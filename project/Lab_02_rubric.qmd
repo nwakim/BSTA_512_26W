@@ -1,0 +1,19 @@
+---
+title: "Lab 2 Rubric"
+format: 
+  html:
+    page-layout: full
+---
+
+**Total: 21 points**  
+*Each row is scored from 0–3 points based on the criteria.*
+
+| **Lab Activity** | **3 points** | **2 points** | **1 point** | **0 points** |
+|------------------|--------------|--------------|--------------|--------------|
+| **Restate research question** | Clearly and concisely restates the research question using the provided format | Restates question with minor clarity or format issues | Restates question but with vague or incorrect structure | Research question is missing or unclear |
+| **Make sure variables are coded correctly** | Uses `class()` or `map()` correctly for all 11 variables; accurately recodes variable types and sets reference levels | Mostly correct use of functions; recoding has minor issues | Incomplete or partially incorrect variable type checking or recoding | Does not check or recode variable types |
+| **Consider potential confounders and effect modifiers** | Completes all entries with thoughtful classification and 1–2 sentence reasoning | Completes most entries with reasonable reasoning | Incomplete table or reasoning lacks clarity | Table is missing or mostly incorrect |
+| **Create contingency tables for categorical predictors** | Correctly creates tables for all categorical predictors; identifies small cell counts | Creates most tables; identifies some small cell counts | Tables are incomplete or interpretation is unclear | No contingency tables created |
+| **Bivariate exploratory data analysis** | Uses `ggpairs()` and clearly identifies predictors with visual trends | Uses `ggpairs()` but interpretation is limited or unclear | Attempts `ggpairs()` but contains errors or lacks insights | No exploratory analysis completed |
+| **Fit simple logistic regression** | Correctly fits model with `glm()`; displays and interprets unadjusted odds ratio | Model is mostly correct; interpretation is basic or slightly unclear | Model or output has major issues; interpretation is missing or incorrect | Model not attempted or entirely incorrect |
+| **Plot the predicted probability** | Accurately plots or tables predicted probabilities with clear labeling and formatting | Produces plot/table with minor issues in clarity or accuracy | Attempt made, but result is confusing or incorrect | No plot or table presented |

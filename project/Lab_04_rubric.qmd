@@ -1,0 +1,16 @@
+---
+title: "Lab 4 Rubric"
+format: 
+  html:
+    page-layout: full
+---
+
+**Total: 15 points**\
+*Each row is scored from 0–3 points based on the criteria.*
+
+| Lab activity | 3 points | 2 points | 1 point | 0 points |
+|---------------|---------------|---------------|---------------|---------------|
+| **Restate research question** | Research question is clearly and correctly restated using the provided format | Research question is mostly clear but contains minor wording or format issues | Research question is vague or partially incomplete | Research question is missing or unclear |
+| **Build your model (6 points)** | 6 points: Clearly builds model using either LASSO or purposeful selection with appropriate justification and code | 4 points: Model is mostly correct but lacks clarity, explanation, or includes minor coding issues | 2 points: Model is attempted but has major conceptual or coding errors | 0 points: No model built or model is not interpretable |
+| **Assess your model fit** | Includes both Hosmer-Lemeshow test and ROC-AUC, interprets results correctly | Includes tests but interpretation is shallow or contains minor errors | Includes only one test or results without interpretation | No model fit assessment performed |
+| **Perform model diagnostics** | Conducts all required diagnostics (residuals, coefficients, leverage), investigates influential points clearly | Conducts most diagnostics, but with minimal interpretation or analysis | Performs incomplete or incorrect diagnostics | No diagnostics performed |

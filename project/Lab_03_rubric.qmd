@@ -1,0 +1,17 @@
+---
+title: "Lab 3 Rubric"
+format: 
+  html:
+    page-layout: full
+---
+
+**Total: 15 points**\
+*Each row is scored from 0–3 points based on the criteria.*
+
+| Lab activity | 3 points | 2 points | 1 point | 0 points |
+|----|----|----|----|----|
+| **Restate research question** | Research question is clearly and correctly restated using the specified format | Research question is mostly clear, but minor issues with clarity or format | Research question is vague or partially incomplete | Research question is missing or not understandable |
+| **Fit a multiple logistic regression model** | Correctly fits a main effects model with 5 covariates; code runs without error | Fits model with minor issues (e.g., \<5 covariates, unclear variable selection) | Attempts model but contains major coding or logic errors | No model fit attempted |
+| **Present the odds ratio in a table** | Uses `tbl_regression()` correctly; table is well-formatted and clearly labeled | Table is mostly correct but has minor issues with formatting or labels | Table is incomplete or improperly formatted | No odds ratio table presented |
+| **Present the odds ratio in a forest plot** | Forest plot is correctly constructed, includes all model terms, and highlights the main covariate clearly | Plot is mostly correct but has formatting issues or unclear labeling | Forest plot included but missing key elements or incorrect | No forest plot included |
+| **Interpret the odds ratio for your main covariate** | Clear, correct interpretation of the main covariate’s odds ratio with 95% CI and list of adjusted covariates | Interpretation is mostly correct but lacks clarity or key details | Attempted interpretation but contains errors in meaning or missing CI/adjustment info | No interpretation provided |

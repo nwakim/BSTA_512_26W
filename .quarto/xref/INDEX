@@ -1,6 +1,7 @@
 {
   "project.qmd": {
-    "project.html": "50e60b0f"
+    "project.html": "50e60b0f",
+    "project.tex": "d0d256f1"
   },
   "homework.qmd": {
     "homework.html": "b0d686f3"
@@ -234,7 +235,8 @@
     "09_MLR_Intro.html": "56dfcee7"
   },
   "syllabus.qmd": {
-    "syllabus.html": "9eef1961"
+    "syllabus.html": "9eef1961",
+    "syllabus.tex": "ef80b0ff"
   },
   "data/NHANES_EDA.Rmd": {
     "NHANES_EDA.html": "3595fbe5"
@@ -244,5 +246,8 @@
   },
   "index.qmd": {
     "index.html": "3ef45a69"
+  },
+  "project/Lab_01_rubric.qmd": {
+    "Lab_01_rubric.html": "b0ddb758"
   }
 }
