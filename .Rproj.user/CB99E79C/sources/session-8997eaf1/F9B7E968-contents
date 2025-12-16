@@ -1,0 +1,114 @@
+---
+title: ""
+toc: false
+page-layout: full
+link-external-newwindow: true
+---
+
+::::::: {style="background-color: #213c96"}
+:::::: {style="color: #FFFFFF"}
+::::: grid
+::: g-col-4
+![](images/bsta_512_hex.png){fig-align="center" width="337"}
+:::
+
+::: g-col-7
+# BSTA 512/612: Linear Models
+
+### Winter 2026
+
+ 
+
+Welcome to BSTA 512/612! In this course, we will focus on linear models, and build our understanding of regression analysis. We will build some theoretical understanding in order to interpret and apply regression models appropriately. We will learn how to build a regression model, interpret the model, and diagnose potential issues with our model.  
+:::
+:::::
+::::::
+:::::::
+
+::: {style="background-color: #4FADF3"}
+::: {style="color: #FFFFFF"}
+
+ 
+
+
+::: grid
+
+::: {.g-col-3}
+
+:::
+
+::: {.g-col-4}
+[{{< iconify material-symbols folder size=24px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_files?csf=1&web=1&e=g2hUNd) OneDrive Folder
+:::
+
+
+::: {.g-col-4}
+[{{< iconify logos zoom-icon size=24px >}}](https://pdx.zoom.us/j/82300634081) Class Zoom link
+:::
+
+:::
+:::
+:::
+
+
+::: columns
+::: {.column width="25%"}
+### Instructor
+
+{{< iconify fluent person-24-filled size=24px >}} [Dr. Nicky Wakim](instructors.qmd)
+
+{{< iconify bi building-fill size=24px >}} Vanport 622A
+
+{{< iconify tabler mail-filled size=24px >}} [wakim\@ohsu.edu](mailto:wakim@ohsu.edu)
+
+{{< iconify icon-park-solid time size=24px >}} Office Hours W 3-4pm
+:::
+::: {.column width="25%"}
+### TA Office Hours
+::: columns
+::: {.column width="25%"}
+Sheetal
+
+Kelsey
+
+Sophia
+:::
+::: {.column width="75%"}
+{{< iconify icon-park-solid time size=24px >}} TBD
+
+{{< iconify icon-park-solid time size=24px >}} TBD
+
+{{< iconify icon-park-solid time size=24px >}} TBD
+:::
+:::
+:::
+
+::: {.column width="25%"}
+### Course details
+
+{{< iconify fa6-solid calendar-days size=24px >}} Mondays, Wednesdays
+
+{{< iconify fa6-solid calendar size=24px >}} Jan 5 - March 16
+
+{{< iconify icon-park-solid time size=24px >}} 1:00 PM - 2:50 PM
+
+{{< iconify fa6-solid person-chalkboard size=24px >}} In-person, TBD
+:::
+
+::: {.column width="25%"}
+### Contacting me
+
+E-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.
+:::
+:::
+
+------------------------------------------------------------------------
+
+::::: grid
+::: g-col-9
+:::
+
+::: g-col-3
+[{{< iconify icomoon-free github size=24px >}} View the source on GitHub](https://github.com/nwakim/BSTA_512_W25)
+:::
+:::::
