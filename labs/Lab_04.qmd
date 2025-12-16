@@ -1,0 +1,119 @@
+---
+title: "Lab 4"
+author: "Your name here!!"
+subtitle: "BSTA 512/612"
+description: "Due: March 7, 2024 at 11pm"
+date-modified: "today"
+categories: [""]
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    embed-resources: true
+    number-sections: true
+    number-depth: 4
+---
+
+```{r}
+#| message: false
+#| echo: false
+
+# PLEASE DO NOT REMOVE THIS CODE CHUNK!!!
+### ADD YOUR LIBRARIES HERE!!! ####
+
+library(tidyverse)
+library(gtsummary)
+library(here)
+```
+
+## Lab activities
+
+Before starting this lab, you should go back to Lab 2, save a new `.rda` file that contains all the new variables from that Lab. Then you can load it here!
+
+### Restate your research question
+
+::: callout-important
+##### Task
+
+Please restate your research question below using the provided format. It's repetitive, but it helps me contextualize my feedback as I look through your lab.
+:::
+
+### Step 1: Simple linear regressions / analysis
+
+::: callout-important
+#### Tasks
+
+1.  Run a simple linear regression model for each covariate against the IAT score (outcome).
+2.  Display results from the test if each covariate explains enough variation of the outcome. This may be from three options in the instructions: `summary()/anova()` only, `lapply()`, or `sapply()`
+
+Interpretation of the results will be in the next step.
+:::
+
+### Step 2: Preliminary variable selection
+
+::: callout-important
+#### Tasks
+
+1.    Decide which covariates will be included in the initial model and list them. 
+2.    Run the initial model and display the regression table.
+
+No need to write out the model, but you may *in addition* to the list. 
+:::
+
+### Step 3: Assess change in coefficient
+
+::: callout-important
+#### Tasks
+
+Remove variables from the initial model based on your common sense, change in coefficient, and/or p-values of the F-tests.
+
+**You do NOT need to show all your work here.** You just need to include: 
+
+1.    A brief explanation of what variables were dropped and why (a sentence per variable), and
+2.    An example of your process with one variable is enough (including code that you ran)
+:::
+
+### Step 4: Assess scale for continuous variables
+
+::: callout-important
+#### Tasks
+
+No tasks here! If you want to try out what I did above, you can!
+:::
+
+### Step 5: Check for interactions
+
+::: callout-important
+#### Tasks
+
+Using your discussion in Lab 3 and the results from the F-test on interactions:
+
+1.    Create a list of the interactions that you will include in your model.
+2.    Run the preliminary final model that includes the main effects and interactions.
+:::
+
+### Step 6: Assess model fit
+
+::: callout-important
+#### Tasks
+
+**Optional:** Create a table that displays some fo the model fit statistics to compare preliminary final models.
+:::
+
+### Create a forest plot of your coefficient estimates
+
+::: callout-important
+#### Tasks
+
+Create a forest plot **or regression table using `tbl_regression()`** to visualize the coefficient estimates. 
+:::
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Muddy Points</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b780fb0528eafbfa2bf38de57c29c417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo light-content">
+    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Linear Models</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../instructors.html"> 
+<span class="menu-text">Instructors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#muddy-points-from-n2025" id="toc-muddy-points-from-n2025" class="nav-link active" data-scroll-target="#muddy-points-from-n2025">Muddy Points from n2025</a>
+  <ul class="collapse">
+  <li><a href="#i-am-a-little-stuck-model-selection-strategies.-i-just-want-clarification-on-which-one-is-the-best-one-and-why" id="toc-i-am-a-little-stuck-model-selection-strategies.-i-just-want-clarification-on-which-one-is-the-best-one-and-why" class="nav-link" data-scroll-target="#i-am-a-little-stuck-model-selection-strategies.-i-just-want-clarification-on-which-one-is-the-best-one-and-why">1. I am a little stuck model selection strategies. I just want clarification on which one is the “best one”, and why?</a></li>
+  <li><a href="#for-fit-statistic-what-is-the-best-range-or-number-that-is-accurate" id="toc-for-fit-statistic-what-is-the-best-range-or-number-that-is-accurate" class="nav-link" data-scroll-target="#for-fit-statistic-what-is-the-best-range-or-number-that-is-accurate">2. For fit statistic, what is the best range or number that is “accurate?”</a></li>
+  <li><a href="#just-checking-straight-that-with-association-usually-some-common-issues-is-the-too-few-variables-higher-bias-and-lower-variance-compared-to-prediction." id="toc-just-checking-straight-that-with-association-usually-some-common-issues-is-the-too-few-variables-higher-bias-and-lower-variance-compared-to-prediction." class="nav-link" data-scroll-target="#just-checking-straight-that-with-association-usually-some-common-issues-is-the-too-few-variables-higher-bias-and-lower-variance-compared-to-prediction.">3. Just checking straight that with association usually some common issues is the too few variables, higher bias and lower variance compared to prediction.</a></li>
+  <li><a href="#how-do-i-actually-choose-which-model-to-go-with-from-the-common-model-fit-statistics" id="toc-how-do-i-actually-choose-which-model-to-go-with-from-the-common-model-fit-statistics" class="nav-link" data-scroll-target="#how-do-i-actually-choose-which-model-to-go-with-from-the-common-model-fit-statistics">4. How do I actually choose which model to go with from the common model fit statistics?</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-2024" id="toc-muddy-points-2024" class="nav-link" data-scroll-target="#muddy-points-2024">Muddy Points 2024</a>
+  <ul class="collapse">
+  <li><a href="#in-cie-why-this-assumes-a-10-difference-indicates-confounding-and-not-effect-measure-modification" id="toc-in-cie-why-this-assumes-a-10-difference-indicates-confounding-and-not-effect-measure-modification" class="nav-link" data-scroll-target="#in-cie-why-this-assumes-a-10-difference-indicates-confounding-and-not-effect-measure-modification">1. In CIE, why this assumes a 10% difference indicates confounding and not effect measure modification</a></li>
+  <li><a href="#any-variables-not-selected-for-the-final-model-have-still-been-adjusted-for-since-they-had-a-chance-to-be-in-the-model-how-are-they-adjusted-for-when-they-arent" id="toc-any-variables-not-selected-for-the-final-model-have-still-been-adjusted-for-since-they-had-a-chance-to-be-in-the-model-how-are-they-adjusted-for-when-they-arent" class="nav-link" data-scroll-target="#any-variables-not-selected-for-the-final-model-have-still-been-adjusted-for-since-they-had-a-chance-to-be-in-the-model-how-are-they-adjusted-for-when-they-arent">2. “Any variables not selected for the final model have still been adjusted for, since they had a chance to be in the model” How are they adjusted for when they aren’t?</a></li>
+  <li><a href="#difference-between-stepwise-and-change-in-estimate-approach" id="toc-difference-between-stepwise-and-change-in-estimate-approach" class="nav-link" data-scroll-target="#difference-between-stepwise-and-change-in-estimate-approach">3. Difference between stepwise and change in estimate approach?</a></li>
+  <li><a href="#how-does-having-fewer-covariates-cause-a-more-biased-estimate-and-what-does-it-mean-for-widehatbeta-to-be-biased-for-beta" id="toc-how-does-having-fewer-covariates-cause-a-more-biased-estimate-and-what-does-it-mean-for-widehatbeta-to-be-biased-for-beta" class="nav-link" data-scroll-target="#how-does-having-fewer-covariates-cause-a-more-biased-estimate-and-what-does-it-mean-for-widehatbeta-to-be-biased-for-beta">4. How does having fewer covariates cause a more biased estimate? (and what does it mean for <span class="math inline">\(\widehat\beta\)</span> to be biased for <span class="math inline">\(\beta\)</span>?)</a></li>
+  <li><a href="#all-the-new-approaches-for-model-selection" id="toc-all-the-new-approaches-for-model-selection" class="nav-link" data-scroll-target="#all-the-new-approaches-for-model-selection">5. All the new approaches for model selection!</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Muddy Points</h1>
+<p class="subtitle lead">Lesson 13: Model Selection</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">December 12, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="muddy-points-from-n2025" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-n2025">Muddy Points from n2025</h2>
+<section id="i-am-a-little-stuck-model-selection-strategies.-i-just-want-clarification-on-which-one-is-the-best-one-and-why" class="level3">
+<h3 class="anchored" data-anchor-id="i-am-a-little-stuck-model-selection-strategies.-i-just-want-clarification-on-which-one-is-the-best-one-and-why">1. I am a little stuck model selection strategies. I just want clarification on which one is the “best one”, and why?</h3>
+<p>There is no “best one.” It really just depends on your research goals and preferences. Different situations may lead you to follow different model selection strategies. Each model selection strategy will guide you towards a “best model,” but that depends on what the model selection strategy prioritizes.</p>
+</section>
+<section id="for-fit-statistic-what-is-the-best-range-or-number-that-is-accurate" class="level3">
+<h3 class="anchored" data-anchor-id="for-fit-statistic-what-is-the-best-range-or-number-that-is-accurate">2. For fit statistic, what is the best range or number that is “accurate?”</h3>
+<p>There is no best range. The ranges depend on the sample you have. Therefore, we only compare relative numbers between models that use the same data.</p>
+</section>
+<section id="just-checking-straight-that-with-association-usually-some-common-issues-is-the-too-few-variables-higher-bias-and-lower-variance-compared-to-prediction." class="level3">
+<h3 class="anchored" data-anchor-id="just-checking-straight-that-with-association-usually-some-common-issues-is-the-too-few-variables-higher-bias-and-lower-variance-compared-to-prediction.">3. Just checking straight that with association usually some common issues is the too few variables, higher bias and lower variance compared to prediction.</h3>
+<p>Yes! In association, we do not want to overcomplicate the model because that will mess with interpretability of the model. Therefore, we lean towards less variables, which leads to higher bias <em>potential</em> and less variance of our coefficient estimates.</p>
+</section>
+<section id="how-do-i-actually-choose-which-model-to-go-with-from-the-common-model-fit-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="how-do-i-actually-choose-which-model-to-go-with-from-the-common-model-fit-statistics">4. How do I actually choose which model to go with from the common model fit statistics?</h3>
+<p>I mostly go with the model with the best values (lowers AIC and BIC and higher <span class="math inline">\(R^2\)</span>). A lot of the times, I use it if my model selection technique landed me on a really complicated model. Maybe I did not expect a bunch of interactions in the model, but that was the final model. I might quickly compare the model fit statistics of the model without interactions (or with different interactions) to compared the model fits.</p>
+</section>
+</section>
+<section id="muddy-points-2024" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-2024">Muddy Points 2024</h2>
+<section id="in-cie-why-this-assumes-a-10-difference-indicates-confounding-and-not-effect-measure-modification" class="level3">
+<h3 class="anchored" data-anchor-id="in-cie-why-this-assumes-a-10-difference-indicates-confounding-and-not-effect-measure-modification">1. In CIE, why this assumes a 10% difference indicates confounding and not effect measure modification</h3>
+<p>A 10% difference can also indicate an interaction, but we would need to see the difference when we include the interaction. I think I was specifically talking about including variables, which typically means I am only including their main effects. With main effects, we can test for confounding, but not interactions. That’s all! We can separately test for interactions using the same 10% criterion.</p>
+</section>
+<section id="any-variables-not-selected-for-the-final-model-have-still-been-adjusted-for-since-they-had-a-chance-to-be-in-the-model-how-are-they-adjusted-for-when-they-arent" class="level3">
+<h3 class="anchored" data-anchor-id="any-variables-not-selected-for-the-final-model-have-still-been-adjusted-for-since-they-had-a-chance-to-be-in-the-model-how-are-they-adjusted-for-when-they-arent">2. “Any variables not selected for the final model have still been adjusted for, since they had a chance to be in the model” How are they adjusted for when they aren’t?</h3>
+<p>I feel your confusion. These variables have not been explicitly adjusted for in the model, more implicitly. If a variable is not selected that means it does not predict our outcome well and/or it does not affect other variables’ relationship with the outcome. That means we tried to adjust for it, but it has no effect, so we have technically adjusted for something that does not change our model.</p>
+<p>An example is probably best. Let’s say we’re looking at treatment effect. We measured the weather on the day that someone went in for treatment. We have a variable on whether it was cloudy or not. That variable was not selected in the model because the cloudiness has no effect on the treatment, but we allowed it to be a potential covariate. This is different than a variable that may not have an effect but was not measured. We cannot say we adjusted for something like shirt color during treatment because we haven’t actually tested it.</p>
+</section>
+<section id="difference-between-stepwise-and-change-in-estimate-approach" class="level3">
+<h3 class="anchored" data-anchor-id="difference-between-stepwise-and-change-in-estimate-approach">3. Difference between stepwise and change in estimate approach?</h3>
+<p>Stepwise is an automatic selection process that only requires us to put our dataset in a function which will return the “optimal” model. It also based only on the p-values of coefficients in the model. In CIE, we are manually including and excluding variables, and checking for a change in a coefficient estimate, instead of a significant p-value. A big change in a coefficient estimate is not necessarily accompanied by a significant p-value.</p>
+</section>
+<section id="how-does-having-fewer-covariates-cause-a-more-biased-estimate-and-what-does-it-mean-for-widehatbeta-to-be-biased-for-beta" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-having-fewer-covariates-cause-a-more-biased-estimate-and-what-does-it-mean-for-widehatbeta-to-be-biased-for-beta">4. How does having fewer covariates cause a more biased estimate? (and what does it mean for <span class="math inline">\(\widehat\beta\)</span> to be biased for <span class="math inline">\(\beta\)</span>?)</h3>
+<p>Fewer covariates in our model means we likely not capturing the complex relationship between our outcome and our variables. If we leave out a variable that is an important predictor of the outcome, then the coefficients of all the variables that made it into the model will be a little biased. (Because we are not capturing the true, underlying model).</p>
+<p>For example, let’s say I am analyzing data for a study on dementia. Dementia is my outcome and I include a few variables in my model, such as whether or not you live with someone, depression, and physical activity. However, I leave out age, which is known to have high association with dementia. I have left out an important variable that may be a confounder or effect modifier of the variables in the model. Thus, the estimates of coefficients in the model will be biased.</p>
+<p>The less variables in the model, the more likely we are leaving out a variable that would help predict our outcome. We can counter this by trying to select the best model!</p>
+<p>Second part of the question: <span class="math inline">\(\widehat\beta\)</span> is a biased estimate for <span class="math inline">\(\beta\)</span> means that the estimated value, <span class="math inline">\(\widehat\beta\)</span>, is not close to the true, underlying <span class="math inline">\(\beta\)</span>. We work under the assumption that there is some true relationship between our covariates and our outcome, and we are trying to uncover the true value by estimating it. However, our estimate may not be close to the true value. We can try to get it as close as possible given our research aims and model.</p>
+</section>
+<section id="all-the-new-approaches-for-model-selection" class="level3">
+<h3 class="anchored" data-anchor-id="all-the-new-approaches-for-model-selection">5. All the new approaches for model selection!</h3>
+<p>Just to be clear, the main intention for the overview was that you can identify and recognize some of the key characteristics of different model selection strategies. We can’t cover all of them in detail, but I just want you to know what’s out there, and what other people might use.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

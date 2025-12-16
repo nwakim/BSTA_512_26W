@@ -1,0 +1,102 @@
+---
+title: "Muddy Points"
+subtitle: "Lesson 14: Purposeful Selection"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Muddy Points 2025
+
+### 1. For the three methods/approaches to address the violation of linearity assumption: Approach 1: Categorize continuous variable Approach 2: Fractional Polynomials Approach 3: Spline functions Which one is the most used approach? I am a bit confused on what we should be looking for in each. What should be the values that we should analyze first?
+
+You don't really need to be looking for anything. If you find that a numeric variable is not linear with the outcome, you have a few options:
+
+1. Categorize the numeric variable so linearity is no longer an issue
+2. Model the variable with a transformation, then you need to check if the transformation is linear
+3. Use splines to create different sections of the variable that are linear with the outcome.
+
+I would say categorizing is the most used approach to maintain interpretability. 
+
+### 2. Poll Everywhere questions about interactions 
+
+We want to see if a model *with interactions* explains more variance than a model *without interactions*. We can use the F-test to determine this! We end up testing if the coefficients for the interactions terms are zero (null hypothesis) or one or more is not zero (alternative hypothesis). 
+
+It is helpful to understand how many coefficients you are testing when determining if an interaction should be in the model or not. Let's look at some examples for this.
+
+#### 1. Interaction between two binary variables
+
+Let's sat we have $X_1$ and $X_2$. Both variables can take two values: Yes or No. I can model the following main effects model: $$Y = \beta_0 + \beta_1 I(X_1 = \text{Yes}) + \beta_2 I(X_2=\text{Yes})+ \epsilon$$
+
+I can also include interactions in the model: $$Y = \beta_0 + \beta_1 I(X_1 = \text{Yes}) + \beta_2 I(X_2=\text{Yes})+ \beta_3 I(X_1 = \text{Yes}) \cdot I(X_2 = \text{Yes})+ \epsilon$$
+
+If I want to compare these two models, I need to test if $\beta_3=0$ or not. **Therefore, I am only testing one coefficient**.
+
+#### 2. Interaction between two multi-level categorical variables.
+
+Let's sat we have $X_1$ and $X_2$. $X_1$ can take 4 values: group 1, group 2, group 3, and group 4. $X_2$ can take 3 values: category 1, category 2, and category 3.
+
+I can model the following main effects model: 
+
+$$\begin{aligned}
+Y = & \beta_0 + \beta_1 I(X_1 = \text{Group 2}) + \beta_2 I(X_1 = \text{Group 3}) + \beta_3 I(X_1 = \text{Group 4}) + \\ & \beta_4 I(X_2 = \text{Category 2}) + \beta_5 I(X_2 = \text{Category 3}) + \epsilon
+\end{aligned}$$
+
+I can also include interactions in the model: 
+
+$$\begin{aligned}
+Y = & \beta_0 + \beta_1 I(X_1 = \text{Group 2}) + \beta_2 I(X_1 = \text{Group 3}) + \beta_3 I(X_1 = \text{Group 4}) + \\ & \beta_4 I(X_2 = \text{Category 2}) + \beta_5 I(X_2 = \text{Category 3}) + 
+\\ & \beta_6 I(X_1 = \text{Group 2}) \cdot I(X_2 = \text{Category 2}) + \beta_7 I(X_1 = \text{Group 2}) \cdot I(X_2 = \text{Category 3}) + 
+\\ & \beta_8 I(X_1 = \text{Group 3}) \cdot I(X_2 = \text{Category 2}) + \beta_9 I(X_1 = \text{Group 3}) \cdot I(X_2 = \text{Category 3}) + 
+\\ & \beta_{10} I(X_1 = \text{Group 4}) \cdot I(X_2 = \text{Category 2}) + \beta_{11} I(X_1 = \text{Group 4}) \cdot I(X_2 = \text{Category 3}) + 
++ \epsilon
+\end{aligned}$$
+
+If I want to compare these two models, I need to test all coefficients of the interactions. **Therefore, I am testing 6 coefficients**.
+
+## Muddy Points 2024
+
+### 6. Assessing change in coefficients
+
+I highly recommend going back to the slides with interactions (effect modifiers) and confounders ([Lesson 11.2: Interactions continued](https://nwakim.github.io/W2024_BSTA_512/slides_annotated/11_Interactions_2.pdf)). On slide 18, we get into the change in coefficients. This is just one way to measure if a variable might be important in our model.
+
+### 7. General feelings of uncertainty when it comes to picking a model based on some of these more subjective measures
+
+Fair enough! It takes time to build that trust in your instincts when building a model. This is mostly why there are a few concrete rules within purposeful model selection. I don't think your model can go horribly wrong in the subjective choices, but sticking with the more concrete rules (when there are some) will be important.
+
+### 8. All of the different F-tests and p-values we are using in the early steps of model building
+
+Yeah... definitely hard to keep organized when we're seeing different uses so close together
+
+-   In step 2, we use the F-test to see if a single variable (potentially with many coeffiicents) explains enough variation in our outcome
+
+    -   This is the F-test in simple linear regression with
+
+        -   Reduced / null model: $Y = \beta_0 + \epsilon$
+
+        -   Full / alternative model: $Y = \beta_0 + \beta_1 X + \epsilon$
+
+        -   This will be different for multi-level covariates
+
+        -   We can use `anova( full_model )` to get the F-statistic and p-value
+
+-   In step 3, we use the F-test to see if a single variable (potentially with many coeffiicents) explains enough variation in our outcome, *given the other variables in the model*
+
+    -   This is the F-test in simple linear regression with
+
+        -   Reduced / null model: $Y = \beta_0 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon$
+
+        -   Full / alternative model: $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon$
+
+        -   This will be different for multi-level covariates: more coefficients removed between full and reduced
+
+        -   We can use `anova( full_model , reduced_model )` to get the F-statistic and p-value
+
+### 9. Why didn't we use those packages earlier?
+
+You got me! Partially because I wanted us to practice plotting in `ggplot` and be able to create more detailed plots. I think those functions (`skim()` and `ggpairs()`) super helpful in big picture, but if we don't know what to look for or identify oversights in the output, then we can miss important information about the data. More detailed plots, and more practice with variable types (like making factors) is needed to approach `skim()` and `ggpairs()`.
+
+

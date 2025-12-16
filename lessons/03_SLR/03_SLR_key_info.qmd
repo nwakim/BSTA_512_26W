@@ -1,0 +1,21 @@
+---
+title: "Key Info and Announcements"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Announcements
+
+- There is no Slack for this class
+- Attendance policy: Attendance in-person or online to all (ish) classes. Attendance is taken by completing exit ticket within 1 week of class
+- Extra question on preference for Thursday morning office hours
+- TA emails are up!
+  - We are also working on office hours
+
+## Key Dates
+
+- Lab 1 due this Thursday at 11pm

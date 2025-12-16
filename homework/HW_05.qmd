@@ -1,0 +1,159 @@
+---
+title: "Homework 5"
+subtitle: "BSTA 512/612"
+author: "Your name here!!!"
+description: "Due: Friday March 14, 2025 at 11pm"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    embed-resources: true
+---
+
+::: callout-caution
+Homework is ready!! Nicky (3/3/2025)
+:::
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.height = 4, fig.width = 6, fig.align = "center")
+
+library(tidyverse)
+library(rstatix)
+library(broom)
+library(gt)
+library(janitor)
+library(readxl)
+library(gridExtra)
+library(ggfortify)  # autoplot(model)
+library(gtsummary)
+library(describedata) # gladder()
+library(haven)
+library(here)
+```
+
+
+## Directions
+
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_05.qmd)
+
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
+
+-   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
+
+-   For each question, make sure to include all code and resulting output in the html file to support your answers
+
+-   Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.
+
+-   Write all answers in complete sentences as if communicating the results to a collaborator.
+
+::: callout-tip
+It is a good idea to try rendering your document from time to time as you go along! Note that rendering automatically saves your `.qmd` file and rendering frequently helps you catch your errors more quickly.
+:::
+
+# Questions
+
+The purpose of the below problem is to integrate what we have learned so far into a simple process that might be embedded into our analysis. This will help you see how many of our learning objectives connect as a single work flow. Some of the things we have learned that will be covered:
+
+-   Choosing what to test
+-   Interpretations of coefficients (with and without other covariates in the model)
+-   F-test procedures and conclusions
+-   Testing if a covariate is an effect modifier, confounder, or nothing
+
+## Question 1
+
+We are going to revisit the Palmer Penguins dataset from Homework 4. Choosing what to test, interpretations of coefficients, F-test conclusions, and interactions
+
+For this problem we will be using the `penguins` dataset from the `palmerpenguins` R package. We will look at the association between flipper length of penguins (measured in mm) and specific species of penguins.
+
+Description from help file:
+
+> Includes measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex.
+
+[More info about the data.](https://allisonhorst.github.io/palmerpenguins/)
+
+```{r}
+# first install the palmerpenguins package
+# install.packages("palmerpenguins")
+library(palmerpenguins)
+data(penguins)
+
+# run the command below to learn more about the variables in the penguins dataset
+# ?penguins
+```
+
+### Part a
+
+Make a plot of flipper length (outcome) and body mass (explanatory variable). Discuss what you see in the plot.
+
+### Part b
+
+Write the simple linear regression model that we will fit for the association between body mass and flipper length. If you use any short hand, please write it out. For example: Let $BD$ represent bill depth.
+
+### Part c
+
+Run the simple linear regression model for the association between body mass and flipper length. Display the regression table output.
+
+### Part d
+
+Interpret the coefficient for body mass. Note that as we move forward with a multivariate model, we will refer to this is estimate at the the crude or unadjusted coefficient estimate.
+
+### Part e
+
+Discuss how centering body mass might help with interpretability. Then, center body mass around the mean, run the model again, and display the regression table. Does the intercept and/or slope change from Part c?
+
+### Part f
+
+Make a plot of flipper length (outcome) and body mass (explanatory variable) by bill depth. Discuss what you see in the plot. (Hint: bill depth will be the color in the plot.)
+
+### Part g
+
+Make a plot of flipper length (outcome) and body mass (explanatory variable) by penguin species. Discuss what you see in the plot and relate it back to the plot in Part f.
+
+### Part h
+
+Using only body mass and bill depth as covariates, write out the model that we would fit including the main effects of body mass and bill depth and their interaction (this is a mathematical equation). How many coefficients are tested when we test for a significant interaction?
+
+::: callout-note
+Both covariates should be represented as centered. For the rest of the homework, we will use the centered body mass and bill depth.
+:::
+
+### Part i 
+
+Center bill depth.
+
+### Part j
+
+Using only body mass and bill depth as covariates, test if bill depth is an effect modifier.
+
+### Part k
+
+Using only body mass and species as covariates, write out the model that we would fit including the main effects of body mass and species and their interaction. How many coefficients are tested when we test for a significant interaction?
+
+Hint: Homework 4 can help guide us with the species' categories.
+
+### Part l
+
+Using only body mass and species as covariates, test if species is an effect modifier. 
+
+### Part m
+
+Using the results in the above parts, we will move forward with the following model:
+
+$$\begin{aligned}
+FL = & \beta_0 + \beta_1 BM^c + \beta_2 BD^c +  \beta_3 I(\textrm{Chinstrap}) + \beta_4 I(\textrm{Gentoo}) +  \\ & \beta_5 BM^c \cdot I(\textrm{Chinstrap}) + \beta_6 BM^c \cdot I(\textrm{Gentoo}) + \epsilon
+\end{aligned}$$ 
+
+Run the above model and display the regression table output.
+
+*Please note that this is not exactly the best method for selecting a model. I just wanted to step us through a similar thought process.*
+
+
+### Part n
+
+Interpret each coefficient in the model above. There should be 7 total interpretations.
+
+### Part o
+
+For Chinstrap penguins, what is the effect of centered body mass? Use `estimable()` to find the 95% confidence interval for the effect. Interpret the effect.

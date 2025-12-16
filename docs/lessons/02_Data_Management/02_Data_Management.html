@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nicky Wakim">
+<meta name="dcterms.date" content="2026-01-07">
+
+<title>Lesson 2: Data and File Management</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b780fb0528eafbfa2bf38de57c29c417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/font-awesome/css/all.min.css" rel="stylesheet">
+<link href="../../site_libs/font-awesome/css/v4-shims.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo light-content">
+    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Linear Models</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../instructors.html"> 
+<span class="menu-text">Instructors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#need-to-include-slides-on-working-with-and-storing-datasets" id="toc-need-to-include-slides-on-working-with-and-storing-datasets" class="nav-link active" data-scroll-target="#need-to-include-slides-on-working-with-and-storing-datasets">Need to include slides on working with and storing datasets</a></li>
+  <li><a href="#what-we-will-cover" id="toc-what-we-will-cover" class="nav-link" data-scroll-target="#what-we-will-cover">What we will cover</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul></li>
+  <li><a href="#introduction-to-the-tidyverse" id="toc-introduction-to-the-tidyverse" class="nav-link" data-scroll-target="#introduction-to-the-tidyverse">Introduction to the <code>tidyverse</code></a>
+  <ul class="collapse">
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#what-is-the-tidyverse" id="toc-what-is-the-tidyverse" class="nav-link" data-scroll-target="#what-is-the-tidyverse">What is the tidyverse?</a></li>
+  <li><a href="#tidy-data1" id="toc-tidy-data1" class="nav-link" data-scroll-target="#tidy-data1">Tidy data</a></li>
+  <li><a href="#pipe-operator-magrittr" id="toc-pipe-operator-magrittr" class="nav-link" data-scroll-target="#pipe-operator-magrittr">Pipe operator (<code>magrittr</code>)</a></li>
+  <li><a href="#recoding-a-binary-variable-with-pipe-operator" id="toc-recoding-a-binary-variable-with-pipe-operator" class="nav-link" data-scroll-target="#recoding-a-binary-variable-with-pipe-operator">Recoding a binary variable with pipe operator</a></li>
+  <li><a href="#recoding-a-multi-level-variable" id="toc-recoding-a-multi-level-variable" class="nav-link" data-scroll-target="#recoding-a-multi-level-variable">Recoding a multi-level variable</a></li>
+  </ul></li>
+  <li><a href="#ggplot2-revisited" id="toc-ggplot2-revisited" class="nav-link" data-scroll-target="#ggplot2-revisited"><code>ggplot2</code> revisited</a>
+  <ul class="collapse">
+  <li><a href="#ggplot2-in-tidyverse" id="toc-ggplot2-in-tidyverse" class="nav-link" data-scroll-target="#ggplot2-in-tidyverse"><code>ggplot2</code> in tidyverse</a></li>
+  <li><a href="#tidyverse-visualizing-multiple-variables" id="toc-tidyverse-visualizing-multiple-variables" class="nav-link" data-scroll-target="#tidyverse-visualizing-multiple-variables">Tidyverse: Visualizing multiple variables</a></li>
+  <li><a href="#tidyverse-visualizing-even-more-variables" id="toc-tidyverse-visualizing-even-more-variables" class="nav-link" data-scroll-target="#tidyverse-visualizing-even-more-variables">Tidyverse: Visualizing even more variables</a></li>
+  <li><a href="#base-r-visualizing-even-more-variables" id="toc-base-r-visualizing-even-more-variables" class="nav-link" data-scroll-target="#base-r-visualizing-even-more-variables">Base R: Visualizing even more variables</a></li>
+  </ul></li>
+  <li><a href="#functions-for-data-management" id="toc-functions-for-data-management" class="nav-link" data-scroll-target="#functions-for-data-management">Functions for data management</a>
+  <ul class="collapse">
+  <li><a href="#important-functions-for-data-management" id="toc-important-functions-for-data-management" class="nav-link" data-scroll-target="#important-functions-for-data-management">Important functions for data management</a></li>
+  <li><a href="#lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" id="toc-lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" class="nav-link" data-scroll-target="#lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class">Let’s look back at the <code>dds.discr</code> dataset that I briefly used last class</a></li>
+  <li><a href="#rename-one-of-the-first-things-i-usually-do" id="toc-rename-one-of-the-first-things-i-usually-do" class="nav-link" data-scroll-target="#rename-one-of-the-first-things-i-usually-do"><code>rename()</code>: one of the first things I usually do</a></li>
+  <li><a href="#mutate-constructing-new-variables-from-what-you-have" id="toc-mutate-constructing-new-variables-from-what-you-have" class="nav-link" data-scroll-target="#mutate-constructing-new-variables-from-what-you-have"><code>mutate()</code>: constructing new variables from what you have</a></li>
+  <li><a href="#mutate-other-examples" id="toc-mutate-other-examples" class="nav-link" data-scroll-target="#mutate-other-examples"><code>mutate()</code>: other examples</a></li>
+  <li><a href="#filter-keep-rows-that-match-a-condition" id="toc-filter-keep-rows-that-match-a-condition" class="nav-link" data-scroll-target="#filter-keep-rows-that-match-a-condition"><code>filter()</code>: keep rows that match a condition</a></li>
+  <li><a href="#select-keep-or-drop-columns-using-their-names-and-types" id="toc-select-keep-or-drop-columns-using-their-names-and-types" class="nav-link" data-scroll-target="#select-keep-or-drop-columns-using-their-names-and-types"><code>select()</code>: keep or drop columns using their names and types</a></li>
+  </ul></li>
+  <li><a href="#summarizing-data" id="toc-summarizing-data" class="nav-link" data-scroll-target="#summarizing-data">Summarizing Data</a>
+  <ul class="collapse">
+  <li><a href="#tbl_summary-table-summary-12" id="toc-tbl_summary-table-summary-12" class="nav-link" data-scroll-target="#tbl_summary-table-summary-12"><code>tbl_summary()</code> : table summary (1/2)</a></li>
+  <li><a href="#tbl_summary-table-summary-22" id="toc-tbl_summary-table-summary-22" class="nav-link" data-scroll-target="#tbl_summary-table-summary-22"><code>tbl_summary()</code> : table summary (2/2)</a></li>
+  <li><a href="#group_by-group-by-one-or-more-variables" id="toc-group_by-group-by-one-or-more-variables" class="nav-link" data-scroll-target="#group_by-group-by-one-or-more-variables"><code>group_by()</code>: group by one or more variables</a></li>
+  <li><a href="#summarize-summarize-your-data-or-grouped-data-into-one-row" id="toc-summarize-summarize-your-data-or-grouped-data-into-one-row" class="nav-link" data-scroll-target="#summarize-summarize-your-data-or-grouped-data-into-one-row"><code>summarize()</code>: summarize your data or grouped data into one row</a></li>
+  <li><a href="#across-apply-a-function-across-multiple-columns" id="toc-across-apply-a-function-across-multiple-columns" class="nav-link" data-scroll-target="#across-apply-a-function-across-multiple-columns"><code>across()</code>: apply a function across multiple columns</a></li>
+  </ul></li>
+  <li><a href="#folder-organization" id="toc-folder-organization" class="nav-link" data-scroll-target="#folder-organization">Folder organization</a>
+  <ul class="collapse">
+  <li><a href="#folder-organization-1" id="toc-folder-organization-1" class="nav-link" data-scroll-target="#folder-organization-1">Folder organization</a></li>
+  <li><a href="#aside-folder-and-file-naming" id="toc-aside-folder-and-file-naming" class="nav-link" data-scroll-target="#aside-folder-and-file-naming">Aside: folder and file naming</a></li>
+  <li><a href="#creating-project-in-rstudio" id="toc-creating-project-in-rstudio" class="nav-link" data-scroll-target="#creating-project-in-rstudio">Creating project in RStudio</a></li>
+  <li><a href="#the-nice-thing-about-r-projects" id="toc-the-nice-thing-about-r-projects" class="nav-link" data-scroll-target="#the-nice-thing-about-r-projects">The nice thing about R projects</a></li>
+  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility">Reproducibility</a></li>
+  </ul></li>
+  <li><a href="#here-package-and-importing-data" id="toc-here-package-and-importing-data" class="nav-link" data-scroll-target="#here-package-and-importing-data"><code>here</code> package and importing data</a>
+  <ul class="collapse">
+  <li><a href="#here-package" id="toc-here-package" class="nav-link" data-scroll-target="#here-package"><code>here</code> package</a></li>
+  <li><a href="#here-package-1" id="toc-here-package-1" class="nav-link" data-scroll-target="#here-package-1"><code>here</code> package</a></li>
+  <li><a href="#using-here-package" id="toc-using-here-package" class="nav-link" data-scroll-target="#using-here-package">Using <code>here</code> package</a></li>
+  </ul></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a>
+  <ul class="collapse">
+  <li><a href="#using-here-to-load-data" id="toc-using-here-to-load-data" class="nav-link" data-scroll-target="#using-here-to-load-data">Using <code>here()</code> to load data</a></li>
+  <li><a href="#common-functions-to-load-data" id="toc-common-functions-to-load-data" class="nav-link" data-scroll-target="#common-functions-to-load-data">Common functions to load data</a></li>
+  </ul></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
+  <ul class="collapse">
+  <li><a href="#dplyr-resources" id="toc-dplyr-resources" class="nav-link" data-scroll-target="#dplyr-resources"><code>dplyr</code> resources</a></li>
+  <li><a href="#r-programming-class-at-ohsu" id="toc-r-programming-class-at-ohsu" class="nav-link" data-scroll-target="#r-programming-class-at-ohsu">R programming class at OHSU!</a></li>
+  <li><a href="#the-larger-tidy-ecosystem" id="toc-the-larger-tidy-ecosystem" class="nav-link" data-scroll-target="#the-larger-tidy-ecosystem">The larger tidy ecosystem</a></li>
+  <li><a href="#credit-to-mine-çetinkaya-rundel" id="toc-credit-to-mine-çetinkaya-rundel" class="nav-link" data-scroll-target="#credit-to-mine-çetinkaya-rundel">Credit to Mine Çetinkaya-Rundel</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02_Data_Management.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 2: Data and File Management</h1>
+<p class="subtitle lead">Adapted from parts of Mine Çetinkaya-Rundel’s tidyverse course</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nicky Wakim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="need-to-include-slides-on-working-with-and-storing-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="need-to-include-slides-on-working-with-and-storing-datasets">Need to include slides on working with and storing datasets</h2>
+<ul>
+<li>Raw/original</li>
+<li>Processed/cleaned
+<ul>
+<li>cleaned, handled missing values, transformed (pivoted), formatted properly, applying specific variable types from codebook</li>
+</ul></li>
+<li>Feature engineered data
+<ul>
+<li>creating new features or modifying existing ones</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-we-will-cover" class="level1">
+<h1>What we will cover</h1>
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+<li><code>ggplot2</code> revisited</li>
+<li>Functions for data management</li>
+<li>Functions for data summarization</li>
+<li>Folder organization</li>
+<li><code>here</code> package and importing data</li>
+</ol>
+<p>&nbsp;</p>
+<ul>
+<li>Not covered: basic Quarto set up. Please see R recordings in OneDrive and my <a href="https://nwakim.github.io/F24_EPI_525/schedule.html">EPI 525 site</a> for videos and slides.</li>
+</ul>
+<div class="cell">
+<style type="text/css">
+.reveal code {
+  max-height: 100% !important;
+}
+</style>
+</div>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/debugging.png" class="img-fluid figure-img" alt="A cartoon of a fuzzy round monster face showing 10 different emotions experienced during the process of debugging code. The progression goes from (1) “I got this” - looking determined and optimistic; (2) “Huh. Really thought that was it.” - looking a bit baffled; (3) “...” - looking up at the ceiling in thought; (4) “Fine. Restarting.” - looking a bit annoyed; (5) “OH WTF.” Looking very frazzled and frustrated; (6) “Zombie meltdown.” - looking like a full meltdown; (7) (blank) - sleeping; (8) “A NEW HOPE!” - a happy looking monster with a lightbulb above; (9) “insert awesome theme song” - looking determined and typing away; (10) “I love coding” - arms raised in victory with a big smile, with confetti falling."></p>
+<figcaption>Artwork by @allison_horst</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="introduction-to-the-tidyverse" class="level1">
+<h1>Introduction to the <code>tidyverse</code></h1>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/spiderverse.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="what-is-the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-tidyverse">What is the tidyverse?</h2>
+<p>The <strong>tidyverse</strong> is a collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li><strong>ggplot2</strong> - data visualisation</li>
+<li><strong>dplyr</strong> - data manipulation</li>
+<li><strong>tidyr</strong> - tidy data</li>
+<li><strong>readr</strong> - read rectangular data</li>
+<li><strong>purrr</strong> - functional programming</li>
+<li><strong>tibble</strong> - modern data frames</li>
+<li><strong>stringr</strong> - string manipulation</li>
+<li><strong>forcats</strong> - factors</li>
+<li>and many more …</li>
+</ul>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/tidyverse.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="669"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tidy-data1" class="level2">
+<h2 class="anchored" data-anchor-id="tidy-data1">Tidy data<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/tidy-data-frame.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1500"></p>
+</figure>
+</div>
+<ol type="1">
+<li><p>Each variable must have its own column.</p></li>
+<li><p>Each observation must have its own row.</p></li>
+<li><p>Each value must have its own cell.</p></li>
+</ol>
+</section>
+<section id="pipe-operator-magrittr" class="level2">
+<h2 class="anchored" data-anchor-id="pipe-operator-magrittr">Pipe operator (<code>magrittr</code>)</h2>
+<ul>
+<li>The pipe operator (<code>%&gt;%</code>) allows us to step through sequential functions in the same way we follow if-then statements or steps from instructions</li>
+</ul>
+<p>&nbsp;</p>
+<div class="heq">
+<p>I want to find my keys, then start my car, then drive to work, then park my car.</p>
+</div>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Nested</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">park</span>(<span class="fu">drive</span>(<span class="fu">start_car</span>(<span class="fu">find</span>(<span class="st">"keys"</span>)), </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">"work"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Piped</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span>(<span class="st">"keys"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">start_car</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drive</span>(<span class="at">to =</span> <span class="st">"work"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">park</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recoding-a-binary-variable-with-pipe-operator" class="level2">
+<h2 class="anchored" data-anchor-id="recoding-a-binary-variable-with-pipe-operator">Recoding a binary variable with pipe operator</h2>
+<p>&nbsp;</p>
+<div class="heq">
+<p>Let’s say I want a variable <code>transmission</code> to show the category names that are assigned to numeric values in the code. I want <code>0</code> to be coded as <code>automatic</code> and <code>1</code> to be coded as <code>manual</code>.</p>
+</div>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Base R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>transmission <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mtcars<span class="sc">$</span>am <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"automatic"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"manual"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Tidyverse:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">transmission =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      am <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"automatic"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      am <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"manual"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>&nbsp;</p>
+<div class="hl">
+<p><code>mutate()</code> creates new columns that are functions of existing variables</p>
+</div>
+</div>
+</div>
+</section>
+<section id="recoding-a-multi-level-variable" class="level2">
+<h2 class="anchored" data-anchor-id="recoding-a-multi-level-variable">Recoding a multi-level variable</h2>
+<p>&nbsp;</p>
+<div class="heq">
+<p>Let’s say I want a variable <code>gear</code> to show the category names that are assigned to numeric values in the code. I want <code>3</code> to be coded as gear <code>three</code>, <code>4</code> to be coded as gear <code>four</code>, <code>5</code> to be coded as gear <code>five</code>.</p>
+</div>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Base R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>gear_char <span class="ot">&lt;-</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    mtcars<span class="sc">$</span>gear <span class="sc">==</span> <span class="dv">3</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"three"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      mtcars<span class="sc">$</span>gear <span class="sc">==</span> <span class="dv">4</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"four"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"five"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Tidyverse:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">gear_char =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      gear <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"three"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      gear <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"four"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      gear <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"five"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ggplot2-revisited" class="level1">
+<h1><code>ggplot2</code> revisited</h1>
+<section id="ggplot2-in-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2-in-tidyverse"><code>ggplot2</code> in tidyverse</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/ggplot2-part-of-tidyverse.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="669"></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>We talked about this in our review notes</p>
+<ul>
+<li>I want to revisit it: always helps to have more examples!</li>
+<li>This example is closer to the multivariable work we’ll do in this class!</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>ggplot2</strong> is tidyverse’s data visualization package</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>The <code>gg</code> in “ggplot2” stands for Grammar of Graphics</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>It is inspired by the book <strong>Grammar of Graphics</strong> by Leland Wilkinson</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="tidyverse-visualizing-multiple-variables" class="level2">
+<h2 class="anchored" data-anchor-id="tidyverse-visualizing-multiple-variables">Tidyverse: Visualizing multiple variables</h2>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  mtcars,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg, <span class="at">color =</span> transmission)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Data_Management_files/figure-revealjs/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tidyverse-visualizing-even-more-variables" class="level2">
+<h2 class="anchored" data-anchor-id="tidyverse-visualizing-even-more-variables">Tidyverse: Visualizing even more variables</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  mtcars,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg, <span class="at">color =</span> transmission)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cyl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Data_Management_files/figure-revealjs/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="base-r-visualizing-even-more-variables" class="level2">
+<h2 class="anchored" data-anchor-id="base-r-visualizing-even-more-variables">Base R: Visualizing even more variables</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>trans_color <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mtcars<span class="sc">$</span>transmission <span class="sc">==</span> <span class="st">"automatic"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mtcars_cyl4 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">4</span>, ]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mtcars_cyl6 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">6</span>, ]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>mtcars_cyl8 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">8</span>, ]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>, <span class="dv">0</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl4, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 4"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl6, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 6"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl8, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 8"</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"automatic"</span>, <span class="st">"manual"</span>), <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_Data_Management_files/figure-revealjs/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="functions-for-data-management" class="level1">
+<h1>Functions for data management</h1>
+<section id="important-functions-for-data-management" class="level2">
+<h2 class="anchored" data-anchor-id="important-functions-for-data-management">Important functions for data management</h2>
+<p>&nbsp;</p>
+<p><strong>Data manipulation</strong></p>
+<ul>
+<li><p><code>pivot_longer()</code> and <code>pivot_wider()</code> (not covered today)</p></li>
+<li><p><code>rename()</code></p></li>
+<li><p><code>mutate()</code></p></li>
+<li><p><code>filter()</code></p></li>
+<li><p><code>select()</code></p></li>
+</ul>
+<p><strong>Summarizing data</strong></p>
+<ul>
+<li><code>tbl_summary()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code></li>
+<li><code>across()</code></li>
+</ul>
+</section>
+<section id="lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" class="level2">
+<h2 class="anchored" data-anchor-id="lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class">Let’s look back at the <code>dds.discr</code> dataset that I briefly used last class</h2>
+<p>&nbsp; &nbsp;</p>
+<ul>
+<li>We will load the data (This is a special case! <code>dds.discr</code> is a built-in R dataset)</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dds.discr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Now, let’s take a glimpse at the dataset:</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 6
+$ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
+$ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
+$ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
+$ gender       &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
+$ ethnicity    &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…</code></pre>
+</div>
+</div>
+</section>
+<section id="rename-one-of-the-first-things-i-usually-do" class="level2">
+<h2 class="anchored" data-anchor-id="rename-one-of-the-first-things-i-usually-do"><code>rename()</code>: one of the first things I usually do</h2>
+<ul>
+<li><p>I notice that two variables have values that don’t necessarily match the variable name</p>
+<ul>
+<li><p>Female and male are not genders</p></li>
+<li><p>“White not Hispanic” combines race and ethnicity into one category</p></li>
+</ul></li>
+</ul>
+<div class="heq">
+<p>I want to rename gender to SAB (sex assigned at birth) and rename ethnicity to R_E (race and ethnicity)</p>
+</div>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dds.discr1 <span class="ot">=</span> dds.discr <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">SAB =</span> gender, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">R_E =</span> ethnicity)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 6
+$ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
+$ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
+$ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
+$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
+$ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate-constructing-new-variables-from-what-you-have" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-constructing-new-variables-from-what-you-have"><code>mutate()</code>: constructing new variables from what you have</h2>
+<ul>
+<li><p>We’ve seen a couple examples for <code>mutate()</code> so far (mostly because its used so often!)</p></li>
+<li><p>We haven’t seen an example where we make a new variable from two variables</p></li>
+</ul>
+<div class="heq">
+<p>I want to make a variable that is the ratio of expenditures over age</p>
+</div>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="ot">=</span> dds.discr1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">exp_to_age =</span> expenditures<span class="sc">/</span>age)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 7
+$ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
+$ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
+$ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
+$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
+$ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…
+$ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 304.40…</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate-other-examples" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-other-examples"><code>mutate()</code>: other examples</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dds.discr3 <span class="ot">=</span> dds.discr1 <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expend_20perc =</span> expenditures <span class="sc">*</span> <span class="fl">0.2</span>, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">expend_sq =</span> expenditures<span class="sc">^</span><span class="dv">2</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">expend_over_5000 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>           expenditures <span class="sc">&gt;</span> <span class="dv">5000</span> <span class="sc">~</span> <span class="st">"Yes"</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>           expenditures <span class="sc">&lt;=</span> <span class="dv">5000</span> <span class="sc">~</span> <span class="st">"No"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         ), </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">expend_log =</span> <span class="fu">log</span>(expenditures)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 10
+$ id               &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 1077…
+$ age.cohort       &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17,…
+$ age              &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17…
+$ SAB              &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Mal…
+$ expenditures     &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021…
+$ R_E              &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, His…
+$ expend_20perc    &lt;dbl&gt; 422.6, 8384.8, 290.8, 1280.0, 882.4, 913.2, 783.0, 77…
+$ expend_sq        &lt;dbl&gt; 4464769, 1757621776, 2114116, 40960000, 19465744, 208…
+$ expend_over_5000 &lt;chr&gt; "No", "Yes", "No", "Yes", "No", "No", "No", "No", "Ye…
+$ expend_log       &lt;dbl&gt; 7.655864, 10.643614, 7.282074, 8.764053, 8.392083, 8.…</code></pre>
+</div>
+</div>
+</section>
+<section id="filter-keep-rows-that-match-a-condition" class="level2">
+<h2 class="anchored" data-anchor-id="filter-keep-rows-that-match-a-condition"><code>filter()</code>: keep rows that match a condition</h2>
+<ul>
+<li>What if I want to subset the data frame? (keep certain rows of observations)</li>
+</ul>
+<div class="heq">
+<p>I want to look at the data for people who between 50 and 60 years old</p>
+</div>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dds.discr3 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">60</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 23
+Columns: 7
+$ id           &lt;int&gt; 15970, 19412, 29506, 31658, 36123, 39287, 39672, 43455, 4…
+$ age.cohort   &lt;fct&gt; 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51…
+$ age          &lt;int&gt; 51, 60, 56, 60, 59, 59, 54, 57, 52, 57, 55, 52, 59, 54, 5…
+$ SAB          &lt;fct&gt; Female, Female, Female, Female, Male, Female, Female, Mal…
+$ expenditures &lt;int&gt; 54267, 57702, 48215, 46873, 42739, 44734, 52833, 48363, 5…
+$ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, White not Hispani…
+$ exp_to_age   &lt;dbl&gt; 1064.0588, 961.7000, 860.9821, 781.2167, 724.3898, 758.20…</code></pre>
+</div>
+</div>
+</section>
+<section id="select-keep-or-drop-columns-using-their-names-and-types" class="level2">
+<h2 class="anchored" data-anchor-id="select-keep-or-drop-columns-using-their-names-and-types"><code>select()</code>: keep or drop columns using their names and types</h2>
+<ul>
+<li>What if I want to remove or keep certain variables?</li>
+</ul>
+<div class="heq">
+<p>I want to only have age and expenditure in my data frame</p>
+</div>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dds.discr4 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, expenditures)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 2
+$ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
+$ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="summarizing-data" class="level1">
+<h1>Summarizing Data</h1>
+<section id="tbl_summary-table-summary-12" class="level2">
+<h2 class="anchored" data-anchor-id="tbl_summary-table-summary-12"><code>tbl_summary()</code> : table summary (1/2)</h2>
+<ul>
+<li>What if I want one of those fancy summary tables that are at the top of most research articles? (lovingly called “Table 1”)</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_summary</span>(dds.discr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="pzveloiefp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pzveloiefp table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pzveloiefp thead, #pzveloiefp tbody, #pzveloiefp tfoot, #pzveloiefp tr, #pzveloiefp td, #pzveloiefp th {
+  border-style: none;
+}
+
+#pzveloiefp p {
+  margin: 0;
+  padding: 0;
+}
+
+#pzveloiefp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pzveloiefp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pzveloiefp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pzveloiefp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pzveloiefp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pzveloiefp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pzveloiefp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pzveloiefp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pzveloiefp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pzveloiefp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pzveloiefp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pzveloiefp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pzveloiefp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pzveloiefp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pzveloiefp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pzveloiefp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pzveloiefp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pzveloiefp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pzveloiefp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pzveloiefp .gt_left {
+  text-align: left;
+}
+
+#pzveloiefp .gt_center {
+  text-align: center;
+}
+
+#pzveloiefp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pzveloiefp .gt_font_normal {
+  font-weight: normal;
+}
+
+#pzveloiefp .gt_font_bold {
+  font-weight: bold;
+}
+
+#pzveloiefp .gt_font_italic {
+  font-style: italic;
+}
+
+#pzveloiefp .gt_super {
+  font-size: 65%;
+}
+
+#pzveloiefp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pzveloiefp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pzveloiefp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pzveloiefp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pzveloiefp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pzveloiefp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pzveloiefp .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pzveloiefp .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pzveloiefp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>N = 1,000</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">id</td>
+<td class="gt_row gt_center" headers="stat_0">55,385 (31,759, 76,205)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">age.cohort</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;0-5</td>
+<td class="gt_row gt_center" headers="stat_0">82 (8.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;6-12</td>
+<td class="gt_row gt_center" headers="stat_0">175 (18%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;13-17</td>
+<td class="gt_row gt_center" headers="stat_0">212 (21%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;18-21</td>
+<td class="gt_row gt_center" headers="stat_0">199 (20%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;22-50</td>
+<td class="gt_row gt_center" headers="stat_0">226 (23%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;51+</td>
+<td class="gt_row gt_center" headers="stat_0">106 (11%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">age</td>
+<td class="gt_row gt_center" headers="stat_0">18 (12, 26)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">SAB</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td class="gt_row gt_center" headers="stat_0">503 (50%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td class="gt_row gt_center" headers="stat_0">497 (50%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">expenditures</td>
+<td class="gt_row gt_center" headers="stat_0">7,026 (2,898, 37,718)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">R_E</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;American Indian</td>
+<td class="gt_row gt_center" headers="stat_0">4 (0.4%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Asian</td>
+<td class="gt_row gt_center" headers="stat_0">129 (13%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Black</td>
+<td class="gt_row gt_center" headers="stat_0">59 (5.9%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic</td>
+<td class="gt_row gt_center" headers="stat_0">376 (38%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Multi Race</td>
+<td class="gt_row gt_center" headers="stat_0">26 (2.6%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Native Hawaiian</td>
+<td class="gt_row gt_center" headers="stat_0">3 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
+<td class="gt_row gt_center" headers="stat_0">2 (0.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White not Hispanic</td>
+<td class="gt_row gt_center" headers="stat_0">401 (40%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">exp_to_age</td>
+<td class="gt_row gt_center" headers="stat_0">462 (273, 938)</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_footnotes odd">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3); n (%)</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="tbl_summary-table-summary-22" class="level2">
+<h2 class="anchored" data-anchor-id="tbl_summary-table-summary-22"><code>tbl_summary()</code> : table summary (2/2)</h2>
+<ul>
+<li>Let’s make this more presentable</li>
+</ul>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id, <span class="sc">-</span>age.cohort, <span class="sc">-</span>exp_to_age) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">c</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                        R_E <span class="sc">~</span> <span class="st">"Race/Ethnicity"</span>, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                        SAB <span class="sc">~</span> <span class="st">"Sex Assigned at Birth"</span>, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                        expenditures <span class="sc">~</span> <span class="st">"Expenditures"</span>) ,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"{mean} ({sd})"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:30%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="cipcvyjwvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cipcvyjwvx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#cipcvyjwvx thead, #cipcvyjwvx tbody, #cipcvyjwvx tfoot, #cipcvyjwvx tr, #cipcvyjwvx td, #cipcvyjwvx th {
+  border-style: none;
+}
+
+#cipcvyjwvx p {
+  margin: 0;
+  padding: 0;
+}
+
+#cipcvyjwvx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#cipcvyjwvx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#cipcvyjwvx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#cipcvyjwvx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#cipcvyjwvx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#cipcvyjwvx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#cipcvyjwvx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#cipcvyjwvx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#cipcvyjwvx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#cipcvyjwvx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#cipcvyjwvx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#cipcvyjwvx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#cipcvyjwvx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#cipcvyjwvx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cipcvyjwvx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cipcvyjwvx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cipcvyjwvx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cipcvyjwvx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cipcvyjwvx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cipcvyjwvx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cipcvyjwvx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cipcvyjwvx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cipcvyjwvx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cipcvyjwvx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cipcvyjwvx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cipcvyjwvx .gt_left {
+  text-align: left;
+}
+
+#cipcvyjwvx .gt_center {
+  text-align: center;
+}
+
+#cipcvyjwvx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cipcvyjwvx .gt_font_normal {
+  font-weight: normal;
+}
+
+#cipcvyjwvx .gt_font_bold {
+  font-weight: bold;
+}
+
+#cipcvyjwvx .gt_font_italic {
+  font-style: italic;
+}
+
+#cipcvyjwvx .gt_super {
+  font-size: 65%;
+}
+
+#cipcvyjwvx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cipcvyjwvx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cipcvyjwvx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cipcvyjwvx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cipcvyjwvx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cipcvyjwvx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cipcvyjwvx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#cipcvyjwvx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#cipcvyjwvx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>N = 1,000</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Age</td>
+<td class="gt_row gt_center" headers="stat_0">23 (18)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Sex Assigned at Birth</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td class="gt_row gt_center" headers="stat_0">503 (50%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td class="gt_row gt_center" headers="stat_0">497 (50%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Expenditures</td>
+<td class="gt_row gt_center" headers="stat_0">18,066 (19,543)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Race/Ethnicity</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;American Indian</td>
+<td class="gt_row gt_center" headers="stat_0">4 (0.4%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Asian</td>
+<td class="gt_row gt_center" headers="stat_0">129 (13%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Black</td>
+<td class="gt_row gt_center" headers="stat_0">59 (5.9%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Hispanic</td>
+<td class="gt_row gt_center" headers="stat_0">376 (38%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Multi Race</td>
+<td class="gt_row gt_center" headers="stat_0">26 (2.6%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Native Hawaiian</td>
+<td class="gt_row gt_center" headers="stat_0">3 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
+<td class="gt_row gt_center" headers="stat_0">2 (0.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White not Hispanic</td>
+<td class="gt_row gt_center" headers="stat_0">401 (40%)</td>
+</tr>
+</tbody><tfoot>
+<tr class="gt_footnotes odd">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean (SD); n (%)</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="group_by-group-by-one-or-more-variables" class="level2">
+<h2 class="anchored" data-anchor-id="group_by-group-by-one-or-more-variables"><code>group_by()</code>: group by one or more variables</h2>
+<ul>
+<li>What if I want to quickly look at group differences?</li>
+<li>It will not change how the data look, but changes the actions of following functions</li>
+</ul>
+<div class="heq">
+<p>I want to group my data by sex assigned at birth.</p>
+</div>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dds.discr5 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SAB)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 7
+Groups: SAB [2]
+$ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
+$ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
+$ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
+$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
+$ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…
+$ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 304.40…</code></pre>
+</div>
+</div>
+<ul>
+<li>Let’s see how the groups change something like the <code>summarize()</code> function in the next slide</li>
+</ul>
+</section>
+<section id="summarize-summarize-your-data-or-grouped-data-into-one-row" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-summarize-your-data-or-grouped-data-into-one-row"><code>summarize()</code>: summarize your data or grouped data into one row</h2>
+<ul>
+<li>What if I want to calculate specific descriptive statistics for my variables?</li>
+<li>This function is often best used with <code>group_by()</code></li>
+<li>If only presenting the summaries, functions like <code>tbl_summary()</code> is better</li>
+<li><code>summarize()</code> creates a new data frame, which means you can plot and manipulate the summarized data</li>
+</ul>
+<p>&nbsp;</p>
+<div class="columns">
+<div class="column">
+<p>Over whole sample:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ave =</span> <span class="fu">mean</span>(expenditures),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(expenditures),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">med =</span> <span class="fu">median</span>(expenditures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+     ave     SD   med
+   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 18066. 19543.  7026</code></pre>
+</div>
+</div>
+</div><div class="column">
+<p>Grouped by sex assigned at birth:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SAB) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ave =</span> <span class="fu">mean</span>(expenditures),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(expenditures),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">med =</span> <span class="fu">median</span>(expenditures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  SAB       ave     SD   med
+  &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+1 Female 18130. 20020.  6400
+2 Male   18001. 19068.  7219</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="across-apply-a-function-across-multiple-columns" class="level2">
+<h2 class="anchored" data-anchor-id="across-apply-a-function-across-multiple-columns"><code>across()</code>: apply a function across multiple columns</h2>
+<ul>
+<li>Like <code>group_by()</code>, this function is often paired with another transformation function</li>
+</ul>
+<div class="heq">
+<p>I want all my integer values to have two significant figures.</p>
+</div>
+<p>&nbsp;</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dds.discr6 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.integer), signif, <span class="at">digits =</span> <span class="dv">2</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,000
+Columns: 7
+$ id           &lt;dbl&gt; 10000, 10000, 10000, 11000, 11000, 11000, 11000, 11000, 1…
+$ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
+$ age          &lt;dbl&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
+$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ expenditures &lt;dbl&gt; 2100, 42000, 1500, 6400, 4400, 4600, 3900, 3900, 5000, 29…
+$ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…
+$ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 304.40…</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="folder-organization" class="level1">
+<h1>Folder organization</h1>
+<section id="folder-organization-1" class="level2">
+<h2 class="anchored" data-anchor-id="folder-organization-1">Folder organization</h2>
+<ul>
+<li><p>Make a folder for our class!</p>
+<ul>
+<li>I suggest naming it something like <code>BSTA_512_W25</code> to indicate the class and the term</li>
+</ul></li>
+<li><p>Make these folders in your computer (or in OneDrive if you prefer)</p>
+<ul>
+<li>Only make them in OneDrive <strong>if</strong> you have a desktop connection</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column">
+<ul>
+<li><p>For a project, I have the following folders</p>
+<ul>
+<li>Background</li>
+<li>Code</li>
+<li>Data_Raw</li>
+<li>Data_Processed</li>
+<li>Dissemination</li>
+<li>Reports</li>
+<li>Meetings</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<ul>
+<li><p>For our class, I suggest making one folder for the course with the following folders in it:</p>
+<ul>
+<li>Data</li>
+<li>Homework</li>
+<li>Project (with above subfolders)</li>
+<li>Lessons</li>
+<li>And other folders if you want</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="aside-folder-and-file-naming" class="level2">
+<h2 class="anchored" data-anchor-id="aside-folder-and-file-naming">Aside: folder and file naming</h2>
+<p>There are a few good practices for naming files and folders for easy tracking:</p>
+<ol type="1">
+<li>Keep the name short and relevant</li>
+<li>Use leading numbers to help organize sequential items
+<ul>
+<li>I can show you my lessons folders as an example</li>
+</ul></li>
+<li>Use dates in the format “YYYY-MM-DD” so that files are in chronological order</li>
+<li>You can label different versions if you would like to</li>
+<li>Use “_” to separate sections of the name
+<ul>
+<li>I also use this to separate words, but some people say you should use “-” to separate words</li>
+</ul></li>
+</ol>
+</section>
+<section id="creating-project-in-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="creating-project-in-rstudio">Creating project in RStudio</h2>
+<ul>
+<li><p>Way to designate a working directory: basically your home base when working in R</p>
+<ul>
+<li><p>We have to tell R exactly where we are in our folders and where to find other things</p></li>
+<li><p>A project makes it easier to tell R where we are</p></li>
+</ul></li>
+<li><p>Basic steps to create a project</p>
+<ul>
+<li><p>Go into RStudio</p></li>
+<li><p>Create new project for this class (under <code>File</code> or top right corner)</p>
+<ul>
+<li>I would chose “Existing Directory” since we have already set up our folders</li>
+<li>Make the new project in the <code>BSTA_512_W25</code> folder</li>
+</ul></li>
+</ul></li>
+<li><p>Once we have projects, we can open one and R will automatically know that its location is the start of our working directory</p></li>
+<li><p>Only make one project for now!!</p></li>
+</ul>
+</section>
+<section id="the-nice-thing-about-r-projects" class="level2">
+<h2 class="anchored" data-anchor-id="the-nice-thing-about-r-projects">The nice thing about R projects</h2>
+<ul>
+<li>5 minute video explaining some of the nice features of R projects</li>
+</ul>
+<p><a href="https://rfortherestofus.com/2022/10/rstudio-projects" class="uri">https://rfortherestofus.com/2022/10/rstudio-projects</a></p>
+</section>
+<section id="reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility">Reproducibility</h2>
+<ul>
+<li><p>Research data and code can reach the same results regardless of who is running the code</p>
+<ul>
+<li>This can also refer to future or past you!</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>We want to set up our work so the entire folder can be moved around and work in its new location</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Projects work well in combination with the <code>here</code> package</li>
+</ul>
+</section>
+</section>
+<section id="here-package-and-importing-data" class="level1">
+<h1><code>here</code> package and importing data</h1>
+<section id="here-package" class="level2">
+<h2 class="anchored" data-anchor-id="here-package"><code>here</code> package</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/here_pkg.png" class="img-fluid figure-img"></p>
+<figcaption>Illustration by <a href="https://github.com/allisonhorst">Allison Horst</a></figcaption>
+</figure>
+</div>
+</section>
+<section id="here-package-1" class="level2">
+<h2 class="anchored" data-anchor-id="here-package-1"><code>here</code> package</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li><p><a href="http://jenrichmond.rbind.io/post/how-to-use-the-here-package/">Good source for the <code>here</code> package</a></p>
+<ul>
+<li>Just substitute <code>.Rmd</code> with <code>.qmd</code></li>
+</ul></li>
+<li><p>Basically, a <code>.qmd</code> file and <code>.R</code> file work differently</p>
+<ul>
+<li>We haven’t worked much with <code>.R</code> files</li>
+</ul></li>
+<li><p>For <code>.qmd</code> files, the automatic directory is the folder it is in</p>
+<ul>
+<li>But we want it to be the main project folder</li>
+</ul></li>
+<li><p><code>here</code> can help with that</p></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Very important for reproducibility!!</strong></li>
+</ul>
+</div><div class="column">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/paths.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="using-here-package" class="level2">
+<h2 class="anchored" data-anchor-id="using-here-package">Using <code>here</code> package</h2>
+<ul>
+<li><p>Within your console, type <code>here()</code> and enter</p>
+<ul>
+<li>Try this with <code>getwd()</code> as well</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">here</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/wakim/Library/CloudStorage/OneDrive-OregonHealth&amp;ScienceUniversity/Teaching/Classes/BSTA_512_26W/BSTA_512_26W_site"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/wakim/Library/CloudStorage/OneDrive-OregonHealth&amp;ScienceUniversity/Teaching/Classes/BSTA_512_26W/BSTA_512_26W_site"</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<ul>
+<li><code>here</code> can be used whenever we need to access a file path in <strong>R code</strong>
+<ul>
+<li>Importing data</li>
+<li>Saving output</li>
+<li>Accessing files</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="importing-data" class="level1">
+<h1>Importing data</h1>
+<section id="using-here-to-load-data" class="level2">
+<h2 class="anchored" data-anchor-id="using-here-to-load-data">Using <code>here()</code> to load data</h2>
+<ul>
+<li><p>The <code>here()</code> function will start at the working directory (where your <code>.Rproj</code> file is) and let you write out a file path for anything</p></li>
+<li><p>To load the dataset in our <code>.qmd</code> file, we will use:</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"./data/BodyTemperatures.xlsx"</span>))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"BodyTemperatures.xlsx"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="common-functions-to-load-data" class="level2">
+<h2 class="anchored" data-anchor-id="common-functions-to-load-data">Common functions to load data</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Data file type</th>
+<th>Package needed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read_excel()</code></td>
+<td><code>.xls</code>, <code>.xlsx</code></td>
+<td><code>readxl</code></td>
+</tr>
+<tr class="even">
+<td><code>read.csv()</code></td>
+<td><code>.csv</code></td>
+<td>Built in</td>
+</tr>
+<tr class="odd">
+<td><code>load()</code></td>
+<td><code>.Rdata</code></td>
+<td>Built in</td>
+</tr>
+<tr class="even">
+<td><code>read_sas()</code></td>
+<td><code>.sas7bdat</code></td>
+<td><code>haven</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<section id="dplyr-resources" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr-resources"><code>dplyr</code> resources</h2>
+<ul>
+<li><a href="https://dplyr.tidyverse.org/reference/index.html">More <code>dpylr</code> functions to reference!</a></li>
+</ul>
+<p>Additional details and examples are available in the vignettes:</p>
+<ul>
+<li><p><a href="https://dplyr.tidyverse.org/articles/colwise.html">column-wise operations vignette</a></p></li>
+<li><p><a href="https://dplyr.tidyverse.org/articles/rowwise.html">row-wise operations vignette</a></p></li>
+</ul>
+<p>&nbsp;</p>
+<p>and the dplyr 1.0.0 release blog posts:</p>
+<ul>
+<li><a href="https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-colwise/">working across columns</a></li>
+<li><a href="https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-rowwise/">working within rows</a></li>
+</ul>
+</section>
+<section id="r-programming-class-at-ohsu" class="level2">
+<h2 class="anchored" data-anchor-id="r-programming-class-at-ohsu">R programming class at OHSU!</h2>
+<p>You can check out <a href="https://sph-r-programming-2022.netlify.app/">Dr.&nbsp;Jessica Minnier’s R class page</a> if you want more notes, videos, etc.</p>
+</section>
+<section id="the-larger-tidy-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="the-larger-tidy-ecosystem">The larger tidy ecosystem</h2>
+<p>Just to name a few…</p>
+<ul>
+<li><p><a href="https://garthtarr.github.io/meatR/janitor.html">janitor</a></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">kableExtra</a></p></li>
+<li><p><a href="https://patchwork.data-imaginist.com/">patchwork</a></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/gghighlight/vignettes/gghighlight.html">gghighlight</a></p></li>
+<li><p><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></p></li>
+</ul>
+</section>
+<section id="credit-to-mine-çetinkaya-rundel" class="level2">
+<h2 class="anchored" data-anchor-id="credit-to-mine-çetinkaya-rundel">Credit to Mine Çetinkaya-Rundel</h2>
+<ul>
+<li><p>These notes were built from Mine’s notes</p>
+<ul>
+<li><p>Most pages and code were left as she made them</p></li>
+<li><p>I changed a few things to match our class</p></li>
+</ul></li>
+<li><p>Please see <a href="https://github.com/mine-cetinkaya-rundel/teach-ds-wsc-2021/tree/main">her Github repository</a> for the original notes</p></li>
+</ul>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Source: R for Data Science. Grolemund and Wickham.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

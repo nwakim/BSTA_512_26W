@@ -1,0 +1,75 @@
+---
+title: "Lab 1"
+author: "Your name here!!"
+subtitle: "BSTA 512/612"
+description: "Due: January 16, 2025 at 11pm"
+date-modified: "today"
+categories: [""]
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    embed-resources: true
+---
+
+## Lab activities
+
+### 1. Reading and listening activities
+
+#### 1.1 Article: [Implicit and explicit anti-fat bias: The role of weight-related attitudes and beliefs](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Labs/Implicit_anti_fat.pdf?csf=1&web=1&e=Gg43c4)
+    
+::: callout-important
+#### Task
+
+Answer the questions from the instructions.
+:::
+
+#### 1.2 Podcast: [Anti-Fat Bias by Maintenance Phase](https://maintenancephase.buzzsprout.com/1411126/6524683-anti-fat-bias)
+
+::: callout-important
+#### Task
+
+If you decide to listen, feel free to share a quote that most impacted you.
+:::
+
+### 2. Familiarizing ourselves with the Implicit Association Test (IAT)
+
+#### 2.1 Learn more about the test
+
+::: callout-important
+#### Task
+
+In 5-10 bullet points, write down some of your ideas on the study design that you may want to mention.
+:::
+
+#### 2.2 Take the test
+
+::: callout-important
+#### Task
+
+Take the Weight IAT test.
+:::
+
+### 3. Get a sense of how you would like to analyze the data
+
+::: callout-important
+#### Task
+
+Write your research question
+:::
+
+### 4. Organize your "Project" folder
+
+::: callout-important
+#### Task
+
+Display your working directory using the `here` package and `here()` function.
+:::
+
+### 5. Compile above work into an introduction
+
+::: callout-important
+#### Task
+
+Write your introduction
+:::

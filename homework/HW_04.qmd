@@ -1,0 +1,164 @@
+---
+title: "Homework 4"
+subtitle: "BSTA 512/612"
+author: "Your name here!!!"
+description: "Due: Friday February 28, 2025 at 11pm"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    embed-resources: true
+---
+
+::: callout-caution
+Homework 4 is updated (Nicky 2/19/25)
+:::
+
+```{=html}
+<style>div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}</style>
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.height = 4, fig.width = 6, fig.align = "center")
+
+library(tidyverse)
+library(rstatix)
+library(broom)
+library(gt)
+library(janitor)
+library(readxl)
+library(gridExtra)
+library(ggfortify)  # autoplot(model)
+library(gtsummary)
+library(describedata) # gladder()
+library(haven)
+library(here)
+```
+
+
+## Directions
+
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_04.qmd)
+
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
+
+-   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
+
+-   For each question, make sure to include all code and resulting output in the html file to support your answers
+
+-   Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.
+
+-   Write all answers in complete sentences as if communicating the results to a collaborator.
+
+::: callout-tip
+It is a good idea to try rendering your document from time to time as you go along! Note that rendering automatically saves your `.qmd` file and rendering frequently helps you catch your errors more quickly.
+:::
+
+## Questions
+
+### Question 1 {#sec-L10-F-test}
+
+This question uses the same dataset as HW 2, question 1 and HW 3, question 4. 
+
+This question is based on data collected as part of an observational study of patients who suffered from stroke.
+
+Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article [Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis](https://pubmed.ncbi.nlm.nih.gov/21940963/).
+
+The dataset that you will work with is called `completedata.sas7bdat`. The two variables we are interested in are:
+
+-   Covariate 1: `Fatalism` (larger values indicate that the individual feels less control of their life)
+
+    -   Potential scores range from 8 to 40
+
+-   Covariate 2: `Optimism` (larger values indicate that the individual feels higher levels of optimism)
+
+    -   Potential scores range from 6 to 24
+
+-   Covariate 3: `Spirituality` (larger values indicate that the individual has more belief in a higher power)
+
+    -   Potential scores range from 2 to 8
+
+-   Outcome: `Depression` (larger values imply increased depression)
+
+    -   Potential scores range from 0 to 27
+
+For our homework purposes we will assume each variable is continuous.
+
+```{r}
+dep_df = read_sas(here("./data/completedata.sas7bdat"))
+```
+
+#### Part a
+
+Fit the regression model with all the covariates (Fatalism, Optimism, Spirituality), display the regression table, and write out the fitted regression line.
+
+#### Part b
+
+Does at least one of the covariates contribute significantly to the prediction of Depression? (Note: this is an overall test. Please follow the hypothesis test steps. To complete step 4-6, simply output your ANOVA table.)
+
+
+#### Part c
+
+Does the addition of Spirituality add significantly to the prediction of Depression achieved by Fatalism and Optimism?
+
+
+#### Part d
+
+Does the addition of Spirituality and Optimism add significantly to the prediction of Depression achieved by Fatalism?
+
+
+### Question 2 {#sec-L11-L12-Interactions-01}
+
+A team of nutrition experts investigated the influence of protein content in diet on the relationship between age (explanatory variable) and height (outcome, in centimeters) for children. Using the dataset, `CH12Q03.xls`, answer the following questions.
+
+This question was adapted from [this textbook](https://catalog.lib.uchicago.edu/vufind/Record/7546272).
+
+```{r}
+#| echo: false
+protein <- read_excel("./data/CH12Q03.xls") # change this to the appropriate file location
+```
+
+#### Part a
+
+Using R, make a variable that is a factor for Diet. Make sure to check what values the original variable for Diet can take. How many indicator functions do you need to represent the categorical variable Diet (protein-rich vs. protein-poor)?
+
+
+#### Part b
+
+At a level of significance $\alpha = 0.10$, test whether protein diet modifies the effect of age on height. Justify your answer (e.g., perform a hypothesis test for the interaction between diet and age).
+
+*Note: recall that we model an effect modifier with an interaction.*
+
+#### Part c
+
+Is it possible that diet is a confounder? Note: this will depend on your results from Part b. 
+
+#### Part d
+
+Write the fitted regression equation for our model in Part b. Write the respective regression lines for each specific diet group: protein rich and protein poor. Interpret the slope of each regression line (include the 95% CI here).
+
+### Question 3 {#sec-L11-L12-Interactions-02}
+
+An experiment was conducted regarding a quantitative analysis of factors found in high-density lipoprotein (HDL) in a sample of human blood serum. Three variables thought to be predictive of, or associated with, HDL measurement (Y) were the total cholesterol (X1) and total triglyceride (X2) concentrations in the sample, plus the presence or absence of a certain sticky component of the serum called sinking pre-beta or SPB (X3), coded as 0 if absent and 1 if present. Using the dataset, `CH09Q05.xls`, answer the following questions.
+
+```{r}
+#| echo: false
+
+HDL_factors <- read_excel(here("./data/CH09Q05.xls")) # change this to the appropriate file location
+```
+
+#### Part a {#sec-Q3-Part-a}
+
+Use $\alpha= 0.05$, test whether if there is a crude association between HDL measurement and total cholesterol. Note: testing for a crude association means we fit a simple linear regression model and see if the association is significant. 
+
+#### Part b
+
+Sometimes simple linear regression leads us to believe that there is no association between two variables, but missing interaction might be obscuring the association. Use $\alpha= 0.1$ to test whether total triglyceride is an effect modifier of the association between HDL and total cholesterol. Make sure to include a concluding statement.
+
+Note: Since the data frame has the variables named as $Y$, $X1$, and $X2$, you may use those in the regression equations, but when you are making a conclusion, please use the specific names of the variables to identify each. For example, $Y$ is actually HDL. 
+
+#### Part c
+
+Test whether total triglyceride is a confounder by comparing the model in Part a to a model that includes total triglyceride. Make sure to include a concluding statement and interpret your coefficients. 
+
+

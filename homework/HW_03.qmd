@@ -1,0 +1,281 @@
+---
+title: "Homework 3"
+subtitle: "BSTA 512/612"
+author: "Your name here!!!"
+description: "Due: Friday February 14, 2025 at 11pm"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(rstatix)
+library(broom)
+library(gt)
+library(janitor)
+library(readxl)
+library(gridExtra)
+library(ggfortify)  # autoplot(model)
+library(gtsummary)
+library(describedata) # gladder()
+library(haven)
+library(here)
+```
+
+::: callout-caution
+This homework is ready! 2/6/25
+:::
+
+## Directions
+
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_03.qmd)
+
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
+
+-   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
+
+-   For each question, make sure to include all code and resulting output in the html file to support your answers
+
+-   Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.
+
+-   Write all answers in complete sentences as if communicating the results to a collaborator.
+
+::: callout-tip
+It is a good idea to try rendering your document from time to time as you go along! Note that rendering automatically saves your `.qmd` file and rendering frequently helps you catch your errors more quickly.
+:::
+
+## Questions
+
+### Midterm feedback!!
+
+[Please complete the midterm feedback](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUQkdNUVRFQU41T0tRVDc0U1k2V0VFRVk4TS4u) along with this homework!!
+
+
+
+### Question 1
+
+This question and data are adapted from [this textbook](https://catalog.lib.uchicago.edu/vufind/Record/7546272).
+
+In an experiment designed to describe the dose–response curve for vitamin K, individual rats were depleted of their vitamin K reserves and then fed dried liver for 4 days at different dosage levels. The response of each rat was measured as the concentration of a clotting agent needed to clot a sample of its blood in 3 minutes. The results of the experiment on 12 rats are given in the following table; values are expressed in common logarithms for both dose and response.
+
+```{r}
+clot = read_excel(here("./data/CH05Q09.xls"))
+clot %>% gt() %>%
+  cols_label(RAT = md("**Rat**"),
+             LOGCONC = md("**Log10 Concentration (Y)**"),
+             LOGDOSE = md("**Log10 Dose (X)**"))
+```
+
+Use the log-transformed values as given in the dataset.
+
+Use the following scatterplot to build your answers off of:
+
+```{r}
+#| fig-height: 5
+#| fig-width: 6.5
+#| fig-align: center
+#| echo: false
+
+ggplot(clot, aes(x = LOGDOSE,
+                 y = LOGCONC)) +
+  geom_point(size = 2) +
+  labs(x = "Log10 dose (X)", 
+       y = "Log10 concentration (Y)",
+       title = "Concentration of clotting agent needed vs. dosage levels of liver") +
+    theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 12), 
+        title = element_text(size = 12))
+```
+
+#### Part a
+
+Fit a linear regression model to the data and add the regression line to the plot.
+
+#### Part b
+
+Use R to create the ANOVA table for the regression described in the exercise.
+
+#### Part c
+
+Using the F-test, determine whether there is an association between the log10 concentration and log10 dose.
+
+::: callout-note
+Make sure to include all needed steps for an F-test. Calculating the F test statistic (step 5) is not needed if you use the ANOVA table. Make sure your conclusion connects back the research context.
+:::
+
+#### Part d
+
+Rewrite your hypothesis test in Part c to show the null and alternative models that we are testing. Did we reject the smaller (reduced) model?
+
+::: callout-note
+You do not need to go through the hypothesis test process again. A quick statement on rejecting or not is okay.
+:::
+
+::: callout-tip
+If you prefer to write out the models by hand, remember that you can take a picture of your work and insert it into this document. HW0 can be a good reference for how we've done this before.
+:::
+
+### Question 2
+
+We will continue to work with the study and dataset from Question 2 above.
+
+#### Part a
+
+Find the correlation coefficient between the two variables. Is the value consistent with your description of the relationship in Question 2? Why or why not?
+
+#### Part b
+
+Calculate the coefficient of determination using linear regression summary output. Can we also calculate the coefficient of determination from the ANOVA in Question 2?
+
+#### Part c
+
+Give an interpretation of the coefficient of determination in the context of the study.
+
+
+### Question 3
+
+A high respiratory rate is a potential diagnostic indicator of respiratory infection in children. To judge whether a respiratory rate is “high” however, a physician must have a clear picture of the distribution of normal rates. To this end, Italian researchers measured the respiratory rates (in breaths/minute) of 618 children between the ages of 15 days and 3 years (measured in months).
+
+The data and problem framing came from the `Sleuth3` package. Please make sure to run the following code to load the data. You can directly access the dataset `ex0824` from the package. I have included a new assignment of the data to `q1_data` if you would like to use that.
+
+```{r}
+#| message: false
+
+if(!require(Sleuth3)) { install.packages("Sleuth3"); library(Sleuth3) }
+q1_data = ex0824 
+```
+
+#### Part a
+
+Create a scatterplot of the dependent and independent variables with both the best-fit line and a smoothed curve through the points. Describe the relationship between the dependent and independent variables, and also comment on whether you think it is reasonable to use a linear regression to model the relationship.
+
+#### Part b
+
+Write out the population regression model for the simple linear regression model. Please leave the variables untransformed for now.
+
+#### Part c
+
+Fit the regression model, display the regression table, and write out the fitted regression line.
+
+#### Part d
+
+Assess the normality of the model's fitted residuals by creating a histogram, density plot, and boxplot of the residuals to visually inspect the distribution of the residuals, and describe any deviations from normality.
+
+
+#### Part e
+
+Assess the normality of the model's fitted residuals by creating QQ plot of the residuals.
+
+Bonus work, but not required: Compare the QQ plot to 4 such plots simulated from normal data, and discuss why or why not the residuals could have come from a normal distribution.
+
+#### Part f
+
+Test the normality of the model's fitted residuals and comment on whether the test's conclusion is consistent with your visual inspection or not. Make sure to include the hypotheses, needed R code, and a conclusion to the test based on the p-value ([as shown in these slides](https://nwakim.github.io/W2024_BSTA_512/slides/06_SLR_Diagnostics.html#/n-shapiro-wilk-test-of-normality)).
+
+#### Part g
+
+Create a residual plot using ggplot and the residuals. Discuss what this means in the context of our model assumptions.
+
+#### Part h
+
+Determine whether there are any observations with high leverage. Please use the cutoff, $h_i > 6/n$. If there are observations with high leverage, print the observations and state how many high leverage points there are.
+
+#### Part i
+
+Print the 10 observations with highest Cook's distance. If there are observations with high Cook's distance ($d_i >1$), state how many observations have high Cook's distance.
+
+#### Part j
+
+Create a histogram for rate. Describe its distribution shapes.
+
+#### Part k
+
+Using the above histogram, and Tukey's ladder of transformations, discuss the range of transformations that will be appropriate for **Rate**. Explain your reasoning.
+
+Then use `gladder()` to decide on two possible transformations. Explain your reasoning.
+
+Note: questions below will ask about model fit with the transformations. For now, just explain why you chose the two that you did.
+
+#### Part l
+
+Add the two rate transformations you chose above to the dataset. You do not need to print any output, just make sure the code is visible.
+
+#### Part m
+
+Create scatterplots using two transformed rates and age. Discuss if either transformation potentially improves the model fit. Explain why or why not. Note: including lines will help!
+
+#### Part n
+
+Using one of the transoformed outcomes, fit the regression model, display the regression table, and write out the fitted regression line.
+
+#### Part o
+
+Assess the normality of the model’s fitted residuals by creating QQ plot of the residuals. Does the transformation improve the QQ plot?
+
+#### Part p
+
+Create a residual plot using ggplot and the residuals. Discuss what this means in the context of our model assumptions. Does the transformation improve our model assumptions?
+
+#### Part q
+
+Between the model with the untransformed outcome and the transformed outcome, which would you recommend using for analysis? (Hint: there are pros and cons to both models)
+
+### Question 4
+
+This question uses the same dataset as HW 2, question 1.
+
+This question is based on data collected as part of an observational study of patients who suffered from stroke.
+
+Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article [Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis](https://pubmed.ncbi.nlm.nih.gov/21940963/).
+
+The dataset that you will work with is called `completedata.sas7bdat`. The two variables we are interested in are:
+
+-   Covariate 1: `Fatalism` (larger values indicate that the individual feels less control of their life)
+
+    -   Potential scores range from 8 to 40
+
+-   Covariate 2: `Optimism` (larger values indicate that the individual feels higher levels of optimism)
+
+    -   Potential scores range from 6 to 24
+
+-   Covariate 3: `Spirituality` (larger values indicate that the individual has more belief in a higher power)
+
+    -   Potential scores range from 2 to 8
+
+-   Outcome: `Depression` (larger values imply increased depression)
+
+    -   Potential scores range from 0 to 27
+
+For our homework purposes we will assume each variable is continuous.
+
+```{r}
+dep_df = read_sas(here("./data/completedata.sas7bdat"))
+```
+
+#### Part a
+
+Fit the regression model with all the covariates (Fatalism, Optimism, Spirituality), display the regression table, and write out the fitted regression line.
+
+#### Part b
+
+Interpret each coefficient ($\beta_0$, $\beta_1$, $\beta_2$, $\beta_3$).
+
+Does the intercept make sense for the range of values that each covariate can take? Explain.
+
+
+#### Part c
+
+Recall in Homework 2, we ran a simple linear regression model for Depression vs. Fatalism with the following interpretation for the coefficient: For every 1 point higher fatalism score, there is an expected difference of 0.25 points higher depression score (95%CI: 0.17, 0.32).
+
+Does the addition of Optimism and Spirituality change our coefficient estimate for Fatalism? (No need for an official hypothesis test here. I just want us to note some differences.)
+
+
+#### Part d
+
+From the fitted regression model, calculate the regression line when Optimism score is 10 and Spirituality score is 6.

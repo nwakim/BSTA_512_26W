@@ -1,0 +1,110 @@
+---
+title: "Lab 3 Instructions"
+author: "Nicky Wakim"
+subtitle: "BSTA 512/612"
+description: "Due: February 21, 2025 at 11pm"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    self-contained: true
+    number-sections: true
+    number-depth: 4
+editor_options: 
+  chunk_output_type: console
+---
+
+::: callout-caution
+
+This lab is ready to go! Nicky (2/14/2025)
+:::
+
+::: callout-warning
+## IMPORTANT TO READ
+
+-   There is an instructions file and a file for you to edit and turn in. Please only work in the latter file!!
+:::
+
+```{r}
+#| message: false
+#| echo: false
+
+# PLEASE DO NOT REMOVE THIS CODE CHUNK!!!
+### ADD YOUR LIBRARIES HERE!!! ####
+
+library(tidyverse)
+library(gtsummary)
+library(here)
+if(!require(lubridate)) { install.packages("lubridate"); library(lubridate) }
+#load("~/Library/CloudStorage/OneDrive-OregonHealth&ScienceUniversity/Teaching/Datasets/Implicit_anti_fat_bias/Data/Data_2021/iat_data.rda")
+load(here("../Project/data/iat_data_lab3.rda"))
+```
+
+## Directions
+
+Please turn in your `.html` file on Sakai.Please let me know if you greatly prefer to submit a physical copy.
+
+[You can download the `.qmd` file for this lab here.](https://github.com/nwakim/BSTA_512_26W/blob/main/labs/Lab_03.qmd) Please use the linked qmd file and not this one! (This is specifically the instructions.)
+
+The rest of this lab's instructions are embedded into the lab activities.
+
+### Purpose
+
+The main purpose of this lab is to perform some quality control on our data, recode some of the multi-selection categorical variables, continue data exploration, and start analyzing the main relationship of our research question.
+
+### Grading
+
+**This lab is graded out of 12 points.** Nicky will use the following rubric displayed on the [Project](../project.qmd) page.
+
+## Lab activities
+
+Before starting this lab, you should go back to Lab 2, save a new `.rda` file that contains all the new variables from that Lab. Then you can load it here!
+
+::: callout-note
+I have left it up to you to load the needed packages for this lab.
+:::
+
+### Restate research question
+
+::: callout-important
+#### Task
+
+Please restate your research question below using the provided format (1 sentence). You can change the wording if you'd like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.
+:::
+
+In this study, we will investigate the association between IAT score and ________. 
+
+### Fit a multiple logistic regression model
+
+Recall, we have not removed missing observations. In homework 1, we discussed what `glm()` does with missing values automatically. 
+
+::: callout-important
+#### Task
+
+Fit a main effects model with 5 of your covariates. This will not necessarily be your final model, but we can construct interpretations and code that will be useful in your final model. 
+:::
+
+### Present the odds ratio in a table
+
+::: callout-important
+#### Task
+
+Use the `tbl_regression()` function to make a table of the odds ratios from your fitted model.
+:::
+
+### Present the odds ratio in a forest plot
+
+::: callout-important
+#### Task
+
+Use the code from our lesson on Multiple Logistic Regression (Lesson 9) to make a forest plot of the odds ratio from your fitted model. Make sure your main variable looks presentable! The other ones do not need to look perfect since they may not be in your final model. 
+:::
+
+### Interpret the odds ratio for your main covariate
+
+::: callout-important
+#### Task
+
+Interpret the estimated odds ratio(s) for the covariate from your research question. Make sure to include the 95% confidence intervals and what other variables you adjusted for. 
+:::

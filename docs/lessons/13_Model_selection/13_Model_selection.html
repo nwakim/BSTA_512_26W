@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nicky Wakim">
+<meta name="dcterms.date" content="2025-02-24">
+
+<title>Lesson 13: Model/Variable Selection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b780fb0528eafbfa2bf38de57c29c417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo light-content">
+    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Linear Models</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../instructors.html"> 
+<span class="menu-text">Instructors</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#regression-analysis-process" id="toc-regression-analysis-process" class="nav-link" data-scroll-target="#regression-analysis-process">Regression analysis process</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-1" id="toc-learning-objectives-1" class="nav-link" data-scroll-target="#learning-objectives-1">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#some-important-definitions" id="toc-some-important-definitions" class="nav-link" data-scroll-target="#some-important-definitions">Some important definitions</a></li>
+  <li><a href="#why-cant-i-just-throw-in-all-the-variables-into-my-model" id="toc-why-cant-i-just-throw-in-all-the-variables-into-my-model" class="nav-link" data-scroll-target="#why-cant-i-just-throw-in-all-the-variables-into-my-model">Why can’t I just throw in all the variables into my model?</a></li>
+  <li><a href="#think-back-to-population-model-vs.-estimated-models" id="toc-think-back-to-population-model-vs.-estimated-models" class="nav-link" data-scroll-target="#think-back-to-population-model-vs.-estimated-models">Think back to population model vs.&nbsp;estimated models</a></li>
+  <li><a href="#model-complexity-vs.-parsimony" id="toc-model-complexity-vs.-parsimony" class="nav-link" data-scroll-target="#model-complexity-vs.-parsimony">Model Complexity vs.&nbsp;Parsimony</a></li>
+  <li><a href="#bias-variance-trade-off" id="toc-bias-variance-trade-off" class="nav-link" data-scroll-target="#bias-variance-trade-off">Bias-variance trade off</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#model-selection-basics-slide-adjusted-from-jodi-lapidus" id="toc-model-selection-basics-slide-adjusted-from-jodi-lapidus" class="nav-link" data-scroll-target="#model-selection-basics-slide-adjusted-from-jodi-lapidus">Model Selection basics (slide adjusted from Jodi Lapidus)</a></li>
+  <li><a href="#the-goals-of-association-vs.-prediction" id="toc-the-goals-of-association-vs.-prediction" class="nav-link" data-scroll-target="#the-goals-of-association-vs.-prediction">The goals of association vs.&nbsp;prediction</a></li>
+  <li><a href="#model-building-for-association-vs.-prediction" id="toc-model-building-for-association-vs.-prediction" class="nav-link" data-scroll-target="#model-building-for-association-vs.-prediction">Model building for association vs.&nbsp;prediction</a></li>
+  <li><a href="#poll-everywhere-question-1" id="toc-poll-everywhere-question-1" class="nav-link" data-scroll-target="#poll-everywhere-question-1">Poll Everywhere Question 1</a></li>
+  <li><a href="#model-selection-strategies-for-continuous-outcomes" id="toc-model-selection-strategies-for-continuous-outcomes" class="nav-link" data-scroll-target="#model-selection-strategies-for-continuous-outcomes">Model selection strategies for <em>continuous</em> outcomes</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-2" id="toc-learning-objectives-2" class="nav-link" data-scroll-target="#learning-objectives-2">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#pre-specification-of-multivariable-model-slide-adapted-from-jodi-lapidus" id="toc-pre-specification-of-multivariable-model-slide-adapted-from-jodi-lapidus" class="nav-link" data-scroll-target="#pre-specification-of-multivariable-model-slide-adapted-from-jodi-lapidus">Pre-specification of multivariable model (slide adapted from Jodi Lapidus)</a></li>
+  <li><a href="#purposeful-model-selection-slide-adapted-from-jodi-lapidus" id="toc-purposeful-model-selection-slide-adapted-from-jodi-lapidus" class="nav-link" data-scroll-target="#purposeful-model-selection-slide-adapted-from-jodi-lapidus">Purposeful model selection (slide adapted from Jodi Lapidus)</a></li>
+  <li><a href="#change-in-estimate-cie-approach-slide-adapted-from-jodi-lapidus" id="toc-change-in-estimate-cie-approach-slide-adapted-from-jodi-lapidus" class="nav-link" data-scroll-target="#change-in-estimate-cie-approach-slide-adapted-from-jodi-lapidus">Change in estimate (CIE) approach (slide adapted from Jodi Lapidus)</a></li>
+  <li><a href="#stepwise-selection-slide-adapted-from-adrianna-westbrook" id="toc-stepwise-selection-slide-adapted-from-adrianna-westbrook" class="nav-link" data-scroll-target="#stepwise-selection-slide-adapted-from-adrianna-westbrook">Stepwise selection (slide adapted from Adrianna Westbrook)</a></li>
+  <li><a href="#stepwise-selection-two-common-approaches" id="toc-stepwise-selection-two-common-approaches" class="nav-link" data-scroll-target="#stepwise-selection-two-common-approaches">Stepwise selection: two common approaches</a></li>
+  <li><a href="#best-subset-slide-adapted-from-adrianna-westbrook" id="toc-best-subset-slide-adapted-from-adrianna-westbrook" class="nav-link" data-scroll-target="#best-subset-slide-adapted-from-adrianna-westbrook">Best subset (slide adapted from Adrianna Westbrook)</a></li>
+  <li><a href="#regularization-techniques" id="toc-regularization-techniques" class="nav-link" data-scroll-target="#regularization-techniques">Regularization techniques</a></li>
+  <li><a href="#poll-everywhere-question-2" id="toc-poll-everywhere-question-2" class="nav-link" data-scroll-target="#poll-everywhere-question-2">Poll Everywhere Question 2</a></li>
+  </ul></li>
+  <li><a href="#learning-objectives-3" id="toc-learning-objectives-3" class="nav-link" data-scroll-target="#learning-objectives-3">Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#introduction-to-model-fit-statistics" id="toc-introduction-to-model-fit-statistics" class="nav-link" data-scroll-target="#introduction-to-model-fit-statistics">Introduction to model fit statistics</a></li>
+  <li><a href="#common-model-fit-statistics" id="toc-common-model-fit-statistics" class="nav-link" data-scroll-target="#common-model-fit-statistics">Common model fit statistics</a></li>
+  <li><a href="#common-model-fit-statistics-1" id="toc-common-model-fit-statistics-1" class="nav-link" data-scroll-target="#common-model-fit-statistics-1">Common model fit statistics</a></li>
+  <li><a href="#example-of-a-table-for-model-fit-statistics" id="toc-example-of-a-table-for-model-fit-statistics" class="nav-link" data-scroll-target="#example-of-a-table-for-model-fit-statistics">Example of a table for model fit statistics</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="13_Model_selection.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lesson 13: Model/Variable Selection</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Nicky Wakim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 24, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Understand the motivation for model selection, including bias-variance trade off and alignment of research goals (association vs.&nbsp;prediction)</li>
+<li>Explain the general process or idea behind different model selection techniques</li>
+<li>Recognize common model fit statistics and understand what they measure</li>
+</ol>
+<div class="cell">
+<style type="text/css">
+.reveal code {
+  max-height: 100% !important;
+}
+</style>
+</div>
+<div class="cell">
+<style type="text/css">
+.sourceCode code {
+  font-size: 1.3em;
+}
+</style>
+</div>
+<section id="regression-analysis-process" class="level2">
+<h2 class="anchored" data-anchor-id="regression-analysis-process">Regression analysis process</h2>
+<div class="box">
+<p><img src="../img_slides/arrow2.png" class="absolute img-fluid" data-top="13.5%" data-right="62.1%" width="155"> <img src="../img_slides/arrow2.png" class="absolute img-fluid" data-top="13.5%" data-right="28.4%" width="155"><img src="../img_slides/arrow_back4.png" class="absolute img-fluid" data-top="7.5%" data-right="30.5%" width="820"> <img src="../img_slides/arrow_down.png" class="absolute img-fluid" data-top="60.5%" data-right="48%" width="85"></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="RAP1">
+<div class="RAP1-title">
+<p>Model Selection</p>
+</div>
+<div class="RAP1-cont">
+<ul>
+<li><p>Building a model</p></li>
+<li><p>Selecting variables</p></li>
+<li><p>Prediction vs interpretation</p></li>
+<li><p>Comparing potential models</p></li>
+</ul>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:30%;">
+<div class="RAP2">
+<div class="RAP2-title">
+<p>Model Fitting</p>
+</div>
+<div class="RAP2-cont">
+<ul>
+<li><p>Find best fit line</p></li>
+<li><p>Using OLS in this class</p></li>
+<li><p>Parameter estimation</p></li>
+<li><p>Categorical covariates</p></li>
+<li><p>Interactions</p></li>
+</ul>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:30%;">
+<div class="RAP3">
+<div class="RAP3-title">
+<p>Model Evaluation</p>
+</div>
+<div class="RAP3-cont">
+<ul>
+<li>Evaluation of model fit</li>
+<li>Testing model assumptions</li>
+<li>Residuals</li>
+<li>Transformations</li>
+<li>Influential points</li>
+<li>Multicollinearity</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="RAP4">
+<div class="RAP4-title">
+<p>Model Use (Inference)</p>
+</div>
+<div class="RAP4-cont">
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Inference for coefficients</li>
+<li>Hypothesis testing for coefficients</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Inference for expected <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span></li>
+<li>Prediction of new <span class="math inline">\(Y\)</span> given <span class="math inline">\(X\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="learning-objectives-1" class="level1">
+<h1>Learning Objectives</h1>
+<div class="lob">
+<ol type="1">
+<li>Understand the motivation for model selection, including bias-variance trade off and alignment of research goals (association vs.&nbsp;prediction)</li>
+</ol>
+</div>
+<ol start="2" type="1">
+<li>Explain the general process or idea behind different model selection techniques</li>
+<li>Recognize common model fit statistics and understand what they measure</li>
+</ol>
+<section id="some-important-definitions" class="level2">
+<h2 class="anchored" data-anchor-id="some-important-definitions">Some important definitions</h2>
+<ul>
+<li><p><strong>Model selection</strong>: picking the “best” model from a set of possible models</p>
+<ul>
+<li>Models will have the same outcome, but typically differ by the covariates that are included, their transformations, and their interactions</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p><strong>Model selection strategies</strong>: a process or framework that helps us pick our “best” model</p>
+<ul>
+<li>These strategies often differ by the approach and criteria used to the determine the “best” model</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Overfitting</strong>: result of fitting a model so closely to our <em>particular</em> sample data that it cannot be generalized to other samples (or the population)</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>Model parsimony</strong>: model that uses the fewest possible parameters to explain the relationship</li>
+</ul>
+</section>
+<section id="why-cant-i-just-throw-in-all-the-variables-into-my-model" class="level2">
+<h2 class="anchored" data-anchor-id="why-cant-i-just-throw-in-all-the-variables-into-my-model">Why can’t I just throw in all the variables into my model?</h2>
+<ul>
+<li><p>First, let’s think about the number of observations in our dataset</p>
+<ul>
+<li>In our Gapminder dataset, we have ~80 countries</li>
+<li>The closer the number of variables is to the number of observations: the model overfit the data and lose precision on coefficient estimates</li>
+</ul></li>
+<li><p>Extreme example: In the Gapminder dataset, I can use an indicator for each country</p>
+<ul>
+<li><p>Remember that each country is an observation</p></li>
+<li><p>So we have a perfectly fit model - a covariate for each observation</p></li>
+<li><p>But we cannot generalize this to any other countries</p></li>
+<li><p>And we haven’t identified any meaningful relationships between life expectancy and other measured characteristics</p></li>
+</ul></li>
+<li><p>More covariates in the model is not always better</p>
+<ul>
+<li>Overfitting the data limits our generalizability and prevents us from answering research questions</li>
+</ul></li>
+</ul>
+</section>
+<section id="think-back-to-population-model-vs.-estimated-models" class="level2">
+<h2 class="anchored" data-anchor-id="think-back-to-population-model-vs.-estimated-models">Think back to population model vs.&nbsp;estimated models</h2>
+<ul>
+<li>Population model = true, underlying relationship
+<ul>
+<li>We’ve discussed this with a set group of covariates</li>
+<li>But we also do NOT know exactly what variables are at play in the true, underlying model</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Estimated model = model estimated with subset of the variables at play and a subset of the population (aka sample)</li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Example: anti-fat bias
+<ul>
+<li>Will do our best to estimate the association in our research question</li>
+<li>But we have two things working against us:
+<ul>
+<li>We do NOT know the exact social complexities involved in this bias</li>
+<li>We cannot include all the variables that we have access to</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="model-complexity-vs.-parsimony" class="level2">
+<h2 class="anchored" data-anchor-id="model-complexity-vs.-parsimony">Model Complexity vs.&nbsp;Parsimony</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Suppose we have <span class="math inline">\(p = 30\)</span> covariates (in the true model) and n = 50 observations. We could consider the following two alternatives:</p>
+<ol type="1">
+<li>We could fit a model using all of the covariates.
+<ul>
+<li>In this case, <span class="math inline">\(\widehat\beta\)</span> is unbiased for <span class="math inline">\(\beta\)</span> (in a linear model fit using OLS). But <span class="math inline">\(\widehat\beta\)</span> has very high variance.</li>
+</ul></li>
+<li>We could fit a model using only the five strongest covariates.
+<ul>
+<li>In this case, <span class="math inline">\(\widehat\beta\)</span> will more likely be biased for <span class="math inline">\(\beta\)</span>, but it will have lower variance (compared to the estimate including all covariates)</li>
+</ul></li>
+</ol>
+<ul>
+<li>Increasing the number of observations sometimes, but not always, helps with the first approach</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://scott.fortmann-roe.com/docs/BiasVariance.html"><img src="../img_slides/bullseye.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+</figure>
+</div>
+<figcaption>Source: http://scott.fortmann-roe.com/docs/BiasVariance.html</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bias-variance-trade-off" class="level2">
+<h2 class="anchored" data-anchor-id="bias-variance-trade-off">Bias-variance trade off</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Recall mean square error is a function of SSE (sum of squared residuals)</p>
+<p><span class="math display">\[
+MSE = \dfrac{1}{n} \sum_{i=1}^{n} \big(Y_i - \widehat{Y}_i \big)^2 = \dfrac{1}{n} SSE
+\]</span></p></li>
+<li><p>MSE can also be written as a function of the bias and variance</p>
+<p><span class="math display">\[
+MSE = \text{bias}\big(\widehat\beta\big)^2 + \text{variance}\big(\widehat\beta\big)
+\]</span></p></li>
+<li><p>For the same data:</p>
+<ul>
+<li><p>More covariates in model: less bias, more variance</p></li>
+<li><p>Less covariates in model: more bias, less variance</p></li>
+</ul></li>
+<li><p>Our goal: find a model with just the right amount of covariates to balance bias and vairance</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="http://scott.fortmann-roe.com/docs/BiasVariance.html"><img src="../img_slides/biasvariance_tradeoff.png" class="img-fluid figure-img" width="1000"></a></p>
+<figcaption>Source: http://scott.fortmann-roe.com/docs/BiasVariance.html</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<p><img src="../img_slides/all_mod_wrong.jpg" class="img-fluid"></p>
+</section>
+<section id="model-selection-basics-slide-adjusted-from-jodi-lapidus" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection-basics-slide-adjusted-from-jodi-lapidus">Model Selection basics (slide adjusted from Jodi Lapidus)</h2>
+<ul>
+<li><p>“Because models always fall far short of the complex reality under study, there are no best or optimal strategies for modeling.”</p>
+<ul>
+<li>From: <a href="https://www.annualreviews.org/doi/pdf/10.1146/annurev-publhealth-031914-122559">Statistical Foundations for Model-Based Adjustments</a></li>
+</ul></li>
+<li><p>Not all statistical texts provide practical advice on model development</p>
+<ul>
+<li>A lot of resources include methods/code to compare models, but does not include much advice re: selecting which model to ultimately use.</li>
+<li>Other texts are sparse on details or incorporate simplistic approaches</li>
+</ul></li>
+<li><p>Model development strategy should <strong>align with research goals</strong></p>
+<ul>
+<li>Prediction vs.&nbsp;Estimating Association</li>
+<li>Strategy may depend on study design and data set size</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-goals-of-association-vs.-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="the-goals-of-association-vs.-prediction">The goals of association vs.&nbsp;prediction</h2>
+<div class="columns">
+<div class="column">
+<div class="definition">
+<div class="def-title">
+<p>Association / Explanatory / One variable’s effect</p>
+</div>
+<div class="def-cont">
+<ul>
+<li><p><strong>Goal:</strong> Understand one variable’s (or a group of variable’s) effect on the response after adjusting for other factors</p></li>
+<li><p>Mainly interpret the coefficient of the variable that is the focus of the study</p>
+<ul>
+<li>Interpreting the coefficients of the other variables is not important, but can help bring context</li>
+</ul></li>
+<li><p>Any variables not selected for the final model have still been adjusted for, since they had a chance to be in the model</p></li>
+<li><p>Example: How is body mass of a penguin associated with flipper length?</p></li>
+</ul>
+</div>
+</div>
+</div><div class="column">
+<div class="proposition">
+<div class="prop-title">
+<p>Prediction</p>
+</div>
+<div class="prop-cont">
+<ul>
+<li><p><strong>Goal:</strong> to calculate the most precise prediction of the response variable</p></li>
+<li><p>Interpreting coefficients is not important</p></li>
+<li><p>Choose only the variables that are strong predictors of the response variable</p>
+<ul>
+<li>Excluding irrelevant variables can help reduce widths of the prediction intervals</li>
+</ul></li>
+<li><p>Example: What is the flipper length of a penguin with body mass of 3000 g (and all its other characteristics)?</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-building-for-association-vs.-prediction" class="level2">
+<h2 class="anchored" data-anchor-id="model-building-for-association-vs.-prediction">Model building for association vs.&nbsp;prediction</h2>
+<p><a href="https://onlinelibrary.wiley.com/doi/10.1016/j.pmrj.2014.08.941">More information on the two analysis goals:</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/explanatory_v_prediction.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p><a href="https://onlinelibrary.wiley.com/authored-by/Sainani/Kristin+L.?startPage=&amp;SeriesKey=19341563">If you ever get the chance, check out Dr.&nbsp;Kristin Sainani’s series on Statistics</a></p>
+</section>
+<section id="poll-everywhere-question-1" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-1">Poll Everywhere Question 1</h2>
+</section>
+<section id="model-selection-strategies-for-continuous-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection-strategies-for-continuous-outcomes">Model selection strategies for <em>continuous</em> outcomes</h2>
+<div class="columns">
+<div class="column">
+<div class="definition">
+<div class="def-title">
+<p>Association / Explanatory / One variable’s effect</p>
+</div>
+<div class="def-cont">
+<ul>
+<li><p>Selection of potential models is tied more with the research context with some incorporation of prediction scores</p></li>
+<li><p>Pre-specification of multivariable model</p></li>
+<li><p>Purposeful model selection</p>
+<ul>
+<li>“Risk factor modeling”</li>
+</ul></li>
+<li><p>Change in Estimate (CIE) approaches</p>
+<ul>
+<li>Will learn in Survival Analysis (BSTA 514)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div><div class="column">
+<div class="proposition">
+<div class="prop-title">
+<p>Prediction</p>
+</div>
+<div class="prop-cont">
+<ul>
+<li><p>Selection of potential models is fully dependent on prediction scores</p></li>
+<li><p>Automated strategies</p>
+<ul>
+<li>Stepwise selection (forward/backward)
+<ul>
+<li>You’ll see these a lot, but they’re not really good methods</li>
+</ul></li>
+<li>Best subset</li>
+<li>Regularization techniques (LASSO, Ridge, Elastic net)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>For categorical outcomes, there are more prediction model selection strategies (will learn more in BSTA 513)</p>
+<ul>
+<li>Examples: Decision trees, Random forest, Neural networks, K-means</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="learning-objectives-2" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Understand the motivation for model selection, including bias-variance trade off and alignment of research goals (association vs.&nbsp;prediction)</li>
+</ol>
+<div class="lob">
+<ol start="2" type="1">
+<li>Explain the general process or idea behind different model selection techniques</li>
+</ol>
+</div>
+<ol start="3" type="1">
+<li>Recognize common model fit statistics and understand what they measure</li>
+</ol>
+<section id="pre-specification-of-multivariable-model-slide-adapted-from-jodi-lapidus" class="level2">
+<h2 class="anchored" data-anchor-id="pre-specification-of-multivariable-model-slide-adapted-from-jodi-lapidus">Pre-specification of multivariable model (slide adapted from Jodi Lapidus)</h2>
+<ul>
+<li><p>In a clinical trial, we often have to write and finalize a statistical analysis plan (SAP) before the trial starts</p>
+<ul>
+<li>Basically: we completely define the model that we will fit (based on previous work and literature)</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>If we wish to compare treatment effects adjusted for covariates, all covariates typically specified in advance</p>
+<ul>
+<li><p>Example: Comparing effectiveness of 3-drug vs.&nbsp;2-drug regimen for delaying AIDS onset or death. Covariates such as severity of HIV infection at baseline would have been specified in advance.</p></li>
+<li><p>Variables such as study site, as well as any randomization stratification variables are common covariates.</p></li>
+<li><p>Partly to make sure that we are not adding in variables that make our regimen significant</p></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><p>In these cases, only a limited number of multivariable models are fit and reported</p>
+<ul>
+<li>Do not perform all the model building steps outlined in Hosmer and Lemeshow texts</li>
+</ul></li>
+</ul>
+</section>
+<section id="purposeful-model-selection-slide-adapted-from-jodi-lapidus" class="level2">
+<h2 class="anchored" data-anchor-id="purposeful-model-selection-slide-adapted-from-jodi-lapidus">Purposeful model selection (slide adapted from Jodi Lapidus)</h2>
+<ul>
+<li><p>Can use this type of model selection for any type of regression</p></li>
+<li><p>Careful, well-thought out variable selection process</p>
+<ul>
+<li>Considers both confounding and interaction, as well as checking model assumptions, fit, etc.</li>
+</ul></li>
+<li><p>Often a reasonable strategy, especially in epidemiology and more exploratory clinical studies</p>
+<ul>
+<li>However, not always appropriate!</li>
+<li>E.g. clinical trials with model specified in advance. (pre-specified model)</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>This is the selection process that we will focus on in this class!</strong>
+<ul>
+<li>Next lecture</li>
+</ul></li>
+</ul>
+</section>
+<section id="change-in-estimate-cie-approach-slide-adapted-from-jodi-lapidus" class="level2">
+<h2 class="anchored" data-anchor-id="change-in-estimate-cie-approach-slide-adapted-from-jodi-lapidus">Change in estimate (CIE) approach (slide adapted from Jodi Lapidus)</h2>
+<ul>
+<li><p>CIE strategies select covariates on the basis of how much their control changes exposure effect estimates</p>
+<ul>
+<li>Observed change is presumed to measure confounding by the covariate.</li>
+</ul></li>
+<li><p>What estimate?</p>
+<ul>
+<li>Hosmer/Lemeshow (H/L) text suggest using coefficients from the model</li>
+<li>We typically use the coefficient estimate from the explanatory variable that we are most interested in</li>
+</ul></li>
+<li><p>What magnitude change is ”important”?</p>
+<ul>
+<li>H/L text suggest 10%</li>
+</ul></li>
+<li><p>One must choose an effect measure to judge change importance, where “importance” needs to be evaluated along a contextually meaningful scale</p></li>
+<li><p>Accurate assessment of confounding may require examining changes from removing entire sets of covariates</p>
+<ul>
+<li>Add in or eliminate candidate confounders one at time?</li>
+<li>Add in or eliminate candidate confounders in sets?</li>
+</ul></li>
+</ul>
+</section>
+<section id="stepwise-selection-slide-adapted-from-adrianna-westbrook" class="level2">
+<h2 class="anchored" data-anchor-id="stepwise-selection-slide-adapted-from-adrianna-westbrook">Stepwise selection (slide adapted from Adrianna Westbrook)</h2>
+<ul>
+<li><p>This is an incredibly common approach that statisticians use, often because it is an older and more recognized method</p>
+<ul>
+<li>BUT IT IS ALSO ONE OF THE WORST MODEL SELECTION STRATEGIES!!</li>
+</ul></li>
+<li><p>Major disadvantages to stepwise selection:</p>
+<ul>
+<li>Prone to overfitting</li>
+<li>Biased estimates</li>
+<li>Cements the wrong idea that we are looking for our “most significant” covariates</li>
+</ul></li>
+<li><p>Predictors/covariates are added or removed one at time if they are below a certain threshold (usually p-value below 0.10 to 0.20)</p></li>
+</ul>
+</section>
+<section id="stepwise-selection-two-common-approaches" class="level2">
+<h2 class="anchored" data-anchor-id="stepwise-selection-two-common-approaches">Stepwise selection: two common approaches</h2>
+<ul>
+<li><p>I will introduce two of the approaches so that you understand the general process if a collaborator ever mentions stepwise selection</p></li>
+<li><p>Forward selection:</p>
+<ul>
+<li><p>For <span class="math inline">\(p\)</span> covariates potential covariates, run all simple linear regressions:</p>
+<ul>
+<li><span class="math inline">\(Y= \beta_0 + \beta_1 X_1 + \epsilon\)</span> through <span class="math inline">\(Y= \beta_0 + \beta_1 X_{p} + \epsilon\)</span></li>
+<li>Include the <span class="math inline">\(X_i\)</span> with the lowest p-value (assuming it is below the threshold)</li>
+</ul></li>
+<li><p>Now run <span class="math inline">\(Y= \beta_0 + \beta_1 X_i + \beta_2 X_1 + \epsilon\)</span> through <span class="math inline">\(Y= \beta_0 + \beta_1 X_i + \beta_2 X_{p} + \epsilon\)</span> and enter the next <span class="math inline">\(X_j\)</span> with the lowest p-value</p></li>
+<li><p>Continue process until no more predictors come back with a p-value below the threshold</p></li>
+</ul></li>
+<li><p>Backward selection:</p>
+<ul>
+<li>Start with a full model (<span class="math inline">\(Y= \beta_0 + \beta_1 X_1 + ... + \beta_p X_p + \epsilon\)</span>) and remove predictor with the highest p-value (assuming it is above the threshold)</li>
+<li>Repeatedly remove the variable with the highest p-value until all remaining variables meet the stopping criteria (are below the threshold)</li>
+</ul></li>
+</ul>
+</section>
+<section id="best-subset-slide-adapted-from-adrianna-westbrook" class="level2">
+<h2 class="anchored" data-anchor-id="best-subset-slide-adapted-from-adrianna-westbrook">Best subset (slide adapted from Adrianna Westbrook)</h2>
+<ul>
+<li><p>I don’t see this approach very often</p></li>
+<li><p>Quite literally making subsets of the data and using the “best” one</p></li>
+<li><p>General steps:</p>
+<ul>
+<li>Run every possible model fitting 1 to all possible <span class="math inline">\(p\)</span> predictors/covariates</li>
+<li>You can limit number of potential predictors</li>
+<li><span class="math inline">\(2^p\)</span> = total number of models where <span class="math inline">\(p\)</span> = number of predictors</li>
+<li>You will get the best fitting model within each category (i.e., 1 predictor model, 2 predictor model,…, <span class="math inline">\(p\)</span> predictor model)</li>
+<li>Then have to find the best fitting model between the best models from each category</li>
+</ul></li>
+<li><p>Major disadvantages to best subset:</p>
+<ul>
+<li>Does not account for interactions</li>
+<li>Needs to run a lot of models (takes A LOT of time)</li>
+</ul></li>
+</ul>
+</section>
+<section id="regularization-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="regularization-techniques">Regularization techniques</h2>
+<ul>
+<li>Regularization techniques (LASSO, ridge, elastic net) adds a penalization that shrinks (or regularizes) coefficients down to reduce overfitting</li>
+<li>Maximize likelihood of a model, but includes a penalty for additional covariates</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>LASSO (Least About Shrinkage and Selection Operator)</td>
+<td>Ridge</td>
+<td>Elastic Net</td>
+</tr>
+<tr class="even">
+<td>Penalization</td>
+<td>L-1 Norm, uses absolute value</td>
+<td>L-2 Norm, uses squared value</td>
+<td>Best of both worlds, L-1 and L-2 used</td>
+</tr>
+<tr class="odd">
+<td>Pro’s</td>
+<td>Reduces overfitting, will shrink coefficient to zero</td>
+<td>Reduces overfitting, handles collinearity, can handle k&gt;n</td>
+<td>Reduces overfitting, handles collinearity, handles k&gt;n, shrinks coefficients to zero</td>
+</tr>
+<tr class="even">
+<td>Con’s</td>
+<td>Cannot handle k&gt;n, doesn’t handle multicollinearity well</td>
+<td>Does not shrink coefficients to zero, difficult to interpret</td>
+<td>More difficult for R to do than the other two (but not really that bad)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="poll-everywhere-question-2" class="level2">
+<h2 class="anchored" data-anchor-id="poll-everywhere-question-2">Poll Everywhere Question 2</h2>
+</section>
+</section>
+<section id="learning-objectives-3" class="level1">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Understand the motivation for model selection, including bias-variance trade off and alignment of research goals (association vs.&nbsp;prediction)</li>
+<li>Explain the general process or idea behind different model selection techniques</li>
+</ol>
+<div class="lob">
+<ol start="3" type="1">
+<li>Recognize common model fit statistics and understand what they measure</li>
+</ol>
+</div>
+<section id="introduction-to-model-fit-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-model-fit-statistics">Introduction to model fit statistics</h2>
+<ul>
+<li><p>So far we have compared models using the F-test</p></li>
+<li><p>The F-test is a great way to compare models that are <strong>nested</strong></p>
+<ul>
+<li>Basically, this means that the “full” model contains all the covariates that the “reduced” model contains</li>
+<li>The full model will have additional covariates, but the covariates in the reduced is a subset of the covariates in the full</li>
+</ul></li>
+<li><p>What if we want to compare models that are not nested?</p>
+<ul>
+<li><p>There is a special group of fit statistics that can help us compare models</p></li>
+<li><p>Note: these are sometimes used in the model building process (within one strategy)</p>
+<ul>
+<li><p>Helpful if we want to compare selected models across strategies</p></li>
+<li><p>Helpful if we have a few “final” models with different covariates that we want to compare</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="common-model-fit-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="common-model-fit-statistics">Common model fit statistics</h2>
+<ul>
+<li><p>The following model fit statistics combine information about the SSE, the number of parameters in the model, and the sample size</p></li>
+<li><p>For Mallow’s Cp, AIC, and BIC: <strong>smaller</strong> values indicate better model fit!</p></li>
+<li><p>For Adjusted R-squared: <strong>larger</strong> values indicate better model fit!</p></li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fit statistic</th>
+<th>Equation</th>
+<th>R code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R-squared / Adjusted R-squared</td>
+<td><span class="math inline">\(Adj. R^2 = 1 - \frac{SSE/(n-p-1)}{SSY/(n-1)}\)</span></td>
+<td><a href="https://www.statology.org/adjusted-r-squared-in-r/">Within <code>summary(model_name)</code></a></td>
+</tr>
+<tr class="even">
+<td>Mallow’s <span class="math inline">\(C_p\)</span></td>
+<td><span class="math inline">\(C_p = \Bigg[ \dfrac{\widehat\sigma^2_p}{\widehat\sigma^2_{max}} - 1 \Bigg](n-p) + p\)</span></td>
+<td><a href="https://www.statology.org/how-to-calculate-mallows-cp-in-r/"><code>ols_mallows_cp()</code></a></td>
+</tr>
+<tr class="odd">
+<td>Akaike information criterion (AIC)</td>
+<td><span class="math inline">\(AIC = n\log(SSE) - n \log(n) + 2(p+1)\)</span></td>
+<td><code>AIC(model_name)</code></td>
+</tr>
+<tr class="even">
+<td>Bayesian information criterion (BIC)</td>
+<td><span class="math inline">\(BIC = n\log(SSE) - n\log(n) + log(n)\cdot(p+1)\)</span></td>
+<td><code>BIC(model_name)</code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<ul>
+<li>We don’t need to know the exact formulas for them!</li>
+</ul>
+</section>
+<section id="common-model-fit-statistics-1" class="level2">
+<h2 class="anchored" data-anchor-id="common-model-fit-statistics-1">Common model fit statistics</h2>
+<ul>
+<li><p>There is no hypothesis testing for these fit statistics</p>
+<ul>
+<li><p>Only helpful if you are comparing models</p></li>
+<li><p>Works for nested and non-nested models</p></li>
+</ul></li>
+<li><p>Common to report all or some of them</p></li>
+<li><p>All of the fit statistics will not necessarily reach a consensus about the best fitting model</p>
+<ul>
+<li>Each weigh SSE, number of parameters, and number of observations differently</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img_slides/Model-Fit-Statistics.png" class="img-fluid figure-img"></p>
+<figcaption>https://www.researchgate.net/figure/Model-Fit-Statistics_tbl1_308844501</figcaption>
+</figure>
+</div>
+</section>
+<section id="example-of-a-table-for-model-fit-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="example-of-a-table-for-model-fit-statistics">Example of a table for model fit statistics</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(olsrr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD <span class="sc">+</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                           income_levels <span class="sc">+</span> four_regions)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>fit_stats <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Model =</span> <span class="fu">c</span>(<span class="st">"Model 1: FLR only"</span>, <span class="st">"Model 2: FLR + FS"</span>, <span class="st">"Model 3: FLR + FS + Income + WR"</span>), </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">adj_R_2 =</span> <span class="fu">c</span>(<span class="fu">summary</span>(model1)<span class="sc">$</span>adj.r.squared, <span class="fu">summary</span>(model2)<span class="sc">$</span>adj.r.squared, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">summary</span>(model3)<span class="sc">$</span>adj.r.squared), </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Cp =</span> <span class="fu">c</span>(<span class="fu">ols_mallows_cp</span>(model1, model3), <span class="fu">ols_mallows_cp</span>(model2, model3), </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">ols_mallows_cp</span>(model3, model3)), </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">AIC</span>(model1), <span class="fu">AIC</span>(model2), <span class="fu">AIC</span>(model3)), </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">BIC =</span> <span class="fu">c</span>(<span class="fu">BIC</span>(model1), <span class="fu">BIC</span>(model2), <span class="fu">BIC</span>(model3)))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fit_stats) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Model"</span>, <span class="st">"Adj. R-squared"</span>, <span class="st">"Mallow's Cp"</span>, <span class="st">"AIC"</span>, <span class="st">"BIC"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>fit_stats <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="nqmmsbfikz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nqmmsbfikz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nqmmsbfikz thead, #nqmmsbfikz tbody, #nqmmsbfikz tfoot, #nqmmsbfikz tr, #nqmmsbfikz td, #nqmmsbfikz th {
+  border-style: none;
+}
+
+#nqmmsbfikz p {
+  margin: 0;
+  padding: 0;
+}
+
+#nqmmsbfikz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 40px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nqmmsbfikz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nqmmsbfikz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nqmmsbfikz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nqmmsbfikz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nqmmsbfikz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nqmmsbfikz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nqmmsbfikz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nqmmsbfikz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nqmmsbfikz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nqmmsbfikz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nqmmsbfikz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nqmmsbfikz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nqmmsbfikz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nqmmsbfikz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqmmsbfikz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nqmmsbfikz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nqmmsbfikz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nqmmsbfikz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqmmsbfikz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nqmmsbfikz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqmmsbfikz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nqmmsbfikz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqmmsbfikz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nqmmsbfikz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nqmmsbfikz .gt_left {
+  text-align: left;
+}
+
+#nqmmsbfikz .gt_center {
+  text-align: center;
+}
+
+#nqmmsbfikz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nqmmsbfikz .gt_font_normal {
+  font-weight: normal;
+}
+
+#nqmmsbfikz .gt_font_bold {
+  font-weight: bold;
+}
+
+#nqmmsbfikz .gt_font_italic {
+  font-style: italic;
+}
+
+#nqmmsbfikz .gt_super {
+  font-size: 65%;
+}
+
+#nqmmsbfikz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nqmmsbfikz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nqmmsbfikz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nqmmsbfikz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nqmmsbfikz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nqmmsbfikz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nqmmsbfikz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#nqmmsbfikz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nqmmsbfikz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="Adj.-R-squared" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Adj. R-squared</th>
+<th id="Mallow's-Cp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Mallow's Cp</th>
+<th id="AIC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">AIC</th>
+<th id="BIC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">BIC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Model 1: FLR only</td>
+<td class="gt_row gt_right" headers="Adj. R-squared">0.413</td>
+<td class="gt_row gt_right" headers="Mallow's Cp">88.126</td>
+<td class="gt_row gt_right" headers="AIC">470.066</td>
+<td class="gt_row gt_right" headers="BIC">476.896</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Model">Model 2: FLR + FS</td>
+<td class="gt_row gt_right" headers="Adj. R-squared">0.550</td>
+<td class="gt_row gt_right" headers="Mallow's Cp">51.942</td>
+<td class="gt_row gt_right" headers="AIC">451.872</td>
+<td class="gt_row gt_right" headers="BIC">460.979</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Model 3: FLR + FS + Income + WR</td>
+<td class="gt_row gt_right" headers="Adj. R-squared">0.737</td>
+<td class="gt_row gt_right" headers="Mallow's Cp">9.000</td>
+<td class="gt_row gt_right" headers="AIC">418.724</td>
+<td class="gt_row gt_right" headers="BIC">441.491</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

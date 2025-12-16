@@ -1,0 +1,494 @@
+---
+title: "Lab 1 Instructions"
+author: "Nicky Wakim"
+subtitle: "BSTA 512/612"
+description: "Due: Thursday January 16, 2025 at 11pm"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    self-contained: true
+    number-sections: true
+    number-depth: 5
+editor_options: 
+  chunk_output_type: console
+---
+
+::: callout-caution
+Lab is ready! 1/9/2025
+:::
+
+## Directions
+
+Please turn in your `.html` file on Sakai. 
+
+This document is the instructions for the lab. You will use a cleaner version to fill in your work. [You can download the `.qmd` file for this lab here.](https://github.com/nwakim/BSTA_512_26W/blob/main/labs/Lab_01.qmd) 
+
+### Purpose
+
+This lab will serve as an introduction to our quarter long project.
+
+There will be no analysis in this lab. Instead, we are building our knowledge around the research question, setting up our folder, and downloading the data. 
+
+### Grading
+
+Each lab will follow the rubric on the Project page. Since this lab does not include coding nor analysis, this portion of the rubric is excluded.
+
+## Lab activities
+
+### Reading and listening activities
+
+#### Article: [Implicit and explicit anti-fat bias: The role of weight-related attitudes and beliefs](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_files/Project/Resources/weightinclusivehealthcare.pdf?csf=1&web=1&e=B9D2a4)
+
+This article will serve as a reference point for our project. The article is meant to introduce social scientists' approaches to research and analyses. However, the article is not meant to be a basis for which we perform our analysis.
+
+::: callout-warning
+This article discusses anti-fat bias. It uses words that may be triggering to larger-bodied people.
+:::
+
+Please read sections 1 - 2, through 2.2 ("Procedures and measures"). Answer the following questions:
+
+-   In your own words, what is anti-fat bias?
+
+-   What were the three social theoretical models that the paper discusses? Which do you personally think is the biggest contributor to anti-fat bias and why?
+
+-   From the following measures in section 2.2, select two and discuss why the named measure may or may not accurately represent its respective italicized statement taken from the IAT questionnaire. *Feel free to answer this question after taking the IAT yourself.*
+
+    -   Self-perception of weight
+
+    -   Thin/fat group identity
+
+    -   Controllability of weight
+
+    -   Awareness of societal standards
+
+    -   Internalization of societal standards
+
+    For example, for Self-perception of weight, the italicized statement is the following statement outlined in red:![](images/example_lab_01.png)
+    
+::: callout-important
+#### Task
+
+Answer the above questions. 
+:::
+
+#### Optional Podcast: [Anti-Fat Bias by Maintenance Phase](https://maintenancephase.buzzsprout.com/1411126/6524683-anti-fat-bias)
+
+::: callout-warning
+This podcast shares the experience of one of its hosts that involves anti-fat bias. This may be triggering if you have experienced this type of bias.
+:::
+
+**This is an optional listening for this lab**, but I highly encourage you listen at some point this quarter. This is a really good way to see how research can be integrated into conversation and experience.
+
+If you decide to listen, feel free to share a quote that most impacted you.
+
+::: callout-important
+#### Task (Optional)
+
+If you decide to listen, feel free to share a quote that most impacted you.
+:::
+
+### Familiarizing ourselves with the Implicit Association Test (IAT)
+
+#### Learn more about the test
+
+Visit the [Project Implicit site](https://implicit.harvard.edu/implicit/education.html), and read about the test. What is your initial reaction to the test? What questions about the test do you have? Do you have any questions about the test's validity? The point here is not to attempt to discredit the test itself, but see what specific questions the test can help us answer and what is outside the scope of our analysis. For example, are there any potential issues with the fact that people are self-selected to take the test? Does that mean our sample is representative of the whole U.S. or world? Is it an issue that someone can take the test more than once?
+
+*This exercise will serve as a good starting point for the discussion section of our project report.* *The more effort you put in here and now, the more prepared you will be for the report.*
+
+::: callout-important
+#### Task
+
+In 5-10 bullet points, write down some of your ideas on the study design that you may want to mention.
+:::
+
+#### Take the test
+
+You will spend 15 minutes taking the IAT. You can go to the [Project Implicit website](https://implicit.harvard.edu/implicit/research/), register, and select a specific test to take. Once registered, you can click "Take a Test," read the Preliminary Information, and then click "I wish to proceed" at the bottom. Then you can click the button "Weight IAT" to take this particular test.
+
+I will not check that you have completed this test, but it will help you understand the data you are analyzing.
+
+::: callout-important
+#### Task
+
+Take the Weight IAT. There is nothing to report here. 
+:::
+
+### Choose one of three research questions {#sec-rq}
+
+For our project, we will examine the association between the IAT score and one other variable. We will also test if another variable has an interaction (similar to an effect measure modifier).
+
+From the following three options, please select a research question:
+
+1. How is anti-fat bias, as measured by the IAT, associated with importance of weight to sense of self?
+    a. With subquestion: Does political identity modify the above association?
+2. How is anti-fat bias, as measured by the IAT, associated with self-perception of weight?
+    a. With subquestion: Does sex assigned at birth (SAB, in a binary form) modify the above association?
+3. Not known yet
+
+::: callout-important
+#### Task
+
+Please copy and paste your chosen research question.
+:::
+
+### Organize your "Project" folder
+
+Before downloading the data, go back to Lesson 2 and follow the file setup for our project. This includes making an `.Rproj` file within the main folder. Make sure you are working with the project by using the `here()` function to display your working directory. 
+
+::: callout-important
+#### Task
+
+Display your working directory using the `here` package and `here()` function. You may also insert a screenshot of your project folder. 
+:::
+
+### Access and download the data
+
+This serves as good practice for accessing data that is online or needs to be downloaded from a collaborator.
+
+Data can be accessed [here](https://osf.io/xikve/). You will need to navigate to the "Files" tab. 
+
+Find and download the files named `Weight_IAT.public.2024.zip` and `Weight_IAT_public_2024_codebook.xlsx`. I left-clicked the three dots on the right and then selected "Download." See below image for what my screen looked like. 
+
+![](images/data_access_1.png)
+
+You will need to unzip the data and move both files to your project folder.I like to have a folder named `data` to house my data.
+
+::: callout-important
+##### Task
+
+Download the 2024 data and codebook from the archives and store in accessible folder. No need to report anything for this task. 
+:::
+
+### Load data and needed packages
+
+First, load the packages that you will need in the remainder of this lab. You can add to this as you need to. At the top of your R code chunk, you can add the following option to repress the messages from the loading packages:
+
+![](images/r_message.png)
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(gtsummary)
+library(here)
+library(haven)
+if(!require(lubridate)) { install.packages("lubridate"); library(lubridate) }
+```
+
+Using the `haven` and `here` package, load the data (`sav` file) into this document. (Hint: the function needed in `haven` is `read_sav()`. Name your dataset something that feels intuitive to you and will distinguish it from other datasets that you work with.
+
+```{r}
+#| echo: false
+iat_2024_raw = read_sav(file = here("../TA_files/Project/data/Weight IAT.public.2024.sav"))
+```
+
+Loading the `sav` file every time you render will take a long time. One way to speed this up is by saving the data as an `rda` file (R data file). Change the following R code to save the `rda` file. You will also need to remove the `#| eval: false` at the top of the code chunk once you have corrected the code. If you are confused on the syntax, don't forget that you can use `?save` for more information.
+
+```{r}
+#| eval: false
+save(<whatever you called the read sav file>, file = "Where you would like to save the file with its name")
+
+```
+
+Check that you have an `rda` file where you saved it. Now use `load()` with the file path to load the `rda` data here.
+
+```{r}
+#| eval: false
+load(file = "Where you would like to save the file with its name")
+```
+
+At this point, if you think you loaded the file correctly, add `#| eval: false` to the code chunk where you loaded the `sav` file and back to the chunk where you saved the `rda` file.
+
+Take a `glimpse` at the data to make sure you loaded it correctly.
+
+How many rows and columns are in the dataset? Do you think we will need all these variables for our analysis?
+
+::: callout-important
+##### Task Summary
+
+Read sav, save data as rda, load rda, glimpse at data.
+
+How many rows and columns are in the dataset? Do you think we will need all these variables for our analysis?
+:::
+
+### Check data with codebook
+
+Datasets will typically have a codebook that describes the variables in the dataset. The codebook will have information on each variable, including the variable name, description, and possible values. It is really helpful to reference the codebook as you work with data. However, codebooks will occasionally have mistakes. 
+
+**There are mistakes in this dataset's codebook!!** For example, the codebook says there's a variable called `countryres_num` in the 2024 dataset, but the only variable for someone's country of residence is `countryres003_num`.
+
+**There are relics in this dataset's codebook!!** For example, you will see `birthsex` and `genderidentity` in the codebook, but these are from a previous test's measurements. These have been phased out because the categorization was outdated. Newer measurements are used to capture gender identity, including `genderIdentity_0002` and `transIdentity`.
+
+::: callout-important
+##### Task
+
+For the following variables *from the codebook*, check whether your loaded dataset contains the variable and the same information. You will need to check that the variable exists in the dataset and that the categories or numbers are the same. **Make sure you include the code used to confirm your findings.**
+
+1. `raceombmulti`
+4. `myheight_002`
+3. `idfat_001`
+2. `important_001` 
+3. `iatevaluations001`
+:::
+
+### Data wrangling
+
+As you go through this process, it is important that you look at the codebook for more information on each variable.
+
+#### Restrict data to participants in the U.S.
+
+The sample includes individuals residing in many different countries. Since we are discussing attitudes and beliefs that are inherently connected to society and culture, I think it is important that we restrict our analysis and discussion to a country in which we have some social experience. **Thus, let's restrict our data to the US only by filtering the variable `countryres003_num` to 1 (corresponding to the US).**
+
+You can check this by using 'glimpse()`
+
+::: callout-important
+##### Task
+
+Filter the country of residence to the U.S. Make sure to show your code.
+:::
+
+#### Restrict your analysis to 1 outcome and 9 possible covariates/predictors (10 total)
+
+We are going to restrict our analysis to the single outcome, IAT score, which is named `D_biep.Thin_Good_all`. You can rename this variable to something like `IAT_score`.
+
+We will also restrict our analysis to the following 9 potential variables so our work is a little more manageable. Two of the 9 variables will be the specific variables from your research question selected in @sec-rq. 
+
+::: callout-important
+##### Task
+
+You will need to select the following variables:
+
+1. The outcome, `D_biep.Thin_Good_all`
+2. The two variables from your identified research question
+3. The four required demographic variables
+3. The three additional variables from the lists below
+
+For the **three additional variables**, please explain why you chose each in 1-2 lines. This can be informal and bulleted.
+:::
+
+We will start our data exploration with the following 4 required, demographic variables:
+
+1.  Age (we need to construct from `birthmonth`, `birthyear`, `month`, and `year`)
+2.  Race and ethnicity (through multiple variables on R/E `raceomb_003_`)
+2.  Gender identity (`genderIdentity_0002`)
+4.  Trans identity (`transIdentity`)
+
+Please pick 3 additional variables to include in your analysis:
+
+1.  Education (`edu_14`)
+3.  Self-reported BMI (through self-reported height and weight)
+4.  Political identity (`politicalid_7`)
+5.  Religiosity (`religionid`)
+1.  Explicit anti-fat bias (`att7`)
+2.  Self-perception of weight (`iam_001`)
+3.  Fat group identity (`identfat_001` )
+4.  Thin group identity (`identthen_001` )
+5.  Controllability of weight of others (`controlother_001`)
+6.  Controllability of weight of yourself (`controlyou_001`)
+7.  Most people prefer thin or fat people (`mostpref_001` )
+8.  Importance of weight to sense of self (`important_001`)
+
+I have chosen these variables for a mixture of reasons. For example, I have left out variables about residence and occupation because those variables have hundreds of categories that would be overwhelming in linear regression. For the 4 required demographic variables, I chose age because I really want us to get practice with a continuous variable. I chose race and ethnicity because of the intertwined history of racism and anti-fat bias in Western countries (including the U.S. where most participants reside).
+
+::: callout-note
+##### A note of the available variables on race
+
+The dataset has several variables that make up complete information on the sample's race and ethnicity. Each variable measures whether someone identifies as a specific race/ethnicity or not. An individual can identify as multiple races. This means the proportions across variables for race and ethnicity will not add up to 1. 
+
+[Important lesson from We All Count](https://weallcount.com/2022/10/27/4-approaches-to-multiple-race-questions/) about using a multiple selection race question. We can try out all these options!
+:::
+
+::: callout-note
+##### A word on self-reported BMI
+
+This variable is rooted in racism and anti-fat bias. The [American Medical Association made a few press releases](https://www.ama-assn.org/press-center/press-releases/ama-adopts-new-policy-clarifying-role-bmi-measure-medicine) on policies using BMI as a measure, with alternative measures (frankly, just other measures of fatness to use as a diagnostic tool instead of checking true indicators of health). However, I can think of a couple examples where BMI might help us understand some context in this research, so I have left it as an option. Although still self-reported, it might be interesting to see how BMI (which is the closest measurement available in this dataset to an "objective" measure of fatness) is related to individuals' attitudes and beliefs. I am not saying there is anything to the relationship, but it might be worth checking out if you are interested.
+
+I will also say, in this dataset, there are MANY issues constructing the variable for BMI from height and weight. *If you do not feel strongly about including it, I would suggest you avoid the variable self-reported BMI*. It is not worth bringing in a racist and anti-fat variable into the dataset if you do not have a specific use for it. If you do plan to use it, please come to me for help as early as possible!
+:::
+
+If you would like to investigate a variable outside the list, please email or chat with me **before** moving forward with the variable. 
+
+::: callout-important
+##### Task
+
+Using R, select your identified variables from your dataset.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+iat_2024 = iat_2024_raw %>% 
+  select(IAT_score = D_biep.Thin_Good_all, 
+         att7, iam_001, identfat_001, 
+         myweight_002, myheight_002,
+         identthin_001, controlother_001, 
+         controlyou_001, mostpref_001,
+         important_001, 
+         birthmonth, birthyear, month, year, 
+         raceomb_002, raceombmulti, ethnicityomb, 
+         edu, edu_14, 
+         genderIdentity, 
+         birthSex)
+```
+
+#### Make a new dataset with only complete cases
+
+Handling missing data is outside the scope of our class. There are many techniques to handling missing data, but we will use complete case analysis. This means we will only use observations that have information for every variable we chose. The function `drop_na()` will give you the complete cases. You can feed your dataset into the function and assign it as a new dataframe.
+
+For example:
+
+```{r}
+#| eval: false
+new_df = old_df %>% drop_na()
+```
+
+You will also need to save the new dataset so that you can load it in future labs/work. 
+
+You can use something like:
+```{r}
+#| eval: false
+save(new_df, file = "IAT_data_complete.Rda")
+```
+
+Make sure this dataset saves into your project folder! And make sure you have a decent number of individuals in the complete dataset (mine was around 119,000 individuals)
+
+::: callout-note
+##### A weird quirk of this dataset
+
+For some reason, whoever made this dataset decided to use `NA` instead of 0's if someone did not identify as a specific race/ethnicity. This means we do not know whether an `NA` means the race/ethnicity is missing or if it is truly 0. We will need to replace the NA's with 0's (hint: `replace_na` is a good function) and then see if an individual has 0's for all race/ethnicities (meaning they have missing data). 
+:::
+
+::: callout-important
+##### Task
+
+Make a new dataset with only complete cases. Save this dataset in your project folder.
+:::
+
+#### Manipulating variables that are coded as numeric variables
+
+Many variables in this dataset are coded as numeric values, but have specific categories linking up to the numbers. Using `mutate()` and `cases()` similar to our Data Management lesson, please create a new categorical variable with the specified categories from the codebook. Make sure that you create a variable with a new name! Since some of these variables are ordered categories, we will investigate if it's appropriate to use the numeric or categorical version of the variable.
+
+::: callout-tip
+##### Example of how I would create new variable for self-perception of weight (`iam_001`):
+
+By looking at the codebook, I see that respondents answer the following question: “Currently, I am:”
+
+-   “Very underweight”
+-   “Moderately underweight”
+-   “Slightly underweight”
+-   “Neither underweight nor underweight”
+-   “Slightly overweight”
+-   “Moderately overweight”
+-   “Very overweight”
+
+If I look at the data as is, I see that the variable is numeric.
+
+```{r}
+#| eval: false
+iat_2024 %>%
+  dplyr::select(iam_001) %>%
+  tbl_summary()
+```
+
+Again, I want to create a variable with the answers instead of numbers, so I will change transform the variable to include the text:
+
+```{r}
+#| eval: false
+
+iat_2024 = iat_2024 %>%
+  mutate(iam_001_f = case_match(iam_001,
+                             7 ~ "Very overweight",
+                             6 ~ "Moderately overweight",
+                             5 ~ "Slightly overweight",
+                             4 ~ "Neither underweight nor underweight",
+                             3 ~ "Slightly underweight",
+                             2 ~ "Moderately underweight",
+                             1 ~ "Very underweight",
+                             .default = NA # to add NA if unknown
+                             ) %>% factor())
+iat_2024 %>%
+  dplyr::select(iam_001_f) %>%
+  tbl_summary()
+
+ggplot(data=iat_2024) +
+  geom_boxplot(aes(x = iam_001_f, y = IAT_score))
+```
+
+I have called the new variable `iam_001_f` to indicate that the variable is not in factor form. You can also call it something like `iam_001_cat` to indicate the categorical form.
+:::
+
+::: callout-important
+##### Task
+
+Identify and list the variables that are coded numerically, but are categorical based on the codebook. Create a new variable for the categorical/factor version of the variable. (Hint: it is helpful to keep the numerical version for future reference.) 
+
+It is up to you to check that your code ran properly!! (Hint: you can use `glimpse()` or `tbl_summary()` to check that the variable is now categorical.)
+:::
+
+#### Creating age from birth date and test date
+
+This dataset does not have an available "age" variable. However, we have enough information to determine each individual's age from the test date and their self-reported birth date. We can use the `lubridate` package to configure the age. First, we need to use `make_date()` to construct the birth date and test date. Below, I have implemented `make_date()` to make the birth date.
+
+::: callout-important
+##### Task
+
+From the codebook, find the variables that we can use to construct the test date. Then use `make_date()` to create the test date.
+:::
+
+```{r}
+#| eval: false
+
+iat_2024 = iat_2024 %>%
+  mutate(birthdate = make_date(month = birthmonth, year = birthyear), 
+         testdate = make_date(month = month, year = year))
+```
+
+Once the two dates are created, we can use further use `lubridate` to calculate the age in years. This code is a little complicated, so here is an example of how I have created age:
+
+```{r}
+#| eval: false
+
+iat_2024 = iat_2024 %>%
+  mutate(age = interval(start = birthdate, end = testdate) %>%
+          as.period() %>% year()) %>%
+  select(-birthmonth, -birthyear, -year, -month, 
+         -testdate, -birthdate)
+```
+
+Note that the name of my dataset is `iat_2024` and I feed it into `mutate()`. Within `mutate()`, I assigned `age` to the interval between the name of my birth date (`birthdate`) and the name of my test date (`testdate`). I need to convert the interval to a period of time (`as.period()`), then to a measurement of years (`year()`).
+
+::: callout-important
+##### Task
+
+Following the above example, create an age variable that measures the years between individuals' birth and test date. Then remove the variables used to make age.
+:::
+
+#### If you chose BMI, create the variable
+
+Raw data from weight and height are categorical. This is according to the codebook associated with this dataset. Please find your codebook file named `Weight_IAT_public_2024_codebook.xlsx` . You can find the value names for `myweight_002` and `myheight_002`.
+
+-   For example, in the weight variable,
+
+    -   most categories identify a lower limit to the weight in the group. One example group is weight is greater than or equal to 200 pounds and less than 205 pounds (labelled as "200 lb :: 91 kg").
+
+    -   the first category for weight is "below 50lb:: 23kg" with 258 observations
+
+    -   the last category for weight is "above 440lb:: above 200kg" with 295 observations
+
+        -   While the 5 groups of weight leading up the last category have 33, 28, 34, 20, and 89 observations, respectively.
+
+I will post an extra resource outlining some of my work on the BMI variable.
+
+### Compile above work into an introduction
+
+At this point, you have done a lot of the work needed to write an introduction for your poster. In 3-5 bullet points, write a description of anti-fat bias, IAT, your research question, and the context for the question. 
+
+*In the next lab, we will work on a summary of the dataset (e.g. where are the data from, when were they collected, how many subjects, what are the variables, what are the exposure and outcomes variables of interest, etc.).*
+
+::: callout-important
+#### Task
+
+Write your introduction
+:::

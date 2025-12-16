@@ -1,0 +1,245 @@
+{
+  "project.qmd": {
+    "project.html": "50e60b0f"
+  },
+  "homework.qmd": {
+    "homework.html": "b0d686f3"
+  },
+  "labs/Lab_01_instructions.qmd": {
+    "Lab_01_instructions.html": "3f572722"
+  },
+  "labs/Lab_04_instructions.qmd": {
+    "Lab_04_instructions.html": "e24e6d68"
+  },
+  "labs/Poster-example.qmd": {
+    "Poster-example.html": "1728b0c5"
+  },
+  "labs/Project_poster_instructions.qmd": {
+    "Project_poster_instructions.html": "551895c9"
+  },
+  "labs/Lab_04.qmd": {
+    "Lab_04.html": "faeae2b0"
+  },
+  "labs/Lab_01.qmd": {
+    "Lab_01.html": "e66af76f"
+  },
+  "labs/Lab_03_instructions.qmd": {
+    "Lab_03_instructions.html": "2f983044"
+  },
+  "labs/BMI_help.qmd": {
+    "BMI_help.html": "3ed15a4c"
+  },
+  "labs/Lab_02.qmd": {
+    "Lab_02.html": "400767ec"
+  },
+  "labs/Project_template.qmd": {
+    "Project_template.html": "bc430b00"
+  },
+  "labs/Lab_03.qmd": {
+    "Lab_03.html": "84973001"
+  },
+  "labs/Lab_02_work.qmd": {
+    "Lab_02_work.html": "279e191b"
+  },
+  "labs/Lab_03_work.qmd": {
+    "Lab_03_work.html": "cf6db2c9"
+  },
+  "labs/Lab_02_instructions.qmd": {
+    "Lab_02_instructions.html": "78819113"
+  },
+  "labs/Project_report_instructions.qmd": {
+    "Project_report_instructions.html": "dd178824"
+  },
+  "instructors.qmd": {
+    "instructors.html": "224c3501"
+  },
+  "hw_answers/HW_03_ans.qmd": {
+    "HW_03_ans.html": "faf4553f"
+  },
+  "hw_answers/HW_05_ans.qmd": {
+    "HW_05_ans.html": "e84de7a1"
+  },
+  "hw_answers/HW_04_ans.qmd": {
+    "HW_04_ans.html": "24f2f1de"
+  },
+  "homework/HW_03.qmd": {
+    "HW_03.html": "51ecf455"
+  },
+  "homework/HW_02.qmd": {
+    "HW_02.html": "22d36d7a"
+  },
+  "homework/HW_00.qmd": {
+    "HW_00.html": "bf76728e"
+  },
+  "homework/HW_01.qmd": {
+    "HW_01.html": "260b143c"
+  },
+  "homework/HW_05.qmd": {
+    "HW_05.html": "4209bfe6"
+  },
+  "homework/HW_04.qmd": {
+    "HW_04.html": "f1658611"
+  },
+  "lessons/05_Cat_covariates/05_Cat_covariates.qmd": {
+    "05_Cat_covariates.html": "df712898"
+  },
+  "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.qmd": {
+    "05_Cat_covariates_muddy_points.html": "cb68df7e"
+  },
+  "lessons/05_Cat_covariates/05_Cat_covariates_key_info.qmd": {
+    "05_Cat_covariates_key_info.html": "6633cbee"
+  },
+  "lessons/03_SLR/03_SLR_muddy_points.qmd": {
+    "03_SLR_muddy_points.html": "6863dee1"
+  },
+  "lessons/03_SLR/03_SLR.qmd": {
+    "03_SLR.html": "c26a192f"
+  },
+  "lessons/03_SLR/03_SLR_key_info.qmd": {
+    "03_SLR_key_info.html": "bd86e9c1"
+  },
+  "lessons/00_Welcome/00_Welcome_key_info.qmd": {
+    "00_Welcome_key_info.html": "30b3dcf2"
+  },
+  "lessons/00_Welcome/00_Welcome.qmd": {
+    "00_Welcome.html": "90ceecb6"
+  },
+  "lessons/10_MLR_F-test/10_MLR_F-test_muddy_points.qmd": {
+    "10_MLR_F-test_muddy_points.html": "ba33d0af"
+  },
+  "lessons/10_MLR_F-test/10_MLR_F-test_key_info.qmd": {
+    "10_MLR_F-test_key_info.html": "3e54ca9d"
+  },
+  "lessons/10_MLR_F-test/10_MLR_F-test.qmd": {
+    "10_MLR_F-test.html": "fe7f6d09"
+  },
+  "lessons/Review-slides_HW-Labs/Review_HW_03_Lab_03.qmd": {
+    "Review_HW_03_Lab_03.html": "ef92c2cd"
+  },
+  "lessons/Review-slides_HW-Labs/Review_HW_02_Lab_02.qmd": {
+    "Review_HW_02_Lab_02.html": "35aa25f2"
+  },
+  "lessons/08_SLR_Diagnostics/08_SLR_Diag_key_info.qmd": {
+    "08_SLR_Diag_key_info.html": "b2f23e0b"
+  },
+  "lessons/08_SLR_Diagnostics/08_SLR_Diag.qmd": {
+    "08_SLR_Diag.html": "2c0a6aae"
+  },
+  "lessons/08_SLR_Diagnostics/08_SLR_Diag_muddy_points.qmd": {
+    "08_SLR_Diag_muddy_points.html": "ffa0c6a6"
+  },
+  "lessons/06_SLR_Eval/06_SLR_Eval.qmd": {
+    "06_SLR_Eval.html": "645d7872"
+  },
+  "lessons/06_SLR_Eval/06_SLR_Eval_key_info.qmd": {
+    "06_SLR_Eval_key_info.html": "4191a796"
+  },
+  "lessons/06_SLR_Eval/06_SLR_Eval_muddy_points.qmd": {
+    "06_SLR_Eval_muddy_points.html": "682a92ff"
+  },
+  "lessons/16_Poster_help/16_Poster_help.qmd": {
+    "16_Poster_help.html": "6f803932"
+  },
+  "lessons/01_Review/01_Review_muddy_points.qmd": {
+    "01_Review_muddy_points.html": "e7c26b56"
+  },
+  "lessons/01_Review/01_Review.qmd": {
+    "01_Review.html": "95c309b5"
+  },
+  "lessons/01_Review/01_Review_key_info.qmd": {
+    "01_Review_key_info.html": "7aebaf81"
+  },
+  "lessons/15_MLR_Diagnostics/15_MLR_Diagnostics_key_info.qmd": {
+    "15_MLR_Diagnostics_key_info.html": "16e51942"
+  },
+  "lessons/15_MLR_Diagnostics/15_MLR_Diagnostics_muddy_points.qmd": {
+    "15_MLR_Diagnostics_muddy_points.html": "edcc5962"
+  },
+  "lessons/15_MLR_Diagnostics/15_MLR_Diagnostics.qmd": {
+    "15_MLR_Diagnostics.html": "a61114b1"
+  },
+  "lessons/13_Model_selection/13_Model_selection.qmd": {
+    "13_Model_selection.html": "69410700"
+  },
+  "lessons/13_Model_selection/13_Model_selection_key_info.qmd": {
+    "13_Model_selection_key_info.html": "0e351cd8"
+  },
+  "lessons/13_Model_selection/13_Model_selection_maybe.qmd": {
+    "13_Model_selection_maybe.html": "35b801db"
+  },
+  "lessons/13_Model_selection/13_Model_selection_muddy_points.qmd": {
+    "13_Model_selection_muddy_points.html": "7bcbf692"
+  },
+  "lessons/07_SLR_Assumptions/07_SLR_Assumptions.qmd": {
+    "07_SLR_Assumptions.html": "e0605a06"
+  },
+  "lessons/07_SLR_Assumptions/07_SLR_Assumptions_key_info.qmd": {
+    "07_SLR_Assumptions_key_info.html": "915e9d04"
+  },
+  "lessons/07_SLR_Assumptions/07_SLR_Assumptions_muddy_points.qmd": {
+    "07_SLR_Assumptions_muddy_points.html": "fe90a030"
+  },
+  "lessons/11_Interactions_01/11_Interactions_01_key_info.qmd": {
+    "11_Interactions_01_key_info.html": "d9d3b830"
+  },
+  "lessons/11_Interactions_01/11_Interactions_01_muddy_points.qmd": {
+    "11_Interactions_01_muddy_points.html": "d45a85c4"
+  },
+  "lessons/11_Interactions_01/11_Interactions_01.qmd": {
+    "11_Interactions_01.html": "5db64c8a"
+  },
+  "lessons/12_Interactions_02/12_Interactions_02_muddy_points.qmd": {
+    "12_Interactions_02_muddy_points.html": "3e79b542"
+  },
+  "lessons/12_Interactions_02/12_Interactions_02_key_info.qmd": {
+    "12_Interactions_02_key_info.html": "74c011a8"
+  },
+  "lessons/12_Interactions_02/12_Interactions_02.qmd": {
+    "12_Interactions_02.html": "4c76e118"
+  },
+  "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred_muddy_points.qmd": {
+    "04_SLR_Inf_Pred_muddy_points.html": "8f6b2f4d"
+  },
+  "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred_key_info.qmd": {
+    "04_SLR_Inf_Pred_key_info.html": "98365803"
+  },
+  "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.qmd": {
+    "04_SLR_Inf_Pred.html": "fb0f29fb"
+  },
+  "lessons/14_Purposeful_selection/14_Purposeful_selection_key_info.qmd": {
+    "14_Purposeful_selection_key_info.html": "f273fe7b"
+  },
+  "lessons/14_Purposeful_selection/14_Purposeful_selection_muddy_points.qmd": {
+    "14_Purposeful_selection_muddy_points.html": "db0e1e2c"
+  },
+  "lessons/14_Purposeful_selection/14_Purposeful_selection.qmd": {
+    "14_Purposeful_selection.html": "684c7092"
+  },
+  "lessons/02_Data_Management/02_Data_Management.qmd": {
+    "02_Data_Management.html": "adffed1a"
+  },
+  "lessons/02_Data_Management/02_Data_Management_muddy_points.qmd": {
+    "02_Data_Management_muddy_points.html": "4d9e78c6"
+  },
+  "lessons/02_Data_Management/02_Data_Management_key_info.qmd": {
+    "02_Data_Management_key_info.html": "57c35940"
+  },
+  "lessons/09_MLR_Intro/09_MLR_Intro_key_info.qmd": {
+    "09_MLR_Intro_key_info.html": "306356ff"
+  },
+  "lessons/09_MLR_Intro/09_MLR_Intro_muddy_points.qmd": {
+    "09_MLR_Intro_muddy_points.html": "4e131d58"
+  },
+  "lessons/09_MLR_Intro/09_MLR_Intro.qmd": {
+    "09_MLR_Intro.html": "56dfcee7"
+  },
+  "syllabus.qmd": {
+    "syllabus.html": "9eef1961"
+  },
+  "data/NHANES_EDA.Rmd": {
+    "NHANES_EDA.html": "3595fbe5"
+  },
+  "schedule.qmd": {
+    "schedule.html": "c402f784"
+  }
+}

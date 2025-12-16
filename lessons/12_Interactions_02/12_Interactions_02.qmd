@@ -1,0 +1,963 @@
+---
+title: "Lesson 12: Interactions, Part 2"
+author: "Nicky Wakim"
+title-slide-attributes:
+    data-background-color: "#213c96"
+date: "02/19/2025"
+format: 
+  revealjs:
+    theme: "../simple_NW.scss"
+    chalkboard: true
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "Lesson 12: Interactions 2"
+    highlight-style: ayu
+    html-math-method: mathjax
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| label: "setup" 
+#| include: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(janitor)
+library(knitr)
+library(broom)
+library(rstatix)
+library(gt)
+library(readxl)
+#----------
+# new packages
+# install.packages("describedata")
+library(describedata) # gladder()
+library(gridExtra)   # grid.arrange()
+library(ggfortify)  # autoplot(model)
+# New Day 6
+library(gtsummary)
+
+# New Day 7
+library(plotly) # for plot_ly() command
+library(GGally) # for ggpairs() command 
+library(ggiraphExtra)   # for ggPredict() command
+
+# Load the data - update code if the csv file is not in the same location on your computer
+# If you need to download the file, please go to ur shared folder under Data > Slides
+gapm <- read_excel("data/Gapminder_vars_2011.xlsx", 
+                   na = "NA")  # important!!!! 
+
+
+gapm_sub <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
+  drop_na(LifeExpectancyYrs, FemaleLiteracyRate, four_regions, FoodSupplykcPPD) %>%
+  mutate(four_regions = factor(four_regions, 
+                               levels = c("africa", "americas", 
+                                          "asia", "europe"), 
+                               labels = c("Africa", "Americas", 
+                                          "Asia", "Europe"))) %>%
+  rename(income_levels = `World bank, 4 income groups 2017`) %>%
+  mutate(income_levels1 = factor(income_levels, 
+                                levels = c("Low income", 
+                                           "Lower middle income", 
+                                           "Upper middle income", 
+                                           "High income")), 
+         income_levels2 = relevel(factor(income_levels, 
+                                levels = c("Low income", 
+                                           "Lower middle income", 
+                                           "Upper middle income", 
+                                           "High income"), 
+                                labels = c("Lower income", "Lower income", 
+                                            "Higher income", "Higher income")), 
+                                ref = "Lower income"))
+
+```
+
+# Learning Objectives
+
+**Last time:**
+
+1.  Define confounders and effect modifiers, and how they interact with the main relationship we model.
+2.  Interpret the interaction component of a model with **a binary categorical covariate and continuous covariate**, and how the main variable's effect changes.
+3.  Interpret the interaction component of a model with **a multi-level categorical covariate and continuous covariate**, and how the main variable's effect changes.
+
+**This time:**
+
+4.  Interpret the interaction component of a model with **two categorical covariates**, and how the main variable's effect changes.
+5.  Interpret the interaction component of a model with **two continuous covariates**, and how the main variable's effect changes.
+6. Report results for a best-fit line (with confidence intervals) at different levels of an effect measure modifier
+
+# Learning Objectives
+
+**Last time:**
+
+1.  Define confounders and effect modifiers, and how they interact with the main relationship we model.
+2.  Interpret the interaction component of a model with **a binary categorical covariate and continuous covariate**, and how the main variable's effect changes.
+3.  Interpret the interaction component of a model with **a multi-level categorical covariate and continuous covariate**, and how the main variable's effect changes.
+
+**This time:**
+
+::: lob
+4.  Interpret the interaction component of a model with **two categorical covariates**, and how the main variable's effect changes.
+:::
+
+5.  Interpret the interaction component of a model with **two continuous covariates**, and how the main variable's effect changes.
+
+## Do we think income level can be an effect modifier for world region?
+
+::: columns
+::: column
+-   Taking a break from female literacy rate to demonstrate interactions for two categorical variables
+
+-   We can start by visualizing the relationship between life expectancy and world region *by income level*
+
+-   Questions of interest: Does the effect of world region on life expectancy differ depending on income level?
+
+    -   This is the same as: Is income level an effect modifier for world region?
+
+-   Let's run an interaction model to see!
+:::
+
+::: column
+```{r fig.height=7, fig.width=9, warning=F, fig.align='center'}
+#| echo: false
+ggplot(gapm_sub, aes(x = four_regions, y = LifeExpectancyYrs, 
+                  color = income_levels2)) +
+  geom_jitter(size = 2, alpha = .6, width = 0.2) +
+  stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
+  labs(x = "World Regions", 
+       y = "Life expectancy (years)",
+       title = "Life expectancy vs. World Region", 
+       color = "Income level") +
+  theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 20), 
+        title = element_text(size = 20), 
+        legend.text=element_text(size= 18)) +
+  scale_color_manual(values=c("#FF8021", "#34AC8B"))
+```
+:::
+:::
+
+## Model with interaction between a *multi-level categorical and binary variables*
+
+Model we are fitting:
+
+$$\begin{aligned}LE = &\beta_0 + \beta_1 I(\text{high income}) + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ & \beta_5 \cdot I(\text{high income}) \cdot I(\text{Americas}) + \beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & \beta_7 \cdot I(\text{high income})\cdot I(\text{Europe})+ \epsilon \end{aligned}$$
+
+-   $LE$ as life expectancy
+-   $I(\text{high income})$ as indicator of high income
+-   $I(\text{Americas})$, $I(\text{Asia})$, $I(\text{Europe})$ as the indicator for each world region
+
+In R:
+
+```{r}
+#| echo: true
+# gapm_sub = gapm_sub %>% mutate(income_levels2 = relevel(income_levels2, ref = "Higher income")) # for poll everywhere
+
+m_int_wr_inc = lm(LifeExpectancyYrs ~ income_levels2 + four_regions +
+                  income_levels2*four_regions, data = gapm_sub)
+m_int_wr_inc = lm(LifeExpectancyYrs ~ income_levels2*four_regions, 
+                data = gapm_sub)
+```
+
+## Displaying the regression table and writing fitted regression equation
+
+```{r}
+#| echo: true
+
+tidy(m_int_wr_inc, conf.int=T) %>% gt() %>% tab_options(table.font.size = 25) %>% fmt_number(decimals = 3)
+```
+
+$$\begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 \cdot I(\text{high income}) \cdot I(\text{Americas}) + \widehat\beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & \widehat\beta_7 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\widehat{LE} = & 60.85 + 2.10 \cdot I(\text{high income}) + 10.8 \cdot I(\text{Americas}) + 7.47\cdot  I(\text{Asia}) + 11.50 \cdot I(\text{Europe}) + \\ & 2.64 \cdot I(\text{high income}) \cdot I(\text{Americas}) + 1.54 \cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & 2.38 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\end{aligned}$$
+
+## Poll Everywhere Question 4
+
+::: columns
+::: {.column width="60%"}
+:::
+
+::: {.column width="40%"}
+```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
+#| echo: false
+ggplot(gapm_sub, aes(x = four_regions, y = LifeExpectancyYrs, 
+                  color = income_levels2)) +
+  geom_jitter(size = 2, alpha = .6, width = 0.2) +
+  stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
+  labs(x = "World Regions", 
+       y = "Life expectancy (years)",
+       title = "Life expectancy vs. World Region", 
+       color = "Income level") +
+  theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 20), 
+        title = element_text(size = 20), 
+        legend.text=element_text(size= 18), legend.position = "bottom") +
+  scale_color_manual(values=c("#FF8021", "#34AC8B"))
+```
+:::
+:::
+
+
+## Comparing fitted regression *means* for each world region {.smaller}
+
+$$\begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 \cdot I(\text{high income}) \cdot I(\text{Americas}) + \widehat\beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & \widehat\beta_7 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\widehat{LE} = & 60.85 + 2.10 \cdot I(\text{high income}) + 10.8 \cdot I(\text{Americas}) + 7.47\cdot  I(\text{Asia}) + 11.50 \cdot I(\text{Europe}) + \\ & 2.64 \cdot I(\text{high income}) \cdot I(\text{Americas}) + 1.54 \cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & 2.38 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\end{aligned}$$
+
+::: columns
+::: {.column width="25%"}
+::: proof1
+::: proof-title
+Africa
+:::
+
+::: proof-cont
+$$\begin{aligned} 
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \widehat\beta_4 \cdot 0 + \\ & \widehat\beta_5 I(\text{high income}) \cdot 0 + \\ & \widehat\beta_6 I(\text{high income}) \cdot 0+ \\& \widehat\beta_7 I(\text{high income}) \cdot 0 \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income})\\
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="25%"}
+::: fact
+::: fact-title
+The Americas
+:::
+
+::: fact-cont
+$$\begin{aligned} 
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \\ & \widehat\beta_2 \cdot 1 + \widehat\beta_3 \cdot 0 + \widehat\beta_4 \cdot 0 + \\ &  \widehat\beta_5 I(\text{high income}) \cdot 1 + \\ & \widehat\beta_6 I(\text{high income}) \cdot 0+ \\ & \widehat\beta_7 I(\text{high income}) \cdot 0 \\
+\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_2\big) + \\ &\big(\widehat\beta_1 + \widehat\beta_5\big)I(\text{high income}) \\
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="25%"}
+::: proposition
+::: prop-title
+Asia
+:::
+
+::: prop-cont
+$$\begin{aligned} 
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 1 + \widehat\beta_4 \cdot 0 + \\ & \widehat\beta_5 I(\text{high income}) \cdot 0 + \\ & \widehat\beta_6 I(\text{high income}) \cdot 1+ \\ & \widehat\beta_7 I(\text{high income}) \cdot 0 \\
+\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_3\big) + \\ &\big(\widehat\beta_1 + \widehat\beta_6\big)I(\text{high income}) \\
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="25%"}
+::: definition
+::: def-title
+Europe
+:::
+
+::: def-cont
+$$\begin{aligned} 
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \widehat\beta_4 \cdot 1 + \\ & \widehat\beta_5 I(\text{high income}) \cdot 0 + \\ & \widehat\beta_6 I(\text{high income}) \cdot 0+ \\ & \widehat\beta_7 I(\text{high income}) \cdot 1 \\
+\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_4\big) + \\ & \big(\widehat\beta_1 + \widehat\beta_7\big)I(\text{high income}) \\
+\end{aligned}$$
+:::
+:::
+:::
+:::
+
+## Comparing fitted regression *means* for each income level {.smaller}
+
+$$\begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 I(\text{high income}) + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 \cdot I(\text{high income}) \cdot I(\text{Americas}) + \widehat\beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & \widehat\beta_7 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\widehat{LE} = & 60.85 + 2.10 \cdot I(\text{high income}) + 10.8 \cdot I(\text{Americas}) + 7.47\cdot  I(\text{Asia}) + 11.50 \cdot I(\text{Europe}) + \\ & 2.64 \cdot I(\text{high income}) \cdot I(\text{Americas}) + 1.54 \cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & 2.38 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\end{aligned}$$
+
+::: columns
+::: column
+::: proof1
+::: proof-title
+For lower income countries: $I(\text{high income}) =0$
+:::
+
+::: proof-cont
+$$ \begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 \cdot 0 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 \cdot 0\cdot I(\text{Americas}) + \widehat\beta_6\cdot 0 \cdot I(\text{Asia})+ \widehat\beta_7 \cdot 0\cdot I(\text{Europe}) \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) \\
+\end{aligned}$$
+:::
+:::
+:::
+
+::: column
+::: fact
+::: fact-title
+For higher income countries: $I(\text{high income}) =1$
+:::
+
+::: fact-cont
+$$ \begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 \cdot 1 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 \cdot 1\cdot I(\text{Americas}) + \widehat\beta_6\cdot 1 \cdot I(\text{Asia})+ \widehat\beta_7 \cdot 1\cdot I(\text{Europe}) \\
+\widehat{LE} = & (\widehat\beta_0 + \widehat\beta_1)  + (\widehat\beta_2 + \widehat\beta_5) I(\text{Americas}) + (\widehat\beta_3 + \widehat\beta_6)  I(\text{Asia}) + \\ & (\widehat\beta_4 + \widehat\beta_7)  I(\text{Europe}) \\
+\end{aligned}$$
+:::
+:::
+:::
+:::
+
+- Example interpretation: The America's effect on mean life expectancy increases $\widehat{\beta}_5$ comparing high income to low income countries.
+
+## Let's take a look back at the plot
+
+::: columns
+::: {.column width="50%"}
+::: proof1
+::: proof-title
+For lower income countries: $I(\text{high income}) =0$
+:::
+
+::: proof-cont
+$$ \begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \\ & \widehat\beta_4 I(\text{Europe}) \\
+\end{aligned}$$
+:::
+:::
+
+::: fact
+::: fact-title
+For higher income countries: $I(\text{high income}) =1$
+:::
+
+::: fact-cont
+$$ \begin{aligned}
+\widehat{LE} = & (\widehat\beta_0 + \widehat\beta_1)  + (\widehat\beta_2 + \widehat\beta_5) I(\text{Americas}) + \\& (\widehat\beta_3 + \widehat\beta_6)  I(\text{Asia}) +  (\widehat\beta_4 + \widehat\beta_7)  I(\text{Europe}) \\
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="50%"}
+```{r fig.height=8.5, fig.width=8.5, warning=F, fig.align='center'}
+#| echo: false
+ggplot(gapm_sub, aes(x = four_regions, y = LifeExpectancyYrs, 
+                  color = income_levels2)) +
+  geom_jitter(size = 2, alpha = .6, width = 0.2) +
+  stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
+  labs(x = "World Regions", 
+       y = "Life expectancy (years)",
+       title = "Life expectancy vs. World Region", 
+       color = "Income level") +
+  theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 20), 
+        title = element_text(size = 20), 
+        legend.text=element_text(size= 18), legend.position = "bottom") +
+  scale_color_manual(values=c("#FF8021", "#34AC8B"))
+```
+:::
+:::
+
+## Interpretation for interaction between two categorical variables
+
+$$ \begin{aligned}
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 \cdot I(\text{high income}) + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 \cdot I(\text{high income})\cdot I(\text{Americas}) + \widehat\beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & \widehat\beta_7 \cdot I(\text{high income})\cdot I(\text{Europe}) \\
+\widehat{LE} = & \bigg[\widehat\beta_0 + \widehat\beta_1 \cdot I(\text{high income})\bigg]  + \bigg[\widehat\beta_2 + \widehat\beta_5 \cdot I(\text{high income})\bigg] I(\text{Americas}) + \\ & \bigg[\widehat\beta_3 + \widehat\beta_6 \cdot I(\text{high income})\bigg]  I(\text{Asia}) +  \bigg[\widehat\beta_4 + \widehat\beta_7 \cdot I(\text{high income})\bigg]  I(\text{Europe}) \\
+\end{aligned}$$
+
+-   Interpretation:
+    -   $\beta_1$ = mean change in the Africa's life expectancy, comparing high income to low income countries
+    -   $\beta_5$ = mean change in the Americas' effect, comparing high income to low income countries
+    -   $\beta_6$ = mean change in Asia's effect, comparing high income to low income countries
+    -   $\beta_7$ = mean change in Europe's effect, comparing high income to low income countries
+
+## Test interaction between two categorical variables (1/2) {.smaller}
+
+-   We run an F-test for a group of coefficients ($\beta_5$, $\beta_6$, $\beta_7$) in the below model (see lesson 9)
+
+$$\begin{aligned}LE = &\beta_0 + \beta_1 I(\text{high income}) + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ & \beta_5 \cdot I(\text{high income}) \cdot I(\text{Americas}) + \beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \\ & \beta_7 \cdot I(\text{high income})\cdot I(\text{Europe})+ \epsilon \end{aligned}$$
+
+::: columns
+::: {.column width="45%"}
+::: proof1
+::: proof-title
+Null $H_0$
+:::
+
+::: proof-cont
+$\beta_5= \beta_6 = \beta_7 =0$
+:::
+:::
+:::
+
+::: {.column width="55%"}
+::: definition
+::: def-title
+Alternative $H_1$
+:::
+
+::: def-cont
+$\beta_5\neq0$ and/or $\beta_6\neq0$ and/or $\beta_7\neq0$
+:::
+:::
+:::
+:::
+
+::: columns
+::: {.column width="45%"}
+::: proof1
+::: proof-title
+Null / Smaller / Reduced model
+:::
+
+::: proof-cont
+$$\begin{aligned}LE = &\beta_0 + \beta_1 I(\text{high income}) + \beta_2 I(\text{Americas}) + \\& \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \epsilon \end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="55%"}
+::: definition
+::: def-title
+Alternative / Larger / Full model
+:::
+
+::: def-cont
+$$\begin{aligned}LE = &\beta_0 + \beta_1 I(\text{high income}) + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \\ & \beta_4 I(\text{Europe}) + \beta_5 \cdot I(\text{high income}) \cdot I(\text{Americas}) + \\ & \beta_6\cdot I(\text{high income}) \cdot I(\text{Asia})+ \beta_7 \cdot I(\text{high income})\cdot I(\text{Europe})+ \epsilon \end{aligned}$$
+:::
+:::
+:::
+:::
+
+## Test interaction between two categorical variables (2/2)
+
+-   Fit the reduced and full model
+
+```{r}
+#| echo: true
+m_int_wr_inc_red = lm(LifeExpectancyYrs ~ income_levels2 + four_regions, 
+                   data = gapm_sub)
+m_int_wr_inc_full = lm(LifeExpectancyYrs ~ income_levels2 + four_regions +
+                          income_levels2*four_regions, data = gapm_sub)
+```
+
+-   Display the ANOVA table with F-statistic and p-value
+
+```{r}
+anova(m_int_wr_inc_red, m_int_wr_inc_full) %>% tidy() %>% gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
+
+# newdata <- data.frame(four_regions = c("Africa", "Americas", "Asia", "Europe"), 
+#                       FLR_c = c()) 
+# (pred = predict(m_int_wr_full, 
+#                 newdata=newdata, 
+#                 interval="confidence"))
+```
+
+-   Conclusion: There is not a significant interaction between world region and income level (p = 0.928).
+
+# Learning Objectives
+
+**Last time:**
+
+1.  Define confounders and effect modifiers, and how they interact with the main relationship we model.
+2.  Interpret the interaction component of a model with **a binary categorical covariate and continuous covariate**, and how the main variable's effect changes.
+3.  Interpret the interaction component of a model with **a multi-level categorical covariate and continuous covariate**, and how the main variable's effect changes.
+
+**This time:**
+
+4.  Interpret the interaction component of a model with **two categorical covariates**, and how the main variable's effect changes.
+
+::: lob
+5.  Interpret the interaction component of a model with **two continuous covariates**, and how the main variable's effect changes.
+:::
+
+## Do we think food supply is an effect modifier for female literacy rate?
+
+::: columns
+::: {.column width="40%"}
+-   We can start by visualizing the relationship between life expectancy and female literacy rate *by food supply*
+
+-   Questions of interest: Does the effect of female literacy rate on life expectancy differ depending on food supply?
+
+    -   This is the same as: Is food supply is an effect modifier for female literacy rate? Is food supply an effect modifier of the association between life expectancy and female literacy rate?
+
+-   Let's run an interaction model to see!
+:::
+
+::: {.column width="60%"}
+```{r fig.height=4, fig.width=6, warning=F, fig.align='center'}
+#| echo: false
+m_int_fs = lm(LifeExpectancyYrs ~ FemaleLiteracyRate*FoodSupplykcPPD, data = gapm_sub)
+(mr1_2d = ggPredict(m_int_fs, interactive = T) )
+```
+:::
+:::
+
+## Model with interaction between *two continuous variables*
+
+Model we are fitting:
+
+$$ LE = \beta_0 + \beta_1 FLR^c + \beta_2 FS^c + \beta_3 FLR^c \cdot FS^c + \epsilon$$
+
+-   $LE$ as life expectancy
+-   $FLR^c$ as the **centered** around the mean female literacy rate (continuous variable)
+-   $FS^c$ as the **centered** around the mean food supply (continuous variable)
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code to center FLR and FS"
+#| echo: true
+gapm_sub = gapm_sub %>% 
+  mutate(FLR_c = FemaleLiteracyRate - mean(FemaleLiteracyRate), 
+         FS_c = FoodSupplykcPPD - mean(FoodSupplykcPPD))
+mean_FS = mean(gapm_sub$FoodSupplykcPPD) %>% round(digits = 0)
+mean_FLR = mean(gapm_sub$FemaleLiteracyRate) %>% round(digits = 2)
+```
+
+In R:
+
+```{r}
+#| echo: true
+
+m_int_fs = lm(LifeExpectancyYrs ~ FLR_c + FS_c + FLR_c*FS_c, data = gapm_sub)
+```
+
+OR
+
+```{r}
+#| echo: true
+
+m_int_fs = lm(LifeExpectancyYrs ~ FLR_c*FS_c, data = gapm_sub)
+```
+
+## Displaying the regression table and writing fitted regression equation
+
+```{r}
+#| echo: true
+tidy_m_fs = tidy(m_int_fs, conf.int=T) 
+tidy_m_fs %>% gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 5)
+```
+
+$$ \begin{aligned}
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \widehat\beta_2 FS^c + \widehat\beta_3 FLR^c \cdot FS^c \\
+\widehat{LE} = & `r round(tidy_m_fs$estimate[1],2)` + `r round(tidy_m_fs$estimate[2],2)` \cdot FLR^c + `r round(tidy_m_fs$estimate[3],2)` \cdot FS^c - 0.00001 \cdot FLR^c \cdot FS^c
+\end{aligned}$$
+
+## Comparing fitted regression lines for various food supply values
+
+$$ \begin{aligned}
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \widehat\beta_2 FS^c + \widehat\beta_3 FLR^c \cdot FS^c \\
+\widehat{LE} = & `r round(tidy_m_fs$estimate[1],2)` + `r round(tidy_m_fs$estimate[2],2)` \cdot FLR^c + `r round(tidy_m_fs$estimate[3],2)` \cdot FS^c - 0.00001 \cdot FLR^c \cdot FS^c
+\end{aligned}$$
+
+To identify different lines, we need to pick example values of Food Supply:
+
+::: columns
+::: {.column width="33%"}
+::: FS1
+::: FS1-title
+Food Supply of `r mean_FS -1000` kcal PPD
+:::
+
+::: FS1-cont
+$$\begin{aligned} 
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \\ & \widehat\beta_2 \cdot (-1000) + \\ & \widehat\beta_3 FLR^c \cdot (-1000) \\
+\widehat{LE} = & \big(\widehat\beta_0 - 1000 \widehat\beta_2 \big)+ \\ & \big(\widehat\beta_1 - 1000 \widehat\beta_3  \big) FLR^c
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="33%"}
+::: FS2
+::: FS2-title
+Food Supply of `r mean_FS` kcal PPD
+:::
+
+::: FS2-cont
+$$\begin{aligned} 
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \\ & \widehat\beta_2 \cdot 0 + \\ & \widehat\beta_3 FLR^c \cdot 0 \\
+\widehat{LE} = & \big(\widehat\beta_0 \big)+ \\ & \big(\widehat\beta_1 \big) FLR^c
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="33%"}
+::: FS3
+::: FS3-title
+Food Supply of `r mean_FS + 1000` kcal PPD
+:::
+
+::: FS3-cont
+$$\begin{aligned} 
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \\ & \widehat\beta_2 \cdot 1000 + \\ & \widehat\beta_3 FLR^c \cdot 1000 \\
+\widehat{LE} = & \big(\widehat\beta_0 + 1000 \widehat\beta_2 \big)+ \\ & \big(\widehat\beta_1 + 1000 \widehat\beta_3  \big) FLR^c
+\end{aligned}$$
+:::
+:::
+:::
+:::
+
+## Poll Everywhere Question??
+
+## Interpretation for interaction between two continuous variables
+
+$$ \begin{aligned}
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \widehat\beta_2 FS^c + \widehat\beta_3 FLR^c \cdot FS^c \\
+\widehat{LE} = & \bigg[\widehat\beta_0 + \widehat\beta_2 \cdot FS^c \bigg] + \underbrace{\bigg[\widehat\beta_1 + \widehat\beta_3 \cdot FS^c \bigg]}_\text{FLR's effect} FLR \\
+\end{aligned}$$
+
+-   Interpretation:
+
+    -   $\beta_3$ = mean change in female literacy rate's effect, for every one kcal PPD increase in food supply
+
+-   In summary, the interaction term can be interpreted as "difference in adjusted female literacy rate effect for every 1 kcal PPD increase in food supply"
+
+-   It will be helpful to test the interaction to round out this interpretation!!
+
+## Test interaction between two continuous variables
+
+-   We run an F-test for a single coefficients ($\beta_3$) in the below model (see lesson 9)
+
+$$ LE = \beta_0 + \beta_1 FLR^c + \beta_2 FS^c + \beta_3 FLR^c \cdot FS^c + \epsilon$$
+
+::: columns
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+::: proof1
+::: proof-title
+Null $H_0$
+:::
+
+::: proof-cont
+$$\beta_3=0$$
+:::
+:::
+:::
+
+::: {.column width="40%"}
+::: definition
+::: def-title
+Alternative $H_1$
+:::
+
+::: def-cont
+$$\beta_3\neq0$$
+:::
+:::
+:::
+
+::: {.column width="10%"}
+:::
+:::
+
+::: columns
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+::: proof1
+::: proof-title
+Null / Smaller / Reduced model
+:::
+
+::: proof-cont
+$$ LE = \beta_0 + \beta_1 FLR^c + \beta_2 FS^c + \epsilon$$
+:::
+:::
+:::
+
+::: {.column width="40%"}
+::: definition
+::: def-title
+Alternative / Larger / Full model
+:::
+
+::: def-cont
+$$\begin{aligned}
+LE = & \beta_0 + \beta_1 FLR^c + \beta_2 FS^c + \\ & \beta_3 FLR^c \cdot FS^c + \epsilon
+\end{aligned}$$
+:::
+:::
+:::
+:::
+
+## Test interaction between two continuous variables
+
+-   Fit the reduced and full model
+
+```{r}
+#| echo: true
+m_int_fs_red = lm(LifeExpectancyYrs ~ FLR_c + FS_c, 
+                   data = gapm_sub)
+m_int_fs_full = lm(LifeExpectancyYrs ~ FLR_c + FS_c +
+                  FLR_c*FS_c, data = gapm_sub)
+```
+
+ 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Display the ANOVA table with F-statistic and p-value"
+#| echo: true
+anova(m_int_fs_red, m_int_fs_full) %>% tidy() %>% 
+  gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
+```
+
+-   Conclusion: There is not a significant interaction between female literacy rate and food supply (p = 0.945). Food supply is not an effect modifier of the association between female literacy rate and life expectancy.
+
+# Learning Objective
+
+**Bonus learning objective that's not really bonus but just a last minute addition**
+
+6. Report results for a best-fit line (with confidence intervals) at different levels of an effect measure modifier
+
+## How to find the confidence interval for each slope?
+
+- In the example with FS and FLR, we showed:
+
+::: FS3
+::: FS3-title
+Best-fit line for Food Supply of `r mean_FS + 1000` kcal PPD
+:::
+::: FS3-cont
+$$\begin{aligned} 
+\widehat{LE} = & \big(\widehat\beta_0 + 1000 \widehat\beta_2 \big)+  \big(\widehat\beta_1 + 1000 \widehat\beta_3  \big) FLR^c
+\end{aligned}$$
+:::
+:::
+
+- Often, we want to report the estimate of the combined coefficients: $\widehat\beta_1 + 1000 \widehat\beta_3$
+
+  - This allows us to make a statement like: "At a food supply of 3812 kcal PPD, mean life expectancy increases ($\widehat\beta_1 + 1000 \widehat\beta_3$) years for every one percent increase in female literacy rate (95% CI: \_\_, \_\_)."
+
+ 
+
+- We can calculate $\widehat\beta_1 + 1000 \widehat\beta_3$ by using the values of the estimated coefficients
+
+- BUT we always want to have a **95% confidence interval** when we report this combined estimate!!
+
+## Getting a 95% confidence interval requires linear combinations!
+
+- If we want a confidence interval for $\widehat\beta_1 + 1000 \widehat\beta_3$, then we would use the formula:
+
+$$\bigg(\widehat\beta_1 + 1000 \widehat\beta_3 \bigg) \pm t^* \times SE_{(\beta_1 + 1000 \beta_3)}$$
+
+- The hard part is figuring out what $SE_{(\beta_1 + 1000 \beta_3)}$ (or $\text{Var}(\beta_1 + 1000 \beta_3)$) equals
+
+- We need to go back to variance of linear combinations (BSTA 512/612, EPI 525):
+$$\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) + 2ab\text{Cov}(X, Y)$$
+or
+$$\text{Var}(aX - bY) = a^2\text{Var}(X) + b^2\text{Var}(Y) - 2ab\text{Cov}(X, Y)$$
+
+## Reference: calculating $SE_{(\beta_1 + 1000 \beta_3)}$ by hand
+
+- A helpful function that returns the variance-covariance matric of all the coefficients in model `m_int_fs`:
+
+::: columns
+::: {.column width="70%"}
+```{r}
+#| echo: true
+vcov(m_int_fs)
+```
+:::
+::: {.column width="30%"}
+$$ \begin{aligned}
+\text{Var}(\beta_1) & = `r round(vcov(m_int_fs)[2,2], 9)` \\
+\text{Var}(\beta_3) & = `r round(vcov(m_int_fs)[4,4], 9)` \\
+\text{Cov}(\beta_1, \beta_3) & = `r round(vcov(m_int_fs)[2,4], 9)` \\
+\end{aligned}$$
+:::
+:::
+
+$$ \begin{aligned}
+\text{Var}(\beta_1 + 1000 \beta_3) & = \text{Var}(\beta_1) + 1000^2\text{Var}(\beta_3) + 2000\text{Cov}(\beta_1, \beta_3) \\ 
+\text{Var}(\beta_1 + 1000 \beta_3) & = `r round(vcov(m_int_fs)[2,2], 9)` + 1000^2 \times `r round(vcov(m_int_fs)[4,4], 9)` + 2000 \times `r round(vcov(m_int_fs)[2,4], 9)` \\ 
+\text{Var}(\beta_1 + 1000 \beta_3) & = `r round(vcov(m_int_fs)[2,2] + 1000^2 * vcov(m_int_fs)[4,4] + 2000 * vcov(m_int_fs)[2,4], 9)` \\
+SE_{(\beta_1 + 1000 \beta_3)} & = \sqrt{`r round(vcov(m_int_fs)[2,2] + 1000^2 * vcov(m_int_fs)[4,4] + 2000 * vcov(m_int_fs)[2,4], 9)`} \\ 
+SE_{(\beta_1 + 1000 \beta_3)} & = `r round(sqrt(vcov(m_int_fs)[2,2] + 1000^2 * vcov(m_int_fs)[4,4] + 2000 * vcov(m_int_fs)[2,4]), 9)`
+\end{aligned}$$
+
+
+## We can use R and `estimable()` to find the estimate and CI
+
+For $\widehat\beta_1 + 1000 \widehat\beta_3$:
+
+```{r}
+#| echo: true
+
+library(gmodels)
+m_int_fs %>% estimable(
+                   c("(Intercept)" = 0,      # beta0
+                     "FLR_c"       = 1,      # beta1
+                     "FS_c"        = 0,      # beta2
+                     "FLR_c:FS_c"  = 1000),  # beta3
+                   conf.int = 0.95)
+```
+
+```{r}
+m_int_fs_3812 = m_int_fs %>% estimable(
+                   c("(Intercept)" = 0,      # beta0
+                     "FLR_c"       = 1,      # beta1
+                     "FS_c"        = 0,      # beta2
+                     "FLR_c:FS_c"  = 1000),  # beta3
+                   conf.int = 0.95)
+```
+
+ 
+
+**Our conclusion:** At a food supply of 3812 kcal PPD, mean life expectancy increases `r round(m_int_fs_3812$Estimate, 5)` years for every one percent increase in female literacy rate (95% CI: `r round(m_int_fs_3812$Lower.CI, 5)`, `r round(m_int_fs_3812$Upper.CI, 5)`).
+
+## Another example: income (binary) and FLR (1/2)
+
+```{r}
+#| echo: true
+
+m_int_inc2 = gapm_sub %>% 
+  lm(formula = LifeExpectancyYrs ~ FLR_c*income_levels2)
+```
+
+$$ \begin{aligned}
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 FLR \cdot I(\text{high income}) \\
+\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot I(\text{high income}) + 0.228 \cdot FLR \cdot I(\text{high income})
+\end{aligned}$$
+
+::: columns
+::: column
+::: proof1
+::: proof-title
+For lower income countries: $I(\text{high income}) =0$
+:::
+
+::: proof-cont
+$$ \begin{aligned}
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 \cdot 0 + \widehat\beta_3 FLR \cdot 0 \\
+\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot 0 + \\
+& 0.228 \cdot FLR \cdot 0 \\ 
+\widehat{LE} = & 54.85 + 0.156 \cdot FLR\\ 
+\end{aligned}$$
+:::
+:::
+:::
+
+::: column
+::: fact
+::: fact-title
+For higher income countries: $I(\text{high income}) =1$
+:::
+
+::: fact-cont
+$$ \begin{aligned}
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 \cdot 1 + \widehat\beta_3 FLR \cdot 1 \\
+\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot 1 + \\ & 0.228 \cdot FLR \cdot 1 \\ 
+\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot FLR\\ 
+\end{aligned}$$
+:::
+:::
+:::
+:::
+
+## Another example: income (binary) and FLR (2/2)
+
+
+```{r}
+#| echo: true
+
+m_int_inc2$coefficients # I just need to see the exact names
+m_int_inc2 %>% estimable(
+                   c("(Intercept)" = 0,      # beta0
+                     "FLR_c"       = 1,      # beta1
+                     "income_levels2Higher income" = 0,      # beta2
+                     "FLR_c:income_levels2Higher income"  = 1),  # beta3
+                   conf.int = 0.95)
+```
+
+```{r}
+m_int_high_inc = m_int_inc2 %>% estimable(
+                   c("(Intercept)" = 0,      # beta0
+                     "FLR_c"       = 1,      # beta1
+                     "income_levels2Higher income" = 0,      # beta2
+                     "FLR_c:income_levels2Higher income"  = 1),  # beta3
+                   conf.int = 0.95)
+```
+
+ 
+
+**Our conclusion:** For countries with high income, mean life expectancy increases `r round(m_int_high_inc$Estimate, 3)` years for every one percent increase in female literacy rate (95% CI: `r round(m_int_high_inc$Lower.CI, 3)`, `r round(m_int_high_inc$Upper.CI, 3)`).
+
+## If our example had an effect measure modifier
+
+```{r}
+m_int_low_inc = m_int_inc2 %>% estimable(
+                   c("(Intercept)" = 0,      # beta0
+                     "FLR_c"       = 0,      # beta1
+                     "income_levels2Higher income" = 1,      # beta2
+                     "FLR_c:income_levels2Higher income"  = 0),  # beta3
+                   conf.int = 0.95)
+```
+
+- None of our examples had a significant interaction, so it's hard to demonstrate exactly how we would report this
+
+- Let's say, **just for example**, that income had a significant interaction with FLR
+  - How would we report this to an audience??
+  
+- Here's how to report on an interaction/EMM:
+
+  - We found that a country's income status (high or low) is a significant effect measure modifier on female literacy rate (*include p-value for interaction test here*). For countries with high income, mean life expectancy increases `r round(m_int_high_inc$Estimate, 3)` years for every one percent increase in female literacy rate (95% CI: `r round(m_int_high_inc$Lower.CI, 3)`, `r round(m_int_high_inc$Upper.CI, 3)`). For countries with low income, mean life expectancy increases `r round(m_int_low_inc$Estimate, 3)` years for every one percent increase in female literacy rate (95% CI: `r round(m_int_low_inc$Lower.CI, 3)`, `r round(m_int_low_inc$Upper.CI, 3)`)."
+
+# Extra Reference Material
+
+## General interpretation of the interaction term (reference)
+
+$E[Y\mid X_{1},X_{2} ]=\beta_0 + \underbrace{(\beta_1+\beta_3X_{2}) }_\text{$X_{1}$'s effect} X_{1}+ \underbrace{\beta_2X_{2}}_\text{$X_{2}$ held constant}$\
+${\color{white}{E[Y\mid X_{1},X_{2} ]}}=\beta_0 + \underbrace{(\beta_2+\beta_3X_{1}) }_\text{$X_{2}$'s effect}X_{2} + \underbrace{\beta_1X_{1}}_\text{$X_{1}$ held constant}$
+
+-   Interpretation:
+
+    -   $\beta_3$ = mean change in $X_{1}$'s effect, per unit increase in $X_{2}$;\
+
+    -   [$\beta_3$]{style="color: white"} = mean change in $X_{2}$'s effect, per unit increase in $X_{1}$;
+
+    -   where the "$X_{1}$ effect" equals the change in $E[Y]$ per unit increase in $X_{1}$ with $X_{2}$ held constant, i.e. "adjusted $X_{1}$ effect"
+
+-   In summary, the interaction term can be interpreted as "difference in adjusted $X_1$ (or $X_2$) effect per unit increase in $X_2$ (or $X_1$)"
+
+## A glimpse at how interactions might be incorporated into model selection {.smaller}
+
+1.  Identify outcome (Y) and primary explanatory (X) variables
+
+2.  Decide which other variables might be important and could be potential confounders. Add these to the model.
+
+    -   This is often done by indentifying variables that previous research deemed important, or researchers believe could be important
+    -   From a statistical perspective, we often include variables that are significantly associated with the outcome (in their respective SLR)
+
+3.  (Optional step) Test 3 way interactions
+
+    -   This makes our model incredibly hard to interpret. Our class will not cover this!!
+    -   We will skip to testing 2 way interactions
+
+4.  Test 2 way interactions
+
+    -   When testing a 2 way interaction, make sure the full and reduced models contain the main effects
+
+    -   First test all the 2 way interactions together using a partial F-test (with $alpha = 0.10$)
+
+        -   If this test not significant, do not test 2-way interactions individually
+        -   If partial F-test is significant, then test each of the 2-way interactions
+
+5.  Remaining main effects - to include of not to include?
+
+    -   For variables that are included in any interactions, they will be automatically included as main effects and thus not checked for confounding
+
+    -   For variables that are not included in any interactions:
+
+        -   Check to see if they are confounders by seeing whether exclusion of the variable(s) changes any of the coefficient of the primary explanatory variable (including interactions) X by more than 10%
+
+            -   If any of X's coefficients change when removing the potential confounder, then keep it in the model
