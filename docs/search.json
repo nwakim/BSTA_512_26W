@@ -1886,8 +1886,8 @@
     "objectID": "lessons/00_Welcome/00_Welcome.html#nicky-wakim-sheher",
     "href": "lessons/00_Welcome/00_Welcome.html#nicky-wakim-sheher",
     "title": "Welcome to BSTA 512/612!",
-    "section": "",
-    "text": "Call me “Nicky,” “Dr. W,” “Professor Wakim,” or any combo!\n\nIf you are comfortable with it, I prefer Nicky\n\nAssistant Professor of Biostatistics\n \nOriginally from DC area (Virginia side!)\nTwo kitties\nVolleyball, biking, pickleball\nBut also sleeping, TV, and reading\nTaking ceramics at PCC\nI am currently moving!\n\n\n\n\n Video"
+    "section": "Nicky Wakim (she/her)",
+    "text": "Nicky Wakim (she/her)\n\n\n\nCall me “Nicky,” “Dr. W,” “Professor Wakim,” or any combo!\n\nIf you are comfortable with it, I prefer Nicky\n\nAssistant Professor of Biostatistics\n \nOriginally from DC area (Virginia side!)\nTwo kitties\nVolleyball, biking, pickleball\nBut also sleeping, TV, and reading\nTaking ceramics at PCC\nI am currently moving!\n\n\n\n\n Video"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome.html#some-important-tasks",
@@ -1964,7 +1964,7 @@
     "href": "lessons/00_Welcome/00_Welcome.html#what-we-will-cover-process-for-regression-data-analysis",
     "title": "Welcome to BSTA 512/612!",
     "section": "What we will cover: process for regression data analysis",
-    "text": "What we will cover: process for regression data analysis\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)\nPrediction of new \\(Y\\) given \\(X\\)"
+    "text": "What we will cover: process for regression data analysis\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)\nPrediction of new \\(Y\\) given \\(X\\)"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome.html#let-me-know-if-you-have-questions",
