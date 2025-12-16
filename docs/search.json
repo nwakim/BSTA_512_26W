@@ -32,7 +32,7 @@
     "href": "homework.html",
     "title": "Homework",
     "section": "",
-    "text": "Homework\nAssignment\nAssignment due (@11pm)\nAnswers\nSolutions (.qmd)\nSolutions (.html)*\n\n\n\n\n0\n\n1/9\n\n\n\n\n\n1\n\n1/23\n\n\n\n\n\n2\n\n1/31\n\n\n\n\n\n3\n\n2/14\n\n\n\n\n\n4\n\n2/28\n\n\n\n\n\n5\n\n3/14\n*Please note that you need to download the .html file to see the LaTeX math properly."
+    "text": "Homework\nAssignment\nAssignment due (@11pm)\nAnswers\nSolutions folder\n\n\n\n\n0\n\n01/08\n\n\n\n\n1\n\n01/25\n\n\n\n\n2\n\n02/01\n\n\n\n\n3\n\n02/15\n\n\n\n\n4\n\n03/01\n\n\n\n\n5\n\n03/15\n*Please note that you need to download the .html file to see the LaTeX math properly."
   },
   {
     "objectID": "homework.html#file-naming",
@@ -46,7 +46,7 @@
     "href": "homework.html#rubrics",
     "title": "Homework",
     "section": "Rubrics",
-    "text": "Rubrics\n\n\n\n\n\n\n\n\n\n1 point\n0 points\n\n\n\n\nCompletion\n75% of the question parts are thoroughly worked out and have an answer. “Question parts” means the sub-questions labeled “Part _”\nLess than 75% of question parts are thoroughly worked out. Attempts do not count as thoroughly worked out."
+    "text": "Rubrics\n\n\n\n\n\n\n\n\n\n1 point\n0 points\n\n\n\n\nCompleteness\n75% of the question parts are thoroughly worked out and have an answer. “Question parts” means the sub-questions labeled “Part _.” Answers can be incorrect or correct. For parts with longer processes and calculations, solution set up and calculations are required.\nLess than 75% of question parts are thoroughly worked out. Attempts do not count as thoroughly worked out."
   },
   {
     "objectID": "schedule.html",

@@ -3,7 +3,7 @@
     "path": "~/Library/CloudStorage/OneDrive-OregonHealth&ScienceUniversity/Teaching/Classes/BSTA_512_26W/BSTA_512_26W_site/homework.qmd",
     "project_path": "homework.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "2664245010",
     "contents": "",
     "dirty": false,
     "created": 1765593279038.0,
@@ -11,14 +11,21 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "1844:1491.5",
+        "cursorPosition": "29,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1743122118,
+    "lastKnownWriteTime": 1765852684,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1743122118,
+    "last_content_update": 1765852684646,
     "read_only": false,
     "read_only_alternatives": []
 }

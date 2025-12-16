@@ -1,0 +1,15 @@
+{
+  "hash": "23cb28fa347c4e99d932b7afa0e0a4b9",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Homework\"\nformat: \n  html:\n    page-layout: full\n    link-external-newwindow: true\n    toc: false\n---\n\n\n\n| Homework | Assignment | Assignment due (\\@11pm) | Answers | Solutions folder |\n|---------------|---------------|---------------|---------------|---------------|\n| 0 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_00.qmd)]{style=\"color:#f8f5f0;\"} | 01/08 | [{{< iconify ph key-fill size=29px >}}]{style=\"color:#f8f5f0;\"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style=\"color:#f8f5f0;\"} |\n| 1 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_01.qmd)]{style=\"color:#f8f5f0;\"} | 01/25 | [{{< iconify ph key-fill size=29px >}}]{style=\"color:#f8f5f0;\"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style=\"color:#f8f5f0;\"} |\n| 2 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_02.qmd)]{style=\"color:#f8f5f0;\"} | 02/01 | [{{< iconify ph key-fill size=29px >}}]{style=\"color:#f8f5f0;\"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style=\"color:#f8f5f0;\"} |\n| 3 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_03.qmd)]{style=\"color:#f8f5f0;\"} | 02/15 | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_03_ans.qmd)]{style=\"color:#f8f5f0;\"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style=\"color:#f8f5f0;\"} |\n| 4 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_04.qmd)]{style=\"color:#f8f5f0;\"} | 03/01 | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_04_ans.qmd)]{style=\"color:#f8f5f0;\"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style=\"color:#f8f5f0;\"} |\n| 5 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_05.qmd)]{style=\"color:#f8f5f0;\"} | 03/15 | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_05_ans.qmd)]{style=\"color:#f8f5f0;\"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style=\"color:#f8f5f0;\"} |\n\n\\*Please note that you need to download the `.html` file to see the LaTeX math properly.\n\n## File Naming\n\n-   For HW Assignments, please use the following file naming: \"Lastname_Firstinitial_HW0.qmd\" and \"Lastname_Firstinitial_HW0.html\"\n\n## Rubrics\n\n|   | 1 point | 0 points |\n|------------------------|------------------------|------------------------|\n| Completeness | 75% of the question parts are thoroughly worked out and have an answer. “Question parts” means the sub-questions labeled “Part \\_.\" Answers can be incorrect or correct. For parts with longer processes and calculations, solution set up and calculations are required. | Less than 75% of question parts are thoroughly worked out. Attempts do not count as thoroughly worked out. |\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
