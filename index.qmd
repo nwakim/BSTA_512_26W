@@ -38,7 +38,7 @@ Welcome to BSTA 512/612! In this course, we will focus on linear models, and bui
 :::
 
 ::: {.g-col-4}
-[{{< iconify material-symbols folder size=24px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_files?csf=1&web=1&e=g2hUNd) OneDrive Folder
+[{{< iconify material-symbols folder size=24px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512?csf=1&web=1&e=KliyNt) OneDrive Folder
 :::
 
 
@@ -61,7 +61,7 @@ Welcome to BSTA 512/612! In this course, we will focus on linear models, and bui
 
 {{< iconify tabler mail-filled size=24px >}} [wakim\@ohsu.edu](mailto:wakim@ohsu.edu)
 
-{{< iconify icon-park-solid time size=24px >}} Office Hours W 3-4pm
+{{< iconify icon-park-solid time size=24px >}} Office Hours TBD
 :::
 ::: {.column width="25%"}
 ### TA Office Hours
