@@ -28,21 +28,20 @@ Welcome to BSTA 512/612! In this course, we will focus on linear models, and bui
 ::: {style="background-color: #4FADF3"}
 ::: {style="color: #FFFFFF"}
 
- 
-
 
 ::: grid
-
 ::: {.g-col-3}
 
 :::
 
 ::: {.g-col-4}
+[hi]{style="color: #4FADF3; font-size: 0.2em;"} \
 [{{< iconify material-symbols folder size=24px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512?csf=1&web=1&e=KliyNt) OneDrive Folder
 :::
 
 
 ::: {.g-col-4}
+[hi]{style="color: #4FADF3; font-size: 0.2em;"} \
 [{{< iconify logos zoom-icon size=24px >}}](https://pdx.zoom.us/j/82300634081) Class Zoom link
 :::
 
@@ -92,7 +91,7 @@ Sophia
 
 {{< iconify icon-park-solid time size=24px >}} 1:00 PM - 2:50 PM
 
-{{< iconify fa6-solid person-chalkboard size=24px >}} In-person, TBD
+{{< iconify fa6-solid person-chalkboard size=24px >}} In-person, KCRB 1011
 :::
 
 ::: {.column width="25%"}
