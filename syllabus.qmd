@@ -56,9 +56,14 @@ These learning objectives were adapted from [Maria Tackett's Regression Analysis
 
 ## Meeting Times
 
-Mondays          1:00 PM -- 2:50 PM PST in TBD
+Mondays          1:00 PM -- 2:50 PM PST
 
-Wednesdays    1:00 PM -- 2:50 PM PST in TBD
+Wednesdays    1:00 PM -- 2:50 PM PST
+
+- Class will be located in...
+  - KCRB 1011 from 1/5/26 - 3/4/26
+  - RPV 1205/1215 (B/C) from 3/9/26 - 3/11/26
+  - TBD on 3/17/26
 
 ### Known Exceptions
 
