@@ -249,5 +249,62 @@
   },
   "project/Lab_01_rubric.qmd": {
     "Lab_01_rubric.html": "b0ddb758"
+  },
+  "quiz.qmd": {
+    "quiz.html": "179551e4"
+  },
+  "project/Lab_01_instructions.qmd": {
+    "Lab_01_instructions.html": "42ed3d3a"
+  },
+  "project/Lab_04_instructions.qmd": {
+    "Lab_04_instructions.html": "7ea0554d"
+  },
+  "project/Poster-example.qmd": {
+    "Poster-example.html": "41eea980"
+  },
+  "project/Lab_02_rubric.qmd": {
+    "Lab_02_rubric.html": "2e382ce5"
+  },
+  "project/Project_poster_instructions.qmd": {
+    "Project_poster_instructions.html": "a4b836ab"
+  },
+  "project/Lab_04_rubric.qmd": {
+    "Lab_04_rubric.html": "b218a28b"
+  },
+  "project/Lab_04.qmd": {
+    "Lab_04.html": "02287a13"
+  },
+  "project/Lab_01.qmd": {
+    "Lab_01.html": "d02740d2"
+  },
+  "project/Lab_03_instructions.qmd": {
+    "Lab_03_instructions.html": "c3db26ed"
+  },
+  "project/BMI_help.qmd": {
+    "BMI_help.html": "efc2451c"
+  },
+  "project/Lab_02.qmd": {
+    "Lab_02.html": "592ba991"
+  },
+  "project/Project_template.qmd": {
+    "Project_template.html": "6af14718"
+  },
+  "project/Lab_03.qmd": {
+    "Lab_03.html": "7efe8e18"
+  },
+  "project/Lab_02_work.qmd": {
+    "Lab_02_work.html": "6024d687"
+  },
+  "project/Lab_03_work.qmd": {
+    "Lab_03_work.html": "2384c65e"
+  },
+  "project/Lab_02_instructions.qmd": {
+    "Lab_02_instructions.html": "30752bdf"
+  },
+  "project/Project_report_instructions.qmd": {
+    "Project_report_instructions.html": "f26e237d"
+  },
+  "project/Lab_03_rubric.qmd": {
+    "Lab_03_rubric.html": "8ed1f731"
   }
 }

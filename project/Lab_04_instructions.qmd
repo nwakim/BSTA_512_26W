@@ -13,10 +13,12 @@ format:
     number-depth: 4
 editor_options: 
   chunk_output_type: console
+execute:
+  eval: false
 ---
 
 ::: callout-caution
-Read to go! Nicky 3/3/2025
+Not ready yet
 :::
 
 ```{r}

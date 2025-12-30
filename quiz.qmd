@@ -1,0 +1,46 @@
+---
+title: "Quiz Info"
+date-modified: "today"
+format: 
+  html:
+    page-layout: full
+    link-external-newwindow: true
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here("class_dates.R"))
+```
+
+Below is the general timing and lessons for each quiz:
+
+| Quiz | Lessons | Open Date \@ 3pm | Close Date \@ 11pm |
+|----|----|----|----|
+| 1 | 1-4 | `r q1_open %>% format("%m/%d")` | `r q1_close %>% format("%m/%d")` |
+| 2 | 5-9 | `r q2_open %>% format("%m/%d")` | `r q2_close %>% format("%m/%d")` |
+| 3 | 10-14 | `r q3_open %>% format("%m/%d")` | `r q3_close %>% format("%m/%d")` |
+
+Quizzes will be mostly conceptual questions with 10-15 multiple choice questions. Some calculations will need to be done for certain questions, but the focus will be on understanding concepts.
+
+More information specific to each quiz will be posted below.
+
+### Instructions that will presented for each quiz
+
+1.  I have written a 30-minute quiz, but there is no time limit on the quiz. You will have from Wednesday at 3pm to Sunday at 11pm to finish the quiz.
+
+2.  The quiz is open book and open notes. You may use books other than the class textbook, you may use anything on our course webpage, and you may use reference websites (like Wikipedia, Googling expected value of specific distribution, etc.).
+
+3.  No cheating will be tolerated. Cheating includes:
+
+    -   Using ChatGPT or any other AI software
+    -   Copy and pasting the question from Sakai to any search engine.
+    -   Using question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.
+    -   Asking other students, sharing quiz work or sharing quiz results.
+
+4.  Each question is worth 1 point, including multiple choice and free response questions.
+
+### Quiz 1
+
+### Quiz 2
+
+### Quiz 3
