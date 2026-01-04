@@ -11,8 +11,6 @@ editor_options:
 ## Announcements
 
 - Hello! Welcome!
-- Let's take a second to check that Echo360 works
-  - But please mute your computer first!!
 
 - I'll discuss more in the Welcome and Review lesson
 - Any initial questions

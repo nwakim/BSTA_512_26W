@@ -1431,8 +1431,8 @@
     "objectID": "lessons/01_Review/01_Review.html#what-did-we-learn-in-511611-12",
     "href": "lessons/01_Review/01_Review.html#what-did-we-learn-in-511611-12",
     "title": "Lesson 1: Review",
-    "section": "",
-    "text": "In 511, we talked about categorical and continuous outcomes (dependent variables)\n \nWe also talked about their relationship with 1-2 continuous or categorical exposure (independent variables or predictor)\n \nWe had many good ways to assess the relationship between an outcome and exposure:\n \n\n\n\n\n\n\n\n\n\n\nContinuous Outcome\nCategorical Outcome\n\n\nContinuous Exposure\nCorrelation, simple linear regression\n??\n\n\nCategorical Exposure\nt-tests, paired t-tests, 2 sample t-tests, ANOVA\nproportion t-test, Chi-squared goodness of fit test, Fisher’s Exact test, Chi-squared test of independence, etc."
+    "section": "What did we learn in 511/611? (1/2)",
+    "text": "What did we learn in 511/611? (1/2)\n\nIn 511, we talked about categorical and continuous outcomes (dependent variables)\n \nWe also talked about their relationship with 1-2 continuous or categorical exposure (independent variables or predictor)\n \nWe had many good ways to assess the relationship between an outcome and exposure:\n \n\n\n\n\n\n\n\n\n\n\nContinuous Outcome\nCategorical Outcome\n\n\nContinuous Exposure\nCorrelation, simple linear regression\n??\n\n\nCategorical Exposure\nt-tests, paired t-tests, 2 sample t-tests, ANOVA\nproportion t-test, Chi-squared goodness of fit test, Fisher’s Exact test, Chi-squared test of independence, etc."
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#what-did-we-learn-in-511611-22",
@@ -1453,7 +1453,7 @@
     "href": "lessons/01_Review/01_Review.html#process-of-regression-data-analysis",
     "title": "Lesson 1: Review",
     "section": "Process of regression data analysis",
-    "text": "Process of regression data analysis\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)\nPrediction of new \\(Y\\) given \\(X\\)"
+    "text": "Process of regression data analysis\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)\nPrediction of new \\(Y\\) given \\(X\\)"
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#main-sections-of-the-course",
@@ -1474,7 +1474,7 @@
     "href": "lessons/01_Review/01_Review.html#before-we-begin",
     "title": "Lesson 1: Review",
     "section": "Before we begin",
-    "text": "Before we begin\n\nFeel free to visit my or Meike’s Introducation to Biostatistics\nMeike’s BSTA 511 page\nNicky’s BSTA 525 page"
+    "text": "Before we begin\n\nFeel free to visit my or Meike’s Introducation to Biostatistics\nMeike’s BSTA 511 page\nNicky’s EPI 525 page"
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#learning-objectives",
@@ -1509,7 +1509,7 @@
     "href": "lessons/01_Review/01_Review.html#descriptive-statistics-continuous-variables-r-code",
     "title": "Lesson 1: Review",
     "section": "Descriptive Statistics: continuous variables (R code)",
-    "text": "Descriptive Statistics: continuous variables (R code)\n\n\nMeasures of central tendency\n\nSample mean\n\nmean( sample )\n\nMedian\n\nmedian( sample )\n\n\n\nMeasures of variability (or dispersion)\n\nSample variance\n\nvar( sample )\n\nSample standard deviation\n\nsd( sample )\n\nIQR\n\nIQR( sample )\n\n\n\n\n\nOr all together!!\n\n\ndds.discr %&gt;% get_summary_stats(age)\n\n# A tibble: 1 × 13\n  variable     n   min   max median    q1    q3   iqr   mad  mean    sd    se\n  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 age       1000     0    95     18    12    26    14  10.4  22.8  18.5 0.584\n# ℹ 1 more variable: ci &lt;dbl&gt;"
+    "text": "Descriptive Statistics: continuous variables (R code)\n\n\nMeasures of central tendency\n\nSample mean\n\nmean( sample )\n\nMedian\n\nmedian( sample )\n\n\n\nMeasures of variability (or dispersion)\n\nSample variance\n\nvar( sample )\n\nSample standard deviation\n\nsd( sample )\n\nIQR\n\nIQR( sample )\n\n\n\n\nOr all together!!\n\n\ndds.discr %&gt;% get_summary_stats(age)\n\n# A tibble: 1 × 13\n  variable     n   min   max median    q1    q3   iqr   mad  mean    sd    se\n  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 age       1000     0    95     18    12    26    14  10.4  22.8  18.5 0.584\n# ℹ 1 more variable: ci &lt;dbl&gt;"
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#data-visualization",
@@ -1523,14 +1523,14 @@
     "href": "lessons/01_Review/01_Review.html#histogram-using-ggplot2",
     "title": "Lesson 1: Review",
     "section": "Histogram using ggplot2",
-    "text": "Histogram using ggplot2\nWe can make a basic graph for a continuous variable:\n\n\n\nggplot(data = dds.discr, \n       aes(x = age)) +\n  geom_histogram()\n\n\n\n\n\n\n\n\n\n\nggplot() +\n  geom_histogram(data = dds.discr, \n       aes(x = age))\n\n\n\n\n\n\n\n\n\n\nSome more information on histograms using ggplot2"
+    "text": "Histogram using ggplot2\nWe can make a basic graph for a continuous variable:\n\n\n\nggplot(data = dds.discr, \n       aes(x = age)) +\n  geom_histogram()\n\n\n\n\n\n\n\n\n\n\nggplot() +\n  geom_histogram(data = dds.discr, \n       aes(x = age))\n\n\n\n\n\n\n\n\n\nSome more information on histograms using ggplot2"
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#spruced-up-histogram-using-ggplot2",
     "href": "lessons/01_Review/01_Review.html#spruced-up-histogram-using-ggplot2",
     "title": "Lesson 1: Review",
     "section": "Spruced up histogram using ggplot2",
-    "text": "Spruced up histogram using ggplot2\nWe can make a more formal, presentable graph:\n\nggplot(data = dds.discr, \n       aes(x = age)) +\n  geom_histogram() +\n  theme(text = element_text(size=20)) +\n  labs(x = \"Age\", \n       y = \"Count\", \n       title = \"Distribution of Age in Sample\")\n\n\n\n\n\n\n\n\nI would like you to turn in homework, labs, and project reports with graphs like these."
+    "text": "Spruced up histogram using ggplot2\nWe can make a more formal, presentable graph:\n\nggplot(data = dds.discr, \n       aes(x = age)) +\n  geom_histogram() +\n  theme(text = element_text(size=20)) + # me making the text larger\n  labs(x = \"Age\", # me adding labels\n       y = \"Count\", \n       title = \"Distribution of Age in Sample\")\n\n\nI would like you to turn in homework, labs, and project reports with graphs like these."
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#other-basic-plots-from-ggplot2",
@@ -1614,7 +1614,7 @@
     "href": "lessons/01_Review/01_Review.html#confidence-interval-for-two-independent-means",
     "title": "Lesson 1: Review",
     "section": "Confidence interval for two independent means",
-    "text": "Confidence interval for two independent means\n\n\nThe confidence interval for difference in independent population means, \\(\\mu_1\\) and \\(\\mu_2\\):\n\\[\n\\overline{x}_1 - \\overline{x}_2 \\pm t^{*}\\sqrt{\\dfrac{s_1^2}{n_1} + \\dfrac{s_2^2}{n_2}}\n\\]\n\nwhere \\(t^*\\) is the critical value for the 95% (or other percent) corresponding to the t-distribution and dependent on \\(df=n_1 + n_2 -2\\)\n\n\n\n\n\n \n\nPlease check out my notes on this if you’d like: https://nwakim.github.io/F24_EPI_525/schedule.html\n\nIt’s under Lesson 13"
+    "text": "Confidence interval for two independent means\n\n\nThe confidence interval for difference in independent population means, \\(\\mu_1\\) and \\(\\mu_2\\):\n\\[\n\\overline{x}_1 - \\overline{x}_2 \\pm t^{*}\\sqrt{\\dfrac{s_1^2}{n_1} + \\dfrac{s_2^2}{n_2}}\n\\]\n\nwhere \\(t^*\\) is the critical value for the 95% (or other percent) corresponding to the t-distribution and dependent on \\(df=n_1 + n_2 -2\\)\n\n\n\n\n \n\nPlease check out my notes on this if you’d like: https://nwakim.github.io/F24_EPI_525/schedule.html\n\nIt’s under Lesson 13"
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#heres-a-decent-source-for-other-r-code-for-tests-in-511",
@@ -1656,7 +1656,7 @@
     "href": "lessons/01_Review/01_Review.html#reference-what-does-it-all-look-like-together",
     "title": "Lesson 1: Review",
     "section": "Reference: what does it all look like together?",
-    "text": "Reference: what does it all look like together?\n\n\nExample of hypothesis test based on the 1992 JAMA data\n\n\nIs there evidence to support that the population mean body temperature is different from 98.6°F?\n\n\n\n\n\nAssumptions: The individual observations are independent and the number of individuals in our sample is 130. Thus, we can use CLT to approximate the sampling distribution.\n\n4-5. Test statistic and p-value\n\n\nSet \\(\\alpha = 0.05\\)\n\n\n\nHypothesis:\n\\[\\begin{aligned}\nH_0 &: \\mu = 98.6\\\\\n\\text{vs. } H_A&: \\mu \\neq 98.6\n\\end{aligned}\\]\n\n\n\n\n\nCode\ntemps_ttest &lt;- t.test(x = BodyTemps$Temperature, mu = 98.6)\ntidy(temps_ttest) %&gt;% gt() %&gt;% tab_options(table.font.size = 36)\n\n\n\n\n\n\n\n\nestimate\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n98.24923\n-5.454823\n2.410632e-07\n129\n98.122\n98.37646\nOne Sample t-test\ntwo.sided\n\n\n\n\n\n\n\n\nConclusion: We reject the null hypothesis. The average body temperature in the sample was 98.25°F (95% CI 98.12, 98.38°F), which is discernibly different from 98.6°F ( \\(p\\)-value &lt; 0.001)."
+    "text": "Reference: what does it all look like together?\n\n\nExample of hypothesis test based on the 1992 JAMA data\n\n\nIs there evidence to support that the population mean body temperature is different from 98.6°F?\n\n\n\n\n\nAssumptions: The individual observations are independent and the number of individuals in our sample is 130. Thus, we can use CLT to approximate the sampling distribution.\n\n4-5. Test statistic and p-value\n\n\nSet \\(\\alpha = 0.05\\)\n\n\n\nHypothesis:\n\\[\\begin{aligned}\nH_0 &: \\mu = 98.6\\\\\n\\text{vs. } H_A&: \\mu \\neq 98.6\n\\end{aligned}\\]\n\n\n\n\nCode\ntemps_ttest &lt;- t.test(x = BodyTemps$Temperature, mu = 98.6)\ntidy(temps_ttest) %&gt;% gt() %&gt;% tab_options(table.font.size = 36)\n\n\n\n\n\n\n\n\nestimate\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n98.24923\n-5.454823\n2.410632e-07\n129\n98.122\n98.37646\nOne Sample t-test\ntwo.sided\n\n\n\n\n\n\n\n\nConclusion: We reject the null hypothesis. The average body temperature was 98.25°F (95% CI 98.12, 98.38°F), which is discernibly different from 98.6°F ( \\(p\\)-value &lt; 0.001)."
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#how-did-we-get-the-95-ci",
@@ -1677,7 +1677,7 @@
     "href": "lessons/01_Review/01_Review.html#outcomes-of-our-hypothesis-test",
     "title": "Lesson 1: Review",
     "section": "Outcomes of our hypothesis test",
-    "text": "Outcomes of our hypothesis test"
+    "text": "Outcomes of our hypothesis test\n\n\nType 1 error is \\(\\alpha\\)\n\nThe probability that we falsely reject the null hypothesis (but the null is true!!)\n\nPower is \\(1-\\beta\\)\n\nThe probability of correctly rejecting the null hypothesis"
   },
   {
     "objectID": "lessons/01_Review/01_Review.html#prabilities-of-outcomes",
@@ -1887,14 +1887,14 @@
     "href": "lessons/00_Welcome/00_Welcome.html#nicky-wakim-sheher",
     "title": "Welcome to BSTA 512/612!",
     "section": "Nicky Wakim (she/her)",
-    "text": "Nicky Wakim (she/her)\n\n\n\nCall me “Nicky,” “Dr. W,” “Professor Wakim,” or any combo!\n\nIf you are comfortable with it, I prefer Nicky\n\nAssistant Professor of Biostatistics\n \nOriginally from DC area (Virginia side!)\nTwo kitties\nVolleyball, biking, pickleball\nBut also sleeping, TV, and reading\nTaking ceramics at PCC\nI am currently moving!\n\n\n\n\n Video"
+    "text": "Nicky Wakim (she/her)\n\n\n\nCall me “Nicky,” “Dr. W,” “Professor Wakim,” or any combo!\n\nIf you are comfortable with it, I prefer Nicky\n\nAssistant Professor of Biostatistics\n \nOriginally from DC area (Virginia side!)\nTwo kitties\nVolleyball, biking, pickleball\nBut also sleeping, TV, and reading\nCeramics!\n\n\n\n\n Video"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome.html#some-important-tasks",
     "href": "lessons/00_Welcome/00_Welcome.html#some-important-tasks",
     "title": "Welcome to BSTA 512/612!",
     "section": "Some important tasks",
-    "text": "Some important tasks\n\nStar the class website: https://nwakim.github.io/BSTA_512_W25/\nComplete the WhenIsGood for office hours\nComplete Homework 0 by this Thursday at 11pm!\nHighly suggest that you make an appointment with a learning specialist through Student Academic Support Services!"
+    "text": "Some important tasks\n\nStar the class website: https://nwakim.github.io/BSTA_512_26W/\nComplete Homework 0 by this Thursday at 11pm!\n\nChecking OneDrive access\nCompleting whenisgood for office hours\n\nHighly suggest that you make an appointment with a learning specialist through Student Academic Support Services!"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome.html#lets-visit-the-website-homepage",
@@ -1957,7 +1957,7 @@
     "href": "lessons/00_Welcome/00_Welcome.html#structure-for-this-course",
     "title": "Welcome to BSTA 512/612!",
     "section": "Structure for this course",
-    "text": "Structure for this course\n\nWe will use the foundation built in BSTA 511/611 or EPID 525\n\n \n\nWe will be building towards models that can handle many variables!\n \n\nRegression is the building block for modeling multivariable relationships\n\n \nIn Linear Models we will build, interpret, and evaluate linear regression models"
+    "text": "Structure for this course\n\nWe will use the foundation built in BSTA 511/611 or EPI 525\n\n \n\nWe will be building towards models that can handle many variables!\n \n\nRegression is the building block for modeling multivariable relationships\n\n \nIn Linear Models we will build, interpret, and evaluate linear regression models"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome.html#what-we-will-cover-process-for-regression-data-analysis",
@@ -1971,7 +1971,7 @@
     "href": "lessons/00_Welcome/00_Welcome.html#let-me-know-if-you-have-questions",
     "title": "Welcome to BSTA 512/612!",
     "section": "Let me know if you have questions",
-    "text": "Let me know if you have questions\nOr if there’s any contradicting information in the course site… I’m sure I made a mistake somewhere!!\n\nFor example: we do NOT have quizzes. If you see a mention of quizzes anywhere in the course, then I simply overlooked it and need to fix it!"
+    "text": "Let me know if you have questions\nOr if there’s any contradicting information in the course site… I’m sure I made a mistake somewhere!!\n\nFor example: we have quizzes. This is a change from last year, so there’s anything that mentions not having quizzes, then I simply overlooked it and need to fix it!\nI am also updating the labs to improve them. If you notice any inconsistencies in the lab instructions, please let me know!"
   },
   {
     "objectID": "lessons/03_SLR/03_SLR_key_info.html",
@@ -2321,14 +2321,14 @@
     "href": "lessons/00_Welcome/00_Welcome_key_info.html",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Hello! Welcome!\nLet’s take a second to check that Echo360 works\n\nBut please mute your computer first!!\n\nI’ll discuss more in the Welcome and Review lesson\nAny initial questions"
+    "text": "Hello! Welcome!\nI’ll discuss more in the Welcome and Review lesson\nAny initial questions"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome_key_info.html#announcements",
     "href": "lessons/00_Welcome/00_Welcome_key_info.html#announcements",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Hello! Welcome!\nLet’s take a second to check that Echo360 works\n\nBut please mute your computer first!!\n\nI’ll discuss more in the Welcome and Review lesson\nAny initial questions"
+    "text": "Hello! Welcome!\nI’ll discuss more in the Welcome and Review lesson\nAny initial questions"
   },
   {
     "objectID": "lessons/00_Welcome/00_Welcome_key_info.html#key-dates",

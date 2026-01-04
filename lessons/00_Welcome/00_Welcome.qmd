@@ -44,9 +44,8 @@ library(tidyverse)
 
 -   But also sleeping, TV, and reading
 
--   Taking ceramics at PCC
+-   Ceramics!
 
--   I am currently moving!
 :::
 
 ::: {.column width="5%"}
@@ -65,11 +64,11 @@ library(tidyverse)
 
 ## Some important tasks
 
--   Star the class website: <https://nwakim.github.io/BSTA_512_W25/>
-
--   Complete the [WhenIsGood](https://whenisgood.net/amhssx9) for office hours
+-   Star the class website: <https://nwakim.github.io/BSTA_512_26W/>
 
 -   Complete Homework 0 by this Thursday at 11pm!
+    - Checking OneDrive access
+    - Completing whenisgood for office hours
 
 -   Highly suggest that you make an appointment with a learning specialist through [Student Academic Support Services](https://sakai.ohsu.edu/portal/site/Student_Support)!
 
@@ -91,7 +90,7 @@ g=3
 ## Let's visit the website: Homepage
 
 ```{=html}
-<iframe id="frame" src="https://nwakim.github.io/BSTA_512_W25/"></iframe>
+<iframe id="frame" src="https://nwakim.github.io/BSTA_512_26W/"></iframe>
 ```
 
 ## Let's visit the website: Syllabus
@@ -115,7 +114,7 @@ g=3
 -   Weeks, class info, homeworks, labs
 
 ```{=html}
-<iframe id="frame" src="https://nwakim.github.io/BSTA_512_W25/schedule.html"></iframe>
+<iframe id="frame" src="https://nwakim.github.io/BSTA_512_26W/schedule.html"></iframe>
 ```
 
 ## Let's visit the website: Schedule (2/2)
@@ -140,7 +139,7 @@ g=3
 
 ## Structure for this course
 
-- We will use the foundation built in BSTA 511/611 or EPID 525
+- We will use the foundation built in BSTA 511/611 or EPI 525
 
  
 
@@ -247,4 +246,6 @@ Model Use (Inference)
 
 Or if there's any contradicting information in the course site... I'm sure I made a mistake somewhere!!
 
-- For example: we do NOT have quizzes. If you see a mention of quizzes anywhere in the course, then I simply overlooked it and need to fix it!
+- For example: we **have** quizzes. This is a change from last year, so there's anything that mentions not having quizzes, then I simply overlooked it and need to fix it!
+
+- I am also updating the labs to improve them. If you notice any inconsistencies in the lab instructions, please let me know!

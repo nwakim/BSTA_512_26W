@@ -239,9 +239,9 @@ library(ggplot2)
 
 - Feel free to visit my or Meike's Introducation to Biostatistics
 
--   [Meike's BSTA 511 page](https://niederhausen.github.io/BSTA_511_F24/)
+-   [Meike's BSTA 511 page](https://niederhausen.github.io/BSTA_511_F25/)
 
--   [Nicky's BSTA 525 page](https://nwakim.github.io/F24_EPI_525/)
+-   [Nicky's EPI 525 page](https://nwakim.github.io/EPI_525_25F/)
 
 ## Learning Objectives
 
@@ -449,8 +449,8 @@ We can make a more formal, presentable graph:
 ggplot(data = dds.discr, 
        aes(x = age)) +
   geom_histogram() +
-  theme(text = element_text(size=20)) +
-  labs(x = "Age", 
+  theme(text = element_text(size=20)) + # me making the text larger
+  labs(x = "Age", # me adding labels
        y = "Count", 
        title = "Distribution of Age in Sample")
 ```
@@ -864,7 +864,7 @@ tidy(temps_ttest) %>% gt() %>% tab_options(table.font.size = 36)
 ```
 
 
-6.  **Conclusion:** We reject the null hypothesis. The average body temperature in the sample was 98.25°F (95% CI 98.12, 98.38°F), which is discernibly different from 98.6°F ( $p$-value \< 0.001).
+6.  **Conclusion:** We reject the null hypothesis. The average body temperature was 98.25°F (95% CI 98.12, 98.38°F), which is discernibly different from 98.6°F ( $p$-value \< 0.001).
 
 ## How did we get the 95% CI?
 
@@ -896,9 +896,7 @@ t.test(x = BodyTemps$Temperature,
 
 ## Outcomes of our hypothesis test
 
-![](../img_slides/Type_1_2_error.png){fig-align="center"}
-
-## Prabilities of outcomes
+![](../img_slides/type-i-and-type-ii-errors_chart.png){fig-align="center"}
 
 -   Type 1 error is $\alpha$
 
@@ -907,8 +905,6 @@ t.test(x = BodyTemps$Temperature,
 -   Power is $1-\beta$
 
     -   The probability of correctly rejecting the null hypothesis
-
-![](../img_slides/Power.png){fig-align="center"}
 
 ## What I think is the most intuitive way to look at it
 
