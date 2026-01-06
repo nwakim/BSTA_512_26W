@@ -9,9 +9,10 @@ editor_options:
 ---
 
 ## Announcements
-- I saw that we had some issues with getting into the OneDrive
-  - Let's see if [this link](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EpUBcHEh3gxFpNbGHtayubkBdZntbHGDInmuvVlB9ErJ9g?e=KSKtVa) works
-  - I might need to manually add you all to the folder UGH
+- Questions from exit tickets:
+  - Is the Project Day mandatory? YES
+  - Would it be possible for those of us in 612 to get more information on what is required for the readings that are part of our grade?
+    - Yes! I will email you all shortly!
 
 - New to R? Check out [my old class site](https://nwakim.github.io/F24_EPI_525/schedule.html)
   - Video recordings will be in Student folder
