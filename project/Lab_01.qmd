@@ -3,19 +3,24 @@ title: "Lab 1"
 author: "Your name here!!"
 subtitle: "BSTA 512/612"
 date-modified: "today"
-categories: [""]
 format: 
   html:
     link-external-newwindow: true
     toc: true
     embed-resources: true
+    number-sections: true
+    number-depth: 5
 ---
+
+## Directions
+
+Directions and instructions are on the website!
 
 ## Lab activities
 
-### 1. Reading and listening activities
+### Reading and listening activities
 
-#### 1.1 Article: [Implicit and explicit anti-fat bias: The role of weight-related attitudes and beliefs](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Labs/Implicit_anti_fat.pdf?csf=1&web=1&e=Gg43c4)
+#### Article: [Implicit and explicit anti-fat bias: The role of weight-related attitudes and beliefs](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/W25_BSTA_512_612/Student_files/Labs/Implicit_anti_fat.pdf?csf=1&web=1&e=Gg43c4)
     
 ::: callout-important
 #### Task
@@ -23,7 +28,7 @@ format:
 Answer the questions from the instructions.
 :::
 
-#### 1.2 Podcast: [Anti-Fat Bias by Maintenance Phase](https://maintenancephase.buzzsprout.com/1411126/6524683-anti-fat-bias)
+#### Optional Podcast: [Anti-Fat Bias by Maintenance Phase](https://maintenancephase.buzzsprout.com/1411126/6524683-anti-fat-bias)
 
 ::: callout-important
 #### Task
@@ -31,9 +36,9 @@ Answer the questions from the instructions.
 If you decide to listen, feel free to share a quote that most impacted you.
 :::
 
-### 2. Familiarizing ourselves with the Implicit Association Test (IAT)
+### Familiarizing ourselves with the Implicit Association Test (IAT)
 
-#### 2.1 Learn more about the test
+#### Learn more about the test
 
 ::: callout-important
 #### Task
@@ -41,7 +46,7 @@ If you decide to listen, feel free to share a quote that most impacted you.
 In 5-10 bullet points, write down some of your ideas on the study design that you may want to mention.
 :::
 
-#### 2.2 Take the test
+#### Take the test
 
 ::: callout-important
 #### Task
@@ -49,15 +54,15 @@ In 5-10 bullet points, write down some of your ideas on the study design that yo
 Take the Weight IAT test.
 :::
 
-### 3. Get a sense of how you would like to analyze the data
+### Choose one of three research questions {#sec-rq}
 
 ::: callout-important
 #### Task
 
-Write your research question
+Please copy and paste your chosen research question.
 :::
 
-### 4. Organize your "Project" folder
+### Organize your "Project" folder
 
 ::: callout-important
 #### Task
@@ -65,7 +70,28 @@ Write your research question
 Display your working directory using the `here` package and `here()` function.
 :::
 
-### 5. Compile above work into an introduction
+### Access and download the data
+
+::: callout-important
+##### Task
+
+Download the 2024 data and codebook from the archives and store in accessible folder. No need to report anything for this task. 
+:::
+
+### Load data and needed packages
+
+### Check data with codebook
+
+### Data wrangling
+
+#### Restrict data to participants in the U.S.
+
+#### Restrict your analysis to 1 outcome and 9 possible covariates/predictors (10 total)
+
+#### Make a new dataset with only complete cases
+
+
+### Compile above work into an introduction
 
 ::: callout-important
 #### Task
