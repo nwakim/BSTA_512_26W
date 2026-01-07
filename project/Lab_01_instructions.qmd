@@ -2,7 +2,6 @@
 title: "Lab 1 Instructions"
 author: "Nicky Wakim"
 subtitle: "BSTA 512/612"
-description: "Due: Thursday January 16, 2025 at 11pm"
 date-modified: "today"
 format: 
   html:
@@ -16,7 +15,7 @@ editor_options:
 ---
 
 ::: callout-caution
-Lab is ready! 1/9/2025
+**Still updating lab!!! Likely to be done end of day 1/7**
 :::
 
 ## Directions
@@ -181,7 +180,7 @@ Using the `haven` and `here` package, load the data (`sav` file) into this docum
 
 ```{r}
 #| echo: false
-iat_2024_raw = read_sav(file = here("../TA_files/Project/data/Weight IAT.public.2024.sav"))
+iat_2024_raw = read_sav(file = here("../TA_files_BSTA_512/Project/data/Weight IAT.public.2024.sav"))
 ```
 
 Loading the `sav` file every time you render will take a long time. One way to speed this up is by saving the data as an `rda` file (R data file). Change the following R code to save the `rda` file. You will also need to remove the `#| eval: false` at the top of the code chunk once you have corrected the code. If you are confused on the syntax, don't forget that you can use `?save` for more information.
