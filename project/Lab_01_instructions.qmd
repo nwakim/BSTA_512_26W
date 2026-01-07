@@ -22,7 +22,7 @@ editor_options:
 
 Please turn in your `.html` file on Sakai. 
 
-This document is the instructions for the lab. You will use a cleaner version to fill in your work. [You can download the `.qmd` file for this lab here.](https://github.com/nwakim/BSTA_512_26W/blob/main/labs/Lab_01.qmd) 
+This document is the instructions for the lab. You will use a cleaner version to fill in your work. [You can download the `.qmd` file for this lab here.](https://github.com/nwakim/BSTA_512_26W/blob/main/project/Lab_01.qmd) 
 
 ### Purpose
 
@@ -38,7 +38,7 @@ Each lab will follow the rubric on the Project page. Since this lab does not inc
 
 ### Reading and listening activities
 
-#### Article: [Implicit and explicit anti-fat bias: The role of weight-related attitudes and beliefs](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_files/Project/Resources/weightinclusivehealthcare.pdf?csf=1&web=1&e=B9D2a4)
+#### Article: [Implicit and explicit anti-fat bias: The role of weight-related attitudes and beliefs](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Labs/Implicit_anti_fat.pdf?csf=1&web=1&e=D3dQI6)
 
 This article will serve as a reference point for our project. The article is meant to introduce social scientists' approaches to research and analyses. However, the article is not meant to be a basis for which we perform our analysis.
 

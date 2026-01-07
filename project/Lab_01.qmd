@@ -2,7 +2,6 @@
 title: "Lab 1"
 author: "Your name here!!"
 subtitle: "BSTA 512/612"
-description: "Due: January 16, 2025 at 11pm"
 date-modified: "today"
 categories: [""]
 format: 
