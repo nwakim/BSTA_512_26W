@@ -1,292 +1,219 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Nicky Wakim">
-<meta name="dcterms.date" content="2026-01-07">
-
-<title>Lesson 2: Data and File Management</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-</style>
-
-
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<html lang="en"><head>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b780fb0528eafbfa2bf38de57c29c417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
-<link href="../../site_libs/font-awesome/css/all.min.css" rel="stylesheet">
-<link href="../../site_libs/font-awesome/css/v4-shims.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-29987c632d9c708eba81ba88d1291502.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
-
+  <meta name="author" content="Nicky Wakim">
+  <meta name="dcterms.date" content="2026-01-07">
+  <title>Linear Models – Lesson 2: Data and File Management</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #575f66;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #575f66; } /* Normal */
+    code span.al { color: #f51818; background-color: #faefef; font-weight: bold; } /* Alert */
+    code span.an { color: #e6ba7e; } /* Annotation */
+    code span.at { color: #399ee6; } /* Attribute */
+    code span.bn { color: #ff9940; } /* BaseN */
+    code span.bu { color: #4cbf99; } /* BuiltIn */
+    code span.cf { color: #fa8d3e; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4cbf99; } /* Char */
+    code span.cn { color: #a37acc; } /* Constant */
+    code span.co { color: #607880; font-style: italic; } /* Comment */
+    code span.cv { color: #a37acc; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #fa8d3e; } /* DataType */
+    code span.dv { color: #ff9940; } /* DecVal */
+    code span.er { color: #f51818; text-decoration: underline; } /* Error */
+    code span.ex { color: #399ee6; font-weight: bold; } /* Extension */
+    code span.fl { color: #ff9940; } /* Float */
+    code span.fu { color: #f2ae49; } /* Function */
+    code span.im { color: #86b300; } /* Import */
+    code span.in { color: #ff9940; } /* Information */
+    code span.kw { color: #fa8d3e; font-weight: bold; } /* Keyword */
+    code span.op { color: #ed9366; } /* Operator */
+    code span.ot { color: #55b4d4; } /* Other */
+    code span.pp { color: #f07171; } /* Preprocessor */
+    code span.re { color: #399ee6; background-color: #ddecf3; } /* RegionMarker */
+    code span.sc { color: #4cbf99; } /* SpecialChar */
+    code span.ss { color: #4cbf99; } /* SpecialString */
+    code span.st { color: #86b300; } /* String */
+    code span.va { color: #55b4d4; } /* Variable */
+    code span.vs { color: #86b300; } /* VerbatimString */
+    code span.wa { color: #f07171; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b8cb4baf68cc3010e8c27c839335cad1.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <link href="../../site_libs/font-awesome/css/all.min.css" rel="stylesheet">
+  <link href="../../site_libs/font-awesome/css/v4-shims.min.css" rel="stylesheet">
 </head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
 
-<body class="nav-fixed quarto-light">
+<section id="title-slide" data-background-color="#213c96" class="quarto-title-block center">
+  <h1 class="title">Lesson 2: Data and File Management</h1>
+  <p class="subtitle">Adapted from parts of Mine Çetinkaya-Rundel’s tidyverse course</p>
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo light-content">
-    <img src="../../images/bsta_512_hex.png" alt="" class="navbar-logo dark-content">
-    </a>
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Linear Models</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../schedule.html"> 
-<span class="menu-text">Schedule</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../syllabus.html"> 
-<span class="menu-text">Syllabus</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../instructors.html"> 
-<span class="menu-text">Instructors</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../homework.html"> 
-<span class="menu-text">Homework</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../project.html"> 
-<span class="menu-text">Project</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Nicky Wakim 
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#need-to-include-slides-on-working-with-and-storing-datasets" id="toc-need-to-include-slides-on-working-with-and-storing-datasets" class="nav-link active" data-scroll-target="#need-to-include-slides-on-working-with-and-storing-datasets">Need to include slides on working with and storing datasets</a></li>
-  <li><a href="#what-we-will-cover" id="toc-what-we-will-cover" class="nav-link" data-scroll-target="#what-we-will-cover">What we will cover</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  </ul></li>
-  <li><a href="#introduction-to-the-tidyverse" id="toc-introduction-to-the-tidyverse" class="nav-link" data-scroll-target="#introduction-to-the-tidyverse">Introduction to the <code>tidyverse</code></a>
-  <ul class="collapse">
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#what-is-the-tidyverse" id="toc-what-is-the-tidyverse" class="nav-link" data-scroll-target="#what-is-the-tidyverse">What is the tidyverse?</a></li>
-  <li><a href="#tidy-data1" id="toc-tidy-data1" class="nav-link" data-scroll-target="#tidy-data1">Tidy data</a></li>
-  <li><a href="#pipe-operator-magrittr" id="toc-pipe-operator-magrittr" class="nav-link" data-scroll-target="#pipe-operator-magrittr">Pipe operator (<code>magrittr</code>)</a></li>
-  <li><a href="#recoding-a-binary-variable-with-pipe-operator" id="toc-recoding-a-binary-variable-with-pipe-operator" class="nav-link" data-scroll-target="#recoding-a-binary-variable-with-pipe-operator">Recoding a binary variable with pipe operator</a></li>
-  <li><a href="#recoding-a-multi-level-variable" id="toc-recoding-a-multi-level-variable" class="nav-link" data-scroll-target="#recoding-a-multi-level-variable">Recoding a multi-level variable</a></li>
-  </ul></li>
-  <li><a href="#ggplot2-revisited" id="toc-ggplot2-revisited" class="nav-link" data-scroll-target="#ggplot2-revisited"><code>ggplot2</code> revisited</a>
-  <ul class="collapse">
-  <li><a href="#ggplot2-in-tidyverse" id="toc-ggplot2-in-tidyverse" class="nav-link" data-scroll-target="#ggplot2-in-tidyverse"><code>ggplot2</code> in tidyverse</a></li>
-  <li><a href="#tidyverse-visualizing-multiple-variables" id="toc-tidyverse-visualizing-multiple-variables" class="nav-link" data-scroll-target="#tidyverse-visualizing-multiple-variables">Tidyverse: Visualizing multiple variables</a></li>
-  <li><a href="#tidyverse-visualizing-even-more-variables" id="toc-tidyverse-visualizing-even-more-variables" class="nav-link" data-scroll-target="#tidyverse-visualizing-even-more-variables">Tidyverse: Visualizing even more variables</a></li>
-  <li><a href="#base-r-visualizing-even-more-variables" id="toc-base-r-visualizing-even-more-variables" class="nav-link" data-scroll-target="#base-r-visualizing-even-more-variables">Base R: Visualizing even more variables</a></li>
-  </ul></li>
-  <li><a href="#functions-for-data-management" id="toc-functions-for-data-management" class="nav-link" data-scroll-target="#functions-for-data-management">Functions for data management</a>
-  <ul class="collapse">
-  <li><a href="#important-functions-for-data-management" id="toc-important-functions-for-data-management" class="nav-link" data-scroll-target="#important-functions-for-data-management">Important functions for data management</a></li>
-  <li><a href="#lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" id="toc-lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" class="nav-link" data-scroll-target="#lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class">Let’s look back at the <code>dds.discr</code> dataset that I briefly used last class</a></li>
-  <li><a href="#rename-one-of-the-first-things-i-usually-do" id="toc-rename-one-of-the-first-things-i-usually-do" class="nav-link" data-scroll-target="#rename-one-of-the-first-things-i-usually-do"><code>rename()</code>: one of the first things I usually do</a></li>
-  <li><a href="#mutate-constructing-new-variables-from-what-you-have" id="toc-mutate-constructing-new-variables-from-what-you-have" class="nav-link" data-scroll-target="#mutate-constructing-new-variables-from-what-you-have"><code>mutate()</code>: constructing new variables from what you have</a></li>
-  <li><a href="#mutate-other-examples" id="toc-mutate-other-examples" class="nav-link" data-scroll-target="#mutate-other-examples"><code>mutate()</code>: other examples</a></li>
-  <li><a href="#filter-keep-rows-that-match-a-condition" id="toc-filter-keep-rows-that-match-a-condition" class="nav-link" data-scroll-target="#filter-keep-rows-that-match-a-condition"><code>filter()</code>: keep rows that match a condition</a></li>
-  <li><a href="#select-keep-or-drop-columns-using-their-names-and-types" id="toc-select-keep-or-drop-columns-using-their-names-and-types" class="nav-link" data-scroll-target="#select-keep-or-drop-columns-using-their-names-and-types"><code>select()</code>: keep or drop columns using their names and types</a></li>
-  </ul></li>
-  <li><a href="#summarizing-data" id="toc-summarizing-data" class="nav-link" data-scroll-target="#summarizing-data">Summarizing Data</a>
-  <ul class="collapse">
-  <li><a href="#tbl_summary-table-summary-12" id="toc-tbl_summary-table-summary-12" class="nav-link" data-scroll-target="#tbl_summary-table-summary-12"><code>tbl_summary()</code> : table summary (1/2)</a></li>
-  <li><a href="#tbl_summary-table-summary-22" id="toc-tbl_summary-table-summary-22" class="nav-link" data-scroll-target="#tbl_summary-table-summary-22"><code>tbl_summary()</code> : table summary (2/2)</a></li>
-  <li><a href="#group_by-group-by-one-or-more-variables" id="toc-group_by-group-by-one-or-more-variables" class="nav-link" data-scroll-target="#group_by-group-by-one-or-more-variables"><code>group_by()</code>: group by one or more variables</a></li>
-  <li><a href="#summarize-summarize-your-data-or-grouped-data-into-one-row" id="toc-summarize-summarize-your-data-or-grouped-data-into-one-row" class="nav-link" data-scroll-target="#summarize-summarize-your-data-or-grouped-data-into-one-row"><code>summarize()</code>: summarize your data or grouped data into one row</a></li>
-  <li><a href="#across-apply-a-function-across-multiple-columns" id="toc-across-apply-a-function-across-multiple-columns" class="nav-link" data-scroll-target="#across-apply-a-function-across-multiple-columns"><code>across()</code>: apply a function across multiple columns</a></li>
-  </ul></li>
-  <li><a href="#folder-organization" id="toc-folder-organization" class="nav-link" data-scroll-target="#folder-organization">Folder organization</a>
-  <ul class="collapse">
-  <li><a href="#folder-organization-1" id="toc-folder-organization-1" class="nav-link" data-scroll-target="#folder-organization-1">Folder organization</a></li>
-  <li><a href="#aside-folder-and-file-naming" id="toc-aside-folder-and-file-naming" class="nav-link" data-scroll-target="#aside-folder-and-file-naming">Aside: folder and file naming</a></li>
-  <li><a href="#creating-project-in-rstudio" id="toc-creating-project-in-rstudio" class="nav-link" data-scroll-target="#creating-project-in-rstudio">Creating project in RStudio</a></li>
-  <li><a href="#the-nice-thing-about-r-projects" id="toc-the-nice-thing-about-r-projects" class="nav-link" data-scroll-target="#the-nice-thing-about-r-projects">The nice thing about R projects</a></li>
-  <li><a href="#reproducibility" id="toc-reproducibility" class="nav-link" data-scroll-target="#reproducibility">Reproducibility</a></li>
-  </ul></li>
-  <li><a href="#here-package-and-importing-data" id="toc-here-package-and-importing-data" class="nav-link" data-scroll-target="#here-package-and-importing-data"><code>here</code> package and importing data</a>
-  <ul class="collapse">
-  <li><a href="#here-package" id="toc-here-package" class="nav-link" data-scroll-target="#here-package"><code>here</code> package</a></li>
-  <li><a href="#here-package-1" id="toc-here-package-1" class="nav-link" data-scroll-target="#here-package-1"><code>here</code> package</a></li>
-  <li><a href="#using-here-package" id="toc-using-here-package" class="nav-link" data-scroll-target="#using-here-package">Using <code>here</code> package</a></li>
-  </ul></li>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a>
-  <ul class="collapse">
-  <li><a href="#using-here-to-load-data" id="toc-using-here-to-load-data" class="nav-link" data-scroll-target="#using-here-to-load-data">Using <code>here()</code> to load data</a></li>
-  <li><a href="#common-functions-to-load-data" id="toc-common-functions-to-load-data" class="nav-link" data-scroll-target="#common-functions-to-load-data">Common functions to load data</a></li>
-  </ul></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a>
-  <ul class="collapse">
-  <li><a href="#dplyr-resources" id="toc-dplyr-resources" class="nav-link" data-scroll-target="#dplyr-resources"><code>dplyr</code> resources</a></li>
-  <li><a href="#r-programming-class-at-ohsu" id="toc-r-programming-class-at-ohsu" class="nav-link" data-scroll-target="#r-programming-class-at-ohsu">R programming class at OHSU!</a></li>
-  <li><a href="#the-larger-tidy-ecosystem" id="toc-the-larger-tidy-ecosystem" class="nav-link" data-scroll-target="#the-larger-tidy-ecosystem">The larger tidy ecosystem</a></li>
-  <li><a href="#credit-to-mine-çetinkaya-rundel" id="toc-credit-to-mine-çetinkaya-rundel" class="nav-link" data-scroll-target="#credit-to-mine-çetinkaya-rundel">Credit to Mine Çetinkaya-Rundel</a></li>
-  </ul></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02_Data_Management.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Lesson 2: Data and File Management</h1>
-<p class="subtitle lead">Adapted from parts of Mine Çetinkaya-Rundel’s tidyverse course</p>
+</div>
 </div>
 
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Nicky Wakim </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 7, 2026</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="need-to-include-slides-on-working-with-and-storing-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="need-to-include-slides-on-working-with-and-storing-datasets">Need to include slides on working with and storing datasets</h2>
-<ul>
-<li>Raw/original</li>
-<li>Processed/cleaned
-<ul>
-<li>cleaned, handled missing values, transformed (pivoted), formatted properly, applying specific variable types from codebook</li>
-</ul></li>
-<li>Feature engineered data
-<ul>
-<li>creating new features or modifying existing ones</li>
-</ul></li>
-</ul>
+  <p class="date">2026-01-07</p>
 </section>
-<section id="what-we-will-cover" class="level1">
-<h1>What we will cover</h1>
+<section>
+<section id="what-we-will-cover-today" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
 <ol type="1">
 <li>Introduction to <code>tidyverse</code></li>
 <li><code>ggplot2</code> revisited</li>
@@ -306,28 +233,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 </div>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/debugging.png" class="img-fluid figure-img" alt="A cartoon of a fuzzy round monster face showing 10 different emotions experienced during the process of debugging code. The progression goes from (1) “I got this” - looking determined and optimistic; (2) “Huh. Really thought that was it.” - looking a bit baffled; (3) “...” - looking up at the ceiling in thought; (4) “Fine. Restarting.” - looking a bit annoyed; (5) “OH WTF.” Looking very frazzled and frustrated; (6) “Zombie meltdown.” - looking like a full meltdown; (7) (blank) - sleeping; (8) “A NEW HOPE!” - a happy looking monster with a lightbulb above; (9) “insert awesome theme song” - looking determined and typing away; (10) “I love coding” - arms raised in victory with a big smile, with confetti falling."></p>
-<figcaption>Artwork by @allison_horst</figcaption>
-</figure>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+
+<img data-src="../img_slides/debugging.png" alt="A cartoon of a fuzzy round monster face showing 10 different emotions experienced during the process of debugging code. The progression goes from (1) “I got this” - looking determined and optimistic; (2) “Huh. Really thought that was it.” - looking a bit baffled; (3) “...” - looking up at the ceiling in thought; (4) “Fine. Restarting.” - looking a bit annoyed; (5) “OH WTF.” Looking very frazzled and frustrated; (6) “Zombie meltdown.” - looking like a full meltdown; (7) (blank) - sleeping; (8) “A NEW HOPE!” - a happy looking monster with a lightbulb above; (9) “insert awesome theme song” - looking determined and typing away; (10) “I love coding” - arms raised in victory with a big smile, with confetti falling." class="r-stretch quarto-figure-center"><p class="caption">Artwork by @allison_horst</p></section>
+</section>
+<section>
+<section id="what-we-will-cover-today-1" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
+<div class="lob">
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+</ol>
 </div>
+<ol start="2" type="1">
+<li><code>ggplot2</code> revisited</li>
+<li>Functions for data management</li>
+<li>Functions for data summarization</li>
+<li>Folder organization</li>
+<li><code>here</code> package and importing data</li>
+</ol>
 </section>
-</section>
-<section id="introduction-to-the-tidyverse" class="level1">
-<h1>Introduction to the <code>tidyverse</code></h1>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1"></h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/spiderverse.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</section>
-<section id="what-is-the-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-the-tidyverse">What is the tidyverse?</h2>
+<section id="section-1" class="slide level2">
+<h2></h2>
+
+<img data-src="../img_slides/spiderverse.jpeg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="what-is-the-tidyverse" class="slide level2">
+<h2>What is the tidyverse?</h2>
 <p>The <strong>tidyverse</strong> is a collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</p>
 <div class="columns">
 <div class="column" style="width:45%;">
@@ -344,18 +277,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div><div class="column" style="width:55%;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/tidyverse.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="669"></p>
+<figure>
+<p><img data-src="../img_slides/tidyverse.png" class="quarto-figure quarto-figure-center" width="669"></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="tidy-data1" class="level2">
-<h2 class="anchored" data-anchor-id="tidy-data1">Tidy data<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<section id="tidy-data1" class="slide level2">
+<h2>Tidy data<sup>1</sup></h2>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/tidy-data-frame.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1500"></p>
+<figure>
+<p><img data-src="../img_slides/tidy-data-frame.png" class="quarto-figure quarto-figure-center" width="1500"></p>
 </figure>
 </div>
 <ol type="1">
@@ -363,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Each observation must have its own row.</p></li>
 <li><p>Each value must have its own cell.</p></li>
 </ol>
-</section>
-<section id="pipe-operator-magrittr" class="level2">
-<h2 class="anchored" data-anchor-id="pipe-operator-magrittr">Pipe operator (<code>magrittr</code>)</h2>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Source: R for Data Science. Grolemund and Wickham.</p></li></ol></aside></section>
+<section id="pipe-operator-magrittr" class="slide level2">
+<h2>Pipe operator (<code>magrittr</code>)</h2>
 <ul>
 <li>The pipe operator (<code>%&gt;%</code>) allows us to step through sequential functions in the same way we follow if-then statements or steps from instructions</li>
 </ul>
@@ -378,22 +310,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="column" style="width:50%;">
 <p><strong>Nested</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">park</span>(<span class="fu">drive</span>(<span class="fu">start_car</span>(<span class="fu">find</span>(<span class="st">"keys"</span>)), </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">"work"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">park</span>(<span class="fu">drive</span>(<span class="fu">start_car</span>(<span class="fu">find</span>(<span class="st">"keys"</span>)), </span>
+<span id="cb1-2"><a></a>           <span class="at">to =</span> <span class="st">"work"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p><strong>Piped</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span>(<span class="st">"keys"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">start_car</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drive</span>(<span class="at">to =</span> <span class="st">"work"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">park</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">find</span>(<span class="st">"keys"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a></a>  <span class="fu">start_car</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a></a>  <span class="fu">drive</span>(<span class="at">to =</span> <span class="st">"work"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a></a>  <span class="fu">park</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="recoding-a-binary-variable-with-pipe-operator" class="level2">
-<h2 class="anchored" data-anchor-id="recoding-a-binary-variable-with-pipe-operator">Recoding a binary variable with pipe operator</h2>
+<section id="recoding-a-binary-variable-with-pipe-operator" class="slide level2">
+<h2>Recoding a binary variable with pipe operator</h2>
 <p>&nbsp;</p>
 <div class="heq">
 <p>Let’s say I want a variable <code>transmission</code> to show the category names that are assigned to numeric values in the code. I want <code>0</code> to be coded as <code>automatic</code> and <code>1</code> to be coded as <code>manual</code>.</p>
@@ -403,33 +334,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="column" style="width:50%;">
 <p>Base R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>transmission <span class="ot">&lt;-</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mtcars<span class="sc">$</span>am <span class="sc">==</span> <span class="dv">0</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"automatic"</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"manual"</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>mtcars<span class="sc">$</span>transmission <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a></a>  <span class="fu">ifelse</span>(</span>
+<span id="cb3-3"><a></a>    mtcars<span class="sc">$</span>am <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb3-4"><a></a>    <span class="st">"automatic"</span>,</span>
+<span id="cb3-5"><a></a>    <span class="st">"manual"</span></span>
+<span id="cb3-6"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Tidyverse:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">transmission =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      am <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"automatic"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      am <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"manual"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a></a>    <span class="at">transmission =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-4"><a></a>      am <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"automatic"</span>,</span>
+<span id="cb4-5"><a></a>      am <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"manual"</span></span>
+<span id="cb4-6"><a></a>    )</span>
+<span id="cb4-7"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>&nbsp;</p>
 <div class="hl">
 <p><code>mutate()</code> creates new columns that are functions of existing variables</p>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="recoding-a-multi-level-variable" class="level2">
-<h2 class="anchored" data-anchor-id="recoding-a-multi-level-variable">Recoding a multi-level variable</h2>
+<section id="reference-recoding-a-multi-level-variable" class="slide level2">
+<h2>Reference: Recoding a multi-level variable</h2>
 <p>&nbsp;</p>
 <div class="heq">
 <p>Let’s say I want a variable <code>gear</code> to show the category names that are assigned to numeric values in the code. I want <code>3</code> to be coded as gear <code>three</code>, <code>4</code> to be coded as gear <code>four</code>, <code>5</code> to be coded as gear <code>five</code>.</p>
@@ -439,42 +369,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="column" style="width:50%;">
 <p>Base R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>gear_char <span class="ot">&lt;-</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    mtcars<span class="sc">$</span>gear <span class="sc">==</span> <span class="dv">3</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"three"</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      mtcars<span class="sc">$</span>gear <span class="sc">==</span> <span class="dv">4</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"four"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"five"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>mtcars<span class="sc">$</span>gear_char <span class="ot">&lt;-</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">ifelse</span>(</span>
+<span id="cb5-3"><a></a>    mtcars<span class="sc">$</span>gear <span class="sc">==</span> <span class="dv">3</span>,</span>
+<span id="cb5-4"><a></a>    <span class="st">"three"</span>,</span>
+<span id="cb5-5"><a></a>    <span class="fu">ifelse</span>(</span>
+<span id="cb5-6"><a></a>      mtcars<span class="sc">$</span>gear <span class="sc">==</span> <span class="dv">4</span>,</span>
+<span id="cb5-7"><a></a>      <span class="st">"four"</span>,</span>
+<span id="cb5-8"><a></a>      <span class="st">"five"</span></span>
+<span id="cb5-9"><a></a>    )</span>
+<span id="cb5-10"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:50%;">
 <p>Tidyverse:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">gear_char =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      gear <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"three"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      gear <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"four"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      gear <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"five"</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>mtcars <span class="ot">&lt;-</span> mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a></a>    <span class="at">gear_char =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-4"><a></a>      gear <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"three"</span>,</span>
+<span id="cb6-5"><a></a>      gear <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"four"</span>,</span>
+<span id="cb6-6"><a></a>      gear <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"five"</span></span>
+<span id="cb6-7"><a></a>    )</span>
+<span id="cb6-8"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div></div>
+</section></section>
+<section>
+<section id="what-we-will-cover-today-2" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+</ol>
+<div class="lob">
+<ol start="2" type="1">
+<li><code>ggplot2</code> revisited</li>
+</ol>
 </div>
-</div>
+<ol start="2" type="1">
+<li>Functions for data management</li>
+<li>Functions for data summarization</li>
+<li>Folder organization</li>
+<li><code>here</code> package and importing data</li>
+</ol>
 </section>
-</section>
-<section id="ggplot2-revisited" class="level1">
-<h1><code>ggplot2</code> revisited</h1>
-<section id="ggplot2-in-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="ggplot2-in-tidyverse"><code>ggplot2</code> in tidyverse</h2>
+<section id="ggplot2-in-tidyverse" class="slide level2">
+<h2><code>ggplot2</code> in tidyverse</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/ggplot2-part-of-tidyverse.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="669"></p>
+<figure>
+<p><img data-src="../img_slides/ggplot2-part-of-tidyverse.png" class="quarto-figure quarto-figure-center" width="669"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
@@ -497,69 +441,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>It is inspired by the book <strong>Grammar of Graphics</strong> by Leland Wilkinson</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
-<section id="tidyverse-visualizing-multiple-variables" class="level2">
-<h2 class="anchored" data-anchor-id="tidyverse-visualizing-multiple-variables">Tidyverse: Visualizing multiple variables</h2>
+<section id="tidyverse-visualizing-multiple-variables" class="slide level2">
+<h2>Tidyverse: Visualizing multiple variables</h2>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  mtcars,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg, <span class="at">color =</span> transmission)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="02_Data_Management_files/figure-revealjs/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">ggplot</span>(</span>
+<span id="cb7-2"><a></a>  mtcars,</span>
+<span id="cb7-3"><a></a>  <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg, <span class="at">color =</span> transmission)) <span class="sc">+</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
 </div>
-</div>
-</div>
+<img data-src="02_Data_Management_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="poll-everywhere-question-1" class="slide level2">
+<h2>Poll Everywhere Question 1</h2>
 </section>
-<section id="tidyverse-visualizing-even-more-variables" class="level2">
-<h2 class="anchored" data-anchor-id="tidyverse-visualizing-even-more-variables">Tidyverse: Visualizing even more variables</h2>
+<section id="tidyverse-visualizing-even-more-variables" class="slide level2">
+<h2>Tidyverse: Visualizing even more variables</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  mtcars,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg, <span class="at">color =</span> transmission)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cyl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="02_Data_Management_files/figure-revealjs/unnamed-chunk-9-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-2"><a></a>  mtcars,</span>
+<span id="cb8-3"><a></a>  <span class="fu">aes</span>(<span class="at">x =</span> disp, <span class="at">y =</span> mpg, <span class="at">color =</span> transmission)) <span class="sc">+</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cyl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
 </div>
-</div>
-</div>
-</section>
-<section id="base-r-visualizing-even-more-variables" class="level2">
-<h2 class="anchored" data-anchor-id="base-r-visualizing-even-more-variables">Base R: Visualizing even more variables</h2>
+<img data-src="02_Data_Management_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%" class="r-stretch"></section>
+<section id="base-r-visualizing-even-more-variables" class="slide level2">
+<h2>Base R: Visualizing even more variables</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>trans_color <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mtcars<span class="sc">$</span>transmission <span class="sc">==</span> <span class="st">"automatic"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mtcars_cyl4 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">4</span>, ]</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mtcars_cyl6 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">6</span>, ]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>mtcars_cyl8 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">8</span>, ]</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>, <span class="dv">0</span>))</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl4, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 4"</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl6, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 6"</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl8, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 8"</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"automatic"</span>, <span class="st">"manual"</span>), <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="02_Data_Management_files/figure-revealjs/unnamed-chunk-10-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>mtcars<span class="sc">$</span>trans_color <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mtcars<span class="sc">$</span>transmission <span class="sc">==</span> <span class="st">"automatic"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>)</span>
+<span id="cb9-2"><a></a>mtcars_cyl4 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">4</span>, ]</span>
+<span id="cb9-3"><a></a>mtcars_cyl6 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">6</span>, ]</span>
+<span id="cb9-4"><a></a>mtcars_cyl8 <span class="ot">=</span> mtcars[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">8</span>, ]</span>
+<span id="cb9-5"><a></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="at">mgp =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>, <span class="dv">0</span>))</span>
+<span id="cb9-6"><a></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl4, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 4"</span>)</span>
+<span id="cb9-7"><a></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl6, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 6"</span>)</span>
+<span id="cb9-8"><a></a><span class="fu">plot</span>(mpg <span class="sc">~</span> disp, <span class="at">data =</span> mtcars_cyl8, <span class="at">col =</span> trans_color, <span class="at">main =</span> <span class="st">"Cyl 8"</span>)</span>
+<span id="cb9-9"><a></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"automatic"</span>, <span class="st">"manual"</span>), <span class="at">pch =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
 </div>
+<img data-src="02_Data_Management_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%" class="r-stretch"></section></section>
+<section>
+<section id="what-we-will-cover-today-3" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+<li><code>ggplot2</code> revisited</li>
+</ol>
+<div class="lob">
+<ol start="3" type="1">
+<li>Functions for data management</li>
+</ol>
 </div>
-</div>
+<ol start="4" type="1">
+<li>Functions for data summarization</li>
+<li>Folder organization</li>
+<li><code>here</code> package and importing data</li>
+</ol>
 </section>
-</section>
-<section id="functions-for-data-management" class="level1">
-<h1>Functions for data management</h1>
-<section id="important-functions-for-data-management" class="level2">
-<h2 class="anchored" data-anchor-id="important-functions-for-data-management">Important functions for data management</h2>
+<section id="important-functions-for-data-management" class="slide level2">
+<h2>Important functions for data management</h2>
 <p>&nbsp;</p>
 <p><strong>Data manipulation</strong></p>
 <ul>
@@ -577,20 +520,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>across()</code></li>
 </ul>
 </section>
-<section id="lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" class="level2">
-<h2 class="anchored" data-anchor-id="lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class">Let’s look back at the <code>dds.discr</code> dataset that I briefly used last class</h2>
+<section id="lets-look-back-at-the-dds.discr-dataset-that-i-briefly-used-last-class" class="slide level2">
+<h2>Let’s look back at the <code>dds.discr</code> dataset that I briefly used last class</h2>
 <p>&nbsp; &nbsp;</p>
 <ul>
 <li>We will load the data (This is a special case! <code>dds.discr</code> is a built-in R dataset)</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"dds.discr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">data</span>(<span class="st">"dds.discr"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Now, let’s take a glimpse at the dataset:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">glimpse</span>(dds.discr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 6
@@ -603,8 +546,11 @@ $ ethnicity    &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, His
 </div>
 </div>
 </section>
-<section id="rename-one-of-the-first-things-i-usually-do" class="level2">
-<h2 class="anchored" data-anchor-id="rename-one-of-the-first-things-i-usually-do"><code>rename()</code>: one of the first things I usually do</h2>
+<section id="poll-everywhere-question-2" class="slide level2">
+<h2>Poll Everywhere Question 2</h2>
+</section>
+<section id="rename-one-of-the-first-things-i-usually-do" class="slide level2">
+<h2><code>rename()</code>: one of the first things I usually do</h2>
 <ul>
 <li><p>I notice that two variables have values that don’t necessarily match the variable name</p>
 <ul>
@@ -613,29 +559,29 @@ $ ethnicity    &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, His
 </ul></li>
 </ul>
 <div class="heq">
-<p>I want to rename gender to SAB (sex assigned at birth) and rename ethnicity to R_E (race and ethnicity)</p>
+<p>I want to rename gender to sex (not sure if assigned at birth?) and rename ethnicity to R_E (race and ethnicity)</p>
 </div>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dds.discr1 <span class="ot">=</span> dds.discr <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">SAB =</span> gender, </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">R_E =</span> ethnicity)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>dds.discr1 <span class="ot">=</span> dds.discr <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a></a>  <span class="fu">rename</span>(<span class="at">sex =</span> gender, </span>
+<span id="cb13-3"><a></a>         <span class="at">R_E =</span> ethnicity)</span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a><span class="fu">glimpse</span>(dds.discr1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 6
 $ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
 $ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
 $ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
-$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ sex          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
 $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
 $ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…</code></pre>
 </div>
 </div>
 </section>
-<section id="mutate-constructing-new-variables-from-what-you-have" class="level2">
-<h2 class="anchored" data-anchor-id="mutate-constructing-new-variables-from-what-you-have"><code>mutate()</code>: constructing new variables from what you have</h2>
+<section id="mutate-constructing-new-variables-from-what-you-have" class="slide level2">
+<h2><code>mutate()</code>: constructing new variables from what you have</h2>
 <ul>
 <li><p>We’ve seen a couple examples for <code>mutate()</code> so far (mostly because its used so often!)</p></li>
 <li><p>We haven’t seen an example where we make a new variable from two variables</p></li>
@@ -645,43 +591,43 @@ $ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, His
 </div>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="ot">=</span> dds.discr1 <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">exp_to_age =</span> expenditures<span class="sc">/</span>age)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>dds.discr2 <span class="ot">=</span> dds.discr1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a></a>  <span class="fu">mutate</span>(<span class="at">exp_to_age =</span> expenditures<span class="sc">/</span>age)</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a><span class="fu">glimpse</span>(dds.discr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 7
 $ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
 $ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
 $ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
-$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ sex          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
 $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
 $ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…
 $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 304.40…</code></pre>
 </div>
 </div>
 </section>
-<section id="mutate-other-examples" class="level2">
-<h2 class="anchored" data-anchor-id="mutate-other-examples"><code>mutate()</code>: other examples</h2>
+<section id="mutate-other-examples" class="slide level2">
+<h2><code>mutate()</code>: other examples</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dds.discr3 <span class="ot">=</span> dds.discr1 <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expend_20perc =</span> expenditures <span class="sc">*</span> <span class="fl">0.2</span>, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">expend_sq =</span> expenditures<span class="sc">^</span><span class="dv">2</span>, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">expend_over_5000 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>           expenditures <span class="sc">&gt;</span> <span class="dv">5000</span> <span class="sc">~</span> <span class="st">"Yes"</span>, </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>           expenditures <span class="sc">&lt;=</span> <span class="dv">5000</span> <span class="sc">~</span> <span class="st">"No"</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         ), </span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">expend_log =</span> <span class="fu">log</span>(expenditures)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>dds.discr3 <span class="ot">=</span> dds.discr1 <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a></a>  <span class="fu">mutate</span>(<span class="at">expend_20perc =</span> expenditures <span class="sc">*</span> <span class="fl">0.2</span>, </span>
+<span id="cb17-3"><a></a>         <span class="at">expend_sq =</span> expenditures<span class="sc">^</span><span class="dv">2</span>, </span>
+<span id="cb17-4"><a></a>         <span class="at">expend_over_5000 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb17-5"><a></a>           expenditures <span class="sc">&gt;</span> <span class="dv">5000</span> <span class="sc">~</span> <span class="st">"Yes"</span>, </span>
+<span id="cb17-6"><a></a>           expenditures <span class="sc">&lt;=</span> <span class="dv">5000</span> <span class="sc">~</span> <span class="st">"No"</span></span>
+<span id="cb17-7"><a></a>         ), </span>
+<span id="cb17-8"><a></a>         <span class="at">expend_log =</span> <span class="fu">log</span>(expenditures)</span>
+<span id="cb17-9"><a></a>  )</span>
+<span id="cb17-10"><a></a><span class="fu">glimpse</span>(dds.discr3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 10
 $ id               &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 1077…
 $ age.cohort       &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17,…
 $ age              &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17…
-$ SAB              &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Mal…
+$ sex              &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Mal…
 $ expenditures     &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021…
 $ R_E              &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, His…
 $ expend_20perc    &lt;dbl&gt; 422.6, 8384.8, 290.8, 1280.0, 882.4, 913.2, 783.0, 77…
@@ -691,8 +637,11 @@ $ expend_log       &lt;dbl&gt; 7.655864, 10.643614, 7.282074, 8.764053, 8.392083
 </div>
 </div>
 </section>
-<section id="filter-keep-rows-that-match-a-condition" class="level2">
-<h2 class="anchored" data-anchor-id="filter-keep-rows-that-match-a-condition"><code>filter()</code>: keep rows that match a condition</h2>
+<section id="poll-everywhere-question-3" class="slide level2">
+<h2>Poll Everywhere Question 3</h2>
+</section>
+<section id="filter-keep-rows-that-match-a-condition" class="slide level2">
+<h2><code>filter()</code>: keep rows that match a condition</h2>
 <ul>
 <li>What if I want to subset the data frame? (keep certain rows of observations)</li>
 </ul>
@@ -701,25 +650,25 @@ $ expend_log       &lt;dbl&gt; 7.655864, 10.643614, 7.282074, 8.764053, 8.392083
 </div>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dds.discr3 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">60</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>dds.discr3 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> age <span class="sc">&lt;=</span> <span class="dv">60</span>)</span>
+<span id="cb19-3"><a></a></span>
+<span id="cb19-4"><a></a><span class="fu">glimpse</span>(dds.discr3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 23
 Columns: 7
 $ id           &lt;int&gt; 15970, 19412, 29506, 31658, 36123, 39287, 39672, 43455, 4…
 $ age.cohort   &lt;fct&gt; 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51+, 51…
 $ age          &lt;int&gt; 51, 60, 56, 60, 59, 59, 54, 57, 52, 57, 55, 52, 59, 54, 5…
-$ SAB          &lt;fct&gt; Female, Female, Female, Female, Male, Female, Female, Mal…
+$ sex          &lt;fct&gt; Female, Female, Female, Female, Male, Female, Female, Mal…
 $ expenditures &lt;int&gt; 54267, 57702, 48215, 46873, 42739, 44734, 52833, 48363, 5…
 $ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, White not Hispani…
 $ exp_to_age   &lt;dbl&gt; 1064.0588, 961.7000, 860.9821, 781.2167, 724.3898, 758.20…</code></pre>
 </div>
 </div>
 </section>
-<section id="select-keep-or-drop-columns-using-their-names-and-types" class="level2">
-<h2 class="anchored" data-anchor-id="select-keep-or-drop-columns-using-their-names-and-types"><code>select()</code>: keep or drop columns using their names and types</h2>
+<section id="select-keep-or-drop-columns-using-their-names-and-types" class="slide level2">
+<h2><code>select()</code>: keep or drop columns using their names and types</h2>
 <ul>
 <li>What if I want to remove or keep certain variables?</li>
 </ul>
@@ -728,10 +677,10 @@ $ exp_to_age   &lt;dbl&gt; 1064.0588, 961.7000, 860.9821, 781.2167, 724.3898, 75
 </div>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dds.discr4 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, expenditures)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>dds.discr4 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a></a>  <span class="fu">select</span>(age, expenditures)</span>
+<span id="cb21-3"><a></a></span>
+<span id="cb21-4"><a></a><span class="fu">glimpse</span>(dds.discr4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 2
@@ -739,20 +688,35 @@ $ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17
 $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…</code></pre>
 </div>
 </div>
+</section></section>
+<section>
+<section id="what-we-will-cover-today-4" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+<li><code>ggplot2</code> revisited</li>
+<li>Functions for data management</li>
+</ol>
+<div class="lob">
+<ol start="4" type="1">
+<li>Functions for data summarization</li>
+</ol>
+</div>
+<ol start="5" type="1">
+<li>Folder organization</li>
+<li><code>here</code> package and importing data</li>
+</ol>
 </section>
-</section>
-<section id="summarizing-data" class="level1">
-<h1>Summarizing Data</h1>
-<section id="tbl_summary-table-summary-12" class="level2">
-<h2 class="anchored" data-anchor-id="tbl_summary-table-summary-12"><code>tbl_summary()</code> : table summary (1/2)</h2>
+<section id="tbl_summary-table-summary-12" class="slide level2">
+<h2><code>tbl_summary()</code> : table summary (1/2)</h2>
 <ul>
 <li>What if I want one of those fancy summary tables that are at the top of most research articles? (lovingly called “Table 1”)</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_summary</span>(dds.discr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb23-2"><a></a><span class="fu">tbl_summary</span>(dds.discr2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -1207,7 +1171,7 @@ $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -1257,7 +1221,7 @@ $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021
 <td class="gt_row gt_center" headers="stat_0">18 (12, 26)</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">SAB</td>
+<td class="gt_row gt_left" headers="label">sex</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
@@ -1325,28 +1289,29 @@ $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="tbl_summary-table-summary-22" class="level2">
-<h2 class="anchored" data-anchor-id="tbl_summary-table-summary-22"><code>tbl_summary()</code> : table summary (2/2)</h2>
+<section id="tbl_summary-table-summary-22" class="slide level2">
+<h2><code>tbl_summary()</code> : table summary (2/2)</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
 <ul>
 <li>Let’s make this more presentable</li>
+<li>Will need to do this on one of your labs!!</li>
 </ul>
 <p>&nbsp;</p>
-<div class="columns">
-<div class="column" style="width:70%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>id, <span class="sc">-</span>age.cohort, <span class="sc">-</span>exp_to_age) <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">c</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                        R_E <span class="sc">~</span> <span class="st">"Race/Ethnicity"</span>, </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                        SAB <span class="sc">~</span> <span class="st">"Sex Assigned at Birth"</span>, </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                        expenditures <span class="sc">~</span> <span class="st">"Expenditures"</span>) ,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"{mean} ({sd})"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>id, <span class="sc">-</span>age.cohort, <span class="sc">-</span>exp_to_age) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a></a>  <span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">c</span>(age <span class="sc">~</span> <span class="st">"Age"</span>, </span>
+<span id="cb24-4"><a></a>                        R_E <span class="sc">~</span> <span class="st">"Race/Ethnicity"</span>, </span>
+<span id="cb24-5"><a></a>                        sex <span class="sc">~</span> <span class="st">"Sex"</span>, </span>
+<span id="cb24-6"><a></a>                        expenditures <span class="sc">~</span> <span class="st">"Expenditures"</span>) ,</span>
+<span id="cb24-7"><a></a>              <span class="at">statistic =</span> </span>
+<span id="cb24-8"><a></a>                <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"{mean} ({sd})"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div><div class="column" style="width:30%;">
-<div class="cell">
+</div><div class="column" style="width:35%;">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="cipcvyjwvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#cipcvyjwvx table {
@@ -1798,7 +1763,7 @@ $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021
 }
 </style>
 
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -1815,7 +1780,7 @@ $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021
 <td class="gt_row gt_center" headers="stat_0">23 (18)</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">Sex Assigned at Birth</td>
+<td class="gt_row gt_left" headers="label">Sex</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
 </tr>
@@ -1879,31 +1844,30 @@ $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="group_by-group-by-one-or-more-variables" class="level2">
-<h2 class="anchored" data-anchor-id="group_by-group-by-one-or-more-variables"><code>group_by()</code>: group by one or more variables</h2>
+<section id="group_by-group-by-one-or-more-variables" class="slide level2">
+<h2><code>group_by()</code>: group by one or more variables</h2>
 <ul>
 <li>What if I want to quickly look at group differences?</li>
 <li>It will not change how the data look, but changes the actions of following functions</li>
 </ul>
 <div class="heq">
-<p>I want to group my data by sex assigned at birth.</p>
+<p>I want to group my data by sex.</p>
 </div>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dds.discr5 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SAB)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>dds.discr5 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a></a>  <span class="fu">group_by</span>(sex)</span>
+<span id="cb25-3"><a></a><span class="fu">glimpse</span>(dds.discr5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 7
-Groups: SAB [2]
+Groups: sex [2]
 $ id           &lt;int&gt; 10210, 10409, 10486, 10538, 10568, 10690, 10711, 10778, 1…
 $ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
 $ age          &lt;int&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
-$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ sex          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
 $ expenditures &lt;int&gt; 2113, 41924, 1454, 6400, 4412, 4566, 3915, 3873, 5021, 28…
 $ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…
 $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 304.40…</code></pre>
@@ -1913,8 +1877,8 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <li>Let’s see how the groups change something like the <code>summarize()</code> function in the next slide</li>
 </ul>
 </section>
-<section id="summarize-summarize-your-data-or-grouped-data-into-one-row" class="level2">
-<h2 class="anchored" data-anchor-id="summarize-summarize-your-data-or-grouped-data-into-one-row"><code>summarize()</code>: summarize your data or grouped data into one row</h2>
+<section id="summarize-summarize-your-data-or-grouped-data-into-one-row" class="slide level2">
+<h2><code>summarize()</code>: summarize your data or grouped data into one row</h2>
 <ul>
 <li>What if I want to calculate specific descriptive statistics for my variables?</li>
 <li>This function is often best used with <code>group_by()</code></li>
@@ -1926,11 +1890,11 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <div class="column">
 <p>Over whole sample:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="sc">%&gt;%</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ave =</span> <span class="fu">mean</span>(expenditures),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(expenditures),</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">med =</span> <span class="fu">median</span>(expenditures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>dds.discr2 <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb27-3"><a></a>    <span class="at">ave =</span> <span class="fu">mean</span>(expenditures),</span>
+<span id="cb27-4"><a></a>    <span class="at">SD =</span> <span class="fu">sd</span>(expenditures),</span>
+<span id="cb27-5"><a></a>    <span class="at">med =</span> <span class="fu">median</span>(expenditures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
      ave     SD   med
@@ -1939,27 +1903,26 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </div>
 </div>
 </div><div class="column">
-<p>Grouped by sex assigned at birth:</p>
+<p>Grouped by sex:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dds.discr2 <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SAB) <span class="sc">%&gt;%</span> </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">ave =</span> <span class="fu">mean</span>(expenditures),</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(expenditures),</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">med =</span> <span class="fu">median</span>(expenditures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>dds.discr2 <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb29-4"><a></a>    <span class="at">ave =</span> <span class="fu">mean</span>(expenditures),</span>
+<span id="cb29-5"><a></a>    <span class="at">SD =</span> <span class="fu">sd</span>(expenditures),</span>
+<span id="cb29-6"><a></a>    <span class="at">med =</span> <span class="fu">median</span>(expenditures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
-  SAB       ave     SD   med
+  sex       ave     SD   med
   &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
 1 Female 18130. 20020.  6400
 2 Male   18001. 19068.  7219</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="across-apply-a-function-across-multiple-columns" class="level2">
-<h2 class="anchored" data-anchor-id="across-apply-a-function-across-multiple-columns"><code>across()</code>: apply a function across multiple columns</h2>
+<section id="across-apply-a-function-across-multiple-columns" class="slide level2">
+<h2><code>across()</code>: apply a function across multiple columns</h2>
 <ul>
 <li>Like <code>group_by()</code>, this function is often paired with another transformation function</li>
 </ul>
@@ -1968,28 +1931,46 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </div>
 <p>&nbsp;</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>dds.discr6 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.integer), signif, <span class="at">digits =</span> <span class="dv">2</span>))</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dds.discr6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>dds.discr6 <span class="ot">=</span> dds.discr2 <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.integer), signif, <span class="at">digits =</span> <span class="dv">2</span>))</span>
+<span id="cb31-3"><a></a></span>
+<span id="cb31-4"><a></a><span class="fu">glimpse</span>(dds.discr6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 1,000
 Columns: 7
 $ id           &lt;dbl&gt; 10000, 10000, 10000, 11000, 11000, 11000, 11000, 11000, 1…
 $ age.cohort   &lt;fct&gt; 13-17, 22-50, 0-5, 18-21, 13-17, 13-17, 13-17, 13-17, 13-…
 $ age          &lt;dbl&gt; 17, 37, 3, 19, 13, 15, 13, 17, 14, 13, 13, 14, 15, 17, 20…
-$ SAB          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
+$ sex          &lt;fct&gt; Female, Male, Male, Female, Male, Female, Female, Male, F…
 $ expenditures &lt;dbl&gt; 2100, 42000, 1500, 6400, 4400, 4600, 3900, 3900, 5000, 29…
 $ R_E          &lt;fct&gt; White not Hispanic, White not Hispanic, Hispanic, Hispani…
 $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 304.40…</code></pre>
 </div>
 </div>
 </section>
+<section id="poll-everywhere-question-4" class="slide level2">
+<h2>Poll Everywhere Question 4</h2>
+</section></section>
+<section>
+<section id="what-we-will-cover-today-5" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+<li><code>ggplot2</code> revisited</li>
+<li>Functions for data management</li>
+<li>Functions for data summarization</li>
+</ol>
+<div class="lob">
+<ol start="5" type="1">
+<li>Folder organization</li>
+</ol>
+</div>
+<ol start="6" type="1">
+<li><code>here</code> package and importing data</li>
+</ol>
 </section>
-<section id="folder-organization" class="level1">
-<h1>Folder organization</h1>
-<section id="folder-organization-1" class="level2">
-<h2 class="anchored" data-anchor-id="folder-organization-1">Folder organization</h2>
+<section id="folder-organization" class="slide level2">
+<h2>Folder organization</h2>
 <ul>
 <li><p>Make a folder for our class!</p>
 <ul>
@@ -2025,11 +2006,10 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <li>And other folders if you want</li>
 </ul></li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
-<section id="aside-folder-and-file-naming" class="level2">
-<h2 class="anchored" data-anchor-id="aside-folder-and-file-naming">Aside: folder and file naming</h2>
+<section id="aside-folder-and-file-naming" class="slide level2">
+<h2>Aside: folder and file naming</h2>
 <p>There are a few good practices for naming files and folders for easy tracking:</p>
 <ol type="1">
 <li>Keep the name short and relevant</li>
@@ -2045,8 +2025,8 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </ul></li>
 </ol>
 </section>
-<section id="creating-project-in-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="creating-project-in-rstudio">Creating project in RStudio</h2>
+<section id="creating-project-in-rstudio" class="slide level2">
+<h2>Creating project in RStudio</h2>
 <ul>
 <li><p>Way to designate a working directory: basically your home base when working in R</p>
 <ul>
@@ -2066,15 +2046,15 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <li><p>Only make one project for now!!</p></li>
 </ul>
 </section>
-<section id="the-nice-thing-about-r-projects" class="level2">
-<h2 class="anchored" data-anchor-id="the-nice-thing-about-r-projects">The nice thing about R projects</h2>
+<section id="the-nice-thing-about-r-projects" class="slide level2">
+<h2>The nice thing about R projects</h2>
 <ul>
 <li>5 minute video explaining some of the nice features of R projects</li>
 </ul>
 <p><a href="https://rfortherestofus.com/2022/10/rstudio-projects" class="uri">https://rfortherestofus.com/2022/10/rstudio-projects</a></p>
 </section>
-<section id="reproducibility" class="level2">
-<h2 class="anchored" data-anchor-id="reproducibility">Reproducibility</h2>
+<section id="reproducibility" class="slide level2">
+<h2>Reproducibility</h2>
 <ul>
 <li><p>Research data and code can reach the same results regardless of who is running the code</p>
 <ul>
@@ -2089,21 +2069,29 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <ul>
 <li>Projects work well in combination with the <code>here</code> package</li>
 </ul>
-</section>
-</section>
-<section id="here-package-and-importing-data" class="level1">
-<h1><code>here</code> package and importing data</h1>
-<section id="here-package" class="level2">
-<h2 class="anchored" data-anchor-id="here-package"><code>here</code> package</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/here_pkg.png" class="img-fluid figure-img"></p>
-<figcaption>Illustration by <a href="https://github.com/allisonhorst">Allison Horst</a></figcaption>
-</figure>
+</section></section>
+<section>
+<section id="what-we-will-cover-today-6" class="title-slide slide level1 center">
+<h1>What we will cover today</h1>
+<ol type="1">
+<li>Introduction to <code>tidyverse</code></li>
+<li><code>ggplot2</code> revisited</li>
+<li>Functions for data management</li>
+<li>Functions for data summarization</li>
+<li>Folder organization</li>
+</ol>
+<div class="lob">
+<ol start="6" type="1">
+<li><code>here</code> package and importing data</li>
+</ol>
 </div>
 </section>
-<section id="here-package-1" class="level2">
-<h2 class="anchored" data-anchor-id="here-package-1"><code>here</code> package</h2>
+<section id="here-package" class="slide level2">
+<h2><code>here</code> package</h2>
+
+<img data-src="../img_slides/here_pkg.png" class="r-stretch quarto-figure-center"><p class="caption">Illustration by <a href="https://github.com/allisonhorst">Allison Horst</a></p></section>
+<section id="here-package-1" class="slide level2">
+<h2><code>here</code> package</h2>
 <div class="columns">
 <div class="column">
 <ul>
@@ -2127,15 +2115,17 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </ul>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../img_slides/paths.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<figure>
+<p><img data-src="../img_slides/paths.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
-<section id="using-here-package" class="level2">
-<h2 class="anchored" data-anchor-id="using-here-package">Using <code>here</code> package</h2>
+<section id="poll-everywhere-question-5" class="slide level2">
+<h2>Poll Everywhere Question 5</h2>
+</section>
+<section id="using-here-package" class="slide level2">
+<h2>Using <code>here</code> package</h2>
 <ul>
 <li><p>Within your console, type <code>here()</code> and enter</p>
 <ul>
@@ -2143,12 +2133,12 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </ul></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">here</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">library</span>(here)</span>
+<span id="cb33-2"><a></a><span class="fu">here</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/wakim/Library/CloudStorage/OneDrive-OregonHealth&amp;ScienceUniversity/Teaching/Classes/BSTA_512_26W/BSTA_512_26W_site"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/wakim/Library/CloudStorage/OneDrive-OregonHealth&amp;ScienceUniversity/Teaching/Classes/BSTA_512_26W/BSTA_512_26W_site"</code></pre>
 </div>
@@ -2163,24 +2153,21 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </ul></li>
 </ul>
 </section>
-</section>
-<section id="importing-data" class="level1">
-<h1>Importing data</h1>
-<section id="using-here-to-load-data" class="level2">
-<h2 class="anchored" data-anchor-id="using-here-to-load-data">Using <code>here()</code> to load data</h2>
+<section id="using-here-to-load-data" class="slide level2">
+<h2>Using <code>here()</code> to load data</h2>
 <ul>
 <li><p>The <code>here()</code> function will start at the working directory (where your <code>.Rproj</code> file is) and let you write out a file path for anything</p></li>
 <li><p>To load the dataset in our <code>.qmd</code> file, we will use:</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"./data/BodyTemperatures.xlsx"</span>))</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"BodyTemperatures.xlsx"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">library</span>(readxl)</span>
+<span id="cb37-2"><a></a>data <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"./data/BodyTemperatures.xlsx"</span>))</span>
+<span id="cb37-3"><a></a>data <span class="ot">=</span> <span class="fu">read_excel</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"BodyTemperatures.xlsx"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="common-functions-to-load-data" class="level2">
-<h2 class="anchored" data-anchor-id="common-functions-to-load-data">Common functions to load data</h2>
-<table class="caption-top table">
+<section id="common-functions-to-load-data" class="slide level2">
+<h2>Common functions to load data</h2>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Function</th>
@@ -2211,12 +2198,14 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </tr>
 </tbody>
 </table>
-</section>
-</section>
-<section id="resources" class="level1">
+</section></section>
+<section>
+<section id="resources" class="title-slide slide level1 center">
 <h1>Resources</h1>
-<section id="dplyr-resources" class="level2">
-<h2 class="anchored" data-anchor-id="dplyr-resources"><code>dplyr</code> resources</h2>
+
+</section>
+<section id="dplyr-resources" class="slide level2">
+<h2><code>dplyr</code> resources</h2>
 <ul>
 <li><a href="https://dplyr.tidyverse.org/reference/index.html">More <code>dpylr</code> functions to reference!</a></li>
 </ul>
@@ -2232,12 +2221,12 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <li><a href="https://www.tidyverse.org/blog/2020/04/dplyr-1-0-0-rowwise/">working within rows</a></li>
 </ul>
 </section>
-<section id="r-programming-class-at-ohsu" class="level2">
-<h2 class="anchored" data-anchor-id="r-programming-class-at-ohsu">R programming class at OHSU!</h2>
+<section id="r-programming-class-at-ohsu" class="slide level2">
+<h2>R programming class at OHSU!</h2>
 <p>You can check out <a href="https://sph-r-programming-2022.netlify.app/">Dr.&nbsp;Jessica Minnier’s R class page</a> if you want more notes, videos, etc.</p>
 </section>
-<section id="the-larger-tidy-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="the-larger-tidy-ecosystem">The larger tidy ecosystem</h2>
+<section id="the-larger-tidy-ecosystem" class="slide level2">
+<h2>The larger tidy ecosystem</h2>
 <p>Just to name a few…</p>
 <ul>
 <li><p><a href="https://garthtarr.github.io/meatR/janitor.html">janitor</a></p></li>
@@ -2247,8 +2236,8 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 <li><p><a href="https://mjskay.github.io/tidybayes/">tidybayes</a></p></li>
 </ul>
 </section>
-<section id="credit-to-mine-çetinkaya-rundel" class="level2">
-<h2 class="anchored" data-anchor-id="credit-to-mine-çetinkaya-rundel">Credit to Mine Çetinkaya-Rundel</h2>
+<section id="credit-to-mine-çetinkaya-rundel" class="slide level2">
+<h2>Credit to Mine Çetinkaya-Rundel</h2>
 <ul>
 <li><p>These notes were built from Mine’s notes</p>
 <ul>
@@ -2259,457 +2248,431 @@ $ exp_to_age   &lt;dbl&gt; 124.2941, 1133.0811, 484.6667, 336.8421, 339.3846, 30
 </ul>
 
 
-</section>
-</section>
+</section></section>
 
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>Lesson 2: Data Management</p>
+</div>
+</div></div>
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
 
-<ol>
-<li id="fn1"><p>Source: R for Data Science. Grolemund and Wickham.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
-<script>
-  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-  // slide changes (different for each slide format).
-  (function () {
-    // dispatch for htmlwidgets
-    function fireSlideEnter() {
-      const event = window.document.createEvent("Event");
-      event.initEvent("slideenter", true, true);
-      window.document.dispatchEvent(event);
-    }
+  <script>
 
-    function fireSlideChanged(previousSlide, currentSlide) {
-      fireSlideEnter();
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
 
-      // dispatch for shiny
-      if (window.jQuery) {
-        if (previousSlide) {
-          window.jQuery(previousSlide).trigger("hidden");
-        }
-        if (currentSlide) {
-          window.jQuery(currentSlide).trigger("shown");
-        }
-      }
-    }
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
 
-    // hookup for slidy
-    if (window.w3c_slidy) {
-      window.w3c_slidy.add_observer(function (slide_num) {
-        // slide_num starts at position 1
-        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-      });
-    }
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
 
-  })();
-</script>
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
 
-<script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
-    }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
-    }
-    const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
-    });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
-    }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
-        }
-      }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1955,
+
+        height: 1100,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
         },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
-    }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
       });
-    }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
         }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
             }
           }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          return note.innerHTML;
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
         }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      }
-    }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
         }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
             }
           } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
             });
           }
-        } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
-            if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
         }
-      }, function(instance) {
       });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
-      } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
-        });
-      }
-    }
-  });
-  </script>
-</div> <!-- /content -->
-
-
-
+      </script>
+    
 
 </body></html>

@@ -46,17 +46,10 @@ library(scales)
 library(openintro)
 library(jsonlite)
 library(here)
+library(gt)
 ```
 
-## Need to include slides on working with and storing datasets
-
-- Raw/original
-- Processed/cleaned
-  - cleaned, handled missing values, transformed (pivoted), formatted properly, applying specific variable types from codebook
-- Feature engineered data
-  - creating new features or modifying existing ones
-
-# What we will cover
+# What we will cover today
 
 1. Introduction to `tidyverse`
 2. `ggplot2` revisited
@@ -79,7 +72,25 @@ library(here)
 
 ![Artwork by \@allison_horst](../img_slides/debugging.png){fig-alt="A cartoon of a fuzzy round monster face showing 10 different emotions experienced during the process of debugging code. The progression goes from (1) “I got this” - looking determined and optimistic; (2) “Huh. Really thought that was it.” - looking a bit baffled; (3) “...” - looking up at the ceiling in thought; (4) “Fine. Restarting.” - looking a bit annoyed; (5) “OH WTF.” Looking very frazzled and frustrated; (6) “Zombie meltdown.” - looking like a full meltdown; (7) (blank) - sleeping; (8) “A NEW HOPE!” - a happy looking monster with a lightbulb above; (9) “insert awesome theme song” - looking determined and typing away; (10) “I love coding” - arms raised in victory with a big smile, with confetti falling."}
 
-# Introduction to the `tidyverse`
+## Need to include slides on working with and storing datasets {visibility="hidden"}
+
+- Raw/original
+- Processed/cleaned
+  - cleaned, handled missing values, transformed (pivoted), formatted properly, applying specific variable types from codebook
+- Feature engineered data
+  - creating new features or modifying existing ones
+
+# What we will cover today
+
+::: lob
+1. Introduction to `tidyverse`
+:::
+
+2. `ggplot2` revisited
+2. Functions for data management
+3. Functions for data summarization
+4. Folder organization
+5. `here` package and importing data
 
 ## 
 
@@ -199,7 +210,7 @@ mtcars <- mtcars %>%
 :::
 :::
 
-## Recoding a multi-level variable
+## Reference: Recoding a multi-level variable
 
  
 
@@ -243,7 +254,18 @@ mtcars <- mtcars %>%
 :::
 :::
 
-# `ggplot2` revisited
+# What we will cover today
+
+1. Introduction to `tidyverse`
+
+::: lob
+2. `ggplot2` revisited
+:::
+
+2. Functions for data management
+3. Functions for data summarization
+4. Folder organization
+5. `here` package and importing data
 
 ## `ggplot2` in tidyverse
 
@@ -284,6 +306,8 @@ ggplot(
   geom_point()
 ```
 
+## Poll Everywhere Question 1
+
 ## Tidyverse: Visualizing even more variables
 
 ```{r out.width = "100%", fig.asp = 0.3, fig.width = 8}
@@ -308,7 +332,18 @@ plot(mpg ~ disp, data = mtcars_cyl8, col = trans_color, main = "Cyl 8")
 legend("topright", legend = c("automatic", "manual"), pch = 1, col = c("green", "blue"))
 ```
 
-# Functions for data management
+# What we will cover today
+
+1. Introduction to `tidyverse`
+2. `ggplot2` revisited
+
+::: lob
+3. Functions for data management
+::: 
+
+4. Functions for data summarization
+5. Folder organization
+6. `here` package and importing data
 
 ## Important functions for data management
 
@@ -349,6 +384,9 @@ data("dds.discr")
 glimpse(dds.discr)
 ```
 
+## Poll Everywhere Question 2
+
+
 ## `rename()`: one of the first things I usually do
 
 -   I notice that two variables have values that don't necessarily match the variable name
@@ -358,14 +396,14 @@ glimpse(dds.discr)
     -   "White not Hispanic" combines race and ethnicity into one category
 
 ::: heq
-I want to rename gender to SAB (sex assigned at birth) and rename ethnicity to R_E (race and ethnicity)
+I want to rename gender to sex (not sure if assigned at birth?) and rename ethnicity to R_E (race and ethnicity)
 :::
 
  
 
 ```{r}
 dds.discr1 = dds.discr %>% 
-  rename(SAB = gender, 
+  rename(sex = gender, 
          R_E = ethnicity)
 
 glimpse(dds.discr1)
@@ -405,6 +443,8 @@ dds.discr3 = dds.discr1 %>%
 glimpse(dds.discr3)
 ```
 
+## Poll Everywhere Question 3
+
 ## `filter()`: keep rows that match a condition
 
 -   What if I want to subset the data frame? (keep certain rows of observations)
@@ -439,7 +479,18 @@ dds.discr4 = dds.discr2 %>%
 glimpse(dds.discr4)
 ```
 
-# Summarizing Data
+# What we will cover today
+
+1. Introduction to `tidyverse`
+2. `ggplot2` revisited
+3. Functions for data management
+
+::: lob
+4. Functions for data summarization
+:::
+
+5. Folder organization
+6. `here` package and importing data
 
 ## `tbl_summary()` : table summary (1/2)
 
@@ -467,12 +518,13 @@ tbl_summary(dds.discr2)
 
 ## `tbl_summary()` : table summary (2/2)
 
+::: columns
+::: {.column width="65%"}
 -   Let's make this more presentable
+- Will need to do this on one of your labs!!
 
  
 
-::: columns
-::: {.column width="70%"}
 ```{r}
 #| eval: false
 
@@ -480,23 +532,27 @@ dds.discr2 %>%
   select(-id, -age.cohort, -exp_to_age) %>%
   tbl_summary(label = c(age ~ "Age", 
                         R_E ~ "Race/Ethnicity", 
-                        SAB ~ "Sex Assigned at Birth", 
+                        sex ~ "Sex", 
                         expenditures ~ "Expenditures") ,
-              statistic = list(all_continuous() ~ "{mean} ({sd})"))
+              statistic = 
+                list(all_continuous() ~ "{mean} ({sd})"))
 ```
+
 :::
 
-::: {.column width="30%"}
+::: {.column width="35%"}
 ```{r}
 #| echo: false
+#| fig-align: center
 
 dds.discr2 %>%
   select(-id, -age.cohort, -exp_to_age) %>%
   tbl_summary(label = c(age ~ "Age", 
                         R_E ~ "Race/Ethnicity", 
-                        SAB ~ "Sex Assigned at Birth", 
+                        sex ~ "Sex", 
                         expenditures ~ "Expenditures") ,
-              statistic = list(all_continuous() ~ "{mean} ({sd})"))
+              statistic = 
+                list(all_continuous() ~ "{mean} ({sd})"))
 ```
 :::
 :::
@@ -507,14 +563,14 @@ dds.discr2 %>%
 -   It will not change how the data look, but changes the actions of following functions
 
 ::: heq
-I want to group my data by sex assigned at birth.
+I want to group my data by sex.
 :::
 
  
 
 ```{r}
 dds.discr5 = dds.discr2 %>%
-  group_by(SAB)
+  group_by(sex)
 glimpse(dds.discr5)
 ```
 
@@ -543,11 +599,11 @@ dds.discr2 %>%
 :::
 
 ::: column
-Grouped by sex assigned at birth:
+Grouped by sex:
 
 ```{r}
 dds.discr2 %>% 
-  group_by(SAB) %>% 
+  group_by(sex) %>% 
   summarize(
     ave = mean(expenditures),
     SD = sd(expenditures),
@@ -573,7 +629,20 @@ dds.discr6 = dds.discr2 %>%
 glimpse(dds.discr6)
 ```
 
-# Folder organization
+## Poll Everywhere Question 4
+
+# What we will cover today
+
+1. Introduction to `tidyverse`
+2. `ggplot2` revisited
+3. Functions for data management
+4. Functions for data summarization
+
+::: lob
+5. Folder organization
+:::
+
+6. `here` package and importing data
 
 ## Folder organization
 
@@ -661,7 +730,17 @@ There are a few good practices for naming files and folders for easy tracking:
 
 - Projects work well in combination with the `here` package
 
-# `here` package and importing data
+# What we will cover today
+
+1. Introduction to `tidyverse`
+2. `ggplot2` revisited
+3. Functions for data management
+4. Functions for data summarization
+5. Folder organization
+
+::: lob
+6. `here` package and importing data
+:::
 
 ## `here` package
 
@@ -695,6 +774,8 @@ There are a few good practices for naming files and folders for easy tracking:
 :::
 :::::
 
+## Poll Everywhere Question 5
+
 ## Using `here` package
 
 -   Within your console, type `here()` and enter
@@ -713,8 +794,6 @@ getwd()
     -   Importing data
     -   Saving output
     -   Accessing files
-
-# Importing data
 
 ## Using `here()` to load data
 
@@ -738,7 +817,6 @@ data = read_excel(here("data", "BodyTemperatures.xlsx"))
 | `read.csv()`   | `.csv`          | Built in       |
 | `load()`       | `.Rdata`        | Built in       |
 | `read_sas()`   | `.sas7bdat`     | `haven`        |
-
 
 # Resources
 
