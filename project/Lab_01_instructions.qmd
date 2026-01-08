@@ -13,7 +13,7 @@ format:
 ---
 
 ::: callout-caution
-**Still updating lab!!! Likely to be done end of day 1/7**
+Ready to go!
 :::
 
 ## Directions
