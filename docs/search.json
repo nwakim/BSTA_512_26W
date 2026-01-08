@@ -5528,5 +5528,26 @@
     "title": "Lab 1 Rubric",
     "section": "Lab 1 Rubric",
     "text": "Lab 1 Rubric\n\n\n\n\n\n\n\n\n\n\nLab activity\n3 points\n2 points\n1 point\n0 points\n\n\n\n\nReading and listening activities\nThoroughly answers all three questions about the article with well-supported reasoning.\nAnswers all questions but lacks depth in the theoretical or measure discussion.\nAnswers some questions with minimal explanation.\nAnswers are unclear or missing.\n\n\nFamiliarizing ourselves with the Implicit Association Test (IAT)\nProvides 5-10 thoughtful bullet points on study design/validity based on the Project Implicit site.\nProvides fewer than 5 bullet points or lacks critical reflection.\nPoints are vague or do not address study design/validity.\nTask not attempted.\n\n\nChoose one of two research questions\nClearly states the chosen research question and subquestion (or pre-approved alternative).\nResearch question is stated but missing the subquestion.\nResearch question is vague or does not match provided options.\nSelection is missing.\n\n\nOrganize your “Project” folder\nCorrectly displays working directory using here() and provides evidence of .Rproj setup.\nMinor issues with here() usage or directory display.\nProject structure is disorganized or here() is used incorrectly.\nNo evidence of organization or reproducible paths.\n\n\nLoad data and needed packages\nSuccessfully reads .sav, saves as .rda, loads .rda, and provides glimpse with correct dimensions.\nCompletes loading process but fails to provide glimpse or correct dimensions.\nMajor issues in the .sav to .rda conversion process.\nData not loaded or incorrect format.\n\n\nCheck data with codebook\nCorrectly verifies all 5 variables (raceombmulti, etc.) and includes the code used for confirmation.\nVerifies variables but fails to include code for one or more.\nChecks fewer than 3 variables or provides no code output.\nDid not perform the codebook check.\n\n\nData wrangling\nCorrectly filters for US, calculates age using lubridate, and selects the 10 required variables with rationales.\nMost wrangling is correct, but minor errors in age calculation or rationales are missing.\nMajor errors in filtering or age construction; incorrect variable count.\nWrangling not attempted or result is unusable.\n\n\nCompile above work into an introduction\n3-5 well-structured bullets covering anti-fat bias, IAT, and the chosen research question context.\nCovers key points but lacks clarity or specific context for the RQ.\nBullets are too brief or missing key introduction elements.\nIntroduction is missing."
+  },
+  {
+    "objectID": "hw_answers/HW_01_ans.html",
+    "href": "hw_answers/HW_01_ans.html",
+    "title": "Homework 1 Answers",
+    "section": "",
+    "text": "Answers are not necessarily complete! This is just meant to serve as a check if you are stuck."
+  },
+  {
+    "objectID": "hw_answers/HW_01_ans.html#directions",
+    "href": "hw_answers/HW_01_ans.html#directions",
+    "title": "Homework 1 Answers",
+    "section": "Directions",
+    "text": "Directions\nThis document provides the solutions (final answers) for Homework 1. You may use this to double-check your final numbers and conclusions. This document does not contain the code or derivations required to arrive at the answer."
+  },
+  {
+    "objectID": "hw_answers/HW_01_ans.html#questions",
+    "href": "hw_answers/HW_01_ans.html#questions",
+    "title": "Homework 1 Answers",
+    "section": "Questions",
+    "text": "Questions\nThe following questions were adapted from this textbook.\n\nQuestion 1\n\nPart a\n\nAnswer: 0.6306\n\n\n\nPart b\n\nAnswer: 11.689\n\n\n\n\nQuestion 2\n\nPart a\n\nAnswer:\n\n\n\nPart b\n\nAnswer: .\n\n\n\nPart c\n\nAnswer: (69.49, 70.51)\n\n\n\n\nQuestion 3\n\nAnswer: fail to reject\n\n\n\nQuestion 4\n\nAnswer:\n\n\n\nQuestion 5\n\nAnswer: Any function from dplyr not discussed in class (e.g., arrange, slice, distinct, sample_n) is acceptable.\n\n\n\nQuestion 6\n\nPart a\n\nAnswer:\n\n\n[1] \"AGE\"      \"DRYWGT\"   \"LOGDRYWG\"\n\n\n\n\n\n\n\n\n\n\n\n\nPart b\n\nAnswer:\n\n\n\nPart c\n\nAnswer:\n\n\\(\\widehat{\\text{Dry weight}} = -1.885 + 0.235 \\cdot Age\\)\n\\(\\widehat{\\log_{10}(\\text{Dry weight})} = -2.689 + 0.196 \\cdot Age\\)\n\nOR\n\n\\(\\widehat{Y} = -1.885 + 0.235 \\cdot X\\)\n\\(\\widehat{Z} = -2.689 + 0.196 \\cdot X\\)\n\n\n\n\nPart d\n\nAnswer:\n\n\n\nPart e\n\nAnswer:\n\nSlope: 0.196 (95% CI: 0.185, 0.207)\nIntercept: -2.689 (95% CI: -2.809, -2.569)\n\n\n\n\nPart f\n\nAnswer:\n\nLog-scale: -1.122\n\n\n\n\n\nQuestion 7\n\nPart a\n\nAnswer: weights\n\n\n\nPart b\n\nAnswer:\n\n\n\nPart c\n\nAnswer: No\n\n\n\n\nQuestion 8\n\nAnswer:"
   }
 ]

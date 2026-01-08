@@ -1,0 +1,17 @@
+{
+  "hash": "1fa7a02c349322240f3f494b3a59a090",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Homework 1 Answers\"\nsubtitle: \"BSTA 512/612\"\ndate-modified: \"today\"\nformat: \n  html:\n    link-external-newwindow: true\n    toc: true\n    embed-resources: true\neditor_options: \n  chunk_output_type: console\n---\n\nAnswers are not necessarily complete! This is just meant to serve as a check if you are stuck. \n\n```{=html}\n<style>\ndiv.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}\n</style>\n\n```\n\n\n\n## Directions\n\nThis document provides the solutions (final answers) for Homework 1. You may use this to double-check your final numbers and conclusions. This document does not contain the code or derivations required to arrive at the answer.\n\n## Questions\n\nThe following questions were adapted from [this textbook](https://catalog.lib.uchicago.edu/vufind/Record/7546272).\n\n### Question 1\n\n#### Part a\n\n::: blue\n**Answer:** 0.6306\n:::\n\n#### Part b\n\n::: blue\n**Answer:** 11.689\n:::\n\n### Question 2\n\n\n#### Part a\n\n::: blue\n**Answer:** \n:::\n\n#### Part b\n\n\n::: blue\n**Answer:** .\n:::\n\n#### Part c\n\n::: blue\n**Answer:** (69.49, 70.51)\n:::\n\n### Question 3\n\n::: blue\n**Answer:** fail to reject\n:::\n\n### Question 4\n\n::: blue\n**Answer:** \n:::\n\n### Question 5\n\n\n::: blue\n**Answer:** Any function from `dplyr` not discussed in class (e.g., `arrange`, `slice`, `distinct`, `sample_n`) is acceptable.\n:::\n\n### Question 6\n\n\n#### Part a\n\n::: blue\n**Answer:**\n\n\n::: {.cell}\n\n:::\n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"AGE\"      \"DRYWGT\"   \"LOGDRYWG\"\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](HW_01_ans_files/figure-html/unnamed-chunk-2-1.png){width=768}\n:::\n:::\n\n\n:::\n\n#### Part b\n\n::: blue\n**Answer:**\n:::\n\n#### Part c\n\n::: blue\n**Answer:**\n\n1.  $\\widehat{\\text{Dry weight}} = -1.885 + 0.235 \\cdot Age$\n\n2.  $\\widehat{\\log_{10}(\\text{Dry weight})} = -2.689 + 0.196 \\cdot Age$\n\nOR \n\n1.  $\\widehat{Y} = -1.885 + 0.235 \\cdot X$\n\n2.  $\\widehat{Z} = -2.689 + 0.196 \\cdot X$\n:::\n\n#### Part d\n\n::: blue\n**Answer:**\n:::\n\n#### Part e\n\n::: blue\n**Answer:**\n\n* **Slope:** 0.196 (95% CI: 0.185, 0.207)\n* **Intercept:** -2.689 (95% CI: -2.809, -2.569)\n:::\n\n#### Part f\n\n::: blue\n**Answer:**\n\n* **Log-scale:** -1.122\n:::\n\n### Question 7\n\n#### Part a\n\n::: blue\n**Answer:** `weights`\n:::\n\n#### Part b\n\n::: blue\n**Answer:**\n:::\n\n#### Part c\n\n::: blue\n**Answer:** No\n:::\n\n### Question 8\n\n::: blue\n**Answer:**\n:::",
+    "supporting": [
+      "HW_01_ans_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

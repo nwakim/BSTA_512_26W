@@ -1,0 +1,210 @@
+---
+title: "Homework 1 Answers"
+subtitle: "BSTA 512/612"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+Answers are not necessarily complete! This is just meant to serve as a check if you are stuck. 
+
+```{=html}
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.height = 2, fig.width = 4)
+
+library(tidyverse)
+library(rstatix)
+library(broom)
+library(gt)
+library(janitor)
+library(here)
+library(gridExtra)
+
+```
+
+## Directions
+
+This document provides the solutions (final answers) for Homework 1. You may use this to double-check your final numbers and conclusions. This document does not contain the code or derivations required to arrive at the answer.
+
+## Questions
+
+The following questions were adapted from [this textbook](https://catalog.lib.uchicago.edu/vufind/Record/7546272).
+
+### Question 1
+
+#### Part a
+
+::: blue
+**Answer:** 0.6306
+:::
+
+#### Part b
+
+::: blue
+**Answer:** 11.689
+:::
+
+### Question 2
+
+
+#### Part a
+
+::: blue
+**Answer:** 
+:::
+
+#### Part b
+
+
+::: blue
+**Answer:** .
+:::
+
+#### Part c
+
+::: blue
+**Answer:** (69.49, 70.51)
+:::
+
+### Question 3
+
+::: blue
+**Answer:** fail to reject
+:::
+
+### Question 4
+
+::: blue
+**Answer:** 
+:::
+
+### Question 5
+
+
+::: blue
+**Answer:** Any function from `dplyr` not discussed in class (e.g., `arrange`, `slice`, `distinct`, `sample_n`) is acceptable.
+:::
+
+### Question 6
+
+
+#### Part a
+
+::: blue
+**Answer:**
+
+```{r}
+#| echo: false
+
+library(readxl)
+# you might need to update the location of the data file
+# you can choose whatever name you like for the tibble when loading it into R's workspace 
+ch05q01 <- read_excel(here("data/CH05Q01.xls"))
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+names(ch05q01)
+
+G1 <- ggplot(ch05q01, aes(x = AGE, y = DRYWGT)) +
+  geom_point() + 
+  labs(title = "Scatterplot of Age vs. Dry Weight", 
+       x = "Age (days)", 
+       y = "Dry weight")
+
+G2 <- ggplot(ch05q01, aes(x = AGE, y = LOGDRYWG)) +
+  geom_point() +
+  labs(title = "Scatterplot of Age vs. Log Dry Weight", 
+       x = "Age (days)", 
+       y = "Log dry weight")
+
+library(gridExtra)
+grid.arrange(G1, G2, nrow = 1)
+```
+
+:::
+
+#### Part b
+
+::: blue
+**Answer:**
+:::
+
+#### Part c
+
+::: blue
+**Answer:**
+
+1.  $\widehat{\text{Dry weight}} = -1.885 + 0.235 \cdot Age$
+
+2.  $\widehat{\log_{10}(\text{Dry weight})} = -2.689 + 0.196 \cdot Age$
+
+OR 
+
+1.  $\widehat{Y} = -1.885 + 0.235 \cdot X$
+
+2.  $\widehat{Z} = -2.689 + 0.196 \cdot X$
+:::
+
+#### Part d
+
+::: blue
+**Answer:**
+:::
+
+#### Part e
+
+::: blue
+**Answer:**
+
+* **Slope:** 0.196 (95% CI: 0.185, 0.207)
+* **Intercept:** -2.689 (95% CI: -2.809, -2.569)
+:::
+
+#### Part f
+
+::: blue
+**Answer:**
+
+* **Log-scale:** -1.122
+:::
+
+### Question 7
+
+#### Part a
+
+::: blue
+**Answer:** `weights`
+:::
+
+#### Part b
+
+::: blue
+**Answer:**
+:::
+
+#### Part c
+
+::: blue
+**Answer:** No
+:::
+
+### Question 8
+
+::: blue
+**Answer:**
+:::
