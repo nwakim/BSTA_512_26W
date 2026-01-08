@@ -106,6 +106,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -124,11 +128,17 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#lab-1-rubric" id="toc-lab-1-rubric" class="nav-link active" data-scroll-target="#lab-1-rubric">Lab 1 Rubric</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -137,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -149,6 +159,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>24 points total</p>
+<section id="lab-1-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="lab-1-rubric">Lab 1 Rubric</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -159,74 +172,75 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Lab activity</th>
-<th>3 points</th>
-<th>2 points</th>
-<th>1 point</th>
-<th>0 points</th>
+<th style="text-align: left;">Lab activity</th>
+<th style="text-align: left;">3 points</th>
+<th style="text-align: left;">2 points</th>
+<th style="text-align: left;">1 point</th>
+<th style="text-align: left;">0 points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Familiarize yourself with the Well-Being and Basic Needs Survey</strong></td>
-<td>Clearly answers all three questions with well-supported reasoning</td>
-<td>Answers all questions but lacks depth in explanation</td>
-<td>Answers some questions with minimal explanation</td>
-<td>Answers are unclear or missing</td>
+<td style="text-align: left;"><strong>Reading and listening activities</strong></td>
+<td style="text-align: left;">Thoroughly answers all three questions about the article with well-supported reasoning.</td>
+<td style="text-align: left;">Answers all questions but lacks depth in the theoretical or measure discussion.</td>
+<td style="text-align: left;">Answers some questions with minimal explanation.</td>
+<td style="text-align: left;">Answers are unclear or missing.</td>
 </tr>
 <tr class="even">
-<td><strong>File organization</strong></td>
-<td>Correctly sets up folders, <code>.Rproj</code>, and uses <code>here()</code></td>
-<td>Minor issues with folder setup or <code>here()</code> usage</td>
-<td>Some structure but missing key components</td>
-<td>No clear organization or incorrect setup</td>
+<td style="text-align: left;"><strong>Familiarizing ourselves with the Implicit Association Test (IAT)</strong></td>
+<td style="text-align: left;">Provides 5-10 thoughtful bullet points on study design/validity based on the Project Implicit site.</td>
+<td style="text-align: left;">Provides fewer than 5 bullet points or lacks critical reflection.</td>
+<td style="text-align: left;">Points are vague or do not address study design/validity.</td>
+<td style="text-align: left;">Task not attempted.</td>
 </tr>
 <tr class="odd">
-<td><strong>Decide on list of variables to focus on</strong></td>
-<td>Correctly selects 10 predictors with all requirements met</td>
-<td>Selects 10 predictors but some do not meet criteria</td>
-<td>Selects fewer than 10 predictors or incorrect types</td>
-<td>Selects incorrect variables or missing response</td>
+<td style="text-align: left;"><strong>Choose one of two research questions</strong></td>
+<td style="text-align: left;">Clearly states the chosen research question and subquestion (or pre-approved alternative).</td>
+<td style="text-align: left;">Research question is stated but missing the subquestion.</td>
+<td style="text-align: left;">Research question is vague or does not match provided options.</td>
+<td style="text-align: left;">Selection is missing.</td>
 </tr>
 <tr class="even">
-<td><strong>Get a sense of how you would like to analyze the data</strong></td>
-<td>Clearly states a well-formed research question</td>
-<td>Research question is clear but could be refined</td>
-<td>Research question is vague or missing key elements</td>
-<td>Research question is unclear or missing</td>
+<td style="text-align: left;"><strong>Organize your “Project” folder</strong></td>
+<td style="text-align: left;">Correctly displays working directory using <code>here()</code> and provides evidence of <code>.Rproj</code> setup.</td>
+<td style="text-align: left;">Minor issues with <code>here()</code> usage or directory display.</td>
+<td style="text-align: left;">Project structure is disorganized or <code>here()</code> is used incorrectly.</td>
+<td style="text-align: left;">No evidence of organization or reproducible paths.</td>
 </tr>
 <tr class="odd">
-<td><strong>Save data for processing with <code>.Rda</code></strong></td>
-<td>Creates and saves <code>.Rda</code> file with screenshot provided</td>
-<td>Saves <code>.Rda</code> file but no screenshot</td>
-<td>Attempts but incorrect <code>.Rda</code> file format</td>
-<td>No <code>.Rda</code> file saved</td>
+<td style="text-align: left;"><strong>Load data and needed packages</strong></td>
+<td style="text-align: left;">Successfully reads <code>.sav</code>, saves as <code>.rda</code>, loads <code>.rda</code>, and provides <code>glimpse</code> with correct dimensions.</td>
+<td style="text-align: left;">Completes loading process but fails to provide <code>glimpse</code> or correct dimensions.</td>
+<td style="text-align: left;">Major issues in the <code>.sav</code> to <code>.rda</code> conversion process.</td>
+<td style="text-align: left;">Data not loaded or incorrect format.</td>
 </tr>
 <tr class="even">
-<td><strong>Getting data in working format</strong></td>
-<td>Selects and processes variables correctly, cleans names</td>
-<td>Selects variables but has minor processing issues</td>
-<td>Attempts processing but with major errors</td>
-<td>Does not attempt processing</td>
+<td style="text-align: left;"><strong>Check data with codebook</strong></td>
+<td style="text-align: left;">Correctly verifies all 5 variables (<code>raceombmulti</code>, etc.) and includes the code used for confirmation.</td>
+<td style="text-align: left;">Verifies variables but fails to include code for one or more.</td>
+<td style="text-align: left;">Checks fewer than 3 variables or provides no code output.</td>
+<td style="text-align: left;">Did not perform the codebook check.</td>
 </tr>
 <tr class="odd">
-<td><strong>Explore the outcome and predictors</strong></td>
-<td>Reports food insecurity percentage and identifies low-count categories</td>
-<td>Reports some details but incomplete</td>
-<td>Missing either percentage or variable count details</td>
-<td>Does not report data insights</td>
+<td style="text-align: left;"><strong>Data wrangling</strong></td>
+<td style="text-align: left;">Correctly filters for US, calculates age using <code>lubridate</code>, and selects the 10 required variables with rationales.</td>
+<td style="text-align: left;">Most wrangling is correct, but minor errors in age calculation or rationales are missing.</td>
+<td style="text-align: left;">Major errors in filtering or age construction; incorrect variable count.</td>
+<td style="text-align: left;">Wrangling not attempted or result is unusable.</td>
 </tr>
 <tr class="even">
-<td><strong>Compile above work into an introduction</strong></td>
-<td>Well-structured introduction with background, importance, and study purpose</td>
-<td>Covers key points but lacks clarity or depth</td>
-<td>Covers some points but lacks organization</td>
-<td>Missing key introduction elements</td>
+<td style="text-align: left;"><strong>Compile above work into an introduction</strong></td>
+<td style="text-align: left;">3-5 well-structured bullets covering anti-fat bias, IAT, and the chosen research question context.</td>
+<td style="text-align: left;">Covers key points but lacks clarity or specific context for the RQ.</td>
+<td style="text-align: left;">Bullets are too brief or missing key introduction elements.</td>
+<td style="text-align: left;">Introduction is missing.</td>
 </tr>
 </tbody>
 </table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

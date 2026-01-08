@@ -95,7 +95,7 @@ Using R, load the data (`csv` file) into this document. Note that this is a `csv
 
 here()
 
-iat_2024_raw = read_sav(file = here("../TA_files/Project/data/Weight IAT.public.2024.sav"))
+iat_2024_raw = read_sav(file = here("../TA_files_BSTA_512/Project/data/Weight IAT.public.2024.sav"))
 ```
 
 Loading the `csv` file every time you render will take a long time. One way to speed this up is by saving the data as an `rda` file (R data file). Change the following R code to save the `rda` file. You will also need to remove the `#| eval: false` at the top of the code chunk once you have corrected the code. If you are confused on the syntax, don't forget that you can use `?save` for more information.
@@ -217,7 +217,7 @@ iat_2024 = iat_2024_raw %>%
          controlyou_001, mostpref_001,
          important_001, 
          birthmonth, birthyear, month, year, 
-         raceomb_002, raceombmulti, ethnicityomb, 
+         raceombmulti, ethnicityomb, 
          edu, edu_14, 
          genderIdentity, 
          birthSex)
