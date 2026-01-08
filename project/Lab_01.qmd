@@ -54,7 +54,7 @@ In 5-10 bullet points, write down some of your ideas on the study design that yo
 Take the Weight IAT test.
 :::
 
-### Choose one of three research questions {#sec-rq}
+### Choose one of two research questions {#sec-rq}
 
 ::: callout-important
 #### Task
@@ -80,15 +80,92 @@ Download the 2024 data and codebook from the archives and store in accessible fo
 
 ### Load data and needed packages
 
+::: callout-important
+##### Task Summary
+
+Read sav, save data as rda, load rda, glimpse at data.
+
+How many rows and columns are in the dataset? Do you think we will need all these variables for our analysis?
+:::
+
 ### Check data with codebook
+
+::: callout-important
+##### Task
+
+For the following variables *from the codebook*, check whether your loaded dataset contains the variable and the same information. You will need to check that the variable exists in the dataset and that the categories or numbers are the same. **Make sure you include the code used to confirm your findings.**
+
+1. `raceombmulti`
+4. `myheight_002`
+3. `idfat_001`
+2. `important_001` 
+3. `iatevaluations001`
+:::
 
 ### Data wrangling
 
 #### Restrict data to participants in the U.S.
 
+::: callout-important
+##### Task
+
+Filter the country of residence to the U.S. Make sure to show your code.
+:::
+
 #### Restrict your analysis to 1 outcome and 9 possible covariates/predictors (10 total)
 
+::: callout-important
+##### Task
+
+You will need to select the following variables:
+
+1. The outcome, `D_biep.Thin_Good_all`
+2. The two variables from your identified research question
+3. The four required demographic variables
+3. The three additional variables from the lists below
+
+For the **three additional variables**, please explain why you chose each in 1-2 lines. This can be informal and bulleted.
+:::
+
+::: callout-important
+##### Task
+
+Using R, select your identified variables from your dataset.
+:::
+
 #### Make a new dataset with only complete cases
+
+::: callout-important
+##### Task
+
+Make a new dataset with only complete cases. Save this dataset in your project folder.
+:::
+
+#### Manipulating variables that are coded as numeric variables
+
+::: callout-important
+##### Task
+
+Identify and list the variables that are coded numerically, but are categorical based on the codebook. Create a new variable for the categorical/factor version of the variable. (Hint: it is helpful to keep the numerical version for future reference.) 
+
+It is up to you to check that your code ran properly!! (Hint: you can use `glimpse()` or `tbl_summary()` to check that the variable is now categorical.)
+:::
+
+#### Creating age from birth date and test date
+
+::: callout-important
+##### Task
+
+From the codebook, find the variables that we can use to construct the test date. Then use `make_date()` to create the test date.
+:::
+
+::: callout-important
+##### Task
+
+Following the above example, create an age variable that measures the years between individuals' birth and test date. Then remove the variables used to make age.
+:::
+
+#### If you chose BMI, create the variable
 
 
 ### Compile above work into an introduction

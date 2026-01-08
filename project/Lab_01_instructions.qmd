@@ -112,17 +112,18 @@ I will not check that you have completed this test, but it will help you underst
 Take the Weight IAT. There is nothing to report here. 
 :::
 
-### Choose one of three research questions {#sec-rq}
+### Choose one of two research questions {#sec-rq}
 
 For our project, we will examine the association between the IAT score and one other variable. We will also test if another variable has an interaction (similar to an effect measure modifier).
 
-From the following three options, please select a research question:
+From the following two options, please select a research question:
 
 1. How is anti-fat bias, as measured by the IAT, associated with importance of weight to sense of self?
     a. With subquestion: Does political identity modify the above association?
 2. How is anti-fat bias, as measured by the IAT, associated with self-perception of weight?
     a. With subquestion: Does sex assigned at birth (SAB, in a binary form) modify the above association?
-3. Nicky needs to add this!!
+    
+If you have a strong preference for a different research question, please email me to discuss.
 
 ::: callout-important
 #### Task

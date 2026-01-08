@@ -141,6 +141,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -164,10 +168,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-winter-2024" id="toc-muddy-points-from-winter-2024" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2024">Muddy points from Winter 2024</a></li>
+  <li><a href="#muddy-points-winter-2026" id="toc-muddy-points-winter-2026" class="nav-link active" data-scroll-target="#muddy-points-winter-2026">Muddy points Winter 2026</a>
+  <ul class="collapse">
+  <li><a href="#this-code-was-new-to-me-statistic-listall_continuous-mean-sd-.-i-get-that-this-is-telling-r-to-present-our-data-as-mean-sd.-but-what-other-things-would-you-do-with-the-statistic-list-code" id="toc-this-code-was-new-to-me-statistic-listall_continuous-mean-sd-.-i-get-that-this-is-telling-r-to-present-our-data-as-mean-sd.-but-what-other-things-would-you-do-with-the-statistic-list-code" class="nav-link" data-scroll-target="#this-code-was-new-to-me-statistic-listall_continuous-mean-sd-.-i-get-that-this-is-telling-r-to-present-our-data-as-mean-sd.-but-what-other-things-would-you-do-with-the-statistic-list-code">1. This code was new to me: statistic = list(all_continuous() ~ “{mean} ({sd})” . I get that this is telling R to present our data as mean (SD). but what other things would you do with the statistic = list() code</a></li>
+  <li><a href="#i-was-a-little-unclear-on-why-the-race-and-ethnicity-variable-wouldnt-be-considered-untidy-since-its-combining-two-variables-into-one-column" id="toc-i-was-a-little-unclear-on-why-the-race-and-ethnicity-variable-wouldnt-be-considered-untidy-since-its-combining-two-variables-into-one-column" class="nav-link" data-scroll-target="#i-was-a-little-unclear-on-why-the-race-and-ethnicity-variable-wouldnt-be-considered-untidy-since-its-combining-two-variables-into-one-column">2. I was a little unclear on why the race and ethnicity variable wouldn’t be considered untidy, since it’s combining two variables into one column</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-winter-2024" id="toc-muddy-points-from-winter-2024" class="nav-link" data-scroll-target="#muddy-points-from-winter-2024">Muddy points from Winter 2024</a>
+  <ul class="collapse">
   <li><a href="#more-on-the-functions-and-problems-we-had-in-class" id="toc-more-on-the-functions-and-problems-we-had-in-class" class="nav-link" data-scroll-target="#more-on-the-functions-and-problems-we-had-in-class">1. More on the functions and problems we had in class!</a></li>
   <li><a href="#tbl_summary-trying-to-figure-out-how-to-change-the-median-values-to-mean" id="toc-tbl_summary-trying-to-figure-out-how-to-change-the-median-values-to-mean" class="nav-link" data-scroll-target="#tbl_summary-trying-to-figure-out-how-to-change-the-median-values-to-mean">2. <code>tbl_summary()</code>: Trying to figure out how to change the median values to mean</a></li>
   <li><a href="#are-there-benefits-to-ggplot-compared-to-the-base-r-graphing-functions" id="toc-are-there-benefits-to-ggplot-compared-to-the-base-r-graphing-functions" class="nav-link" data-scroll-target="#are-there-benefits-to-ggplot-compared-to-the-base-r-graphing-functions">3. Are there benefits to ggplot compared to the base R graphing functions?</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">January 7, 2026</p>
     </div>
   </div>
     
@@ -200,9 +211,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="muddy-points-from-winter-2024" class="level3">
-<h3 class="anchored" data-anchor-id="muddy-points-from-winter-2024">Muddy points from Winter 2024</h3>
+<section id="muddy-points-winter-2026" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-winter-2026">Muddy points Winter 2026</h2>
+<section id="this-code-was-new-to-me-statistic-listall_continuous-mean-sd-.-i-get-that-this-is-telling-r-to-present-our-data-as-mean-sd.-but-what-other-things-would-you-do-with-the-statistic-list-code" class="level3">
+<h3 class="anchored" data-anchor-id="this-code-was-new-to-me-statistic-listall_continuous-mean-sd-.-i-get-that-this-is-telling-r-to-present-our-data-as-mean-sd.-but-what-other-things-would-you-do-with-the-statistic-list-code">1. This code was new to me: statistic = list(all_continuous() ~ “{mean} ({sd})” . I get that this is telling R to present our data as mean (SD). but what other things would you do with the statistic = list() code</h3>
+<p><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html#statistic-argument">Here are some</a> of the special inputs for the statistics option in <code>tbl_summary()</code>.</p>
 </section>
+<section id="i-was-a-little-unclear-on-why-the-race-and-ethnicity-variable-wouldnt-be-considered-untidy-since-its-combining-two-variables-into-one-column" class="level3">
+<h3 class="anchored" data-anchor-id="i-was-a-little-unclear-on-why-the-race-and-ethnicity-variable-wouldnt-be-considered-untidy-since-its-combining-two-variables-into-one-column">2. I was a little unclear on why the race and ethnicity variable wouldn’t be considered untidy, since it’s combining two variables into one column</h3>
+<p>Interesting point! I see why you are confused from my explanation in class. We can combine information from more than 1 variable into one column, as long as the new column is still a single variable. For example, we calculated the ratio of expenditures to age, which involved two variables, but the new variable was still a single variable. This means the cells within that variables column does not convey information about multiple variables.</p>
+<p>This is a lot of words, and it’s best to see a counter example. Let’s say we had a dataset with 5 columns, one for their person ID and 4 for the past 4 years of income:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>person_id</th>
+<th>income_2020</th>
+<th>income_2021</th>
+<th>income_2022</th>
+<th>income_2023</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>50000</td>
+<td>52000</td>
+<td>54000</td>
+<td>56000</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>60000</td>
+<td>62000</td>
+<td>64000</td>
+<td>66000</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>70000</td>
+<td>72000</td>
+<td>74000</td>
+<td>76000</td>
+</tr>
+</tbody>
+</table>
+<p>This dataset is NOT tidy because the income information is spread across 4 columns. Each column is not a single variable (combines income and year). We would want to separate the income and years into their own columns, and then each individual would have 4 rows/observations of data that correspond to each year.</p>
+</section>
+</section>
+<section id="muddy-points-from-winter-2024" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2024">Muddy points from Winter 2024</h2>
 <section id="more-on-the-functions-and-problems-we-had-in-class" class="level3">
 <h3 class="anchored" data-anchor-id="more-on-the-functions-and-problems-we-had-in-class">1. More on the functions and problems we had in class!</h3>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -725,23 +782,23 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
 <span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>                        expenditures <span class="sc">~</span> <span class="st">"Expenditures"</span>) ,</span>
 <span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">statistic =</span> <span class="fu">list</span>(<span class="fu">all_continuous</span>() <span class="sc">~</span> <span class="st">"{mean} ({sd})"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="atgudlzcmz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#atgudlzcmz table {
+<div id="nclnddmvzt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nclnddmvzt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#atgudlzcmz thead, #atgudlzcmz tbody, #atgudlzcmz tfoot, #atgudlzcmz tr, #atgudlzcmz td, #atgudlzcmz th {
+#nclnddmvzt thead, #nclnddmvzt tbody, #nclnddmvzt tfoot, #nclnddmvzt tr, #nclnddmvzt td, #nclnddmvzt th {
   border-style: none;
 }
 
-#atgudlzcmz p {
+#nclnddmvzt p {
   margin: 0;
   padding: 0;
 }
 
-#atgudlzcmz .gt_table {
+#nclnddmvzt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -767,12 +824,12 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_caption {
+#nclnddmvzt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#atgudlzcmz .gt_title {
+#nclnddmvzt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -784,7 +841,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-bottom-width: 0;
 }
 
-#atgudlzcmz .gt_subtitle {
+#nclnddmvzt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -796,7 +853,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-top-width: 0;
 }
 
-#atgudlzcmz .gt_heading {
+#nclnddmvzt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -808,13 +865,13 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_bottom_border {
+#nclnddmvzt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_col_headings {
+#nclnddmvzt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -829,7 +886,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_col_heading {
+#nclnddmvzt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -849,7 +906,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   overflow-x: hidden;
 }
 
-#atgudlzcmz .gt_column_spanner_outer {
+#nclnddmvzt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -861,15 +918,15 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   padding-right: 4px;
 }
 
-#atgudlzcmz .gt_column_spanner_outer:first-child {
+#nclnddmvzt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#atgudlzcmz .gt_column_spanner_outer:last-child {
+#nclnddmvzt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#atgudlzcmz .gt_column_spanner {
+#nclnddmvzt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -881,11 +938,11 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   width: 100%;
 }
 
-#atgudlzcmz .gt_spanner_row {
+#nclnddmvzt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#atgudlzcmz .gt_group_heading {
+#nclnddmvzt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -911,7 +968,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   text-align: left;
 }
 
-#atgudlzcmz .gt_empty_group_heading {
+#nclnddmvzt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -926,15 +983,15 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   vertical-align: middle;
 }
 
-#atgudlzcmz .gt_from_md > :first-child {
+#nclnddmvzt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#atgudlzcmz .gt_from_md > :last-child {
+#nclnddmvzt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#atgudlzcmz .gt_row {
+#nclnddmvzt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -953,7 +1010,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   overflow-x: hidden;
 }
 
-#atgudlzcmz .gt_stub {
+#nclnddmvzt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -966,7 +1023,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   padding-right: 5px;
 }
 
-#atgudlzcmz .gt_stub_row_group {
+#nclnddmvzt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -980,15 +1037,15 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   vertical-align: top;
 }
 
-#atgudlzcmz .gt_row_group_first td {
+#nclnddmvzt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#atgudlzcmz .gt_row_group_first th {
+#nclnddmvzt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#atgudlzcmz .gt_summary_row {
+#nclnddmvzt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -998,16 +1055,16 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   padding-right: 5px;
 }
 
-#atgudlzcmz .gt_first_summary_row {
+#nclnddmvzt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_first_summary_row.thick {
+#nclnddmvzt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#atgudlzcmz .gt_last_summary_row {
+#nclnddmvzt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1017,7 +1074,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_grand_summary_row {
+#nclnddmvzt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1027,7 +1084,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   padding-right: 5px;
 }
 
-#atgudlzcmz .gt_first_grand_summary_row {
+#nclnddmvzt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1037,7 +1094,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_last_grand_summary_row_top {
+#nclnddmvzt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1047,11 +1104,11 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_striped {
+#nclnddmvzt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#atgudlzcmz .gt_table_body {
+#nclnddmvzt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1060,7 +1117,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_footnotes {
+#nclnddmvzt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1074,7 +1131,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_footnote {
+#nclnddmvzt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1083,7 +1140,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   padding-right: 5px;
 }
 
-#atgudlzcmz .gt_sourcenotes {
+#nclnddmvzt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1097,7 +1154,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#atgudlzcmz .gt_sourcenote {
+#nclnddmvzt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1105,72 +1162,72 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
   padding-right: 5px;
 }
 
-#atgudlzcmz .gt_left {
+#nclnddmvzt .gt_left {
   text-align: left;
 }
 
-#atgudlzcmz .gt_center {
+#nclnddmvzt .gt_center {
   text-align: center;
 }
 
-#atgudlzcmz .gt_right {
+#nclnddmvzt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#atgudlzcmz .gt_font_normal {
+#nclnddmvzt .gt_font_normal {
   font-weight: normal;
 }
 
-#atgudlzcmz .gt_font_bold {
+#nclnddmvzt .gt_font_bold {
   font-weight: bold;
 }
 
-#atgudlzcmz .gt_font_italic {
+#nclnddmvzt .gt_font_italic {
   font-style: italic;
 }
 
-#atgudlzcmz .gt_super {
+#nclnddmvzt .gt_super {
   font-size: 65%;
 }
 
-#atgudlzcmz .gt_footnote_marks {
+#nclnddmvzt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#atgudlzcmz .gt_asterisk {
+#nclnddmvzt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#atgudlzcmz .gt_indent_1 {
+#nclnddmvzt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#atgudlzcmz .gt_indent_2 {
+#nclnddmvzt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#atgudlzcmz .gt_indent_3 {
+#nclnddmvzt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#atgudlzcmz .gt_indent_4 {
+#nclnddmvzt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#atgudlzcmz .gt_indent_5 {
+#nclnddmvzt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#atgudlzcmz .katex-display {
+#nclnddmvzt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#atgudlzcmz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nclnddmvzt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1245,8 +1302,8 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White not Hispanic</td>
 <td class="gt_row gt_center" headers="stat_0">401 (40%)</td>
 </tr>
-</tbody><tfoot class="gt_footnotes">
-<tr class="odd">
+</tbody><tfoot>
+<tr class="gt_footnotes odd">
 <td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean (SD); n (%)</td>
 </tr>
 </tfoot>
@@ -1263,6 +1320,7 @@ $ `2011`       &lt;dbl&gt; 16.7, 7.4, 15.4, 41.3, 19.3</code></pre>
 <p>I am certainly not going to force you to use <code>ggplot</code> over base R. At the end of the day, it is really whatever makes the most sense to you. I will say: <code>ggplot2</code> seems to be where most statisticians and epidemiologists are headed. And I really believe that <code>ggplot</code> is more efficient with coding.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

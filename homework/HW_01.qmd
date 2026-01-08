@@ -23,9 +23,9 @@ library(here)
 
 ## Directions
 
--   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_01.qmd)
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_26W/blob/main/homework/HW_01.qmd)
 
--   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW1 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW1 `.qmd` file.
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Data/Homework/HW1?csf=1&web=1&e=XG1524) the HW1 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW1 `.qmd` file.
 
 -   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
 
@@ -165,7 +165,7 @@ Now get the regression coefficients using R and plug them into the regression mo
 
 Using `ggplot`, create the respective best-fit lines on your plots. Which of the two regression lines has the better fit? Based on your answers to parts (a)–(c), is it more appropriate to run a linear regression of Y on X or of Z on X? Explain.
 
-#### Part e (to be covered on Monday 1/22)
+#### Part e
 
 For the regression that you chose as being more appropriate in part (d), find 95% confidence intervals for the true slope and intercept. Interpret each interval ~~with regard to the null hypothesis that the true value is 0~~.
 

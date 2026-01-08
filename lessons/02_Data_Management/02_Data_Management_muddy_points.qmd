@@ -15,7 +15,28 @@ editor_options:
 
 library(here)
 ```
-### Muddy points from Winter 2024
+
+## Muddy points Winter 2026
+
+### 1. This code was new to me: statistic = list(all_continuous() ~ "{mean} ({sd})" . I get that this is telling R to present our data as mean (SD). but what other things would you do with the statistic = list() code
+
+[Here are some](https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html#statistic-argument) of the special inputs for the statistics option in `tbl_summary()`.  
+
+### 2. I was a little unclear on why the race and ethnicity variable wouldn't be considered untidy, since it's combining two variables into one column
+
+Interesting point! I see why you are confused from my explanation in class. We can combine information from more than 1 variable into one column, as long as the new column is still a single variable. For example, we calculated the ratio of expenditures to age, which involved two variables, but the new variable was still a single variable. This means the cells within that variables column does not convey information about multiple variables. 
+
+This is a lot of words, and it's best to see a counter example. Let's say we had a dataset with 5 columns, one for their person ID and 4 for the past 4 years of income:
+
+| person_id | income_2020 | income_2021 | income_2022 | income_2023 |
+|-----------|-------------|-------------|-------------|-------------|
+| 1         | 50000       | 52000       | 54000       | 56000       |
+| 2         | 60000       | 62000       | 64000       | 66000       |
+| 3         | 70000       | 72000       | 74000       | 76000       |
+
+This dataset is NOT tidy because the income information is spread across 4 columns. Each column is not a single variable (combines income and year). We would want to separate the income and years into their own columns, and then each individual would have 4 rows/observations of data that correspond to each year. 
+
+## Muddy points from Winter 2024
 
 ### 1. More on the functions and problems we had in class!
 
