@@ -3,8 +3,7 @@ title: "Lesson 3: Introduction to Simple Linear Regression (SLR)"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "01/13/2025"
-categories: ["Week 1"]
+date: "`r library(here); source(here('class_dates.R')); w2d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -44,13 +43,9 @@ library(pwr)
 library(gridExtra) # NEW!!!
 library(readxl)
 
-# terminal: for icons
-# quarto install extension quarto-ext/fontawesome
-
 # set ggplot theme for slides 
-theme_set(theme_gray(base_size = 22))
+theme_set(theme_bw(base_size = 22))
 # theme_update(text = element_text(size=16))  # set global text size for ggplots
-
 ```
 
 # Learning Objectives
@@ -176,43 +171,40 @@ Model Use (Inference)
 #| fig-width: 11
 #| echo: false
 
-gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA")
-
-gapm = gapm1 %>% 
-  drop_na(FemaleLiteracyRate, 
-          LifeExpectancyYrs, 
-          four_regions, 
-          FoodSupplykcPPD)
+load(here("data", "gapminder2022.RData"))
+#gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA")
 
 gapm_slr_plot = gapm %>%
-  ggplot(aes(x = FemaleLiteracyRate,
-             y = LifeExpectancyYrs)) +
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))
+        title = element_text(size = 25))
 
 gapm_slr_plot
 
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
+tidy_model1 = tidy(model1)
 ```
 :::
 
 ::: {.column width="45%"}
  
 
-Life expectancy vs. female literacy rate
+Life expectancy vs. cell phones
 
  
 
--   Each point on the plot is for a different country
+-   Each point on the plot is for a different country/territory
 
  
 
--   $X$ = country's adult female literacy rate
+-   $X$ = country's number of cell phones per 100 people
 
  
 
@@ -221,7 +213,7 @@ Life expectancy vs. female literacy rate
 :::
 
 ::: heq
-$$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rate}$$
+$$\widehat{\text{life expectancy}} =  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{cell phones}$$
 :::
 
 ## Reference: How did I code that? {.smaller}
@@ -229,50 +221,47 @@ $$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rat
 ![](../img_slides/pause.png){.absolute top="83%" right="0%" width="120" height="120"}
 
 ```{r}
-#| fig-height: 6.5
-#| fig-width: 10
+#| fig-height: 7
+#| fig-width: 11
 #| fig-align: center
 
 gapm %>%
-  ggplot(aes(x = FemaleLiteracyRate,
-             y = LifeExpectancyYrs)) +
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))
+        title = element_text(size = 25))
 
 ```
 
 ## Research and dataset description
 
 ::: hl3
-**Research question:** Is there an association between life expectancy and female literacy rates?
+**Research question:** Is there an association between life expectancy and number of cell phones?
 :::
 
--   Data file: `Gapminder_vars_2011.xlsx`
+-   Data file: `gapminder.Rdata`
+-   [You can access my codebook here](lessons/gapminder_codebook.qmd)
 
 -   Data were downloaded from
     [Gapminder](https://www.gapminder.org/data/){.uri}
-    -   2011 is the most recent year with the most complete data
-    -   Observational study measuring different characteristics of countries, including population, health, environment, work, etc.
+    -   2022 is the most recent year with the most complete data
+    -   Observational study measuring different characteristics of countries/territories, including population, health, environment, work, etc.
 
 -   [**Life
     expectancy**](https://www.gapminder.org/data/documentation/gd004/) =
     the average number of years a newborn child would live if current
     mortality patterns were to stay the same.
 
--   [**Adult literacy rate**](http://data.uis.unesco.org/) is the
-    percentage of people ages 15 and above who can, with understanding,
-    read and write a short, simple statement on their everyday life.
+-   [**Cell phones per 100 people**](https://data.worldbank.org/indicator/IT.CEL.SETS.P2) is the number of cell phone subscriptions per 100 people in a given population, indicating the level of mobile phone use and accessibility.
     
  
 
-- [National Literacy Trust](https://literacytrust.org.uk/research-services/research-reports/literacy-and-life-expectancy/) in England has studied the link between these two variables
-  - Please note that they clearly state that literacy is linked to life expectancy **through many socioeconomic and health factors**
 
 
 ## Poll Everywhere Question 1
@@ -282,8 +271,7 @@ gapm %>%
 -   Load data
 
 ```{r}
-library(readxl)
-gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA")
+load(here("data", "gapminder2022.RData"))
 ```
 
 ## Get to know the data (2/3)
@@ -291,58 +279,56 @@ gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA")
 -   Glimpse of the data
 
 ```{r}
-glimpse(gapm1)
+glimpse(gapm)
 ```
 
--   Note the missing values for our variables of interest
-
 ## Get to know the data (3/3)
+
+::: columns
+
+::: {.column width="50%"}
 
 -   Get a sense of the summary statistics
 
 ```{r}
-gapm1 %>% 
-  select(LifeExpectancyYrs, 
-         FemaleLiteracyRate) %>% 
+gapm %>% 
+  select(cell_phones_100,
+         life_exp) %>% 
   summary()
 ```
 
-## Remove missing values (1/2)
-
--   Remove rows with missing data for life expectancy and female
-    literacy rate
-
-```{r}
-gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
-glimpse(gapm)
-```
-
--   No missing values now for our variables of interest
-
-## Remove missing values (2/2)
-
--   And no more missing values when we look only at our two variables of
-    interest
-
-```{r}
-gapm %>%
-  select(LifeExpectancyYrs, 
-          FemaleLiteracyRate) %>% 
-  get_summary_stats()
-```
-
-::: definition
-::: def-title
-Note
 :::
 
-::: def-cont
--   Removing the rows with missing data was not needed to run the
-    regression model.
--   I did this step since later we will be calculating the standard
-    deviations of the explanatory and response variables for *just the
-    values included in the regression model*. It'll be easier to do this
-    if we remove the missing values now.
+::: {.column width="50%"}
+- Plot the individual variables
+```{r}
+#| code-fold: true
+#| fig-height: 8
+#| fig-width: 8
+
+cell_phone_hist = gapm %>%
+  ggplot(aes(x = cell_phones_100)) +
+  geom_histogram() +
+  labs(x = "Cell phones per 100 people",
+       y = "Number of territories",
+       title = "Distribution of cell phones per 100 people") +
+    theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 18), 
+        title = element_text(size = 20))
+
+life_exp_hist = gapm %>%
+  ggplot(aes(x = life_exp)) +
+  geom_histogram() +
+  labs(x = "Life expectancy (years)",
+       y = "Number of territories",
+       title = "Distribution of life expectancy") +
+    theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 18), 
+        title = element_text(size = 20))
+
+grid.arrange(cell_phone_hist, life_exp_hist, nrow=2)
+```
+
 :::
 :::
 
@@ -396,7 +382,7 @@ gapm_slr_plot
 :::
 
 ::: heq
-$$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rate}$$
+$$\widehat{\text{life expectancy}} =  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{cell phones}$$
 :::
 
 ## Association vs. prediction
@@ -410,7 +396,7 @@ Association
 
 ::: proof-cont
 -   What is the association between countries’ life expectancy and
-    female literacy rate?
+    cell phones?
 -   Use the slope of the line or correlation coefficient
 :::
 :::
@@ -424,13 +410,13 @@ Prediction
 
 ::: def-cont
 -   What is the expected life expectancy for a country with a
-    specified female literacy rate?    
+    specified number of cell phones per 100 people?    
 :::
 :::
 :::
 :::
 
-$$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rate}$$
+$$\widehat{\text{life expectancy}} =  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{cell phones}$$
 
 ```{r}
 #| fig-height: 7
@@ -741,6 +727,8 @@ gapm_slr_plot
 ::: {.column width="50%"}
 #### Population regression *model*
 
+Think of this as proposed model **before** we fit the data
+
 ::: lob
 $$Y =  \beta_0 + \beta_1X + \epsilon$$
 :::
@@ -760,6 +748,8 @@ $$Y =  \beta_0 + \beta_1X + \epsilon$$
 
 ::: {.column width="50%"}
 #### Estimated regression *line*
+
+Think of this as the actualized model **after** we fit data
 
 ::: hl
 $$\widehat{Y} =  \widehat{\beta}_0 + \widehat{\beta}_1X$$
@@ -924,7 +914,7 @@ This is an important fact! For the **estimated/fitted model**, the
 residuals: $\widehat\epsilon = Y - \widehat{Y}$
 :::
 
-## *Individual* $i$ residuals in the estimated/fitted model
+## Residuals for observation $i$ in the estimated/fitted model
 
 ::: columns
 ::: {.column width="45%"}
@@ -945,14 +935,14 @@ residuals: $\widehat\epsilon = Y - \widehat{Y}$
 #| fig-align: center
 # code from https://drsimonj.svbtle.com/visualising-residuals
 
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 regression_points <- augment(model1)
 # summary(model1)
 # sum(model1$residuals^2)
 
 ggplot(regression_points, 
-       aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
   # geom_segment(aes(
   #   xend = female_literacy_rate_2011, 
   #   yend = .fitted), 
@@ -963,17 +953,17 @@ ggplot(regression_points,
   #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
     #guides(color = "none") +
   geom_point(aes(y = .fitted), shape = 1, size = 4) +
-labs(x = "Female literacy rate (%)", 
+labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))  
+        title = element_text(size = 25))  
 ```
 :::
 :::
 
-## *Individual* $i$ residuals in the estimated/fitted model
+## Residuals for observation $i$ in the estimated/fitted model
 
 ::: columns
 ::: {.column width="45%"}
@@ -1004,16 +994,11 @@ labs(x = "Female literacy rate (%)",
 #| fig-align: center
 # code from https://drsimonj.svbtle.com/visualising-residuals
 
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
-regression_points <- augment(model1)
-# summary(model1)
-# sum(model1$residuals^2)
-
 ggplot(regression_points, 
-       aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_segment(aes(
-    xend = FemaleLiteracyRate, 
+    xend = cell_phones_100, 
     yend = .fitted), 
     alpha = 1, 
     color = "#4FADF3", 
@@ -1024,12 +1009,12 @@ ggplot(regression_points,
   #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
     #guides(color = "none") +
   geom_point(aes(y = .fitted), shape = 1, size = 4) +
-labs(x = "Female literacy rate (%)", 
+labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))  
+        title = element_text(size = 25))
 ```
 :::
 :::
@@ -1052,7 +1037,6 @@ labs(x = "Female literacy rate (%)",
 
     -   Vague use of total error: more precisely, we want to **reduce
         the sum of squared errors**
-    -   Think back to my R Shiny app!
     -   We need to mathematically define this!
 
  
@@ -1317,7 +1301,7 @@ $$\begin{aligned}
 ```{r}
 #| out-height: 800px 
 
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 ```
 
  
@@ -1338,7 +1322,7 @@ dataset_name %>% lm( formula = Y ~ X )
 ```{r}
 #| out-height: 800px 
 
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 summary(model1)
 ```
 
@@ -1358,20 +1342,20 @@ tidy(model1) %>%
 -   Regression equation for our model (which we saw a looong time ago):
 
 ::: heq
-$$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rate}$$
+$$\widehat{\text{life expectancy}} =  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{cell phones}$$
 :::
 
 ## How do we interpret the coefficients?
 
 ::: heq
-$$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rate}$$
+$$\widehat{\text{life expectancy}} =  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{cell phones}$$
 :::
 
 -   **Intercept ($\hat{\beta}_0$)**
     -   The expected outcome for the $Y$-variable when the $X$-variable (if continuous)
         is 0
-    -   **Example:** The expected/average life expectancy is 50.9 years
-        for a country with 0% female literacy.
+    -   **Example:** The expected/average life expectancy is 60.4 years
+        for a country with 0 cell phones per 100 people.
 -   **Slope ($\hat{\beta}_1$)**
     -   For every increase of 1 unit in the $X$-variable (if continuous), there is an
         expected increase of $\widehat\beta_1$ units in the
@@ -1380,9 +1364,8 @@ $$\widehat{\text{life expectancy}} =  50.9 + 0.232\cdot\text{female literacy rat
     -   We only say that there is an expected increase and not
         necessarily a causal increase.
 
-    -   **Example:** For every 1 percent increase in the female literacy
-        rate, life expectancy increases, on average, 0.232 years.
-          - Can also say "...average life expectancy increases 0.232..."
+    -   **Example:** For every 1 additional cell phone per 100 people, life expectancy increases, on average, 0.09 years.
+          - Can also say "...average life expectancy increases 0.09..." or "... expected life expectancy increases 0.09..."
 
 ## Next time
 

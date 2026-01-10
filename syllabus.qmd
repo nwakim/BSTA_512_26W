@@ -27,7 +27,7 @@ editor_options:
     -   For homework: can be turned in any time before course ends, but you will not receive feedback on late work
     -   For labs: one "no questions asked" extension
 -   **Attendance policy:** attend in person and fill out exit tickets for 12 out of the 19 classes
-    -   There are **FOUR mandatory in-person attendance days**
+    -   There are **FIVE mandatory in-person attendance days** (4 lab discussions and 1 project poster day)
 -   The class will end on March 17, 2025. **All coursework MUST be completed by March 20, 2025 at 11pm.**
 
 ## Description
@@ -61,9 +61,8 @@ Mondays          1:00 PM -- 2:50 PM PST
 Wednesdays    1:00 PM -- 2:50 PM PST
 
 -   Class will be located in...
-    -   KCRB 1011 from 1/5/26 - 3/4/26
-    -   RPV 1205/1215 (B/C) from 3/9/26 - 3/11/26
-    -   TBD on 3/17/26
+    -   Lincoln Hall, Room 339
+    -   TBD on 3/16/26
 
 ### Known Exceptions
 
