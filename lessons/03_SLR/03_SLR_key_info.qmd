@@ -10,12 +10,27 @@ editor_options:
 
 ## Announcements
 
-- There is no Slack for this class
-- Attendance policy: Attendance in-person or online to all (ish) classes. Attendance is taken by completing exit ticket within 1 week of class
-- Extra question on preference for Thursday morning office hours
 - TA emails are up!
-  - We are also working on office hours
+  - Their office hours are posted: I need to decide on mine tonight
+  - Check out the instructor page for more info on the office hours
+- If you are submitting a late assignment, the Sakai submission will be closed
+  - You will need to email me AND THE TAs!!!
+  - The TAs grade your work, so it's better that you don't have to wait for me to check my email and forward it to the TAs
+- Questions on course logistics (like assignments or grades) are best put in an email, not the exit ticket!! 
+  - Exit tickets are more for content questions
+  - Emails keep your question on my radar better
+
+ 
+
+- MPH Student Focus Group
+  - From the principal investigator, Seth Igarta: As the Professional and Career Development Specialist at OHSU, I am seeking current Master of Public Health (MPH) students to participate in a focus group study titled Your MPH, Your Voice. The purpose of this study is to understand the MPH student career preparation experience and how students describe their needs for public health careers. Participants will help shape future student success programming and services in the School of Public Health.
+  - Participation in this study involves:
+    - A time commitment of about 60 minutes between January 20-23
+    - Zoom virtual attendance or in-person attendance at the Vanport Building on 1810 SW 5th Ave in Portland, OR.
+    - **A $20 gift card to Ovation Coffee & Tea for participation.**
+  - [Click here to sign up!](https://urldefense.com/v3/__https:/forms.gle/TMxWy9poRmySC2Y47__;!!Mi0JBg!KFwLgbCS6Utp1_DHZglX5RSNielzIYhUdKtzdFecHSBVSUkDScVYvR0uRqRXvbS-14QtQOGOM8liCN3He9KaYqUIrnc$) For more information about this study, please contact the principal investigator, Seth Igarta, by email at <igarta@ohsu.edu>
 
 ## Key Dates
 
 - Lab 1 due this Thursday at 11pm
+- HW 1 due next Thursday at 11pm

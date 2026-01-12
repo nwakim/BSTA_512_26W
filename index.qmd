@@ -66,18 +66,18 @@ Welcome to BSTA 512/612! In this course, we will focus on linear models, and bui
 ### TA Office Hours
 ::: columns
 ::: {.column width="25%"}
-Sheetal
+[Sheetal](https://ohsu.webex.com/meet/akula)
 
-Kelsey
+[Kelsey](https://pdx.zoom.us/j/87663146835)
 
 Sophia
 :::
 ::: {.column width="75%"}
-{{< iconify icon-park-solid time size=24px >}} TBD
+{{< iconify icon-park-solid time size=24px >}} W 11:30-12:30
 
-{{< iconify icon-park-solid time size=24px >}} TBD
+{{< iconify icon-park-solid time size=24px >}} T 10-11
 
-{{< iconify icon-park-solid time size=24px >}} TBD
+{{< iconify icon-park-solid time size=24px >}} M 3-4
 :::
 :::
 :::
@@ -91,7 +91,7 @@ Sophia
 
 {{< iconify icon-park-solid time size=24px >}} 1:00 PM - 2:50 PM
 
-{{< iconify fa6-solid person-chalkboard size=24px >}} In-person, KCRB 1011
+{{< iconify fa6-solid person-chalkboard size=24px >}} In-person, LH 339
 :::
 
 ::: {.column width="25%"}
