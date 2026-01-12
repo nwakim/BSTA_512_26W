@@ -246,7 +246,7 @@ gapm %>%
 :::
 
 -   Data file: `gapminder.Rdata`
--   [You can access my codebook here](lessons/gapminder_codebook.qmd)
+-   [You can access my codebook here](../gapminder_codebook.qmd)
 
 -   Data were downloaded from
     [Gapminder](https://www.gapminder.org/data/){.uri}
