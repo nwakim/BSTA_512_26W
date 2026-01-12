@@ -19,6 +19,11 @@ editor_options:
 - Questions on course logistics (like assignments or grades) are best put in an email, not the exit ticket!! 
   - Exit tickets are more for content questions
   - Emails keep your question on my radar better
+- HW 0 feedback
+  - Some of the TAs missed your HTML doc
+- Poll Everywhere
+  - Still limited to 40 responses today
+  - Will fix by WEednesday!
 
  
 
