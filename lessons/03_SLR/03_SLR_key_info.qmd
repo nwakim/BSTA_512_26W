@@ -37,5 +37,5 @@ editor_options:
 
 ## Key Dates
 
-- Lab 1 due this Thursday at 11pm
-- HW 1 due next Thursday at 11pm
+- Lab 1 due this Sunday at 11pm
+- HW 1 due next Sunday at 11pm
