@@ -135,6 +135,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -158,7 +162,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-2025" id="toc-muddy-points-from-2025" class="nav-link active" data-scroll-target="#muddy-points-from-2025">Muddy Points from 2025</a>
+  <li><a href="#muddy-points-from-2026" id="toc-muddy-points-from-2026" class="nav-link active" data-scroll-target="#muddy-points-from-2026">Muddy Points from 2026</a>
+  <ul class="collapse">
+  <li><a href="#linear-regression-model-vs-linear-regression-line" id="toc-linear-regression-model-vs-linear-regression-line" class="nav-link" data-scroll-target="#linear-regression-model-vs-linear-regression-line">1. Linear regression model vs linear regression line</a></li>
+  <li><a href="#are-residuals-actually-values-observed-in-the-data" id="toc-are-residuals-actually-values-observed-in-the-data" class="nav-link" data-scroll-target="#are-residuals-actually-values-observed-in-the-data">2. Are residuals actually values observed in the data?</a></li>
+  <li><a href="#are-we-essentially-finding-the-line-of-best-fit-for-our-data-or-is-that-too-simplified-of-a-way-of-thinking-about-it" id="toc-are-we-essentially-finding-the-line-of-best-fit-for-our-data-or-is-that-too-simplified-of-a-way-of-thinking-about-it" class="nav-link" data-scroll-target="#are-we-essentially-finding-the-line-of-best-fit-for-our-data-or-is-that-too-simplified-of-a-way-of-thinking-about-it">3. Are we essentially finding the line of best fit for our data or is that too simplified of a way of thinking about it?</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-2025" id="toc-muddy-points-from-2025" class="nav-link" data-scroll-target="#muddy-points-from-2025">Muddy Points from 2025</a>
   <ul class="collapse">
   <li><a href="#in-a-homework-problem-or-in-a-real-life-scenario-i-am-a-bit-confused-on-when-to-use-population-vs-estimate-slr.-how-do-we-know-when-to-use-the-population-parameters-and-estimated-coefficients" id="toc-in-a-homework-problem-or-in-a-real-life-scenario-i-am-a-bit-confused-on-when-to-use-population-vs-estimate-slr.-how-do-we-know-when-to-use-the-population-parameters-and-estimated-coefficients" class="nav-link" data-scroll-target="#in-a-homework-problem-or-in-a-real-life-scenario-i-am-a-bit-confused-on-when-to-use-population-vs-estimate-slr.-how-do-we-know-when-to-use-the-population-parameters-and-estimated-coefficients">1. In a homework problem, or in a real-life scenario: I am a bit confused on when to use population vs estimate SLR. How do we know when to use the population parameters and estimated coefficients?</a></li>
   </ul></li>
@@ -190,7 +200,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">January 12, 2026</p>
     </div>
   </div>
     
@@ -201,6 +211,22 @@ window.Quarto = {
 </header>
 
 
+<section id="muddy-points-from-2026" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-2026">Muddy Points from 2026</h2>
+<p>Lots of overlap with muddy points from 2025 and 2024! See below for more questions and answers</p>
+<section id="linear-regression-model-vs-linear-regression-line" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-model-vs-linear-regression-line">1. Linear regression model vs linear regression line</h3>
+<p>See question 2 in 2024 muddy points.</p>
+</section>
+<section id="are-residuals-actually-values-observed-in-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="are-residuals-actually-values-observed-in-the-data">2. Are residuals actually values observed in the data?</h3>
+<p>Residuals are the difference between the observed value (<span class="math inline">\(Y\)</span>) and the expected value given our model (<span class="math inline">\(\hat{Y}\)</span>). So residuals themselves are not observed values in the data, but they are calculated from observed values.</p>
+</section>
+<section id="are-we-essentially-finding-the-line-of-best-fit-for-our-data-or-is-that-too-simplified-of-a-way-of-thinking-about-it" class="level3">
+<h3 class="anchored" data-anchor-id="are-we-essentially-finding-the-line-of-best-fit-for-our-data-or-is-that-too-simplified-of-a-way-of-thinking-about-it">3. Are we essentially finding the line of best fit for our data or is that too simplified of a way of thinking about it?</h3>
+<p>Yes, we are finding the line of best fit for our data! The line of best fit is the line that minimizes the sum of squared errors (SSE).</p>
+</section>
+</section>
 <section id="muddy-points-from-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-2025">Muddy Points from 2025</h2>
 <section id="in-a-homework-problem-or-in-a-real-life-scenario-i-am-a-bit-confused-on-when-to-use-population-vs-estimate-slr.-how-do-we-know-when-to-use-the-population-parameters-and-estimated-coefficients" class="level3">
@@ -221,9 +247,9 @@ window.Quarto = {
 <p>I think it can help a lot with this confusion.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 34%">
-<col style="width: 58%">
+<col style="width: 10%">
+<col style="width: 32%">
+<col style="width: 56%">
 </colgroup>
 <thead>
 <tr class="header">
