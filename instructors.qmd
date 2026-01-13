@@ -38,11 +38,11 @@ TBD
 
 Sheetal Akula, Kelsey Mackenzie, and Sophia Mann will serve as our TAs for the quarter!! They will have the following office hours and will help answer questions over email.
 
-| TA | Email | Day | Time | Link |
+| TA | Email | Day | Time | Location |
 |---------------|---------------|---------------|---------------|---------------|
 | Sheetal Akula | [akula\@ohsu.edu](mailto:akula@ohsu.edu){.email} | Wednesday | 11:30am-12:30pm | [Webex](https://ohsu.webex.com/meet/akula) |
 | Kelsey Mackenzie | [mackenzie\@ohsu.edu](mailto:mackenzie@ohsu.edu){.email} | Tuesday | 10-11am | [Zoom](https://pdx.zoom.us/j/87663146835) |
-| Sophia Mann | [mannso\@ohsu.edu](mailto:mannso@ohsu.edu){.email} | Monday | 3-4pm | In-person |
+| Sophia Mann | [mannso\@ohsu.edu](mailto:mannso@ohsu.edu){.email} | Monday | 3-4pm | VPT 627 |
 
 ## Academic Success Center Tutors
 
