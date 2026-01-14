@@ -280,13 +280,107 @@ $$Y =  \beta_0 + \beta_1X + \epsilon$$
 4.  Calculate and report the estimate and confidence interval for the
     expected/mean response given $X$
 
+## Residuals recap
+
+- Recall our population model residuals are distributed by
+    $\epsilon \sim N(0, \sigma^2)$
+- And our estimated residuals are
+        $\widehat\epsilon \sim N(0, \widehat\sigma^2)$
+
+ 
+
+::: columns
+::: {.column width="33%"}
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+# code from https://drsimonj.svbtle.com/visualising-residuals
+regression_points <- augment(model1)
+
+ggplot(regression_points, 
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
+  geom_segment(aes(
+    xend = cell_phones_100, 
+    yend = .fitted), 
+    alpha = 1, 
+    color = "#4FADF3", 
+    size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "#F14124", size=3) +
+  # > Color adjustments made here...
+  geom_point(color = "black", size = 4) +  # Color mapped here
+  #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
+    #guides(color = "none") +
+  geom_point(aes(y = .fitted), shape = 1, size = 4) +
+labs(x = "Cell phones per 100 people", 
+       y = "Life expectancy (years)",
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+```
+:::
+::: {.column width="33%"}
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+
+## Make a plot of the residuals from the above plot, but now the best fit line is vertical at 0 and the blue lines showing the residuals are plotted
+
+ggplot(regression_points, 
+       aes(x = .resid,
+                 y = cell_phones_100)) +
+  geom_segment(aes(
+    xend = 0, 
+    yend = cell_phones_100), 
+    alpha = 1, 
+    color = "#4FADF3", 
+    size = 2) +
+  geom_vline(xintercept = 0, color = "#F14124", size=3) +
+  geom_point(color = "black", size = 4) +
+labs(x = "Residuals", 
+       y = "Cell phones per 100 people",
+       title = "Residuals from fitted model") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+
+# plot the residuals
+ggplot(regression_points, aes(x = .resid)) +
+  geom_histogram() +
+  geom_vline(xintercept = 0, color = "#F14124", size=3) +
+  labs(x = "Residuals", y = "Count", 
+       title = "Residuals from fitted model") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+```
+:::
+:::
+
+
 ## $\widehat\sigma^2$: Needed ingredient for inference
 
--   Recall our population model residuals are distributed by
-    $\epsilon \sim N(0, \sigma^2)$
-    -   And our estimated residuals are
-        $\widehat\epsilon \sim N(0, \widehat\sigma^2)$
--   Hence, the *variance* of the errors (residuals) is estimated by
+- **We need the variance of the residuals $\sigma^2$ to perform inference on our
+    coefficients**
+
+-   The *variance* of the errors (residuals) is estimated by
     $\widehat{\sigma}^2$
 
 ::: heq
@@ -526,11 +620,11 @@ H_0 &: \beta_1 = 0\\
 
 ::: columns
 ::: {.column width="50%"}
-$$\text{SE}_{\widehat\beta_1} = \frac{s_{\textrm{residuals}}}{s_x\sqrt{n-1}}$$
+$$\text{SE}_{\widehat\beta_1} = \frac{\widehat{\sigma}}{s_X\sqrt{n-1}}$$
 :::
 
 ::: {.column width="50%"}
-$\text{SE}_{\widehat\beta_1}$ is the **variability** of the statistic
+$\text{SE}_{\widehat\beta_1}$ is a measure of **variability** of the estimate
 $\widehat\beta_1$
 :::
 :::
@@ -540,21 +634,21 @@ $\widehat\beta_1$
 ::: {style="font-size: 90%;"}
 ::: columns
 ::: {.column width="32%"}
--   $s_{\textrm{residuals}}^2$ is the sd of the residuals
+-   $\widehat{\sigma}$ is the standard deviation of the residuals
 :::
 
 ::: {.column width="1%"}
 :::
 
 ::: {.column width="32%"}
--   $s_x$ is the sample sd of the explanatory variable $x$
+-   $s_X$ is the sample standard deviation of the explanatory variable $X$
 :::
 
 ::: {.column width="1%"}
 :::
 
 ::: {.column width="32%"}
--   $n$ is the sample size, or the number of (complete) pairs of points
+-   $n$ is the sample size, or the number of observations in the model
 :::
 :::
 :::
@@ -735,7 +829,7 @@ model1_b1 %>% gt() %>%
 
 We reject the null hypothesis that the slope is 0 at the $5\%$
 significance level. There is sufficient evidence that there is
-significant association between life expectancy and number of cell phones per 100 people (p-value \< 0.0001).
+association between life expectancy and number of cell phones per 100 people (p-value \< 0.0001).
 
 ## Note on hypothesis testing using `R`
 
@@ -1042,7 +1136,7 @@ LB, UB).
 ## For reference: quick CI for $\beta_0$
 
 -   Calculate CI for population **intercept** $\beta_0$:
-    $\widehat{\beta}_0 \pm t^*\cdot SE_{\beta_0}$
+    $\widehat{\beta}_0 \pm t^*\cdot SE_{\widehat{\beta}_0}$
 
 where $t^*$ is the $t$-distribution critical value with $df = n -2$
 
@@ -1154,11 +1248,11 @@ gapm %>%
 
 $$\widehat{E}[Y|X^*] \pm t_{n-2}^* \cdot SE_{\widehat{E}[Y|X^*]}$$
 
-$$SE_{\widehat{E}[Y|X^*]} = s_{\text{residuals}} \sqrt{\frac{1}{n} + \frac{(X^* - \overline{X})^2}{(n-1)s_X^2}}$$
+$$SE_{\widehat{E}[Y|X^*]} = \widehat{\sigma} \sqrt{\frac{1}{n} + \frac{(X^* - \overline{X})^2}{(n-1)s_X^2}}$$
 
 -   $\widehat{E}[Y|X^*]$ is the predicted value at the specified point
     $X^*$ of the explanatory variable
--   $s_{\textrm{residuals}}^2$ is the sd of the residuals
+-   $\widehat{\sigma}^2$ is the sd of the residuals
 -   $n$ is the sample size, or the number of (complete) pairs of points
 -   $\overline{X}$ is the sample mean of the explanatory variable $x$
 -   $s_X$ is the sample sd of the explanatory variable $X$
@@ -1191,7 +1285,7 @@ UCI = Y60 + MOE_Yx
 \begin{align}
 \widehat{E}[Y|X^*] &\pm t_{n-2}^* \cdot SE_{\widehat{E}[Y|X^*]}\\
 
-`r round(Y60, 3)` &\pm `r round(tstar, 3)` \cdot s_{residuals} \sqrt{\frac{1}{n} + \frac{(X^* - \bar{x})^2}{(n-1)s_x^2}}\\
+`r round(Y60, 3)` &\pm `r round(tstar, 3)` \cdot \widehat{\sigma} \sqrt{\frac{1}{n} + \frac{(X^* - \bar{x})^2}{(n-1)s_X^2}}\\
 
 `r round(Y60, 3)` &\pm `r round(tstar, 3)` \cdot `r round(s_resid, 3)` \sqrt{\frac{1}{`r n`} + \frac{(`r Xstar` - `r round(mx, 3)`)^2}{(`r n`-1)`r round(s_x, 3)`^2}}\\
 
@@ -1292,7 +1386,7 @@ gapm %>%
 ```{=tex}
 \begin{align}
 \widehat{E}[Y|X^*] &\pm t_{n-2}^* \cdot SE_{\widehat{E}[Y|X^*]}\\
-\widehat{E}[Y|X^*] &\pm t_{n-2}^* \cdot s_{residuals} \sqrt{\frac{1}{n} + \frac{(X^* - \bar{x})^2}{(n-1)s_x^2}}
+\widehat{E}[Y|X^*] &\pm t_{n-2}^* \cdot \widehat{\sigma} \sqrt{\frac{1}{n} + \frac{(X^* - \bar{x})^2}{(n-1)s_x^2}}
 \end{align}
 ```
 ```{r}

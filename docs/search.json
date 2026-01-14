@@ -543,7 +543,7 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#widehatsigma2-needed-ingredient-for-inference",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "\\(\\widehat\\sigma^2\\): Needed ingredient for inference",
-    "text": "\\(\\widehat\\sigma^2\\): Needed ingredient for inference\n\nRecall our population model residuals are distributed by \\(\\epsilon \\sim N(0, \\sigma^2)\\)\n\nAnd our estimated residuals are \\(\\widehat\\epsilon \\sim N(0, \\widehat\\sigma^2)\\)\n\nHence, the variance of the errors (residuals) is estimated by \\(\\widehat{\\sigma}^2\\)\n\n\n\\[\\widehat{\\sigma}^2 = S_{y|x}^2= \\frac{1}{n-2}\\sum_{i=1}^n (Y_i - \\widehat{Y}_i)^2 =\\frac{1}{n-2}SSE = MSE\\]"
+    "text": "\\(\\widehat\\sigma^2\\): Needed ingredient for inference\n\nWe need the variance of the residuals \\(\\sigma^2\\) to perform inference on our coefficients\nThe variance of the errors (residuals) is estimated by \\(\\widehat{\\sigma}^2\\)\n\n\n\\[\\widehat{\\sigma}^2 = S_{y|x}^2= \\frac{1}{n-2}\\sum_{i=1}^n (Y_i - \\widehat{Y}_i)^2 =\\frac{1}{n-2}SSE = MSE\\]"
   },
   {
     "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#widehatsigma2-i-hope-r-can-calculate-that-for-me-12",
@@ -606,7 +606,7 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#standard-error-of-fitted-slope-widehatbeta_1",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "Standard error of fitted slope \\(\\widehat\\beta_1\\)",
-    "text": "Standard error of fitted slope \\(\\widehat\\beta_1\\)\n\n   \n\n\n\\[\\text{SE}_{\\widehat\\beta_1} = \\frac{s_{\\textrm{residuals}}}{s_x\\sqrt{n-1}}\\]\n\n\\(\\text{SE}_{\\widehat\\beta_1}\\) is the variability of the statistic \\(\\widehat\\beta_1\\)\n\n   \n\n\n\n\n\\(s_{\\textrm{residuals}}^2\\) is the sd of the residuals\n\n\n\n\n\n\\(s_x\\) is the sample sd of the explanatory variable \\(x\\)\n\n\n\n\n\n\\(n\\) is the sample size, or the number of (complete) pairs of points"
+    "text": "Standard error of fitted slope \\(\\widehat\\beta_1\\)\n\n   \n\n\n\\[\\text{SE}_{\\widehat\\beta_1} = \\frac{\\widehat{\\sigma}}{s_X\\sqrt{n-1}}\\]\n\n\\(\\text{SE}_{\\widehat\\beta_1}\\) is a measure of variability of the estimate \\(\\widehat\\beta_1\\)\n\n   \n\n\n\n\n\\(\\widehat{\\sigma}\\) is the standard deviation of the residuals\n\n\n\n\n\n\\(s_X\\) is the sample standard deviation of the explanatory variable \\(X\\)\n\n\n\n\n\n\\(n\\) is the sample size, or the number of observations in the model"
   },
   {
     "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#calculating-standard-error-for-widehatbeta_1-12",
@@ -662,7 +662,7 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#life-expectancy-example-hypothesis-test-for-population-slope-beta_1-44",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "Life expectancy example: hypothesis test for population slope \\(\\beta_1\\) (4/4)",
-    "text": "Life expectancy example: hypothesis test for population slope \\(\\beta_1\\) (4/4)\n\nWrite a conclusion\n\n \nWe reject the null hypothesis that the slope is 0 at the \\(5\\%\\) significance level. There is sufficient evidence that there is significant association between life expectancy and number of cell phones per 100 people (p-value &lt; 0.0001)."
+    "text": "Life expectancy example: hypothesis test for population slope \\(\\beta_1\\) (4/4)\n\nWrite a conclusion\n\n \nWe reject the null hypothesis that the slope is 0 at the \\(5\\%\\) significance level. There is sufficient evidence that there is association between life expectancy and number of cell phones per 100 people (p-value &lt; 0.0001)."
   },
   {
     "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#note-on-hypothesis-testing-using-r",
@@ -753,7 +753,7 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#for-reference-quick-ci-for-beta_0",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "For reference: quick CI for \\(\\beta_0\\)",
-    "text": "For reference: quick CI for \\(\\beta_0\\)\n\nCalculate CI for population intercept \\(\\beta_0\\): \\(\\widehat{\\beta}_0 \\pm t^*\\cdot SE_{\\beta_0}\\)\n\nwhere \\(t^*\\) is the \\(t\\)-distribution critical value with \\(df = n -2\\)\n\nUse the regression table\n\n\ntidy(model1, conf.int = T) %&gt;% gt() %&gt;%\n  tab_options(table.font.size = 40) %&gt;% fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n60.041\n2.056\n29.207\n0.000\n55.964\n64.117\n\n\ncell_phones_100\n0.094\n0.017\n5.546\n0.000\n0.060\n0.127\n\n\n\n\n\n\n\n\n\nGeneral statement for population intercept inference\n\n\nThe expected outcome for the \\(Y\\)-variable is (\\(\\widehat\\beta_0\\)) when the \\(X\\)-variable is 0 (95% CI: LB, UB).\n\n\n\nFor example: The average life expectancy is 60.04 years when the number of cell phones per person is 0 (95% CI: 55.96, 64.12)."
+    "text": "For reference: quick CI for \\(\\beta_0\\)\n\nCalculate CI for population intercept \\(\\beta_0\\): \\(\\widehat{\\beta}_0 \\pm t^*\\cdot SE_{\\widehat{\\beta}_0}\\)\n\nwhere \\(t^*\\) is the \\(t\\)-distribution critical value with \\(df = n -2\\)\n\nUse the regression table\n\n\ntidy(model1, conf.int = T) %&gt;% gt() %&gt;%\n  tab_options(table.font.size = 40) %&gt;% fmt_number(decimals = 3)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n60.041\n2.056\n29.207\n0.000\n55.964\n64.117\n\n\ncell_phones_100\n0.094\n0.017\n5.546\n0.000\n0.060\n0.127\n\n\n\n\n\n\n\n\n\nGeneral statement for population intercept inference\n\n\nThe expected outcome for the \\(Y\\)-variable is (\\(\\widehat\\beta_0\\)) when the \\(X\\)-variable is 0 (95% CI: LB, UB).\n\n\n\nFor example: The average life expectancy is 60.04 years when the number of cell phones per person is 0 (95% CI: 55.96, 64.12)."
   },
   {
     "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#finding-a-mean-response-given-a-value-of-our-independent-variable",
@@ -781,7 +781,7 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#example-option-1-ci-for-mean-response-mu_yx",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "Example Option 1: CI for mean response \\(\\mu_{Y|X^*}\\)",
-    "text": "Example Option 1: CI for mean response \\(\\mu_{Y|X^*}\\)\nFind the 95% CI’s for mean life expectancy for 60 cell phones per 100 people:\n\\[\\begin{align}\n\\widehat{E}[Y|X^*] &\\pm t_{n-2}^* \\cdot SE_{\\widehat{E}[Y|X^*]}\\\\\n\n65.671 &\\pm 1.983 \\cdot s_{residuals} \\sqrt{\\frac{1}{n} + \\frac{(X^* - \\bar{x})^2}{(n-1)s_x^2}}\\\\\n\n65.671 &\\pm 1.983 \\cdot 5.964 \\sqrt{\\frac{1}{105} + \\frac{(60 - 116.523)^2}{(105-1)34.565^2}}\\\\\n\n65.671 &\\pm 1.983 \\cdot 1.12\\\\\n\n65.671 &\\pm 2.22\\\\\n\n(63.45 &, 67.891)\n\\end{align}\\]"
+    "text": "Example Option 1: CI for mean response \\(\\mu_{Y|X^*}\\)\nFind the 95% CI’s for mean life expectancy for 60 cell phones per 100 people:\n\\[\\begin{align}\n\\widehat{E}[Y|X^*] &\\pm t_{n-2}^* \\cdot SE_{\\widehat{E}[Y|X^*]}\\\\\n\n65.671 &\\pm 1.983 \\cdot \\widehat{\\sigma} \\sqrt{\\frac{1}{n} + \\frac{(X^* - \\bar{x})^2}{(n-1)s_X^2}}\\\\\n\n65.671 &\\pm 1.983 \\cdot 5.964 \\sqrt{\\frac{1}{105} + \\frac{(60 - 116.523)^2}{(105-1)34.565^2}}\\\\\n\n65.671 &\\pm 1.983 \\cdot 1.12\\\\\n\n65.671 &\\pm 2.22\\\\\n\n(63.45 &, 67.891)\n\\end{align}\\]"
   },
   {
     "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#example-option-2-ci-for-mean-response-mu_yx",
@@ -809,7 +809,7 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#width-of-confidence-bands-for-mean-response-mu_yx",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "Width of confidence bands for mean response \\(\\mu_{Y|X^*}\\)",
-    "text": "Width of confidence bands for mean response \\(\\mu_{Y|X^*}\\)\n\nFor what values of \\(X^*\\) are the confidence bands (intervals) narrowest? widest?\n\n\\[\\begin{align}\n\\widehat{E}[Y|X^*] &\\pm t_{n-2}^* \\cdot SE_{\\widehat{E}[Y|X^*]}\\\\\n\\widehat{E}[Y|X^*] &\\pm t_{n-2}^* \\cdot s_{residuals} \\sqrt{\\frac{1}{n} + \\frac{(X^* - \\bar{x})^2}{(n-1)s_x^2}}\n\\end{align}\\]"
+    "text": "Width of confidence bands for mean response \\(\\mu_{Y|X^*}\\)\n\nFor what values of \\(X^*\\) are the confidence bands (intervals) narrowest? widest?\n\n\\[\\begin{align}\n\\widehat{E}[Y|X^*] &\\pm t_{n-2}^* \\cdot SE_{\\widehat{E}[Y|X^*]}\\\\\n\\widehat{E}[Y|X^*] &\\pm t_{n-2}^* \\cdot \\widehat{\\sigma} \\sqrt{\\frac{1}{n} + \\frac{(X^* - \\bar{x})^2}{(n-1)s_x^2}}\n\\end{align}\\]"
   },
   {
     "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred_muddy_points.html",
@@ -5618,6 +5618,13 @@
     "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#ci-for-population-mean-response-widehateyx-or-mu_yx",
     "title": "Lesson 4: SLR Inference and Prediction",
     "section": "CI for population mean response (\\(\\widehat{E}[Y|X^*]\\) or \\(\\mu_{Y|X^*})\\)",
-    "text": "CI for population mean response (\\(\\widehat{E}[Y|X^*]\\) or \\(\\mu_{Y|X^*})\\)\n\\[\\widehat{E}[Y|X^*] \\pm t_{n-2}^* \\cdot SE_{\\widehat{E}[Y|X^*]}\\]\n\\[SE_{\\widehat{E}[Y|X^*]} = s_{\\text{residuals}} \\sqrt{\\frac{1}{n} + \\frac{(X^* - \\overline{X})^2}{(n-1)s_X^2}}\\]\n\n\\(\\widehat{E}[Y|X^*]\\) is the predicted value at the specified point \\(X^*\\) of the explanatory variable\n\\(s_{\\textrm{residuals}}^2\\) is the sd of the residuals\n\\(n\\) is the sample size, or the number of (complete) pairs of points\n\\(\\overline{X}\\) is the sample mean of the explanatory variable \\(x\\)\n\\(s_X\\) is the sample sd of the explanatory variable \\(X\\)\n\n\n\nRecall that \\(t_{n-2}^*\\) is calculated using qt() and depends on the confidence level (\\(1-\\alpha\\))"
+    "text": "CI for population mean response (\\(\\widehat{E}[Y|X^*]\\) or \\(\\mu_{Y|X^*})\\)\n\\[\\widehat{E}[Y|X^*] \\pm t_{n-2}^* \\cdot SE_{\\widehat{E}[Y|X^*]}\\]\n\\[SE_{\\widehat{E}[Y|X^*]} = \\widehat{\\sigma} \\sqrt{\\frac{1}{n} + \\frac{(X^* - \\overline{X})^2}{(n-1)s_X^2}}\\]\n\n\\(\\widehat{E}[Y|X^*]\\) is the predicted value at the specified point \\(X^*\\) of the explanatory variable\n\\(\\widehat{\\sigma}^2\\) is the sd of the residuals\n\\(n\\) is the sample size, or the number of (complete) pairs of points\n\\(\\overline{X}\\) is the sample mean of the explanatory variable \\(x\\)\n\\(s_X\\) is the sample sd of the explanatory variable \\(X\\)\n\n\n\nRecall that \\(t_{n-2}^*\\) is calculated using qt() and depends on the confidence level (\\(1-\\alpha\\))"
+  },
+  {
+    "objectID": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#residuals-recap",
+    "href": "lessons/04_SLR_Inf_Pred/04_SLR_Inf_Pred.html#residuals-recap",
+    "title": "Lesson 4: SLR Inference and Prediction",
+    "section": "Residuals recap",
+    "text": "Residuals recap\n\nRecall our population model residuals are distributed by \\(\\epsilon \\sim N(0, \\sigma^2)\\)\nAnd our estimated residuals are \\(\\widehat\\epsilon \\sim N(0, \\widehat\\sigma^2)\\)"
   }
 ]
