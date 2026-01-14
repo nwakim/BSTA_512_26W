@@ -213,7 +213,7 @@ tidy(model1) %>% gt() %>%
 ```{=tex}
 \begin{aligned}
 \widehat{Y} &= \widehat\beta_0 + \widehat\beta_1 \cdot X\\
-\widehat{\text{life expectancy}} &= 50.9 + 0.232 \cdot \text{cell phones}
+\widehat{\text{life expectancy}} &= 60.04 + 0.09 \cdot \text{cell phones}
 \end{aligned}
 ```
 :::
