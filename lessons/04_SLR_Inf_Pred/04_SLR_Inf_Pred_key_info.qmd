@@ -11,6 +11,9 @@ editor_options:
 ## Announcements
 
 - No class on Monday! MLKJ day!
+- Mandatory in-person attendance on 1/21 (that Wednesday)
+  - Will discuss Lab 1
+  - If you have extenuating circumstances, please email me for your make-up assignment
 - My office hours will be on Fridays from 11am-12pm
   - Will start 1/23
 - [Some workshops that are free through INSTATS](https://ohsuitg-my.sharepoint.com/:w:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Other_resources/INSTATS_free_workshops.docx?d=w7d533320ecd748088c30841e40c578cb&csf=1&web=1&e=qHCePc)
@@ -18,5 +21,5 @@ editor_options:
 
 ## Key Dates
 
-- Lab 1 due this Sunday at 11pm
+- Lab 1 due this **Sunday** at 11pm
 
