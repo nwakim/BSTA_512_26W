@@ -3,8 +3,7 @@ title: "Lesson 4: SLR Inference and Prediction"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "01/15/2025"
-categories: ["Week 1"]
+date: "`r library(here); source(here('class_dates.R')); w2d2`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -48,7 +47,7 @@ library(readxl)
 # quarto install extension quarto-ext/fontawesome
 
 # set ggplot theme for slides 
-theme_set(theme_gray(base_size = 22))
+theme_set(theme_bw(base_size = 22))
 # theme_update(text = element_text(size=16))  # set global text size for ggplots
 
 ```
@@ -57,8 +56,7 @@ theme_set(theme_gray(base_size = 22))
 #| include: false
 #| message: false
 #| warning: false
-gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA") 
-gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
+load(here("data", "gapminder2022.RData"))
 ```
 
 ```{r}
@@ -66,7 +64,7 @@ gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
 #| message: false
 #| warning: false
 # Fit regression model:
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 
 # some output, but not complete
 model1
@@ -84,16 +82,6 @@ summary(model1)
 tidy(model1) %>% gt()
 ```
 
-## Textbook readings
-
-- [Introduction to Regression Methods for Public Health Using R](https://bookdown.org/rwnahhas/RMPH/)
-  - [4.5 Interpreting p-values](https://bookdown.org/rwnahhas/RMPH/slr-pvalues.html#slr-pvalues)
-  - [4.6 Predictions from the model](https://bookdown.org/rwnahhas/RMPH/slr-prediction.html#slr-prediction)
-  - [4.7 Confidence intervals and prediction intervals](https://bookdown.org/rwnahhas/RMPH/slr-confints.html)
-  
-- [A Progressive Introduction to Linear Models](https://jfrench.github.io/LinearRegression/)
-  - Not really any good sections
-
 # Learning Objectives
 
 1.  Estimate the variance of the residuals
@@ -109,7 +97,7 @@ tidy(model1) %>% gt()
   max-height: 100% !important;
 }
 ```
-    
+
 ## Process of regression data analysis
 
 ::: box
@@ -202,16 +190,21 @@ Model Use (Inference)
 
 ## Let's remind ourselves of the model that we fit last lesson
 
--   We fit Gapminder data with female literacy rate as our independent
+-   We fit Gapminder data with cell phones as our independent
     variable and life expectancy as our dependent variable
 
 -   We used OLS to find the coefficient estimates of our best-fit line
 
 ::: columns
-::: {.column width="58%"}
+::: {.column width="53%"}
 ```{r}
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
-# Get regression table:
+model1 <- gapm %>% 
+  lm(formula = life_exp ~ cell_phones_100)
+```
+
+```{r}
+#| code-fold: true
+
 tidy(model1) %>% gt() %>% 
  tab_options(table.font.size = 40) %>%
  fmt_number(decimals = 2)
@@ -220,7 +213,7 @@ tidy(model1) %>% gt() %>%
 ```{=tex}
 \begin{aligned}
 \widehat{Y} &= \widehat\beta_0 + \widehat\beta_1 \cdot X\\
-\widehat{\text{life expectancy}} &= 50.9 + 0.232 \cdot \text{female literacy rate}
+\widehat{\text{life expectancy}} &= 50.9 + 0.232 \cdot \text{cell phones}
 \end{aligned}
 ```
 :::
@@ -228,23 +221,23 @@ tidy(model1) %>% gt() %>%
 ::: {.column width="2%"}
 :::
 
-::: {.column width="40%"}
+::: {.column width="45%"}
 ```{r}
 #| fig-height: 8
 #| fig-width: 11
 #| echo: false
 
 gapm_slr_plot = gapm %>%
-  ggplot(aes(x = FemaleLiteracyRate,
-             y = LifeExpectancyYrs)) +
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))
+        title = element_text(size = 25))
 
 gapm_slr_plot
 ```
@@ -302,16 +295,24 @@ $$\widehat{\sigma}^2 = S_{y|x}^2= \frac{1}{n-2}\sum_{i=1}^n (Y_i - \widehat{Y}_i
 
 ## $\widehat\sigma^2$: I hope R can calculate that for me... (1/2)
 
+::: columns
+::: {.column width="33%"}
 -   The *standard deviation* $\widehat{\sigma}$ is given in the R output
     as the `Residual standard error`
 
     -   $4^{th}$ line from the bottom in the `summary()` output of the
         model:
+:::
 
+::: {.column width="2%"}
+:::
 
+::: {.column width="65%"}
 ```{r}
 summary(model1)
 ```
+:::
+:::
 
 ## $\widehat\sigma^2$: I hope R can calculate that for me... (2/2)
 
@@ -321,7 +322,8 @@ summary(model1)
 m1_sum = summary(model1)
 m1_sum$sigma
 # number of observations (pairs of data) used to run the model
-nobs(model1) 
+n = nobs(model1) 
+n
 ```
 
 ## $\widehat\sigma^2$ to SSE
@@ -332,7 +334,7 @@ nobs(model1)
 $$\begin{aligned}
 \widehat{\sigma}^2 & = \frac{1}{n-2}SSE\\
 6.142^2 & = \frac{1}{80-2}SSE\\
-SSE & = 78 \cdot 6.142^2 = 2942.48 
+SSE & = `r n-2` \cdot 6.142^2 = 2942.48 
 \end{aligned}$$
 
 -   2942.48 is the smallest sums of squares of all possible regression
@@ -356,7 +358,7 @@ SSE & = 78 \cdot 6.142^2 = 2942.48
 
 ## Do we trust our estimate $\widehat\beta_1$?
 
--   So far, we have shown that we think the estimate is 0.232 
+-   So far, we have shown that we think the estimate is `r round(tidy(model1)$estimate[2], 3)` 
 
  
 
@@ -570,7 +572,7 @@ glance(model1)
 (s_resid <- glance(model1)$sigma)
 
 # standard deviation of x's
-(s_x <- sd(gapm$FemaleLiteracyRate, na.rm=T))
+(s_x <- sd(gapm$cell_phones_100, na.rm=T))
 
 # number of pairs of complete observations
 (n <- nobs(model1))
@@ -586,7 +588,7 @@ glance(model1)
 
 ```{r}
 # recall model1_b1 is regression table restricted to b1 row
-model1_b1 <-tidy(model1) %>% filter(term == "FemaleLiteracyRate")
+model1_b1 <-tidy(model1) %>% filter(term == "cell_phones_100")
 model1_b1 %>% gt() %>%
   tab_options(table.font.size = 45) %>% fmt_number(decimals = 4)
 ```
@@ -630,20 +632,15 @@ model1_b1 %>% gt() %>%
 -   Steps 1-4 are setting up our hypothesis test: not much change from
     the general steps
 
-::: highlight-container
-::: highlight
-1.  For today's class, we are assuming that we have met the underlying
-    assumptions (checked in our Model Evaluation step)
-:::
-:::
+1.  Check the [**assumptions**]{style="color:#4FADF3"}: We have met the underlying assumptions (checked in our Model Evaluation step)
 
-::: highlight-container
-::: highlight
-2.  State the null hypothesis.
-:::
-:::
+2.  Set the [**level of significance**]{style="color:#4FADF3"}
 
-We are testing if the slope is 0 or not:
+    - Often we use $\alpha = 0.05$
+
+3.  Specify the [**null**]{style="color:#4FADF3"} ( $H_0$ ) and [**alternative**]{style="color:#4FADF3"} ( $H_A$ ) [**hypotheses**]{style="color:#4FADF3"}
+
+    - We are testing if the slope is 0 or not:
 
 ```{=tex}
 \begin{align}
@@ -651,55 +648,49 @@ H_0 &: \beta_1 = 0\\
 \text{vs. } H_A&: \beta_1 \neq 0
 \end{align}
 ```
-::: highlight-container
-::: highlight
-3.  Specify the significance level.
-:::
-:::
 
-Often we use $\alpha = 0.05$
+4.  Specify the test statistic and its [**distribution under the null**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-4.  Specify the test statistic and its distribution under the null
-:::
-:::
-
-The test statistic is $t$, and follows a Student's t-distribution.
+    - The test statistic is $t$, and follows a Student's t-distribution.
 
 ## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (2/4)
 
-::: highlight-container
-::: highlight
-5.  Compute the value of the test statistic
-:::
-:::
+5.Calculate the [**test statistic**]{style="color:#4FADF3"} 
 
--   **Option 1:** Calculate the test statistic using the values in the
+::: columns
+::: {.column width="49%"}
+**Option 1:** Calculate the test statistic using the values in the
     regression table
 
 ```{r}
-# recall model1_b1 is regression table restricted to b1 row
-model1_b1 <-tidy(model1) %>% filter(term == "FemaleLiteracyRate")
+model1_b1 <-tidy(model1) %>% 
+  filter(term == "cell_phones_100")
 model1_b1 %>% gt() %>%
-  tab_options(table.font.size = 40) %>% fmt_number(decimals = 2)
-(TestStat_b1 <- model1_b1$estimate / model1_b1$std.error)
+  tab_options(table.font.size = 40) %>% 
+  fmt_number(decimals = 3)
+(TestStat_b1 <- model1_b1$estimate / 
+    model1_b1$std.error)
 ```
 
--   **Option 2:** Get the test statistic value ($t^*$) from `R`
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+**Option 2:** Get the test statistic value ($t^*$) from `R`
 
 ```{r}
 model1_b1 %>% gt() %>%
-  tab_options(table.font.size = 40) %>% fmt_number(decimals = 2)
+  tab_options(table.font.size = 40) %>% 
+  fmt_number(decimals = 3)
 ```
+:::
+:::
 
 ## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (3/4)
 
-::: highlight-container
-::: highlight
-6.  Calculate the p-value
-:::
-:::
+6.Calculate the [**p-value**]{style="color:#4FADF3"}
 
 -   The $p$-value is the *probability of obtaining a test statistic*
     **just as extreme or more extreme** *than the **observed** test
@@ -711,63 +702,62 @@ model1_b1 %>% gt() %>%
 -   Statistical theory tells us that the test statistic $t$ can be
     modeled by a $t$-distribution with $df = n-2$.
 
-    -   We had 80 countries' data, so $n=80$
+    -   We had `r n` countries' data, so $n=`n`$
 
--   **Option 1:** Use `pt()` and our calculated test statistic
-
-```{r}
-(pv = 2*pt(TestStat_b1, df=80-2, lower.tail=F))
-```
-
--   **Option 2:** Use the regression table output
+::: columns
+::: {.column width="49%"}
+**Option 1:** Use `pt()` and our calculated test statistic
 
 ```{r}
-model1_b1 %>% gt() %>%
-  tab_options(table.font.size = 40)
+(pv = 2*pt(TestStat_b1, 
+           df=n-2, 
+           lower.tail=F))
 ```
+:::
+::: {.column width="2%"}
+:::
+::: {.column width="49%"}
+**Option 2:** Use the regression table output
+
+```{r}
+model1_b1 %>% gt() %>% 
+  tab_options(table.font.size = 40) %>% 
+  fmt_number(decimals = 3)
+```
+:::
+:::
 
 ## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (4/4)
 
-::: highlight-container
-::: highlight
-7.  Write conclusion for the hypothesis test
-:::
-:::
-
-We reject the null hypothesis that the slope is 0 at the $5\%$
-significance level. There is sufficient evidence that there is
-significant association between female life expectancy and female
-literacy rates (p-value \< 0.0001).
-
-## Note on hypothesis testing using `R`
-
--   We can basically skip Step 5 if we are using the "Option 2" route
+7. Write a [**conclusion**]{style="color:#4FADF3"}
 
  
 
--   In our assignments: if you use Option 2, Step 5 is optional
+We reject the null hypothesis that the slope is 0 at the $5\%$
+significance level. There is sufficient evidence that there is
+significant association between life expectancy and number of cell phones per 100 people (p-value \< 0.0001).
+
+## Note on hypothesis testing using `R`
+
+-   We can basically combine Step 5 and 6 if we are using the "Option 2" route
+
+ 
+
+-   In our assignments: if you use Option 2, Step 5and 6 become one
 
     -   Unless I specifically ask for the test statistic!!
 
 ## Life expectancy ex: hypothesis test for population **intercept** $\beta_0$ (1/4)
 
--   Steps 1-4 are setting up our hypothesis test: not much change from
-    the general steps
+1.  Check the [**assumptions**]{style="color:#4FADF3"}: We have met the underlying assumptions (checked in our Model Evaluation step)
 
-::: highlight-container
-::: highlight
-1.  For today's class, we are assuming that we have met the underlying
-    assumptions (checked in our Model Evaluation step)
-:::
-:::
+2.  Set the [**level of significance**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-2.  State the null hypothesis.
-:::
-:::
+    - Often we use $\alpha = 0.05$
 
-We are testing if the intercept is 0 or not:
+3.  Specify the [**null**]{style="color:#4FADF3"} ( $H_0$ ) and [**alternative**]{style="color:#4FADF3"} ( $H_A$ ) [**hypotheses**]{style="color:#4FADF3"}
+
+    - We are testing if the intercept is 0 or not:
 
 ```{=tex}
 \begin{align}
@@ -775,92 +765,93 @@ H_0 &: \beta_0 = 0\\
 \text{vs. } H_A&: \beta_0 \neq 0
 \end{align}
 ```
-::: highlight-container
-::: highlight
-3.  Specify the significance level
-:::
-:::
 
-Often we use $\alpha = 0.05$
+4.  Specify the test statistic and its [**distribution under the null**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-4.  Specify the test statistic and its distribution under the null
-:::
-:::
-
-This is the same as the slope. The test statistic is $t$, and follows a
-Student's t-distribution.
+    - This is the same as the slope. The test statistic is $t$, and follows a Student's t-distribution.
 
 ## Life expectancy ex: hypothesis test for population **intercept** $\beta_0$ (2/4)
 
-::: highlight-container
-::: highlight
-5.  Compute the value of the test statistic
-:::
-:::
+5.Calculate the [**test statistic**]{style="color:#4FADF3"} 
 
--   **Option 1:** Calculate the test statistic using the values in the
+::: columns
+::: {.column width="49%"}
+**Option 1:** Calculate the test statistic using the values in the
     regression table
 
 ```{r}
-# recall model1_b1 is regression table restricted to b1 row
-model1_b0 <-tidy(model1) %>% filter(term == "(Intercept)")
+model1_b0 <- tidy(model1) %>% 
+  filter(term == "(Intercept)")
 model1_b0 %>% gt() %>%
-  tab_options(table.font.size = 40) %>% fmt_number(decimals = 2)
-(TestStat_b0 <- model1_b0$estimate / model1_b0$std.error)
+  tab_options(table.font.size = 40) %>% 
+  fmt_number(decimals = 3)
+(TestStat_b0 <- model1_b0$estimate / 
+    model1_b0$std.error)
 ```
 
--   **Option 2:** Get the test statistic value ($t^*$) from `R`
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+**Option 2:** Get the test statistic value ($t^*$) from `R`
 
 ```{r}
-model1_b0 %>% gt() %>%
-  tab_options(table.font.size = 40) %>% fmt_number(decimals = 2)
+model1_b0 %>% gt() %>% 
+  tab_options(table.font.size = 40) %>% 
+  fmt_number(decimals = 3)
 ```
+:::
+:::
 
 ## Life expectancy ex: hypothesis test for population **intercept** $\beta_0$ (3/4)
 
-::: highlight-container
-::: highlight
-6.  Calculate the p-value
-:::
-:::
+6.Calculate the [**p-value**]{style="color:#4FADF3"}
 
  
 
--   **Option 1:** Use `pt()` and our calculated test statistic
+::: columns
+::: {.column width="49%"}
+**Option 1:** Use `pt()` and our calculated test statistic
 
 ```{r}
-(pv = 2*pt(TestStat_b0, df=80-2, lower.tail=F))
+(pv = 2*pt(TestStat_b0, 
+           df=n-2, 
+           lower.tail=F))
 ```
 
- 
+:::
 
--   **Option 2:** Use the regression table output
+::: {.column width="2%"}
+:::
+::: {.column width="49%"}
+**Option 2:** Use the regression table output
 
 ```{r}
 model1_b0 %>% gt() %>%
-  tab_options(table.font.size = 40)
+  tab_options(table.font.size = 40) %>%
+  fmt_number(decimals = 3)
 ```
+:::
+:::
 
 ## Life expectancy ex: hypothesis test for population **intercept** $\beta_0$ (4/4)
 
-::: highlight-container
-::: highlight
-7.  Write conclusion for the hypothesis test
-:::
-:::
+7. Write a [**conclusion**]{style="color:#4FADF3"}
+
+ 
 
 We reject the null hypothesis that the intercept is 0 at the $5\%$
 significance level. There is sufficient evidence that the intercept for
-the association between average female life expectancy and female
-literacy rates is different from 0 (p-value \< 0.0001).
+the association between life expectancy and number of cell phones per 100 people is different from 0 (p-value \< 0.0001).
 
    
 
--   Note: if we fail to reject $H_0$, then we could decide to remove the
+-   Note: if we fail to reject $H_0$, then we *could* decide to remove the
     intercept from the model to force the regression line to go through
-    the origin (0,0) if it makes sense to do so for the application.
+    the origin (0,0) if it makes sense to do so for the application
+    - Not typical to remove the intercept
 
 # Learning Objectives
 
@@ -973,7 +964,7 @@ SE_b1 <- model1_b1$std.error
 
 ```{r}
 nobs(model1) # sample size n
-(tstar <- qt(.975, df = 80-2))
+(tstar <- qt(.975, df = n - 2))
 ```
 
 Use formula to calculate each bound
@@ -1028,23 +1019,23 @@ LB, UB).
 :::
 :::
 
--   **In our example:** For every 1% increase in female literacy rate, life expectancy increases, on average,
-    0.232 years (95% CI: 0.170, 0.295).
+-   **In our example:** For every additional cell phone per 100 people, life expectancy increases, on average,
+    `r round(tidy(model1)$estimate[2], 3)` years (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[2], 3)`, `r round(tidy(model1, conf.int = T)$conf.high[2], 3)`)
     
 ## Usually three options for your interpretations
 
-- **Option 1:** For every 1% increase in female literacy rate, life expectancy increases, **on average**,
-    0.232 years (95% CI: 0.170, 0.295).
+- **Option 1:** For every additional cell phone per 100 people, life expectancy increases, **on average**,
+    `r round(tidy(model1)$estimate[2], 3)` years (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[2], 3)`, `r round(tidy(model1, conf.int = T)$conf.high[2], 3)`)
     
  
 
-- **Option 2:** For every 1% increase in female literacy rate, **average** life expectancy increases
-    0.232 years (95% CI: 0.170, 0.295).
+- **Option 2:** For every additional cell phone per 100 people, **average** life expectancy increases
+    `r round(tidy(model1)$estimate[2], 3)` years (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[2], 3)`, `r round(tidy(model1, conf.int = T)$conf.high[2], 3)`)
     
  
 
-- **Option 3:** For every 1% increase in female literacy rate, **expected** life expectancy increases
-    0.232 years (95% CI: 0.170, 0.295).
+- **Option 3:** For every additional cell phone per 100 people, **expected** life expectancy increases
+    `r round(tidy(model1)$estimate[2], 3)` years (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[2], 3)`, `r round(tidy(model1, conf.int = T)$conf.high[2], 3)`)
 
 ## Poll Everywhere Question 4
 
@@ -1073,8 +1064,8 @@ the $X$-variable is 0 (95% CI: LB, UB).
 :::
 :::
 
--   **For example:** The expected/average life expectancy is 50.9 years
-    when the female literacy rate is 0 (95% CI: 45.63, 56.22).
+-   **For example:** The average life expectancy is `r round(tidy(model1)$estimate[1], 2)` years
+    when the number of cell phones per person is 0 (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[1], 2)`, `r round(tidy(model1, conf.int = T)$conf.high[1], 2)`).
 
 # Learning Objectives
 
@@ -1097,21 +1088,20 @@ tidy(model1) %>% gt() %>%
   tab_options(table.font.size = 40) %>% fmt_number(decimals = 3)
 ```
 
-$$\widehat{\textrm{life expectancy}} = 50.9 + 0.232 \cdot \textrm{female literacy rate} $$
+$$\widehat{\textrm{life expectancy}} = `r round(tidy(model1)$estimate[1], 3)` + `r round(tidy(model1)$estimate[2], 3)` \cdot \textrm{cell phones} $$
 
--   What is the expected/predicted life expectancy for a country with
-    female literacy rate 60%?
+-   What is the expected/predicted life expectancy for any country with 60 cell phones per 100 people?
 
-$$\widehat{\textrm{life expectancy}} = 50.9 + 0.232 \cdot 60 = `r 50.9 + 0.232*60`$$
+$$\widehat{\textrm{life expectancy}} = `r round(tidy(model1)$estimate[1], 3)` + `r round(tidy(model1)$estimate[2], 3)` \cdot 60 = `r round( tidy(model1)$estimate[1] + tidy(model1)$estimate[2]*60, 3)`$$
 
 ```{r}
-(y_60 <- 50.9 + 0.232*60)
+(y_60 <- tidy(model1)$estimate[1] + tidy(model1)$estimate[2]*60)
 ```
 
 -   How do we interpret the expected value?
 
     -   We sometimes call this "predicted" value, since we can
-        technically use a literacy rate that is not in our sample
+        technically use a number (of cell phones) that is not in our sample
 
 -   How variable is it?
 
@@ -1138,17 +1128,20 @@ $$\widehat{E}[Y|X^*] = \widehat\beta_0 + \widehat\beta_1 X^*$$
 ```{r}
 #| echo: false
 #| fig.height: 8.0
-#| fig.width: 8.0
+#| fig.width: 9
 
 gapm %>%
-  ggplot(aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+  ggplot(aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_point(size=2) +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Number of cell phones per 100 people", 
        y = "Life expectancy (years)",
-       title = "Life expectancy vs. female literacy rate") +  
+       title = "Life expectancy vs. cell phones") +  
   geom_smooth(method = "lm", se = TRUE, size =3, color = "#F14124") +
-  geom_vline(xintercept = 60, color = "#A7EA52", size = 3)
+  geom_vline(xintercept = 60, color = "#A7EA52", size = 3) +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
 ```
 :::
 :::
@@ -1157,7 +1150,7 @@ gapm %>%
 -   The mean responses have variability, and we can calculate a CI for
     it, for every value of $X^*$
 
-## CI for population mean response ($E[Y|X^*]$ or $\mu_{Y|X^*})$
+## CI for population mean response ($\widehat{E}[Y|X^*]$ or $\mu_{Y|X^*})$
 
 $$\widehat{E}[Y|X^*] \pm t_{n-2}^* \cdot SE_{\widehat{E}[Y|X^*]}$$
 
@@ -1177,76 +1170,42 @@ $$SE_{\widehat{E}[Y|X^*]} = s_{\text{residuals}} \sqrt{\frac{1}{n} + \frac{(X^* 
 
 ## Example Option 1: CI for mean response $\mu_{Y|X^*}$
 
-**Find the 95% CI for the mean life expectancy when the female literacy
-rate is 60.**
+**Find the 95% CI's for mean life expectancy for 60 cell phones per 100 people:**
 
-::: {style="font-size: 70%;"}
+```{r}
+#| echo: false
+Xstar <- 60
+Y60 <- tidy(model1)$estimate[1] + tidy(model1)$estimate[2]*60
+tstar <- qt(.975, df = n - 2)
+s_resid <- glance(model1)$sigma
+n <- nobs(model1)
+mx <- mean(gapm$cell_phones_100, na.rm=T)
+s_x <- sd(gapm$cell_phones_100, na.rm=T)
+SE_Yx <- s_resid *sqrt(1/n + (Xstar - mx)^2/((n-1)*s_x^2))
+MOE_Yx <- SE_Yx*tstar
+LCI = Y60 - MOE_Yx
+UCI = Y60 + MOE_Yx
+```
+
 ```{=tex}
 \begin{align}
 \widehat{E}[Y|X^*] &\pm t_{n-2}^* \cdot SE_{\widehat{E}[Y|X^*]}\\
-64.8596 &\pm 1.990847 \cdot s_{residuals} \sqrt{\frac{1}{n} + \frac{(X^* - \bar{x})^2}{(n-1)s_x^2}}\\
-64.8596 &\pm 1.990847 \cdot 6.142157 \sqrt{\frac{1}{80} + \frac{(60 - 81.65375)^2}{(80-1)21.95371^2}}\\
-64.8596 &\pm 1.990847 \cdot 0.9675541\\
-64.8596 &\pm 1.926252\\
-(62.93335 &, 66.78586)
+
+`r round(Y60, 3)` &\pm `r round(tstar, 3)` \cdot s_{residuals} \sqrt{\frac{1}{n} + \frac{(X^* - \bar{x})^2}{(n-1)s_x^2}}\\
+
+`r round(Y60, 3)` &\pm `r round(tstar, 3)` \cdot `r round(s_resid, 3)` \sqrt{\frac{1}{`r n`} + \frac{(`r Xstar` - `r round(mx, 3)`)^2}{(`r n`-1)`r round(s_x, 3)`^2}}\\
+
+`r round(Y60, 3)` &\pm `r round(tstar, 3)` \cdot `r round(s_resid*sqrt((1/n) + ((Xstar - mx)^2)/((n-1)*s_x^2)), 3)`\\
+
+`r round(Y60, 3)` &\pm `r round(tstar * s_resid*sqrt((1/n) + ((Xstar - mx)^2)/((n-1)*s_x^2)), 3)`\\
+
+(`r round(LCI, 3)` &, `r round(UCI, 3)`)
 \end{align}
 ```
-:::
-
-::: {style="font-size: 90%;"}
-::: columns
-::: {.column width="50%"}
-```{r}
-(Y60 <- 50.9278981 + 0.2321951 * 60)
-(tstar <- qt(.975, df = 78))
-(s_resid <- glance(model1)$sigma)
-```
-:::
-
-::: {.column width="50%"}
-```{r}
-(n <- nobs(model1))
-(mx <- mean(gapm$FemaleLiteracyRate, na.rm=T))
-(s_x <- sd(gapm$FemaleLiteracyRate, na.rm=T))
-```
-:::
-:::
-
-```{r}
-(SE_Yx <- s_resid *sqrt(1/n + (60 - mx)^2/((n-1)*s_x^2)))
-```
-
-::: columns
-::: {.column width="32%"}
-```{r}
-(MOE_Yx <- SE_Yx*tstar)
-```
-:::
-
-::: {.column width="1%"}
-:::
-
-::: {.column width="32%"}
-```{r}
-Y60 - MOE_Yx
-```
-:::
-
-::: {.column width="1%"}
-:::
-
-::: {.column width="32%"}
-```{r}
-Y60 + MOE_Yx
-```
-:::
-:::
-:::
 
 ## Example Option 2: CI for mean response $\mu_{Y|X^*}$
 
-**Find the 95% CI's for the mean life expectancy when the female
-literacy rate is 60 and 80.**
+**Find the 95% CI's for mean life expectancy for 60 and 80 cell phones per 100 people, respectively.**
 
 -   Use the base R `predict()` function
 -   Requires specification of a `newdata` "value"
@@ -1256,7 +1215,7 @@ literacy rate is 60 and 80.**
         model
 
 ```{r}
-newdata <- data.frame(FemaleLiteracyRate = c(60, 80)) 
+newdata <- data.frame(cell_phones_100 = c(60, 80)) 
 newdata
 ```
 
@@ -1266,6 +1225,14 @@ newdata
 predict(model1, 
         newdata=newdata, 
         interval="confidence")
+```
+
+```{r}
+#| echo: false
+pred_x60 = predict(model1, 
+        newdata=newdata, 
+        interval="confidence") %>%
+  as.data.frame()
 ```
 :::
 
@@ -1277,7 +1244,7 @@ Interpretation
 
 ::: fact-cont
 We are 95% confident that the **average** life expectancy for a country
-with a 60% female literacy rate will be between 62.9 and 66.8 years.
+with a 60 cell phones per 100 people will be between `r round(pred_x60$lwr[1], 2)` and `r round(pred_x60$upr[1], 2)` years.
 :::
 :::
 :::
@@ -1297,13 +1264,24 @@ with a 60% female literacy rate will be between 62.9 and 66.8 years.
 
 ```{r}
 #| fig-align: center
+#| output-location: column
+#| fig-height: 8
+#| fig-width: 11
 
 gapm %>%
-  ggplot(aes(x=FemaleLiteracyRate, 
-             y=LifeExpectancyYrs)) +
-  geom_point()+
-  geom_smooth(method = lm, se=TRUE)+
-  ggtitle("Life expectancy vs. female literacy rate") 
+  ggplot(
+    aes(
+      x=cell_phones_100, 
+      y=life_exp
+      )
+    ) +
+  geom_point() +
+  geom_smooth(method = lm, se=TRUE) +
+  labs(
+    x = "Cell phones per 100 people",
+    y = "Life expectancy (years)",
+    title = "Life expectancy vs. cell phones"
+    )
 ```
 
 ## Width of confidence bands for mean response $\mu_{Y|X^*}$
@@ -1322,16 +1300,32 @@ gapm %>%
 #| fig-align: center
 
 gapm %>%
-  ggplot(aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+  ggplot(aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = TRUE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
-       y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and female literacy rate in 2011") +
+  labs(
+    x = "Cell phones per 100 people",
+    y = "Life expectancy (years)",
+    title = "Life expectancy vs. cell phones"
+    ) +
     theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 17)) +
   geom_vline(xintercept = mx, color = "purple", size = 3)
 
 ```
+
+## Textbook readings
+
+- [Introduction to Regression Methods for Public Health Using R](https://bookdown.org/rwnahhas/RMPH/)
+  - [4.5 Interpreting p-values](https://bookdown.org/rwnahhas/RMPH/slr-pvalues.html#slr-pvalues)
+  - [4.6 Predictions from the model](https://bookdown.org/rwnahhas/RMPH/slr-prediction.html#slr-prediction)
+  - [4.7 Confidence intervals and prediction intervals](https://bookdown.org/rwnahhas/RMPH/slr-confints.html)
+  
+- [A Progressive Introduction to Linear Models](https://jfrench.github.io/LinearRegression/)
+  - Not really any good sections
+
+
+    
+

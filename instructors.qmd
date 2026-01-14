@@ -32,14 +32,14 @@ format:
 
 ### Office Hours
 
-TBD
+[Fridays: 11am-12pm on Zoom](https://pdx.zoom.us/j/88034032016)
 
 ## Teaching Assistants
 
 Sheetal Akula, Kelsey Mackenzie, and Sophia Mann will serve as our TAs for the quarter!! They will have the following office hours and will help answer questions over email.
 
 | TA | Email | Day | Time | Location |
-|---------------|---------------|---------------|---------------|---------------|
+|----|----|----|----|----|
 | Sheetal Akula | [akula\@ohsu.edu](mailto:akula@ohsu.edu){.email} | Wednesday | 11:30am-12:30pm | [Webex](https://ohsu.webex.com/meet/akula) |
 | Kelsey Mackenzie | [mackenzie\@ohsu.edu](mailto:mackenzie@ohsu.edu){.email} | Tuesday | 10-11am | [Zoom](https://pdx.zoom.us/j/87663146835) |
 | Sophia Mann | [mannso\@ohsu.edu](mailto:mannso@ohsu.edu){.email} | Monday | 3-4pm | VPT 627 |
@@ -55,7 +55,7 @@ The Academic Success Center has biostatistics/epidemiology tutors available. Unl
 If you are interested in what I consider my Scope of Practice, here is an adapted table from Dr. Costa's [An Educator’s Scope of Practice](http://dx.doi.org/10.1007/978-3-030-92705-9_15):
 
 | What I do | What I do not do |
-|------------------------------------|------------------------------------|
+|----|----|
 | Create positive learning conditions for all learners | Police my students’ attention |
 | Create assessments that accommodate all students' learning styles | Focus on eliminating any opportunity for cheating |
 | Consistently maintain expertise in my subject matter area | Ignore recent updates in my subject matter area |

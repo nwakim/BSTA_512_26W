@@ -60,7 +60,7 @@ Welcome to BSTA 512/612! In this course, we will focus on linear models, and bui
 
 {{< iconify tabler mail-filled size=24px >}} [wakim\@ohsu.edu](mailto:wakim@ohsu.edu)
 
-{{< iconify icon-park-solid time size=24px >}} Office Hours TBD
+{{< iconify icon-park-solid time size=24px >}} [OH: F 11-12](https://pdx.zoom.us/j/88034032016)
 :::
 ::: {.column width="25%"}
 ### TA Office Hours
