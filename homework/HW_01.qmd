@@ -8,8 +8,6 @@ format:
     link-external-newwindow: true
     toc: true
     embed-resources: true
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -167,7 +165,7 @@ Using `ggplot`, create the respective best-fit lines on your plots. Which of the
 
 #### Part e
 
-For the regression that you chose as being more appropriate in part (d), find 95% confidence intervals for the true slope and intercept. Interpret each interval ~~with regard to the null hypothesis that the true value is 0~~.
+For the regression that you chose as being more appropriate in part (d), find 95% confidence intervals for the true slope and intercept. **Interpret each estimate, including the confidence interval.**
 
 ::: {.callout-note appearance="simple"}
 You can get the CI's from the R output
@@ -175,7 +173,7 @@ You can get the CI's from the R output
 
 #### Part f
 
-For the regression that you chose as being more appropriate in part (d), add 95% confidence ~~and prediction~~ bands. Using your sketch, find and interpret an approximate 95% confidence interval for the mean response of an 8-day-old chick.
+For the regression that you chose as being more appropriate in part (d), add 95% confidence bands. Calculate and interpret the mean response of an 8-day-old chick, including a 95% confidence interval.
 
 
 ## Question 7

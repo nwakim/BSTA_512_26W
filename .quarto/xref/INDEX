@@ -312,5 +312,8 @@
   },
   "lessons/gapminder_codebook.qmd": {
     "gapminder_codebook.html": "d45708f4"
+  },
+  "hw_answers/HW_02_ans.qmd": {
+    "HW_02_ans.html": "8b968664"
   }
 }

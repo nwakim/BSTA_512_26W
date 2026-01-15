@@ -1,0 +1,225 @@
+---
+title: "Homework 2 Answers"
+subtitle: "BSTA 512/612"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    toc: true
+    self-contained: true
+    code-block-bg: "#fff"
+    embed-resources: true
+editor_options: 
+  chunk_output_type: console
+---
+
+**Answers are not necessarily complete!** This is just meant to serve as a check if you are stuck. 
+
+```{=html}
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(rstatix)
+library(broom)
+library(broom.helpers)
+library(gt)
+library(janitor)
+library(readxl)
+library(haven)
+library(here)
+library(gtsummary) ## Added this package!!
+
+```
+
+## Questions
+
+### Question 1
+
+```{r}
+#| echo: false
+fatal_dep = read_sas(here("data/completedata.sas7bdat"))
+```
+
+#### Part a
+
+**Answer:**
+
+::: blue
+```{r}
+#| fig-width: 6
+#| fig-height: 4.5
+#| fig-align: center
+
+ggplot(data = fatal_dep, aes(x = Fatalism, y = Depression)) +
+  geom_point() +
+  labs(title = "Scatterplot of Depression vs. Fatalism")
+```
+:::
+
+#### Part b
+
+**Answer:**
+
+::: blue
+```{r}
+#| fig-width: 6
+#| fig-height: 4.5
+#| fig-align: center
+#| message: false
+
+
+fd_model = lm(Depression ~ Fatalism, 
+              data = fatal_dep)
+
+tidy(fd_model) %>% gt() %>%
+  tab_options(table.font.size = 15) %>% fmt_number(decimals = 4)
+
+```
+:::
+
+#### Part c
+
+**Answer:**
+
+::: blue
+```{r}
+fatal_dep2 = fatal_dep %>%
+  mutate(FatalismC = Fatalism - median(Fatalism))
+```
+
+
+```{r}
+#| fig-width: 6
+#| fig-height: 4.5
+#| fig-align: center
+#| message: false
+
+ggplot(data = fatal_dep2, aes(x = FatalismC, y = Depression)) +
+  geom_point() +
+  # geom_smooth(method = lm, se = FALSE, color = "#F14124") +
+  labs(title = "Scatterplot of Depression vs. Fatalism", 
+       x = "Median centered Fatalism")
+```
+:::
+
+#### Part d
+
+**Answer:**
+
+::: blue
+```{r}
+#| fig-width: 6
+#| fig-height: 4.5
+#| fig-align: center
+#| message: false
+
+
+fd_model2 = lm(Depression ~ FatalismC, 
+              data = fatal_dep2)
+
+tidy(fd_model2) %>% gt() %>%
+  tab_options(table.font.size = 15) %>% fmt_number(decimals = 4)
+```
+
+:::
+
+#### Part e
+
+**Answer:**
+
+::: blue
+:::
+
+### Question 2
+
+```{r}
+# first install the palmerpenguins package
+# install.packages("palmerpenguins")
+library(palmerpenguins)
+data(penguins)
+
+# run the command below to learn more about the variables in the penguins dataset
+# ?penguins
+```
+
+#### Part a
+
+::: blue
+```{r}
+flippers_species_ave <- penguins %>% 
+  group_by(species) %>% 
+  summarise(
+    flipper_ave = mean(flipper_length_mm, na.rm = T)
+    )
+
+flippers_species_ave 
+```
+:::
+
+#### Part b
+
+::: blue
+```{r}
+# Note: In class I used fun.y within stats_summary.
+# I noticed that this is now deprecated, and I used fun below instead.
+# Both still work.
+
+ggplot(penguins, aes(x = species, 
+                   y = flipper_length_mm, 
+                   color = species)) +
+  geom_jitter(size = 1, alpha = .6, width = 0.2, 
+              show.legend = FALSE) +     # removed legend since not needed
+  stat_summary(fun = mean, geom = "point", size = 8, shape = 18, 
+               show.legend = FALSE) +    # removed legend since not needed
+  labs(x = "Species", 
+       y = "Flipper lengths (mm)",
+       title = "Flipper lengths by penguin species",
+       caption = "Diamonds = species averages") 
+  
+```
+:::
+
+#### Part c
+
+Write out the fitted regression equation that models the flipper length by penguin species. Use LaTeX math markup or insert an image of your equation. Do not yet insert values for the regression coefficients, i.e. use the generic coefficients $\widehat{\beta}_0, \widehat{\beta}_1$. Use Adelie as the reference level.
+
+::: blue
+
+:::
+
+#### Part d
+
+::: blue
+```{r}
+# names(penguins)
+model3 <- lm(flipper_length_mm ~ species, data = penguins)
+tidy(model3, conf.int=T) %>% gt() # don't need to have confidence intervals, but it will help in next part
+```
+:::
+
+#### Part e
+
+How do we interpret each of the regression coefficients for this model? *Write out a separate interpretation for each of the coefficients.*
+
+::: blue
+
+:::
+
+#### Part f
+
+Calculate the mean flipper length (and the 95% CI) of penguins in the Chinstrap and Gentoo species using the `predict()` function.
+
+::: blue
+```{r}
+newdata = data.frame(species = c("Chinstrap", "Gentoo")) 
+pred = predict(model3, newdata=newdata, interval="confidence")
+```
+
+Chinstrap penguins: `r round(pred[1,1], 2)` mm
+:::
