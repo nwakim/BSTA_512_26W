@@ -11,7 +11,7 @@ editor_options:
 
 ## Muddy Points from 2025
 
-### 1. I had a little bit of trouble visualizing the "worthiness" of how reliable the data is on a graph
+### 1. I had a little bit of trouble visualizing the "trustworthiness" of how reliable the data is on a graph
 
 Exactly. We can get an idea of the "trustworthiness" from a graph, but we can never be certain. That's why we gotta use the math! The math will exactly quantify that "trustworthiness."
 

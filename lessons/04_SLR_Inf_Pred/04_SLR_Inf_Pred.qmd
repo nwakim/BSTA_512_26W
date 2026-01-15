@@ -213,7 +213,7 @@ tidy(model1) %>% gt() %>%
 ```{=tex}
 \begin{aligned}
 \widehat{Y} &= \widehat\beta_0 + \widehat\beta_1 \cdot X\\
-\widehat{\text{life expectancy}} &= 60.04 + 0.09 \cdot \text{cell phones}
+\widehat{\textrm{life expectancy}} &= `r round(tidy(model1)$estimate[1], 3)` + `r round(tidy(model1)$estimate[2], 3)` \cdot \textrm{cell phones}
 \end{aligned}
 ```
 :::
@@ -427,11 +427,11 @@ n
 
 $$\begin{aligned}
 \widehat{\sigma}^2 & = \frac{1}{n-2}SSE\\
-6.142^2 & = \frac{1}{80-2}SSE\\
-SSE & = `r n-2` \cdot 6.142^2 = 2942.48 
+`r round(m1_sum$sigma, 3)`^2 & = \frac{1}{`r n`-2}SSE\\
+SSE & = `r n-2` \cdot `r round(m1_sum$sigma, 3)`^2 = `r round((n-2) * (m1_sum$sigma)^2, 2)` 
 \end{aligned}$$
 
--   2942.48 is the smallest sums of squares of all possible regression
+-   `r round((n-2) * (m1_sum$sigma)^2, 2)` is the smallest sums of squares of all possible regression
     lines through the data
 
 # Learning Objectives
@@ -604,7 +604,7 @@ H_0 &: \beta_1 = 0\\
 
 6.  Calculate the [**p-value**]{style="color:#4FADF3"}
 
-    - We are generally calculating: $2\cdot P(T > t)$
+    - We are generally calculating: $2\cdot P(T > |t|)$
 
 7.  Write a [**conclusion**]{style="color:#4FADF3"}
 
@@ -796,7 +796,7 @@ model1_b1 %>% gt() %>%
 -   Statistical theory tells us that the test statistic $t$ can be
     modeled by a $t$-distribution with $df = n-2$.
 
-    -   We had `r n` countries' data, so $n=`n`$
+    -   We had `r n` countries' data, so $n=`r n`$
 
 ::: columns
 ::: {.column width="49%"}
@@ -1159,7 +1159,7 @@ the $X$-variable is 0 (95% CI: LB, UB).
 :::
 
 -   **For example:** The average life expectancy is `r round(tidy(model1)$estimate[1], 2)` years
-    when the number of cell phones per person is 0 (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[1], 2)`, `r round(tidy(model1, conf.int = T)$conf.high[1], 2)`).
+    when the number of cell phones per 100 people is 0 (95% CI: `r round(tidy(model1, conf.int = T)$conf.low[1], 2)`, `r round(tidy(model1, conf.int = T)$conf.high[1], 2)`).
 
 # Learning Objectives
 
@@ -1212,8 +1212,7 @@ $\varepsilon \sim N(0,\sigma^2)$
 
 <br>
 
--   When we take the expected value, at a given value $X^*$, the average
-    expected response at $X^*$ is:
+-   When we take the expected value, at a given value $X^*$, the average/expected response at $X^*$ is:
 
 $$\widehat{E}[Y|X^*] = \widehat\beta_0 + \widehat\beta_1 X^*$$
 :::
