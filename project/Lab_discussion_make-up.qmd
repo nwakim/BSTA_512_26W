@@ -1,0 +1,28 @@
+---
+title: "Lab Discussion Make-up Assignment"
+format: html
+---
+
+## Logistics
+
+The make-up assignment will be due one week after the in-class discussion day. 
+
+## Directions
+
+### Feedback on another student's lab
+
+You will trade labs with your assigned partner or group. Please share your html documents with each other. 
+
+In a half page to one page, please answer the following questions about your peer's (or peers') lab assignment:
+
+- What was their research question?
+- Do you see any major errors in coding?
+- What were three differences in your approach to the lab?
+- What did you learn from their work?
+- What would you improve from your own lab?
+
+### Share you feedback with your group
+
+Please email your feedback to Nicky and your group (in one email). If you would like to further discuss feedback with each other, you can continue on a separate chain or coordinate a meeting with one another. 
+
+My hope is that you get a sense of your own work by engaging with someone else's. 
