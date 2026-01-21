@@ -73,6 +73,8 @@ countdown::countdown(15)
 
 - Did everyone in the group successfully save the dataset?
 - Can you open it right now?
+- Did everyone include all the race variables?
+- Any other issues with variables??
 
 ```{r}
 #| echo: false

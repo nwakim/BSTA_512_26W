@@ -172,7 +172,7 @@ Model Use (Inference)
 
 -   [You can access my codebook here](../gapminder_codebook.qmd)
 
--   Gapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of poltical rights and civil liberties ratings.
+-   Gapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of political rights and civil liberties ratings.
 
     -   Not free (NF)
     -   Partly free (PF)
@@ -218,7 +218,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
        title = "Life expectancy vs. Freedom status",
-       caption = "Diamonds = region averages") +
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -273,7 +273,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
        title = "Life expectancy vs. Freedom status",
-       caption = "Diamonds = region averages") +
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -397,7 +397,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
        title = "Life expectancy vs. Freedom status",
-       caption = "Diamonds = region averages") +
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 22), 
         axis.text = element_text(size = 22), 
         title = element_text(size = 22))
@@ -407,7 +407,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
 
 ## Building the regression equation: Indicator functions
 
--   In order to represent each region in the equation, we need to introduce a new function:
+-   In order to represent each status in the equation, we need to introduce a new function:
 
     -   Indicator function:
 
@@ -420,7 +420,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
 
     -   This basically a binary yes/no if $X$ is a specific value $x$
 
--   For example, if we want to identify a country as being in the Americas region, we can make:
+-   For example, if we want to identify a country as partly free, we can make:
 
     $$I(FS = \text{partly free}) \text{ or }I(\text{partly free}) = 
     \left\{
@@ -453,7 +453,7 @@ $$\begin{aligned}
 
 -   However, a linear regression equation still requires an intercept!
 
-    -   So one of our regions need to become our "reference" group
+    -   So one of our statuses need to become our "reference" group
     -   We'll use "not free" as our reference
     -   That means we need to adjust all the numbers
 
@@ -472,7 +472,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
        title = "Life expectancy vs. Freedom status",
-       caption = "Diamonds = region averages") +
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -502,7 +502,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
        title = "Life expectancy vs. Freedom status",
-       caption = "Diamonds = region averages") +
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -592,7 +592,7 @@ $$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod
 
 -   Don't forget that we can use the confidence intervals to assess whether the mean difference with Africa is significant or not
 
-## We can also use R to report each region's average life expectancy
+## We can also use R to report each status's average life expectancy
 
 **Find the 95% CI's for the mean life expectancy for the countries that are partly free and free**
 
@@ -813,7 +813,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
        title = "Life expectancy vs. Freedom status",
-       caption = "Diamonds = region averages") +
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -833,7 +833,7 @@ ggplot(m1_aug, aes(x = freedom_status, y = .fitted)) + geom_point() +
   theme(axis.text = element_text(size = 22), axis.title = element_text(size = 22))
 ```
 
-## Residual plots (now the spread within each region)
+## Residual plots (now the spread within each status)
 
 ```{r fig.height=6, fig.width=6, warning=F}
 #| echo: true
@@ -877,6 +877,16 @@ ggplot(m1_aug, aes(x=.resid)) + geom_histogram() +
 ::: {.column width="40%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
+
+gapm2 = gapm2 %>%
+ mutate(income_level_4 = fct_relevel(
+          income_level_4, 
+            "Low income", 
+            "Lower middle income", 
+            "Upper middle income", 
+            "High income"
+ ))
+
 ggplot(gapm2, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
@@ -898,12 +908,13 @@ A few changes needed:
 ```{r}
 #| echo: true
 gapm2 = gapm2 %>%
- mutate(income_level_4 = factor(income_level_4, 
-            ordered = T, 
-            levels = c("Low income", 
+ mutate(income_level_4 = fct_relevel(
+          income_level_4, 
+            "Low income", 
             "Lower middle income", 
             "Upper middle income", 
-            "High income")))
+            "High income"
+ ))
 ```
 
 -   Make the income levels readable
@@ -919,7 +930,9 @@ gapm2 = gapm2 %>%
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| eval: false
 #| echo: true
-ggplot(gapm, aes(x = income_level_4, y = life_exp)) +
+
+
+ggplot(gapm2, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   labs(x = "Income levels", 
@@ -936,7 +949,7 @@ ggplot(gapm, aes(x = income_level_4, y = life_exp)) +
 ::: {.column width="40%"}
 ```{r fig.height=8, fig.width=7, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm, aes(x = income_level_4, y = life_exp)) +
+ggplot(gapm2, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   labs(x = "Income levels", 
@@ -1040,6 +1053,9 @@ ggplot(gapm2, aes(x = as.numeric(income_level_4), y = life_exp)) +
 
 ## Ordinal coding / Scoring
 
+::: columns
+::: {.column width="40%"}
+
 -   Map each income level to a number
 
 -   Usually start at 1
@@ -1051,12 +1067,24 @@ ggplot(gapm2, aes(x = as.numeric(income_level_4), y = life_exp)) +
 | Upper middle income | 3     |
 | High income         | 4     |
 
+:::
+
+::: {.column width="60%"}
 ```{r}
 #| echo: true
 gapm2 = gapm2 %>%
-  mutate(income_num = as.numeric(income_level_4))
-str(gapm$income_num)
+  mutate(income_num = case_when(
+    income_level_4 == "Low income" ~ 1,
+    income_level_4 == "Lower middle income" ~ 2,
+    income_level_4 == "Upper middle income" ~ 3,
+    income_level_4 == "High income" ~ 4
+  ))
+gapm2 %>% select(income_level_4, income_num) %>% 
+  head(6)
 ```
+
+:::
+:::
 
 ## Run the model with the scored income
 
@@ -1080,7 +1108,8 @@ $$\begin{aligned}
 ## Interpreting the model
 
 ```{r}
-tidy(mod_inc2, conf.int=T) %>% gt() %>% tab_options(table.font.size = 37) %>%
+tidy_mod_inc2 = tidy(mod_inc2, conf.int=T)
+tidy_mod_inc2 %>% gt() %>% tab_options(table.font.size = 37) %>%
   fmt_number(decimals = 2)
 ```
 
@@ -1090,7 +1119,7 @@ $$\widehat{\textrm{LE}} =  54.01 + 6.25 \cdot \text{Income level}$$
 
     -   Note: this does not make sense because there is no income level of 0!
 
--   **Interpreting the coefficient for income:** For every 1-level increase in income level, mean life expectancy increases 6.25 years (95% CI: 5.52, 6.98).
+-   **Interpreting the coefficient for income:** For every 1-level increase in income level, mean life expectancy increases `r round(coef(mod_inc2)[2], 2)` years (95% CI: `r round(tidy_mod_inc2$conf.low[2], 2)`, `r round(tidy_mod_inc2$conf.high[2], 2)`).
 
 ## What if life expectancy vs. income level looked like this?
 

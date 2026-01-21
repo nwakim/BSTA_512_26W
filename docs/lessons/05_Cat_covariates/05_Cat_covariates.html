@@ -328,7 +328,7 @@ Nicky Wakim
 <ul>
 <li><p>We will look at life expectancy vs.&nbsp;these Freedom statuss</p></li>
 <li><p><a href="../../lessons/gapminder_codebook.html">You can access my codebook here</a></p></li>
-<li><p>Gapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of poltical rights and civil liberties ratings.</p>
+<li><p>Gapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of political rights and civil liberties ratings.</p>
 <ul>
 <li>Not free (NF)</li>
 <li>Partly free (PF)</li>
@@ -380,7 +380,7 @@ Nicky Wakim
 <span id="cb2-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Freedom status"</span>, </span>
 <span id="cb2-5"><a></a>       <span class="at">y =</span> <span class="st">"Country life expectancy (years)"</span>,</span>
 <span id="cb2-6"><a></a>       <span class="at">title =</span> <span class="st">"Life expectancy vs. Freedom status"</span>,</span>
-<span id="cb2-7"><a></a>       <span class="at">caption =</span> <span class="st">"Diamonds = region averages"</span>) <span class="sc">+</span></span>
+<span id="cb2-7"><a></a>       <span class="at">caption =</span> <span class="st">"Diamonds = FS averages"</span>) <span class="sc">+</span></span>
 <span id="cb2-8"><a></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), </span>
 <span id="cb2-9"><a></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>), </span>
 <span id="cb2-10"><a></a>        <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -561,7 +561,7 @@ Nicky Wakim
 <section id="building-the-regression-equation-indicator-functions" class="slide level2">
 <h2>Building the regression equation: Indicator functions</h2>
 <ul>
-<li><p>In order to represent each region in the equation, we need to introduce a new function:</p>
+<li><p>In order to represent each status in the equation, we need to introduce a new function:</p>
 <ul>
 <li>Indicator function:</li>
 </ul>
@@ -574,7 +574,7 @@ Nicky Wakim
 <ul>
 <li>This basically a binary yes/no if <span class="math inline">\(X\)</span> is a specific value <span class="math inline">\(x\)</span></li>
 </ul></li>
-<li><p>For example, if we want to identify a country as being in the Americas region, we can make:</p>
+<li><p>For example, if we want to identify a country as partly free, we can make:</p>
 <p><span class="math display">\[I(FS = \text{partly free}) \text{ or }I(\text{partly free}) =
 \left\{
 \begin{array}{@{}ll@{}}
@@ -613,7 +613,7 @@ Nicky Wakim
 <ul>
 <li><p>However, a linear regression equation still requires an intercept!</p>
 <ul>
-<li>So one of our regions need to become our “reference” group</li>
+<li>So one of our statuses need to become our “reference” group</li>
 <li>We’ll use “not free” as our reference</li>
 <li>That means we need to adjust all the numbers</li>
 </ul></li>
@@ -776,23 +776,23 @@ Mean difference in life expectancy between free and not free countries
 <span id="cb4-4"><a></a><span class="fu">tidy</span>(model1, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">38</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-5"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="rwsefifmzq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rwsefifmzq table {
+<div id="wyqygtaqqg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wyqygtaqqg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rwsefifmzq thead, #rwsefifmzq tbody, #rwsefifmzq tfoot, #rwsefifmzq tr, #rwsefifmzq td, #rwsefifmzq th {
+#wyqygtaqqg thead, #wyqygtaqqg tbody, #wyqygtaqqg tfoot, #wyqygtaqqg tr, #wyqygtaqqg td, #wyqygtaqqg th {
   border-style: none;
 }
 
-#rwsefifmzq p {
+#wyqygtaqqg p {
   margin: 0;
   padding: 0;
 }
 
-#rwsefifmzq .gt_table {
+#wyqygtaqqg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -818,12 +818,12 @@ Mean difference in life expectancy between free and not free countries
   border-left-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_caption {
+#wyqygtaqqg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rwsefifmzq .gt_title {
+#wyqygtaqqg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -835,7 +835,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-width: 0;
 }
 
-#rwsefifmzq .gt_subtitle {
+#wyqygtaqqg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -847,7 +847,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-width: 0;
 }
 
-#rwsefifmzq .gt_heading {
+#wyqygtaqqg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -859,13 +859,13 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_bottom_border {
+#wyqygtaqqg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_col_headings {
+#wyqygtaqqg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -880,7 +880,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_col_heading {
+#wyqygtaqqg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -900,7 +900,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#rwsefifmzq .gt_column_spanner_outer {
+#wyqygtaqqg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -912,15 +912,15 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 4px;
 }
 
-#rwsefifmzq .gt_column_spanner_outer:first-child {
+#wyqygtaqqg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rwsefifmzq .gt_column_spanner_outer:last-child {
+#wyqygtaqqg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rwsefifmzq .gt_column_spanner {
+#wyqygtaqqg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -932,11 +932,11 @@ Mean difference in life expectancy between free and not free countries
   width: 100%;
 }
 
-#rwsefifmzq .gt_spanner_row {
+#wyqygtaqqg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rwsefifmzq .gt_group_heading {
+#wyqygtaqqg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -962,7 +962,7 @@ Mean difference in life expectancy between free and not free countries
   text-align: left;
 }
 
-#rwsefifmzq .gt_empty_group_heading {
+#wyqygtaqqg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -977,15 +977,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: middle;
 }
 
-#rwsefifmzq .gt_from_md > :first-child {
+#wyqygtaqqg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rwsefifmzq .gt_from_md > :last-child {
+#wyqygtaqqg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rwsefifmzq .gt_row {
+#wyqygtaqqg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1004,7 +1004,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#rwsefifmzq .gt_stub {
+#wyqygtaqqg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,7 +1017,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#rwsefifmzq .gt_stub_row_group {
+#wyqygtaqqg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1031,15 +1031,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: top;
 }
 
-#rwsefifmzq .gt_row_group_first td {
+#wyqygtaqqg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rwsefifmzq .gt_row_group_first th {
+#wyqygtaqqg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rwsefifmzq .gt_summary_row {
+#wyqygtaqqg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1049,16 +1049,16 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#rwsefifmzq .gt_first_summary_row {
+#wyqygtaqqg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_first_summary_row.thick {
+#wyqygtaqqg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rwsefifmzq .gt_last_summary_row {
+#wyqygtaqqg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1068,7 +1068,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_grand_summary_row {
+#wyqygtaqqg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1078,7 +1078,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#rwsefifmzq .gt_first_grand_summary_row {
+#wyqygtaqqg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +1088,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_last_grand_summary_row_top {
+#wyqygtaqqg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1098,11 +1098,11 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_striped {
+#wyqygtaqqg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rwsefifmzq .gt_table_body {
+#wyqygtaqqg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1111,7 +1111,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_footnotes {
+#wyqygtaqqg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1125,7 +1125,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_footnote {
+#wyqygtaqqg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1134,7 +1134,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#rwsefifmzq .gt_sourcenotes {
+#wyqygtaqqg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1148,7 +1148,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#rwsefifmzq .gt_sourcenote {
+#wyqygtaqqg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1156,72 +1156,72 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#rwsefifmzq .gt_left {
+#wyqygtaqqg .gt_left {
   text-align: left;
 }
 
-#rwsefifmzq .gt_center {
+#wyqygtaqqg .gt_center {
   text-align: center;
 }
 
-#rwsefifmzq .gt_right {
+#wyqygtaqqg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rwsefifmzq .gt_font_normal {
+#wyqygtaqqg .gt_font_normal {
   font-weight: normal;
 }
 
-#rwsefifmzq .gt_font_bold {
+#wyqygtaqqg .gt_font_bold {
   font-weight: bold;
 }
 
-#rwsefifmzq .gt_font_italic {
+#wyqygtaqqg .gt_font_italic {
   font-style: italic;
 }
 
-#rwsefifmzq .gt_super {
+#wyqygtaqqg .gt_super {
   font-size: 65%;
 }
 
-#rwsefifmzq .gt_footnote_marks {
+#wyqygtaqqg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rwsefifmzq .gt_asterisk {
+#wyqygtaqqg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rwsefifmzq .gt_indent_1 {
+#wyqygtaqqg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rwsefifmzq .gt_indent_2 {
+#wyqygtaqqg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rwsefifmzq .gt_indent_3 {
+#wyqygtaqqg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rwsefifmzq .gt_indent_4 {
+#wyqygtaqqg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rwsefifmzq .gt_indent_5 {
+#wyqygtaqqg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rwsefifmzq .katex-display {
+#wyqygtaqqg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rwsefifmzq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wyqygtaqqg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1310,8 +1310,8 @@ Mean difference in life expectancy between free and not free countries
 <li>Don’t forget that we can use the confidence intervals to assess whether the mean difference with Africa is significant or not</li>
 </ul>
 </section>
-<section id="we-can-also-use-r-to-report-each-regions-average-life-expectancy" class="slide level2">
-<h2>We can also use R to report each region’s average life expectancy</h2>
+<section id="we-can-also-use-r-to-report-each-statuss-average-life-expectancy" class="slide level2">
+<h2>We can also use R to report each status’s average life expectancy</h2>
 <p><strong>Find the 95% CI’s for the mean life expectancy for the countries that are partly free and free</strong></p>
 <ul>
 <li>Use the base R <code>predict()</code> function (see Lesson 4 for more info)</li>
@@ -1546,23 +1546,23 @@ Mean difference in life expectancy between free and not free countries
 <span id="cb16-2"><a></a><span class="fu">tidy</span>(model2) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="anmngtagvh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#anmngtagvh table {
+<div id="bnaskbgflq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bnaskbgflq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#anmngtagvh thead, #anmngtagvh tbody, #anmngtagvh tfoot, #anmngtagvh tr, #anmngtagvh td, #anmngtagvh th {
+#bnaskbgflq thead, #bnaskbgflq tbody, #bnaskbgflq tfoot, #bnaskbgflq tr, #bnaskbgflq td, #bnaskbgflq th {
   border-style: none;
 }
 
-#anmngtagvh p {
+#bnaskbgflq p {
   margin: 0;
   padding: 0;
 }
 
-#anmngtagvh .gt_table {
+#bnaskbgflq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1588,12 +1588,12 @@ Mean difference in life expectancy between free and not free countries
   border-left-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_caption {
+#bnaskbgflq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#anmngtagvh .gt_title {
+#bnaskbgflq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1605,7 +1605,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-width: 0;
 }
 
-#anmngtagvh .gt_subtitle {
+#bnaskbgflq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1617,7 +1617,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-width: 0;
 }
 
-#anmngtagvh .gt_heading {
+#bnaskbgflq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1629,13 +1629,13 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_bottom_border {
+#bnaskbgflq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_col_headings {
+#bnaskbgflq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1650,7 +1650,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_col_heading {
+#bnaskbgflq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1670,7 +1670,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#anmngtagvh .gt_column_spanner_outer {
+#bnaskbgflq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1682,15 +1682,15 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 4px;
 }
 
-#anmngtagvh .gt_column_spanner_outer:first-child {
+#bnaskbgflq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#anmngtagvh .gt_column_spanner_outer:last-child {
+#bnaskbgflq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#anmngtagvh .gt_column_spanner {
+#bnaskbgflq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1702,11 +1702,11 @@ Mean difference in life expectancy between free and not free countries
   width: 100%;
 }
 
-#anmngtagvh .gt_spanner_row {
+#bnaskbgflq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#anmngtagvh .gt_group_heading {
+#bnaskbgflq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1732,7 +1732,7 @@ Mean difference in life expectancy between free and not free countries
   text-align: left;
 }
 
-#anmngtagvh .gt_empty_group_heading {
+#bnaskbgflq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1747,15 +1747,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: middle;
 }
 
-#anmngtagvh .gt_from_md > :first-child {
+#bnaskbgflq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#anmngtagvh .gt_from_md > :last-child {
+#bnaskbgflq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#anmngtagvh .gt_row {
+#bnaskbgflq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1774,7 +1774,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#anmngtagvh .gt_stub {
+#bnaskbgflq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1787,7 +1787,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#anmngtagvh .gt_stub_row_group {
+#bnaskbgflq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1801,15 +1801,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: top;
 }
 
-#anmngtagvh .gt_row_group_first td {
+#bnaskbgflq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#anmngtagvh .gt_row_group_first th {
+#bnaskbgflq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#anmngtagvh .gt_summary_row {
+#bnaskbgflq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1819,16 +1819,16 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#anmngtagvh .gt_first_summary_row {
+#bnaskbgflq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_first_summary_row.thick {
+#bnaskbgflq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#anmngtagvh .gt_last_summary_row {
+#bnaskbgflq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1838,7 +1838,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_grand_summary_row {
+#bnaskbgflq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1848,7 +1848,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#anmngtagvh .gt_first_grand_summary_row {
+#bnaskbgflq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1858,7 +1858,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_last_grand_summary_row_top {
+#bnaskbgflq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1868,11 +1868,11 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_striped {
+#bnaskbgflq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#anmngtagvh .gt_table_body {
+#bnaskbgflq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1881,7 +1881,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_footnotes {
+#bnaskbgflq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1895,7 +1895,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_footnote {
+#bnaskbgflq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1904,7 +1904,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#anmngtagvh .gt_sourcenotes {
+#bnaskbgflq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1918,7 +1918,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#anmngtagvh .gt_sourcenote {
+#bnaskbgflq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1926,72 +1926,72 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#anmngtagvh .gt_left {
+#bnaskbgflq .gt_left {
   text-align: left;
 }
 
-#anmngtagvh .gt_center {
+#bnaskbgflq .gt_center {
   text-align: center;
 }
 
-#anmngtagvh .gt_right {
+#bnaskbgflq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#anmngtagvh .gt_font_normal {
+#bnaskbgflq .gt_font_normal {
   font-weight: normal;
 }
 
-#anmngtagvh .gt_font_bold {
+#bnaskbgflq .gt_font_bold {
   font-weight: bold;
 }
 
-#anmngtagvh .gt_font_italic {
+#bnaskbgflq .gt_font_italic {
   font-style: italic;
 }
 
-#anmngtagvh .gt_super {
+#bnaskbgflq .gt_super {
   font-size: 65%;
 }
 
-#anmngtagvh .gt_footnote_marks {
+#bnaskbgflq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#anmngtagvh .gt_asterisk {
+#bnaskbgflq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#anmngtagvh .gt_indent_1 {
+#bnaskbgflq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#anmngtagvh .gt_indent_2 {
+#bnaskbgflq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#anmngtagvh .gt_indent_3 {
+#bnaskbgflq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#anmngtagvh .gt_indent_4 {
+#bnaskbgflq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#anmngtagvh .gt_indent_5 {
+#bnaskbgflq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#anmngtagvh .katex-display {
+#bnaskbgflq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#anmngtagvh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bnaskbgflq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2068,8 +2068,8 @@ Mean difference in life expectancy between free and not free countries
 
 </div>
 <img data-src="05_Cat_covariates_files/figure-revealjs/unnamed-chunk-22-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
-<section id="residual-plots-now-the-spread-within-each-region" class="slide level2">
-<h2>Residual plots (now the spread within each region)</h2>
+<section id="residual-plots-now-the-spread-within-each-status" class="slide level2">
+<h2>Residual plots (now the spread within each status)</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">ggplot</span>(m1_aug, <span class="fu">aes</span>(<span class="at">x=</span>.resid)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
 <span id="cb18-2"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">22</span>), <span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">22</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2130,12 +2130,13 @@ Mean difference in life expectancy between free and not free countries
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>gapm2 <span class="ot">=</span> gapm2 <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a></a> <span class="fu">mutate</span>(<span class="at">income_level_4 =</span> <span class="fu">factor</span>(income_level_4, </span>
-<span id="cb19-3"><a></a>            <span class="at">ordered =</span> T, </span>
-<span id="cb19-4"><a></a>            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Low income"</span>, </span>
+<span id="cb19-2"><a></a> <span class="fu">mutate</span>(<span class="at">income_level_4 =</span> <span class="fu">fct_relevel</span>(</span>
+<span id="cb19-3"><a></a>          income_level_4, </span>
+<span id="cb19-4"><a></a>            <span class="st">"Low income"</span>, </span>
 <span id="cb19-5"><a></a>            <span class="st">"Lower middle income"</span>, </span>
 <span id="cb19-6"><a></a>            <span class="st">"Upper middle income"</span>, </span>
-<span id="cb19-7"><a></a>            <span class="st">"High income"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-7"><a></a>            <span class="st">"High income"</span></span>
+<span id="cb19-8"><a></a> ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>Make the income levels readable</p>
@@ -2150,7 +2151,7 @@ Mean difference in life expectancy between free and not free countries
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">ggplot</span>(gapm, <span class="fu">aes</span>(<span class="at">x =</span> income_level_4, <span class="at">y =</span> life_exp)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">ggplot</span>(gapm2, <span class="fu">aes</span>(<span class="at">x =</span> income_level_4, <span class="at">y =</span> life_exp)) <span class="sc">+</span></span>
 <span id="cb20-2"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
 <span id="cb20-3"><a></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">shape =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
 <span id="cb20-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Income levels"</span>, </span>
@@ -2256,6 +2257,8 @@ Mean difference in life expectancy between free and not free countries
 </section>
 <section id="ordinal-coding-scoring" class="slide level2">
 <h2>Ordinal coding / Scoring</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
 <ul>
 <li><p>Map each income level to a number</p></li>
 <li><p>Usually start at 1</p></li>
@@ -2286,14 +2289,30 @@ Mean difference in life expectancy between free and not free countries
 </tr>
 </tbody>
 </table>
+</div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>gapm2 <span class="ot">=</span> gapm2 <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a></a>  <span class="fu">mutate</span>(<span class="at">income_num =</span> <span class="fu">as.numeric</span>(income_level_4))</span>
-<span id="cb21-3"><a></a><span class="fu">str</span>(gapm<span class="sc">$</span>income_num)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-2"><a></a>  <span class="fu">mutate</span>(<span class="at">income_num =</span> <span class="fu">case_when</span>(</span>
+<span id="cb21-3"><a></a>    income_level_4 <span class="sc">==</span> <span class="st">"Low income"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb21-4"><a></a>    income_level_4 <span class="sc">==</span> <span class="st">"Lower middle income"</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb21-5"><a></a>    income_level_4 <span class="sc">==</span> <span class="st">"Upper middle income"</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb21-6"><a></a>    income_level_4 <span class="sc">==</span> <span class="st">"High income"</span> <span class="sc">~</span> <span class="dv">4</span></span>
+<span id="cb21-7"><a></a>  ))</span>
+<span id="cb21-8"><a></a>gapm2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(income_level_4, income_num) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-9"><a></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> NULL</code></pre>
+<pre><code># A tibble: 6 × 2
+  income_level_4      income_num
+  &lt;fct&gt;                    &lt;dbl&gt;
+1 Low income                   1
+2 Upper middle income          3
+3 High income                  4
+4 Upper middle income          3
+5 Upper middle income          3
+6 Upper middle income          3</code></pre>
 </div>
 </div>
+</div></div>
 </section>
 <section id="run-the-model-with-the-scored-income" class="slide level2">
 <h2>Run the model with the scored income</h2>
@@ -2302,23 +2321,23 @@ Mean difference in life expectancy between free and not free countries
 <span id="cb23-2"><a></a><span class="fu">tidy</span>(mod_inc2) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">37</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb23-3"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="bdjdljckto" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bdjdljckto table {
+<div id="juzrcmccyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#juzrcmccyf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bdjdljckto thead, #bdjdljckto tbody, #bdjdljckto tfoot, #bdjdljckto tr, #bdjdljckto td, #bdjdljckto th {
+#juzrcmccyf thead, #juzrcmccyf tbody, #juzrcmccyf tfoot, #juzrcmccyf tr, #juzrcmccyf td, #juzrcmccyf th {
   border-style: none;
 }
 
-#bdjdljckto p {
+#juzrcmccyf p {
   margin: 0;
   padding: 0;
 }
 
-#bdjdljckto .gt_table {
+#juzrcmccyf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2344,12 +2363,12 @@ Mean difference in life expectancy between free and not free countries
   border-left-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_caption {
+#juzrcmccyf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bdjdljckto .gt_title {
+#juzrcmccyf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2361,7 +2380,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-width: 0;
 }
 
-#bdjdljckto .gt_subtitle {
+#juzrcmccyf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2373,7 +2392,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-width: 0;
 }
 
-#bdjdljckto .gt_heading {
+#juzrcmccyf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2385,13 +2404,13 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_bottom_border {
+#juzrcmccyf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_col_headings {
+#juzrcmccyf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2406,7 +2425,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_col_heading {
+#juzrcmccyf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2426,7 +2445,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#bdjdljckto .gt_column_spanner_outer {
+#juzrcmccyf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2438,15 +2457,15 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 4px;
 }
 
-#bdjdljckto .gt_column_spanner_outer:first-child {
+#juzrcmccyf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bdjdljckto .gt_column_spanner_outer:last-child {
+#juzrcmccyf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bdjdljckto .gt_column_spanner {
+#juzrcmccyf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2458,11 +2477,11 @@ Mean difference in life expectancy between free and not free countries
   width: 100%;
 }
 
-#bdjdljckto .gt_spanner_row {
+#juzrcmccyf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bdjdljckto .gt_group_heading {
+#juzrcmccyf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2488,7 +2507,7 @@ Mean difference in life expectancy between free and not free countries
   text-align: left;
 }
 
-#bdjdljckto .gt_empty_group_heading {
+#juzrcmccyf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2503,15 +2522,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: middle;
 }
 
-#bdjdljckto .gt_from_md > :first-child {
+#juzrcmccyf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bdjdljckto .gt_from_md > :last-child {
+#juzrcmccyf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bdjdljckto .gt_row {
+#juzrcmccyf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2530,7 +2549,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#bdjdljckto .gt_stub {
+#juzrcmccyf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2543,7 +2562,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#bdjdljckto .gt_stub_row_group {
+#juzrcmccyf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2557,15 +2576,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: top;
 }
 
-#bdjdljckto .gt_row_group_first td {
+#juzrcmccyf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bdjdljckto .gt_row_group_first th {
+#juzrcmccyf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bdjdljckto .gt_summary_row {
+#juzrcmccyf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2575,16 +2594,16 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#bdjdljckto .gt_first_summary_row {
+#juzrcmccyf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_first_summary_row.thick {
+#juzrcmccyf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bdjdljckto .gt_last_summary_row {
+#juzrcmccyf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2594,7 +2613,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_grand_summary_row {
+#juzrcmccyf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2604,7 +2623,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#bdjdljckto .gt_first_grand_summary_row {
+#juzrcmccyf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2614,7 +2633,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_last_grand_summary_row_top {
+#juzrcmccyf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2624,11 +2643,11 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_striped {
+#juzrcmccyf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bdjdljckto .gt_table_body {
+#juzrcmccyf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2637,7 +2656,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_footnotes {
+#juzrcmccyf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2651,7 +2670,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_footnote {
+#juzrcmccyf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2660,7 +2679,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#bdjdljckto .gt_sourcenotes {
+#juzrcmccyf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2674,7 +2693,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#bdjdljckto .gt_sourcenote {
+#juzrcmccyf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2682,72 +2701,72 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#bdjdljckto .gt_left {
+#juzrcmccyf .gt_left {
   text-align: left;
 }
 
-#bdjdljckto .gt_center {
+#juzrcmccyf .gt_center {
   text-align: center;
 }
 
-#bdjdljckto .gt_right {
+#juzrcmccyf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bdjdljckto .gt_font_normal {
+#juzrcmccyf .gt_font_normal {
   font-weight: normal;
 }
 
-#bdjdljckto .gt_font_bold {
+#juzrcmccyf .gt_font_bold {
   font-weight: bold;
 }
 
-#bdjdljckto .gt_font_italic {
+#juzrcmccyf .gt_font_italic {
   font-style: italic;
 }
 
-#bdjdljckto .gt_super {
+#juzrcmccyf .gt_super {
   font-size: 65%;
 }
 
-#bdjdljckto .gt_footnote_marks {
+#juzrcmccyf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bdjdljckto .gt_asterisk {
+#juzrcmccyf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bdjdljckto .gt_indent_1 {
+#juzrcmccyf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bdjdljckto .gt_indent_2 {
+#juzrcmccyf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bdjdljckto .gt_indent_3 {
+#juzrcmccyf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bdjdljckto .gt_indent_4 {
+#juzrcmccyf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bdjdljckto .gt_indent_5 {
+#juzrcmccyf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bdjdljckto .katex-display {
+#juzrcmccyf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bdjdljckto div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#juzrcmccyf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2798,23 +2817,23 @@ Mean difference in life expectancy between free and not free countries
 <h2>Interpreting the model</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="xdizenwopw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xdizenwopw table {
+<div id="woxsowznhm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#woxsowznhm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xdizenwopw thead, #xdizenwopw tbody, #xdizenwopw tfoot, #xdizenwopw tr, #xdizenwopw td, #xdizenwopw th {
+#woxsowznhm thead, #woxsowznhm tbody, #woxsowznhm tfoot, #woxsowznhm tr, #woxsowznhm td, #woxsowznhm th {
   border-style: none;
 }
 
-#xdizenwopw p {
+#woxsowznhm p {
   margin: 0;
   padding: 0;
 }
 
-#xdizenwopw .gt_table {
+#woxsowznhm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2840,12 +2859,12 @@ Mean difference in life expectancy between free and not free countries
   border-left-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_caption {
+#woxsowznhm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xdizenwopw .gt_title {
+#woxsowznhm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2857,7 +2876,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-width: 0;
 }
 
-#xdizenwopw .gt_subtitle {
+#woxsowznhm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2869,7 +2888,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-width: 0;
 }
 
-#xdizenwopw .gt_heading {
+#woxsowznhm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2881,13 +2900,13 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_bottom_border {
+#woxsowznhm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_col_headings {
+#woxsowznhm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2902,7 +2921,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_col_heading {
+#woxsowznhm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2922,7 +2941,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#xdizenwopw .gt_column_spanner_outer {
+#woxsowznhm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2934,15 +2953,15 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 4px;
 }
 
-#xdizenwopw .gt_column_spanner_outer:first-child {
+#woxsowznhm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xdizenwopw .gt_column_spanner_outer:last-child {
+#woxsowznhm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xdizenwopw .gt_column_spanner {
+#woxsowznhm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2954,11 +2973,11 @@ Mean difference in life expectancy between free and not free countries
   width: 100%;
 }
 
-#xdizenwopw .gt_spanner_row {
+#woxsowznhm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xdizenwopw .gt_group_heading {
+#woxsowznhm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2984,7 +3003,7 @@ Mean difference in life expectancy between free and not free countries
   text-align: left;
 }
 
-#xdizenwopw .gt_empty_group_heading {
+#woxsowznhm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2999,15 +3018,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: middle;
 }
 
-#xdizenwopw .gt_from_md > :first-child {
+#woxsowznhm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xdizenwopw .gt_from_md > :last-child {
+#woxsowznhm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xdizenwopw .gt_row {
+#woxsowznhm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3026,7 +3045,7 @@ Mean difference in life expectancy between free and not free countries
   overflow-x: hidden;
 }
 
-#xdizenwopw .gt_stub {
+#woxsowznhm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3039,7 +3058,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#xdizenwopw .gt_stub_row_group {
+#woxsowznhm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3053,15 +3072,15 @@ Mean difference in life expectancy between free and not free countries
   vertical-align: top;
 }
 
-#xdizenwopw .gt_row_group_first td {
+#woxsowznhm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xdizenwopw .gt_row_group_first th {
+#woxsowznhm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xdizenwopw .gt_summary_row {
+#woxsowznhm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3071,16 +3090,16 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#xdizenwopw .gt_first_summary_row {
+#woxsowznhm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_first_summary_row.thick {
+#woxsowznhm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xdizenwopw .gt_last_summary_row {
+#woxsowznhm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3090,7 +3109,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_grand_summary_row {
+#woxsowznhm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3100,7 +3119,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#xdizenwopw .gt_first_grand_summary_row {
+#woxsowznhm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3110,7 +3129,7 @@ Mean difference in life expectancy between free and not free countries
   border-top-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_last_grand_summary_row_top {
+#woxsowznhm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3120,11 +3139,11 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_striped {
+#woxsowznhm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xdizenwopw .gt_table_body {
+#woxsowznhm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3133,7 +3152,7 @@ Mean difference in life expectancy between free and not free countries
   border-bottom-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_footnotes {
+#woxsowznhm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3147,7 +3166,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_footnote {
+#woxsowznhm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3156,7 +3175,7 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#xdizenwopw .gt_sourcenotes {
+#woxsowznhm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3170,7 +3189,7 @@ Mean difference in life expectancy between free and not free countries
   border-right-color: #D3D3D3;
 }
 
-#xdizenwopw .gt_sourcenote {
+#woxsowznhm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3178,72 +3197,72 @@ Mean difference in life expectancy between free and not free countries
   padding-right: 5px;
 }
 
-#xdizenwopw .gt_left {
+#woxsowznhm .gt_left {
   text-align: left;
 }
 
-#xdizenwopw .gt_center {
+#woxsowznhm .gt_center {
   text-align: center;
 }
 
-#xdizenwopw .gt_right {
+#woxsowznhm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xdizenwopw .gt_font_normal {
+#woxsowznhm .gt_font_normal {
   font-weight: normal;
 }
 
-#xdizenwopw .gt_font_bold {
+#woxsowznhm .gt_font_bold {
   font-weight: bold;
 }
 
-#xdizenwopw .gt_font_italic {
+#woxsowznhm .gt_font_italic {
   font-style: italic;
 }
 
-#xdizenwopw .gt_super {
+#woxsowznhm .gt_super {
   font-size: 65%;
 }
 
-#xdizenwopw .gt_footnote_marks {
+#woxsowznhm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xdizenwopw .gt_asterisk {
+#woxsowznhm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xdizenwopw .gt_indent_1 {
+#woxsowznhm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xdizenwopw .gt_indent_2 {
+#woxsowznhm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xdizenwopw .gt_indent_3 {
+#woxsowznhm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xdizenwopw .gt_indent_4 {
+#woxsowznhm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xdizenwopw .gt_indent_5 {
+#woxsowznhm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xdizenwopw .katex-display {
+#woxsowznhm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xdizenwopw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#woxsowznhm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3291,7 +3310,7 @@ Mean difference in life expectancy between free and not free countries
 <ul>
 <li>Note: this does not make sense because there is no income level of 0!</li>
 </ul></li>
-<li><p><strong>Interpreting the coefficient for income:</strong> For every 1-level increase in income level, mean life expectancy increases 6.25 years (95% CI: 5.52, 6.98).</p></li>
+<li><p><strong>Interpreting the coefficient for income:</strong> For every 1-level increase in income level, mean life expectancy increases 4.9 years (95% CI: 3.9, 5.91).</p></li>
 </ul>
 </section>
 <section id="what-if-life-expectancy-vs.-income-level-looked-like-this" class="slide level2">

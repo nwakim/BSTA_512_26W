@@ -226,7 +226,7 @@ For the following variables *from the codebook*, check whether your loaded datas
 
 1. `raceombmulti`
 4. `myheight_002`
-3. `idfat_001`
+3. `identfat_001`
 2. `important_001` 
 3. `iatevaluations001`
 :::
