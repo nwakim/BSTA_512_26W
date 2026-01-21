@@ -5647,5 +5647,467 @@
     "title": "Homework 2 Answers",
     "section": "Questions",
     "text": "Questions\n\nQuestion 1\n\nPart a\nAnswer:\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart b\nAnswer:\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n1.2819\n0.7196\n1.7814\n0.0753\n\n\nFatalism\n0.2458\n0.0395\n6.2273\n0.0000\n\n\n\n\n\n\n\n\n\n\nPart c\nAnswer:\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart d\nAnswer:\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n5.4599\n0.2087\n26.1594\n0.0000\n\n\nFatalismC\n0.2458\n0.0395\n6.2273\n0.0000\n\n\n\n\n\n\n\n\n\n\nPart e\nAnswer:\n\n\n\n\n\n\nQuestion 2\n\n\n\nAttaching package: 'palmerpenguins'\n\n\nThe following objects are masked from 'package:datasets':\n\n    penguins, penguins_raw\n\n\n\nPart a\n\n\n\n# A tibble: 3 × 2\n  species   flipper_ave\n  &lt;fct&gt;           &lt;dbl&gt;\n1 Adelie           190.\n2 Chinstrap        196.\n3 Gentoo           217.\n\n\n\n\n\nPart b\n\n\n\nWarning: Removed 2 rows containing non-finite outside the scale range\n(`stat_summary()`).\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\n\nPart c\nWrite out the fitted regression equation that models the flipper length by penguin species. Use LaTeX math markup or insert an image of your equation. Do not yet insert values for the regression coefficients, i.e. use the generic coefficients \\(\\widehat{\\beta}_0, \\widehat{\\beta}_1\\). Use Adelie as the reference level.\n\n\n\n\n\nPart d\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n189.953642\n0.5404799\n351.453643\n0.000000e+00\n188.890526\n191.016759\n\n\nspeciesChinstrap\n5.869887\n0.9699452\n6.051772\n3.794027e-09\n3.962018\n7.777756\n\n\nspeciesGentoo\n27.233349\n0.8066819\n33.759714\n1.844813e-110\n25.646617\n28.820082\n\n\n\n\n\n\n\n\n\n\nPart e\nHow do we interpret each of the regression coefficients for this model? Write out a separate interpretation for each of the coefficients.\n\n\n\n\n\nPart f\nCalculate the mean flipper length (and the 95% CI) of penguins in the Chinstrap and Gentoo species using the predict() function.\n\nChinstrap penguins: 195.82 mm"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_key_info.html",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Question in exit ticket: Could you please repeat questions for the live-streamers?\n\nI will try to remember! This is one of those cases where the recording is not the exact substitute for the class. It’s just hard for me to think about the mic picking up everything while I’m speaking.\n\nGoing through labs\n\nPlease submit your labs using html files!! (I took off a point if you submitted a qmd only)\nPlease write your answers outside of the task box and below it\nI have adjusted grades this morning and gave some important feedback on your research questions\n\nPlease make sure to review this and integrate into the next lab!\n\nYour grade might have changed - please check my comments\n\nYour grade may not have changed - please check my comments"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_key_info.html#announcements",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Question in exit ticket: Could you please repeat questions for the live-streamers?\n\nI will try to remember! This is one of those cases where the recording is not the exact substitute for the class. It’s just hard for me to think about the mic picking up everything while I’m speaking.\n\nGoing through labs\n\nPlease submit your labs using html files!! (I took off a point if you submitted a qmd only)\nPlease write your answers outside of the task box and below it\nI have adjusted grades this morning and gave some important feedback on your research questions\n\nPlease make sure to review this and integrate into the next lab!\n\nYour grade might have changed - please check my comments\n\nYour grade may not have changed - please check my comments"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_key_info.html#key-dates",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_key_info.html#key-dates",
+    "title": "Key Info and Announcements",
+    "section": "Key Dates",
+    "text": "Key Dates"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#why-slr-ish",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#why-slr-ish",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Why “SLR-ish”?",
+    "text": "Why “SLR-ish”?\n\nThe strict definition of simple linear regression: only two variables that are BOTH continuous\n\n \n\nCommon (but kinda wrong) use of simple linear regression: only two variables with outcome continuous and predictor not specified\n\n \n\nI’m including multi-level categorical covariates in SLR mostly because it’s easier to learn now!"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#lets-map-that-to-our-regression-analysis-process",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#lets-map-that-to-our-regression-analysis-process",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Let’s map that to our regression analysis process",
+    "text": "Let’s map that to our regression analysis process\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#still-looking-at-gapminder-life-expectancy-data",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#still-looking-at-gapminder-life-expectancy-data",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Still looking at Gapminder Life Expectancy data",
+    "text": "Still looking at Gapminder Life Expectancy data\n\nWe will look at life expectancy vs. these Freedom statuss\nYou can access my codebook here\nGapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of poltical rights and civil liberties ratings.\n\nNot free (NF)\nPartly free (PF)\nFree (F)\n\nFreedom status is a multi-level categorical covariate: it has three statuses\n\n \n\nNote: I am calling the expected life expectancy \\(\\widehat{LE}\\)\n\nPreviously, I have FSitten \\(\\widehat{\\text{life expectancy}}\\)"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate-12",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate-12",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Linear regression with a categorical covariate (1/2)",
+    "text": "Linear regression with a categorical covariate (1/2)\n\n\nBad option for visualization:\n\n\nCode\nggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +\n  geom_point() +\n  labs(x = \"World region\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. world region\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\n\nGood option for visualization:\n\n\nCode\nggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +\n  geom_jitter(size = 1, alpha = .6, width = 0.2) +\n  stat_summary(fun = mean, geom = \"point\", size = 8, shape = 18) +\n  labs(x = \"World region\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. world region\",\n       caption = \"Diamonds = region averages\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\n\nUsed geom_jitter()\n\n\nGood option for visualization:\n\n\nCode\nggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +\n  geom_boxplot() +\n  labs(x = \"World region\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. world region\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20))"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate-22",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate-22",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Linear regression with a categorical covariate (2/2)",
+    "text": "Linear regression with a categorical covariate (2/2)\n\n\n\nWhen using a categorical covariate/predictor (that is not ordered),\n\nWe do NOT, technically, find a best-fit line\n\nInstead we model the means of the outcome\n\nFor the different levels of the categorical variable\n\n\n \n\nIn 511, we used Kruskal-Wallis test and our ANOVA table to test if groups means were statistically different from one another\nWe can do this using linear models AND we can include other variables in the model"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#there-are-different-ways-to-code-categorical-variables",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#there-are-different-ways-to-code-categorical-variables",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "There are different ways to code categorical variables",
+    "text": "There are different ways to code categorical variables\n\n\n\n\nReference Cell Coding\n\n\n\nSometimes called dummy coding\nCompares each level of a variable to the omitted (reference) level\n\n\n\n\n\n\nEffect coding\n\n\n\nSometimes called sum coding or deviation coding\nCompares deviations from the grand mean\nNot covered in our class\n\n\n\n\n\n\nOrdinal encoding\n\n\n\nSometimes called scoring\nCategories have a natural, even spaced ordering\nLinear relationship between levels\n\n\n\n\n \nIf you want to learn more about these and other coding schemes:\n\nCoding Systems for Categorical Variables in Regression Analysis\nCategorical Data Encoding Techniques\nCoding Schemes for Categorical Variables"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-problem-with-a-single-coefficient",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-problem-with-a-single-coefficient",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Building the regression equation: problem with a single coefficient",
+    "text": "Building the regression equation: problem with a single coefficient\n\n\nPreviously: simple linear regression\n\nOutcome \\(Y\\) = numerical variable\nPredictor \\(X\\) = numerical variable\n\nThe regression (best-fit) line is: \\[\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\cdot X \\]\n\nNew: what if the explanatory variable is categorical?\nNaively, we could Write: \\(\\widehat{Y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\cdot X\\)\nOr, with our variables: \\[\\widehat{\\textrm{LE}} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 \\cdot \\textrm{FS} \\]\n\nBut what does \\(\\textrm{FS}\\) (freedom status) mean in this equation?\n\nWhat values can it take? How do we represent each FS?\n\n\n \n\nNote: the above is WRONG"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-how-do-we-map-categories-to-means",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-how-do-we-map-categories-to-means",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Building the regression equation: how do we map categories to means?",
+    "text": "Building the regression equation: how do we map categories to means?\n\nIf we only have freedom status in our model and want to map it to an average life expectancy…\n\n\n\n\nWe want to create a function that can map each freedom status to life expectancy\n\nIf not free: \\(\\widehat{LE} = 74.13\\) years\nIf partly free: \\(\\widehat{LE} = 70.39\\) years\nIf free: \\(\\widehat{LE} = 68.99\\) years\n\n\n \n\nCan we make one equation for \\(\\widehat{LE}\\) by putting the “if” statements within the equation?"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-indicator-functions",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-indicator-functions",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Building the regression equation: Indicator functions",
+    "text": "Building the regression equation: Indicator functions\n\nIn order to represent each region in the equation, we need to introduce a new function:\n\nIndicator function:\n\n\\[I(X = x) \\text{ or } I(x) =\n\\left\\{\n\\begin{array}{@{}ll@{}}\n1, & \\text{if}\\ X = x \\\\\n  0, & \\text{else}\n\\end{array}\\right. \\]\n\nThis basically a binary yes/no if \\(X\\) is a specific value \\(x\\)\n\nFor example, if we want to identify a country as being in the Americas region, we can make:\n\\[I(FS = \\text{partly free}) \\text{ or }I(\\text{partly free}) =\n\\left\\{\n\\begin{array}{@{}ll@{}}\n1, & \\text{if}\\ FS = \\text{partly free} \\\\\n  0, & \\text{else}\n\\end{array}\\right. \\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-1",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-1",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Poll Everywhere Question 1",
+    "text": "Poll Everywhere Question 1"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-indicators-in-our-equation",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-indicators-in-our-equation",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Building the regression equation: Indicators in our equation",
+    "text": "Building the regression equation: Indicators in our equation\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} = & 74.13 \\cdot I(\\text{not free}) + 70.39 \\cdot I(\\text{partly free}) + \\\\ &68.99 \\cdot I(\\text{free})\n\\end{aligned}\\]\n\nHowever, a linear regression equation still requires an intercept!\n\nSo one of our regions need to become our “reference” group\nWe’ll use “not free” as our reference\nThat means we need to adjust all the numbers\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} = & 74.13 + -3.74 \\cdot I(\\text{partly free}) + \\\\ &-5.14 \\cdot I(\\text{free}) \\\\\n\\widehat{\\textrm{LE}} = & \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{partly free}) + \\\\ & \\widehat\\beta_2 \\cdot I(\\text{free})\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#viewing-the-regression-equation-another-way",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#viewing-the-regression-equation-another-way",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Viewing the regression equation another way",
+    "text": "Viewing the regression equation another way\n\\[\\widehat{\\textrm{LE}} = \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(FS = \\text{partly free}) + \\widehat\\beta_2 \\cdot I(FS = \\text{free})\\]\n\n\n\n\n\n\n\n\n\n\nFreedom status\nRegression equation for FS\nAverage Life Expectancy for FS\n\n\n\n\nNot free\n\\(\\begin{aligned} \\widehat{\\textrm{LE}} = &\\widehat\\beta_0 + \\widehat\\beta_1 \\cdot 0 + \\widehat\\beta_2 \\cdot 0 \\end{aligned}\\)\n\\(\\widehat{\\textrm{LE}} = \\widehat\\beta_0\\)\n\n\nPartly free\n\\(\\begin{aligned} \\widehat{\\textrm{LE}} = &\\widehat\\beta_0 + \\widehat\\beta_1 \\cdot 1+ \\widehat\\beta_2 \\cdot 0\\end{aligned}\\)\n\\(\\widehat{\\textrm{LE}} = \\widehat\\beta_0 + \\widehat\\beta_1\\)\n\n\nFree\n\\(\\begin{aligned} \\widehat{\\textrm{LE}} = &\\widehat\\beta_0 + \\widehat\\beta_1 \\cdot 0 + \\widehat\\beta_2 \\cdot 1\\end{aligned}\\)\n\\(\\widehat{\\textrm{LE}} = \\widehat\\beta_0 + \\widehat\\beta_2\\)"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#interpretation-of-regression-equation-coefficients",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#interpretation-of-regression-equation-coefficients",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Interpretation of regression equation coefficients",
+    "text": "Interpretation of regression equation coefficients\nRemember: expected, mean, and average are interchangeable\n\n\n\n\n\n\n\n\n\nCoefficient\n\n\n\n\nInterpretation\n\n\n\n\n\n\n\n\n\n\n\n\nExpected/mean/average life expectancy of countries that are not free\n\n\n\n\n\n\n\n\n\n\nDifference in mean life expectancy between partly free and not free countries -OR-\n\n\nMean difference in life expectancy between partly free and not free countries\n\n\n\n\n\n\n\n\n\n\nDifference in mean life expectancy between free and not free countries -OR-\n\n\nMean difference in life expectancy between free and not free countries"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-2",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-2",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Poll Everywhere Question 2",
+    "text": "Poll Everywhere Question 2"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#regression-table-with-lm-function",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#regression-table-with-lm-function",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Regression table with lm() function",
+    "text": "Regression table with lm() function\n\nmodel1 = gapm %&gt;%\n  lm(formula = life_exp ~ freedom_status)\n\ntidy(model1, conf.int=T) %&gt;% gt() %&gt;% tab_options(table.font.size = 38) %&gt;% \n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n68.99\n1.17\n58.88\n0.00\n66.67\n71.32\n\n\nfreedom_statusF\n5.14\n1.70\n3.02\n0.00\n1.76\n8.51\n\n\nfreedom_statusPF\n1.40\n1.52\n0.92\n0.36\n−1.61\n4.40\n\n\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 68.99 + 1.4 \\cdot I(\\text{PF}) + 5.14 \\cdot I(\\text{F})\\]\n\nWhich Freedom status did R choose as the reference level?\nHow you would calculate the mean life expectancies of freedom statuss using only the results from the regression table?"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#bringing-in-the-numbersunits95-ci",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#bringing-in-the-numbersunits95-ci",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Bringing in the numbers/units/95% CI",
+    "text": "Bringing in the numbers/units/95% CI\n\n\n\n\n\n\n\nCoefficient\nInterpretation\n\n\n\n\n\\(\\widehat{\\beta}_0\\)\nAverage life expectancy of countries that are not free is 68.99 (95% CI: 66.67, 71.32).\n\n\n\\(\\widehat{\\beta}_1\\)\nThe difference in mean life expectancy between countries that are partly free and not free is 5.14 (95% CI: 1.76, 8.51).\n\n\n\\(\\widehat{\\beta}_2\\)\nThe difference in mean life expectancy between countries that are free and not free is 1.4 (95% CI: -1.61, 4.4).\n\n\n\n\nDon’t forget that we can use the confidence intervals to assess whether the mean difference with Africa is significant or not"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-also-use-r-to-report-each-regions-average-life-expectancy",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-also-use-r-to-report-each-regions-average-life-expectancy",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "We can also use R to report each region’s average life expectancy",
+    "text": "We can also use R to report each region’s average life expectancy\nFind the 95% CI’s for the mean life expectancy for the countries that are partly free and free\n\nUse the base R predict() function (see Lesson 4 for more info)\nRequires specification of a newdata “value”\n\n\nnewdata = data.frame(freedom_status = c(\"NF\", \"PF\", \"F\")) \n\n\n\n\n(pred = predict(model1, \n                newdata=newdata, \n                interval=\"confidence\"))\n\n       fit      lwr      upr\n1 68.99387 66.66958 71.31816\n2 70.39000 68.48194 72.29806\n3 74.12893 71.68329 76.57457\n\n\n\n\n\nInterpretations\n\n\n\nThe average life expectancy for countries that are partly free is 70.39 years (95% CI: 68.48, 72.3).\nThe average life expectancy for countries that are free is 74.13 years (95% CI: 71.68, 76.57)."
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#another-way-to-look-at-coefficient-values",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#another-way-to-look-at-coefficient-values",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Another way to look at coefficient values",
+    "text": "Another way to look at coefficient values\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{PF}) +  \\widehat\\beta_2 \\cdot I(\\text{F})\\]\n\n\nCode\n# means of each level of `freedom_status`\ngapm2_ave &lt;- gapm %&gt;% \n  group_by(freedom_status) %&gt;% \n  summarise(life_ave = mean(life_exp))\n\n# mean of `africa`\nmean_NF &lt;- gapm2_ave %&gt;% \n  filter(freedom_status == \"NF\") %&gt;% \n  pull(life_ave)\n\n# differences in means between levels of `freedom_status` and `africa`\ngapm2_ave_diff &lt;- gapm2_ave %&gt;% \n  mutate(`Difference with NF` = life_ave - mean_NF) %&gt;%\n  rename(`Freedom status` = freedom_status, \n         `Average life expectancy` = life_ave)\n\n# At the beginning of the Rmd we loaded knitr, which is where the kable command is from\n# library(knitr)\ngapm2_ave_diff %&gt;% kable(\n  digits = 1,\n  format = \"markdown\"\n  ) \n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with NF\n\n\n\n\nNF\n69.0\n0.0\n\n\nF\n74.1\n5.1\n\n\nPF\n70.4\n1.4\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 68.99 + 1.4 \\cdot I(\\text{PF}) + 5.14 \\cdot I(\\text{F})\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#reference-levels",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#reference-levels",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Reference levels",
+    "text": "Reference levels\nWhy is NF not one of the variables in the regression equation?\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{PF}) +  \\widehat\\beta_2 \\cdot I(\\text{F})\\]\n\nCategorical variables must have at least 2 levels. If they have 2 levels, we call them binary\n\n \n\nWe choose one level as our reference level to which all other levels of the categorical variable are compared\n\nThe levels and $ are compared to the level \\(\\text{not free}\\)\n\n\n \n\nThe intercept of the regression equation is the mean of the outcome restricted to the reference level\n\nRecall that the intercept is the mean life expectancy of countries that are not free, which was our reference level\n\n\n \n\nIf the categorical variable has \\(r\\) levels, then we need \\(r-1\\) variables/coefficients to model it!"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-europe-12",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-europe-12",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "We can change the reference level to Europe (1/2)",
+    "text": "We can change the reference level to Europe (1/2)\n\nSuppose we want to compare the mean life expectancies of Freedom statuss to the \\(\\text{Europe}\\) level instead of \\(\\text{Africa}\\)\nBelow is the estimated regression equation for when \\(Africa\\) is the reference level\n\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{Americas}) +  \\widehat\\beta_2 \\cdot I(\\text{Asia}) + \\widehat\\beta_3 \\cdot I(\\text{Europe})\\]\n\nUpdate the variables to make \\(Europe\\) the reference level:\n\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{Africa}) +  \\widehat\\beta_2 \\cdot I(\\text{Americas}) + \\widehat\\beta_3 \\cdot I(\\text{Asia})\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-europe-22",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-europe-22",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "We can change the reference level to Europe (2/2)",
+    "text": "We can change the reference level to Europe (2/2)\n\nNow update the coefficients of the regression equation using the output below.\n\n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with PF\n\n\n\n\nF\n74.13\n3.74\n\n\nNF\n68.99\n-1.40\n\n\nPF\n70.39\n0.00\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 70.39 + 3.74 \\cdot I(\\text{Africa}) + -1.4 \\cdot I(\\text{Americas})\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe-12",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe-12",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "R: Change reference level to Europe (1/2)",
+    "text": "R: Change reference level to Europe (1/2)\n\nfreedom_status data type was originally a character - check this with str() or class() or glimpse()\n\n\nstr(gapm$freedom_status) \n\n chr [1:105] \"NF\" \"PF\" \"NF\" \"F\" \"PF\" \"NF\" \"PF\" \"PF\" \"F\" \"PF\" \"PF\" \"F\" \"F\" ...\n\n\n\nIn order to change the reference level, we need to convert it to data type factor\n\nI also did this at the beginning to capitalize each region\n\n\n\ngapm_ex = gapm %&gt;% \n mutate(\n   freedom_status = factor(freedom_status, \n                         levels = c(\"africa\", \"americas\", \"asia\", \"europe\"), \n                         labels = c(\"Africa\", \"Americas\", \"Asia\", \"Europe\"))\n   )\nstr(gapm_ex$freedom_status) \nlevels(gapm_ex$freedom_status) # order of factor levels"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe-22",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe-22",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "R: Change reference level to Europe (2/2)",
+    "text": "R: Change reference level to Europe (2/2)\n\nNow change the order of the factor levels\nCode below uses fct_relevel() from the forcats package that gets loaded as a part of the tidyverse\nAny levels not mentioned will be left in their existing order, after the explicitly mentioned levels.\n\n\ngapm2 &lt;- gapm %&gt;% \n  mutate(\n    freedom_status = fct_relevel(freedom_status, \"PF\")\n    )\n\n\nCheck the order:\n\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"F\"  \"NF\""
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-run-model-with-europe-as-the-reference-level",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-run-model-with-europe-as-the-reference-level",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "R: Run model with Europe as the reference level",
+    "text": "R: Run model with Europe as the reference level\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"F\"  \"NF\"\n\nmodel2 &lt;- lm(life_exp ~ freedom_status, data = gapm2)\ntidy(model2) %&gt;% gt() %&gt;% tab_options(table.font.size = 35) %&gt;% \n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n70.39\n0.96\n73.17\n0.00\n\n\nfreedom_statusF\n3.74\n1.56\n2.39\n0.02\n\n\nfreedom_statusNF\n−1.40\n1.52\n−0.92\n0.36\n\n\n\n\n\n\n\n\\[\\begin{aligned}\\widehat{\\textrm{LE}} &=  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{Africa}) +  \\widehat\\beta_2 \\cdot I(\\text{Americas}) + \\widehat\\beta_3 \\cdot I(\\text{Asia}) \\\\ \\widehat{\\textrm{LE}} &= 70.39 3.74 \\cdot I(\\text{Africa}) -1.4 \\cdot I(\\text{Americas}) \\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#fitted-values-residuals",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#fitted-values-residuals",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Fitted values & residuals",
+    "text": "Fitted values & residuals\n\n\nSimilar to as before:\n\nObserved values \\(Y\\) are the values in the dataset\nFitted values \\(\\widehat{Y}\\) are the values that fall on the best-fit line for a specific value of x are the means of the outcome stratified by the categorical predictor’s levels\nResiduals (\\(\\widehat{\\epsilon} = Y - \\widehat{Y}\\)) are the differences between the two"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#fitted-values-are-the-same-as-the-means",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#fitted-values-are-the-same-as-the-means",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Fitted values are the same as the means",
+    "text": "Fitted values are the same as the means\n\nm1_aug &lt;- augment(model1)\n\nggplot(m1_aug, aes(x = freedom_status, y = .fitted)) + geom_point() +\n  theme(axis.text = element_text(size = 22), axis.title = element_text(size = 22))"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#residual-plots-now-the-spread-within-each-region",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#residual-plots-now-the-spread-within-each-region",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Residual plots (now the spread within each region)",
+    "text": "Residual plots (now the spread within each region)\n\nggplot(m1_aug, aes(x=.resid)) + geom_histogram() + \n  theme(axis.text = element_text(size = 22), title = element_text(size = 22))"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-3",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-3",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Poll Everywhere Question 3",
+    "text": "Poll Everywhere Question 3"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#lets-look-at-life-expectancy-vs.-four-income-levels",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#lets-look-at-life-expectancy-vs.-four-income-levels",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Let’s look at life expectancy vs. four income levels",
+    "text": "Let’s look at life expectancy vs. four income levels\n\nGapminder discusses individual income levels\n\n \n\nIncome levels for a country is based on average GDP per capita, and grouped into:\n\nLow income\nLower middle income\nUpper middle income\nHigh income"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#visualizing-the-ordinal-variable-income-levels",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#visualizing-the-ordinal-variable-income-levels",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Visualizing the ordinal variable, income levels",
+    "text": "Visualizing the ordinal variable, income levels\n\n\n\n\n\n\n\n\n\n\n\n\nA few changes needed:\n\nPut the income levels in order\n\n\ngapm2 = gapm2 %&gt;%\n mutate(income_level_4 = factor(income_level_4, \n            ordered = T, \n            levels = c(\"Low income\", \n            \"Lower middle income\", \n            \"Upper middle income\", \n            \"High income\")))\n\n\nMake the income levels readable\n\nHow to Rotate Axis Labels in ggplot2?"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#much-better-visualizing-the-ordinal-variable-income-levels",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#much-better-visualizing-the-ordinal-variable-income-levels",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Much better: Visualizing the ordinal variable, income levels",
+    "text": "Much better: Visualizing the ordinal variable, income levels\n\n\n\nggplot(gapm, aes(x = income_level_4, y = life_exp)) +\n  geom_jitter(size = 1, alpha = .6, width = 0.2) +\n  stat_summary(fun = mean, geom = \"point\", size = 8, shape = 18) +\n  labs(x = \"Income levels\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. income levels\",\n       caption = \"Diamonds = Income level averages\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20), \n        axis.text.x=element_text(angle = 20, vjust = 1, hjust=1))"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#how-can-we-code-this-variable",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#how-can-we-code-this-variable",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "How can we code this variable?",
+    "text": "How can we code this variable?\nWe have two options:\n\n\n\n\nTreat the levels as nominal, and use reference cell coding\n\n\n\nLike we did with freedom status\nThis option will not break the linearity assumption\nFor \\(g\\) categories of the variable, we will have \\(g-1\\) coefficients to estimate\n\n\n\n\n\n\nUse the ordinal values to score the levels and treat as a numerical variable\n\n\n\nEven if a variable is inherently ordered, we need to check that linearity holds if categories are represented as numbers\nThis way of coding preserves more power in the model (less coefficients to estimate means more power)\nOnly one coefficient to estimate"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#some-important-considerations-when-scoring-ordinal-variables",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#some-important-considerations-when-scoring-ordinal-variables",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Some important considerations when scoring ordinal variables",
+    "text": "Some important considerations when scoring ordinal variables\n\nEven if a variable is inherently ordered, we need to check that linearity holds if categories are represented as numbers (more in next lessons)\n\nLinearity is an assumption of linear regression: that the relationship between X and Y is linear\n\n\n \n\nAssumes differences between adjacent groups are equal\n\nIncome levels are pre-set groups by Gapminder\nMight be hard to interpret “every 1-level increase in income level”\n\n\n \n\nIs the variable part of the main relationship that you are investigating? (even if linearity holds)\n\nIf yes, consider leaving as reference cell coding unless the interpretation makes sense\nIf no, and just needed as an adjustment in your model, then power benefit of scoring might be worth it!"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#check-that-linearity-holds-for-income-levels",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#check-that-linearity-holds-for-income-levels",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Check that linearity holds for income levels",
+    "text": "Check that linearity holds for income levels\n\n\n\nUsing visual assessment, linearity holds for our income levels (more in next lessons)\nWe can use the ordinal encoding for income levels"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-4",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#poll-everywhere-question-4",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Poll Everywhere Question 4",
+    "text": "Poll Everywhere Question 4"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#ordinal-coding-scoring",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#ordinal-coding-scoring",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Ordinal coding / Scoring",
+    "text": "Ordinal coding / Scoring\n\nMap each income level to a number\nUsually start at 1\n\n\n\n\nIncome Level\nScore\n\n\n\n\nLow income\n1\n\n\nLower middle income\n2\n\n\nUpper middle income\n3\n\n\nHigh income\n4\n\n\n\n\ngapm2 = gapm2 %&gt;%\n  mutate(income_num = as.numeric(income_level_4))\nstr(gapm$income_num)\n\n NULL"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#run-the-model-with-the-scored-income",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#run-the-model-with-the-scored-income",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Run the model with the scored income",
+    "text": "Run the model with the scored income\n\nmod_inc2 = gapm2 %&gt;% lm(formula = life_exp ~ income_num)\ntidy(mod_inc2) %&gt;% gt() %&gt;% tab_options(table.font.size = 37) %&gt;%\n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n58.51\n1.38\n42.47\n0.00\n\n\nincome_num\n4.90\n0.51\n9.66\n0.00\n\n\n\n\n\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} &=  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot \\text{Income level} \\\\\n\\widehat{\\textrm{LE}} &=  58.51 + 4.9 \\cdot \\text{Income level}\n\\end{aligned}\\]\n\nKeep in mind: We cannot calculate the expected outcome outside of the scoring values\n\nFor example, we cannot find the mean life expectancy for an income level of 1.5"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#interpreting-the-model",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#interpreting-the-model",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Interpreting the model",
+    "text": "Interpreting the model\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n58.51\n1.38\n42.47\n0.00\n55.78\n61.24\n\n\nincome_num\n4.90\n0.51\n9.66\n0.00\n3.90\n5.91\n\n\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} =  54.01 + 6.25 \\cdot \\text{Income level}\\]\n\nInterpreting the intercept: At an income level of 0, mean life expectancy is 54.01 (95% CI: 51.92, 56.10).\n\nNote: this does not make sense because there is no income level of 0!\n\nInterpreting the coefficient for income: For every 1-level increase in income level, mean life expectancy increases 6.25 years (95% CI: 5.52, 6.98)."
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#what-if-life-expectancy-vs.-income-level-looked-like-this",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#what-if-life-expectancy-vs.-income-level-looked-like-this",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "What if life expectancy vs. income level looked like this?",
+    "text": "What if life expectancy vs. income level looked like this?\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo longer maintaining the linearity assumption\nNeed to use reference cell coding\n\n \n\nWe would fit the following model: \\[\\begin{aligned}\n\\textrm{LE} = & \\beta_0 + \\beta_1 \\cdot I(\\text{Lower middle income}) + \\\\ & \\beta_2 \\cdot I(\\text{Upper middle income}) + \\\\ & \\beta_3 \\cdot I(\\text{High income}) + \\epsilon\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#if-time",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#if-time",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "If time…",
+    "text": "If time…\nLet’s walk through categorical variables that have multiple selections\n\nSo each group is not mutually exclusive\nWe could make an indicator for each category, but individuals could be a part of multiple categories\n\n \n\nAlso, thinking about income levels - can we combine two groups to make one??"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#visualizing-the-relationship",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#visualizing-the-relationship",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Visualizing the relationship",
+    "text": "Visualizing the relationship\n\n\nBad option for visualization:\n\n\nCode\nggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +\n  geom_point() +\n  labs(x = \"Freedom status\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. Freedom status\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\n\nGood option for visualization:\n\n\nCode\nggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +\n  geom_jitter(size = 1, alpha = .6, width = 0.2) +\n  stat_summary(fun = mean, geom = \"point\", size = 8, shape = 18) +\n  labs(x = \"Freedom status\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. Freedom status\",\n       caption = \"Diamonds = region averages\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20))\n\n\n\n\n\n\n\n\n\n\nUsed geom_jitter()\n\n\nGood option for visualization:\n\n\nCode\nggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +\n  geom_boxplot() +\n  labs(x = \"Freedom status\", \n       y = \"Country life expectancy (years)\",\n       title = \"Life expectancy vs. Freedom status\") +\n  theme(axis.title = element_text(size = 20), \n        axis.text = element_text(size = 20), \n        title = element_text(size = 20))"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "Linear regression with a categorical covariate",
+    "text": "Linear regression with a categorical covariate\n\n\n\nWhen using a categorical covariate/predictor,\n\nWe do NOT, technically, find a best-fit line\n\nInstead we model the means of the outcome\n\nFor the different levels of the categorical variable\n\n\n \n\nIn 511/525, we used Kruskal-Wallis test and our ANOVA table to test if groups means were statistically different from one another\nWe can do this using linear models AND we can include other variables in the model"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#notes-from-me-and-the-tas",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#notes-from-me-and-the-tas",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Notes from me and the TAs",
+    "text": "Notes from me and the TAs"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#get-into-groups-of-2-4",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#get-into-groups-of-2-4",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Get into groups of 2-4",
+    "text": "Get into groups of 2-4\n\nNo more than 4!\nIntroduce yourself if you do not know each other\nShare you html documents with each other (email, airdrop, etc.)"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#introduce-research-question",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#introduce-research-question",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Introduce Research Question",
+    "text": "Introduce Research Question\n\nShare your research question with each other!\nShare your other variables\nIs everyone using the appropriate variables?\nDid anyone see any potential issues with how many individuals are in each category of a variable?"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#double-check-code-and-saved-data",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#double-check-code-and-saved-data",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Double check code and saved data",
+    "text": "Double check code and saved data\n\nDid everyone in the group successfully save the dataset?\nCan you open it right now?"
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion.html#compiled-introductions",
+    "href": "lessons/L01_Discussion/L01_Discussion.html#compiled-introductions",
+    "title": "Lab 1: Feedback and Discussion",
+    "section": "Compiled introductions",
+    "text": "Compiled introductions\n\nWhat major points did you include in your introduction?\nWould you change anything after discussing with your group?"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#lab-3-feedback",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#lab-3-feedback",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Lab 3 Feedback",
+    "text": "Lab 3 Feedback\n\nSome fo you did main covariate + 4 other variables and some did main covariate + 5 other variables\n\nOkay either way\n\nIn presentation of odds ratios (forest plot and tables), it’s important to include the reference group\n\nGives the reader context for the comparison"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#get-into-groups-of-2-4",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#get-into-groups-of-2-4",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Get into groups of 2-4",
+    "text": "Get into groups of 2-4\n\nNo more than 4!\nIntroduce yourself and your research question\nShare you html documents with each other (email, airdrop, etc.)"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nsource(\"/Users/wakim/Library/CloudStorage/OneDrive-OregonHealth&ScienceUniversity/Projects/Teaching_DEIJ_Datasets/Datasets/Food_insecurity/Code/Labs/Lab_02_work.R\")\n\nLet’s say I ran this model:\n\nmodel = wbns4 %&gt;% \n  glm(formula = FOOD_INSEC ~ PPINCIMP + XACSNET + FAMSIZE, family = binomial)"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-1",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-1",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nlibrary(broom.helpers)\nMLR_tidy0 = tidy_and_attach(model,  conf.int=T, exponentiate = T) %&gt;%\n  tidy_remove_intercept() %&gt;%\n  tidy_add_reference_rows() %&gt;%\n  tidy_add_estimate_to_reference_rows() %&gt;%\n  tidy_add_term_labels()\n\nglimpse(MLR_tidy0)"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-2",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-2",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nplot_MLR0 = ggplot(data=MLR_tidy0, \n       aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  \n  geom_vline(xintercept=1, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  \n  labs(x = \"OR (95% CI)\", \n       title = \"Odds ratios of food insecurity\") +\n  theme(axis.title = element_text(size = 12), \n        axis.text = element_text(size = 12), \n        title = element_text(size = 12), \n        axis.title.y=element_blank(), \n        strip.text = element_text(size = 12), \n        strip.placement = \"outside\", \n        strip.background = element_blank())"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-3",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-3",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nplot_MLR0"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-4",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-4",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nMLR_tidy = MLR_tidy0  %&gt;%\n              mutate(order = case_match(label, \n                            \"Less than $5,000\" ~ 1, \n                            \"$5,000 to $7,499\" ~ 2, \n                            \"$7,500 to $9,999\" ~ 3, \n                            \"$10,000 to $12,499\" ~ 4, \n                            \"$12,500 to $14,999\" ~ 5, \n                            \"$15,000 to $19,999\" ~ 6, \n                            \"$20,000 to $24,999\" ~ 7, \n                            \"$25,000 to $29,999\" ~ 8, \n                            \"$30,000 to $34,999\" ~ 9, \n                            \"$35,000 to $39,999\" ~ 10, \n                            \"$40,000 to $49,999\" ~ 11, \n                            \"$50,000 to $59,999\" ~ 12, \n                            \"$60,000 to $74,999\" ~ 13, \n                            \"$75,000 to $84,999\" ~ 14, \n                            \"$85,000 to $99,999\" ~ 15, \n                            \"$100,000 to $124,999\" ~ 16, \n                            \"$125,000 to $149,999\" ~ 17, \n                            \"$150,000 to $174,999\" ~ 18, \n                            \"$175,000 to $199,999\" ~ 19, \n                            \"$200,000 to $249,999\" ~ 20, \n                            \"$250,000 or more\" ~ 21, \n                            \"1\" ~ 1, \n                            \"2\" ~ 2, \n                            \"3\" ~ 3, \n                            \"4\" ~ 4, \n                            \"5\" ~ 5, \n                            \"6\" ~ 6, \n                            \"7\" ~ 7, \n                            \"8 or more\" ~ 8,\n                            .default = 0)) %&gt;%\n            mutate(label = fct_reorder(label, desc(order)))"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-5",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-5",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nplot_MLR = ggplot(data=MLR_tidy, \n       aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + \n  geom_point(size = 3) +  geom_errorbarh(height=.2) + \n  \n  geom_vline(xintercept=1, color='#C2352F', linetype='dashed', alpha=1) +\n  theme_classic() +\n  \n  facet_grid(rows = vars(var_label), scales = \"free\",\n             space='free_y', switch = \"y\") + \n  \n  labs(x = \"OR (95% CI)\", \n       title = \"Odds ratios of food insecurity\") +\n  theme(axis.title = element_text(size = 12), \n        axis.text = element_text(size = 12), \n        title = element_text(size = 12), \n        axis.title.y=element_blank(), \n        strip.text = element_text(size = 12), \n        strip.placement = \"outside\", \n        strip.background = element_blank())"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-6",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#help-with-forest-plot-ordering-categories-6",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Help with forest plot: ordering categories",
+    "text": "Help with forest plot: ordering categories\n\nplot_MLR"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion.html#questions-to-consider",
+    "href": "lessons/L03_Discussion/L03_Discussion.html#questions-to-consider",
+    "title": "Lab 3: Feedback and Discussion",
+    "section": "Questions to consider",
+    "text": "Questions to consider\n\nHow did you handle any categorical variables?\n\nIncome, family size, number of children, etc\n\nAre the categories for the forest plot in order?\nHow did you interpret your estimated odds ratios?\n\nIf you have many categories in your main variable, do you see a trend?\nWhat might be a better way to report a trend?\n\nIf you had interactions, how would your interpretation change?"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion_muddy_points.html",
+    "href": "lessons/L03_Discussion/L03_Discussion_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!"
+  },
+  {
+    "objectID": "lessons/L03_Discussion/L03_Discussion_muddy_points.html#muddy-points-from-spring-2025",
+    "href": "lessons/L03_Discussion/L03_Discussion_muddy_points.html#muddy-points-from-spring-2025",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-pf-12",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-pf-12",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "We can change the reference level to PF (1/2)",
+    "text": "We can change the reference level to PF (1/2)\n\nSuppose we want to compare the mean life expectancies of freedom statuses to the \\(\\text{partly free}\\) level instead of \\(\\text{not free}\\)\nBelow is the estimated regression equation for when \\(\\text{not free}\\) is the reference level\n\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{PF}) +  \\widehat\\beta_2 \\cdot I(\\text{F})\\]\n\nUpdate the variables to make \\(\\text{partly free}\\) the reference level:\n\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{NF}) +  \\widehat\\beta_2 \\cdot I(\\text{F})\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-pf-22",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-pf-22",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "We can change the reference level to PF (2/2)",
+    "text": "We can change the reference level to PF (2/2)\n\nNow update the coefficients of the regression equation using the output below.\n\n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with PF\n\n\n\n\nNF\n68.99\n-1.40\n\n\nF\n74.13\n3.74\n\n\nPF\n70.39\n0.00\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 70.39 -1.4 \\cdot I(\\text{NF}) + 3.74 \\cdot I(\\text{F})\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "R: Change reference level to Europe",
+    "text": "R: Change reference level to Europe\n\nfreedom_status data type was originally a character - check this with str() or class() or glimpse()\n\n\nstr(gapm$freedom_status) \n\n Factor w/ 3 levels \"NF\",\"F\",\"PF\": 1 3 1 2 3 1 3 3 2 3 ...\n\n\n\nTo change the reference level, we can use fct_relevel() from the forcats package (part of tidyverse)\nAny levels not mentioned will be left in their existing order, after the explicitly mentioned levels.\n\n\ngapm2 = gapm %&gt;% \n mutate(\n   freedom_status = fct_relevel(freedom_status, \"PF\")\n     )\n\n\nCheck the order:\n\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"NF\" \"F\""
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-run-model-with-pf-as-the-reference-level",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-run-model-with-pf-as-the-reference-level",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "R: Run model with PF as the reference level",
+    "text": "R: Run model with PF as the reference level\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"NF\" \"F\" \n\nmodel2 = gapm2 %&gt;% lm(formula = life_exp ~ freedom_status)\ntidy(model2) %&gt;% gt() %&gt;% tab_options(table.font.size = 35) %&gt;% \n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n70.39\n0.96\n73.17\n0.00\n\n\nfreedom_statusNF\n−1.40\n1.52\n−0.92\n0.36\n\n\nfreedom_statusF\n3.74\n1.56\n2.39\n0.02\n\n\n\n\n\n\n\n\\[\\begin{aligned}\\widehat{\\textrm{LE}} &=  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{NF}) +  \\widehat\\beta_2 \\cdot I(\\text{F}) + \\\\ \\widehat{\\textrm{LE}} &= 70.39 -1.4 \\cdot I(\\text{NF}) + 3.74 \\cdot I(\\text{F}) \\end{aligned}\\]"
   }
 ]

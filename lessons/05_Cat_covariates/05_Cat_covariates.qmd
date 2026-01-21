@@ -1,9 +1,9 @@
 ---
 title: "Lesson 5: SLR-ish: Categorical Covariates"
-author: "Meike Niederhausen and Nicky Wakim"
+author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "01/22/2025"
+date: "`r library(here); source(here('class_dates.R')); w3d2`"
 categories: ["Week 6"]
 format: 
   revealjs:
@@ -35,36 +35,16 @@ library(knitr)
 library(readxl)
 library(gt)
 
-# Load the data - update code if the csv file is not in the same location on your computer
-# If you need to download the file, please go to ur shared folder under Data > Slides
-gapm <- read_excel("data/Gapminder_vars_2011.xlsx", 
-                   na = "NA")  # important!!!! 
-
-gapm_sub <- gapm %>% 
-  drop_na(LifeExpectancyYrs, FemaleLiteracyRate, FoodSupplykcPPD)
-
-glimpse(gapm_sub)
+theme_set(theme_bw(base_size = 22))
 ```
 
 ```{r echo=FALSE}
-# Load the data - update code if the csv file is not in the same location on your computer
-gapm <- read_excel("data/gapminder_vars_2011.xlsx", 
-                   na = "NA")  # important!!!! 
-# na = "NA" is telling R that the NA's in the Excel sheet are actual missing values and not character strings
-
-# glimpse(gapm)
-# Note that life expectancy and female literacy rate have different column names in this dataset
-
-# gapm %>% tabyl(four_regions) # no missing values
-
-# Removing all rows (countries) that have 
-# a missing value for any of the variables listed in drop_na()
-gapm2 <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
-  drop_na(LifeExpectancyYrs, four_regions) %>%
-  mutate(four_regions = factor(four_regions, levels = c("africa", "americas", "asia", "europe"), labels = c("Africa", "Americas", "Asia", "Europe"))) %>%
-  rename(income_levels = `World bank, 4 income groups 2017`)
-# dim(gapm)
-# dim(gapm2)
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF"))
 ```
 
 # Learning Objectives
@@ -77,25 +57,24 @@ gapm2 <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
 
 ## Why "SLR-*ish*"?
 
-- The **strict** definition of simple linear regression: only two variables that are BOTH continuous
+-   The **strict** definition of simple linear regression: only two variables that are BOTH continuous
 
  
 
-- Common (but kinda wrong) use of simple linear regression: only two variables with outcome continuous and predictor not specified
+-   Common (but kinda wrong) use of simple linear regression: only two variables with outcome continuous and predictor not specified
 
  
 
-- I'm including multi-level categorical covariates in SLR mostly because it's easier to learn now!
-
+-   I'm including multi-level categorical covariates in SLR mostly because it's easier to learn now!
 
 ## Let's map that to our regression analysis process
 
-::: box
+:::::::::::::::::: box
 ![](../img_slides/arrow2.png){.absolute top="13.5%" right="62.1%" width="155"} ![](../img_slides/arrow2.png){.absolute top="13.5%" right="28.4%" width="155"}![](../img_slides/arrow_back4.png){.absolute top="7.5%" right="30.5%" width="820"} ![](../img_slides/arrow_down.png){.absolute top="60.5%" right="48%" width="85"}
 
-::: columns
-::: {.column width="30%"}
-::: RAP1
+::::::::::::::::: columns
+:::::: {.column width="30%"}
+::::: RAP1
 ::: RAP1-title
 Model Selection
 :::
@@ -109,14 +88,14 @@ Model Selection
 
 -   Comparing potential models
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="4%"}
 :::
 
-::: {.column width="30%"}
-::: RAP2
+:::::: {.column width="30%"}
+::::: RAP2
 ::: RAP2-title
 Model Fitting
 :::
@@ -132,14 +111,14 @@ Model Fitting
 
 -   Interactions
 :::
-:::
-:::
+:::::
+::::::
 
 ::: {.column width="4%"}
 :::
 
-::: {.column width="30%"}
-::: RAP3
+:::::: {.column width="30%"}
+::::: RAP3
 ::: RAP3-title
 Model Evaluation
 :::
@@ -152,18 +131,18 @@ Model Evaluation
 -   Influential points
 -   Multicollinearity
 :::
-:::
-:::
-:::
-:::
+:::::
+::::::
+:::::::::::::::::
+::::::::::::::::::
 
-::: RAP4
+:::::::: RAP4
 ::: RAP4-title
 Model Use (Inference)
 :::
 
-::: RAP4-cont
-::: columns
+:::::: RAP4-cont
+::::: columns
 ::: {.column width="50%"}
 -   Inference for coefficients
 -   Hypothesis testing for coefficients
@@ -172,15 +151,16 @@ Model Use (Inference)
 ::: {.column width="50%"}
 -   Inference for expected $Y$ given $X$
 :::
-:::
-:::
-:::
+:::::
+::::::
+::::::::
 
 # Learning Objectives
 
 ::: lob
 1.  Understand why we need a new way to code categorical variables compared to continuous variables
 :::
+
 2.  Write the regression equation for a categorical variable using reference cell coding
 3.  Calculate and interpret coefficients for reference cell coding
 4.  Change the reference level in a categorical variable for reference cell coding
@@ -188,36 +168,37 @@ Model Use (Inference)
 
 ## Still looking at Gapminder Life Expectancy data
 
--   We will look at life expectancy vs. these world regions
+-   We will look at life expectancy vs. these Freedom statuss
 
--   [Gapminder uses four world regions](https://www.gapminder.org/fw/four-regions/)
+-   [You can access my codebook here](../gapminder_codebook.qmd)
 
-    -   Africa
-    -   The Americas
-    -   Asia
-    -   Europe
-    
-- World region is a **multi-level categorical covariate**: it has four regions 
-    
+-   Gapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of poltical rights and civil liberties ratings.
+
+    -   Not free (NF)
+    -   Partly free (PF)
+    -   Free (F)
+
+-   Freedom status is a **multi-level categorical covariate**: it has three statuses
+
  
 
-- Note: I am calling the expected life expectancy $\widehat{LE}$
-  - Previously, I have written $\widehat{\text{life expectancy}}$
+-   Note: I am calling the expected life expectancy $\widehat{LE}$
+    -   Previously, I have FSitten $\widehat{\text{life expectancy}}$
 
-## Linear regression with a categorical covariate (1/2)
+## Visualizing the relationship
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 Bad option for visualization:
 
 ```{r fig.height=7, fig.width=7, warning=F, fig.align='center'}
 #| echo: true
 #| code-fold: true
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_point() +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region") +
+       title = "Life expectancy vs. Freedom status") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -230,19 +211,20 @@ Good option for visualization:
 ```{r fig.height=7, fig.width=7, warning=F, fig.align='center'}
 #| echo: true
 #| code-fold: true
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
+       title = "Life expectancy vs. Freedom status",
        caption = "Diamonds = region averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
 ```
 
-- Used `geom_jitter()`
+-   Used `geom_jitter()`
 :::
 
 ::: {.column width="33%"}
@@ -251,23 +233,23 @@ Good option for visualization:
 ```{r fig.height=7, fig.width=7, warning=F, fig.align='center'}
 #| echo: true
 #| code-fold: true
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_boxplot() +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region") +
+       title = "Life expectancy vs. Freedom status") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
 ```
 :::
-:::
+::::::
 
-## Linear regression with a categorical covariate (2/2)
+## Linear regression with a categorical covariate
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
--   When using a categorical covariate/predictor (that is not ordered),
+-   When using a categorical covariate/predictor,
 
     -   We do **NOT**, technically, find a best-fit line
 
@@ -277,7 +259,7 @@ ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
 
  
 
--   In 511, we used Kruskal-Wallis test and our ANOVA table to test if groups means were statistically different from one another
+-   In 511/525, we used Kruskal-Wallis test and our ANOVA table to test if groups means were statistically different from one another
 
 -   We can do this [using linear models](https://lindeloev.github.io/tests-as-linear/linear_tests_cheat_sheet.pdf) AND we can include other variables in the model
 :::
@@ -285,29 +267,64 @@ ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
 ::: {.column width="50%"}
 ```{r fig.height=7, fig.width=7, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
+       title = "Life expectancy vs. Freedom status",
        caption = "Diamonds = region averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
 ```
 :::
-:::
+:::::
 
 ## There are different ways to code categorical variables
 
--   Reference cell coding (sometimes called dummy coding)
-    -   Compares each level of a variable to the omitted (reference) level
--   Effect coding (sometimes called sum coding or deviation coding)
-    -   Compares deviations from the grand mean
-    -   Not covered in our class
--   Ordinal encoding (sometimes called scoring)
-    -   Categories have a natural, even spaced ordering
+::::::::::::::: columns
+:::::: {.column width="33%"}
+::::: definition
+::: def-title
+Reference Cell Coding
+:::
+
+::: def-cont
+-   Sometimes called dummy coding
+-   Compares each level of a variable to the omitted (reference) level
+:::
+:::::
+::::::
+
+:::::: {.column width="33%"}
+::::: example
+::: ex-title
+Effect coding
+:::
+
+::: ex-cont
+-   Sometimes called sum coding or deviation coding
+-   Compares deviations from the grand mean
+-   Not covered in our class
+:::
+:::::
+::::::
+
+:::::: {.column width="33%"}
+::::: fact
+::: fact-title
+Ordinal encoding
+:::
+
+::: fact-cont
+-   Sometimes called scoring
+-   Categories have a natural, even spaced ordering
+-   Linear relationship between levels
+:::
+:::::
+::::::
+:::::::::::::::
 
  
 
@@ -319,7 +336,7 @@ If you want to learn more about these and other coding schemes:
 
 ## Building the regression equation: problem with a single coefficient
 
-::: columns
+::::: columns
 ::: column
 **Previously: simple linear regression**
 
@@ -332,41 +349,39 @@ The regression (best-fit) line is: $$\widehat{Y} = \widehat{\beta}_0 + \widehat{
 ::: column
 **New: what if the explanatory variable is categorical?**
 
-*Naively*, we could write: $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \cdot X$
+*Naively*, we could Write: $\widehat{Y} = \widehat{\beta}_0 + \widehat{\beta}_1 \cdot X$
 
-Or, with our variables: $$\widehat{\textrm{LE}} = \widehat{\beta}_0 + \widehat{\beta}_1 \cdot \textrm{WR} $$
+Or, with our variables: $$\widehat{\textrm{LE}} = \widehat{\beta}_0 + \widehat{\beta}_1 \cdot \textrm{FS} $$
 
--   But what does $\textrm{WR}$ (world regions) mean in this equation?
+-   But what does $\textrm{FS}$ (freedom status) mean in this equation?
 
-    -   What values can it take? How do we represent each region?
+    -   What values can it take? How do we represent each FS?
 
  
 
-- Note: the above is WRONG
+-   Note: the above is WRONG
 :::
-:::
+:::::
 
 ## Building the regression equation: how do we map categories to means?
 
--   If we only have world region in our model and want to map it to an expected life expectancy...
+-   If we only have freedom status in our model and want to map it to an average life expectancy...
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
-means_LE = gapm2 %>%
-  group_by(four_regions) %>%
-  summarise(mean = mean(LifeExpectancyYrs))
+means_LE = gapm %>%
+  group_by(freedom_status) %>% 
+  summarise(mean = mean(life_exp))
 ```
 
--   We want to create a function that can map each region to life expectancy
+-   We want to create a function that can map each freedom status to life expectancy
 
-    -   If in Africa: $\widehat{LE} = 61.32$ years
+    -   If not free: $\widehat{LE} = `r round(means_LE$mean[2], 2)`$ years
 
-    -   If in the Americas: $\widehat{LE} = 74.64$ years
+    -   If partly free: $\widehat{LE} = `r round(means_LE$mean[3], 2)`$ years
 
-    -   If in Asia: $\widehat{LE} = 71.70$ years
-
-    -   If in Europe: $\widehat{LE} = 77.61$ years
+    -   If free: $\widehat{LE} = `r round(means_LE$mean[1], 2)`$ years
 
  
 
@@ -376,19 +391,19 @@ means_LE = gapm2 %>%
 ::: {.column width="50%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
+       title = "Life expectancy vs. Freedom status",
        caption = "Diamonds = region averages") +
   theme(axis.title = element_text(size = 22), 
         axis.text = element_text(size = 22), 
         title = element_text(size = 22))
 ```
 :::
-:::
+:::::
 
 ## Building the regression equation: Indicator functions
 
@@ -407,16 +422,14 @@ ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
 
 -   For example, if we want to identify a country as being in the Americas region, we can make:
 
-    $$I(WR = \text{Americas}) \text{ or }I(\text{Americas}) = 
+    $$I(FS = \text{partly free}) \text{ or }I(\text{partly free}) = 
     \left\{
     \begin{array}{@{}ll@{}}
-     1, & \text{if}\ WR = \text{Americas} \\
+     1, & \text{if}\ FS = \text{partly free} \\
       0, & \text{else}
      \end{array}\right. $$
 
 ## Poll Everywhere Question 1
-
-
 
 # Learning Objectives
 
@@ -432,76 +445,70 @@ ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
 
 ## Building the regression equation: Indicators in our equation
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 $$\begin{aligned}
-\widehat{\textrm{LE}} = & `r round(means_LE$mean[1], 2)` \cdot I(\text{Africa}) + `r round(means_LE$mean[2], 2)` \cdot I(\text{Americas}) + \\ &`r round(means_LE$mean[3], 2)` \cdot I(\text{Asia}) + `r round(means_LE$mean[4], 2)` \cdot I(\text{Europe})
+\widehat{\textrm{LE}} = & `r round(means_LE$mean[2], 2)` \cdot I(\text{not free}) + `r round(means_LE$mean[3], 2)` \cdot I(\text{partly free}) + \\ &`r round(means_LE$mean[1], 2)` \cdot I(\text{free})
 \end{aligned}$$
 
 -   However, a linear regression equation still requires an intercept!
 
     -   So one of our regions need to become our "reference" group
-    -   We'll use Africa as our reference
+    -   We'll use "not free" as our reference
     -   That means we need to adjust all the numbers
 
 $$\begin{aligned}
-\widehat{\textrm{LE}} = & `r round(means_LE$mean[1], 2)` + `r round(means_LE$mean[2]-means_LE$mean[1], 2)` \cdot I(\text{Americas}) + \\ &`r round(means_LE$mean[3]-means_LE$mean[1], 2)` \cdot I(\text{Asia}) + `r round(means_LE$mean[4]-means_LE$mean[1], 2)` \cdot I(\text{Europe}) \\
-\widehat{\textrm{LE}} = & \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) + \\ & \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})
+\widehat{\textrm{LE}} = & `r round(means_LE$mean[2], 2)` + `r round(means_LE$mean[3]-means_LE$mean[2], 2)` \cdot I(\text{partly free}) + \\ &`r round(means_LE$mean[1]-means_LE$mean[2], 2)` \cdot I(\text{free}) \\
+\widehat{\textrm{LE}} = & \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{partly free}) + \\ & \widehat\beta_2 \cdot I(\text{free})
 \end{aligned}$$
 :::
 
 ::: {.column width="50%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
+       title = "Life expectancy vs. Freedom status",
        caption = "Diamonds = region averages") +
-  theme(axis.title = element_text(size = 22), 
-        axis.text = element_text(size = 22), 
-        title = element_text(size = 22))
+  theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 20), 
+        title = element_text(size = 20))
 ```
 :::
-:::
+:::::
 
 ## Viewing the regression equation another way
 
-$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) + \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})$$
+$$\widehat{\textrm{LE}} = \widehat\beta_0 + \widehat\beta_1 \cdot I(FS = \text{partly free}) + \widehat\beta_2 \cdot I(FS = \text{free})$$
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
-| World region | Regression equation for WR                                                                                                                                  | Average Life Expectancy for WR                              |
-+==============+=============================================================================================================================================================+=============================================================+
-| Africa       | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 0 + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 \end{aligned}$ | $\widehat{\textrm{LE}} = \widehat\beta_0$                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
-| Americas     | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 1+ \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 \end{aligned}$  | $\widehat{\textrm{LE}} = \widehat\beta_0 + \widehat\beta_1$ |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
-| Asia         | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 0 + \\ & \widehat\beta_2 \cdot 1 + \widehat\beta_3 \cdot 0 \end{aligned}$ | $\widehat{\textrm{LE}} = \widehat\beta_0 + \widehat\beta_2$ |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
-| Europe       | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 0 + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 1 \end{aligned}$ | $\widehat{\textrm{LE}} = \widehat\beta_0 + \widehat\beta_3$ |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------+
+| Freedom status | Regression equation for FS | Average Life Expectancy for FS |
+|------------------|------------------------------------|------------------|
+| Not free | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 0 + \widehat\beta_2 \cdot 0 \end{aligned}$ | $\widehat{\textrm{LE}} = \widehat\beta_0$ |
+| Partly free | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 1+ \widehat\beta_2 \cdot 0\end{aligned}$ | $\widehat{\textrm{LE}} = \widehat\beta_0 + \widehat\beta_1$ |
+| Free | $\begin{aligned} \widehat{\textrm{LE}} = &\widehat\beta_0 + \widehat\beta_1 \cdot 0 + \widehat\beta_2 \cdot 1\end{aligned}$ | $\widehat{\textrm{LE}} = \widehat\beta_0 + \widehat\beta_2$ |
 :::
 
 ::: {.column width="40%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
+       title = "Life expectancy vs. Freedom status",
        caption = "Diamonds = region averages") +
-  theme(axis.title = element_text(size = 22), 
-        axis.text = element_text(size = 22), 
-        title = element_text(size = 22))
+  theme(axis.title = element_text(size = 20), 
+        axis.text = element_text(size = 20), 
+        title = element_text(size = 20))
 ```
 :::
-:::
+:::::
 
 # Learning Objectives
 
@@ -517,77 +524,87 @@ ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
 
 ## Interpretation of regression equation coefficients
 
--   Remember: expected, mean, and average are interchangeable
+Remember: expected, mean, and average are interchangeable
 
-+---------------------+--------------------------------------------------------------------+
-| Coefficient         | Interpretation                                                     |
-+=====================+====================================================================+
-| $\widehat{\beta}_0$ | Expected/mean/average life expectancy of Africa                    |
-+---------------------+--------------------------------------------------------------------+
-| $\widehat{\beta}_1$ | Difference in mean life expectancy of the Americas and Africa -OR- |
-|                     |                                                                    |
-|                     | Mean difference in life expectancy of the Americas and Africa      |
-+---------------------+--------------------------------------------------------------------+
-| $\widehat{\beta}_2$ | Difference in mean life expectancy between Asia and Africa -OR-    |
-|                     |                                                                    |
-|                     | Mean difference in life expectancy between Asia and Africa         |
-+---------------------+--------------------------------------------------------------------+
-| $\widehat{\beta}_3$ | Difference in mean life expectancy between Europe and Africa -OR-  |
-|                     |                                                                    |
-|                     | Mean difference in life expectancy between Europe and Africa       |
-+---------------------+--------------------------------------------------------------------+
+<table style="width:98%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr>
+<th><p>Coefficient</p></th>
+<th><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><p></p></td>
+<td><p>Expected/mean/average life expectancy of countries that are not free</p></td>
+</tr>
+<tr>
+<td><p></p></td>
+<td><p>Difference in mean life expectancy between partly free and not free countries -OR-</p>
+<p>Mean difference in life expectancy between partly free and not free countries</p></td>
+</tr>
+<tr>
+<td><p></p></td>
+<td><p>Difference in mean life expectancy between free and not free countries -OR-</p>
+<p>Mean difference in life expectancy between free and not free countries</p></td>
+</tr>
+</tbody>
+</table>
 
 ## Poll Everywhere Question 2
-
-
 
 ## Regression table with `lm()` function
 
 ```{r}
 #| echo: true
-model1 <- lm(LifeExpectancyYrs ~ four_regions, data = gapm2)
+
+model1 = gapm %>%
+  lm(formula = life_exp ~ freedom_status)
+
 tidy(model1, conf.int=T) %>% gt() %>% tab_options(table.font.size = 38) %>% 
   fmt_number(decimals = 2)
 ```
 
-$$\widehat{\textrm{LE}} = `r round(means_LE$mean[1], 2)` + `r round(means_LE$mean[2]-means_LE$mean[1], 2)` \cdot I(\text{Americas}) + `r round(means_LE$mean[3]-means_LE$mean[1], 2)` \cdot I(\text{Asia}) + `r round(means_LE$mean[4]-means_LE$mean[1], 2)` \cdot I(\text{Europe})$$
+```{r}
+#| echo: false
 
--   Which world region did R choose as the reference level?
+tidy_mod = tidy(model1, conf.int=T)
 
--   How you would calculate the mean life expectancies of world regions using *only* the results from the regression table?
+```
+
+$$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod$estimate[3], 2)` \cdot I(\text{PF}) + `r round(tidy_mod$estimate[2], 2)` \cdot I(\text{F})$$
+
+-   Which Freedom status did R choose as the reference level?
+
+-   How you would calculate the mean life expectancies of freedom statuss using *only* the results from the regression table?
 
 ## Bringing in the numbers/units/95% CI
 
-+---------------------+----------------------------------------------------------------------------------------------------------------------+
-| Coefficient         | Interpretation                                                                                                       |
-+=====================+======================================================================================================================+
-| $\widehat{\beta}_0$ | Average life expectancy of countries in Africa is 61.32 years (95% CI: 59.81, 62.83).                                |
-+---------------------+----------------------------------------------------------------------------------------------------------------------+
-| $\widehat{\beta}_1$ | The difference in mean life expectancy between countries in the Americas and Africa is 13.32 (95% CI: 10.89, 15.74). |
-+---------------------+----------------------------------------------------------------------------------------------------------------------+
-| $\widehat{\beta}_2$ | The difference in mean life expectancy between countries in the Americas and Africa is 10.38 (95% CI: 8.25, 12.51).  |
-+---------------------+----------------------------------------------------------------------------------------------------------------------+
-| $\widehat{\beta}_3$ | The difference in mean life expectancy between countries in Europe and Africa is 18.52 (95% CI: 14.05, 18.52).       |
-+---------------------+----------------------------------------------------------------------------------------------------------------------+
-
- 
+| Coefficient | Interpretation |
+|------------------|------------------------------------------------------|
+| $\widehat{\beta}_0$ | Average life expectancy of countries that are not free is `r round(tidy_mod$estimate[1], 2)` (95% CI: `r round(tidy_mod$conf.low[1], 2)`, `r round(tidy_mod$conf.high[1], 2)`). |
+| $\widehat{\beta}_1$ | The difference in mean life expectancy between countries that are partly free and not free is `r round(tidy_mod$estimate[2], 2)` (95% CI: `r round(tidy_mod$conf.low[2], 2)`, `r round(tidy_mod$conf.high[2], 2)`). |
+| $\widehat{\beta}_2$ | The difference in mean life expectancy between countries that are free and not free is `r round(tidy_mod$estimate[3], 2)` (95% CI: `r round(tidy_mod$conf.low[3], 2)`, `r round(tidy_mod$conf.high[3], 2)`). |
 
 -   Don't forget that we can use the confidence intervals to assess whether the mean difference with Africa is significant or not
 
 ## We can also use R to report each region's average life expectancy
 
-**Find the 95% CI's for the mean life expectancy for the Americas, Asia, and Europe**
+**Find the 95% CI's for the mean life expectancy for the countries that are partly free and free**
 
 -   Use the base R `predict()` function (see Lesson 4 for more info)
 -   Requires specification of a `newdata` "value"
 
 ```{r}
 #| echo: true
-newdata <- data.frame(four_regions = c("Africa", "Americas", "Asia", "Europe")) 
-
+newdata = data.frame(freedom_status = c("NF", "PF", "F")) 
 ```
 
-::: columns
+:::::::: columns
 ::: {.column width="50%"}
 ```{r}
 #| echo: true
@@ -597,44 +614,42 @@ newdata <- data.frame(four_regions = c("Africa", "Americas", "Asia", "Europe"))
 ```
 :::
 
-::: {.column width="50%"}
-::: fact
+:::::: {.column width="50%"}
+::::: fact
 ::: fact-title
 Interpretations
 :::
 
 ::: fact-cont
--   The average life expectancy for countries in the Americas is `r round(pred[2,1], 2)` years (95% CI: `r round(pred[2,2], 2)`, `r round(pred[2,3], 2)`).
--   The average life expectancy for countries in Asia is `r round(pred[3,1], 2)` years (95% CI: `r round(pred[3,2], 2)`, `r round(pred[3,3], 2)`).
--   The average life expectancy for countries in Europe is `r round(pred[4,1], 2)` years (95% CI: `r round(pred[4,2], 2)`, `r round(pred[4,3], 2)`).
+-   The average life expectancy for countries that are partly free is `r round(pred[2,1], 2)` years (95% CI: `r round(pred[2,2], 2)`, `r round(pred[2,3], 2)`).
+-   The average life expectancy for countries that are free is `r round(pred[3,1], 2)` years (95% CI: `r round(pred[3,2], 2)`, `r round(pred[3,3], 2)`).
 :::
-:::
-:::
-:::
+:::::
+::::::
+::::::::
 
 ## Another way to look at coefficient values
 
-$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) +  \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})$$
+$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{PF}) +  \widehat\beta_2 \cdot I(\text{F})$$
 
 ```{r}
 #| echo: true
 #| code-fold: true
 
-# means of each level of `four_regions`
-gapm2_ave <- gapm2 %>% 
-  group_by(four_regions) %>% 
-  summarise(
-    life_ave = mean(LifeExpectancyYrs))
+# means of each level of `freedom_status`
+gapm2_ave <- gapm %>% 
+  group_by(freedom_status) %>% 
+  summarise(life_ave = mean(life_exp))
 
 # mean of `africa`
-mean_africa <- gapm2_ave %>% 
-  filter(four_regions == "Africa") %>% 
+mean_NF <- gapm2_ave %>% 
+  filter(freedom_status == "NF") %>% 
   pull(life_ave)
 
-# differences in means between levels of `four_regions` and `africa`
+# differences in means between levels of `freedom_status` and `africa`
 gapm2_ave_diff <- gapm2_ave %>% 
-  mutate(`Difference with Africa` = life_ave - mean_africa) %>%
-  rename(`World regions` = four_regions, 
+  mutate(`Difference with NF` = life_ave - mean_NF) %>%
+  rename(`Freedom status` = freedom_status, 
          `Average life expectancy` = life_ave)
 
 # At the beginning of the Rmd we loaded knitr, which is where the kable command is from
@@ -645,7 +660,7 @@ gapm2_ave_diff %>% kable(
   ) 
 ```
 
-$$\widehat{\textrm{LE}} = `r round(means_LE$mean[1], 2)` + `r round(means_LE$mean[2]-means_LE$mean[1], 2)` \cdot I(\text{Americas}) + `r round(means_LE$mean[3]-means_LE$mean[1], 2)` \cdot I(\text{Asia}) + `r round(means_LE$mean[4]-means_LE$mean[1], 2)` \cdot I(\text{Europe})$$
+$$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod$estimate[3], 2)` \cdot I(\text{PF}) + `r round(tidy_mod$estimate[2], 2)` \cdot I(\text{F})$$
 
 # 10 minute break here?
 
@@ -663,56 +678,56 @@ $$\widehat{\textrm{LE}} = `r round(means_LE$mean[1], 2)` + `r round(means_LE$mea
 
 ## Reference levels
 
-**Why is `Africa` not one of the variables in the regression equation?**
+**Why is `NF` not one of the variables in the regression equation?**
 
-$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) +  \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})$$
+$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{PF}) +  \widehat\beta_2 \cdot I(\text{F})$$
 
--   Categorical variables have to have at least 2 levels. If they have 2 levels, we call them *binary*
+-   Categorical variables must have at least 2 levels. If they have 2 levels, we call them *binary*
 
  
 
 -   We choose one level as our **reference level** to which all other levels of the categorical variable are compared
 
-    -   The levels $\text{Americas}, \text{Asia}, \text{Europe}$ are compared to the level $\text{Africa}$
+    -   The levels \text{partly free} and \text{free}$ are compared to the level $\text{not free}$
 
  
 
 -   The **intercept** of the regression equation is the *mean of the outcome restricted to the reference level*
 
-    -   Recall that the intercept is the mean life expectancy of Africa, which was our reference level
+    -   Recall that the intercept is the mean life expectancy of countries that are not free, which was our reference level
 
  
 
 -   **If the categorical variable has** $r$ levels, then we need $r-1$ variables/coefficients to model it!
 
-## We can change the reference level to `Europe` (1/2)
+## We can change the reference level to `PF` (1/2)
 
--   Suppose we want to compare the mean life expectancies of world regions to the $\text{Europe}$ level instead of $\text{Africa}$
+-   Suppose we want to compare the mean life expectancies of freedom statuses to the $\text{partly free}$ level instead of $\text{not free}$
 
--   Below is the estimated regression equation for when $Africa$ is the reference level
+-   Below is the estimated regression equation for when $\text{not free}$ is the reference level
 
-$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) +  \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})$$
+$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{PF}) +  \widehat\beta_2 \cdot I(\text{F})$$
 
--   Update the variables to make $Europe$ the reference level:
+-   Update the variables to make $\text{partly free}$ the reference level:
 
-$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Africa}) +  \widehat\beta_2 \cdot I(\text{Americas}) + \widehat\beta_3 \cdot I(\text{Asia})$$
+$$\widehat{\textrm{LE}} =  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{NF}) +  \widehat\beta_2 \cdot I(\text{F})$$
 
-## We can change the reference level to `Europe` (2/2)
+## We can change the reference level to `PF` (2/2)
 
 -   Now update the coefficients of the regression equation using the output below.
 
 ```{r echo=FALSE}
-mean_europe <- gapm2_ave %>% 
-  filter(four_regions == "Europe") %>% 
+mean_PF <- gapm2_ave %>% 
+  filter(freedom_status == "PF") %>% 
   pull(life_ave)
 
-# mean_europe
+# mean_PF
 
 gapm2_ave_diff2 <- gapm2_ave %>% 
   mutate(
-    `Difference with Europe` = life_ave - mean_europe
+    `Difference with PF` = life_ave - mean_PF
   ) %>%
-  rename(`World regions` = four_regions, 
+  rename(`Freedom status` = freedom_status, 
          `Average life expectancy` = life_ave)
 
 # At the beginning of the Rmd I loaded knitr, which is where the kable command is from
@@ -724,81 +739,61 @@ gapm2_ave_diff2 %>% kable(
 ```
 
 ```{r echo=FALSE}
-b0 <- mean_europe
+b0 <- mean_PF
 
-coeff_europe <- gapm2_ave_diff2$`Difference with Europe`
-# coeff_europe
+coeff_PF <- gapm2_ave_diff2$`Difference with PF`
 
-b1 <- coeff_europe[1]
-b2 <- coeff_europe[2]
-b3 <- coeff_europe[3]
+b1 <- coeff_PF[1]
+b2 <- coeff_PF[2]
 # b0; b1; b2; b3
 ```
 
-$$\widehat{\textrm{LE}} = `r round(mean_europe,2)` `r round(coeff_europe[1],2)` \cdot I(\text{Africa}) `r round(coeff_europe[2],2)` \cdot I(\text{Americas}) `r round(coeff_europe[3],2)` \cdot I(\text{Asia})$$
+$$\widehat{\textrm{LE}} = `r round(mean_PF,2)` `r round(coeff_PF[1],2)` \cdot I(\text{NF}) + `r round(coeff_PF[2],2)` \cdot I(\text{F})$$
 
-## R: Change reference level to `Europe` (1/2)
+## R: Change reference level to `Europe`
 
--   `four_regions` data type was originally a `character` - check this with `str()`
-
-```{r}
-#| echo: true
-str(gapm$four_regions) 
-```
-
--   In order to change the reference level, we need to convert it to data type `factor`
-
-    -   I also did this at the beginning to capitalize each region
+-   `freedom_status` data type was originally a `character` - check this with `str()` or `class()` or `glimpse()`
 
 ```{r}
 #| echo: true
-
-gapm_ex = gapm %>% 
- mutate(
-   four_regions = factor(four_regions, 
-                         levels = c("africa", "americas", "asia", "europe"), 
-                         labels = c("Africa", "Americas", "Asia", "Europe"))
-   )
-str(gapm_ex$four_regions) 
-levels(gapm_ex$four_regions) # order of factor levels
+str(gapm$freedom_status) 
 ```
 
-## R: Change reference level to `Europe` (2/2)
-
--   Now change the order of the factor levels
--   Code below uses `fct_relevel()` from the `forcats` package that gets loaded as a part of the `tidyverse`
+-   To change the reference level, we can use `fct_relevel()` from the `forcats` package (part of `tidyverse`)
 -   *Any levels not mentioned will be left in their existing order, after the explicitly mentioned levels.*
 
 ```{r}
 #| echo: true
-gapm2 <- gapm2 %>% 
-  mutate(
-    four_regions = fct_relevel(four_regions, "Europe")
-    )
+
+gapm2 = gapm %>% 
+ mutate(
+   freedom_status = fct_relevel(freedom_status, "PF")
+     )
 ```
 
-- Check the order:
+-   Check the order:
+
 ```{r}
 #| echo: true
 
-levels(gapm2$four_regions)
+levels(gapm2$freedom_status)
 ```
 
-## R: Run model with `Europe` as the reference level
+## R: Run model with `PF` as the reference level
 
 ```{r}
 #| echo: true
-levels(gapm2$four_regions)
-model2 <- lm(LifeExpectancyYrs ~ four_regions, data = gapm2)
+levels(gapm2$freedom_status)
+model2 = gapm2 %>% lm(formula = life_exp ~ freedom_status)
 tidy(model2) %>% gt() %>% tab_options(table.font.size = 35) %>% 
   fmt_number(decimals = 2)
 ```
 
-$$\begin{aligned}\widehat{\textrm{LE}} &=  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Africa}) +  \widehat\beta_2 \cdot I(\text{Americas}) + \widehat\beta_3 \cdot I(\text{Asia}) \\ \widehat{\textrm{LE}} &= `r round(mean_europe,2)` `r round(coeff_europe[1],2)` \cdot I(\text{Africa}) `r round(coeff_europe[2],2)` \cdot I(\text{Americas}) `r round(coeff_europe[3],2)` \cdot I(\text{Asia}) \end{aligned}$$
+$$\begin{aligned}\widehat{\textrm{LE}} &=  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{NF}) +  \widehat\beta_2 \cdot I(\text{F}) + \\ \widehat{\textrm{LE}} &= `r round(mean_PF,2)` `r round(coeff_PF[1],2)` \cdot I(\text{NF}) + `r round(coeff_PF[2],2)` \cdot I(\text{F}) \end{aligned}$$
 
 ## Fitted values & residuals
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
 Similar to as before:
 
@@ -812,19 +807,19 @@ Similar to as before:
 ::: {.column width="60%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
+       title = "Life expectancy vs. Freedom status",
        caption = "Diamonds = region averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
 ```
 :::
-:::
+:::::
 
 ## Fitted values are the same as the means
 
@@ -834,10 +829,9 @@ ggplot(gapm2, aes(x = four_regions, y = LifeExpectancyYrs)) +
 
 m1_aug <- augment(model1)
 
-ggplot(m1_aug, aes(x = four_regions, y = .fitted)) + geom_point() +
+ggplot(m1_aug, aes(x = freedom_status, y = .fitted)) + geom_point() +
   theme(axis.text = element_text(size = 22), axis.title = element_text(size = 22))
 ```
-
 
 ## Residual plots (now the spread within each region)
 
@@ -849,7 +843,6 @@ ggplot(m1_aug, aes(x=.resid)) + geom_histogram() +
 ```
 
 ## Poll Everywhere Question 3
-
 
 # Learning Objectives
 
@@ -871,20 +864,20 @@ ggplot(m1_aug, aes(x=.resid)) + geom_histogram() +
 -   **Income levels for a country** is based on average GDP per capita, and grouped into:
 
     -   Low income
-    
+
     -   Lower middle income
-    
+
     -   Upper middle income
-    
+
     -   High income
 
 ## Visualizing the ordinal variable, income levels
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = income_levels, y = LifeExpectancyYrs)) +
+ggplot(gapm2, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   labs(x = "Income levels", 
@@ -905,7 +898,7 @@ A few changes needed:
 ```{r}
 #| echo: true
 gapm2 = gapm2 %>%
- mutate(income_levels = factor(income_levels, 
+ mutate(income_level_4 = factor(income_level_4, 
             ordered = T, 
             levels = c("Low income", 
             "Lower middle income", 
@@ -917,16 +910,16 @@ gapm2 = gapm2 %>%
 
     -   [How to Rotate Axis Labels in ggplot2?](https://www.r-bloggers.com/2021/09/how-to-rotate-axis-labels-in-ggplot2/)
 :::
-:::
+:::::
 
 ## Much better: Visualizing the ordinal variable, income levels {.smaller}
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| eval: false
 #| echo: true
-ggplot(gapm2, aes(x = income_levels, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   labs(x = "Income levels", 
@@ -943,7 +936,7 @@ ggplot(gapm2, aes(x = income_levels, y = LifeExpectancyYrs)) +
 ::: {.column width="40%"}
 ```{r fig.height=8, fig.width=7, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = income_levels, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   labs(x = "Income levels", 
@@ -956,31 +949,31 @@ ggplot(gapm2, aes(x = income_levels, y = LifeExpectancyYrs)) +
         axis.text.x=element_text(angle = 20, vjust = 1, hjust=1))
 ```
 :::
-:::
+:::::
 
 ## How can we code this variable?
 
 We have two options:
 
-::: columns
-::: column
-::: definition
+::::::::::: columns
+:::::: column
+::::: definition
 ::: def-title
 Treat the levels as nominal, and use reference cell coding
 :::
 
 ::: def-cont
--   Like we did with world regions
+-   Like we did with freedom status
 
 -   This option will not break the linearity assumption
 
 -   For $g$ categories of the variable, we will have $g-1$ coefficients to estimate
 :::
-:::
-:::
+:::::
+::::::
 
-::: column
-::: proof1
+:::::: column
+::::: proof1
 ::: proof-title
 Use the ordinal values to score the levels and treat as a numerical variable
 :::
@@ -992,14 +985,14 @@ Use the ordinal values to score the levels and treat as a numerical variable
 
 -   Only one coefficient to estimate
 :::
-:::
-:::
-:::
+:::::
+::::::
+:::::::::::
 
 ## Some important considerations when scoring ordinal variables
 
 -   Even if a variable is inherently ordered, we need to check that linearity holds if categories are represented as numbers (more in next lessons)
-    - Linearity is an assumption of linear regression: that the relationship between X and Y is linear
+    -   Linearity is an assumption of linear regression: that the relationship between X and Y is linear
 
  
 
@@ -1007,18 +1000,18 @@ Use the ordinal values to score the levels and treat as a numerical variable
 
     -   Income levels are pre-set groups by Gapminder
     -   Might be hard to interpret "every 1-level increase in income level"
-   
+
  
- 
+
 -   Is the variable part of the main relationship that you are investigating? (even if linearity holds)
 
     -   If yes, consider leaving as reference cell coding unless the interpretation makes sense
-    
+
     -   If no, and just needed as an adjustment in your model, then power benefit of scoring might be worth it!
 
 ## Check that linearity holds for income levels
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
 -   Using visual assessment, linearity holds for our income levels (more in next lessons)
 
@@ -1028,7 +1021,7 @@ Use the ordinal values to score the levels and treat as a numerical variable
 ::: {.column width="60%"}
 ```{r fig.height=8, fig.width=7.5, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm2, aes(x = as.numeric(income_levels), y = LifeExpectancyYrs)) +
+ggplot(gapm2, aes(x = as.numeric(income_level_4), y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   geom_smooth(method = lm, se = FALSE) + 
@@ -1041,7 +1034,7 @@ ggplot(gapm2, aes(x = as.numeric(income_levels), y = LifeExpectancyYrs)) +
         title = element_text(size = 20))
 ```
 :::
-:::
+:::::
 
 ## Poll Everywhere Question 4
 
@@ -1061,8 +1054,8 @@ ggplot(gapm2, aes(x = as.numeric(income_levels), y = LifeExpectancyYrs)) +
 ```{r}
 #| echo: true
 gapm2 = gapm2 %>%
-  mutate(income_num = as.numeric(income_levels))
-str(gapm2$income_num)
+  mutate(income_num = as.numeric(income_level_4))
+str(gapm$income_num)
 ```
 
 ## Run the model with the scored income
@@ -1070,14 +1063,14 @@ str(gapm2$income_num)
 ```{r}
 #| echo: true
 
-mod_inc2 = lm(LifeExpectancyYrs ~ income_num, data = gapm2)
+mod_inc2 = gapm2 %>% lm(formula = life_exp ~ income_num)
 tidy(mod_inc2) %>% gt() %>% tab_options(table.font.size = 37) %>%
   fmt_number(decimals = 2)
 ```
 
 $$\begin{aligned}
 \widehat{\textrm{LE}} &=  \widehat\beta_0 + \widehat\beta_1 \cdot \text{Income level} \\
-\widehat{\textrm{LE}} &=  54.01 + 6.25 \cdot \text{Income level}
+\widehat{\textrm{LE}} &=  `r round(coef(mod_inc2)[1], 2)` + `r round(coef(mod_inc2)[2], 2)` \cdot \text{Income level}
 \end{aligned}$$
 
 -   Keep in mind: We cannot calculate the expected outcome outside of the scoring values
@@ -1096,12 +1089,12 @@ $$\widehat{\textrm{LE}} =  54.01 + 6.25 \cdot \text{Income level}$$
 -   **Interpreting the intercept:** At an income level of 0, mean life expectancy is 54.01 (95% CI: 51.92, 56.10).
 
     -   Note: this does not make sense because there is no income level of 0!
-    
+
 -   **Interpreting the coefficient for income:** For every 1-level increase in income level, mean life expectancy increases 6.25 years (95% CI: 5.52, 6.98).
 
 ## What if life expectancy vs. income level looked like this?
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 set.seed(40)
@@ -1131,12 +1124,11 @@ ggplot(gapm2, aes(x = income_num, y = life_exp_sim)) +
 
  
 
--   We would fit the following model: 
-$$\begin{aligned}
-\textrm{LE} = & \beta_0 + \beta_1 \cdot I(\text{Lower middle income}) + \\ & \beta_2 \cdot I(\text{Upper middle income}) + \\ & \beta_3 \cdot I(\text{High income}) + \epsilon
-\end{aligned}$$
+-   We would fit the following model: $$\begin{aligned}
+    \textrm{LE} = & \beta_0 + \beta_1 \cdot I(\text{Lower middle income}) + \\ & \beta_2 \cdot I(\text{Upper middle income}) + \\ & \beta_3 \cdot I(\text{High income}) + \epsilon
+    \end{aligned}$$
 :::
-:::
+:::::
 
 ## If time...
 
@@ -1149,4 +1141,3 @@ $$\begin{aligned}
  
 
 -   Also, thinking about income levels - can we combine two groups to make one??
-

@@ -1,0 +1,19 @@
+---
+title: "Muddy Points"
+subtitle: "Lab 1 Discussion"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Muddy Points from Spring 2025
+
+### 1. Why should we be cautious of using survey question variables?
+
+These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!
+
+
+

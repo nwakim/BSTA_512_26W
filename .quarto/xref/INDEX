@@ -315,5 +315,29 @@
   },
   "hw_answers/HW_02_ans.qmd": {
     "HW_02_ans.html": "8b968664"
+  },
+  "lessons/L01_Discussion/L01_Discussion.qmd": {
+    "L01_Discussion.html": "686cdced"
+  },
+  "lessons/L02_Discussion/L02_Discussion.qmd": {
+    "L02_Discussion.html": "55eb84c9"
+  },
+  "lessons/L02_Discussion/L02_Discussion_muddy_points.qmd": {
+    "L02_Discussion_muddy_points.html": "7119f8ca"
+  },
+  "lessons/L01_Discussion/L01_Discussion_muddy_points.qmd": {
+    "L01_Discussion_muddy_points.html": "9dc84e9b"
+  },
+  "lessons/L04_Discussion/L02_Discussion.qmd": {
+    "L02_Discussion.html": "893a0276"
+  },
+  "lessons/L04_Discussion/L02_Discussion_muddy_points.qmd": {
+    "L02_Discussion_muddy_points.html": "80672520"
+  },
+  "lessons/L03_Discussion/L03_Discussion.qmd": {
+    "L03_Discussion.html": "e9d3a127"
+  },
+  "lessons/L03_Discussion/L03_Discussion_muddy_points.qmd": {
+    "L03_Discussion_muddy_points.html": "dc41af79"
   }
 }

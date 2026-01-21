@@ -1,0 +1,135 @@
+---
+title: "Lab 2: Feedback and Discussion"
+author: "Nicky Wakim"
+title-slide-attributes:
+    data-background-color: "#C2352F"
+date: "04/30/2025"
+format: 
+  revealjs:
+    theme: "../simple_NW.scss"
+    chalkboard: true
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "Lab 2: Feedback and Discussion"
+    html-math-method: mathjax
+    highlight-style: ayu
+execute:
+  echo: true
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(janitor)
+library(rstatix)
+library(knitr)
+library(gtsummary)
+library(moderndive)
+library(broom) 
+library(here) 
+library(ggplot2)
+library(ggpubr)
+library(boot) # for inv.logit()
+library(lmtest)
+library(epiDisplay)
+
+```
+
+## Notes from me and the TAs
+
+- Using `ANY_HARDSHIP` or `MULT_HARDSHIPS`
+  - If you look at the User Guide, this involves information from food security
+- Using "Survey Questions"
+  - Be very careful of this! 
+- Interpreting estimated ORs
+  - If your main variable had >6 categories I'm sorry if you interpreted every single one
+- Make sure you are taking the inverse logit to find the predicted probability
+- Make sure you are plotting the predicted probability, not the ORs
+- The TAs left comments in the rubric! Please look at them! 
+
+## Get into groups of 2-4
+
+- No more than 4! 
+- Try to group with people with whos you do not already work on labs 
+- Introduce yourself if you do not know each other
+- Share you html documents with each other (email, airdrop, etc.)
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+## Introduce Research Question
+
+- Share your research question with each other! 
+  - Should be using the same outcome + your main variable
+- Share your other variables
+
+ 
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+## Double check code for variables
+
+- Did everyone code their variables correctly?
+- If you changed something to a factor, does it have the correct levels?
+
+```{r}
+#| echo: false
+countdown::countdown(10)
+```
+
+## Discuss your confounders/effect modifiers
+
+- Does not need to have a causal framework
+- Do you think we need to adjust for certain variables?
+- Do you think there will be interactions?
+- If you think there are interactions, try to narrow it down to 1-2 variables
+
+
+```{r}
+#| echo: false
+countdown::countdown(10)
+```
+
+## Contingency tables + bivariate analysis
+
+- Based on your reasoning in the previous activity and the tables/plots, do you think we need to adjust for any variables?
+- What trends are you seeing?
+- Do you have any cells with low counts?
+
+```{r}
+#| echo: false
+countdown::countdown(10)
+```
+
+## Simple logistic regression
+
+- Does everyone have the correct interpretations of the estimated odds ratios?
+- What's your reference group? 
+- What trends are you seeing?
+
+```{r}
+#| echo: false
+countdown::countdown(10)
+```
+
+## Predicted Probabilities
+
+- Let's just check each other's code and probabilities
+- What would your predicted probabilities look like if you had a confounder? effect modifier?
+
+```{r}
+#| echo: false
+countdown::countdown(10)
+```

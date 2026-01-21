@@ -1,0 +1,204 @@
+---
+title: "Lab 3: Feedback and Discussion"
+author: "Nicky Wakim"
+title-slide-attributes:
+    data-background-color: "#C2352F"
+date: "05/12/2025"
+format: 
+  revealjs:
+    theme: "../simple_NW.scss"
+    chalkboard: true
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "Lab 3: Feedback and Discussion"
+    html-math-method: mathjax
+    highlight-style: ayu
+execute:
+  echo: true
+  eval: false
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(janitor)
+library(rstatix)
+library(knitr)
+library(gtsummary)
+library(moderndive)
+library(broom) 
+library(here) 
+library(ggplot2)
+library(ggpubr)
+library(boot) # for inv.logit()
+library(lmtest)
+library(epiDisplay)
+
+```
+
+## Lab 3 Feedback
+
+- Some fo you did main covariate + 4 other variables and some did main covariate + 5 other variables
+  - Okay either way
+- In presentation of odds ratios (forest plot and tables), it's important to include the reference group
+  - Gives the reader context for the comparison
+
+
+## Get into groups of 2-4
+
+- No more than 4! 
+- Introduce yourself and your research question
+- Share you html documents with each other (email, airdrop, etc.)
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+## Help with forest plot: ordering categories
+
+```{r}
+source("/Users/wakim/Library/CloudStorage/OneDrive-OregonHealth&ScienceUniversity/Projects/Teaching_DEIJ_Datasets/Datasets/Food_insecurity/Code/Labs/Lab_02_work.R")
+```
+
+Let's say I ran this model:
+```{r}
+model = wbns4 %>% 
+  glm(formula = FOOD_INSEC ~ PPINCIMP + XACSNET + FAMSIZE, family = binomial)
+```
+
+## Help with forest plot: ordering categories {.smaller}
+
+```{r}
+library(broom.helpers)
+MLR_tidy0 = tidy_and_attach(model,  conf.int=T, exponentiate = T) %>%
+  tidy_remove_intercept() %>%
+  tidy_add_reference_rows() %>%
+  tidy_add_estimate_to_reference_rows() %>%
+  tidy_add_term_labels()
+
+glimpse(MLR_tidy0)
+
+```
+
+## Help with forest plot: ordering categories {.smaller}
+```{r}
+
+plot_MLR0 = ggplot(data=MLR_tidy0, 
+       aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
+  geom_point(size = 3) +  geom_errorbarh(height=.2) + 
+  
+  geom_vline(xintercept=1, color='#C2352F', linetype='dashed', alpha=1) +
+  theme_classic() +
+  
+  facet_grid(rows = vars(var_label), scales = "free",
+             space='free_y', switch = "y") + 
+  
+  labs(x = "OR (95% CI)", 
+       title = "Odds ratios of food insecurity") +
+  theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 12), 
+        title = element_text(size = 12), 
+        axis.title.y=element_blank(), 
+        strip.text = element_text(size = 12), 
+        strip.placement = "outside", 
+        strip.background = element_blank())
+```
+
+## Help with forest plot: ordering categories {.smaller}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 7
+
+plot_MLR0
+```
+
+## Help with forest plot: ordering categories {.smaller}
+```{r}
+MLR_tidy = MLR_tidy0  %>%
+              mutate(order = case_match(label, 
+                            "Less than $5,000" ~ 1, 
+                            "$5,000 to $7,499" ~ 2, 
+                            "$7,500 to $9,999" ~ 3, 
+                            "$10,000 to $12,499" ~ 4, 
+                            "$12,500 to $14,999" ~ 5, 
+                            "$15,000 to $19,999" ~ 6, 
+                            "$20,000 to $24,999" ~ 7, 
+                            "$25,000 to $29,999" ~ 8, 
+                            "$30,000 to $34,999" ~ 9, 
+                            "$35,000 to $39,999" ~ 10, 
+                            "$40,000 to $49,999" ~ 11, 
+                            "$50,000 to $59,999" ~ 12, 
+                            "$60,000 to $74,999" ~ 13, 
+                            "$75,000 to $84,999" ~ 14, 
+                            "$85,000 to $99,999" ~ 15, 
+                            "$100,000 to $124,999" ~ 16, 
+                            "$125,000 to $149,999" ~ 17, 
+                            "$150,000 to $174,999" ~ 18, 
+                            "$175,000 to $199,999" ~ 19, 
+                            "$200,000 to $249,999" ~ 20, 
+                            "$250,000 or more" ~ 21, 
+                            "1" ~ 1, 
+                            "2" ~ 2, 
+                            "3" ~ 3, 
+                            "4" ~ 4, 
+                            "5" ~ 5, 
+                            "6" ~ 6, 
+                            "7" ~ 7, 
+                            "8 or more" ~ 8,
+                            .default = 0)) %>%
+            mutate(label = fct_reorder(label, desc(order)))
+```
+
+## Help with forest plot: ordering categories {.smaller}
+```{r}
+
+plot_MLR = ggplot(data=MLR_tidy, 
+       aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
+  geom_point(size = 3) +  geom_errorbarh(height=.2) + 
+  
+  geom_vline(xintercept=1, color='#C2352F', linetype='dashed', alpha=1) +
+  theme_classic() +
+  
+  facet_grid(rows = vars(var_label), scales = "free",
+             space='free_y', switch = "y") + 
+  
+  labs(x = "OR (95% CI)", 
+       title = "Odds ratios of food insecurity") +
+  theme(axis.title = element_text(size = 12), 
+        axis.text = element_text(size = 12), 
+        title = element_text(size = 12), 
+        axis.title.y=element_blank(), 
+        strip.text = element_text(size = 12), 
+        strip.placement = "outside", 
+        strip.background = element_blank())
+```
+
+## Help with forest plot: ordering categories {.smaller}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 7
+
+plot_MLR
+```
+
+
+
+## Questions to consider
+
+- How did you handle any categorical variables?
+  - Income, family size, number of children, etc
+- Are the categories for the forest plot in order?
+- How did you interpret your estimated odds ratios?
+  - If you have many categories in your main variable, do you see a trend? 
+  - What might be a better way to report a trend?
+- If you had interactions, how would your interpretation change?

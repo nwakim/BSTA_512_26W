@@ -22,24 +22,6 @@ editor_options:
     - Your grade may not have changed - please check my comments
 
 ### Office hours / TAs 
-#### Liv Ainsworth
-
-- Office hours: Fridays 10-11am
-  - [Online Zoom Link](https://pdx.zoom.us/my/lainswo)
-- **Email:** [ainsworl@ohsu.edu](mailto:ainsworl@ohsu.edu)
-
-#### Katie Hand
-
-- Office hours: Mondays 4:30-5:30 pm 
-  - [Online Webex Link](https://ohsu.webex.com/ohsu/j.php?MTID=mde106aeb839ffbab53e77f01bb4590ae)
-- **Email:** [handka@ohsu.edu](mailto:handka@ohsu.edu)
-
-#### Miyuki Sun
-
-- Office hours: Thursdays 10-11am
-  - [Online Webex Link](https://ohsu.webex.com/ohsu/j.php?MTID=m6d92cdf0b5ce1bdedc0fdb0ec4efb568)
-- **Email:** [sunm@ohsu.edu](mailto:sunm@ohsu.edu)
 
 ## Key Dates
 
-- Homework 1 due tomorrow 1/23 at 11pm

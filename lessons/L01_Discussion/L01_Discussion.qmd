@@ -1,0 +1,90 @@
+---
+title: "Lab 1: Feedback and Discussion"
+author: "Nicky Wakim"
+title-slide-attributes:
+    data-background-color: "#213c96"
+date: "`r library(here); source(here('class_dates.R')); w3d2`"
+format: 
+  revealjs:
+    theme: "../simple_NW.scss"
+    chalkboard: true
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "Lab 1: Feedback and Discussion"
+    html-math-method: mathjax
+    highlight-style: ayu
+execute:
+  echo: true
+  freeze: auto  # re-render only when source changes
+---
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(gt)
+library(janitor)
+library(rstatix)
+library(knitr)
+library(gtsummary)
+library(moderndive)
+library(broom) 
+library(here) 
+library(ggplot2)
+library(ggpubr)
+library(boot) # for inv.logit()
+library(lmtest)
+library(epiDisplay)
+
+```
+
+## Notes from me and the TAs
+
+
+
+## Get into groups of 2-4
+
+- No more than 4! 
+- Introduce yourself if you do not know each other
+- Share you html documents with each other (email, airdrop, etc.)
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+## Introduce Research Question
+
+- Share your research question with each other! 
+- Share your other variables
+- Is everyone using the appropriate variables?
+- Did anyone see any potential issues with how many individuals are in each category of a variable?
+
+```{r}
+#| echo: false
+countdown::countdown(15)
+```
+
+## Double check code and saved data
+
+- Did everyone in the group successfully save the dataset?
+- Can you open it right now?
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+## Compiled introductions
+
+- What major points did you include in your introduction?
+- Would you change anything after discussing with your group?
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
