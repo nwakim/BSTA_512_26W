@@ -5688,7 +5688,7 @@
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#still-looking-at-gapminder-life-expectancy-data",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "Still looking at Gapminder Life Expectancy data",
-    "text": "Still looking at Gapminder Life Expectancy data\n\nWe will look at life expectancy vs. these Freedom statuss\nYou can access my codebook here\nGapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of political rights and civil liberties ratings.\n\nNot free (NF)\nPartly free (PF)\nFree (F)\n\nFreedom status is a multi-level categorical covariate: it has three statuses\n\n \n\nNote: I am calling the expected life expectancy \\(\\widehat{LE}\\)\n\nPreviously, I have FSitten \\(\\widehat{\\text{life expectancy}}\\)"
+    "text": "Still looking at Gapminder Life Expectancy data\n\nWe will look at life expectancy vs. these Freedom statuss\nYou can access my codebook here\nGapminder measures freedom status: This is a descriptive text of the real-world rights and freedoms enjoyed by individuals. It is determined by the freedom rating which is the average of political rights and civil liberties ratings.\n\nNot free (NF)\nPartly free (PF)\nFree (F)\n\nFreedom status is a multi-level categorical covariate: it has three statuses\n\n \n\nNote: I am calling the expected life expectancy \\(\\widehat{LE}\\)\n\nPreviously, I have written \\(\\widehat{\\text{life expectancy}}\\)"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#linear-regression-with-a-categorical-covariate-12",
@@ -5723,7 +5723,7 @@
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-how-do-we-map-categories-to-means",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "Building the regression equation: how do we map categories to means?",
-    "text": "Building the regression equation: how do we map categories to means?\n\nIf we only have freedom status in our model and want to map it to an average life expectancy…\n\n\n\n\nWe want to create a function that can map each freedom status to life expectancy\n\nIf not free: \\(\\widehat{LE} = 74.13\\) years\nIf partly free: \\(\\widehat{LE} = 70.39\\) years\nIf free: \\(\\widehat{LE} = 68.99\\) years\n\n\n \n\nCan we make one equation for \\(\\widehat{LE}\\) by putting the “if” statements within the equation?"
+    "text": "Building the regression equation: how do we map categories to means?\n\nIf we only have freedom status in our model and want to map it to an average life expectancy…\n\n\n\n\nWe want to create a function that can map each freedom status to life expectancy\n\nIf not free: \\(\\widehat{LE} = 68.99\\) years\nIf partly free: \\(\\widehat{LE} = 70.39\\) years\nIf free: \\(\\widehat{LE} = 74.13\\) years\n\n\n \n\nCan we make one equation for \\(\\widehat{LE}\\) by putting the “if” statements within the equation?"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-indicator-functions",
@@ -5744,7 +5744,7 @@
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#building-the-regression-equation-indicators-in-our-equation",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "Building the regression equation: Indicators in our equation",
-    "text": "Building the regression equation: Indicators in our equation\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} = & 74.13 \\cdot I(\\text{not free}) + 70.39 \\cdot I(\\text{partly free}) + \\\\ &68.99 \\cdot I(\\text{free})\n\\end{aligned}\\]\n\nHowever, a linear regression equation still requires an intercept!\n\nSo one of our statuses need to become our “reference” group\nWe’ll use “not free” as our reference\nThat means we need to adjust all the numbers\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} = & 74.13 + -3.74 \\cdot I(\\text{partly free}) + \\\\ &-5.14 \\cdot I(\\text{free}) \\\\\n\\widehat{\\textrm{LE}} = & \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{partly free}) + \\\\ & \\widehat\\beta_2 \\cdot I(\\text{free})\n\\end{aligned}\\]"
+    "text": "Building the regression equation: Indicators in our equation\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} = & 68.99 \\cdot I(\\text{not free}) + 70.39 \\cdot I(\\text{partly free}) + \\\\ &74.13 \\cdot I(\\text{free})\n\\end{aligned}\\]\n\nHowever, a linear regression equation still requires an intercept!\n\nSo one of our statuses need to become our “reference” group\nWe’ll use “not free” as our reference\nThat means we need to adjust all the numbers\n\n\n\\[\\begin{aligned}\n\\widehat{\\textrm{LE}} = & 68.99 + 1.4 \\cdot I(\\text{partly free}) + \\\\ &5.14 \\cdot I(\\text{free}) \\\\\n\\widehat{\\textrm{LE}} = & \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{partly free}) + \\\\ & \\widehat\\beta_2 \\cdot I(\\text{free})\n\\end{aligned}\\]"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#viewing-the-regression-equation-another-way",
@@ -5772,14 +5772,14 @@
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#regression-table-with-lm-function",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "Regression table with lm() function",
-    "text": "Regression table with lm() function\n\nmodel1 = gapm %&gt;%\n  lm(formula = life_exp ~ freedom_status)\n\ntidy(model1, conf.int=T) %&gt;% gt() %&gt;% tab_options(table.font.size = 38) %&gt;% \n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n68.99\n1.17\n58.88\n0.00\n66.67\n71.32\n\n\nfreedom_statusF\n5.14\n1.70\n3.02\n0.00\n1.76\n8.51\n\n\nfreedom_statusPF\n1.40\n1.52\n0.92\n0.36\n−1.61\n4.40\n\n\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 68.99 + 1.4 \\cdot I(\\text{PF}) + 5.14 \\cdot I(\\text{F})\\]\n\nWhich Freedom status did R choose as the reference level?\nHow you would calculate the mean life expectancies of freedom statuss using only the results from the regression table?"
+    "text": "Regression table with lm() function\n\nmodel1 = gapm %&gt;%\n  lm(formula = life_exp ~ freedom_status)\n\ntidy(model1, conf.int=T) %&gt;% gt() %&gt;% tab_options(table.font.size = 38) %&gt;% \n  fmt_number(decimals = 2)\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\nconf.low\nconf.high\n\n\n\n\n(Intercept)\n68.99\n1.17\n58.88\n0.00\n66.67\n71.32\n\n\nfreedom_statusPF\n1.40\n1.52\n0.92\n0.36\n−1.61\n4.40\n\n\nfreedom_statusF\n5.14\n1.70\n3.02\n0.00\n1.76\n8.51\n\n\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 68.99 + 1.4 \\cdot I(\\text{PF}) + 5.14 \\cdot I(\\text{F})\\]\n\nWhich Freedom status did R choose as the reference level?\nHow you would calculate the mean life expectancies of freedom statuss using only the results from the regression table?"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#bringing-in-the-numbersunits95-ci",
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#bringing-in-the-numbersunits95-ci",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "Bringing in the numbers/units/95% CI",
-    "text": "Bringing in the numbers/units/95% CI\n\n\n\n\n\n\n\nCoefficient\nInterpretation\n\n\n\n\n\\(\\widehat{\\beta}_0\\)\nAverage life expectancy of countries that are not free is 68.99 (95% CI: 66.67, 71.32).\n\n\n\\(\\widehat{\\beta}_1\\)\nThe difference in mean life expectancy between countries that are partly free and not free is 5.14 (95% CI: 1.76, 8.51).\n\n\n\\(\\widehat{\\beta}_2\\)\nThe difference in mean life expectancy between countries that are free and not free is 1.4 (95% CI: -1.61, 4.4).\n\n\n\n\nDon’t forget that we can use the confidence intervals to assess whether the mean difference with Africa is significant or not"
+    "text": "Bringing in the numbers/units/95% CI\n\n\n\n\n\n\n\nCoefficient\nInterpretation\n\n\n\n\n\\(\\widehat{\\beta}_0\\)\nAverage life expectancy of countries that are not free is 68.99 (95% CI: 66.67, 71.32).\n\n\n\\(\\widehat{\\beta}_1\\)\nThe difference in mean life expectancy between countries that are partly free and not free is 1.4 (95% CI: -1.61, 4.4).\n\n\n\\(\\widehat{\\beta}_2\\)\nThe difference in mean life expectancy between countries that are free and not free is 5.14 (95% CI: 1.76, 8.51).\n\n\n\n\nDon’t forget that we can use the confidence intervals to assess whether the mean difference with “not free” is significant or not"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-also-use-r-to-report-each-regions-average-life-expectancy",
@@ -5793,7 +5793,7 @@
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#another-way-to-look-at-coefficient-values",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "Another way to look at coefficient values",
-    "text": "Another way to look at coefficient values\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{PF}) +  \\widehat\\beta_2 \\cdot I(\\text{F})\\]\n\n\nCode\n# means of each level of `freedom_status`\ngapm2_ave &lt;- gapm %&gt;% \n  group_by(freedom_status) %&gt;% \n  summarise(life_ave = mean(life_exp))\n\n# mean of `africa`\nmean_NF &lt;- gapm2_ave %&gt;% \n  filter(freedom_status == \"NF\") %&gt;% \n  pull(life_ave)\n\n# differences in means between levels of `freedom_status` and `africa`\ngapm2_ave_diff &lt;- gapm2_ave %&gt;% \n  mutate(`Difference with NF` = life_ave - mean_NF) %&gt;%\n  rename(`Freedom status` = freedom_status, \n         `Average life expectancy` = life_ave)\n\n# At the beginning of the Rmd we loaded knitr, which is where the kable command is from\n# library(knitr)\ngapm2_ave_diff %&gt;% kable(\n  digits = 1,\n  format = \"markdown\"\n  ) \n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with NF\n\n\n\n\nNF\n69.0\n0.0\n\n\nF\n74.1\n5.1\n\n\nPF\n70.4\n1.4\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 68.99 + 1.4 \\cdot I(\\text{PF}) + 5.14 \\cdot I(\\text{F})\\]"
+    "text": "Another way to look at coefficient values\n\\[\\widehat{\\textrm{LE}} =  \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot I(\\text{PF}) +  \\widehat\\beta_2 \\cdot I(\\text{F})\\]\n\n\nCode\n# means of each level of `freedom_status`\ngapm2_ave &lt;- gapm %&gt;% \n  group_by(freedom_status) %&gt;% \n  summarise(life_ave = mean(life_exp))\n\n# mean of `africa`\nmean_NF &lt;- gapm2_ave %&gt;% \n  filter(freedom_status == \"NF\") %&gt;% \n  pull(life_ave)\n\n# differences in means between levels of `freedom_status` and `africa`\ngapm2_ave_diff &lt;- gapm2_ave %&gt;% \n  mutate(`Difference with NF` = life_ave - mean_NF) %&gt;%\n  rename(`Freedom status` = freedom_status, \n         `Average life expectancy` = life_ave)\n\n# At the beginning of the Rmd we loaded knitr, which is where the kable command is from\n# library(knitr)\ngapm2_ave_diff %&gt;% kable(\n  digits = 1,\n  format = \"markdown\"\n  ) \n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with NF\n\n\n\n\nNF\n69.0\n0.0\n\n\nPF\n70.4\n1.4\n\n\nF\n74.1\n5.1\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 68.99 + 1.4 \\cdot I(\\text{PF}) + 5.14 \\cdot I(\\text{F})\\]"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#reference-levels",
@@ -6094,14 +6094,14 @@
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#we-can-change-the-reference-level-to-pf-22",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "We can change the reference level to PF (2/2)",
-    "text": "We can change the reference level to PF (2/2)\n\nNow update the coefficients of the regression equation using the output below.\n\n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with PF\n\n\n\n\nNF\n68.99\n-1.40\n\n\nF\n74.13\n3.74\n\n\nPF\n70.39\n0.00\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 70.39 -1.4 \\cdot I(\\text{NF}) + 3.74 \\cdot I(\\text{F})\\]"
+    "text": "We can change the reference level to PF (2/2)\n\nNow update the coefficients of the regression equation using the output below.\n\n\n\n\n\n\nFreedom status\nAverage life expectancy\nDifference with PF\n\n\n\n\nNF\n68.99\n-1.40\n\n\nPF\n70.39\n0.00\n\n\nF\n74.13\n3.74\n\n\n\n\n\n\\[\\widehat{\\textrm{LE}} = 70.39 -1.4 \\cdot I(\\text{NF}) + 3.74 \\cdot I(\\text{F})\\]"
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe",
     "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-europe",
     "title": "Lesson 5: SLR-ish: Categorical Covariates",
     "section": "R: Change reference level to Europe",
-    "text": "R: Change reference level to Europe\n\nfreedom_status data type was originally a character - check this with str() or class() or glimpse()\n\n\nstr(gapm$freedom_status) \n\n Factor w/ 3 levels \"NF\",\"F\",\"PF\": 1 3 1 2 3 1 3 3 2 3 ...\n\n\n\nTo change the reference level, we can use fct_relevel() from the forcats package (part of tidyverse)\nAny levels not mentioned will be left in their existing order, after the explicitly mentioned levels.\n\n\ngapm2 = gapm %&gt;% \n mutate(\n   freedom_status = fct_relevel(freedom_status, \"PF\")\n     )\n\n\nCheck the order:\n\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"NF\" \"F\""
+    "text": "R: Change reference level to Europe\n\nfreedom_status data type was originally a character - check this with str() or class() or glimpse()\n\n\nstr(gapm$freedom_status) \n\n Factor w/ 3 levels \"NF\",\"PF\",\"F\": 1 2 1 3 2 1 2 2 3 2 ...\n\n\n\nTo change the reference level, we can use fct_relevel() from the forcats package (part of tidyverse)\nAny levels not mentioned will be left in their existing order, after the explicitly mentioned levels.\n\n\ngapm2 = gapm %&gt;% \n mutate(\n   freedom_status = fct_relevel(freedom_status, \"PF\")\n     )\n\n\nCheck the order:\n\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"NF\" \"F\""
   },
   {
     "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-run-model-with-pf-as-the-reference-level",
@@ -6151,5 +6151,54 @@
     "title": "Lab Discussion Make-up Assignment",
     "section": "Directions",
     "text": "Directions\n\nFeedback on another student’s lab\nYou will trade labs with your assigned partner or group. Please share your html documents with each other.\nIn a half page to one page, please answer the following questions about your peer’s (or peers’) lab assignment:\n\nWhat was their research question?\nDo you see any major errors in coding?\nWhat were three differences in your approach to the lab?\nWhat did you learn from their work?\nWhat would you improve from your own lab?\n\n\n\nShare you feedback with your group\nPlease email your feedback to Nicky and your group (in one email). If you would like to further discuss feedback with each other, you can continue on a separate chain or coordinate a meeting with one another.\nMy hope is that you get a sense of your own work by engaging with someone else’s."
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-pf",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates.html#r-change-reference-level-to-pf",
+    "title": "Lesson 5: SLR-ish: Categorical Covariates",
+    "section": "R: Change reference level to PF",
+    "text": "R: Change reference level to PF\n\nfreedom_status data type was originally a character\ncheck this with str() or class() or glimpse()\n\n\nstr(gapm$freedom_status) \n\n Factor w/ 3 levels \"NF\",\"PF\",\"F\": 1 2 1 3 2 1 2 2 3 2 ...\n\n\n\nTo change the reference level, we can use fct_relevel() from the forcats package (part of tidyverse)\nAny levels not mentioned will be left in their existing order, after the explicitly mentioned levels.\n\n\ngapm2 = gapm %&gt;% \n mutate(\n   freedom_status = fct_relevel(freedom_status, \"PF\")\n     )\n\n\nCheck the order:\n\n\nlevels(gapm2$freedom_status)\n\n[1] \"PF\" \"NF\" \"F\""
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Great question! Yes, the CI for Partly Free only tells us if it’s significantly different from Not Free (the reference group). To compare Partly Free to Free, we would need to either change the reference group to Free (or Partly Free) or conduct a post-hoc test that compares those two groups directly.\n\n\n\nYep, that’s exactly right! That’s why we need an indicator function (or dummy variable) to represent each category (aside from the reference group) in the regression model. That way we have a way to represent each category!\n\n\n\nThe difference will always be the other group (indicator group) minus the reference group.\nThe only way we get a positive coefficient (like \\(\\widehat{\\beta}_2\\)) is by subtracting the reference group from the indicator group. Here’s the math that I wrote in class:\n\\[\n\\widehat{LE}_{PF} - \\widehat{LE}_{NF} = (\\widehat{\\beta}_0 + \\widehat{\\beta}_1) - \\widehat{\\beta} =  \\widehat{\\beta}_1\n\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html#muddy-points-2026",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html#muddy-points-2026",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Great question! Yes, the CI for Partly Free only tells us if it’s significantly different from Not Free (the reference group). To compare Partly Free to Free, we would need to either change the reference group to Free (or Partly Free) or conduct a post-hoc test that compares those two groups directly.\n\n\n\nYep, that’s exactly right! That’s why we need an indicator function (or dummy variable) to represent each category (aside from the reference group) in the regression model. That way we have a way to represent each category!\n\n\n\nThe difference will always be the other group (indicator group) minus the reference group.\nThe only way we get a positive coefficient (like \\(\\widehat{\\beta}_2\\)) is by subtracting the reference group from the indicator group. Here’s the math that I wrote in class:\n\\[\n\\widehat{LE}_{PF} - \\widehat{LE}_{NF} = (\\widehat{\\beta}_0 + \\widehat{\\beta}_1) - \\widehat{\\beta} =  \\widehat{\\beta}_1\n\\]"
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html#muddy-points-from-2025",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html#muddy-points-from-2025",
+    "title": "Muddy Points",
+    "section": "Muddy Points from 2025",
+    "text": "Muddy Points from 2025\n\n1. I was a little confused on the part where if each categorical variable, with their respective betas, have each their own residuals for their respective category?\nResiduals are always tied to the expected outcome. Since each category has a different expected outcome (based on their respective estimated coefficients), the countries from same category will have the same expected outcome (in SLR). Thus, for countries in the same category, their residuals (\\(\\widehat{\\epsilon} = Y_i - \\widehat{Y_i}\\)) will all have the same \\(\\widehat{Y_i}\\)\n\n\n2. Factors: What was meant by in order to change the reference level, we need to convert it to data type factor? / Can you quickly explain what a factor is and why we had to convert to a factor to change the reference value?\nGood question! Factors is one of the coding options in R for categorical variables. Different from characters or strings, factors allow you to attach specific attributes to the variable. This includes assigning order to the categories and setting reference levels.\n\n\n3. I’m not really sure how using linear models on categorical variables is useful since you can’t make predictions like you can with continuous data\nYou can make predictions! “Predictions,” for how we used it with continuous predictors/covariates, is just the expected outcome for a given X. For categorical covariates, the expected outcome given X is the mean of each categorical group.\nWith only one variable in the model, it might feel more appropriate to use something like the ANOVA table, but we do not typically have only one variable in the model. This is just to help us set up the foundation of linear regression and understand categorical covariates in our model before we move to multiple linear regression."
+  },
+  {
+    "objectID": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html#muddy-points-from-2024",
+    "href": "lessons/05_Cat_covariates/05_Cat_covariates_muddy_points.html#muddy-points-from-2024",
+    "title": "Muddy Points",
+    "section": "Muddy Points from 2024",
+    "text": "Muddy Points from 2024\n\n1. Why do we need to create a new variable for ordinal / scoring?\nOtherwise R will treat income as non-ordinal, and use the default reference cell coding. So if we want our variables to be scored (and numeric) then we must put it in a form R can recognize.\n\n\n2. I’m a little confused on how the R code works for recoding/reordering our variables, specifically 1) why we use the mutate function but then use the same name for the variable/how that works and 2) why you need to include the list of each variable name in a vector. Basically, what each piece of that code does exactly and why it’s needed.\n\nMutate is just a function to create/change a variable. So if we are not fundamentally changing any aspect of the variable, we can call it by the same name. Helps keep our data frame neat by not tacking on additional variables.\nWhen I am including the list of levels I am giving R the exact order to read each level. So if I want to go from high income to low income, I would reset the levels to the below code. Then R would read high income as the first level.\n\ngapm2 = gapm2 %&gt;%\n mutate(income_levels = factor(income_levels, \n            ordered = T, \n            levels = c(\"High income\", \n                       \"Upper middle income\", \n                       \"Lower middle income\", \n                       \"Low income\")))\n\n\n\n\n3. Is there a rationale or strategy in choosing the most appropriate reference group?\nOften no, not if the groups are not ordered. Things that you may consider:\n\nIs there a central group that you want to make comparisons to?\nIs there any social consequences of continually centering comparisons to one group? We may be consequentially centering the narrative around that group.\nWhen we interpret the coefficients, is there one group as the reference that makes it a little easier to interpret? (this has more of an effect in 513)\n\n\n\n4. How do we build the regression indicators?\nIn R, we don’t need to build the indicators. If we have a variable that is a facotr with mutually exclusive groups, then R will automatically create the indicators within the lm() function."
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion_muddy_points.html",
+    "href": "lessons/L01_Discussion/L01_Discussion_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "These are data types that R uses to store different kinds of data.\n\n&lt;dbl&gt; stands for “double” and represents numeric data (numbers with decimal points).\n&lt;chr&gt; stands for “character” and represents text data (strings of characters).\n&lt;fct&gt; stands for “factor” and represents categorical data (data that can take\n\n\n\n\nNo, I do not post my lab code nor answers. Since we all have different variables in our dataset, we will have different code."
+  },
+  {
+    "objectID": "lessons/L01_Discussion/L01_Discussion_muddy_points.html#muddy-points",
+    "href": "lessons/L01_Discussion/L01_Discussion_muddy_points.html#muddy-points",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "These are data types that R uses to store different kinds of data.\n\n&lt;dbl&gt; stands for “double” and represents numeric data (numbers with decimal points).\n&lt;chr&gt; stands for “character” and represents text data (strings of characters).\n&lt;fct&gt; stands for “factor” and represents categorical data (data that can take\n\n\n\n\nNo, I do not post my lab code nor answers. Since we all have different variables in our dataset, we will have different code."
   }
 ]

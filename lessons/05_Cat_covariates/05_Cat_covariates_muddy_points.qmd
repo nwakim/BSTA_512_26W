@@ -9,6 +9,26 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Muddy Points 2026
+
+### 1. I have a quick question about your "quick hypothesis test" using the outcome of the CIs. We went over the example where the CI for Partly Free spanned 0, so that's an indicator that it's not significant. Is that only the case in reference to Not Free? That doesn't say anything about if it's significantly different than Free, right?
+
+Great question! Yes, the CI for Partly Free only tells us if it's significantly different from Not Free (the reference group). To compare Partly Free to Free, we would need to either change the reference group to Free (or Partly Free) or conduct a post-hoc test that compares those two groups directly.
+
+### 2. 	the purpose of indicator function, seems to be evaluating yes or no such that yes would be partly free or no would be either not free or free.
+
+Yep, that's exactly right! That's why we need an indicator function (or dummy variable) to represent each category (aside from the reference group) in the regression model. That way we have a way to represent each category!
+
+### 3. Which direction is the difference taken to find the coefficient for other levels other than the referent? Is it always referent mean minus other level or the other way around, or is it the absolute value?
+
+The difference will always be the other group (indicator group) minus the reference group.
+
+The only way we get a positive coefficient (like $\widehat{\beta}_2$) is by subtracting the reference group from the indicator group. Here's the math that I wrote in class:
+
+$$
+\widehat{LE}_{PF} - \widehat{LE}_{NF} = (\widehat{\beta}_0 + \widehat{\beta}_1) - \widehat{\beta} =  \widehat{\beta}_1
+$$
+
 ## Muddy Points from 2025
 
 ### 1. I was a little confused on the part where if each categorical variable, with their respective betas, have each their own residuals for their respective category?

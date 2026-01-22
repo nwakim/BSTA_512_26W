@@ -44,7 +44,7 @@ gapm = gapm %>%
   mutate(fs_order = case_when(freedom_status == "F" ~ 3,
                                 freedom_status == "PF" ~ 2,
                                 freedom_status == "NF" ~ 1), 
-         freedom_status = fct_relevel(freedom_status, "NF"))
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F"))
 ```
 
 # Learning Objectives
@@ -183,7 +183,7 @@ Model Use (Inference)
  
 
 -   Note: I am calling the expected life expectancy $\widehat{LE}$
-    -   Previously, I have FSitten $\widehat{\text{life expectancy}}$
+    -   Previously, I have written $\widehat{\text{life expectancy}}$
 
 ## Visualizing the relationship
 
@@ -377,11 +377,11 @@ means_LE = gapm %>%
 
 -   We want to create a function that can map each freedom status to life expectancy
 
-    -   If not free: $\widehat{LE} = `r round(means_LE$mean[2], 2)`$ years
+    -   If not free: $\widehat{LE} = `r round(means_LE$mean[1], 2)`$ years
 
-    -   If partly free: $\widehat{LE} = `r round(means_LE$mean[3], 2)`$ years
+    -   If partly free: $\widehat{LE} = `r round(means_LE$mean[2], 2)`$ years
 
-    -   If free: $\widehat{LE} = `r round(means_LE$mean[1], 2)`$ years
+    -   If free: $\widehat{LE} = `r round(means_LE$mean[3], 2)`$ years
 
  
 
@@ -448,7 +448,7 @@ ggplot(gapm, aes(x = fct_reorder(freedom_status, fs_order), y = life_exp)) +
 ::::: columns
 ::: {.column width="50%"}
 $$\begin{aligned}
-\widehat{\textrm{LE}} = & `r round(means_LE$mean[2], 2)` \cdot I(\text{not free}) + `r round(means_LE$mean[3], 2)` \cdot I(\text{partly free}) + \\ &`r round(means_LE$mean[1], 2)` \cdot I(\text{free})
+\widehat{\textrm{LE}} = & `r round(means_LE$mean[1], 2)` \cdot I(\text{not free}) + `r round(means_LE$mean[2], 2)` \cdot I(\text{partly free}) + \\ &`r round(means_LE$mean[3], 2)` \cdot I(\text{free})
 \end{aligned}$$
 
 -   However, a linear regression equation still requires an intercept!
@@ -458,7 +458,7 @@ $$\begin{aligned}
     -   That means we need to adjust all the numbers
 
 $$\begin{aligned}
-\widehat{\textrm{LE}} = & `r round(means_LE$mean[2], 2)` + `r round(means_LE$mean[3]-means_LE$mean[2], 2)` \cdot I(\text{partly free}) + \\ &`r round(means_LE$mean[1]-means_LE$mean[2], 2)` \cdot I(\text{free}) \\
+\widehat{\textrm{LE}} = & `r round(means_LE$mean[1], 2)` + `r round(means_LE$mean[2]-means_LE$mean[1], 2)` \cdot I(\text{partly free}) + \\ &`r round(means_LE$mean[3]-means_LE$mean[1], 2)` \cdot I(\text{free}) \\
 \widehat{\textrm{LE}} = & \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{partly free}) + \\ & \widehat\beta_2 \cdot I(\text{free})
 \end{aligned}$$
 :::
@@ -576,7 +576,7 @@ tidy_mod = tidy(model1, conf.int=T)
 
 ```
 
-$$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod$estimate[3], 2)` \cdot I(\text{PF}) + `r round(tidy_mod$estimate[2], 2)` \cdot I(\text{F})$$
+$$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod$estimate[2], 2)` \cdot I(\text{PF}) + `r round(tidy_mod$estimate[3], 2)` \cdot I(\text{F})$$
 
 -   Which Freedom status did R choose as the reference level?
 
@@ -590,7 +590,7 @@ $$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod
 | $\widehat{\beta}_1$ | The difference in mean life expectancy between countries that are partly free and not free is `r round(tidy_mod$estimate[2], 2)` (95% CI: `r round(tidy_mod$conf.low[2], 2)`, `r round(tidy_mod$conf.high[2], 2)`). |
 | $\widehat{\beta}_2$ | The difference in mean life expectancy between countries that are free and not free is `r round(tidy_mod$estimate[3], 2)` (95% CI: `r round(tidy_mod$conf.low[3], 2)`, `r round(tidy_mod$conf.high[3], 2)`). |
 
--   Don't forget that we can use the confidence intervals to assess whether the mean difference with Africa is significant or not
+-   Don't forget that we can use the confidence intervals to assess whether the mean difference with "not free" is significant or not
 
 ## We can also use R to report each status's average life expectancy
 
@@ -660,7 +660,7 @@ gapm2_ave_diff %>% kable(
   ) 
 ```
 
-$$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod$estimate[3], 2)` \cdot I(\text{PF}) + `r round(tidy_mod$estimate[2], 2)` \cdot I(\text{F})$$
+$$\widehat{\textrm{LE}} = `r round(tidy_mod$estimate[1], 2)` + `r round(tidy_mod$estimate[2], 2)` \cdot I(\text{PF}) + `r round(tidy_mod$estimate[3], 2)` \cdot I(\text{F})$$
 
 # 10 minute break here?
 
@@ -748,11 +748,13 @@ b2 <- coeff_PF[2]
 # b0; b1; b2; b3
 ```
 
-$$\widehat{\textrm{LE}} = `r round(mean_PF,2)` `r round(coeff_PF[1],2)` \cdot I(\text{NF}) + `r round(coeff_PF[2],2)` \cdot I(\text{F})$$
+$$\widehat{\textrm{LE}} = `r round(mean_PF,2)` `r round(coeff_PF[1],2)` \cdot I(\text{NF}) + `r round(coeff_PF[3],2)` \cdot I(\text{F})$$
 
-## R: Change reference level to `Europe`
+## R: Change reference level to `PF`
 
--   `freedom_status` data type was originally a `character` - check this with `str()` or `class()` or `glimpse()`
+-   `freedom_status` data type was originally a `character` 
+
+- check this with `str()` or `class()` or `glimpse()`
 
 ```{r}
 #| echo: true
@@ -789,7 +791,7 @@ tidy(model2) %>% gt() %>% tab_options(table.font.size = 35) %>%
   fmt_number(decimals = 2)
 ```
 
-$$\begin{aligned}\widehat{\textrm{LE}} &=  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{NF}) +  \widehat\beta_2 \cdot I(\text{F}) + \\ \widehat{\textrm{LE}} &= `r round(mean_PF,2)` `r round(coeff_PF[1],2)` \cdot I(\text{NF}) + `r round(coeff_PF[2],2)` \cdot I(\text{F}) \end{aligned}$$
+$$\begin{aligned}\widehat{\textrm{LE}} &=  \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{NF}) +  \widehat\beta_2 \cdot I(\text{F}) + \\ \widehat{\textrm{LE}} &= `r round(mean_PF,2)` `r round(coeff_PF[1],2)` \cdot I(\text{NF}) + `r round(coeff_PF[3],2)` \cdot I(\text{F}) \end{aligned}$$
 
 ## Fitted values & residuals
 

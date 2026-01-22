@@ -9,11 +9,17 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Muddy Points from Spring 2025
+## Muddy Points
 
-### 1. Why should we be cautious of using survey question variables?
+### 1. What does <dbl> vs <chr> vs <fct> mean from Lab 1?
 
-These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!
+These are data types that R uses to store different kinds of data. 
 
+- `<dbl>` stands for "double" and represents numeric data (numbers with decimal points).
+- `<chr>` stands for "character" and represents text data (strings of characters).
+- `<fct>` stands for "factor" and represents categorical data (data that can take
 
+### 2. Will you be posting your lab code/answers?
+
+No, I do not post my lab code nor answers. Since we all have different variables in our dataset, we will have different code. 
 
