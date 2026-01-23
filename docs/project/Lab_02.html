@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Your Name Here">
-<meta name="description" content="Due: Friday February 7, at 11pm">
 
 <title>Lab 2</title>
 <style>
@@ -3895,27 +3894,19 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#lab-activities" id="toc-lab-activities" class="nav-link active" data-scroll-target="#lab-activities">Lab activities</a>
   <ul>
-  <li><a href="#access-and-download-the-data" id="toc-access-and-download-the-data" class="nav-link" data-scroll-target="#access-and-download-the-data">1. Access and download the data</a></li>
-  <li><a href="#load-data-and-needed-packages" id="toc-load-data-and-needed-packages" class="nav-link" data-scroll-target="#load-data-and-needed-packages">2. Load data and needed packages</a></li>
-  <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">3. Data wrangling</a>
+  <li><a href="#restate-your-research-question" id="toc-restate-your-research-question" class="nav-link" data-scroll-target="#restate-your-research-question">Restate your research question</a></li>
+  <li><a href="#load-in-your-saved-data-from-lab-1" id="toc-load-in-your-saved-data-from-lab-1" class="nav-link" data-scroll-target="#load-in-your-saved-data-from-lab-1">Load in your saved data from Lab 1</a></li>
+  <li><a href="#some-exploratory-data-analysis" id="toc-some-exploratory-data-analysis" class="nav-link" data-scroll-target="#some-exploratory-data-analysis">Some exploratory data analysis</a>
   <ul class="collapse">
-  <li><a href="#whats-our-target-population" id="toc-whats-our-target-population" class="nav-link" data-scroll-target="#whats-our-target-population">3.1 What’s our target population?</a></li>
-  <li><a href="#restrict-your-analysis-to-1-outcome-and-9-possible-covariatespredictors" id="toc-restrict-your-analysis-to-1-outcome-and-9-possible-covariatespredictors" class="nav-link" data-scroll-target="#restrict-your-analysis-to-1-outcome-and-9-possible-covariatespredictors">3.2 Restrict your analysis to 1 outcome and 9 possible covariates/predictors</a></li>
-  <li><a href="#manipulating-variables-that-are-coded-as-numeric-variables" id="toc-manipulating-variables-that-are-coded-as-numeric-variables" class="nav-link" data-scroll-target="#manipulating-variables-that-are-coded-as-numeric-variables">3.3 Manipulating variables that are coded as numeric variables</a></li>
-  <li><a href="#creating-age-from-birth-date-and-test-date" id="toc-creating-age-from-birth-date-and-test-date" class="nav-link" data-scroll-target="#creating-age-from-birth-date-and-test-date">3.4 Creating age from birth date and test date</a></li>
-  <li><a href="#if-you-chose-bmi-create-the-variable" id="toc-if-you-chose-bmi-create-the-variable" class="nav-link" data-scroll-target="#if-you-chose-bmi-create-the-variable">3.5 If you chose BMI, create the variable</a></li>
-  <li><a href="#make-a-new-dataset-with-only-complete-cases" id="toc-make-a-new-dataset-with-only-complete-cases" class="nav-link" data-scroll-target="#make-a-new-dataset-with-only-complete-cases">3.6 Make a new dataset with only complete cases</a></li>
+  <li><a href="#peek-at-your-outcome" id="toc-peek-at-your-outcome" class="nav-link" data-scroll-target="#peek-at-your-outcome">Peek at your outcome</a></li>
+  <li><a href="#univariate-exploratory-data-analysis" id="toc-univariate-exploratory-data-analysis" class="nav-link" data-scroll-target="#univariate-exploratory-data-analysis">Univariate exploratory data analysis</a></li>
+  <li><a href="#bivariate-exploratory-data-analysis" id="toc-bivariate-exploratory-data-analysis" class="nav-link" data-scroll-target="#bivariate-exploratory-data-analysis">Bivariate exploratory data analysis</a></li>
   </ul></li>
-  <li><a href="#some-exploratory-data-analysis" id="toc-some-exploratory-data-analysis" class="nav-link" data-scroll-target="#some-exploratory-data-analysis">4. Some exploratory data analysis</a>
-  <ul class="collapse">
-  <li><a href="#peek-at-your-outcome" id="toc-peek-at-your-outcome" class="nav-link" data-scroll-target="#peek-at-your-outcome">4.1 Peek at your outcome</a></li>
-  <li><a href="#univariate-exploratory-data-analysis" id="toc-univariate-exploratory-data-analysis" class="nav-link" data-scroll-target="#univariate-exploratory-data-analysis">4.2 Univariate exploratory data analysis</a></li>
-  <li><a href="#bivariate-exploratory-data-analysis" id="toc-bivariate-exploratory-data-analysis" class="nav-link" data-scroll-target="#bivariate-exploratory-data-analysis">4.3 Bivariate exploratory data analysis</a></li>
-  </ul></li>
-  <li><a href="#revisit-your-research-question" id="toc-revisit-your-research-question" class="nav-link" data-scroll-target="#revisit-your-research-question">5. Revisit your research question</a></li>
+  <li><a href="#quality-control" id="toc-quality-control" class="nav-link" data-scroll-target="#quality-control">Quality Control</a></li>
+  <li><a href="#fit-a-simple-linear-regression" id="toc-fit-a-simple-linear-regression" class="nav-link" data-scroll-target="#fit-a-simple-linear-regression">Fit a simple linear regression</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Lab_02.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -3926,11 +3917,6 @@ vertical-align: -.125em;
 <p class="subtitle lead">BSTA 512/612</p>
 </div>
 
-<div>
-  <div class="description">
-    Due: Friday February 7, at 11pm
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -3946,7 +3932,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 30, 2025</p>
+      <p class="date-modified">January 23, 2026</p>
     </div>
   </div>
     
@@ -3959,43 +3945,8 @@ vertical-align: -.125em;
 
 <section id="lab-activities" class="level2">
 <h2 class="anchored" data-anchor-id="lab-activities">Lab activities</h2>
-<section id="access-and-download-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="access-and-download-the-data">1. Access and download the data</h3>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task Summary
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Download the 2021 data and codebook from the archives and store in accessible folder.</p>
-</div>
-</div>
-</section>
-<section id="load-data-and-needed-packages" class="level3">
-<h3 class="anchored" data-anchor-id="load-data-and-needed-packages">2. Load data and needed packages</h3>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task Summary
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Read csv, save as rda, load rda, glimpse at data.</p>
-<p>How many rows and columns are in the dataset? Do you think we will need all these variables for our analysis?</p>
-</div>
-</div>
-</section>
-<section id="data-wrangling" class="level3">
-<h3 class="anchored" data-anchor-id="data-wrangling">3. Data wrangling</h3>
-<section id="whats-our-target-population" class="level4">
-<h4 class="anchored" data-anchor-id="whats-our-target-population">3.1 What’s our target population?</h4>
+<section id="restate-your-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="restate-your-research-question">Restate your research question</h3>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4006,12 +3957,12 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Describe our target population. Keep your description to 3-5 characteristics, not including our restriction on the US population.</p>
+<p>Please restate your research question below using the provided format. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.</p>
 </div>
 </div>
 </section>
-<section id="restrict-your-analysis-to-1-outcome-and-9-possible-covariatespredictors" class="level4">
-<h4 class="anchored" data-anchor-id="restrict-your-analysis-to-1-outcome-and-9-possible-covariatespredictors">3.2 Restrict your analysis to 1 outcome and 9 possible covariates/predictors</h4>
+<section id="load-in-your-saved-data-from-lab-1" class="level3">
+<h3 class="anchored" data-anchor-id="load-in-your-saved-data-from-lab-1">Load in your saved data from Lab 1</h3>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4022,93 +3973,14 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>From the 8 attitudes and beliefs, please select 3 that you think will be the most important variables related to your research question. In 1-2 lines, briefly explain why you chose each variable. This can be informal and bulleted.</p>
+<p>Please load in your saved data from Lab 1 using <code>here</code>.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Using R, select your identified variables from your dataset.</p>
-</div>
-</div>
-</section>
-<section id="manipulating-variables-that-are-coded-as-numeric-variables" class="level4">
-<h4 class="anchored" data-anchor-id="manipulating-variables-that-are-coded-as-numeric-variables">3.3 Manipulating variables that are coded as numeric variables</h4>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Identify and list the variables that are coded numerically and correspond to categories. Create a new variable for the categorical/factor version of the variable. It is up to you to check that your code ran properly!! If you are using multi-choice categorical variables (might include race, gender), then do not convert the variable yet!</p>
-</div>
-</div>
-</section>
-<section id="creating-age-from-birth-date-and-test-date" class="level4">
-<h4 class="anchored" data-anchor-id="creating-age-from-birth-date-and-test-date">3.4 Creating age from birth date and test date</h4>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>From the codebook, find the variables that we can use to construct the test date. Then use <code>make_date()</code> to create the test date.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Following the above example, create an age variable that measures the years between individuals’ birth and test date. Then remove the variables used to make age.</p>
-</div>
-</div>
-</section>
-<section id="if-you-chose-bmi-create-the-variable" class="level4">
-<h4 class="anchored" data-anchor-id="if-you-chose-bmi-create-the-variable">3.5 If you chose BMI, create the variable</h4>
-<p>This is optional!!</p>
-</section>
-<section id="make-a-new-dataset-with-only-complete-cases" class="level4">
-<h4 class="anchored" data-anchor-id="make-a-new-dataset-with-only-complete-cases">3.6 Make a new dataset with only complete cases</h4>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Task
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Make a new dataset with only complete cases. Save this dataset in your project folder.</p>
-</div>
-</div>
-</section>
 </section>
 <section id="some-exploratory-data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="some-exploratory-data-analysis">4. Some exploratory data analysis</h3>
+<h3 class="anchored" data-anchor-id="some-exploratory-data-analysis">Some exploratory data analysis</h3>
 <section id="peek-at-your-outcome" class="level4">
-<h4 class="anchored" data-anchor-id="peek-at-your-outcome">4.1 Peek at your outcome</h4>
+<h4 class="anchored" data-anchor-id="peek-at-your-outcome">Peek at your outcome</h4>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4124,7 +3996,7 @@ vertical-align: -.125em;
 </div>
 </section>
 <section id="univariate-exploratory-data-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="univariate-exploratory-data-analysis">4.2 Univariate exploratory data analysis</h4>
+<h4 class="anchored" data-anchor-id="univariate-exploratory-data-analysis">Univariate exploratory data analysis</h4>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4135,12 +4007,12 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Using <code>ggplot</code> or tables, visualize your variables. Get a sense of each variable’s distribution. Do you notice anything out of the ordinary?</p>
+<p>Using <code>ggplot</code> or tables, visualize your variables. Get a sense of each variable’s distribution. No need to report any summary statistics. Do you notice anything out of the ordinary? (This is meant to serve as check on the data and to make notes to yourself for later analysis.)</p>
 </div>
 </div>
 </section>
 <section id="bivariate-exploratory-data-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="bivariate-exploratory-data-analysis">4.3 Bivariate exploratory data analysis</h4>
+<h4 class="anchored" data-anchor-id="bivariate-exploratory-data-analysis">Bivariate exploratory data analysis</h4>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4151,13 +4023,30 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Take a look at the scatterplot, violin, or box plot of IAT score and your variable of interest. Use R and <code>ggplot</code> to make this plot. If your variable of interest is categorical, then make sure to use a violin or boxplot.</p>
+<p>Take a look at the plot of IAT score and your main predictor (from your. research question). Use R and <code>ggplot</code> to make this plot.</p>
 </div>
 </div>
 </section>
 </section>
-<section id="revisit-your-research-question" class="level3">
-<h3 class="anchored" data-anchor-id="revisit-your-research-question">5. Revisit your research question</h3>
+<section id="quality-control" class="level3">
+<h3 class="anchored" data-anchor-id="quality-control">Quality Control</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Tasks
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Glimpse</strong> at the observations that may indicate a respondent who has not properly completed the survey portion. This will require filtering <strong>for</strong> specific answer choices. <a href="https://dplyr.tidyverse.org/reference/filter.html#ref-examples">Please see examples of <code>filter()</code> on it’s documentation page.</a></p>
+<p>Do NOT remove these observations from your dataset!! We are only flagging them for future investigation.</p>
+</div>
+</div>
+</section>
+<section id="fit-a-simple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="fit-a-simple-linear-regression">Fit a simple linear regression</h3>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4168,7 +4057,7 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please restate the research question that you proposed in Lab 1. Please make sure it is only one question, one sentence long. What are your thoughts on the research question now that we looked at the data? Feel free to change it now that we’ve looked at the data. If you change your question, make sure 4.2 reflects the new research question.</p>
+<p>Run a simple linear regression model for the relationship in your primary research question. Print the regression table. Interpret the results and comment on the initial trend you see.</p>
 </div>
 </div>
 

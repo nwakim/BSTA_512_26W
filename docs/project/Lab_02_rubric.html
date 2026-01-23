@@ -157,70 +157,70 @@ ul.task-list li input[type="checkbox"] {
 <em>Each row is scored from 0–3 points based on the criteria.</em></p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
-<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>Lab Activity</strong></th>
-<th><strong>3 points</strong></th>
-<th><strong>2 points</strong></th>
-<th><strong>1 point</strong></th>
-<th><strong>0 points</strong></th>
+<th style="text-align: left;">Lab activity</th>
+<th style="text-align: left;">3 points</th>
+<th style="text-align: left;">2 points</th>
+<th style="text-align: left;">1 point</th>
+<th style="text-align: left;">0 points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Restate research question</strong></td>
-<td>Clearly and concisely restates the research question using the provided format</td>
-<td>Restates question with minor clarity or format issues</td>
-<td>Restates question but with vague or incorrect structure</td>
-<td>Research question is missing or unclear</td>
+<td style="text-align: left;"><strong>Restate your research question</strong></td>
+<td style="text-align: left;">Clearly restates the research question using the provided format, identifying the specific independent variable.</td>
+<td style="text-align: left;">Restates the question but deviates from the format or omits the specific variable name.</td>
+<td style="text-align: left;">Question is vague, incomplete, or does not match the Lab 1 selection.</td>
+<td style="text-align: left;">Task not attempted.</td>
 </tr>
 <tr class="even">
-<td><strong>Make sure variables are coded correctly</strong></td>
-<td>Uses <code>class()</code> or <code>map()</code> correctly for all 11 variables; accurately recodes variable types and sets reference levels</td>
-<td>Mostly correct use of functions; recoding has minor issues</td>
-<td>Incomplete or partially incorrect variable type checking or recoding</td>
-<td>Does not check or recode variable types</td>
+<td style="text-align: left;"><strong>Load in your saved data from Lab 1</strong></td>
+<td style="text-align: left;">Successfully loads the cleaned <code>.rda</code> file from Lab 1 using the <code>here</code> package.</td>
+<td style="text-align: left;">Loads the data correctly but does not use the <code>here</code> package for reproducible paths.</td>
+<td style="text-align: left;">Attempts to load data but encounters errors or reverts to the raw <code>.sav</code> file.</td>
+<td style="text-align: left;">Data not loaded.</td>
 </tr>
 <tr class="odd">
-<td><strong>Consider potential confounders and effect modifiers</strong></td>
-<td>Completes all entries with thoughtful classification and 1–2 sentence reasoning</td>
-<td>Completes most entries with reasonable reasoning</td>
-<td>Incomplete table or reasoning lacks clarity</td>
-<td>Table is missing or mostly incorrect</td>
+<td style="text-align: left;"><strong>Peek at your outcome</strong></td>
+<td style="text-align: left;">Provides a clean histogram of IAT scores with a thoughtful observation about its distribution/shape.</td>
+<td style="text-align: left;">Provides a histogram but lacks interpretation or the plot labels/formatting are poor.</td>
+<td style="text-align: left;">Histogram is incorrect, poorly scaled, or visualization is missing.</td>
+<td style="text-align: left;">Task not attempted.</td>
 </tr>
 <tr class="even">
-<td><strong>Create contingency tables for categorical predictors</strong></td>
-<td>Correctly creates tables for all categorical predictors; identifies small cell counts</td>
-<td>Creates most tables; identifies some small cell counts</td>
-<td>Tables are incomplete or interpretation is unclear</td>
-<td>No contingency tables created</td>
+<td style="text-align: left;"><strong>Univariate exploratory data analysis</strong></td>
+<td style="text-align: left;">Visualizes all variables (10 total) using appropriate plots/tables to show their distributions.</td>
+<td style="text-align: left;">Visualizes most variables but misses one or two, or uses inappropriate plot types for the data.</td>
+<td style="text-align: left;">Visualizations are missing for many variables or plots are unreadable.</td>
+<td style="text-align: left;">No univariate EDA provided.</td>
 </tr>
 <tr class="odd">
-<td><strong>Bivariate exploratory data analysis</strong></td>
-<td>Uses <code>ggpairs()</code> and clearly identifies predictors with visual trends</td>
-<td>Uses <code>ggpairs()</code> but interpretation is limited or unclear</td>
-<td>Attempts <code>ggpairs()</code> but contains errors or lacks insights</td>
-<td>No exploratory analysis completed</td>
+<td style="text-align: left;"><strong>Bivariate exploratory data analysis</strong></td>
+<td style="text-align: left;">Provides a clear plot of IAT score vs.&nbsp;main predictor; correctly uses <code>fct_relevel</code> or <code>fct_reorder</code> for ordered factors.</td>
+<td style="text-align: left;">Provides a bivariate plot but fails to reorder factor levels, making the relationship hard to discern.</td>
+<td style="text-align: left;">Plot is incorrect for the variable types (e.g., scatterplot for two categorical variables).</td>
+<td style="text-align: left;">No bivariate EDA provided.</td>
 </tr>
 <tr class="even">
-<td><strong>Fit simple logistic regression</strong></td>
-<td>Correctly fits model with <code>glm()</code>; displays and interprets unadjusted odds ratio</td>
-<td>Model is mostly correct; interpretation is basic or slightly unclear</td>
-<td>Model or output has major issues; interpretation is missing or incorrect</td>
-<td>Model not attempted or entirely incorrect</td>
+<td style="text-align: left;"><strong>Quality Control</strong></td>
+<td style="text-align: left;">Uses <code>filter()</code> correctly to identify and “glimpse” potentially untruthful observations without deleting them.</td>
+<td style="text-align: left;">Identifies flagged observations but the filtering logic is partially incomplete or flawed.</td>
+<td style="text-align: left;">Mentions quality control but provides no code output or glimpse of the flagged data.</td>
+<td style="text-align: left;">Did not perform the quality control check.</td>
 </tr>
 <tr class="odd">
-<td><strong>Plot the predicted probability</strong></td>
-<td>Accurately plots or tables predicted probabilities with clear labeling and formatting</td>
-<td>Produces plot/table with minor issues in clarity or accuracy</td>
-<td>Attempt made, but result is confusing or incorrect</td>
-<td>No plot or table presented</td>
+<td style="text-align: left;"><strong>Fit a simple linear regression &amp; Interpret results</strong></td>
+<td style="text-align: left;">Fits the SLR, prints a clean table, correctly interprets the slope in context, and comments on the initial trend.</td>
+<td style="text-align: left;">Fits the model and prints the table, but the interpretation contains minor technical or contextual errors.</td>
+<td style="text-align: left;">Fits the model but fails to print a table or provide an interpretation of the results.</td>
+<td style="text-align: left;">Modeling task not attempted.</td>
 </tr>
 </tbody>
 </table>

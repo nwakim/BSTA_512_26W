@@ -2,102 +2,38 @@
 title: "Lab 2"
 subtitle: "BSTA 512/612"
 author: "Your Name Here"
-description: "Due: Friday February 7, at 11pm"
 date-modified: "today"
-categories: [""]
 format: 
   html:
     link-external-newwindow: true
     toc: true
     toc-depth: 4
-    self-contained: true
-  pdf: default 
+    embed-resources: true
 editor_options: 
   chunk_output_type: console
 ---
 
 ## Lab activities
 
-### 1. Access and download the data
-
-::: callout-important
-##### Task Summary
-
-Download the 2021 data and codebook from the archives and store in accessible folder.
-:::
-
-### 2. Load data and needed packages
-
-::: callout-important
-##### Task Summary
-
-Read csv, save as rda, load rda, glimpse at data.
-
-How many rows and columns are in the dataset? Do you think we will need all these variables for our analysis?
-:::
-
-### 3. Data wrangling
-
-#### 3.1 What's our target population?
-
-::: callout-important
-## Task
-
-Describe our target population. Keep your description to 3-5 characteristics, not including our restriction on the US population.
-:::
-
-#### 3.2 Restrict your analysis to 1 outcome and 9 possible covariates/predictors
-
+### Restate your research question
 
 ::: callout-important
 ##### Task
 
-From the 8 attitudes and beliefs, please select 3 that you think will be the most important variables related to your research question. In 1-2 lines, briefly explain why you chose each variable. This can be informal and bulleted.
+Please restate your research question below using the provided format. It's repetitive, but it helps me contextualize my feedback as I look through your lab.
 :::
+
+### Load in your saved data from Lab 1
 
 ::: callout-important
 ##### Task
 
-Using R, select your identified variables from your dataset.
+Please load in your saved data from Lab 1 using `here`. 
 :::
 
-#### 3.3 Manipulating variables that are coded as numeric variables
+### Some exploratory data analysis
 
-::: callout-important
-##### Task
-
-Identify and list the variables that are coded numerically and correspond to categories. Create a new variable for the categorical/factor version of the variable. It is up to you to check that your code ran properly!! If you are using multi-choice categorical variables (might include race, gender), then do not convert the variable yet!
-:::
-
-#### 3.4 Creating age from birth date and test date
-
-::: callout-important
-##### Task
-
-From the codebook, find the variables that we can use to construct the test date. Then use `make_date()` to create the test date.
-:::
-
-::: callout-important
-##### Task
-
-Following the above example, create an age variable that measures the years between individuals' birth and test date. Then remove the variables used to make age.
-:::
-
-#### 3.5 If you chose BMI, create the variable
-
-This is optional!!
-
-#### 3.6 Make a new dataset with only complete cases
-
-::: callout-important
-##### Task
-
-Make a new dataset with only complete cases. Save this dataset in your project folder.
-:::
-
-### 4. Some exploratory data analysis
-
-#### 4.1 Peek at your outcome
+#### Peek at your outcome
 
 ::: callout-important
 ##### Task
@@ -105,26 +41,37 @@ Make a new dataset with only complete cases. Save this dataset in your project f
 Please plot a histogram of the IAT scores. What do you notice about the outcome?
 :::
 
-#### 4.2 Univariate exploratory data analysis
+#### Univariate exploratory data analysis
 
 ::: callout-important
 ##### Task
 
-Using `ggplot` or tables, visualize your variables. Get a sense of each variable's distribution. Do you notice anything out of the ordinary?
+Using `ggplot` or tables, visualize your variables. Get a sense of each variable's distribution. No need to report any summary statistics. Do you notice anything out of the ordinary? (This is meant to serve as check on the data and to make notes to yourself for later analysis.)
 :::
 
-#### 4.3 Bivariate exploratory data analysis
+#### Bivariate exploratory data analysis
 
 ::: callout-important
 ##### Task
 
-Take a look at the scatterplot, violin, or box plot of IAT score and your variable of interest. Use R and `ggplot` to make this plot. If your variable of interest is categorical, then make sure to use a violin or boxplot.
+Take a look at the plot of IAT score and your main predictor (from your. research question). Use R and `ggplot` to make this plot.
 :::
 
-### 5. Revisit your research question
+### Quality Control
+
+::: callout-important
+#### Tasks
+
+**Glimpse** at the observations that may indicate a respondent who has not properly completed the survey portion. This will require filtering **for** specific answer choices. [Please see examples of `filter()` on it's documentation page.](https://dplyr.tidyverse.org/reference/filter.html#ref-examples)
+
+Do NOT remove these observations from your dataset!! We are only flagging them for future investigation.
+:::
+
+### Fit a simple linear regression
 
 ::: callout-important
 ##### Task
 
-Please restate the research question that you proposed in Lab 1. Please make sure it is only one question, one sentence long. What are your thoughts on the research question now that we looked at the data? Feel free to change it now that we've looked at the data. If you change your question, make sure 4.2 reflects the new research question.
+Run a simple linear regression model for the relationship in your primary research question. Print the regression table. Interpret the results and comment on the initial trend you see.
 :::
+

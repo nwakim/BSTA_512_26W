@@ -30,7 +30,7 @@ There will be no analysis in this lab. Instead, we are building our knowledge ar
 
 ### Grading
 
-Each lab will follow the rubric on the Project page. Since this lab does not include coding nor analysis, this portion of the rubric is excluded.
+This lab is worth 24 points. Each lab will follow the specific rubric on the Project page. 
 
 ## Lab activities
 
