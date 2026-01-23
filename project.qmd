@@ -28,13 +28,13 @@ source(here("class_dates.R"))
 ## Labs
 
 | Lab Instructions | Rubric | Due Date | Topics |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | [Lab 1](/project/Lab_01_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_01_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab1 %>% format("%m/%d")` | Familiarize yourself with project, explore your research question, and explore the data |
 | [Lab 2](/project/Lab_02_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_02_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab2 %>% format("%m/%d")` | Explore the data, fit a simple linear regression model |
 | [Lab 3](/project/Lab_03_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_03_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab3 %>% format("%m/%d")` | Fit a temporary MLR and practice interpreting coefficient estimates |
 | [Lab 4](/project/Lab_04_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_04_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab4 %>% format("%m/%d")` | Build a model and adapt Lab 3 to interpret coefficient estimates |
 
--   [Help with BMI variable](/labs/BMI_help.qmd)
+-   [Help with BMI variable](/project/BMI_help.qmd)
 
 ## Lab Discussion Make-Up
 
