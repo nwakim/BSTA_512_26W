@@ -5,7 +5,7 @@ format:
     page-layout: full
 ---
 
-**Total: 21 points**  
+**Total: 24 points**  
 *Each row is scored from 0–3 points based on the criteria.*
 
 | Lab activity | 3 points | 2 points | 1 point | 0 points |
