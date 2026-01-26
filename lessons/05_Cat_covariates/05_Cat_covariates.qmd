@@ -4,7 +4,6 @@ author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
 date: "`r library(here); source(here('class_dates.R')); w3d2`"
-categories: ["Week 6"]
 format: 
   revealjs:
     theme: "../simple_NW.scss"

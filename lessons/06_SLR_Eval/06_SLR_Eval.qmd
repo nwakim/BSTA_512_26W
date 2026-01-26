@@ -3,8 +3,7 @@ title: "Lesson 6: SLR: More inference"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "01/27/2025"
-categories: ["Week 1"]
+date: "`r library(here); source(here('class_dates.R')); w4d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -48,16 +47,14 @@ library(readxl)
 # quarto install extension quarto-ext/fontawesome
 
 # set ggplot theme for slides 
-theme_set(theme_gray(base_size = 22))
-# theme_update(text = element_text(size=16))  # set global text size for ggplots
+theme_set(theme_bw(base_size = 22))
 ```
 
 ```{r}
 #| include: false
 #| message: false
 #| warning: false
-gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA") 
-gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
+load(here("data", "gapminder2022.RData"))
 ```
 
 ```{r}
@@ -65,7 +62,7 @@ gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
 #| message: false
 #| warning: false
 # Fit regression model:
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 
 reg_table = tidy(model1) %>% gt() %>% 
  tab_options(table.font.size = 40) %>%
@@ -115,17 +112,19 @@ reg_table = tidy(model1) %>% gt() %>%
 #| fig-width: 11
 #| echo: false
 
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+gapm_slr_plot = gapm %>%
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))
+        title = element_text(size = 25))
 
+gapm_slr_plot
 ```
 
 ```{=tex}
@@ -273,14 +272,14 @@ regression_points <- augment(model1)
 # summary(model1)
 # sum(model1$residuals^2)
 
-my <- mean(gapm$LifeExpectancyYrs, na.rm=T)
+my <- mean(gapm$life_exp, na.rm=T)
 
 ggplot(regression_points, 
-       aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_hline(yintercept = my, color = "#A7EA52", size = 3) +
   geom_segment(aes(
-    xend = FemaleLiteracyRate, 
+    xend = cell_phones_100, 
     yend = .fitted), 
     alpha = 1, 
     color = "#4FADF3", 
@@ -291,9 +290,9 @@ ggplot(regression_points,
   #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
     #guides(color = "none") +
   geom_point(aes(y = .fitted), shape = 1, size = 4) +
-labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Life expectancy vs. female literacy rate in 2011") +
+       title = "Relationship between life expectancy and cell phones") +
     theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))  
@@ -409,7 +408,7 @@ ANOVA table:
 
 ```{r}
 # Fit regression model:
-model1 <- gapm %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 
 anova(model1)
 anova(model1) %>% tidy() %>% gt() %>%
@@ -920,8 +919,8 @@ Alternative\* model
 ```{r}
 #| echo: false
 means_LE = gapm %>%
-  group_by(four_regions) %>%
-  summarise(mean = mean(LifeExpectancyYrs))
+  group_by(freedom_status) %>%
+  summarise(mean = mean(life_exp))
 ```
 
 ::: columns
@@ -938,13 +937,13 @@ $$\begin{aligned}
 ::: {.column width="50%"}
 ```{r fig.height=8, fig.width=8, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = freedom_status, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
-       y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
-       caption = "Diamonds = region averages") +
+  labs(x = "Freedom status", 
+       y = "Life expectancy (years)",
+       title = "Life expectancy vs. freedom status",
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 22), 
         axis.text = element_text(size = 22), 
         title = element_text(size = 22))
@@ -1095,7 +1094,7 @@ nobs(model1)
 :::
 
 ```{r}
-model2 <- gapm %>% lm(formula = LifeExpectancyYrs ~ four_regions)
+model2 <- gapm %>% lm(formula = life_exp ~ freedom_status)
 anova(model2) %>% tidy() %>% gt() %>% tab_options(table.font.size = 40)
 ```
 
@@ -1216,18 +1215,18 @@ $$\widehat{\beta}_1 = r\frac{SSY}{SSX},\ \ \text{or},\ \  r = \widehat{\beta}_1\
 #| fig-width: 11
 #| echo: false
 
-mx <- mean(gapm$FemaleLiteracyRate, na.rm=T)
-my <- mean(gapm$LifeExpectancyYrs, na.rm=T)
+mx <- mean(gapm$cell_phones_100, na.rm=T)
+my <- mean(gapm$life_exp, na.rm=T)
 
 
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_point(size = 4) +
   geom_vline(xintercept = mx, color = "#FF8021", size = 3) +
    geom_hline(yintercept = my, color = "#A7EA52", size = 3) +
-  labs(x = "Female literacy rate (%)", 
+    labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
+       title = "Relationship between life expectancy and cell phones") +
     theme(axis.title = element_text(size = 30), 
         axis.text = element_text(size = 25), 
         title = element_text(size = 30))
@@ -1259,7 +1258,7 @@ $$R^2 = \frac{SSR}{SSY} = \frac{SSY - SSE}{SSY}$$
 ## Life expectancy example: correlation coeffiicent $r$ and coefficient of determination $R^2$
 
 ```{r}
-(r = cor(x = gapm$LifeExpectancyYrs, y = gapm$FemaleLiteracyRate, 
+(r = cor(x = gapm$life_exp, y = gapm$cell_phones_100, 
          use =  "complete.obs"))
 ```
 ::: columns
