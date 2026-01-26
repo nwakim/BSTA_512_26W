@@ -15,7 +15,7 @@ source(here("class_dates.R"))
 Below is the general timing and lessons for each quiz:
 
 | Quiz | Lessons | Open Date \@ 3pm | Close Date \@ 11pm |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | 1 | 1-4 | `r q1_open %>% format("%m/%d")` | `r q1_close %>% format("%m/%d")` |
 | 2 | 5-9 | `r q2_open %>% format("%m/%d")` | `r q2_close %>% format("%m/%d")` |
 | 3 | 10-14 | `r q3_open %>% format("%m/%d")` | `r q3_close %>% format("%m/%d")` |
@@ -37,9 +37,31 @@ More information specific to each quiz will be posted below.
     -   Using question and answer threads typically seen on sites like StackExchange, WikiHow, Quora, Reddit, StackOverflow, Chegg, etc.
     -   Asking other students, sharing quiz work or sharing quiz results.
 
-4.  Each question is worth 1 point, including multiple choice and free response questions.
+4.  Each question is worth 1 point.
+
+5.  Questions are multiple choice with options A-D.
 
 ### Quiz 1
+
+-   No coding is necessary, mostly conceptual
+
+-   Covers lesson 1-4
+
+    -   Mostly focused on Lessons 3-4:
+
+        -   simple linear regression,
+
+        -   population vs. estimated regression model,
+
+        -   important components of the model (coefficients and residuals),
+
+        -   process (not math) for finding best fit line,
+
+        -   intpreting coefficients for continuous predictor,
+
+        -   predicting mean response,
+
+        -   interpreting mean response
 
 ### Quiz 2
 

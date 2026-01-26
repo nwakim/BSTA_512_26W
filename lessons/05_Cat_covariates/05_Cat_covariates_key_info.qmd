@@ -10,6 +10,17 @@ editor_options:
 
 ## Announcements
 
+- Quiz 1 information
+- Lab 1 feedback: we will have some time to discuss after break
+  - Make sure you are working with a `.Rproj` file within an overarching folder for the class project. 
+  - Race/ethnicity variable
+    - Almost no one coded this correctly
+  - Check your feedback! 
+    - There are warnings about points being taken off later
+    - Points will be taken off if you do not have an html file
+
+## Announcements from Last Class
+
 - Please email me if you are missing class today
 - Going through labs
   - Please submit your labs using html files!! (I took off a point if you submitted a qmd only)
@@ -20,7 +31,6 @@ editor_options:
 
 ## Key Dates
 
-- Homework 1 due this Sunday (1/25) at 11pm
 - Quiz 1 opens on 1/28
   - Closes on 2/1
 - Homework 2 due 2/1 at 11pm
