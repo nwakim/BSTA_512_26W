@@ -23,3 +23,7 @@ These are data types that R uses to store different kinds of data.
 
 No, I do not post my lab code nor answers. Since we all have different variables in our dataset, we will have different code. 
 
+### 3. What would someone do if they need to do the indicator method, but they have a TON of categories?
+
+
+

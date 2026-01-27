@@ -29,6 +29,28 @@ $$
 \widehat{LE}_{PF} - \widehat{LE}_{NF} = (\widehat{\beta}_0 + \widehat{\beta}_1) - \widehat{\beta} =  \widehat{\beta}_1
 $$
 
+### 4. augment() function, when do you recommend using it? why do you not need linearity if you just want to do reference cell coding
+
+The `augment()` function is super useful when you want to add model-related information (like fitted values, residuals, etc.) back to your original data frame. This can be helpful for diagnostics or visualizations.
+
+We'll cover this function next week!
+
+### 5. I'm confused about residuals - in the class example, are there 3 different groups of residuals that get combined? or how is there one plot of residuals that represents the difference between LE and each freedom status group's mean life expectancy.
+
+Great question! In the case of categorical variables, the residuals are calculated based on the difference between the observed values (like LE) and the predicted values (each freedom status group's mean life expectancy) from the model. Since each category has its own predicted value (mean life expectancy for each freedom status), the residuals will reflect how far each observation is from its respective category mean. BUTTTT oce we calculate that distance (the residual), it does not matter which category it came from when we plot the residuals. They are all just differences from their predicted values.
+
+### 6. On page 40 of the slides, "Is the variable part of the main relationship that you are investigating? (even if linearity holds)" I was unable to follow what you were talking about at this point.
+
+Yeah, this may not make a lot of sense until we get more into multiple linear regression (MLR).The idea is that even if a variable meets the assumptions (like linearity), we still need to consider if it is relevant to the research question or main relationship we are investigating. In MLR, we'll have several variables in the model, but we may not need to interpret every relationship with the outcome.
+
+### 7. This part in particular "Is the variable part of the main relationship that you are investigating? (even if linearity holds) If yes, consider leaving as reference cell coding unless the interpretation makes sense." what does the "unless the interpretation makes sense" part mean
+
+
+
+### 8. I was a little confused on why we would choose to keep an ordinal variable using referent coding. Would this depend on whether the finding was linear or not (i.e. keeping it referent might make more sense if there was a clear upward relationship with few outliers)?
+
+### 9. when we were going over ordinal coding/scoring does it matter which score is assigned what number for beta not like is it always going from 0 down to 3 or can it be opposite. How does that impact the income level.
+
 ## Muddy Points from 2025
 
 ### 1. I was a little confused on the part where if each categorical variable, with their respective betas, have each their own residuals for their respective category?
