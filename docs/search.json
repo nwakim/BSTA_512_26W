@@ -452,7 +452,7 @@
     "href": "lessons/02_Data_Management/02_Data_Management.html#r-programming-class-at-ohsu",
     "title": "Lesson 2: Data and File Management",
     "section": "R programming class at OHSU!",
-    "text": "R programming class at OHSU!\nYou can check out Dr. Jessica Minnier’s R class page if you want more notes, videos, etc."
+    "text": "R programming class at OHSU!\n\nYou can check out Dr. Meike’s R class page if you want more notes, videos, etc.\nYou can check out Dr. Jessica’s R class page from 2022 if you want more notes, videos, etc."
   },
   {
     "objectID": "lessons/02_Data_Management/02_Data_Management.html#the-larger-tidy-ecosystem",
@@ -6347,5 +6347,12 @@
     "title": "Lesson 6: SLR: More inference",
     "section": "Life expectancy example: hypothesis test for freedom status (4/4)",
     "text": "Life expectancy example: hypothesis test for freedom status (4/4)\n\nWrite a conclusion\n\nWe reject the null hypothesis that both coefficients are equal to 0 at the \\(5\\%\\) significance level. There is sufficient evidence that there is association between life expectancy and the country’s freedom status (p-value = 0.009)."
+  },
+  {
+    "objectID": "lessons/02_Data_Management/02_Data_Management.html#data-work-resources",
+    "href": "lessons/02_Data_Management/02_Data_Management.html#data-work-resources",
+    "title": "Lesson 2: Data and File Management",
+    "section": "Data work resources",
+    "text": "Data work resources\n\nOnline TB on data science intro\nMore dpylr functions to reference!\n\nAdditional details and examples are available in the vignettes:\n\ncolumn-wise operations vignette\nrow-wise operations vignette\n\n \nand the dplyr 1.0.0 release blog posts:\n\nworking across columns\nworking within rows"
   }
 ]

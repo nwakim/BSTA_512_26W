@@ -820,7 +820,9 @@ data = read_excel(here("data", "BodyTemperatures.xlsx"))
 
 # Resources
 
-## `dplyr` resources
+## Data work resources
+
+- [Online TB on data science intro](https://hellodata.science/)
 
 -   [More `dpylr` functions to reference!](https://dplyr.tidyverse.org/reference/index.html)
 
@@ -839,7 +841,8 @@ and the dplyr 1.0.0 release blog posts:
 
 ## R programming class at OHSU!
 
-You can check out [Dr. Jessica Minnier's R class page](https://sph-r-programming-2022.netlify.app/) if you want more notes, videos, etc.
+- You can check out [Dr. Meike's R class page](https://niederhausen.github.io/BSTA_526_W26/) if you want more notes, videos, etc.
+- You can check out [Dr. Jessica's R class page from 2022](https://sph-r-programming-2022.netlify.app/) if you want more notes, videos, etc.
 
 ## The larger tidy ecosystem
 
