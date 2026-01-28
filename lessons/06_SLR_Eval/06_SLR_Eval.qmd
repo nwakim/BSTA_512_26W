@@ -3,7 +3,7 @@ title: "Lesson 6: SLR: More inference"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "`r library(here); source(here('class_dates.R')); w4d1`"
+date: "`r library(here); source(here('class_dates.R')); w4d2`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -55,6 +55,11 @@ theme_set(theme_bw(base_size = 22))
 #| message: false
 #| warning: false
 load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F"))
 ```
 
 ```{r}
@@ -64,7 +69,9 @@ load(here("data", "gapminder2022.RData"))
 # Fit regression model:
 model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 
-reg_table = tidy(model1) %>% gt() %>% 
+tidy_model1 = tidy(model1)
+
+reg_table = tidy_model1 %>% gt() %>% 
  tab_options(table.font.size = 40) %>%
  fmt_number(decimals = 3)
 ```
@@ -96,11 +103,11 @@ reg_table = tidy(model1) %>% gt() %>%
 
 -   Estimate variance of the residuals
 -   Inference for slope & intercept: CI, p-value
--   Confidence bands of regression line for mean value of Y\|X
+-   Finding mean value of Y\|X
 
 **Lesson 5: Categorical Covariates**
 
--   Inference for different categories
+-   Inference/Interpretation for different categories
 :::
 
 ::: {.column width="2%"}
@@ -130,7 +137,7 @@ gapm_slr_plot
 ```{=tex}
 \begin{aligned}
 \widehat{Y} &= \widehat\beta_0 + \widehat\beta_1 \cdot X\\
-\widehat{\text{LE}} &= 50.9 + 0.232 \cdot \text{FLR}
+\widehat{\text{LE}} &=  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{CP}
 \end{aligned}
 ```
 :::
@@ -249,16 +256,22 @@ Model Use (Inference)
 
 ## Getting to the F-test
 
-The F statistic in linear regression is essentially a proportion of the
-variance explained by the model vs. the variance not explained by the
-model
+The F statistic in linear regression is essentially a proportion of the variance explained by the model vs. the variance not explained by the model
+
+ 
 
 1.  Start with visual of explained vs. unexplained variation
 
+ 
+
 2.  Figure out the mathematical representations of this variation
+
+ 
 
 3.  Look at the ANOVA table to establish key values measuring our
     variance from our model
+
+ 
 
 4.  Build the F-test
 
@@ -267,6 +280,8 @@ model
 ```{r}
 #| echo: false
 #| fig-align: center
+#| fig-height: 6
+#| fig-width: 8
 
 regression_points <- augment(model1)
 # summary(model1)
@@ -277,25 +292,25 @@ my <- mean(gapm$life_exp, na.rm=T)
 ggplot(regression_points, 
        aes(x = cell_phones_100,
                  y = life_exp)) +
-  geom_hline(yintercept = my, color = "#A7EA52", size = 3) +
+  geom_hline(yintercept = my, color = "#A7EA52", size = 2) +
   geom_segment(aes(
     xend = cell_phones_100, 
     yend = .fitted), 
     alpha = 1, 
     color = "#4FADF3", 
-    size = 2) +
-  geom_smooth(method = "lm", se = FALSE, color = "#F14124", size=3) +
+    size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "#F14124", size=2) +
   # > Color adjustments made here...
-  geom_point(color = "black", size = 4) +  # Color mapped here
+  geom_point(color = "black", size = 3) +  # Color mapped here
   #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
     #guides(color = "none") +
-  geom_point(aes(y = .fitted), shape = 1, size = 4) +
+  geom_point(aes(y = .fitted), shape = 1, size = 3) +
   labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
        title = "Relationship between life expectancy and cell phones") +
     theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
-        title = element_text(size = 20))  
+        title = element_text(size = 18))  
 ```
 
 $$ \begin{aligned}
@@ -332,10 +347,96 @@ $$Y_i - \overline{Y} = (Y_i - \widehat{Y}_i) + (\widehat{Y}_i- \overline{Y})$$
 
 ::: columns
 ::: {.column width="50%"}
-![](../img_slides/SSY_SSE_SSR.png){fig-align="center" width="1200"}
+![](../img_slides/SSY_SSE_SSR.png){fig-align="center" width="1000"}
 :::
 
 ::: {.column width="50%"}
+:::
+:::
+
+::: columns
+::: {.column width="33%"}
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+# code from https://drsimonj.svbtle.com/visualising-residuals
+regression_points <- augment(model1)
+
+ggplot(regression_points, 
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
+    geom_hline(yintercept = my, color = "#A7EA52", size = 3) +
+  geom_segment(aes(
+    xend = cell_phones_100, 
+    yend = .fitted), 
+    alpha = 1, 
+    color = "#4FADF3", 
+    size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "#F14124", size=3) +
+  # > Color adjustments made here...
+  geom_point(color = "black", size = 4) +  # Color mapped here
+  #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
+    #guides(color = "none") +
+  geom_point(aes(y = .fitted), shape = 1, size = 4) +
+labs(x = "Cell phones per 100 people", 
+       y = "Life expectancy (years)",
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+```
+:::
+::: {.column width="33%"}
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+
+## Make a plot of the residuals from the above plot, but now the best fit line is vertical at 0 and the blue lines showing the residuals are plotted
+
+ggplot(regression_points, 
+       aes(x = .resid,
+                 y = cell_phones_100)) +
+  geom_segment(aes(
+    xend = 0, 
+    yend = cell_phones_100), 
+    alpha = 1, 
+    color = "#4FADF3", 
+    size = 2) +
+  geom_vline(xintercept = 0, color = "#F14124", size=3) +
+  geom_point(color = "black", size = 4) +
+labs(x = "Residuals", 
+       y = "Cell phones per 100 people",
+       title = "Residuals from fitted model") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 8
+#| fig-width: 8
+#| fig-align: center
+
+# plot the residuals
+ggplot(regression_points, aes(x = .resid)) +
+  geom_histogram() +
+  geom_vline(xintercept = 0, color = "#F14124", size=3) +
+  labs(x = "Residuals", y = "Count", 
+       title = "Residuals from fitted model") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+```
 :::
 :::
 
@@ -433,19 +534,23 @@ anova(model1) %>% tidy() %>% gt() %>%
 
 ## What is the F statistic testing?
 
-$$F = \frac{MSR}{MSE}$$
+- The F statistic is testing whether the model with the predictor variable $X$ explains significantly more variation in $Y$ than a model with no predictors (intercept only model)
 
--   It can be shown that
+ 
 
-$$E(MSE)=\sigma^2\ \text{and}\ E(MSR) = \sigma^2 + \beta_1^2\sum_{i=1}^n (X_i- \overline{X})^2$$
+- In general, the F-test has 3 steps:
+  1. Define the larger (full) model (more coefficients)
+  2. Define the smaller (reduced) model (less coefficients)
+  3. Decide whether to reject the reduced model in favor of the full model
+  
+ 
+  
+- We "decide" by seeing how much **more variation** the **full model explains** compared to the reduced model
+  - **If the full model explains significantly more variation, we reject the reduced model**
+  
+ 
 
--   Recall that $\sigma^2$ is the variance of the population residuals
--   Thus if
-    -   $\beta_1 = 0$, then
-        $F \approx \frac{\widehat{\sigma}^2}{\widehat{\sigma}^2} = 1$
-    -   $\beta_1 \neq 0$, then
-        $F \approx \frac{\widehat{\sigma}^2 + \widehat{\beta}_1^2\sum_{i=1}^n (X_i- \overline{X})^2}{\widehat{\sigma}^2} > 1$
--   So the $F$ statistic can also be used to test $\beta_1$
+- In **simple linear regression**, this is equivalent to testing whether the population slope $\beta_1$ is equal to 0
 
 ## F-test vs. t-test for the population slope
 
@@ -549,20 +654,15 @@ Alternative model ($\beta_1\neq0$)
 
 ::: columns
 ::: {.column width="48%"}
-::: highlight-container
-::: highlight
-1.  For today's class, we are assuming that we have met the underlying
-    assumptions
-:::
-:::
+1.  Check the [**assumptions**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-2.  State the null hypothesis.
-:::
-:::
+2.  Set the [**level of significance**]{style="color:#4FADF3"}
 
-Often, we are curious if the coefficient is 0 or not:
+    - Often we use $\alpha = 0.05$
+
+3.  Specify the [**null**]{style="color:#4FADF3"} ( $H_0$ ) and [**alternative**]{style="color:#4FADF3"} ( $H_A$ ) [**hypotheses**]{style="color:#4FADF3"}
+
+    - Often, we are curious if the coefficient is 0 or not:
 
 ```{=tex}
 \begin{align}
@@ -570,58 +670,33 @@ H_0 &: \beta_1 = 0\\
 \text{vs. } H_A&: \beta_1 \neq 0
 \end{align}
 ```
-::: highlight-container
-::: highlight
-3.  Specify the significance level.
-:::
-:::
 
-Often we use $\alpha = 0.05$
+4.  Specify the test statistic and its [**distribution under the null**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-4.  Specify the test statistic and its distribution under the null
-:::
-:::
-
-The test statistic is $F$, and follows an F-distribution with numerator
-$df=1$ and denominator $df=n-2$.
+    - The test statistic is $F$, and follows an F-distribution with numerator $df=1$ and denominator $df=n-2$.
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="48%"}
-::: highlight-container
-::: highlight
-5.  Compute the value of the test statistic
-:::
-:::
+
+5.  Calculate the [**test statistic**]{style="color:#4FADF3"}
 
 The calculated **test statistic** for $\widehat\beta_1$ is
 
 $$F = \frac{MSR}{MSE}$$
 
-::: highlight-container
-::: highlight
-6.  Calculate the p-value
-:::
-:::
+6.  Calculate the [**p-value**]{style="color:#4FADF3"}
 
-We are generally calculating: $P(F_{1, n-2} > F)$
+    - We are generally calculating: $P(F_{1, n-2} > F)$
 
-::: highlight-container
-::: highlight
-7.  Write conclusion for hypothesis test
-:::
-:::
+7.  Write a [**conclusion**]{style="color:#4FADF3"}
 
--   Reject: $P(F_{1, n-2} > F) < \alpha$
+    - Reject: $P(F_{1, n-2} > F) < \alpha$
 
-We (reject/fail to reject) the null hypothesis that the slope is 0 at
-the $100\alpha\%$ significiance level. There is
-(sufficient/insufficient) evidence that there is significant association
-between ($Y$) and ($X$) (p-value = $P(F_{1, n-2} > F)$).
+We (reject/fail to reject) the null hypothesis that the slope is 0 at the $100\alpha\%$ significance level. There is
+(sufficient/insufficient) evidence that there is significant association between ($Y$) and ($X$) (p-value = $P(F_{1, n-2} > F)$).
 :::
 :::
 
@@ -630,20 +705,15 @@ between ($Y$) and ($X$) (p-value = $P(F_{1, n-2} > F)$).
 -   Steps 1-4 are setting up our hypothesis test: not much change from
     the general steps
 
-::: highlight-container
-::: highlight
-1.  For today's class, we are assuming that we have met the underlying
-    assumptions
-:::
-:::
+1.  Check the [**assumptions**]{style="color:#4FADF3"}: We have met the underlying assumptions (checked in our Model Evaluation step)
 
-::: highlight-container
-::: highlight
-2.  State the null hypothesis.
-:::
-:::
+2.  Set the [**level of significance**]{style="color:#4FADF3"}
 
-We are testing if the slope is 0 or not:
+    - Often we use $\alpha = 0.05$
+
+3.  Specify the [**null**]{style="color:#4FADF3"} ( $H_0$ ) and [**alternative**]{style="color:#4FADF3"} ( $H_A$ ) [**hypotheses**]{style="color:#4FADF3"}
+
+    - Often, we are curious if the coefficient is 0 or not:
 
 ```{=tex}
 \begin{align}
@@ -651,19 +721,8 @@ H_0 &: \beta_1 = 0\\
 \text{vs. } H_A&: \beta_1 \neq 0
 \end{align}
 ```
-::: highlight-container
-::: highlight
-3.  Specify the significance level.
-:::
-:::
 
-Often we use $\alpha = 0.05$
-
-::: highlight-container
-::: highlight
-4.  Specify the test statistic and its distribution under the null
-:::
-:::
+4.  Specify the test statistic and its [**distribution under the null**]{style="color:#4FADF3"}
 
 ::: columns
 ::: {.column width="70%"}
@@ -680,23 +739,35 @@ nobs(model1)
 
 ## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (2/4)
 
-::: highlight-container
-::: highlight
-5.  Compute the value of the test statistic
-:::
-:::
+5.  Calculate the [**test statistic**]{style="color:#4FADF3"}
 
 ```{r}
-anova(model1) %>% tidy() %>% gt() %>%
-  tab_options(table.font.size = 40)
+anova_tab = anova(model1) %>% tidy()
+anova_tab %>% gt() %>% tab_options(table.font.size = 40)
 ```
 
--   **Option 1:** Calculate the test statistic using the values in the
-    ANOVA table
+::: columns
+::: {.column width="49%"}
+**Option 1:** Calculate the test statistic using the values in the ANOVA table
 
-$$F = \frac{MSR}{MSE} = \frac{2052.81}{37.73}=54.414$$
+$$F = \frac{MSR}{MSE} = \frac{`r anova_tab$meansq[1]`}{`r anova_tab$meansq[2]`} = `r round(anova_tab$meansq[1]/anova_tab$meansq[2],3)`$$
+:::
 
--   **Option 2:** Get the test statistic value (F) from the ANOVA table
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+**Option 2:** Get the test statistic value (F) from the ANOVA table
+
+$$F = `r round(anova_tab$statistic[1],3)`$$
+
+```{r}
+F_stat = anova_tab$statistic[1]
+```
+:::
+:::
+
+ 
 
 ::: hl
 I tend to skip this step because I can do it all with step 6
@@ -704,22 +775,19 @@ I tend to skip this step because I can do it all with step 6
 
 ## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (3/4)
 
-::: highlight-container
-::: highlight
-6.  Calculate the p-value
-:::
-:::
+6.  Calculate the [**p-value**]{style="color:#4FADF3"}
 
 -   As per Step 4, test statistic $F$ can be modeled by a
-    $F$-distribution with $df1 = 1$ and $df2 = n-2$.
+    $F$-distribution with $df_1 = 1$ and $df_2 = n-2$.
 
-    -   We had 80 countries' data, so $n=80$
+    -   We had `r nobs(model1)` countries' data, so $n=`r nobs(model1)`$
 
 -   **Option 1:** Use `pf()` and our calculated test statistic
 
 ```{r}
 # p-value is ALWAYS the right tail for F-test
-pf(54.414, df1 = 1, df2 = 78, lower.tail = FALSE)
+n = nobs(model1)
+pf(F_stat, df1 = 1, df2 = n-2, lower.tail = FALSE)
 ```
 
 -   **Option 2:** Use the ANOVA table
@@ -731,16 +799,9 @@ anova(model1) %>% tidy() %>% gt() %>%
 
 ## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (4/4)
 
-::: highlight-container
-::: highlight
-7.  Write conclusion for the hypothesis test
-:::
-:::
+7.  Write a [**conclusion**]{style="color:#4FADF3"}
 
-We reject the null hypothesis that the slope is 0 at the $5\%$
-significance level. There is sufficient evidence that there is
-significant association between female life expectancy and female
-literacy rates (p-value \< 0.0001).
+We reject the null hypothesis that the slope is 0 at the $5\%$ significance level. There is sufficient evidence that there is significant association between life expectancy and cell phones per 100 people (p-value \< 0.0001).
 
 ## Did you notice anything about the p-value?
 
@@ -821,31 +882,6 @@ Does the addition of some group of covariates add significantly to the predictio
 :::
 :::
 
-## When running a F-test for linear models...
-
--   We need to define a larger, full model (more parameters)
--   We need to define a smaller, reduced model (fewer parameters)
--   Use the F-statistic to decide whether or not we reject the smaller model
-    -   The F-statistic compares the SSE of each model to determine if the full model explains a significant amount of additional variance
-
-::: columns
-::: {.column width="30%"}
- 
-
-$$
-F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
-$$
-:::
-
-::: {.column width="70%"}
--   $SSE(R) \geq SSE(F)$
--   Numerator measures difference in **unexplained** variation between the models
-    -   Big difference = added parameters greatly reduce the unexplained variation (increase explained variation)
-    -   Smaller difference = added parameters don't reduce the unexplained variation
--   Take ratio of difference to the unexplained variation in the full model
-:::
-:::
-
 ## We can extend our look at the F-test
 
 We can create a hypothesis test for more than one coefficient at a time...
@@ -914,7 +950,7 @@ Alternative\* model
 
 \*This is **not quite** the alternative, but if we reject the null, then this is the model we move forward with
 
-## Let's say we want to test the association between life expectancy and world region
+## Let's say we want to test the association between life expectancy and freedom status
 
 ```{r}
 #| echo: false
@@ -927,11 +963,11 @@ means_LE = gapm %>%
 ::: {.column width="50%"}
 
 $$\begin{aligned}
-\widehat{\textrm{LE}} = & `r round(means_LE$mean[1], 2)` + `r round(means_LE$mean[2]-means_LE$mean[1], 2)` \cdot I(\text{Americas}) + \\ &`r round(means_LE$mean[3]-means_LE$mean[1], 2)` \cdot I(\text{Asia}) + `r round(means_LE$mean[4]-means_LE$mean[1], 2)` \cdot I(\text{Europe}) \\
-\widehat{\textrm{LE}} = & \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) + \\ & \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})
+\widehat{\textrm{LE}} = & \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{PF}) + \\ & \widehat\beta_2 \cdot I(\text{F}) \\
+\widehat{\textrm{LE}} = & `r round(means_LE$mean[1], 2)` + `r round(means_LE$mean[2]-means_LE$mean[1], 2)` \cdot I(\text{PF}) + \\ &`r round(means_LE$mean[3]-means_LE$mean[1], 2)` \cdot I(\text{F})
 \end{aligned}$$
 
-- We need to figure out if the model with world region explains significantly more variation than the model without world region!
+- We need to figure out if the model with freedom status explains significantly more variation than the model without freedom status!
 :::
 
 ::: {.column width="50%"}
@@ -951,132 +987,86 @@ ggplot(gapm, aes(x = freedom_status, y = life_exp)) +
 :::
 :::
 
-
-## F-test: general steps for hypothesis test for $j$-level categorical variable
+## F-test: general steps for hypothesis test for categorical variable
 
 ::: columns
 ::: {.column width="48%"}
-::: highlight-container
-::: highlight
-1.  For today's class, we are assuming that we have met the underlying
-    assumptions
-:::
-:::
+1.  Check the [**assumptions**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-2.  State the null hypothesis.
-:::
-:::
+2.  Set the [**level of significance**]{style="color:#4FADF3"}
 
-Often, we are curious if the coefficient is 0 or not:
+    - Often we use $\alpha = 0.05$
+
+3.  Specify the [**null**]{style="color:#4FADF3"} ( $H_0$ ) and [**alternative**]{style="color:#4FADF3"} ( $H_A$ ) [**hypotheses**]{style="color:#4FADF3"}
+
+    - Often, we are curious if the coefficienta are 0 or not:
 
 ```{=tex}
 \begin{align}
-H_0 :& \beta_1 = ... = \beta_j = 0\\
+H_0 :& \beta_1 = ... = \beta_k = 0\\
 \text{vs. } H_A:& \beta_1 \neq 0 \text{ and/or } \\
-&\beta_2 \neq 0 ... \text{ and/or } \beta_j \neq 0
+&\beta_2 \neq 0 ... \text{ and/or } \beta_k \neq 0
 \end{align}
 ```
-::: highlight-container
-::: highlight
-3.  Specify the significance level.
-:::
-:::
 
-Often we use $\alpha = 0.05$
+4.  Specify the test statistic and its [**distribution under the null**]{style="color:#4FADF3"}
 
-::: highlight-container
-::: highlight
-4.  Specify the test statistic and its distribution under the null
-:::
-:::
-
-The test statistic is $F$, and follows an F-distribution with numerator
-$df=1$ and denominator $df=n-(k+1)$.
+    - The test statistic is $F$, and follows an F-distribution with numerator $df=1$ and denominator $df=n-(k+1)$
 :::
 
 ::: {.column width="4%"}
 :::
 
 ::: {.column width="48%"}
-::: highlight-container
-::: highlight
-5.  Compute the value of the test statistic
-:::
-:::
 
-The calculated **test statistic** for $\widehat\beta_1$ is
+5.  Calculate the [**test statistic**]{style="color:#4FADF3"}
+
+The calculated **test statistic** for $\beta$s is
 
 $$F = \frac{MSR}{MSE}$$
 
-::: highlight-container
-::: highlight
-6.  Calculate the p-value
+6.  Calculate the [**p-value**]{style="color:#4FADF3"}
+
+    - We are generally calculating: $P(F_{1, n-(k+1)} > F)$
+
+7.  Write a [**conclusion**]{style="color:#4FADF3"}
+
+    - Reject: $P(F_{1, n-2} > F) < \alpha$
+
+We (reject/fail to reject) the null hypothesis that the slope is 0 at the $100\alpha\%$ significance level. There is
+(sufficient/insufficient) evidence that there is significant association between ($Y$) and ($X$) (p-value = $P(F_{1, n-(k+1)} > F)$).
 :::
 :::
 
-We are generally calculating: $P(F_{1, n-(j+1)} > F)$
 
-::: highlight-container
-::: highlight
-7.  Write conclusion for hypothesis test
-:::
-:::
 
--   Reject: $P(F_{1, n-(j+1)} > F) < \alpha$
-
-We (reject/fail to reject) the null hypothesis that the slope is 0 at
-the $100\alpha\%$ significiance level. There is
-(sufficient/insufficient) evidence that there is significant association
-between ($Y$) and ($X$) (p-value = $P(F_{1, n-(j+1)} > F)$).
-:::
-:::
-
-## Life expectancy example: hypothesis test for world region
+## Life expectancy example: hypothesis test for freedom status (1/4)
 
 -   Steps 1-4 are setting up our hypothesis test: not much change from
     the general steps
 
-::: highlight-container
-::: highlight
-1.  For today's class, we are assuming that we have met the underlying
-    assumptions
-:::
-:::
+1.  Check the [**assumptions**]{style="color:#4FADF3"}: We have met the underlying assumptions (checked in our Model Evaluation step)
 
-::: highlight-container
-::: highlight
-2.  State the null hypothesis.
-:::
-:::
+2.  Set the [**level of significance**]{style="color:#4FADF3"}
 
-We are testing if the slope is 0 or not:
+    - Often we use $\alpha = 0.05$
+
+3.  Specify the [**null**]{style="color:#4FADF3"} ( $H_0$ ) and [**alternative**]{style="color:#4FADF3"} ( $H_A$ ) [**hypotheses**]{style="color:#4FADF3"}
+
+    - We are testing if the FS is associated with life expectancy:
 
 ```{=tex}
 \begin{align}
-H_0 :& \beta_1 = \beta_2 = \beta_3 0\\
-\text{vs. } H_A:& \beta_1 \neq 0 \text{ and/or } \beta_2 \neq 0 \text{ and/or } \beta_3 \neq 0
+H_0 :& \beta_1 = \beta_2 = 0\\
+\text{vs. } H_A:& \beta_1 \neq 0 \text{ and/or } \beta_2 \neq 0
 \end{align}
 ```
-::: highlight-container
-::: highlight
-3.  Specify the significance level.
-:::
-:::
 
-Often we use $\alpha = 0.05$
-
-::: highlight-container
-::: highlight
-4.  Specify the test statistic and its distribution under the null
-:::
-:::
+4.  Specify the test statistic and its [**distribution under the null**]{style="color:#4FADF3"}
 
 ::: columns
 ::: {.column width="70%"}
-The test statistic is $F$, and follows an F-distribution with numerator
-$df=j$ and denominator $df=n-(j+1) = 80-(3+1)$.
+The test statistic is $F$, and follows an F-distribution with numerator $df=k$ and denominator $df=n-(k+1) = `r nobs(model1)`-(2+1)$
 :::
 
 ::: {.column width="30%"}
@@ -1086,52 +1076,58 @@ nobs(model1)
 :::
 :::
 
-## Life expectancy example: hypothesis test for world region (2/4) 
-::: highlight-container
-::: highlight
-5.  Compute the value of the test statistic
-:::
-:::
+## Life expectancy example: hypothesis test for freedom status (2/4)
+
+5.  Calculate the [**test statistic**]{style="color:#4FADF3"}
 
 ```{r}
 model2 <- gapm %>% lm(formula = life_exp ~ freedom_status)
-anova(model2) %>% tidy() %>% gt() %>% tab_options(table.font.size = 40)
+anova_tab2 = anova(model2) %>% tidy()
+anova_tab2 %>% gt() %>% tab_options(table.font.size = 40)
 ```
+
+::: columns
+::: {.column width="49%"}
+**Option 1:** Calculate the test statistic using the values in the ANOVA table
+
+$$F = \frac{MSR}{MSE} = \frac{`r anova_tab2$meansq[1]`}{`r anova_tab2$meansq[2]`} = `r round(anova_tab2$meansq[1]/anova_tab2$meansq[2],3)`$$
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="49%"}
+**Option 2:** Get the test statistic value (F) from the ANOVA table
+
+$$F = `r round(anova_tab2$statistic[1],3)`$$
 
 ```{r}
-#| echo: false
-anova_wr = anova(model2) %>% tidy()
+F_stat2 = anova_tab2$statistic[1]
 ```
+:::
+:::
 
--   **Option 1:** Calculate the test statistic using the values in the
-    ANOVA table
-
-$$F = \frac{MSR}{MSE} = \frac{`r anova_wr$meansq[1]`}{`r anova_wr$meansq[2]`} = `r anova_wr$statistic[1]`$$
-
--   **Option 2:** Get the test statistic value (F) from the ANOVA table
+ 
 
 ::: hl
 I tend to skip this step because I can do it all with step 6
 :::
 
-## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (3/4)
+## Life expectancy example: hypothesis test for freedom status (3/4)
 
-::: highlight-container
-::: highlight
-6.  Calculate the p-value
-:::
-:::
+6.  Calculate the [**p-value**]{style="color:#4FADF3"}
 
 -   As per Step 4, test statistic $F$ can be modeled by a
-    $F$-distribution with $df1 = 3$ and $df2 = n-4$.
+    $F$-distribution with $df_1 = 2$ and $df_2 = n-3$.
 
-    -   We had 80 countries' data, so $n=80$
+    -   We had `r nobs(model2)` countries' data, so $n=`r nobs(model1)`$
 
 -   **Option 1:** Use `pf()` and our calculated test statistic
 
 ```{r}
 # p-value is ALWAYS the right tail for F-test
-pf(33.5331, df1 = 3, df2 = 76, lower.tail = FALSE)
+n = nobs(model1)
+pf(F_stat2, df1 = 2, df2 = n-3, lower.tail = FALSE)
 ```
 
 -   **Option 2:** Use the ANOVA table
@@ -1141,17 +1137,11 @@ anova(model2) %>% tidy() %>% gt() %>%
   tab_options(table.font.size = 40)
 ```
 
-## Life expectancy example: hypothesis test for population **slope** $\beta_1$ (4/4)
+## Life expectancy example: hypothesis test for freedom status (4/4)
 
-::: highlight-container
-::: highlight
-7.  Write conclusion for the hypothesis test
-:::
-:::
+7.  Write a [**conclusion**]{style="color:#4FADF3"}
 
-We reject the null hypothesis that all three coefficients are equal to 0 at the $5\%$
-significance level. There is sufficient evidence that there is
-association between female life expectancy and the country's world region (p-value \< 0.0001).
+We reject the null hypothesis that both coefficients are equal to 0 at the $5\%$ significance level. There is sufficient evidence that there is association between life expectancy and the country's freedom status (p-value = 0.009).
 
 
 # Learning Objectives
@@ -1193,7 +1183,7 @@ relationship.
 :::
 :::
 
-## Correlation coefficient ($r$ or $R$)
+## Correlation coefficient ($r$ or $R$) {visibility="hidden"}
 
 ::: columns
 ::: column
@@ -1257,23 +1247,26 @@ $$R^2 = \frac{SSR}{SSY} = \frac{SSY - SSE}{SSY}$$
 
 ## Life expectancy example: correlation coeffiicent $r$ and coefficient of determination $R^2$
 
-```{r}
-(r = cor(x = gapm$life_exp, y = gapm$cell_phones_100, 
-         use =  "complete.obs"))
-```
 ::: columns
-::: {.column width="78%"}
+::: {.column width="50%"}
+We can find the correlation coefficient and square it: 
 ```{r}
-summary(model1) # for R^2 value
+r = cor(x = gapm$life_exp, 
+        y = gapm$cell_phones_100, 
+        use =  "complete.obs")
+r^2
 ```
 :::
 
-::: {.column width="22%"}
-
+::: {.column width="50%"}
+We can pull the coefficient of determination from the model summary:
 ```{r}
-r^2
+model1_sum = summary(model1)
+r_squared = model1_sum$r.squared
+r_squared
 ```
-   
+:::
+:::
 
 ::: fact
 ::: fact-title
@@ -1281,11 +1274,8 @@ Interpretation
 :::
 
 ::: fact-cont
-41.1% of the variation in countries' life expectancy is
-explained by the linear model with female literacy rate as the
+`r round(r_squared*100, 1)`% of the variation in countries' life expectancy is explained by the linear model with number of cell phones per 100 people as the
 independent variable.
-:::
-:::
 :::
 :::
 

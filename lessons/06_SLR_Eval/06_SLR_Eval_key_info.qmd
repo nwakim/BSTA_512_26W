@@ -10,14 +10,22 @@ editor_options:
 
 ## Announcements
 
-- Lab 1 feedback
-  - Make sure you are working with a `.Rproj` file within an overarching folder for the class project. 
-  - Race variable
-    - Almost no one coded this correctly
-  - Check your feedback! 
-    - There are warnings about points being taken off later
-    - Points will be taken off if you do not have an html file
-    - 
+## Events
+
+### Algorithmic Bias: A Practical Introduction
+The Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is offering a brand-new seminar in our Responsible Practice in Data and Analysis series. Alicia Johnson is leading this seminar on Friday, February 13. Flier attached; session [in Compass](https://urldefense.com/v3/__https://ohsu.csod.com/ui/lms-learning-details/app/event/1a40dce3-f716-4f50-9b8d-b0ffbb79efc6__;!!Mi0JBg!J_FZKpWO-hsmRDFAgAyx6mq9WtXTsyPm04HVO4TcxVsleaonXnpYFh6bbimKktbZipfJx7Z1FWr2leoAARDWXEmVh4c$); here’s the [event page](https://www.ohsu.edu/octri/octri-berd-algorithmic-bias-practical-introduction).
+
+### Scholarship Work Party!
+
+- Sunday, February 8th 10 am - 1pm in VPT 260 & VPT 262
+- Join us for this drop-in style scholarship work party! Welcome for applicants in all stages — from just starting to final draft polishing.
+ - You’ll receive:
+    - Built-in accountability & focused work time on your scholarship applications
+    - Quick overview of where to find scholarships and what reviewers look for
+    - Personalized, real-time support from staff from the Financial Aid Office, Writing Center, SPH Staff
+    - Feedback on your materials (personal statements, short answers, and more)
+- Yes, snacks are provided! Street Parking is free until 1pm!
+- [RSVP Here!](http://click.send.ohsu.edu/?qs=e0e8dbe8e54efafce36083e9299faa45f1844d703638c8f494396770c97704ca7abf401ea7aeb3d8100dc9791f1da794af1f878766163b71)
   
 
 

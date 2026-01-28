@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Nicky Wakim">
-  <meta name="dcterms.date" content="2026-01-26">
+  <meta name="dcterms.date" content="2026-01-28">
   <title>Linear Models – Lesson 6: SLR: More inference</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -206,7 +206,7 @@ Nicky Wakim
 </div>
 </div>
 
-  <p class="date">2026-01-26</p>
+  <p class="date">2026-01-28</p>
 </section>
 <section>
 <section id="learning-objectives" class="title-slide slide level1 center">
@@ -232,11 +232,11 @@ Nicky Wakim
 <ul>
 <li>Estimate variance of the residuals</li>
 <li>Inference for slope &amp; intercept: CI, p-value</li>
-<li>Confidence bands of regression line for mean value of Y|X</li>
+<li>Finding mean value of Y|X</li>
 </ul>
 <p><strong>Lesson 5: Categorical Covariates</strong></p>
 <ul>
-<li>Inference for different categories</li>
+<li>Inference/Interpretation for different categories</li>
 </ul>
 </div><div class="column" style="width:2%;">
 
@@ -252,7 +252,7 @@ Nicky Wakim
 </div>
 <span class="math display">\[\begin{aligned}
 \widehat{Y} &amp;= \widehat\beta_0 + \widehat\beta_1 \cdot X\\
-\widehat{\text{LE}} &amp;= 50.9 + 0.232 \cdot \text{FLR}
+\widehat{\text{LE}} &amp;=  60.04 + 0.094\cdot\text{CP}
 \end{aligned}\]</span>
 </div></div>
 <div class="cell">
@@ -356,17 +356,27 @@ Nicky Wakim
 <section id="getting-to-the-f-test" class="slide level2">
 <h2>Getting to the F-test</h2>
 <p>The F statistic in linear regression is essentially a proportion of the variance explained by the model vs.&nbsp;the variance not explained by the model</p>
+<p>&nbsp;</p>
 <ol type="1">
-<li><p>Start with visual of explained vs.&nbsp;unexplained variation</p></li>
-<li><p>Figure out the mathematical representations of this variation</p></li>
-<li><p>Look at the ANOVA table to establish key values measuring our variance from our model</p></li>
-<li><p>Build the F-test</p></li>
+<li>Start with visual of explained vs.&nbsp;unexplained variation</li>
+</ol>
+<p>&nbsp;</p>
+<ol start="2" type="1">
+<li>Figure out the mathematical representations of this variation</li>
+</ol>
+<p>&nbsp;</p>
+<ol start="3" type="1">
+<li>Look at the ANOVA table to establish key values measuring our variance from our model</li>
+</ol>
+<p>&nbsp;</p>
+<ol start="4" type="1">
+<li>Build the F-test</li>
 </ol>
 </section>
 <section id="explained-vs.-unexplained-variation" class="slide level2">
 <h2>Explained vs.&nbsp;Unexplained Variation</h2>
 
-<img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><span class="math display">\[ \begin{aligned}
+<img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><span class="math display">\[ \begin{aligned}
 Y_i - \overline{Y} &amp; = (Y_i - \widehat{Y}_i) + (\widehat{Y}_i- \overline{Y})\\
 \text{Total variation} &amp; = \text{Residual variation after regression} + \text{Variation explained by regression}
 \end{aligned}\]</span></p>
@@ -405,11 +415,43 @@ Y_i - \overline{Y} &amp; = (Y_i - \widehat{Y}_i) + (\widehat{Y}_i- \overline{Y})
 <div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="../img_slides/SSY_SSE_SSR.png" class="quarto-figure quarto-figure-center" width="1200"></p>
+<p><img data-src="../img_slides/SSY_SSE_SSR.png" class="quarto-figure quarto-figure-center" width="1000"></p>
 </figure>
 </div>
 </div><div class="column" style="width:50%;">
 
+</div></div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
 </section>
 <section id="poll-everywhere-question-1" class="slide level2">
@@ -566,23 +608,23 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb3-2"><a></a>   <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a></a>   <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="peplpvjrcj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#peplpvjrcj table {
+<div id="nfhbhcydyc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nfhbhcydyc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#peplpvjrcj thead, #peplpvjrcj tbody, #peplpvjrcj tfoot, #peplpvjrcj tr, #peplpvjrcj td, #peplpvjrcj th {
+#nfhbhcydyc thead, #nfhbhcydyc tbody, #nfhbhcydyc tfoot, #nfhbhcydyc tr, #nfhbhcydyc td, #nfhbhcydyc th {
   border-style: none;
 }
 
-#peplpvjrcj p {
+#nfhbhcydyc p {
   margin: 0;
   padding: 0;
 }
 
-#peplpvjrcj .gt_table {
+#nfhbhcydyc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -608,12 +650,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_caption {
+#nfhbhcydyc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#peplpvjrcj .gt_title {
+#nfhbhcydyc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -625,7 +667,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-width: 0;
 }
 
-#peplpvjrcj .gt_subtitle {
+#nfhbhcydyc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -637,7 +679,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-width: 0;
 }
 
-#peplpvjrcj .gt_heading {
+#nfhbhcydyc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -649,13 +691,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_bottom_border {
+#nfhbhcydyc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_col_headings {
+#nfhbhcydyc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -670,7 +712,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_col_heading {
+#nfhbhcydyc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -690,7 +732,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#peplpvjrcj .gt_column_spanner_outer {
+#nfhbhcydyc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -702,15 +744,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 4px;
 }
 
-#peplpvjrcj .gt_column_spanner_outer:first-child {
+#nfhbhcydyc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#peplpvjrcj .gt_column_spanner_outer:last-child {
+#nfhbhcydyc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#peplpvjrcj .gt_column_spanner {
+#nfhbhcydyc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -722,11 +764,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   width: 100%;
 }
 
-#peplpvjrcj .gt_spanner_row {
+#nfhbhcydyc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#peplpvjrcj .gt_group_heading {
+#nfhbhcydyc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -752,7 +794,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   text-align: left;
 }
 
-#peplpvjrcj .gt_empty_group_heading {
+#nfhbhcydyc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -767,15 +809,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: middle;
 }
 
-#peplpvjrcj .gt_from_md > :first-child {
+#nfhbhcydyc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#peplpvjrcj .gt_from_md > :last-child {
+#nfhbhcydyc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#peplpvjrcj .gt_row {
+#nfhbhcydyc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -794,7 +836,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#peplpvjrcj .gt_stub {
+#nfhbhcydyc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -807,7 +849,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#peplpvjrcj .gt_stub_row_group {
+#nfhbhcydyc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -821,15 +863,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: top;
 }
 
-#peplpvjrcj .gt_row_group_first td {
+#nfhbhcydyc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#peplpvjrcj .gt_row_group_first th {
+#nfhbhcydyc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#peplpvjrcj .gt_summary_row {
+#nfhbhcydyc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -839,16 +881,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#peplpvjrcj .gt_first_summary_row {
+#nfhbhcydyc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_first_summary_row.thick {
+#nfhbhcydyc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#peplpvjrcj .gt_last_summary_row {
+#nfhbhcydyc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,7 +900,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_grand_summary_row {
+#nfhbhcydyc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -868,7 +910,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#peplpvjrcj .gt_first_grand_summary_row {
+#nfhbhcydyc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -878,7 +920,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_last_grand_summary_row_top {
+#nfhbhcydyc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -888,11 +930,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_striped {
+#nfhbhcydyc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#peplpvjrcj .gt_table_body {
+#nfhbhcydyc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -901,7 +943,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_footnotes {
+#nfhbhcydyc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -915,7 +957,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_footnote {
+#nfhbhcydyc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -924,7 +966,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#peplpvjrcj .gt_sourcenotes {
+#nfhbhcydyc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -938,7 +980,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#peplpvjrcj .gt_sourcenote {
+#nfhbhcydyc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -946,72 +988,72 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#peplpvjrcj .gt_left {
+#nfhbhcydyc .gt_left {
   text-align: left;
 }
 
-#peplpvjrcj .gt_center {
+#nfhbhcydyc .gt_center {
   text-align: center;
 }
 
-#peplpvjrcj .gt_right {
+#nfhbhcydyc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#peplpvjrcj .gt_font_normal {
+#nfhbhcydyc .gt_font_normal {
   font-weight: normal;
 }
 
-#peplpvjrcj .gt_font_bold {
+#nfhbhcydyc .gt_font_bold {
   font-weight: bold;
 }
 
-#peplpvjrcj .gt_font_italic {
+#nfhbhcydyc .gt_font_italic {
   font-style: italic;
 }
 
-#peplpvjrcj .gt_super {
+#nfhbhcydyc .gt_super {
   font-size: 65%;
 }
 
-#peplpvjrcj .gt_footnote_marks {
+#nfhbhcydyc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#peplpvjrcj .gt_asterisk {
+#nfhbhcydyc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#peplpvjrcj .gt_indent_1 {
+#nfhbhcydyc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#peplpvjrcj .gt_indent_2 {
+#nfhbhcydyc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#peplpvjrcj .gt_indent_3 {
+#nfhbhcydyc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#peplpvjrcj .gt_indent_4 {
+#nfhbhcydyc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#peplpvjrcj .gt_indent_5 {
+#nfhbhcydyc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#peplpvjrcj .katex-display {
+#nfhbhcydyc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#peplpvjrcj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nfhbhcydyc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1069,19 +1111,28 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="what-is-the-f-statistic-testing" class="slide level2">
 <h2>What is the F statistic testing?</h2>
-<p><span class="math display">\[F = \frac{MSR}{MSE}\]</span></p>
 <ul>
-<li>It can be shown that</li>
+<li>The F statistic is testing whether the model with the predictor variable <span class="math inline">\(X\)</span> explains significantly more variation in <span class="math inline">\(Y\)</span> than a model with no predictors (intercept only model)</li>
 </ul>
-<p><span class="math display">\[E(MSE)=\sigma^2\ \text{and}\ E(MSR) = \sigma^2 + \beta_1^2\sum_{i=1}^n (X_i- \overline{X})^2\]</span></p>
+<p>&nbsp;</p>
 <ul>
-<li>Recall that <span class="math inline">\(\sigma^2\)</span> is the variance of the population residuals</li>
-<li>Thus if
+<li>In general, the F-test has 3 steps:
+<ol type="1">
+<li>Define the larger (full) model (more coefficients)</li>
+<li>Define the smaller (reduced) model (less coefficients)</li>
+<li>Decide whether to reject the reduced model in favor of the full model</li>
+</ol></li>
+</ul>
+<p>&nbsp;</p>
 <ul>
-<li><span class="math inline">\(\beta_1 = 0\)</span>, then <span class="math inline">\(F \approx \frac{\widehat{\sigma}^2}{\widehat{\sigma}^2} = 1\)</span></li>
-<li><span class="math inline">\(\beta_1 \neq 0\)</span>, then <span class="math inline">\(F \approx \frac{\widehat{\sigma}^2 + \widehat{\beta}_1^2\sum_{i=1}^n (X_i- \overline{X})^2}{\widehat{\sigma}^2} &gt; 1\)</span></li>
+<li>We “decide” by seeing how much <strong>more variation</strong> the <strong>full model explains</strong> compared to the reduced model
+<ul>
+<li><strong>If the full model explains significantly more variation, we reject the reduced model</strong></li>
 </ul></li>
-<li>So the <span class="math inline">\(F\)</span> statistic can also be used to test <span class="math inline">\(\beta_1\)</span></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>In <strong>simple linear regression</strong>, this is equivalent to testing whether the population slope <span class="math inline">\(\beta_1\)</span> is equal to 0</li>
 </ul>
 </section>
 <section id="f-test-vs.-t-test-for-the-population-slope" class="slide level2">
@@ -1171,72 +1222,46 @@ H_0 &amp;: \beta_1 = 0\\
 <h2>F-test: general steps for hypothesis test for population <strong>slope</strong> <span class="math inline">\(\beta_1\)</span></h2>
 <div class="columns">
 <div class="column" style="width:48%;">
-<div class="highlight-container">
-<div class="highlight">
 <ol type="1">
-<li>For today’s class, we are assuming that we have met the underlying assumptions</li>
+<li><p>Check the <span style="color:#4FADF3"><strong>assumptions</strong></span></p></li>
+<li><p>Set the <span style="color:#4FADF3"><strong>level of significance</strong></span></p>
+<ul>
+<li>Often we use <span class="math inline">\(\alpha = 0.05\)</span></li>
+</ul></li>
+<li><p>Specify the <span style="color:#4FADF3"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#4FADF3"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#4FADF3"><strong>hypotheses</strong></span></p>
+<ul>
+<li>Often, we are curious if the coefficient is 0 or not:</li>
+</ul></li>
 </ol>
-</div>
-</div>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="2" type="1">
-<li>State the null hypothesis.</li>
-</ol>
-</div>
-</div>
-<p>Often, we are curious if the coefficient is 0 or not:</p>
 <span class="math display">\[\begin{align}
 H_0 &amp;: \beta_1 = 0\\
 \text{vs. } H_A&amp;: \beta_1 \neq 0
 \end{align}\]</span>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="3" type="1">
-<li>Specify the significance level.</li>
-</ol>
-</div>
-</div>
-<p>Often we use <span class="math inline">\(\alpha = 0.05\)</span></p>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="4" type="1">
-<li>Specify the test statistic and its distribution under the null</li>
+<li><p>Specify the test statistic and its <span style="color:#4FADF3"><strong>distribution under the null</strong></span></p>
+<ul>
+<li>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=1\)</span> and denominator <span class="math inline">\(df=n-2\)</span>.</li>
+</ul></li>
 </ol>
-</div>
-</div>
-<p>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=1\)</span> and denominator <span class="math inline">\(df=n-2\)</span>.</p>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div class="highlight-container">
-<div class="highlight">
 <ol start="5" type="1">
-<li>Compute the value of the test statistic</li>
+<li>Calculate the <span style="color:#4FADF3"><strong>test statistic</strong></span></li>
 </ol>
-</div>
-</div>
 <p>The calculated <strong>test statistic</strong> for <span class="math inline">\(\widehat\beta_1\)</span> is</p>
 <p><span class="math display">\[F = \frac{MSR}{MSE}\]</span></p>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="6" type="1">
-<li>Calculate the p-value</li>
-</ol>
-</div>
-</div>
-<p>We are generally calculating: <span class="math inline">\(P(F_{1, n-2} &gt; F)\)</span></p>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="7" type="1">
-<li>Write conclusion for hypothesis test</li>
-</ol>
-</div>
-</div>
+<li><p>Calculate the <span style="color:#4FADF3"><strong>p-value</strong></span></p>
+<ul>
+<li>We are generally calculating: <span class="math inline">\(P(F_{1, n-2} &gt; F)\)</span></li>
+</ul></li>
+<li><p>Write a <span style="color:#4FADF3"><strong>conclusion</strong></span></p>
 <ul>
 <li>Reject: <span class="math inline">\(P(F_{1, n-2} &gt; F) &lt; \alpha\)</span></li>
-</ul>
-<p>We (reject/fail to reject) the null hypothesis that the slope is 0 at the <span class="math inline">\(100\alpha\%\)</span> significiance level. There is (sufficient/insufficient) evidence that there is significant association between (<span class="math inline">\(Y\)</span>) and (<span class="math inline">\(X\)</span>) (p-value = <span class="math inline">\(P(F_{1, n-2} &gt; F)\)</span>).</p>
+</ul></li>
+</ol>
+<p>We (reject/fail to reject) the null hypothesis that the slope is 0 at the <span class="math inline">\(100\alpha\%\)</span> significance level. There is (sufficient/insufficient) evidence that there is significant association between (<span class="math inline">\(Y\)</span>) and (<span class="math inline">\(X\)</span>) (p-value = <span class="math inline">\(P(F_{1, n-2} &gt; F)\)</span>).</p>
 </div></div>
 </section>
 <section id="life-expectancy-example-hypothesis-test-for-population-slope-beta_1" class="slide level2">
@@ -1244,40 +1269,24 @@ H_0 &amp;: \beta_1 = 0\\
 <ul>
 <li>Steps 1-4 are setting up our hypothesis test: not much change from the general steps</li>
 </ul>
-<div class="highlight-container">
-<div class="highlight">
 <ol type="1">
-<li>For today’s class, we are assuming that we have met the underlying assumptions</li>
+<li><p>Check the <span style="color:#4FADF3"><strong>assumptions</strong></span>: We have met the underlying assumptions (checked in our Model Evaluation step)</p></li>
+<li><p>Set the <span style="color:#4FADF3"><strong>level of significance</strong></span></p>
+<ul>
+<li>Often we use <span class="math inline">\(\alpha = 0.05\)</span></li>
+</ul></li>
+<li><p>Specify the <span style="color:#4FADF3"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#4FADF3"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#4FADF3"><strong>hypotheses</strong></span></p>
+<ul>
+<li>Often, we are curious if the coefficient is 0 or not:</li>
+</ul></li>
 </ol>
-</div>
-</div>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="2" type="1">
-<li>State the null hypothesis.</li>
-</ol>
-</div>
-</div>
-<p>We are testing if the slope is 0 or not:</p>
 <span class="math display">\[\begin{align}
 H_0 &amp;: \beta_1 = 0\\
 \text{vs. } H_A&amp;: \beta_1 \neq 0
 \end{align}\]</span>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="3" type="1">
-<li>Specify the significance level.</li>
-</ol>
-</div>
-</div>
-<p>Often we use <span class="math inline">\(\alpha = 0.05\)</span></p>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="4" type="1">
-<li>Specify the test statistic and its distribution under the null</li>
+<li>Specify the test statistic and its <span style="color:#4FADF3"><strong>distribution under the null</strong></span></li>
 </ol>
-</div>
-</div>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=1\)</span> and denominator <span class="math inline">\(df=n-2 = 80-2\)</span>.</p>
@@ -1292,34 +1301,30 @@ H_0 &amp;: \beta_1 = 0\\
 </section>
 <section id="life-expectancy-example-hypothesis-test-for-population-slope-beta_1-24" class="slide level2">
 <h2>Life expectancy example: hypothesis test for population <strong>slope</strong> <span class="math inline">\(\beta_1\)</span> (2/4)</h2>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="5" type="1">
-<li>Compute the value of the test statistic</li>
+<li>Calculate the <span style="color:#4FADF3"><strong>test statistic</strong></span></li>
 </ol>
-</div>
-</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">anova</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>anova_tab <span class="ot">=</span> <span class="fu">anova</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span>
+<span id="cb6-2"><a></a>anova_tab <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="qllxvvqqhk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qllxvvqqhk table {
+<div id="ldlmwgsrep" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ldlmwgsrep table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qllxvvqqhk thead, #qllxvvqqhk tbody, #qllxvvqqhk tfoot, #qllxvvqqhk tr, #qllxvvqqhk td, #qllxvvqqhk th {
+#ldlmwgsrep thead, #ldlmwgsrep tbody, #ldlmwgsrep tfoot, #ldlmwgsrep tr, #ldlmwgsrep td, #ldlmwgsrep th {
   border-style: none;
 }
 
-#qllxvvqqhk p {
+#ldlmwgsrep p {
   margin: 0;
   padding: 0;
 }
 
-#qllxvvqqhk .gt_table {
+#ldlmwgsrep .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1345,12 +1350,12 @@ H_0 &amp;: \beta_1 = 0\\
   border-left-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_caption {
+#ldlmwgsrep .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qllxvvqqhk .gt_title {
+#ldlmwgsrep .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1362,7 +1367,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-width: 0;
 }
 
-#qllxvvqqhk .gt_subtitle {
+#ldlmwgsrep .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1374,7 +1379,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-width: 0;
 }
 
-#qllxvvqqhk .gt_heading {
+#ldlmwgsrep .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1386,13 +1391,13 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_bottom_border {
+#ldlmwgsrep .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_col_headings {
+#ldlmwgsrep .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1407,7 +1412,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_col_heading {
+#ldlmwgsrep .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1427,7 +1432,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#qllxvvqqhk .gt_column_spanner_outer {
+#ldlmwgsrep .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1439,15 +1444,15 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 4px;
 }
 
-#qllxvvqqhk .gt_column_spanner_outer:first-child {
+#ldlmwgsrep .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qllxvvqqhk .gt_column_spanner_outer:last-child {
+#ldlmwgsrep .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qllxvvqqhk .gt_column_spanner {
+#ldlmwgsrep .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1459,11 +1464,11 @@ H_0 &amp;: \beta_1 = 0\\
   width: 100%;
 }
 
-#qllxvvqqhk .gt_spanner_row {
+#ldlmwgsrep .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qllxvvqqhk .gt_group_heading {
+#ldlmwgsrep .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1489,7 +1494,7 @@ H_0 &amp;: \beta_1 = 0\\
   text-align: left;
 }
 
-#qllxvvqqhk .gt_empty_group_heading {
+#ldlmwgsrep .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1504,15 +1509,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: middle;
 }
 
-#qllxvvqqhk .gt_from_md > :first-child {
+#ldlmwgsrep .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qllxvvqqhk .gt_from_md > :last-child {
+#ldlmwgsrep .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qllxvvqqhk .gt_row {
+#ldlmwgsrep .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1531,7 +1536,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#qllxvvqqhk .gt_stub {
+#ldlmwgsrep .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1544,7 +1549,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qllxvvqqhk .gt_stub_row_group {
+#ldlmwgsrep .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1558,15 +1563,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: top;
 }
 
-#qllxvvqqhk .gt_row_group_first td {
+#ldlmwgsrep .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qllxvvqqhk .gt_row_group_first th {
+#ldlmwgsrep .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qllxvvqqhk .gt_summary_row {
+#ldlmwgsrep .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1576,16 +1581,16 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qllxvvqqhk .gt_first_summary_row {
+#ldlmwgsrep .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_first_summary_row.thick {
+#ldlmwgsrep .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qllxvvqqhk .gt_last_summary_row {
+#ldlmwgsrep .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1595,7 +1600,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_grand_summary_row {
+#ldlmwgsrep .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1605,7 +1610,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qllxvvqqhk .gt_first_grand_summary_row {
+#ldlmwgsrep .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1615,7 +1620,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_last_grand_summary_row_top {
+#ldlmwgsrep .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1625,11 +1630,11 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_striped {
+#ldlmwgsrep .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qllxvvqqhk .gt_table_body {
+#ldlmwgsrep .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1638,7 +1643,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_footnotes {
+#ldlmwgsrep .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1652,7 +1657,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_footnote {
+#ldlmwgsrep .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1661,7 +1666,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qllxvvqqhk .gt_sourcenotes {
+#ldlmwgsrep .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1675,7 +1680,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qllxvvqqhk .gt_sourcenote {
+#ldlmwgsrep .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1683,72 +1688,72 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qllxvvqqhk .gt_left {
+#ldlmwgsrep .gt_left {
   text-align: left;
 }
 
-#qllxvvqqhk .gt_center {
+#ldlmwgsrep .gt_center {
   text-align: center;
 }
 
-#qllxvvqqhk .gt_right {
+#ldlmwgsrep .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qllxvvqqhk .gt_font_normal {
+#ldlmwgsrep .gt_font_normal {
   font-weight: normal;
 }
 
-#qllxvvqqhk .gt_font_bold {
+#ldlmwgsrep .gt_font_bold {
   font-weight: bold;
 }
 
-#qllxvvqqhk .gt_font_italic {
+#ldlmwgsrep .gt_font_italic {
   font-style: italic;
 }
 
-#qllxvvqqhk .gt_super {
+#ldlmwgsrep .gt_super {
   font-size: 65%;
 }
 
-#qllxvvqqhk .gt_footnote_marks {
+#ldlmwgsrep .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qllxvvqqhk .gt_asterisk {
+#ldlmwgsrep .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qllxvvqqhk .gt_indent_1 {
+#ldlmwgsrep .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qllxvvqqhk .gt_indent_2 {
+#ldlmwgsrep .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qllxvvqqhk .gt_indent_3 {
+#ldlmwgsrep .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qllxvvqqhk .gt_indent_4 {
+#ldlmwgsrep .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qllxvvqqhk .gt_indent_5 {
+#ldlmwgsrep .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qllxvvqqhk .katex-display {
+#ldlmwgsrep .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qllxvvqqhk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ldlmwgsrep div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1787,64 +1792,68 @@ H_0 &amp;: \beta_1 = 0\\
 </div>
 </div>
 </div>
-<ul>
-<li><strong>Option 1:</strong> Calculate the test statistic using the values in the ANOVA table</li>
-</ul>
-<p><span class="math display">\[F = \frac{MSR}{MSE} = \frac{2052.81}{37.73}=54.414\]</span></p>
-<ul>
-<li><strong>Option 2:</strong> Get the test statistic value (F) from the ANOVA table</li>
-</ul>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><strong>Option 1:</strong> Calculate the test statistic using the values in the ANOVA table</p>
+<p><span class="math display">\[F = \frac{MSR}{MSE} = \frac{1094.1019013}{35.5703546} = 30.759\]</span></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<p><strong>Option 2:</strong> Get the test statistic value (F) from the ANOVA table</p>
+<p><span class="math display">\[F = 30.759\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>F_stat <span class="ot">=</span> anova_tab<span class="sc">$</span>statistic[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<p>&nbsp;</p>
 <div class="hl">
 <p>I tend to skip this step because I can do it all with step 6</p>
 </div>
 </section>
 <section id="life-expectancy-example-hypothesis-test-for-population-slope-beta_1-34" class="slide level2">
 <h2>Life expectancy example: hypothesis test for population <strong>slope</strong> <span class="math inline">\(\beta_1\)</span> (3/4)</h2>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="6" type="1">
-<li>Calculate the p-value</li>
+<li>Calculate the <span style="color:#4FADF3"><strong>p-value</strong></span></li>
 </ol>
-</div>
-</div>
 <ul>
-<li><p>As per Step 4, test statistic <span class="math inline">\(F\)</span> can be modeled by a <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(df1 = 1\)</span> and <span class="math inline">\(df2 = n-2\)</span>.</p>
+<li><p>As per Step 4, test statistic <span class="math inline">\(F\)</span> can be modeled by a <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(df_1 = 1\)</span> and <span class="math inline">\(df_2 = n-2\)</span>.</p>
 <ul>
-<li>We had 80 countries’ data, so <span class="math inline">\(n=80\)</span></li>
+<li>We had 105 countries’ data, so <span class="math inline">\(n=105\)</span></li>
 </ul></li>
 <li><p><strong>Option 1:</strong> Use <code>pf()</code> and our calculated test statistic</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># p-value is ALWAYS the right tail for F-test</span></span>
-<span id="cb7-2"><a></a><span class="fu">pf</span>(<span class="fl">54.414</span>, <span class="at">df1 =</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">78</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># p-value is ALWAYS the right tail for F-test</span></span>
+<span id="cb8-2"><a></a>n <span class="ot">=</span> <span class="fu">nobs</span>(model1)</span>
+<span id="cb8-3"><a></a><span class="fu">pf</span>(F_stat, <span class="at">df1 =</span> <span class="dv">1</span>, <span class="at">df2 =</span> n<span class="dv">-2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.501104e-10</code></pre>
+<pre><code>[1] 2.271176e-07</code></pre>
 </div>
 </div>
 <ul>
 <li><strong>Option 2:</strong> Use the ANOVA table</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">anova</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">anova</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="qqoqaiayas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qqoqaiayas table {
+<div id="furwxdzbql" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#furwxdzbql table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qqoqaiayas thead, #qqoqaiayas tbody, #qqoqaiayas tfoot, #qqoqaiayas tr, #qqoqaiayas td, #qqoqaiayas th {
+#furwxdzbql thead, #furwxdzbql tbody, #furwxdzbql tfoot, #furwxdzbql tr, #furwxdzbql td, #furwxdzbql th {
   border-style: none;
 }
 
-#qqoqaiayas p {
+#furwxdzbql p {
   margin: 0;
   padding: 0;
 }
 
-#qqoqaiayas .gt_table {
+#furwxdzbql .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1870,12 +1879,12 @@ H_0 &amp;: \beta_1 = 0\\
   border-left-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_caption {
+#furwxdzbql .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qqoqaiayas .gt_title {
+#furwxdzbql .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1887,7 +1896,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-width: 0;
 }
 
-#qqoqaiayas .gt_subtitle {
+#furwxdzbql .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1899,7 +1908,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-width: 0;
 }
 
-#qqoqaiayas .gt_heading {
+#furwxdzbql .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1911,13 +1920,13 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_bottom_border {
+#furwxdzbql .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_col_headings {
+#furwxdzbql .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1932,7 +1941,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_col_heading {
+#furwxdzbql .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1952,7 +1961,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#qqoqaiayas .gt_column_spanner_outer {
+#furwxdzbql .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1964,15 +1973,15 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 4px;
 }
 
-#qqoqaiayas .gt_column_spanner_outer:first-child {
+#furwxdzbql .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qqoqaiayas .gt_column_spanner_outer:last-child {
+#furwxdzbql .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qqoqaiayas .gt_column_spanner {
+#furwxdzbql .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1984,11 +1993,11 @@ H_0 &amp;: \beta_1 = 0\\
   width: 100%;
 }
 
-#qqoqaiayas .gt_spanner_row {
+#furwxdzbql .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qqoqaiayas .gt_group_heading {
+#furwxdzbql .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2014,7 +2023,7 @@ H_0 &amp;: \beta_1 = 0\\
   text-align: left;
 }
 
-#qqoqaiayas .gt_empty_group_heading {
+#furwxdzbql .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2029,15 +2038,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: middle;
 }
 
-#qqoqaiayas .gt_from_md > :first-child {
+#furwxdzbql .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qqoqaiayas .gt_from_md > :last-child {
+#furwxdzbql .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qqoqaiayas .gt_row {
+#furwxdzbql .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2056,7 +2065,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#qqoqaiayas .gt_stub {
+#furwxdzbql .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2069,7 +2078,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qqoqaiayas .gt_stub_row_group {
+#furwxdzbql .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2083,15 +2092,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: top;
 }
 
-#qqoqaiayas .gt_row_group_first td {
+#furwxdzbql .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qqoqaiayas .gt_row_group_first th {
+#furwxdzbql .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qqoqaiayas .gt_summary_row {
+#furwxdzbql .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2101,16 +2110,16 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qqoqaiayas .gt_first_summary_row {
+#furwxdzbql .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_first_summary_row.thick {
+#furwxdzbql .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qqoqaiayas .gt_last_summary_row {
+#furwxdzbql .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2120,7 +2129,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_grand_summary_row {
+#furwxdzbql .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2130,7 +2139,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qqoqaiayas .gt_first_grand_summary_row {
+#furwxdzbql .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2140,7 +2149,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_last_grand_summary_row_top {
+#furwxdzbql .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2150,11 +2159,11 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_striped {
+#furwxdzbql .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qqoqaiayas .gt_table_body {
+#furwxdzbql .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2163,7 +2172,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_footnotes {
+#furwxdzbql .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2177,7 +2186,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_footnote {
+#furwxdzbql .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2186,7 +2195,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qqoqaiayas .gt_sourcenotes {
+#furwxdzbql .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2200,7 +2209,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qqoqaiayas .gt_sourcenote {
+#furwxdzbql .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2208,72 +2217,72 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qqoqaiayas .gt_left {
+#furwxdzbql .gt_left {
   text-align: left;
 }
 
-#qqoqaiayas .gt_center {
+#furwxdzbql .gt_center {
   text-align: center;
 }
 
-#qqoqaiayas .gt_right {
+#furwxdzbql .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qqoqaiayas .gt_font_normal {
+#furwxdzbql .gt_font_normal {
   font-weight: normal;
 }
 
-#qqoqaiayas .gt_font_bold {
+#furwxdzbql .gt_font_bold {
   font-weight: bold;
 }
 
-#qqoqaiayas .gt_font_italic {
+#furwxdzbql .gt_font_italic {
   font-style: italic;
 }
 
-#qqoqaiayas .gt_super {
+#furwxdzbql .gt_super {
   font-size: 65%;
 }
 
-#qqoqaiayas .gt_footnote_marks {
+#furwxdzbql .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qqoqaiayas .gt_asterisk {
+#furwxdzbql .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qqoqaiayas .gt_indent_1 {
+#furwxdzbql .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qqoqaiayas .gt_indent_2 {
+#furwxdzbql .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qqoqaiayas .gt_indent_3 {
+#furwxdzbql .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qqoqaiayas .gt_indent_4 {
+#furwxdzbql .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qqoqaiayas .gt_indent_5 {
+#furwxdzbql .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qqoqaiayas .katex-display {
+#furwxdzbql .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qqoqaiayas div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#furwxdzbql div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2315,14 +2324,10 @@ H_0 &amp;: \beta_1 = 0\\
 </section>
 <section id="life-expectancy-example-hypothesis-test-for-population-slope-beta_1-44" class="slide level2">
 <h2>Life expectancy example: hypothesis test for population <strong>slope</strong> <span class="math inline">\(\beta_1\)</span> (4/4)</h2>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="7" type="1">
-<li>Write conclusion for the hypothesis test</li>
+<li>Write a <span style="color:#4FADF3"><strong>conclusion</strong></span></li>
 </ol>
-</div>
-</div>
-<p>We reject the null hypothesis that the slope is 0 at the <span class="math inline">\(5\%\)</span> significance level. There is sufficient evidence that there is significant association between female life expectancy and female literacy rates (p-value &lt; 0.0001).</p>
+<p>We reject the null hypothesis that the slope is 0 at the <span class="math inline">\(5\%\)</span> significance level. There is sufficient evidence that there is significant association between life expectancy and cell phones per 100 people (p-value &lt; 0.0001).</p>
 </section>
 <section id="did-you-notice-anything-about-the-p-value" class="slide level2">
 <h2>Did you notice anything about the p-value?</h2>
@@ -2331,26 +2336,26 @@ H_0 &amp;: \beta_1 = 0\\
 <li>For the t-test:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">tidy</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">tidy</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="uhzhimjmos" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uhzhimjmos table {
+<div id="hvpgnofhkz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hvpgnofhkz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uhzhimjmos thead, #uhzhimjmos tbody, #uhzhimjmos tfoot, #uhzhimjmos tr, #uhzhimjmos td, #uhzhimjmos th {
+#hvpgnofhkz thead, #hvpgnofhkz tbody, #hvpgnofhkz tfoot, #hvpgnofhkz tr, #hvpgnofhkz td, #hvpgnofhkz th {
   border-style: none;
 }
 
-#uhzhimjmos p {
+#hvpgnofhkz p {
   margin: 0;
   padding: 0;
 }
 
-#uhzhimjmos .gt_table {
+#hvpgnofhkz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2376,12 +2381,12 @@ H_0 &amp;: \beta_1 = 0\\
   border-left-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_caption {
+#hvpgnofhkz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uhzhimjmos .gt_title {
+#hvpgnofhkz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2393,7 +2398,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-width: 0;
 }
 
-#uhzhimjmos .gt_subtitle {
+#hvpgnofhkz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2405,7 +2410,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-width: 0;
 }
 
-#uhzhimjmos .gt_heading {
+#hvpgnofhkz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2417,13 +2422,13 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_bottom_border {
+#hvpgnofhkz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_col_headings {
+#hvpgnofhkz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2438,7 +2443,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_col_heading {
+#hvpgnofhkz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2458,7 +2463,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#uhzhimjmos .gt_column_spanner_outer {
+#hvpgnofhkz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2470,15 +2475,15 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 4px;
 }
 
-#uhzhimjmos .gt_column_spanner_outer:first-child {
+#hvpgnofhkz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uhzhimjmos .gt_column_spanner_outer:last-child {
+#hvpgnofhkz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uhzhimjmos .gt_column_spanner {
+#hvpgnofhkz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2490,11 +2495,11 @@ H_0 &amp;: \beta_1 = 0\\
   width: 100%;
 }
 
-#uhzhimjmos .gt_spanner_row {
+#hvpgnofhkz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uhzhimjmos .gt_group_heading {
+#hvpgnofhkz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2520,7 +2525,7 @@ H_0 &amp;: \beta_1 = 0\\
   text-align: left;
 }
 
-#uhzhimjmos .gt_empty_group_heading {
+#hvpgnofhkz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2535,15 +2540,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: middle;
 }
 
-#uhzhimjmos .gt_from_md > :first-child {
+#hvpgnofhkz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uhzhimjmos .gt_from_md > :last-child {
+#hvpgnofhkz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uhzhimjmos .gt_row {
+#hvpgnofhkz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2562,7 +2567,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#uhzhimjmos .gt_stub {
+#hvpgnofhkz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2575,7 +2580,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#uhzhimjmos .gt_stub_row_group {
+#hvpgnofhkz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2589,15 +2594,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: top;
 }
 
-#uhzhimjmos .gt_row_group_first td {
+#hvpgnofhkz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uhzhimjmos .gt_row_group_first th {
+#hvpgnofhkz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uhzhimjmos .gt_summary_row {
+#hvpgnofhkz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2607,16 +2612,16 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#uhzhimjmos .gt_first_summary_row {
+#hvpgnofhkz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_first_summary_row.thick {
+#hvpgnofhkz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uhzhimjmos .gt_last_summary_row {
+#hvpgnofhkz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2626,7 +2631,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_grand_summary_row {
+#hvpgnofhkz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2636,7 +2641,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#uhzhimjmos .gt_first_grand_summary_row {
+#hvpgnofhkz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2646,7 +2651,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_last_grand_summary_row_top {
+#hvpgnofhkz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2656,11 +2661,11 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_striped {
+#hvpgnofhkz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uhzhimjmos .gt_table_body {
+#hvpgnofhkz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2669,7 +2674,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_footnotes {
+#hvpgnofhkz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2683,7 +2688,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_footnote {
+#hvpgnofhkz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2692,7 +2697,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#uhzhimjmos .gt_sourcenotes {
+#hvpgnofhkz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2706,7 +2711,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#uhzhimjmos .gt_sourcenote {
+#hvpgnofhkz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2714,72 +2719,72 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#uhzhimjmos .gt_left {
+#hvpgnofhkz .gt_left {
   text-align: left;
 }
 
-#uhzhimjmos .gt_center {
+#hvpgnofhkz .gt_center {
   text-align: center;
 }
 
-#uhzhimjmos .gt_right {
+#hvpgnofhkz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uhzhimjmos .gt_font_normal {
+#hvpgnofhkz .gt_font_normal {
   font-weight: normal;
 }
 
-#uhzhimjmos .gt_font_bold {
+#hvpgnofhkz .gt_font_bold {
   font-weight: bold;
 }
 
-#uhzhimjmos .gt_font_italic {
+#hvpgnofhkz .gt_font_italic {
   font-style: italic;
 }
 
-#uhzhimjmos .gt_super {
+#hvpgnofhkz .gt_super {
   font-size: 65%;
 }
 
-#uhzhimjmos .gt_footnote_marks {
+#hvpgnofhkz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uhzhimjmos .gt_asterisk {
+#hvpgnofhkz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uhzhimjmos .gt_indent_1 {
+#hvpgnofhkz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uhzhimjmos .gt_indent_2 {
+#hvpgnofhkz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uhzhimjmos .gt_indent_3 {
+#hvpgnofhkz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uhzhimjmos .gt_indent_4 {
+#hvpgnofhkz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uhzhimjmos .gt_indent_5 {
+#hvpgnofhkz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uhzhimjmos .katex-display {
+#hvpgnofhkz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uhzhimjmos div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hvpgnofhkz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2819,26 +2824,26 @@ H_0 &amp;: \beta_1 = 0\\
 <li>For the F-test:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">anova</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">anova</span>(model1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="qdeqoertlh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qdeqoertlh table {
+<div id="lujhflfwwt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lujhflfwwt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qdeqoertlh thead, #qdeqoertlh tbody, #qdeqoertlh tfoot, #qdeqoertlh tr, #qdeqoertlh td, #qdeqoertlh th {
+#lujhflfwwt thead, #lujhflfwwt tbody, #lujhflfwwt tfoot, #lujhflfwwt tr, #lujhflfwwt td, #lujhflfwwt th {
   border-style: none;
 }
 
-#qdeqoertlh p {
+#lujhflfwwt p {
   margin: 0;
   padding: 0;
 }
 
-#qdeqoertlh .gt_table {
+#lujhflfwwt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2864,12 +2869,12 @@ H_0 &amp;: \beta_1 = 0\\
   border-left-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_caption {
+#lujhflfwwt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qdeqoertlh .gt_title {
+#lujhflfwwt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2881,7 +2886,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-width: 0;
 }
 
-#qdeqoertlh .gt_subtitle {
+#lujhflfwwt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2893,7 +2898,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-width: 0;
 }
 
-#qdeqoertlh .gt_heading {
+#lujhflfwwt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2905,13 +2910,13 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_bottom_border {
+#lujhflfwwt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_col_headings {
+#lujhflfwwt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2926,7 +2931,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_col_heading {
+#lujhflfwwt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2946,7 +2951,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#qdeqoertlh .gt_column_spanner_outer {
+#lujhflfwwt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2958,15 +2963,15 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 4px;
 }
 
-#qdeqoertlh .gt_column_spanner_outer:first-child {
+#lujhflfwwt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qdeqoertlh .gt_column_spanner_outer:last-child {
+#lujhflfwwt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qdeqoertlh .gt_column_spanner {
+#lujhflfwwt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2978,11 +2983,11 @@ H_0 &amp;: \beta_1 = 0\\
   width: 100%;
 }
 
-#qdeqoertlh .gt_spanner_row {
+#lujhflfwwt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qdeqoertlh .gt_group_heading {
+#lujhflfwwt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3008,7 +3013,7 @@ H_0 &amp;: \beta_1 = 0\\
   text-align: left;
 }
 
-#qdeqoertlh .gt_empty_group_heading {
+#lujhflfwwt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3023,15 +3028,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: middle;
 }
 
-#qdeqoertlh .gt_from_md > :first-child {
+#lujhflfwwt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qdeqoertlh .gt_from_md > :last-child {
+#lujhflfwwt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qdeqoertlh .gt_row {
+#lujhflfwwt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3050,7 +3055,7 @@ H_0 &amp;: \beta_1 = 0\\
   overflow-x: hidden;
 }
 
-#qdeqoertlh .gt_stub {
+#lujhflfwwt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3063,7 +3068,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qdeqoertlh .gt_stub_row_group {
+#lujhflfwwt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3077,15 +3082,15 @@ H_0 &amp;: \beta_1 = 0\\
   vertical-align: top;
 }
 
-#qdeqoertlh .gt_row_group_first td {
+#lujhflfwwt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qdeqoertlh .gt_row_group_first th {
+#lujhflfwwt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qdeqoertlh .gt_summary_row {
+#lujhflfwwt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3095,16 +3100,16 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qdeqoertlh .gt_first_summary_row {
+#lujhflfwwt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_first_summary_row.thick {
+#lujhflfwwt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qdeqoertlh .gt_last_summary_row {
+#lujhflfwwt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3114,7 +3119,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_grand_summary_row {
+#lujhflfwwt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3124,7 +3129,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qdeqoertlh .gt_first_grand_summary_row {
+#lujhflfwwt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3134,7 +3139,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-top-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_last_grand_summary_row_top {
+#lujhflfwwt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3144,11 +3149,11 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_striped {
+#lujhflfwwt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qdeqoertlh .gt_table_body {
+#lujhflfwwt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3157,7 +3162,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_footnotes {
+#lujhflfwwt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3171,7 +3176,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_footnote {
+#lujhflfwwt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3180,7 +3185,7 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qdeqoertlh .gt_sourcenotes {
+#lujhflfwwt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3194,7 +3199,7 @@ H_0 &amp;: \beta_1 = 0\\
   border-right-color: #D3D3D3;
 }
 
-#qdeqoertlh .gt_sourcenote {
+#lujhflfwwt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3202,72 +3207,72 @@ H_0 &amp;: \beta_1 = 0\\
   padding-right: 5px;
 }
 
-#qdeqoertlh .gt_left {
+#lujhflfwwt .gt_left {
   text-align: left;
 }
 
-#qdeqoertlh .gt_center {
+#lujhflfwwt .gt_center {
   text-align: center;
 }
 
-#qdeqoertlh .gt_right {
+#lujhflfwwt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qdeqoertlh .gt_font_normal {
+#lujhflfwwt .gt_font_normal {
   font-weight: normal;
 }
 
-#qdeqoertlh .gt_font_bold {
+#lujhflfwwt .gt_font_bold {
   font-weight: bold;
 }
 
-#qdeqoertlh .gt_font_italic {
+#lujhflfwwt .gt_font_italic {
   font-style: italic;
 }
 
-#qdeqoertlh .gt_super {
+#lujhflfwwt .gt_super {
   font-size: 65%;
 }
 
-#qdeqoertlh .gt_footnote_marks {
+#lujhflfwwt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qdeqoertlh .gt_asterisk {
+#lujhflfwwt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qdeqoertlh .gt_indent_1 {
+#lujhflfwwt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qdeqoertlh .gt_indent_2 {
+#lujhflfwwt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qdeqoertlh .gt_indent_3 {
+#lujhflfwwt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qdeqoertlh .gt_indent_4 {
+#lujhflfwwt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qdeqoertlh .gt_indent_5 {
+#lujhflfwwt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qdeqoertlh .katex-display {
+#lujhflfwwt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qdeqoertlh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lujhflfwwt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3366,34 +3371,6 @@ H_0 &amp;: \beta_1 = 0\\
 </div>
 </div>
 </section>
-<section id="when-running-a-f-test-for-linear-models" class="slide level2">
-<h2>When running a F-test for linear models…</h2>
-<ul>
-<li>We need to define a larger, full model (more parameters)</li>
-<li>We need to define a smaller, reduced model (fewer parameters)</li>
-<li>Use the F-statistic to decide whether or not we reject the smaller model
-<ul>
-<li>The F-statistic compares the SSE of each model to determine if the full model explains a significant amount of additional variance</li>
-</ul></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:30%;">
-<p>&nbsp;</p>
-<p><span class="math display">\[
-F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
-\]</span></p>
-</div><div class="column" style="width:70%;">
-<ul>
-<li><span class="math inline">\(SSE(R) \geq SSE(F)\)</span></li>
-<li>Numerator measures difference in <strong>unexplained</strong> variation between the models
-<ul>
-<li>Big difference = added parameters greatly reduce the unexplained variation (increase explained variation)</li>
-<li>Smaller difference = added parameters don’t reduce the unexplained variation</li>
-</ul></li>
-<li>Take ratio of difference to the unexplained variation in the full model</li>
-</ul>
-</div></div>
-</section>
 <section id="we-can-extend-our-look-at-the-f-test" class="slide level2">
 <h2>We can extend our look at the F-test</h2>
 <p>We can create a hypothesis test for more than one coefficient at a time…</p>
@@ -3450,183 +3427,138 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
 </div></div>
 <p>*This is <strong>not quite</strong> the alternative, but if we reject the null, then this is the model we move forward with</p>
 </section>
-<section id="lets-say-we-want-to-test-the-association-between-life-expectancy-and-world-region" class="slide level2">
-<h2>Let’s say we want to test the association between life expectancy and world region</h2>
+<section id="lets-say-we-want-to-test-the-association-between-life-expectancy-and-freedom-status" class="slide level2">
+<h2>Let’s say we want to test the association between life expectancy and freedom status</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="math display">\[\begin{aligned}
-\widehat{\textrm{LE}} = &amp; 74.13 + -5.14 \cdot I(\text{Americas}) + \\ &amp;-3.74 \cdot I(\text{Asia}) + NA \cdot I(\text{Europe}) \\
-\widehat{\textrm{LE}} = &amp; \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{Americas}) + \\ &amp; \widehat\beta_2 \cdot I(\text{Asia}) + \widehat\beta_3 \cdot I(\text{Europe})
+\widehat{\textrm{LE}} = &amp; \widehat\beta_0 + \widehat\beta_1 \cdot I(\text{PF}) + \\ &amp; \widehat\beta_2 \cdot I(\text{F}) \\
+\widehat{\textrm{LE}} = &amp; 68.99 + 1.4 \cdot I(\text{PF}) + \\ &amp;5.14 \cdot I(\text{F})
 \end{aligned}\]</span></p>
 <ul>
-<li>We need to figure out if the model with world region explains significantly more variation than the model without world region!</li>
+<li>We need to figure out if the model with freedom status explains significantly more variation than the model without freedom status!</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+<p><img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="f-test-general-steps-for-hypothesis-test-for-j-level-categorical-variable" class="slide level2">
-<h2>F-test: general steps for hypothesis test for <span class="math inline">\(j\)</span>-level categorical variable</h2>
+<section id="f-test-general-steps-for-hypothesis-test-for-categorical-variable" class="slide level2">
+<h2>F-test: general steps for hypothesis test for categorical variable</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
-<div class="highlight-container">
-<div class="highlight">
 <ol type="1">
-<li>For today’s class, we are assuming that we have met the underlying assumptions</li>
+<li><p>Check the <span style="color:#4FADF3"><strong>assumptions</strong></span></p></li>
+<li><p>Set the <span style="color:#4FADF3"><strong>level of significance</strong></span></p>
+<ul>
+<li>Often we use <span class="math inline">\(\alpha = 0.05\)</span></li>
+</ul></li>
+<li><p>Specify the <span style="color:#4FADF3"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#4FADF3"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#4FADF3"><strong>hypotheses</strong></span></p>
+<ul>
+<li>Often, we are curious if the coefficienta are 0 or not:</li>
+</ul></li>
 </ol>
-</div>
-</div>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="2" type="1">
-<li>State the null hypothesis.</li>
-</ol>
-</div>
-</div>
-<p>Often, we are curious if the coefficient is 0 or not:</p>
 <span class="math display">\[\begin{align}
-H_0 :&amp; \beta_1 = ... = \beta_j = 0\\
+H_0 :&amp; \beta_1 = ... = \beta_k = 0\\
 \text{vs. } H_A:&amp; \beta_1 \neq 0 \text{ and/or } \\
-&amp;\beta_2 \neq 0 ... \text{ and/or } \beta_j \neq 0
+&amp;\beta_2 \neq 0 ... \text{ and/or } \beta_k \neq 0
 \end{align}\]</span>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="3" type="1">
-<li>Specify the significance level.</li>
-</ol>
-</div>
-</div>
-<p>Often we use <span class="math inline">\(\alpha = 0.05\)</span></p>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="4" type="1">
-<li>Specify the test statistic and its distribution under the null</li>
+<li><p>Specify the test statistic and its <span style="color:#4FADF3"><strong>distribution under the null</strong></span></p>
+<ul>
+<li>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=1\)</span> and denominator <span class="math inline">\(df=n-(k+1)\)</span></li>
+</ul></li>
 </ol>
-</div>
-</div>
-<p>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=1\)</span> and denominator <span class="math inline">\(df=n-(k+1)\)</span>.</p>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
-<div class="highlight-container">
-<div class="highlight">
 <ol start="5" type="1">
-<li>Compute the value of the test statistic</li>
+<li>Calculate the <span style="color:#4FADF3"><strong>test statistic</strong></span></li>
 </ol>
-</div>
-</div>
-<p>The calculated <strong>test statistic</strong> for <span class="math inline">\(\widehat\beta_1\)</span> is</p>
+<p>The calculated <strong>test statistic</strong> for <span class="math inline">\(\beta\)</span>s is</p>
 <p><span class="math display">\[F = \frac{MSR}{MSE}\]</span></p>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="6" type="1">
-<li>Calculate the p-value</li>
-</ol>
-</div>
-</div>
-<p>We are generally calculating: <span class="math inline">\(P(F_{1, n-(j+1)} &gt; F)\)</span></p>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="7" type="1">
-<li>Write conclusion for hypothesis test</li>
-</ol>
-</div>
-</div>
+<li><p>Calculate the <span style="color:#4FADF3"><strong>p-value</strong></span></p>
 <ul>
-<li>Reject: <span class="math inline">\(P(F_{1, n-(j+1)} &gt; F) &lt; \alpha\)</span></li>
-</ul>
-<p>We (reject/fail to reject) the null hypothesis that the slope is 0 at the <span class="math inline">\(100\alpha\%\)</span> significiance level. There is (sufficient/insufficient) evidence that there is significant association between (<span class="math inline">\(Y\)</span>) and (<span class="math inline">\(X\)</span>) (p-value = <span class="math inline">\(P(F_{1, n-(j+1)} &gt; F)\)</span>).</p>
+<li>We are generally calculating: <span class="math inline">\(P(F_{1, n-(k+1)} &gt; F)\)</span></li>
+</ul></li>
+<li><p>Write a <span style="color:#4FADF3"><strong>conclusion</strong></span></p>
+<ul>
+<li>Reject: <span class="math inline">\(P(F_{1, n-2} &gt; F) &lt; \alpha\)</span></li>
+</ul></li>
+</ol>
+<p>We (reject/fail to reject) the null hypothesis that the slope is 0 at the <span class="math inline">\(100\alpha\%\)</span> significance level. There is (sufficient/insufficient) evidence that there is significant association between (<span class="math inline">\(Y\)</span>) and (<span class="math inline">\(X\)</span>) (p-value = <span class="math inline">\(P(F_{1, n-(k+1)} &gt; F)\)</span>).</p>
 </div></div>
 </section>
-<section id="life-expectancy-example-hypothesis-test-for-world-region" class="slide level2">
-<h2>Life expectancy example: hypothesis test for world region</h2>
+<section id="life-expectancy-example-hypothesis-test-for-freedom-status-14" class="slide level2">
+<h2>Life expectancy example: hypothesis test for freedom status (1/4)</h2>
 <ul>
 <li>Steps 1-4 are setting up our hypothesis test: not much change from the general steps</li>
 </ul>
-<div class="highlight-container">
-<div class="highlight">
 <ol type="1">
-<li>For today’s class, we are assuming that we have met the underlying assumptions</li>
+<li><p>Check the <span style="color:#4FADF3"><strong>assumptions</strong></span>: We have met the underlying assumptions (checked in our Model Evaluation step)</p></li>
+<li><p>Set the <span style="color:#4FADF3"><strong>level of significance</strong></span></p>
+<ul>
+<li>Often we use <span class="math inline">\(\alpha = 0.05\)</span></li>
+</ul></li>
+<li><p>Specify the <span style="color:#4FADF3"><strong>null</strong></span> ( <span class="math inline">\(H_0\)</span> ) and <span style="color:#4FADF3"><strong>alternative</strong></span> ( <span class="math inline">\(H_A\)</span> ) <span style="color:#4FADF3"><strong>hypotheses</strong></span></p>
+<ul>
+<li>We are testing if the FS is associated with life expectancy:</li>
+</ul></li>
 </ol>
-</div>
-</div>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="2" type="1">
-<li>State the null hypothesis.</li>
-</ol>
-</div>
-</div>
-<p>We are testing if the slope is 0 or not:</p>
 <span class="math display">\[\begin{align}
-H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
-\text{vs. } H_A:&amp; \beta_1 \neq 0 \text{ and/or } \beta_2 \neq 0 \text{ and/or } \beta_3 \neq 0
+H_0 :&amp; \beta_1 = \beta_2 = 0\\
+\text{vs. } H_A:&amp; \beta_1 \neq 0 \text{ and/or } \beta_2 \neq 0
 \end{align}\]</span>
-<div class="highlight-container">
-<div class="highlight">
-<ol start="3" type="1">
-<li>Specify the significance level.</li>
-</ol>
-</div>
-</div>
-<p>Often we use <span class="math inline">\(\alpha = 0.05\)</span></p>
-<div class="highlight-container">
-<div class="highlight">
 <ol start="4" type="1">
-<li>Specify the test statistic and its distribution under the null</li>
+<li>Specify the test statistic and its <span style="color:#4FADF3"><strong>distribution under the null</strong></span></li>
 </ol>
-</div>
-</div>
 <div class="columns">
 <div class="column" style="width:70%;">
-<p>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=j\)</span> and denominator <span class="math inline">\(df=n-(j+1) = 80-(3+1)\)</span>.</p>
+<p>The test statistic is <span class="math inline">\(F\)</span>, and follows an F-distribution with numerator <span class="math inline">\(df=k\)</span> and denominator <span class="math inline">\(df=n-(k+1) = 105-(2+1)\)</span></p>
 </div><div class="column" style="width:30%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">nobs</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">nobs</span>(model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 105</code></pre>
 </div>
 </div>
 </div></div>
 </section>
-<section id="life-expectancy-example-hypothesis-test-for-world-region-24" class="slide level2">
-<h2>Life expectancy example: hypothesis test for world region (2/4)</h2>
-<div class="highlight-container">
-<div class="highlight">
+<section id="life-expectancy-example-hypothesis-test-for-freedom-status-24" class="slide level2">
+<h2>Life expectancy example: hypothesis test for freedom status (2/4)</h2>
 <ol start="5" type="1">
-<li>Compute the value of the test statistic</li>
+<li>Calculate the <span style="color:#4FADF3"><strong>test statistic</strong></span></li>
 </ol>
-</div>
-</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>model2 <span class="ot">&lt;-</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> freedom_status)</span>
-<span id="cb14-2"><a></a><span class="fu">anova</span>(model2) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>model2 <span class="ot">&lt;-</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> freedom_status)</span>
+<span id="cb15-2"><a></a>anova_tab2 <span class="ot">=</span> <span class="fu">anova</span>(model2) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span>
+<span id="cb15-3"><a></a>anova_tab2 <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="osblyvpjgd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#osblyvpjgd table {
+<div id="vfabrqsatz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vfabrqsatz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#osblyvpjgd thead, #osblyvpjgd tbody, #osblyvpjgd tfoot, #osblyvpjgd tr, #osblyvpjgd td, #osblyvpjgd th {
+#vfabrqsatz thead, #vfabrqsatz tbody, #vfabrqsatz tfoot, #vfabrqsatz tr, #vfabrqsatz td, #vfabrqsatz th {
   border-style: none;
 }
 
-#osblyvpjgd p {
+#vfabrqsatz p {
   margin: 0;
   padding: 0;
 }
 
-#osblyvpjgd .gt_table {
+#vfabrqsatz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3652,12 +3584,12 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-left-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_caption {
+#vfabrqsatz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#osblyvpjgd .gt_title {
+#vfabrqsatz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3669,7 +3601,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-width: 0;
 }
 
-#osblyvpjgd .gt_subtitle {
+#vfabrqsatz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3681,7 +3613,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-top-width: 0;
 }
 
-#osblyvpjgd .gt_heading {
+#vfabrqsatz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3693,13 +3625,13 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_bottom_border {
+#vfabrqsatz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_col_headings {
+#vfabrqsatz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3714,7 +3646,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_col_heading {
+#vfabrqsatz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3734,7 +3666,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   overflow-x: hidden;
 }
 
-#osblyvpjgd .gt_column_spanner_outer {
+#vfabrqsatz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3746,15 +3678,15 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 4px;
 }
 
-#osblyvpjgd .gt_column_spanner_outer:first-child {
+#vfabrqsatz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#osblyvpjgd .gt_column_spanner_outer:last-child {
+#vfabrqsatz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#osblyvpjgd .gt_column_spanner {
+#vfabrqsatz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3766,11 +3698,11 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   width: 100%;
 }
 
-#osblyvpjgd .gt_spanner_row {
+#vfabrqsatz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#osblyvpjgd .gt_group_heading {
+#vfabrqsatz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3796,7 +3728,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   text-align: left;
 }
 
-#osblyvpjgd .gt_empty_group_heading {
+#vfabrqsatz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3811,15 +3743,15 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   vertical-align: middle;
 }
 
-#osblyvpjgd .gt_from_md > :first-child {
+#vfabrqsatz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#osblyvpjgd .gt_from_md > :last-child {
+#vfabrqsatz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#osblyvpjgd .gt_row {
+#vfabrqsatz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3838,7 +3770,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   overflow-x: hidden;
 }
 
-#osblyvpjgd .gt_stub {
+#vfabrqsatz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3851,7 +3783,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#osblyvpjgd .gt_stub_row_group {
+#vfabrqsatz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3865,15 +3797,15 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   vertical-align: top;
 }
 
-#osblyvpjgd .gt_row_group_first td {
+#vfabrqsatz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#osblyvpjgd .gt_row_group_first th {
+#vfabrqsatz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#osblyvpjgd .gt_summary_row {
+#vfabrqsatz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3883,16 +3815,16 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#osblyvpjgd .gt_first_summary_row {
+#vfabrqsatz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_first_summary_row.thick {
+#vfabrqsatz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#osblyvpjgd .gt_last_summary_row {
+#vfabrqsatz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3902,7 +3834,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_grand_summary_row {
+#vfabrqsatz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3912,7 +3844,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#osblyvpjgd .gt_first_grand_summary_row {
+#vfabrqsatz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3922,7 +3854,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-top-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_last_grand_summary_row_top {
+#vfabrqsatz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3932,11 +3864,11 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_striped {
+#vfabrqsatz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#osblyvpjgd .gt_table_body {
+#vfabrqsatz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3945,7 +3877,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_footnotes {
+#vfabrqsatz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3959,7 +3891,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_footnote {
+#vfabrqsatz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3968,7 +3900,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#osblyvpjgd .gt_sourcenotes {
+#vfabrqsatz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3982,7 +3914,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#osblyvpjgd .gt_sourcenote {
+#vfabrqsatz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3990,72 +3922,72 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#osblyvpjgd .gt_left {
+#vfabrqsatz .gt_left {
   text-align: left;
 }
 
-#osblyvpjgd .gt_center {
+#vfabrqsatz .gt_center {
   text-align: center;
 }
 
-#osblyvpjgd .gt_right {
+#vfabrqsatz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#osblyvpjgd .gt_font_normal {
+#vfabrqsatz .gt_font_normal {
   font-weight: normal;
 }
 
-#osblyvpjgd .gt_font_bold {
+#vfabrqsatz .gt_font_bold {
   font-weight: bold;
 }
 
-#osblyvpjgd .gt_font_italic {
+#vfabrqsatz .gt_font_italic {
   font-style: italic;
 }
 
-#osblyvpjgd .gt_super {
+#vfabrqsatz .gt_super {
   font-size: 65%;
 }
 
-#osblyvpjgd .gt_footnote_marks {
+#vfabrqsatz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#osblyvpjgd .gt_asterisk {
+#vfabrqsatz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#osblyvpjgd .gt_indent_1 {
+#vfabrqsatz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#osblyvpjgd .gt_indent_2 {
+#vfabrqsatz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#osblyvpjgd .gt_indent_3 {
+#vfabrqsatz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#osblyvpjgd .gt_indent_4 {
+#vfabrqsatz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#osblyvpjgd .gt_indent_5 {
+#vfabrqsatz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#osblyvpjgd .katex-display {
+#vfabrqsatz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#osblyvpjgd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vfabrqsatz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4094,64 +4026,68 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
 </div>
 </div>
 </div>
-<ul>
-<li><strong>Option 1:</strong> Calculate the test statistic using the values in the ANOVA table</li>
-</ul>
-<p><span class="math display">\[F = \frac{MSR}{MSE} = \frac{207.9684098}{42.5677608} = 4.8855849\]</span></p>
-<ul>
-<li><strong>Option 2:</strong> Get the test statistic value (F) from the ANOVA table</li>
-</ul>
+<div class="columns">
+<div class="column" style="width:49%;">
+<p><strong>Option 1:</strong> Calculate the test statistic using the values in the ANOVA table</p>
+<p><span class="math display">\[F = \frac{MSR}{MSE} = \frac{207.9684098}{42.5677608} = 4.886\]</span></p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<p><strong>Option 2:</strong> Get the test statistic value (F) from the ANOVA table</p>
+<p><span class="math display">\[F = 4.886\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>F_stat2 <span class="ot">=</span> anova_tab2<span class="sc">$</span>statistic[<span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div></div>
+<p>&nbsp;</p>
 <div class="hl">
 <p>I tend to skip this step because I can do it all with step 6</p>
 </div>
 </section>
-<section id="life-expectancy-example-hypothesis-test-for-population-slope-beta_1-34-1" class="slide level2">
-<h2>Life expectancy example: hypothesis test for population <strong>slope</strong> <span class="math inline">\(\beta_1\)</span> (3/4)</h2>
-<div class="highlight-container">
-<div class="highlight">
+<section id="life-expectancy-example-hypothesis-test-for-freedom-status-34" class="slide level2">
+<h2>Life expectancy example: hypothesis test for freedom status (3/4)</h2>
 <ol start="6" type="1">
-<li>Calculate the p-value</li>
+<li>Calculate the <span style="color:#4FADF3"><strong>p-value</strong></span></li>
 </ol>
-</div>
-</div>
 <ul>
-<li><p>As per Step 4, test statistic <span class="math inline">\(F\)</span> can be modeled by a <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(df1 = 3\)</span> and <span class="math inline">\(df2 = n-4\)</span>.</p>
+<li><p>As per Step 4, test statistic <span class="math inline">\(F\)</span> can be modeled by a <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(df_1 = 2\)</span> and <span class="math inline">\(df_2 = n-3\)</span>.</p>
 <ul>
-<li>We had 80 countries’ data, so <span class="math inline">\(n=80\)</span></li>
+<li>We had 105 countries’ data, so <span class="math inline">\(n=105\)</span></li>
 </ul></li>
 <li><p><strong>Option 1:</strong> Use <code>pf()</code> and our calculated test statistic</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># p-value is ALWAYS the right tail for F-test</span></span>
-<span id="cb15-2"><a></a><span class="fu">pf</span>(<span class="fl">33.5331</span>, <span class="at">df1 =</span> <span class="dv">3</span>, <span class="at">df2 =</span> <span class="dv">76</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># p-value is ALWAYS the right tail for F-test</span></span>
+<span id="cb17-2"><a></a>n <span class="ot">=</span> <span class="fu">nobs</span>(model1)</span>
+<span id="cb17-3"><a></a><span class="fu">pf</span>(F_stat2, <span class="at">df1 =</span> <span class="dv">2</span>, <span class="at">df2 =</span> n<span class="dv">-3</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6.514508e-14</code></pre>
+<pre><code>[1] 0.009414324</code></pre>
 </div>
 </div>
 <ul>
 <li><strong>Option 2:</strong> Use the ANOVA table</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">anova</span>(model2) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">anova</span>(model2) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="tkzknmazld" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tkzknmazld table {
+<div id="itrddjdcdk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#itrddjdcdk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tkzknmazld thead, #tkzknmazld tbody, #tkzknmazld tfoot, #tkzknmazld tr, #tkzknmazld td, #tkzknmazld th {
+#itrddjdcdk thead, #itrddjdcdk tbody, #itrddjdcdk tfoot, #itrddjdcdk tr, #itrddjdcdk td, #itrddjdcdk th {
   border-style: none;
 }
 
-#tkzknmazld p {
+#itrddjdcdk p {
   margin: 0;
   padding: 0;
 }
 
-#tkzknmazld .gt_table {
+#itrddjdcdk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4177,12 +4113,12 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-left-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_caption {
+#itrddjdcdk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tkzknmazld .gt_title {
+#itrddjdcdk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4194,7 +4130,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-width: 0;
 }
 
-#tkzknmazld .gt_subtitle {
+#itrddjdcdk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4206,7 +4142,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-top-width: 0;
 }
 
-#tkzknmazld .gt_heading {
+#itrddjdcdk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4218,13 +4154,13 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_bottom_border {
+#itrddjdcdk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_col_headings {
+#itrddjdcdk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4239,7 +4175,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_col_heading {
+#itrddjdcdk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4259,7 +4195,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   overflow-x: hidden;
 }
 
-#tkzknmazld .gt_column_spanner_outer {
+#itrddjdcdk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4271,15 +4207,15 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 4px;
 }
 
-#tkzknmazld .gt_column_spanner_outer:first-child {
+#itrddjdcdk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tkzknmazld .gt_column_spanner_outer:last-child {
+#itrddjdcdk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tkzknmazld .gt_column_spanner {
+#itrddjdcdk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4291,11 +4227,11 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   width: 100%;
 }
 
-#tkzknmazld .gt_spanner_row {
+#itrddjdcdk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tkzknmazld .gt_group_heading {
+#itrddjdcdk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4321,7 +4257,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   text-align: left;
 }
 
-#tkzknmazld .gt_empty_group_heading {
+#itrddjdcdk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4336,15 +4272,15 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   vertical-align: middle;
 }
 
-#tkzknmazld .gt_from_md > :first-child {
+#itrddjdcdk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tkzknmazld .gt_from_md > :last-child {
+#itrddjdcdk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tkzknmazld .gt_row {
+#itrddjdcdk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4363,7 +4299,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   overflow-x: hidden;
 }
 
-#tkzknmazld .gt_stub {
+#itrddjdcdk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4376,7 +4312,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#tkzknmazld .gt_stub_row_group {
+#itrddjdcdk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4390,15 +4326,15 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   vertical-align: top;
 }
 
-#tkzknmazld .gt_row_group_first td {
+#itrddjdcdk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tkzknmazld .gt_row_group_first th {
+#itrddjdcdk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tkzknmazld .gt_summary_row {
+#itrddjdcdk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4408,16 +4344,16 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#tkzknmazld .gt_first_summary_row {
+#itrddjdcdk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_first_summary_row.thick {
+#itrddjdcdk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tkzknmazld .gt_last_summary_row {
+#itrddjdcdk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4427,7 +4363,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_grand_summary_row {
+#itrddjdcdk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4437,7 +4373,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#tkzknmazld .gt_first_grand_summary_row {
+#itrddjdcdk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4447,7 +4383,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-top-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_last_grand_summary_row_top {
+#itrddjdcdk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4457,11 +4393,11 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_striped {
+#itrddjdcdk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tkzknmazld .gt_table_body {
+#itrddjdcdk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4470,7 +4406,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-bottom-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_footnotes {
+#itrddjdcdk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4484,7 +4420,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_footnote {
+#itrddjdcdk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4493,7 +4429,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#tkzknmazld .gt_sourcenotes {
+#itrddjdcdk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4507,7 +4443,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   border-right-color: #D3D3D3;
 }
 
-#tkzknmazld .gt_sourcenote {
+#itrddjdcdk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4515,72 +4451,72 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
   padding-right: 5px;
 }
 
-#tkzknmazld .gt_left {
+#itrddjdcdk .gt_left {
   text-align: left;
 }
 
-#tkzknmazld .gt_center {
+#itrddjdcdk .gt_center {
   text-align: center;
 }
 
-#tkzknmazld .gt_right {
+#itrddjdcdk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tkzknmazld .gt_font_normal {
+#itrddjdcdk .gt_font_normal {
   font-weight: normal;
 }
 
-#tkzknmazld .gt_font_bold {
+#itrddjdcdk .gt_font_bold {
   font-weight: bold;
 }
 
-#tkzknmazld .gt_font_italic {
+#itrddjdcdk .gt_font_italic {
   font-style: italic;
 }
 
-#tkzknmazld .gt_super {
+#itrddjdcdk .gt_super {
   font-size: 65%;
 }
 
-#tkzknmazld .gt_footnote_marks {
+#itrddjdcdk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tkzknmazld .gt_asterisk {
+#itrddjdcdk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tkzknmazld .gt_indent_1 {
+#itrddjdcdk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tkzknmazld .gt_indent_2 {
+#itrddjdcdk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tkzknmazld .gt_indent_3 {
+#itrddjdcdk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tkzknmazld .gt_indent_4 {
+#itrddjdcdk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tkzknmazld .gt_indent_5 {
+#itrddjdcdk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tkzknmazld .katex-display {
+#itrddjdcdk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tkzknmazld div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#itrddjdcdk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4620,16 +4556,12 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
 </div>
 </div>
 </section>
-<section id="life-expectancy-example-hypothesis-test-for-population-slope-beta_1-44-1" class="slide level2">
-<h2>Life expectancy example: hypothesis test for population <strong>slope</strong> <span class="math inline">\(\beta_1\)</span> (4/4)</h2>
-<div class="highlight-container">
-<div class="highlight">
+<section id="life-expectancy-example-hypothesis-test-for-freedom-status-44" class="slide level2">
+<h2>Life expectancy example: hypothesis test for freedom status (4/4)</h2>
 <ol start="7" type="1">
-<li>Write conclusion for the hypothesis test</li>
+<li>Write a <span style="color:#4FADF3"><strong>conclusion</strong></span></li>
 </ol>
-</div>
-</div>
-<p>We reject the null hypothesis that all three coefficients are equal to 0 at the <span class="math inline">\(5\%\)</span> significance level. There is sufficient evidence that there is association between female life expectancy and the country’s world region (p-value &lt; 0.0001).</p>
+<p>We reject the null hypothesis that both coefficients are equal to 0 at the <span class="math inline">\(5\%\)</span> significance level. There is sufficient evidence that there is association between life expectancy and the country’s freedom status (p-value = 0.009).</p>
 </section></section>
 <section>
 <section id="learning-objectives-4" class="title-slide slide level1 center">
@@ -4664,29 +4596,7 @@ H_0 :&amp; \beta_1 = \beta_2 = \beta_3 0\\
 </div>
 </div></div>
 </section>
-<section id="correlation-coefficient-r-or-r" class="slide level2">
-<h2>Correlation coefficient (<span class="math inline">\(r\)</span> or <span class="math inline">\(R\)</span>)</h2>
-<div class="columns">
-<div class="column">
-<p>The (Pearson) correlation coefficient <span class="math inline">\(r\)</span> of variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> can be computed using the formula:</p>
-<p><span class="math display">\[\begin{aligned}
-r  &amp; = \frac{\sum_{i=1}^n (X_i - \overline{X})(Y_i - \overline{Y})}{\Big(\sum_{i=1}^n (X_i - \overline{X})^2 \sum_{i=1}^n (Y_i - \overline{Y})^2\Big)^{1/2}} \\
-&amp; = \frac{SSXY}{\sqrt{SSX \cdot SSY}}
-\end{aligned}\]</span></p>
-<p>we have the relationship</p>
-<p><span class="math display">\[\widehat{\beta}_1 = r\frac{SSY}{SSX},\ \ \text{or},\ \  r = \widehat{\beta}_1\frac{SSX}{SSY}\]</span></p>
-</div><div class="column">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="06_SLR_Eval_files/figure-revealjs/unnamed-chunk-20-1.png" width="1056"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
+
 <section id="coefficient-of-determination-r2" class="slide level2">
 <h2>Coefficient of determination: <span class="math inline">\(R^2\)</span></h2>
 <p>It can be shown that the square of the correlation coefficient <span class="math inline">\(r\)</span> is equal to</p>
@@ -4709,55 +4619,37 @@ r  &amp; = \frac{\sum_{i=1}^n (X_i - \overline{X})(Y_i - \overline{Y})}{\Big(\su
 </section>
 <section id="life-expectancy-example-correlation-coeffiicent-r-and-coefficient-of-determination-r2" class="slide level2">
 <h2>Life expectancy example: correlation coeffiicent <span class="math inline">\(r\)</span> and coefficient of determination <span class="math inline">\(R^2\)</span></h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>(<span class="at">r =</span> <span class="fu">cor</span>(<span class="at">x =</span> gapm<span class="sc">$</span>life_exp, <span class="at">y =</span> gapm<span class="sc">$</span>cell_phones_100, </span>
-<span id="cb18-2"><a></a>         <span class="at">use =</span>  <span class="st">"complete.obs"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4795386</code></pre>
-</div>
-</div>
 <div class="columns">
-<div class="column" style="width:78%;">
+<div class="column" style="width:50%;">
+<p>We can find the correlation coefficient and square it:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">summary</span>(model1) <span class="co"># for R^2 value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = life_exp ~ cell_phones_100, data = .)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--17.211  -3.268   0.615   3.818  12.449 
-
-Coefficients:
-                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     60.04051    2.05567  29.207  &lt; 2e-16 ***
-cell_phones_100  0.09384    0.01692   5.546 2.27e-07 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 5.964 on 103 degrees of freedom
-Multiple R-squared:   0.23, Adjusted R-squared:  0.2225 
-F-statistic: 30.76 on 1 and 103 DF,  p-value: 2.271e-07</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:22%;">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>r<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>r <span class="ot">=</span> <span class="fu">cor</span>(<span class="at">x =</span> gapm<span class="sc">$</span>life_exp, </span>
+<span id="cb20-2"><a></a>        <span class="at">y =</span> gapm<span class="sc">$</span>cell_phones_100, </span>
+<span id="cb20-3"><a></a>        <span class="at">use =</span>  <span class="st">"complete.obs"</span>)</span>
+<span id="cb20-4"><a></a>r<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2299573</code></pre>
 </div>
 </div>
-<p>&nbsp; &nbsp;</p>
+</div><div class="column" style="width:50%;">
+<p>We can pull the coefficient of determination from the model summary:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>model1_sum <span class="ot">=</span> <span class="fu">summary</span>(model1)</span>
+<span id="cb22-2"><a></a>r_squared <span class="ot">=</span> model1_sum<span class="sc">$</span>r.squared</span>
+<span id="cb22-3"><a></a>r_squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2299573</code></pre>
+</div>
+</div>
+</div></div>
 <div class="fact">
 <div class="fact-title">
 <p>Interpretation</p>
 </div>
 <div class="fact-cont">
-<p>41.1% of the variation in countries’ life expectancy is explained by the linear model with female literacy rate as the independent variable.</p>
+<p>23% of the variation in countries’ life expectancy is explained by the linear model with number of cell phones per 100 people as the independent variable.</p>
 </div>
 </div>
-</div></div>
 </section>
 <section id="what-does-r2-not-measure" class="slide level2">
 <h2>What does <span class="math inline">\(R^2\)</span> not measure?</h2>
