@@ -10,6 +10,8 @@ editor_options:
 
 ## Announcements
 
+- No class related ones...
+
 ## Events
 
 ### Algorithmic Bias: A Practical Introduction
@@ -28,5 +30,10 @@ The Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is of
 - [RSVP Here!](http://click.send.ohsu.edu/?qs=e0e8dbe8e54efafce36083e9299faa45f1844d703638c8f494396770c97704ca7abf401ea7aeb3d8100dc9791f1da794af1f878766163b71)
   
 
-
 ## Key Dates
+
+- Quiz 1 opens today at 3pm
+  - Closes on 2/1 at 11pm
+- Homework 2 due 2/1 at 11pm
+- Lab 2 due 2/8 at 11pm
+
