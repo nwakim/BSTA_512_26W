@@ -29,9 +29,9 @@ library(here)
 
 ## Directions
 
--   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_03.qmd)
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_26W/blob/main/homework/HW_03.qmd)
 
--   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Data/Homework?csf=1&web=1&e=es5Kgh) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
 
 -   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
 
@@ -47,13 +47,8 @@ It is a good idea to try rendering your document from time to time as you go alo
 
 ## Questions
 
-### Midterm feedback!!
 
-[Please complete the midterm feedback](https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUQkdNUVRFQU41T0tRVDc0U1k2V0VFRVk4TS4u) along with this homework!!
-
-
-
-### Question 1
+### Question 1 {#sec-L06-SLR-More_inf}
 
 This question and data are adapted from [this textbook](https://catalog.lib.uchicago.edu/vufind/Record/7546272).
 
@@ -116,7 +111,7 @@ You do not need to go through the hypothesis test process again. A quick stateme
 If you prefer to write out the models by hand, remember that you can take a picture of your work and insert it into this document. HW0 can be a good reference for how we've done this before.
 :::
 
-### Question 2
+### Question 2 {#sec-L06-SLR-More_inf}
 
 We will continue to work with the study and dataset from Question 2 above.
 
@@ -133,7 +128,7 @@ Calculate the coefficient of determination using linear regression summary outpu
 Give an interpretation of the coefficient of determination in the context of the study.
 
 
-### Question 3
+### Question 3 {#sec-L07-L08-Assumptions-Diagnostics}
 
 A high respiratory rate is a potential diagnostic indicator of respiratory infection in children. To judge whether a respiratory rate is “high” however, a physician must have a clear picture of the distribution of normal rates. To this end, Italian researchers measured the respiratory rates (in breaths/minute) of 618 children between the ages of 15 days and 3 years (measured in months).
 
@@ -221,56 +216,3 @@ Create a residual plot using ggplot and the residuals. Discuss what this means i
 
 Between the model with the untransformed outcome and the transformed outcome, which would you recommend using for analysis? (Hint: there are pros and cons to both models)
 
-### Question 4
-
-This question uses the same dataset as HW 2, question 1.
-
-This question is based on data collected as part of an observational study of patients who suffered from stroke.
-
-Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article [Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis](https://pubmed.ncbi.nlm.nih.gov/21940963/).
-
-The dataset that you will work with is called `completedata.sas7bdat`. The two variables we are interested in are:
-
--   Covariate 1: `Fatalism` (larger values indicate that the individual feels less control of their life)
-
-    -   Potential scores range from 8 to 40
-
--   Covariate 2: `Optimism` (larger values indicate that the individual feels higher levels of optimism)
-
-    -   Potential scores range from 6 to 24
-
--   Covariate 3: `Spirituality` (larger values indicate that the individual has more belief in a higher power)
-
-    -   Potential scores range from 2 to 8
-
--   Outcome: `Depression` (larger values imply increased depression)
-
-    -   Potential scores range from 0 to 27
-
-For our homework purposes we will assume each variable is continuous.
-
-```{r}
-dep_df = read_sas(here("./data/completedata.sas7bdat"))
-```
-
-#### Part a
-
-Fit the regression model with all the covariates (Fatalism, Optimism, Spirituality), display the regression table, and write out the fitted regression line.
-
-#### Part b
-
-Interpret each coefficient ($\beta_0$, $\beta_1$, $\beta_2$, $\beta_3$).
-
-Does the intercept make sense for the range of values that each covariate can take? Explain.
-
-
-#### Part c
-
-Recall in Homework 2, we ran a simple linear regression model for Depression vs. Fatalism with the following interpretation for the coefficient: For every 1 point higher fatalism score, there is an expected difference of 0.25 points higher depression score (95%CI: 0.17, 0.32).
-
-Does the addition of Optimism and Spirituality change our coefficient estimate for Fatalism? (No need for an official hypothesis test here. I just want us to note some differences.)
-
-
-#### Part d
-
-From the fitted regression model, calculate the regression line when Optimism score is 10 and Spirituality score is 6.

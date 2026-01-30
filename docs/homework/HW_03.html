@@ -4039,6 +4039,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -4065,11 +4069,9 @@ window.Quarto = {
   <li><a href="#directions" id="toc-directions" class="nav-link active" data-scroll-target="#directions">Directions</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a>
   <ul class="collapse">
-  <li><a href="#midterm-feedback" id="toc-midterm-feedback" class="nav-link" data-scroll-target="#midterm-feedback">Midterm feedback!!</a></li>
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
-  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
-  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
-  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  <li><a href="#sec-L06-SLR-More_inf" id="toc-sec-L06-SLR-More_inf" class="nav-link" data-scroll-target="#sec-L06-SLR-More_inf">Question 1</a></li>
+  <li><a href="#sec-L06-SLR-More_inf" id="toc-sec-L06-SLR-More_inf" class="nav-link" data-scroll-target="#sec-L06-SLR-More_inf">Question 2</a></li>
+  <li><a href="#sec-L07-L08-Assumptions-Diagnostics" id="toc-sec-L07-L08-Assumptions-Diagnostics" class="nav-link" data-scroll-target="#sec-L07-L08-Assumptions-Diagnostics">Question 3</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -4098,7 +4100,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 15, 2025</p>
+      <p class="date-modified">January 29, 2026</p>
     </div>
   </div>
     
@@ -4112,8 +4114,8 @@ window.Quarto = {
 <section id="directions" class="level2">
 <h2 class="anchored" data-anchor-id="directions">Directions</h2>
 <ul>
-<li><p><a href="https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_03.qmd">Download the <code>.qmd</code> file here.</a></p></li>
-<li><p>You will need to download the datasets. Use <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu">this link to download</a> the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named “data” that is housed in the same location as your HW3 <code>.qmd</code> file.</p></li>
+<li><p><a href="https://github.com/nwakim/BSTA_512_26W/blob/main/homework/HW_03.qmd">Download the <code>.qmd</code> file here.</a></p></li>
+<li><p>You will need to download the datasets. Use <a href="https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Data/Homework?csf=1&amp;web=1&amp;e=es5Kgh">this link to download</a> the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named “data” that is housed in the same location as your HW3 <code>.qmd</code> file.</p></li>
 <li><p>Please upload your homework to Sakai. <strong>Upload both your <code>.qmd</code> code file and the rendered <code>.html</code> file</strong></p></li>
 <li><p>For each question, make sure to include all code and resulting output in the html file to support your answers</p></li>
 <li><p>Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.</p></li>
@@ -4135,12 +4137,8 @@ Tip
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<section id="midterm-feedback" class="level3">
-<h3 class="anchored" data-anchor-id="midterm-feedback">Midterm feedback!!</h3>
-<p><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=V3lz4rj6fk2U9pvWr59xWFMopmPUjRtDiHLswhgacNhUQkdNUVRFQU41T0tRVDc0U1k2V0VFRVk4TS4u">Please complete the midterm feedback</a> along with this homework!!</p>
-</section>
-<section id="question-1" class="level3">
-<h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
+<section id="sec-L06-SLR-More_inf" class="level3">
+<h3 class="anchored" data-anchor-id="sec-L06-SLR-More_inf">Question 1</h3>
 <p>This question and data are adapted from <a href="https://catalog.lib.uchicago.edu/vufind/Record/7546272">this textbook</a>.</p>
 <p>In an experiment designed to describe the dose–response curve for vitamin K, individual rats were depleted of their vitamin K reserves and then fed dried liver for 4 days at different dosage levels. The response of each rat was measured as the concentration of a clotting agent needed to clot a sample of its blood in 3 minutes. The results of the experiment on 12 rats are given in the following table; values are expressed in common logarithms for both dose and response.</p>
 <div class="cell">
@@ -4150,20 +4148,20 @@ Tip
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">LOGCONC =</span> <span class="fu">md</span>(<span class="st">&quot;**Log10 Concentration (Y)**&quot;</span>),</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">LOGDOSE =</span> <span class="fu">md</span>(<span class="st">&quot;**Log10 Dose (X)**&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="gjsglghndq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gjsglghndq table {
+<div id="xwgrgcdkju" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xwgrgcdkju table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#gjsglghndq thead, #gjsglghndq tbody, #gjsglghndq tfoot, #gjsglghndq tr, #gjsglghndq td, #gjsglghndq th {
+#xwgrgcdkju thead, #xwgrgcdkju tbody, #xwgrgcdkju tfoot, #xwgrgcdkju tr, #xwgrgcdkju td, #xwgrgcdkju th {
 border-style: none;
 }
-#gjsglghndq p {
+#xwgrgcdkju p {
 margin: 0;
 padding: 0;
 }
-#gjsglghndq .gt_table {
+#xwgrgcdkju .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -4188,11 +4186,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#gjsglghndq .gt_caption {
+#xwgrgcdkju .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#gjsglghndq .gt_title {
+#xwgrgcdkju .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -4203,7 +4201,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#gjsglghndq .gt_subtitle {
+#xwgrgcdkju .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -4214,7 +4212,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#gjsglghndq .gt_heading {
+#xwgrgcdkju .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -4225,12 +4223,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#gjsglghndq .gt_bottom_border {
+#xwgrgcdkju .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#gjsglghndq .gt_col_headings {
+#xwgrgcdkju .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4244,7 +4242,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#gjsglghndq .gt_col_heading {
+#xwgrgcdkju .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4263,7 +4261,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#gjsglghndq .gt_column_spanner_outer {
+#xwgrgcdkju .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4274,13 +4272,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#gjsglghndq .gt_column_spanner_outer:first-child {
+#xwgrgcdkju .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#gjsglghndq .gt_column_spanner_outer:last-child {
+#xwgrgcdkju .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#gjsglghndq .gt_column_spanner {
+#xwgrgcdkju .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -4291,10 +4289,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#gjsglghndq .gt_spanner_row {
+#xwgrgcdkju .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#gjsglghndq .gt_group_heading {
+#xwgrgcdkju .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4319,7 +4317,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#gjsglghndq .gt_empty_group_heading {
+#xwgrgcdkju .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -4333,13 +4331,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#gjsglghndq .gt_from_md > :first-child {
+#xwgrgcdkju .gt_from_md > :first-child {
 margin-top: 0;
 }
-#gjsglghndq .gt_from_md > :last-child {
+#xwgrgcdkju .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#gjsglghndq .gt_row {
+#xwgrgcdkju .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4357,7 +4355,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#gjsglghndq .gt_stub {
+#xwgrgcdkju .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4369,7 +4367,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gjsglghndq .gt_stub_row_group {
+#xwgrgcdkju .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4382,13 +4380,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#gjsglghndq .gt_row_group_first td {
+#xwgrgcdkju .gt_row_group_first td {
 border-top-width: 2px;
 }
-#gjsglghndq .gt_row_group_first th {
+#xwgrgcdkju .gt_row_group_first th {
 border-top-width: 2px;
 }
-#gjsglghndq .gt_summary_row {
+#xwgrgcdkju .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4397,14 +4395,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gjsglghndq .gt_first_summary_row {
+#xwgrgcdkju .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#gjsglghndq .gt_first_summary_row.thick {
+#xwgrgcdkju .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#gjsglghndq .gt_last_summary_row {
+#xwgrgcdkju .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4413,7 +4411,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#gjsglghndq .gt_grand_summary_row {
+#xwgrgcdkju .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4422,7 +4420,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gjsglghndq .gt_first_grand_summary_row {
+#xwgrgcdkju .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4431,7 +4429,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#gjsglghndq .gt_last_grand_summary_row_top {
+#xwgrgcdkju .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4440,10 +4438,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#gjsglghndq .gt_striped {
+#xwgrgcdkju .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#gjsglghndq .gt_table_body {
+#xwgrgcdkju .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4451,7 +4449,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#gjsglghndq .gt_footnotes {
+#xwgrgcdkju .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4464,7 +4462,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#gjsglghndq .gt_footnote {
+#xwgrgcdkju .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -4472,7 +4470,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gjsglghndq .gt_sourcenotes {
+#xwgrgcdkju .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4485,64 +4483,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#gjsglghndq .gt_sourcenote {
+#xwgrgcdkju .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gjsglghndq .gt_left {
+#xwgrgcdkju .gt_left {
 text-align: left;
 }
-#gjsglghndq .gt_center {
+#xwgrgcdkju .gt_center {
 text-align: center;
 }
-#gjsglghndq .gt_right {
+#xwgrgcdkju .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#gjsglghndq .gt_font_normal {
+#xwgrgcdkju .gt_font_normal {
 font-weight: normal;
 }
-#gjsglghndq .gt_font_bold {
+#xwgrgcdkju .gt_font_bold {
 font-weight: bold;
 }
-#gjsglghndq .gt_font_italic {
+#xwgrgcdkju .gt_font_italic {
 font-style: italic;
 }
-#gjsglghndq .gt_super {
+#xwgrgcdkju .gt_super {
 font-size: 65%;
 }
-#gjsglghndq .gt_footnote_marks {
+#xwgrgcdkju .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#gjsglghndq .gt_asterisk {
+#xwgrgcdkju .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#gjsglghndq .gt_indent_1 {
+#xwgrgcdkju .gt_indent_1 {
 text-indent: 5px;
 }
-#gjsglghndq .gt_indent_2 {
+#xwgrgcdkju .gt_indent_2 {
 text-indent: 10px;
 }
-#gjsglghndq .gt_indent_3 {
+#xwgrgcdkju .gt_indent_3 {
 text-indent: 15px;
 }
-#gjsglghndq .gt_indent_4 {
+#xwgrgcdkju .gt_indent_4 {
 text-indent: 20px;
 }
-#gjsglghndq .gt_indent_5 {
+#xwgrgcdkju .gt_indent_5 {
 text-indent: 25px;
 }
-#gjsglghndq .katex-display {
+#xwgrgcdkju .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#gjsglghndq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xwgrgcdkju div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -4689,8 +4687,8 @@ Tip
 </div>
 </section>
 </section>
-<section id="question-2" class="level3">
-<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
+<section id="sec-L06-SLR-More_inf" class="level3">
+<h3 class="anchored" data-anchor-id="sec-L06-SLR-More_inf">Question 2</h3>
 <p>We will continue to work with the study and dataset from Question 2 above.</p>
 <section id="part-a-1" class="level4">
 <h4 class="anchored" data-anchor-id="part-a-1">Part a</h4>
@@ -4705,8 +4703,8 @@ Tip
 <p>Give an interpretation of the coefficient of determination in the context of the study.</p>
 </section>
 </section>
-<section id="question-3" class="level3">
-<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
+<section id="sec-L07-L08-Assumptions-Diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="sec-L07-L08-Assumptions-Diagnostics">Question 3</h3>
 <p>A high respiratory rate is a potential diagnostic indicator of respiratory infection in children. To judge whether a respiratory rate is “high” however, a physician must have a clear picture of the distribution of normal rates. To this end, Italian researchers measured the respiratory rates (in breaths/minute) of 618 children between the ages of 15 days and 3 years (measured in months).</p>
 <p>The data and problem framing came from the <code>Sleuth3</code> package. Please make sure to run the following code to load the data. You can directly access the dataset <code>ex0824</code> from the package. I have included a new assignment of the data to <code>q1_data</code> if you would like to use that.</p>
 <div class="cell">
@@ -4783,53 +4781,6 @@ Tip
 <section id="part-q" class="level4">
 <h4 class="anchored" data-anchor-id="part-q">Part q</h4>
 <p>Between the model with the untransformed outcome and the transformed outcome, which would you recommend using for analysis? (Hint: there are pros and cons to both models)</p>
-</section>
-</section>
-<section id="question-4" class="level3">
-<h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
-<p>This question uses the same dataset as HW 2, question 1.</p>
-<p>This question is based on data collected as part of an observational study of patients who suffered from stroke.</p>
-<p>Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article <a href="https://pubmed.ncbi.nlm.nih.gov/21940963/">Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis</a>.</p>
-<p>The dataset that you will work with is called <code>completedata.sas7bdat</code>. The two variables we are interested in are:</p>
-<ul>
-<li><p>Covariate 1: <code>Fatalism</code> (larger values indicate that the individual feels less control of their life)</p>
-<ul>
-<li>Potential scores range from 8 to 40</li>
-</ul></li>
-<li><p>Covariate 2: <code>Optimism</code> (larger values indicate that the individual feels higher levels of optimism)</p>
-<ul>
-<li>Potential scores range from 6 to 24</li>
-</ul></li>
-<li><p>Covariate 3: <code>Spirituality</code> (larger values indicate that the individual has more belief in a higher power)</p>
-<ul>
-<li>Potential scores range from 2 to 8</li>
-</ul></li>
-<li><p>Outcome: <code>Depression</code> (larger values imply increased depression)</p>
-<ul>
-<li>Potential scores range from 0 to 27</li>
-</ul></li>
-</ul>
-<p>For our homework purposes we will assume each variable is continuous.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dep_df <span class="ot">=</span> <span class="fu">read_sas</span>(<span class="fu">here</span>(<span class="st">&quot;./data/completedata.sas7bdat&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="part-a-3" class="level4">
-<h4 class="anchored" data-anchor-id="part-a-3">Part a</h4>
-<p>Fit the regression model with all the covariates (Fatalism, Optimism, Spirituality), display the regression table, and write out the fitted regression line.</p>
-</section>
-<section id="part-b-3" class="level4">
-<h4 class="anchored" data-anchor-id="part-b-3">Part b</h4>
-<p>Interpret each coefficient (<span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, <span class="math inline">\(\beta_3\)</span>).</p>
-<p>Does the intercept make sense for the range of values that each covariate can take? Explain.</p>
-</section>
-<section id="part-c-3" class="level4">
-<h4 class="anchored" data-anchor-id="part-c-3">Part c</h4>
-<p>Recall in Homework 2, we ran a simple linear regression model for Depression vs. Fatalism with the following interpretation for the coefficient: For every 1 point higher fatalism score, there is an expected difference of 0.25 points higher depression score (95%CI: 0.17, 0.32).</p>
-<p>Does the addition of Optimism and Spirituality change our coefficient estimate for Fatalism? (No need for an official hypothesis test here. I just want us to note some differences.)</p>
-</section>
-<section id="part-d-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-d-2">Part d</h4>
-<p>From the fitted regression model, calculate the regression line when Optimism score is 10 and Spirituality score is 6.</p>
 
 
 </section>

@@ -38,7 +38,58 @@ library(here)
 
 ## Questions
 
-### Question 1
+### Question 1 {#sec-L09-MLR}
+
+```{r}
+dep_df = read_sas(here("data/completedata.sas7bdat"))
+```
+
+#### Part a
+
+::: blue
+
+```{r}
+#| echo: false
+q2_mod_f1 = lm(Depression ~ Fatalism + Optimism + Spirituality, 
+                data = dep_df)
+
+q2_mod_ft = tidy(q2_mod_f1, conf.int = T)
+
+q2_mod_ft %>% gt() %>%
+  tab_options(table.font.size = 15) %>% fmt_number(decimals = 4)
+```
+
+Another fun way to display: 
+```{r}
+tbl_regression(q2_mod_f1, intercept = T)
+```
+:::
+
+#### Part b
+
+::: blue
+-   $\beta_0$: The expected depression score is `r round(q2_mod_ft$estimate[1], 1)` when fatalism, depression, and spirituality scores are 0 (95% CI: `r round(q2_mod_ft$conf.low[1], 1)`, `r round(q2_mod_ft$conf.high[1], 1)`).
+
+    -   Same as homework 2: The intercept does not make sense. A score of 0 is outside the range of possible scores for fatalism, optimism, and spirituality.
+
+-   $\beta_1$: For every 1 point higher fatalism score, there is an expected difference of `r round(q2_mod_ft$estimate[2], 2)` points higher depression score, adjusting for optimism and spirituality score (95% CI: `r round(q2_mod_ft$conf.low[2], 2)`, `r round(q2_mod_ft$conf.high[2], 2)`).
+:::
+
+#### Part c
+
+::: blue
+Not given
+:::
+
+#### Part d
+
+::: blue
+$$\begin{aligned}
+\widehat{\text{Depression}} &= `r round(q2_mod_ft$estimate[1]  + q2_mod_ft$estimate[4] * 6 + q2_mod_ft$estimate[3] * 10, 2)` + `r round(q2_mod_ft$estimate[2], 2)` \cdot \text{Fatalism}
+\end{aligned}$$
+:::
+
+### Question 2
 
 ```{r}
 #| echo: false
@@ -111,7 +162,7 @@ anova(q2_mod_r3, q2_mod_f3) %>% tidy() %>% gt() %>% fmt_number(decimals = 2)
 :::
 
 
-### Question 2
+### Question 3
 
 ```{r}
 #| echo: false
@@ -178,7 +229,7 @@ $$\widehat{\text{Height}}|\text{Age}, \text{Diet} = ??$$
 **Interpretation** You need to work through this!
 :::
 
-### Question 3
+### Question 4
 
 ```{r}
 #| echo: false

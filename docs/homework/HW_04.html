@@ -4039,6 +4039,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -4065,9 +4069,10 @@ window.Quarto = {
   <li><a href="#directions" id="toc-directions" class="nav-link active" data-scroll-target="#directions">Directions</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a>
   <ul class="collapse">
-  <li><a href="#sec-L10-F-test" id="toc-sec-L10-F-test" class="nav-link" data-scroll-target="#sec-L10-F-test">Question 1</a></li>
-  <li><a href="#sec-L11-L12-Interactions-01" id="toc-sec-L11-L12-Interactions-01" class="nav-link" data-scroll-target="#sec-L11-L12-Interactions-01">Question 2</a></li>
-  <li><a href="#sec-L11-L12-Interactions-02" id="toc-sec-L11-L12-Interactions-02" class="nav-link" data-scroll-target="#sec-L11-L12-Interactions-02">Question 3</a></li>
+  <li><a href="#sec-L09-MLR" id="toc-sec-L09-MLR" class="nav-link" data-scroll-target="#sec-L09-MLR">Question 1</a></li>
+  <li><a href="#sec-L10-F-test" id="toc-sec-L10-F-test" class="nav-link" data-scroll-target="#sec-L10-F-test">Question 2</a></li>
+  <li><a href="#sec-L11-L12-Interactions-01" id="toc-sec-L11-L12-Interactions-01" class="nav-link" data-scroll-target="#sec-L11-L12-Interactions-01">Question 3</a></li>
+  <li><a href="#sec-L11-L12-Interactions-02" id="toc-sec-L11-L12-Interactions-02" class="nav-link" data-scroll-target="#sec-L11-L12-Interactions-02">Question 4</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -4096,7 +4101,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 15, 2025</p>
+      <p class="date-modified">January 29, 2026</p>
     </div>
   </div>
     
@@ -4111,8 +4116,8 @@ window.Quarto = {
 <section id="directions" class="level2">
 <h2 class="anchored" data-anchor-id="directions">Directions</h2>
 <ul>
-<li><p><a href="https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_04.qmd">Download the <code>.qmd</code> file here.</a></p></li>
-<li><p>You will need to download the datasets. Use <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu">this link to download</a> the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named “data” that is housed in the same location as your HW3 <code>.qmd</code> file.</p></li>
+<li><p><a href="https://github.com/nwakim/BSTA_512_26W/blob/main/homework/HW_04.qmd">Download the <code>.qmd</code> file here.</a></p></li>
+<li><p>You will need to download the datasets. Use <a href="https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Data/Homework?csf=1&amp;web=1&amp;e=es5Kgh">this link to download</a> the HW4 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named “data” that is housed in the same location as your HW4 <code>.qmd</code> file.</p></li>
 <li><p>Please upload your homework to Sakai. <strong>Upload both your <code>.qmd</code> code file and the rendered <code>.html</code> file</strong></p></li>
 <li><p>For each question, make sure to include all code and resulting output in the html file to support your answers</p></li>
 <li><p>Show the work of your calculations using R code within a code chunk. Make sure that both your code and output are visible in the rendered html file. This is the default setting.</p></li>
@@ -4134,9 +4139,9 @@ Tip
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
-<section id="sec-L10-F-test" class="level3">
-<h3 class="anchored" data-anchor-id="sec-L10-F-test">Question 1</h3>
-<p>This question uses the same dataset as HW 2, question 1 and HW 3, question 4.</p>
+<section id="sec-L09-MLR" class="level3">
+<h3 class="anchored" data-anchor-id="sec-L09-MLR">Question 1</h3>
+<p>This question uses the same dataset as HW 2, question 1.</p>
 <p>This question is based on data collected as part of an observational study of patients who suffered from stroke.</p>
 <p>Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article <a href="https://pubmed.ncbi.nlm.nih.gov/21940963/">Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis</a>.</p>
 <p>The dataset that you will work with is called <code>completedata.sas7bdat</code>. The two variables we are interested in are:</p>
@@ -4168,53 +4173,100 @@ Tip
 </section>
 <section id="part-b" class="level4">
 <h4 class="anchored" data-anchor-id="part-b">Part b</h4>
-<p>Does at least one of the covariates contribute significantly to the prediction of Depression? (Note: this is an overall test. Please follow the hypothesis test steps. To complete step 4-6, simply output your ANOVA table.)</p>
+<p>Interpret each coefficient (<span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, <span class="math inline">\(\beta_3\)</span>).</p>
+<p>Does the intercept make sense for the range of values that each covariate can take? Explain.</p>
 </section>
 <section id="part-c" class="level4">
 <h4 class="anchored" data-anchor-id="part-c">Part c</h4>
-<p>Does the addition of Spirituality add significantly to the prediction of Depression achieved by Fatalism and Optimism?</p>
+<p>Recall in Homework 2, we ran a simple linear regression model for Depression vs. Fatalism with the following interpretation for the coefficient: For every 1 point higher fatalism score, there is an expected difference of 0.25 points higher depression score (95%CI: 0.17, 0.32).</p>
+<p>Does the addition of Optimism and Spirituality change our coefficient estimate for Fatalism? (No need for an official hypothesis test here. I just want us to note some differences.)</p>
 </section>
 <section id="part-d" class="level4">
 <h4 class="anchored" data-anchor-id="part-d">Part d</h4>
+<p>From the fitted regression model, calculate the regression line when Optimism score is 10 and Spirituality score is 6.</p>
+</section>
+</section>
+<section id="sec-L10-F-test" class="level3">
+<h3 class="anchored" data-anchor-id="sec-L10-F-test">Question 2</h3>
+<p>This question uses the same dataset as HW 2, question 1 and HW 3, question 4.</p>
+<p>This question is based on data collected as part of an observational study of patients who suffered from stroke.</p>
+<p>Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article <a href="https://pubmed.ncbi.nlm.nih.gov/21940963/">Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis</a>.</p>
+<p>The dataset that you will work with is called <code>completedata.sas7bdat</code>. The two variables we are interested in are:</p>
+<ul>
+<li><p>Covariate 1: <code>Fatalism</code> (larger values indicate that the individual feels less control of their life)</p>
+<ul>
+<li>Potential scores range from 8 to 40</li>
+</ul></li>
+<li><p>Covariate 2: <code>Optimism</code> (larger values indicate that the individual feels higher levels of optimism)</p>
+<ul>
+<li>Potential scores range from 6 to 24</li>
+</ul></li>
+<li><p>Covariate 3: <code>Spirituality</code> (larger values indicate that the individual has more belief in a higher power)</p>
+<ul>
+<li>Potential scores range from 2 to 8</li>
+</ul></li>
+<li><p>Outcome: <code>Depression</code> (larger values imply increased depression)</p>
+<ul>
+<li>Potential scores range from 0 to 27</li>
+</ul></li>
+</ul>
+<p>For our homework purposes we will assume each variable is continuous.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dep_df <span class="ot">=</span> <span class="fu">read_sas</span>(<span class="fu">here</span>(<span class="st">&quot;./data/completedata.sas7bdat&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="part-a-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-a-1">Part a</h4>
+<p>Fit the regression model with all the covariates (Fatalism, Optimism, Spirituality), display the regression table, and write out the fitted regression line.</p>
+</section>
+<section id="part-b-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-1">Part b</h4>
+<p>Does at least one of the covariates contribute significantly to the prediction of Depression? (Note: this is an overall test. Please follow the hypothesis test steps. To complete step 4-6, simply output your ANOVA table.)</p>
+</section>
+<section id="part-c-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-c-1">Part c</h4>
+<p>Does the addition of Spirituality add significantly to the prediction of Depression achieved by Fatalism and Optimism?</p>
+</section>
+<section id="part-d-1" class="level4">
+<h4 class="anchored" data-anchor-id="part-d-1">Part d</h4>
 <p>Does the addition of Spirituality and Optimism add significantly to the prediction of Depression achieved by Fatalism?</p>
 </section>
 </section>
 <section id="sec-L11-L12-Interactions-01" class="level3">
-<h3 class="anchored" data-anchor-id="sec-L11-L12-Interactions-01">Question 2</h3>
+<h3 class="anchored" data-anchor-id="sec-L11-L12-Interactions-01">Question 3</h3>
 <p>A team of nutrition experts investigated the influence of protein content in diet on the relationship between age (explanatory variable) and height (outcome, in centimeters) for children. Using the dataset, <code>CH12Q03.xls</code>, answer the following questions.</p>
 <p>This question was adapted from <a href="https://catalog.lib.uchicago.edu/vufind/Record/7546272">this textbook</a>.</p>
-<section id="part-a-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-a-1">Part a</h4>
+<section id="part-a-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-a-2">Part a</h4>
 <p>Using R, make a variable that is a factor for Diet. Make sure to check what values the original variable for Diet can take. How many indicator functions do you need to represent the categorical variable Diet (protein-rich vs. protein-poor)?</p>
 </section>
-<section id="part-b-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-b-1">Part b</h4>
+<section id="part-b-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-2">Part b</h4>
 <p>At a level of significance <span class="math inline">\(\alpha = 0.10\)</span>, test whether protein diet modifies the effect of age on height. Justify your answer (e.g., perform a hypothesis test for the interaction between diet and age).</p>
 <p><em>Note: recall that we model an effect modifier with an interaction.</em></p>
 </section>
-<section id="part-c-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-c-1">Part c</h4>
+<section id="part-c-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-c-2">Part c</h4>
 <p>Is it possible that diet is a confounder? Note: this will depend on your results from Part b.</p>
 </section>
-<section id="part-d-1" class="level4">
-<h4 class="anchored" data-anchor-id="part-d-1">Part d</h4>
+<section id="part-d-2" class="level4">
+<h4 class="anchored" data-anchor-id="part-d-2">Part d</h4>
 <p>Write the fitted regression equation for our model in Part b. Write the respective regression lines for each specific diet group: protein rich and protein poor. Interpret the slope of each regression line (include the 95% CI here).</p>
 </section>
 </section>
 <section id="sec-L11-L12-Interactions-02" class="level3">
-<h3 class="anchored" data-anchor-id="sec-L11-L12-Interactions-02">Question 3</h3>
+<h3 class="anchored" data-anchor-id="sec-L11-L12-Interactions-02">Question 4</h3>
 <p>An experiment was conducted regarding a quantitative analysis of factors found in high-density lipoprotein (HDL) in a sample of human blood serum. Three variables thought to be predictive of, or associated with, HDL measurement (Y) were the total cholesterol (X1) and total triglyceride (X2) concentrations in the sample, plus the presence or absence of a certain sticky component of the serum called sinking pre-beta or SPB (X3), coded as 0 if absent and 1 if present. Using the dataset, <code>CH09Q05.xls</code>, answer the following questions.</p>
 <section id="sec-Q3-Part-a" class="level4">
 <h4 class="anchored" data-anchor-id="sec-Q3-Part-a">Part a</h4>
 <p>Use <span class="math inline">\(\alpha= 0.05\)</span>, test whether if there is a crude association between HDL measurement and total cholesterol. Note: testing for a crude association means we fit a simple linear regression model and see if the association is significant.</p>
 </section>
-<section id="part-b-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-b-2">Part b</h4>
+<section id="part-b-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-b-3">Part b</h4>
 <p>Sometimes simple linear regression leads us to believe that there is no association between two variables, but missing interaction might be obscuring the association. Use <span class="math inline">\(\alpha= 0.1\)</span> to test whether total triglyceride is an effect modifier of the association between HDL and total cholesterol. Make sure to include a concluding statement.</p>
 <p>Note: Since the data frame has the variables named as <span class="math inline">\(Y\)</span>, <span class="math inline">\(X1\)</span>, and <span class="math inline">\(X2\)</span>, you may use those in the regression equations, but when you are making a conclusion, please use the specific names of the variables to identify each. For example, <span class="math inline">\(Y\)</span> is actually HDL.</p>
 </section>
-<section id="part-c-2" class="level4">
-<h4 class="anchored" data-anchor-id="part-c-2">Part c</h4>
+<section id="part-c-3" class="level4">
+<h4 class="anchored" data-anchor-id="part-c-3">Part c</h4>
 <p>Test whether total triglyceride is a confounder by comparing the model in Part a to a model that includes total triglyceride. Make sure to include a concluding statement and interpret your coefficients.</p>
 
 

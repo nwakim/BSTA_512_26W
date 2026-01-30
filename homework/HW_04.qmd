@@ -33,9 +33,9 @@ library(here)
 
 ## Directions
 
--   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_04.qmd)
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_26W/blob/main/homework/HW_04.qmd)
 
--   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Data/Homework?csf=1&web=1&e=es5Kgh) the HW4 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW4 `.qmd` file.
 
 -   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
 
@@ -51,7 +51,62 @@ It is a good idea to try rendering your document from time to time as you go alo
 
 ## Questions
 
-### Question 1 {#sec-L10-F-test}
+### Question 1 {#sec-L09-MLR}
+
+This question uses the same dataset as HW 2, question 1.
+
+This question is based on data collected as part of an observational study of patients who suffered from stroke.
+
+Dataset: The main goal was to study various psychological factors: optimism, fatalism, depression, spirituality, and their relationship with stroke severity and other health outcomes among the study participants. Data were collected using questionnaires during a baseline interview and also medical chart review. More information about this study can be found in the article [Fatalism, optimism, spirituality, depressive symptoms and stroke outcome: a population based analysis](https://pubmed.ncbi.nlm.nih.gov/21940963/).
+
+The dataset that you will work with is called `completedata.sas7bdat`. The two variables we are interested in are:
+
+-   Covariate 1: `Fatalism` (larger values indicate that the individual feels less control of their life)
+
+    -   Potential scores range from 8 to 40
+
+-   Covariate 2: `Optimism` (larger values indicate that the individual feels higher levels of optimism)
+
+    -   Potential scores range from 6 to 24
+
+-   Covariate 3: `Spirituality` (larger values indicate that the individual has more belief in a higher power)
+
+    -   Potential scores range from 2 to 8
+
+-   Outcome: `Depression` (larger values imply increased depression)
+
+    -   Potential scores range from 0 to 27
+
+For our homework purposes we will assume each variable is continuous.
+
+```{r}
+dep_df = read_sas(here("./data/completedata.sas7bdat"))
+```
+
+#### Part a
+
+Fit the regression model with all the covariates (Fatalism, Optimism, Spirituality), display the regression table, and write out the fitted regression line.
+
+#### Part b
+
+Interpret each coefficient ($\beta_0$, $\beta_1$, $\beta_2$, $\beta_3$).
+
+Does the intercept make sense for the range of values that each covariate can take? Explain.
+
+
+#### Part c
+
+Recall in Homework 2, we ran a simple linear regression model for Depression vs. Fatalism with the following interpretation for the coefficient: For every 1 point higher fatalism score, there is an expected difference of 0.25 points higher depression score (95%CI: 0.17, 0.32).
+
+Does the addition of Optimism and Spirituality change our coefficient estimate for Fatalism? (No need for an official hypothesis test here. I just want us to note some differences.)
+
+
+#### Part d
+
+From the fitted regression model, calculate the regression line when Optimism score is 10 and Spirituality score is 6.
+
+
+### Question 2 {#sec-L10-F-test}
 
 This question uses the same dataset as HW 2, question 1 and HW 3, question 4. 
 
@@ -102,7 +157,7 @@ Does the addition of Spirituality add significantly to the prediction of Depress
 Does the addition of Spirituality and Optimism add significantly to the prediction of Depression achieved by Fatalism?
 
 
-### Question 2 {#sec-L11-L12-Interactions-01}
+### Question 3 {#sec-L11-L12-Interactions-01}
 
 A team of nutrition experts investigated the influence of protein content in diet on the relationship between age (explanatory variable) and height (outcome, in centimeters) for children. Using the dataset, `CH12Q03.xls`, answer the following questions.
 
@@ -132,7 +187,7 @@ Is it possible that diet is a confounder? Note: this will depend on your results
 
 Write the fitted regression equation for our model in Part b. Write the respective regression lines for each specific diet group: protein rich and protein poor. Interpret the slope of each regression line (include the 95% CI here).
 
-### Question 3 {#sec-L11-L12-Interactions-02}
+### Question 4 {#sec-L11-L12-Interactions-02}
 
 An experiment was conducted regarding a quantitative analysis of factors found in high-density lipoprotein (HDL) in a sample of human blood serum. Three variables thought to be predictive of, or associated with, HDL measurement (Y) were the total cholesterol (X1) and total triglyceride (X2) concentrations in the sample, plus the presence or absence of a certain sticky component of the serum called sinking pre-beta or SPB (X3), coded as 0 if absent and 1 if present. Using the dataset, `CH09Q05.xls`, answer the following questions.
 
