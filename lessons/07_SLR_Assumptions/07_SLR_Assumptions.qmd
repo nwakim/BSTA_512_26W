@@ -3,8 +3,7 @@ title: "Lesson 7: SLR: Checking model assumptions"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "01/29/2025"
-categories: ["Week 4"]
+date: "`r library(here); source(here('class_dates.R')); w5d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -44,8 +43,7 @@ library(pwr)
 library(gridExtra) # NEW!!!
 library(readxl)
 
-# terminal: for icons
-# quarto install extension quarto-ext/fontawesome
+set.seed(43245)
 
 # set ggplot theme for slides 
 theme_set(theme_bw(base_size = 22))
@@ -56,8 +54,14 @@ theme_set(theme_bw(base_size = 22))
 #| include: false
 #| message: false
 #| warning: false
-gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA") 
-gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
+
+
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F"))
 ```
 
 
@@ -166,31 +170,39 @@ Model Use (Inference)
 
 ## Let's remind ourselves of one model we have been working with
 
--   We have been looking at the association between life expectancy and female literacy rate
+-   We have been looking at the association between life expectancy and cell phones
 
 -   We used OLS to find the coefficient estimates of our best-fit line
 
 ::: columns
 ::: {.column width="55%"}
-Population model: $$Y = \beta_0 + \beta_1 X + \epsilon$$
+Population model: 
+
+```{=tex}
+\begin{aligned}
+Y &= \beta_0 + \beta_1 \cdot X + \epsilon \\
+\text{LE} &= \beta_0 + \beta_1 \text{CP} + \epsilon
+\end{aligned}
+```
 
 Estimated model:
 ```{r}
 #| echo: false
 
-model1 <- lm(LifeExpectancyYrs ~
-               FemaleLiteracyRate,
-                 data = gapm)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 # Get regression table:
-tidy(model1) %>% gt() %>% 
+tidy_model1 = tidy(model1)
+
+reg_table = tidy_model1 %>% gt() %>% 
  tab_options(table.font.size = 40) %>%
- fmt_number(decimals = 2)
+ fmt_number(decimals = 3)
+reg_table
 ```
 
 ```{=tex}
 \begin{aligned}
 \widehat{Y} &= \widehat\beta_0 + \widehat\beta_1 \cdot X\\
-\widehat{\text{LE}} &= 50.9 + 0.232 \cdot \text{FLR}
+\widehat{\text{LE}} &=  `r tidy_model1$estimate[1] %>% round(digits=2)` + `r tidy_model1$estimate[2] %>% round(digits=3)`\cdot\text{CP}
 \end{aligned}
 ```
 :::
@@ -205,17 +217,19 @@ tidy(model1) %>% gt() %>%
 #| echo: false
 
 # gapm <- read_csv("data/lifeexp_femlit_2011.csv")
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+gapm_slr_plot = gapm %>%
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))
+        title = element_text(size = 25))
 
+gapm_slr_plot
 ```
 :::
 :::
@@ -245,17 +259,15 @@ $$
 #| fig-align: center
 # code from https://drsimonj.svbtle.com/visualising-residuals
 
-model1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate,
-                 data = gapm)
 regression_points <- augment(model1)
 # summary(model1)
 # sum(model1$residuals^2)
 
 ggplot(regression_points, 
-       aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_segment(aes(
-    xend = FemaleLiteracyRate, 
+    xend = cell_phones_100, 
     yend = .fitted), 
     alpha = 1, 
     color = "#4FADF3", 
@@ -266,11 +278,12 @@ ggplot(regression_points,
   #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
     #guides(color = "none") +
   geom_point(aes(y = .fitted), shape = 1, size = 4) +
-labs(x = "Female literacy rate (%)", 
-       y = "Life expectancy (years)") +
-    theme(axis.title = element_text(size = 30), 
+labs(x = "Cell phones per 100 people", 
+       y = "Life expectancy (years)",
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))  
+        title = element_text(size = 25)) 
 ```
 :::
 :::
@@ -324,10 +337,10 @@ These are the model assumptions made in ordinary least squares:
 ::: columns
 ::: {.column width="35%"}
 -   The relationship between the variables is linear (a straight line):
-    -   The mean value of $Y$ given $X$, $\mu_{y|x}$ or $E[Y|X]$, is a
+    -   The mean value of $Y$ given $X$ (aka $\widehat{Y}|X$, $\mu_{y|x}$ or $E[Y|X]$) is a
         straight-line function of $X$
 
-$$\mu_{y|x} = \beta_0 + \beta_1 \cdot X$$
+$$\widehat{Y}|X = \beta_0 + \beta_1 \cdot X$$
 :::
 
 ::: {.column width="65%"}
@@ -337,12 +350,12 @@ $$\mu_{y|x} = \beta_0 + \beta_1 \cdot X$$
 #| fig-height: 8
 #| fig-width: 11
 
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_point(size = 3, se=FALSE) +
   geom_smooth(method = "lm", se = FALSE, size = 2, colour="#F14124") +
   geom_smooth(size=2) +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)") +
     theme(axis.title = element_text(size = 30), 
         axis.text = element_text(size = 30))
@@ -379,6 +392,9 @@ ggplot(gapm, aes(x = FemaleLiteracyRate,
 -   Equivalently, the measurement (random) errors $\epsilon_i$ ’s
     normally distributed
     -   This is more often what we check
+
+$$\epsilon \sim N(0, \sigma^2)$$    
+    
 :::
 
 ::: column
@@ -390,17 +406,17 @@ ggplot(gapm, aes(x = FemaleLiteracyRate,
 #| fig-align: center
 # code from https://drsimonj.svbtle.com/visualising-residuals
 
-model1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate,
+model1 <- lm(life_exp ~ cell_phones_100,
                  data = gapm)
 regression_points <- augment(model1)
 # summary(model1)
 # sum(model1$residuals^2)
 
 ggplot(regression_points, 
-       aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+       aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_segment(aes(
-    xend = FemaleLiteracyRate, 
+    xend = cell_phones_100, 
     yend = .fitted), 
     alpha = 1, 
     color = "#4FADF3", 
@@ -411,24 +427,31 @@ ggplot(regression_points,
   #scale_color_gradient2(low = "#213c96", mid = "white", high = "#F14124") +  # Colors to use here
     #guides(color = "none") +
   geom_point(aes(y = .fitted), shape = 1, size = 4) +
-labs(x = "Female literacy rate (%)", 
+labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))  
+        title = element_text(size = 25)) 
 ```
 :::
 :::
 
 ## E: Equality of variance of the residuals
 
+::: columns
+::: {.column width="60%"}
 -   The variance of $Y$ given $X$ ($\sigma_{Y|X}^2$), is the same for
     any $X$
 
     -   We use just $\sigma^2$ to denote the common variance
 
 -   This is also called **homoscedasticity**
+:::
+::: {.column width="40%"}
+$$\epsilon \sim N(0, \sigma^2)$$ 
+:::
+:::
 
 ![](../img_slides/OLSassumptions-1.png){fig-align="center"}
 
@@ -473,16 +496,18 @@ In mathematical form: \
 :::
 
 ::: {.column width="40%"}
-$Y|X \overset{\text{i.i.d.}}{\sim} N(\beta_0 + \beta_1X, \sigma^2)$
+$Y_i|X \overset{\text{i.i.d.}}{\sim} N(\beta_0 + \beta_1X, \sigma^2)$
 :::
 
 ::: {.column width="40%"}
-$\epsilon \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$
+$\epsilon_i \overset{\text{i.i.d.}}{\sim} N(0, \sigma^2)$
 :::
 
 ::: {.column width="10%"}
 :::
 :::
+
+where "iid" means independent and identically distributed
 
 
 ## How do we determine if our model follows the LINE assumptions?
@@ -577,15 +602,15 @@ Is the association between the variables **linear**?
 #| echo: false
 #| fig-align: center
 
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_point(size = 3, se=FALSE) +
   geom_smooth(method = "lm", se = FALSE, size = 2, colour="#F14124") +
-  geom_smooth(size=2, se=F) +
-  labs(x = "Female literacy rate (%)", 
+  geom_smooth(size=2) +
+  labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)") +
     theme(axis.title = element_text(size = 20), 
-        axis.text = element_text(size = 18))
+        axis.text = element_text(size = 20))
 ```
 
 ## Poll Everywhere Question 2
@@ -640,8 +665,7 @@ ggplot(gapm, aes(x = FemaleLiteracyRate,
     some other important values.
 
 ```{r}
-model1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate, 
-                data = gapm)
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
 aug1 <- augment(model1) 
 
 glimpse(aug1)
@@ -679,7 +703,7 @@ grid.arrange(hist1, density1, box1, nrow = 1)
 grid.arrange(hist1, density1, box1, nrow = 1)
 ```
 
-- My assessment: Looks like our residuals could be normal if we did not have those values around -20
+- **My assessment:** Looks like our residuals could be normal if we did not have those values around -20
 
 
 ## N: Normal QQ plots (QQ = quantile-quantile)
@@ -910,7 +934,7 @@ grid.arrange(norm_qq, unif_qq, t_qq, skewed_qq, nrow = 1)
 
 ::: columns
 ::: column
--   QQ plot from Life Expectancy vs. Female Literacy Rate Regression
+-   QQ plot from life expectancy vs. cell phones regression
 
 ```{r}
 #| fig.align: center
@@ -925,7 +949,7 @@ ggplot(aug1,
 :::
 
 ::: column
--   Simulated QQ plot of Normal Residuals with $n = 80$
+-   Simulated QQ plot of Normal Residuals with $n = 105$
 
 ```{r}
 #| fig.align: center
@@ -934,7 +958,7 @@ ggplot(aug1,
 
 ggplot() +
   stat_qq(aes(
-    sample = rnorm(80))) + 
+    sample = rnorm(105))) + 
   geom_abline(
     intercept = 0, slope = 1, 
     color = "blue")
@@ -946,6 +970,8 @@ ggplot() +
 
 -   Goodness-of-fit test for the normal distribution: Is there evidence
     that our residuals are from a normal distribution?
+
+- **Honestly: I don't use this test very often in practice**
 
 -   Hypothesis test:
 
@@ -968,7 +994,7 @@ Conclusion
 :::
 
 ::: thm-cont
-Reject the null. Data are not from a normal distribution.
+Fail to reject the null. Data are not from a normal distribution.
 :::
 :::
 :::
@@ -1010,7 +1036,7 @@ Reject the null. Data are not from a normal distribution.
 #| fig-show: hide
 
 ggplot(aug1, 
-       aes(x = FemaleLiteracyRate, 
+       aes(x = cell_phones_100, 
            y = .resid)) + 
   geom_point(size = 2) +
   geom_abline( intercept = 0, slope = 0,
@@ -1037,11 +1063,11 @@ ggplot(aug1,
 ## `autoplot()` can be a helpful tool
 
 ```{r}
-#| fig-width: 8
+#| fig-width: 10
 #| fig-align: center
 
 library(ggfortify)
-autoplot(model1) + theme(text=element_text(size=14))
+autoplot(model1, size = 1) + theme(text=element_text(size=14))
 ```
 
 ## Summary of the assumptions and their diagnostic tool
@@ -1073,11 +1099,14 @@ autoplot(model1) + theme(text=element_text(size=14))
 ## We didn't really go over our options when these assumptions do not hold
 
 - We will consider this more once we get into multiple linear regression
-- For now, with SLR, when assumptions do not hold, I conclude we need to add more variables in the model
+- For now, with SLR, when assumptions do not hold, there are three next steps I can take:
+  1. Add more variables to the model (SLR is not usually enough to explain an outcome)
+  2. Check flagged countries (more in next lesson)
+  3. See if we need to transform the response variable (more in a future lesson)
 
  
 
-- Another note: I did not make these plots very presentable
+- Another note: I do not typically make these plots very presentable
   - Axes were left with whatever names were given to them
-  - These plots are usually just for us! 
-  - Not really something that you include in a formal report
+  - **These plots are usually just for us!**
+  - **Not really something that you include in a formal report**

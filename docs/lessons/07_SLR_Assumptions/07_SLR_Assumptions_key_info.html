@@ -69,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -135,6 +106,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -159,7 +134,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
-  <li><a href="#homework-1-review" id="toc-homework-1-review" class="nav-link" data-scroll-target="#homework-1-review">Homework 1 Review</a></li>
+  <li><a href="#events" id="toc-events" class="nav-link" data-scroll-target="#events">Events</a>
+  <ul class="collapse">
+  <li><a href="#algorithmic-bias-a-practical-introduction" id="toc-algorithmic-bias-a-practical-introduction" class="nav-link" data-scroll-target="#algorithmic-bias-a-practical-introduction">Algorithmic Bias: A Practical Introduction</a></li>
+  <li><a href="#scholarship-work-party" id="toc-scholarship-work-party" class="nav-link" data-scroll-target="#scholarship-work-party">Scholarship Work Party!</a></li>
+  </ul></li>
   <li><a href="#key-dates" id="toc-key-dates" class="nav-link" data-scroll-target="#key-dates">Key Dates</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="07_SLR_Assumptions_key_info.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -181,7 +160,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">January 30, 2026</p>
     </div>
   </div>
     
@@ -194,44 +173,35 @@ window.Quarto = {
 
 <section id="announcements" class="level2">
 <h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+</section>
+<section id="events" class="level2">
+<h2 class="anchored" data-anchor-id="events">Events</h2>
+<section id="algorithmic-bias-a-practical-introduction" class="level3">
+<h3 class="anchored" data-anchor-id="algorithmic-bias-a-practical-introduction">Algorithmic Bias: A Practical Introduction</h3>
+<p>The Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is offering a brand-new seminar in our Responsible Practice in Data and Analysis series. Alicia Johnson is leading this seminar on Friday, February 13. Flier attached; session <a href="https://urldefense.com/v3/__https://ohsu.csod.com/ui/lms-learning-details/app/event/1a40dce3-f716-4f50-9b8d-b0ffbb79efc6__;!!Mi0JBg!J_FZKpWO-hsmRDFAgAyx6mq9WtXTsyPm04HVO4TcxVsleaonXnpYFh6bbimKktbZipfJx7Z1FWr2leoAARDWXEmVh4c$">in Compass</a>; here’s the <a href="https://www.ohsu.edu/octri/octri-berd-algorithmic-bias-practical-introduction">event page</a>.</p>
+</section>
+<section id="scholarship-work-party" class="level3">
+<h3 class="anchored" data-anchor-id="scholarship-work-party">Scholarship Work Party!</h3>
 <ul>
-<li>From exit ticket at 11:15am on 1/28, everyone either voted for Friday or “no preference”
+<li>Sunday, February 8th 10 am - 1pm in VPT 260 &amp; VPT 262</li>
+<li>Join us for this drop-in style scholarship work party! Welcome for applicants in all stages — from just starting to final draft polishing.</li>
+<li>You’ll receive:
 <ul>
-<li>HW and labs will be due on Friday now!!</li>
-<li>Including HW 2!</li>
+<li>Built-in accountability &amp; focused work time on your scholarship applications</li>
+<li>Quick overview of where to find scholarships and what reviewers look for</li>
+<li>Personalized, real-time support from staff from the Financial Aid Office, Writing Center, SPH Staff</li>
+<li>Feedback on your materials (personal statements, short answers, and more)</li>
 </ul></li>
-<li>Make sure you are turning in your HW
-<ul>
-<li>Even HW 0! Some people have not turned it in</li>
-<li>There is no late penalty!</li>
-</ul></li>
-<li>For muddy points, it’s helpful if you have exact questions along with the muddy point.
-<ul>
-<li>For example, from Monday I received a lot of “F test.”</li>
-</ul></li>
+<li>Yes, snacks are provided! Street Parking is free until 1pm!</li>
+<li><a href="http://click.send.ohsu.edu/?qs=e0e8dbe8e54efafce36083e9299faa45f1844d703638c8f494396770c97704ca7abf401ea7aeb3d8100dc9791f1da794af1f878766163b71">RSVP Here!</a></li>
 </ul>
 </section>
-<section id="homework-1-review" class="level2">
-<h2 class="anchored" data-anchor-id="homework-1-review">Homework 1 Review</h2>
-<ul>
-<li>Check your feedback!!</li>
-<li>Question 6: regression with age and weight
-<ul>
-<li>The dry weight is our outcome! It is important to always use <code>Y ~ X</code> in the <code>lm()</code> function!</li>
-<li>Stating the population simple linear regression model = writing it out using <span class="math inline">\(\beta\)</span>s and stuff</li>
-</ul></li>
-<li>Question 4: The choice of an alternative hypothesis should depend primarily on (choose all that apply). Explain your reasoning.
-<ul>
-<li>When creating the hypothesis tests, you should not use the data collected to determine the test</li>
-<li>Your alternative should be formed from prior work/research</li>
-</ul></li>
-<li>Population models should either be written like <span class="math inline">\(E(Y|X) = \beta_0 + \beta_1 X\)</span> or <span class="math inline">\(Y = \beta_0 + \beta_1 X + \epsilon\)</span></li>
-</ul>
 </section>
 <section id="key-dates" class="level2">
 <h2 class="anchored" data-anchor-id="key-dates">Key Dates</h2>
 <ul>
-<li>Homework 2 due on Friday!!</li>
+<li>Homework 2 due 2/1 at 11pm</li>
+<li>Lab 2 due 2/8 at 11pm</li>
 </ul>
 
 

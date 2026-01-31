@@ -849,38 +849,6 @@ This is true when we use the F-test for a single coefficient!
 - We can use the t-test or F-test for a categorical variable with only 2 levels
 
 ## Poll Everywhere Question 3
-    
-## Building a very important toolkit: three types of tests
-
-::: fact
-::: fact-title
-Overall test (in a couple classes)
-:::
-
-::: fact-cont
-Does at least one of the covariates/predictors contribute significantly to the prediction of Y?
-:::
-:::
-
-::: example
-::: ex-title
-Test for addition of a single variable (covariate subset test)
-:::
-
-::: ex-cont
-Does the addition of one particular covariate add significantly to the prediction of Y achieved by other covariates already present in the model?
-:::
-:::
-
-::: proposition
-::: prop-title
-Test for addition of group of variables (covariate subset test) (in a couple classes)
-:::
-
-::: prop-cont
-Does the addition of some group of covariates add significantly to the prediction of Y achieved by other covariates already present in the model?
-:::
-:::
 
 ## We can extend our look at the F-test
 

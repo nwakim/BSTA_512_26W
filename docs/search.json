@@ -1131,7 +1131,7 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions_key_info.html#key-dates",
     "title": "Key Info and Announcements",
     "section": "Key Dates",
-    "text": "Key Dates\n\nHomework 2 due on Friday!!"
+    "text": "Key Dates\n\nHomework 2 due 2/1 at 11pm\nLab 2 due 2/8 at 11pm"
   },
   {
     "objectID": "lessons/13_Model_selection/13_Model_selection_muddy_points.html",
@@ -2369,15 +2369,15 @@
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#lets-map-that-to-our-regression-analysis-process",
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#lets-map-that-to-our-regression-analysis-process",
     "title": "Lesson 10: MLR: Using the F-test",
-    "section": "",
-    "text": "Model Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)"
+    "section": "Let’s map that to our regression analysis process",
+    "text": "Let’s map that to our regression analysis process\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#we-must-revisit-our-dear-friend-the-f-test",
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#we-must-revisit-our-dear-friend-the-f-test",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "We must revisit our dear friend, the F-test!",
-    "text": "We must revisit our dear friend, the F-test!\n\n\n\nhttps://www.writerswrite.co.za/foreshadowing/"
+    "text": "We must revisit our dear friend, the F-test!\n\nhttps://www.writerswrite.co.za/foreshadowing/"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#remember-from-lesson-5-f-test-vs.-t-test-for-the-population-slope",
@@ -2391,14 +2391,14 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#remember-from-lesson-5-planting-a-seed-about-the-f-test",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Remember from Lesson 5: Planting a seed about the F-test",
-    "text": "Remember from Lesson 5: Planting a seed about the F-test\nWe can think about the hypothesis test for the slope…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\n\\(\\beta_1\\neq0\\)\n\n\n\n\nin a slightly different way…\n\n\n\n\n\n\nNull model (\\(\\beta_1=0\\))\n\n\n\n\\(Y = \\beta_0 + \\epsilon\\)\nSmaller (reduced) model\n\n\n\n\n\n\nAlternative model (\\(\\beta_1\\neq0\\))\n\n\n\n\\(Y = \\beta_0 + \\beta_1 X + \\epsilon\\)\nLarger (full) model\n\n\n\n\n\n\nIn multiple linear regression, we can start using this framework to test multiple coefficient parameters at once\n\nDecide whether or not to reject the smaller reduced model in favor of the larger full model\nCannot do this with the t-test!"
+    "text": "Remember from Lesson 5: Planting a seed about the F-test\nWe can think about the hypothesis test for the slope…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\n\\(\\beta_1\\neq0\\)\n\n\n\nin a slightly different way…\n\n\n\n\n\n\nNull model (\\(\\beta_1=0\\))\n\n\n\n\\(Y = \\beta_0 + \\epsilon\\)\nSmaller (reduced) model\n\n\n\n\n\n\nAlternative model (\\(\\beta_1\\neq0\\))\n\n\n\n\\(Y = \\beta_0 + \\beta_1 X + \\epsilon\\)\nLarger (full) model\n\n\n\n\n\nIn multiple linear regression, we can start using this framework to test multiple coefficient parameters at once\n\nDecide whether or not to reject the smaller reduced model in favor of the larger full model\nCannot do this with the t-test!"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#we-can-extend-this",
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#we-can-extend-this",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "We can extend this!!",
-    "text": "We can extend this!!\nWe can create a hypothesis test for more than one coefficient at a time…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=\\beta_2=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\n\\(\\beta_1\\neq0\\) and/or \\(\\beta_2\\neq0\\)\n\n\n\n\nin a slightly different way…\n\n\n\n\n\n\nNull model\n\n\n\n\\(Y = \\beta_0 + \\epsilon\\)\nSmaller (reduced) model\n\n\n\n\n\n\nAlternative* model\n\n\n\n\\(Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\epsilon\\)\nLarger (full) model\n\n\n\n\n\n*This is not quite the alternative, but if we reject the null, then this is the model we move forward with"
+    "text": "We can extend this!!\nWe can create a hypothesis test for more than one coefficient at a time…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=\\beta_2=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\n\\(\\beta_1\\neq0\\) and/or \\(\\beta_2\\neq0\\)\n\n\n\nin a slightly different way…\n\n\n\n\n\n\nNull model\n\n\n\n\\(Y = \\beta_0 + \\epsilon\\)\nSmaller (reduced) model\n\n\n\n\n\n\nAlternative* model\n\n\n\n\\(Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\epsilon\\)\nLarger (full) model\n\n\n\n\n*This is not quite the alternative, but if we reject the null, then this is the model we move forward with"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#poll-everywhere-question-1",
@@ -2454,7 +2454,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#what-did-you-notice-in-the-plots",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "What did you notice in the plots?",
-    "text": "What did you notice in the plots?\n\n\n\nSimple Linear Regression\n\n\n\nMultiple Linear Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n \n\\[SSR = 27.24\\]\n \n \n\\[SSE =37.39\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n \n\\[SSR = 36.39\\]\n \n \n\\[SSE =28.25\\]"
+    "text": "What did you notice in the plots?\n\n\n\nSimple Linear Regression\n\n\n\nMultiple Linear Regression\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n \n\\[SSR = 27.24\\]\n \n \n\\[SSE =37.39\\]\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n \n\\[SSR = 36.39\\]\n \n \n\\[SSE =28.25\\]"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#when-running-a-f-test-for-linear-models",
@@ -2482,7 +2482,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#overall-f-test",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Overall F-test",
-    "text": "Overall F-test\nDoes at least one of the covariates/predictors contribute significantly to the prediction of Y?\n\nFor a general population MLR model, \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2+ \\ldots + \\beta_k X_k + \\epsilon\\]\n\nWe can create a hypothesis test for all the covariate coefficients…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=\\beta_2= \\ldots=\\beta_k=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\nAt least one \\(\\beta_j\\neq0\\) (for \\(j=1, 2, \\ldots, k\\))\n\n\n\n\n\n\n\n\n\n\n\n\nNull / Smaller / Reduced model\n\n\n\\(Y = \\beta_0 + \\epsilon\\)\n\n\n\n\n\nAlternative / Larger / Full model\n\n\n\\(Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\ldots + \\beta_k X_k + \\epsilon\\)"
+    "text": "Overall F-test\nDoes at least one of the covariates/predictors contribute significantly to the prediction of Y?\n\nFor a general population MLR model, \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2+ \\ldots + \\beta_k X_k + \\epsilon\\]\n\nWe can create a hypothesis test for all the covariate coefficients…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=\\beta_2= \\ldots=\\beta_k=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\nAt least one \\(\\beta_j\\neq0\\) (for \\(j=1, 2, \\ldots, k\\))\n\n\n\n\n\n\n\n\n\n\n\nNull / Smaller / Reduced model\n\n\n\\(Y = \\beta_0 + \\epsilon\\)\n\n\n\n\n\nAlternative / Larger / Full model\n\n\n\\(Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\ldots + \\beta_k X_k + \\epsilon\\)"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#overall-f-test-general-steps-for-hypothesis-test",
@@ -2517,7 +2517,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#comparing-the-ssy-ssr-and-sse-for-reduced-and-full-model-1",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Comparing the SSY, SSR, and SSE for reduced and full model",
-    "text": "Comparing the SSY, SSR, and SSE for reduced and full model\n\n\n\nReduced / null model\n\n\\[LE = \\beta_0 + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 0\\]\n \n\\[SSE = 64.64\\]\n\n\n\n\nFull / Alternative model\n\n\\[LE = \\beta_0 + \\beta_1 FLR + \\beta_2 FS + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 36.39\\]\n \n\\[SSE = 28.25\\]"
+    "text": "Comparing the SSY, SSR, and SSE for reduced and full model\n\n\n\nReduced / null model\n\n\\[LE = \\beta_0 + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 0\\]\n \n\\[SSE = 64.64\\]\n\n\n\nFull / Alternative model\n\n\\[LE = \\beta_0 + \\beta_1 FLR + \\beta_2 FS + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 36.39\\]\n \n\\[SSE = 28.25\\]"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#poll-everywhere-question-3",
@@ -2552,7 +2552,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#covariate-subset-test-single-variable",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Covariate subset test: Single variable",
-    "text": "Covariate subset test: Single variable\nDoes the addition of one particular covariate of interest (a numeric covariate with only one coefficient) add significantly to the prediction of Y achieved by other covariates already present in the model?\n\nFor a general population MLR model, \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2+ \\beta_j X_j +\\ldots + \\beta_k X_k + \\epsilon\\]\n\nWe can create a hypothesis test for a single \\(j\\) covariate coefficient (where \\(j\\) can be any value \\(1, 2, \\ldots, k\\))…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_j=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\n\\(\\beta_j\\neq0\\)\n\n\n\n\n\n\n\n\n\n\n\n\nNull / Smaller / Reduced model\n\n\n\\(Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\ldots + \\beta_k X_k + \\epsilon\\)\n\n\n\n\n\nAlternative / Larger / Full model\n\n\n\\(\\begin{aligned}Y = &\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_j X_j +\\\\ &\\ldots + \\beta_k X_k + \\epsilon \\end{aligned}\\)"
+    "text": "Covariate subset test: Single variable\nDoes the addition of one particular covariate of interest (a numeric covariate with only one coefficient) add significantly to the prediction of Y achieved by other covariates already present in the model?\n\nFor a general population MLR model, \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2+ \\beta_j X_j +\\ldots + \\beta_k X_k + \\epsilon\\]\n\nWe can create a hypothesis test for a single \\(j\\) covariate coefficient (where \\(j\\) can be any value \\(1, 2, \\ldots, k\\))…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_j=0\\)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\n\\(\\beta_j\\neq0\\)\n\n\n\n\n\n\n\n\n\n\n\nNull / Smaller / Reduced model\n\n\n\\(Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\ldots + \\beta_k X_k + \\epsilon\\)\n\n\n\n\n\nAlternative / Larger / Full model\n\n\n\\(\\begin{aligned}Y = &\\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_j X_j +\\\\ &\\ldots + \\beta_k X_k + \\epsilon \\end{aligned}\\)"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#single-covariate-f-test-general-steps-for-hypothesis-test-reference",
@@ -2573,7 +2573,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#comparing-the-ssy-ssr-and-sse-for-reduced-and-full-model-2",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Comparing the SSY, SSR, and SSE for reduced and full model",
-    "text": "Comparing the SSY, SSR, and SSE for reduced and full model\n\n\nReduced / null model \\[LE = \\beta_0 + \\beta_1 FLR + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 27.24\\]\n \n\\[SSE = 37.39\\]\n\n\n\nFull / Alternative model \\[LE = \\beta_0 + \\beta_1 FLR + \\beta_2 FS + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 36.39\\]\n \n\\[SSE = 28.25\\]"
+    "text": "Comparing the SSY, SSR, and SSE for reduced and full model\n\n\nReduced / null model \\[LE = \\beta_0 + \\beta_1 FLR + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 27.24\\]\n \n\\[SSE = 37.39\\]\n\n\nFull / Alternative model \\[LE = \\beta_0 + \\beta_1 FLR + \\beta_2 FS + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 36.39\\]\n \n\\[SSE = 28.25\\]"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#poll-everywhere-question-4",
@@ -2608,7 +2608,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#covariate-subset-test-group-of-coefficients",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Covariate subset test: group of coefficients",
-    "text": "Covariate subset test: group of coefficients\nDoes the addition of some group of covariates of interest (or a multi-level categorical variable) add significantly to the prediction of Y obtained through other independent variables already present in the model?\n\nFor a general population MLR model, \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2+ \\ldots + \\beta_k X_k + \\epsilon\\]\n\nWe can create a hypothesis test for a group of covariate coefficients (subset of many)… For example…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=\\beta_3 =0\\) (this can be any coefficients)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\nAt least one \\(\\beta_j\\neq0\\) (for \\(j=2,3\\))\n\n\n\n\n\n\n\n\n\n\n\n\nNull / Smaller / Reduced model\n\n\n\\(Y = \\beta_0 + \\beta_2 X_2 + \\epsilon\\)\n\n\n\n\n\nAlternative / Larger / Full model\n\n\n\\(Y = \\beta_0 + \\beta_1 X + \\beta_2 X + \\beta_3 X_3+\\epsilon\\)"
+    "text": "Covariate subset test: group of coefficients\nDoes the addition of some group of covariates of interest (or a multi-level categorical variable) add significantly to the prediction of Y obtained through other independent variables already present in the model?\n\nFor a general population MLR model, \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2+ \\ldots + \\beta_k X_k + \\epsilon\\]\n\nWe can create a hypothesis test for a group of covariate coefficients (subset of many)… For example…\n\n\n\n\n\n\nNull \\(H_0\\)\n\n\n\\(\\beta_1=\\beta_3 =0\\) (this can be any coefficients)\n\n\n\n\n\nAlternative \\(H_1\\)\n\n\nAt least one \\(\\beta_j\\neq0\\) (for \\(j=2,3\\))\n\n\n\n\n\n\n\n\n\n\n\nNull / Smaller / Reduced model\n\n\n\\(Y = \\beta_0 + \\beta_2 X_2 + \\epsilon\\)\n\n\n\n\n\nAlternative / Larger / Full model\n\n\n\\(Y = \\beta_0 + \\beta_1 X + \\beta_2 X + \\beta_3 X_3+\\epsilon\\)"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#covariate-subset-f-test-general-steps-for-hypothesis-test-reference",
@@ -2629,7 +2629,7 @@
     "href": "lessons/10_MLR_F-test/10_MLR_F-test.html#comparing-the-ssy-ssr-and-sse-for-reduced-and-full-model-3",
     "title": "Lesson 10: MLR: Using the F-test",
     "section": "Comparing the SSY, SSR, and SSE for reduced and full model",
-    "text": "Comparing the SSY, SSR, and SSE for reduced and full model\n\n\nReduced / null model \\[LE = \\beta_0 + \\beta_1 FLR + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 27.24\\]\n \n\\[SSE = 37.39\\]\n\n\n\nFull / Alternative model \\[LE = \\beta_0 + \\beta_1 FLR + \\beta_2 FS + \\beta_3 WS + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 43.26\\]\n \n\\[SSE = 21.38\\]"
+    "text": "Comparing the SSY, SSR, and SSE for reduced and full model\n\n\nReduced / null model \\[LE = \\beta_0 + \\beta_1 FLR + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 27.24\\]\n \n\\[SSE = 37.39\\]\n\n\nFull / Alternative model \\[LE = \\beta_0 + \\beta_1 FLR + \\beta_2 FS + \\beta_3 WS + \\epsilon\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\\[SSY = 64.64\\]\n \n\\[SSR = 43.26\\]\n \n\\[SSE = 21.38\\]"
   },
   {
     "objectID": "lessons/10_MLR_F-test/10_MLR_F-test.html#so-lets-step-through-our-hypothesis-test-13-2",
@@ -3755,22 +3755,22 @@
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#process-of-regression-data-analysis",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#process-of-regression-data-analysis",
     "title": "Lesson 7: SLR: Checking model assumptions",
-    "section": "",
-    "text": "Model Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)\nPrediction of new \\(Y\\) given \\(X\\)"
+    "section": "Process of regression data analysis",
+    "text": "Process of regression data analysis\n\n  \n\n\n\n\nModel Selection\n\n\n\nBuilding a model\nSelecting variables\nPrediction vs interpretation\nComparing potential models\n\n\n\n\n\n\n\n\nModel Fitting\n\n\n\nFind best fit line\nUsing OLS in this class\nParameter estimation\nCategorical covariates\nInteractions\n\n\n\n\n\n\n\n\nModel Evaluation\n\n\n\nEvaluation of model fit\nTesting model assumptions\nResiduals\nTransformations\nInfluential points\nMulticollinearity\n\n\n\n\n\n\n\nModel Use (Inference)\n\n\n\n\n\nInference for coefficients\nHypothesis testing for coefficients\n\n\n\nInference for expected \\(Y\\) given \\(X\\)\nPrediction of new \\(Y\\) given \\(X\\)"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#lets-remind-ourselves-of-one-model-we-have-been-working-with",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#lets-remind-ourselves-of-one-model-we-have-been-working-with",
     "title": "Lesson 7: SLR: Checking model assumptions",
-    "section": "",
-    "text": "We have been looking at the association between life expectancy and female literacy rate\nWe used OLS to find the coefficient estimates of our best-fit line\n\n\n\nPopulation model: \\[Y = \\beta_0 + \\beta_1 X + \\epsilon\\]\nEstimated model:\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n50.93\n2.66\n19.14\n0.00\n\n\nFemaleLiteracyRate\n0.23\n0.03\n7.38\n0.00\n\n\n\n\n\n\n\n\\[\\begin{aligned}\n\\widehat{Y} &= \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot X\\\\\n\\widehat{\\text{LE}} &= 50.9 + 0.232 \\cdot \\text{FLR}\n\\end{aligned}\\]"
+    "section": "Let’s remind ourselves of one model we have been working with",
+    "text": "Let’s remind ourselves of one model we have been working with\n\nWe have been looking at the association between life expectancy and cell phones\nWe used OLS to find the coefficient estimates of our best-fit line\n\n\n\nPopulation model:\n\\[\\begin{aligned}\nY &= \\beta_0 + \\beta_1 \\cdot X + \\epsilon \\\\\n\\text{LE} &= \\beta_0 + \\beta_1 \\text{CP} + \\epsilon\n\\end{aligned}\\]\nEstimated model:\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n60.041\n2.056\n29.207\n0.000\n\n\ncell_phones_100\n0.094\n0.017\n5.546\n0.000\n\n\n\n\n\n\n\n\\[\\begin{aligned}\n\\widehat{Y} &= \\widehat\\beta_0 + \\widehat\\beta_1 \\cdot X\\\\\n\\widehat{\\text{LE}} &=  60.04 + 0.094\\cdot\\text{CP}\n\\end{aligned}\\]"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#our-residuals-will-help-us-a-lot-in-our-diagnostics-and-assumptions",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#our-residuals-will-help-us-a-lot-in-our-diagnostics-and-assumptions",
     "title": "Lesson 7: SLR: Checking model assumptions",
-    "section": "",
-    "text": "The residuals \\(\\widehat\\epsilon_i\\) are the vertical distances between\n\nthe observed data \\((X_i, Y_i)\\)\nthe fitted values (regression line) \\(\\widehat{Y}_i = \\widehat\\beta_0 + \\widehat\\beta_1 X_i\\)\n\n\n\n\\[\n\\widehat\\epsilon_i =Y_i - \\widehat{Y}_i \\text{,   for } i=1, 2, ..., n\n\\]"
+    "section": "Our residuals will help us a lot in our diagnostics and assumptions!",
+    "text": "Our residuals will help us a lot in our diagnostics and assumptions!\n\n\n\nThe residuals \\(\\widehat\\epsilon_i\\) are the vertical distances between\n\nthe observed data \\((X_i, Y_i)\\)\nthe fitted values (regression line) \\(\\widehat{Y}_i = \\widehat\\beta_0 + \\widehat\\beta_1 X_i\\)\n\n\n\n\\[\n\\widehat\\epsilon_i =Y_i - \\widehat{Y}_i \\text{,   for } i=1, 2, ..., n\n\\]"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#least-squares-model-assumptions-line",
@@ -3784,7 +3784,7 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#l-linearity",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "L: Linearity",
-    "text": "L: Linearity\n\n\n\nThe relationship between the variables is linear (a straight line):\n\nThe mean value of \\(Y\\) given \\(X\\), \\(\\mu_{y|x}\\) or \\(E[Y|X]\\), is a straight-line function of \\(X\\)\n\n\n\\[\\mu_{y|x} = \\beta_0 + \\beta_1 \\cdot X\\]"
+    "text": "L: Linearity\n\n\n\nThe relationship between the variables is linear (a straight line):\n\nThe mean value of \\(Y\\) given \\(X\\) (aka \\(\\widehat{Y}|X\\), \\(\\mu_{y|x}\\) or \\(E[Y|X]\\)) is a straight-line function of \\(X\\)\n\n\n\\[\\widehat{Y}|X = \\beta_0 + \\beta_1 \\cdot X\\]"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#i-independence-of-observations",
@@ -3805,21 +3805,21 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-normality",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "N: Normality",
-    "text": "N: Normality\n\n\n\nFor any fixed value of \\(X\\), \\(Y\\) has normal distribution.\n\nNote: This is not about \\(Y\\) alone, but \\(Y|X\\)\n\nEquivalently, the measurement (random) errors \\(\\epsilon_i\\) ’s normally distributed\n\nThis is more often what we check"
+    "text": "N: Normality\n\n\n\nFor any fixed value of \\(X\\), \\(Y\\) has normal distribution.\n\nNote: This is not about \\(Y\\) alone, but \\(Y|X\\)\n\nEquivalently, the measurement (random) errors \\(\\epsilon_i\\) ’s normally distributed\n\nThis is more often what we check\n\n\n\\[\\epsilon \\sim N(0, \\sigma^2)\\]"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#e-equality-of-variance-of-the-residuals",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#e-equality-of-variance-of-the-residuals",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "E: Equality of variance of the residuals",
-    "text": "E: Equality of variance of the residuals\n\nThe variance of \\(Y\\) given \\(X\\) (\\(\\sigma_{Y|X}^2\\)), is the same for any \\(X\\)\n\nWe use just \\(\\sigma^2\\) to denote the common variance\n\nThis is also called homoscedasticity"
+    "text": "E: Equality of variance of the residuals\n\n\n\nThe variance of \\(Y\\) given \\(X\\) (\\(\\sigma_{Y|X}^2\\)), is the same for any \\(X\\)\n\nWe use just \\(\\sigma^2\\) to denote the common variance\n\nThis is also called homoscedasticity\n\n\n\\[\\epsilon \\sim N(0, \\sigma^2)\\]"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#summary-of-line-model-assumptions",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#summary-of-line-model-assumptions",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "Summary of LINE model assumptions",
-    "text": "Summary of LINE model assumptions\n\n\\(Y\\) values are independent (check study design!)\n\n\n\n\n\n\nThe distribution of \\(Y\\) given \\(X\\) is\n\nnormal\nwith mean \\(\\mu_{y|x} = \\beta_0 + \\beta_1 \\cdot X\\)\nand common variance \\(\\sigma^2\\)\n\n\nThis means that the residuals are\n\nnormal\nwith mean = 0\nand common variance \\(\\sigma^2\\)\n\n\n\n\n\nIn mathematical form:\n\n\n\n\n\n\\(Y|X \\overset{\\text{i.i.d.}}{\\sim} N(\\beta_0 + \\beta_1X, \\sigma^2)\\)\n\n\\(\\epsilon \\overset{\\text{i.i.d.}}{\\sim} N(0, \\sigma^2)\\)"
+    "text": "Summary of LINE model assumptions\n\n\\(Y\\) values are independent (check study design!)\n\n\n\n\n\n\nThe distribution of \\(Y\\) given \\(X\\) is\n\nnormal\nwith mean \\(\\mu_{y|x} = \\beta_0 + \\beta_1 \\cdot X\\)\nand common variance \\(\\sigma^2\\)\n\n\nThis means that the residuals are\n\nnormal\nwith mean = 0\nand common variance \\(\\sigma^2\\)\n\n\n\n\nIn mathematical form:\n\n\n\n\n\n\\(Y_i|X \\overset{\\text{i.i.d.}}{\\sim} N(\\beta_0 + \\beta_1X, \\sigma^2)\\)\n\n\\(\\epsilon_i \\overset{\\text{i.i.d.}}{\\sim} N(0, \\sigma^2)\\)\n\n\n\nwhere “iid” means independent and identically distributed"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#how-do-we-determine-if-our-model-follows-the-line-assumptions",
@@ -3833,7 +3833,7 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#l-linearity-of-relationship-between-variables",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "L: Linearity of relationship between variables",
-    "text": "L: Linearity of relationship between variables\n\n\n\n\n\nIs the association between the variables linear?\n\n\n\n\nDiagnostic tool: Scatterplot of \\(X\\) vs. \\(Y\\)"
+    "text": "L: Linearity of relationship between variables\n\n\n\n\n\nIs the association between the variables linear?\n\n\n\nDiagnostic tool: Scatterplot of \\(X\\) vs. \\(Y\\)"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#poll-everywhere-question-2",
@@ -3861,7 +3861,7 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-extract-models-residuals-in-r",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "N: Extract model’s residuals in R",
-    "text": "N: Extract model’s residuals in R\n\nFirst extract the residuals’ values from the model output using the augment() function from the broom package.\nGet a tibble with the orginal data, as well as the residuals and some other important values.\n\n\nmodel1 &lt;- lm(LifeExpectancyYrs ~ FemaleLiteracyRate, \n                data = gapm)\naug1 &lt;- augment(model1) \n\nglimpse(aug1)\n\nRows: 80\nColumns: 8\n$ LifeExpectancyYrs  &lt;dbl&gt; 56.7, 76.7, 60.9, 76.9, 76.0, 73.8, 71.0, 76.9, 58.…\n$ FemaleLiteracyRate &lt;dbl&gt; 13.0, 95.7, 58.6, 99.4, 97.9, 99.5, 53.4, 96.7, 85.…\n$ .fitted            &lt;dbl&gt; 53.94643, 73.14897, 64.53453, 74.00809, 73.65980, 7…\n$ .resid             &lt;dbl&gt; 2.7535654, 3.5510294, -3.6345319, 2.8919074, 2.3402…\n$ .hat               &lt;dbl&gt; 0.13628996, 0.01768176, 0.02645854, 0.02077123, 0.0…\n$ .sigma             &lt;dbl&gt; 6.172684, 6.168414, 6.167643, 6.172935, 6.176043, 6…\n$ .cooksd            &lt;dbl&gt; 1.835891e-02, 3.062372e-03, 4.887448e-03, 2.400993e…\n$ .std.resid         &lt;dbl&gt; 0.48238134, 0.58332052, -0.59972251, 0.47579667, 0.…"
+    "text": "N: Extract model’s residuals in R\n\nFirst extract the residuals’ values from the model output using the augment() function from the broom package.\nGet a tibble with the orginal data, as well as the residuals and some other important values.\n\n\nmodel1 &lt;- gapm %&gt;% lm(formula = life_exp ~ cell_phones_100)\naug1 &lt;- augment(model1) \n\nglimpse(aug1)\n\nRows: 105\nColumns: 8\n$ life_exp        &lt;dbl&gt; 62.64, 76.07, 73.41, 75.37, 73.66, 71.37, 63.96, 75.47…\n$ cell_phones_100 &lt;dbl&gt; 56.2655, 98.3950, 195.6250, 131.4840, 130.5400, 107.50…\n$ .fitted         &lt;dbl&gt; 65.32037, 69.27372, 78.39761, 72.37873, 72.29015, 70.1…\n$ .resid          &lt;dbl&gt; -2.6803652, 6.7962791, -4.9876074, 2.9912674, 1.369850…\n$ .hat            &lt;dbl&gt; 0.038747119, 0.012168777, 0.059882210, 0.011325165, 0.…\n$ .sigma          &lt;dbl&gt; 5.987137, 5.954886, 5.971571, 5.985846, 5.991701, 5.99…\n$ .cooksd         &lt;dbl&gt; 4.234809e-03, 8.096656e-03, 2.369189e-02, 1.457236e-03…\n$ .std.resid      &lt;dbl&gt; -0.45838569, 1.14653081, -0.86249588, 0.50441083, 0.23…"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-check-normality-with-distribution-plots-of-residuals-12",
@@ -3875,7 +3875,7 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-check-normality-with-distribution-plots-of-residuals-22",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "N: Check normality with distribution plots of residuals (2/2)",
-    "text": "N: Check normality with distribution plots of residuals (2/2)\n\nSo do these plots of the residuals look normal?\n\n\ngrid.arrange(hist1, density1, box1, nrow = 1)\n\n\n\n\n\n\n\n\n\nMy assessment: Looks like our residuals could be normal if we did not have those values around -20"
+    "text": "N: Check normality with distribution plots of residuals (2/2)\n\nSo do these plots of the residuals look normal?\n\n\ngrid.arrange(hist1, density1, box1, nrow = 1)\n\n\n\nMy assessment: Looks like our residuals could be normal if we did not have those values around -20"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-normal-qq-plots-qq-quantile-quantile",
@@ -3910,14 +3910,14 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-we-can-compare-the-qq-plots-model-vs.-theoretical",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "N: We can compare the QQ plots: model vs. theoretical",
-    "text": "N: We can compare the QQ plots: model vs. theoretical\n\n\n\nQQ plot from Life Expectancy vs. Female Literacy Rate Regression\n\n\nggplot(aug1, \n      aes(sample = .resid)) + \n  stat_qq() + \n  stat_qq_line() \n\n\n\n\n\n\n\n\n\n\nSimulated QQ plot of Normal Residuals with \\(n = 80\\)\n\n\nggplot() +\n  stat_qq(aes(\n    sample = rnorm(80))) + \n  geom_abline(\n    intercept = 0, slope = 1, \n    color = \"blue\")"
+    "text": "N: We can compare the QQ plots: model vs. theoretical\n\n\n\nQQ plot from life expectancy vs. cell phones regression\n\n\nggplot(aug1, \n      aes(sample = .resid)) + \n  stat_qq() + \n  stat_qq_line() \n\n\n\n\n\n\n\n\n\n\nSimulated QQ plot of Normal Residuals with \\(n = 105\\)\n\n\nggplot() +\n  stat_qq(aes(\n    sample = rnorm(105))) + \n  geom_abline(\n    intercept = 0, slope = 1, \n    color = \"blue\")"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-shapiro-wilk-test-of-normality",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#n-shapiro-wilk-test-of-normality",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "N: Shapiro-Wilk Test of Normality",
-    "text": "N: Shapiro-Wilk Test of Normality\n\nGoodness-of-fit test for the normal distribution: Is there evidence that our residuals are from a normal distribution?\nHypothesis test:\n\n\\[\\begin{aligned}\nH_0 & : \\text{data are from a normally distributed population} \\\\\nH_1 & : \\text{data are NOT from a normally distributed population}\n\\end{aligned}\\]\n\n\n\nshapiro.test(aug1$.resid)\n\n\n    Shapiro-Wilk normality test\n\ndata:  aug1$.resid\nW = 0.90575, p-value = 2.148e-05\n\n\n\n\n\nConclusion\n\n\nReject the null. Data are not from a normal distribution."
+    "text": "N: Shapiro-Wilk Test of Normality\n\nGoodness-of-fit test for the normal distribution: Is there evidence that our residuals are from a normal distribution?\nHonestly: I don’t use this test very often in practice\nHypothesis test:\n\n\\[\\begin{aligned}\nH_0 & : \\text{data are from a normally distributed population} \\\\\nH_1 & : \\text{data are NOT from a normally distributed population}\n\\end{aligned}\\]\n\n\n\nshapiro.test(aug1$.resid)\n\n\n    Shapiro-Wilk normality test\n\ndata:  aug1$.resid\nW = 0.98195, p-value = 0.1639\n\n\n\n\n\nConclusion\n\n\nFail to reject the null. Data are not from a normal distribution."
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#e-equality-of-variance-of-the-residuals-1",
@@ -3931,14 +3931,14 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#e-creating-a-residual-plot",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "E: Creating a residual plot",
-    "text": "E: Creating a residual plot\n\n\n\n\\(x\\) = explanatory variable from regression model\n\n(or the fitted values for a multiple regression)\n\n\\(y\\) = residuals from regression model\n\n\nggplot(aug1, \n       aes(x = FemaleLiteracyRate, \n           y = .resid)) + \n  geom_point(size = 2) +\n  geom_abline( intercept = 0, slope = 0,\n    size = 2, color = \"#FF8021\") +\n  labs(title = \"Residual plot\") +\n  theme(axis.title = element_text(size = 30), \n        axis.text = element_text(size = 30))"
+    "text": "E: Creating a residual plot\n\n\n\n\\(x\\) = explanatory variable from regression model\n\n(or the fitted values for a multiple regression)\n\n\\(y\\) = residuals from regression model\n\n\nggplot(aug1, \n       aes(x = cell_phones_100, \n           y = .resid)) + \n  geom_point(size = 2) +\n  geom_abline( intercept = 0, slope = 0,\n    size = 2, color = \"#FF8021\") +\n  labs(title = \"Residual plot\") +\n  theme(axis.title = element_text(size = 30), \n        axis.text = element_text(size = 30))"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#autoplot-can-be-a-helpful-tool",
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#autoplot-can-be-a-helpful-tool",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "autoplot() can be a helpful tool",
-    "text": "autoplot() can be a helpful tool\n\nlibrary(ggfortify)\nautoplot(model1) + theme(text=element_text(size=14))"
+    "text": "autoplot() can be a helpful tool\n\nlibrary(ggfortify)\nautoplot(model1, size = 1) + theme(text=element_text(size=14))"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#summary-of-the-assumptions-and-their-diagnostic-tool",
@@ -3952,7 +3952,7 @@
     "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions.html#we-didnt-really-go-over-our-options-when-these-assumptions-do-not-hold",
     "title": "Lesson 7: SLR: Checking model assumptions",
     "section": "We didn’t really go over our options when these assumptions do not hold",
-    "text": "We didn’t really go over our options when these assumptions do not hold\n\nWe will consider this more once we get into multiple linear regression\nFor now, with SLR, when assumptions do not hold, I conclude we need to add more variables in the model\n\n \n\nAnother note: I did not make these plots very presentable\n\nAxes were left with whatever names were given to them\nThese plots are usually just for us!\nNot really something that you include in a formal report"
+    "text": "We didn’t really go over our options when these assumptions do not hold\n\nWe will consider this more once we get into multiple linear regression\nFor now, with SLR, when assumptions do not hold, there are three next steps I can take:\n\nAdd more variables to the model (SLR is not usually enough to explain an outcome)\nCheck flagged countries (more in next lesson)\nSee if we need to transform the response variable (more in a future lesson)\n\n\n \n\nAnother note: I do not typically make these plots very presentable\n\nAxes were left with whatever names were given to them\nThese plots are usually just for us!\nNot really something that you include in a formal report"
   },
   {
     "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions_muddy_points.html",
@@ -6389,5 +6389,12 @@
     "title": "Homework 3 Answers",
     "section": "Questions",
     "text": "Questions\n\nQuestion 1\nThis question and data are adapted from this textbook.\nIn an experiment designed to describe the dose–response curve for vitamin K, individual rats were depleted of their vitamin K reserves and then fed dried liver for 4 days at different dosage levels. The response of each rat was measured as the concentration of a clotting agent needed to clot a sample of its blood in 3 minutes. The results of the experiment on 12 rats are given in the following table; values are expressed in common logarithms for both dose and response.\n\nclot = read_excel(here(\"data/CH05Q09.xls\"))\nclot %&gt;% gt() %&gt;%\n  cols_label(RAT = md(\"**Rat**\"),\n             LOGCONC = md(\"**Log10 Concentration (Y)**\"),\n             LOGDOSE = md(\"**Log10 Dose (X)**\"))\n\n\n\n\n\n\n\nRat\nLog10 Concentration (Y)\nLog10 Dose (X)\n\n\n\n\n1\n2.65\n0.18\n\n\n2\n2.25\n0.33\n\n\n3\n2.26\n0.42\n\n\n4\n1.95\n0.54\n\n\n5\n1.72\n0.65\n\n\n6\n1.60\n0.75\n\n\n7\n1.55\n0.83\n\n\n8\n1.32\n0.92\n\n\n9\n1.13\n1.01\n\n\n10\n1.07\n1.04\n\n\n11\n0.95\n1.09\n\n\n12\n0.88\n1.15\n\n\n\n\n\n\n\nUse the log-transformed values as given in the dataset.\nUse the following scatterplot to build your answers off of:\n\n\n\n\n\n\n\n\n\n\nPart a\n\nHere is the code for fitting the model:\n\nsummary(clot_mod)\n\n\nCall:\nlm(formula = LOGCONC ~ LOGDOSE, data = clot)\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-0.097151 -0.026859 -0.003392  0.028279  0.095355 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  2.93620    0.04230   69.41 9.39e-15 ***\nLOGDOSE     -1.78501    0.05267  -33.89 1.18e-11 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.05589 on 10 degrees of freedom\nMultiple R-squared:  0.9914,    Adjusted R-squared:  0.9905 \nF-statistic:  1149 on 1 and 10 DF,  p-value: 1.182e-11\n\n\n\n\n\nPart b\n\n\n\n\n\n\n\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nLOGDOSE\n1\n3.58845400\n3.588454000\n1148.759\n1.182233e-11\n\n\nResiduals\n10\n0.03123767\n0.003123767\nNA\nNA\n\n\n\n\n\n\n\n\n\n\nPart c\n\n\\[ F = 1148.759 \\]\n\n\n\nPart d\n\nNot shown bc answer is complete solution\n\n\n\n\nQuestion 2\n\nPart a\n\n\n\n[1] -0.9956757\n\n\n\n\n\nPart b\n\n\n\n\n\n\n\n\n\nterm\ndf\nsumsq\nmeansq\nstatistic\np.value\n\n\n\n\nLOGDOSE\n1\n3.58845400\n3.588454000\n1148.759\n1.182233e-11\n\n\nResiduals\n10\n0.03123767\n0.003123767\nNA\nNA\n\n\n\n\n\n\n\n[1] 0.9913701\n\n\n\n\n\nPart c\n\nNot given\n\n\n\n\nQuestion 3\n\nif(!require(Sleuth3)) { install.packages(\"Sleuth3\"); library(Sleuth3) }\nq1_data = ex0824 \n\n\nPart a\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart b\n\nNot given\n\n\n\nPart c\nFit the regression model, display the regression table, and write out the fitted regression line.\n\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n47.0521633\n0.50421678\n93.31733\n0.000000e+00\n\n\nAge\n-0.6957134\n0.02937509\n-23.68378\n1.168799e-88\n\n\n\n\n\n\n\n\\[\\begin{aligned}\n\\widehat{\\text{RR}} &= 47.05 -0.7 \\cdot \\text{Age}\n\\end{aligned}\\]\n\n\n\nPart d\n\n\n\n[1] \"Rate\"       \"Age\"        \".fitted\"    \".resid\"     \".hat\"      \n[6] \".sigma\"     \".cooksd\"    \".std.resid\"\n\n\n\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nPart e\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart f\n\n\n\n\n\n\n\n\n\nstatistic\np.value\nmethod\n\n\n\n\n0.9782974\n6.177141e-08\nShapiro-Wilk normality test\n\n\n\n\n\n\n\n\n\n\nPart g\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart h\n\n\n\n# A tibble: 0 × 8\n# ℹ 8 variables: Rate &lt;int&gt;, Age &lt;dbl&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;,\n#   .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;\n\n\n\n\n\nPart i\n\n\n\n# A tibble: 618 × 8\n    Rate   Age .fitted .resid    .hat .sigma .cooksd .std.resid\n   &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;\n 1    78   1.9    45.7   32.3 0.00347   7.74  0.0296       4.12\n 2    75   0.5    46.7   28.3 0.00395   7.76  0.0259       3.62\n 3    73   3.1    44.9   28.1 0.00310   7.77  0.0201       3.59\n 4    72   1.8    45.8   26.2 0.00350   7.78  0.0197       3.35\n 5    70   2.5    45.3   24.7 0.00328   7.78  0.0164       3.15\n 6    69   1.9    45.7   23.3 0.00347   7.79  0.0154       2.97\n 7    69   4.5    43.9   25.1 0.00273   7.78  0.0140       3.20\n 8    66   4.9    43.6   22.4 0.00263   7.80  0.0107       2.85\n 9    27   1.5    46.0  -19.0 0.00360   7.81  0.0107      -2.43\n10    48  25.3    29.5   18.5 0.00361   7.81  0.0102       2.37\n# ℹ 608 more rows\n\n\n\n\n\nPart j\n\n\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n\n\nPart k\n\n\n\nWarning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(density)` instead.\nℹ The deprecated feature was likely used in the describedata package.\n  Please report the issue at\n  &lt;https://github.com/craigjmcgowan/describedata/issues&gt;.\n\n\n\n\n\n\n\n\n\n\n\n\nPart l\n\nNot given\n\n\n\nPart m\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart n\n\nFor the log-transformed Rate:\n\nq1_model2 = lm (Rate_log ~ Age, data = q1_data2)\nq1_mod_t2 = tidy(q1_model2)\nq1_mod_t2 %&gt;% gt()\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n3.84511854\n0.0126276539\n304.49984\n0.000000e+00\n\n\nAge\n-0.01900896\n0.0007356727\n-25.83888\n2.740318e-100\n\n\n\n\n\n\n\n\n\n\nPart o\n\nFor log-transformed Rate:\n\n\n\n\n\n\n\n\n\n\n\n\nPart p\n\nFor log-transformed Rate:\n\n\n\n\n\n\n\n\n\n\n\n\nPart q\n\nNot given"
+  },
+  {
+    "objectID": "lessons/07_SLR_Assumptions/07_SLR_Assumptions_key_info.html#events",
+    "href": "lessons/07_SLR_Assumptions/07_SLR_Assumptions_key_info.html#events",
+    "title": "Key Info and Announcements",
+    "section": "Events",
+    "text": "Events\n\nAlgorithmic Bias: A Practical Introduction\nThe Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is offering a brand-new seminar in our Responsible Practice in Data and Analysis series. Alicia Johnson is leading this seminar on Friday, February 13. Flier attached; session in Compass; here’s the event page.\n\n\nScholarship Work Party!\n\nSunday, February 8th 10 am - 1pm in VPT 260 & VPT 262\nJoin us for this drop-in style scholarship work party! Welcome for applicants in all stages — from just starting to final draft polishing.\nYou’ll receive:\n\nBuilt-in accountability & focused work time on your scholarship applications\nQuick overview of where to find scholarships and what reviewers look for\nPersonalized, real-time support from staff from the Financial Aid Office, Writing Center, SPH Staff\nFeedback on your materials (personal statements, short answers, and more)\n\nYes, snacks are provided! Street Parking is free until 1pm!\nRSVP Here!"
   }
 ]

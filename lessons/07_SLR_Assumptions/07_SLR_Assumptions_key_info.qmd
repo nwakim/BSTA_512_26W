@@ -10,27 +10,26 @@ editor_options:
 ---
 
 ## Announcements
-
-- From exit ticket at 11:15am on 1/28, everyone either voted for Friday or "no preference"
-  - HW and labs will be due on Friday now!!
-  - Including HW 2!
-- Make sure you are turning in your HW
-  - Even HW 0! Some people have not turned it in
-  - There is no late penalty!
-- For muddy points, it's helpful if you have exact questions along with the muddy point.
-  - For example, from Monday I received a lot of "F test." 
   
-## Homework 1 Review
+## Events
 
-- Check your feedback!! 
-- Question 6: regression with age and weight
-  - The dry weight is our outcome! It is important to always use `Y ~ X` in the `lm()` function!
-  - Stating the population simple linear regression model = writing it out using $\beta$s and stuff
-- Question 4: The choice of an alternative hypothesis should depend primarily on (choose all that apply). Explain your reasoning.
-  - When creating the hypothesis tests, you should not use the data collected to determine the test
-  - Your alternative should be formed from prior work/research
-- Population models should either be written like $E(Y|X) = \beta_0 + \beta_1 X$ or $Y = \beta_0 + \beta_1 X + \epsilon$
+### Algorithmic Bias: A Practical Introduction
+The Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is offering a brand-new seminar in our Responsible Practice in Data and Analysis series. Alicia Johnson is leading this seminar on Friday, February 13. Flier attached; session [in Compass](https://urldefense.com/v3/__https://ohsu.csod.com/ui/lms-learning-details/app/event/1a40dce3-f716-4f50-9b8d-b0ffbb79efc6__;!!Mi0JBg!J_FZKpWO-hsmRDFAgAyx6mq9WtXTsyPm04HVO4TcxVsleaonXnpYFh6bbimKktbZipfJx7Z1FWr2leoAARDWXEmVh4c$); here’s the [event page](https://www.ohsu.edu/octri/octri-berd-algorithmic-bias-practical-introduction).
+
+### Scholarship Work Party!
+
+- Sunday, February 8th 10 am - 1pm in VPT 260 & VPT 262
+- Join us for this drop-in style scholarship work party! Welcome for applicants in all stages — from just starting to final draft polishing.
+ - You’ll receive:
+    - Built-in accountability & focused work time on your scholarship applications
+    - Quick overview of where to find scholarships and what reviewers look for
+    - Personalized, real-time support from staff from the Financial Aid Office, Writing Center, SPH Staff
+    - Feedback on your materials (personal statements, short answers, and more)
+- Yes, snacks are provided! Street Parking is free until 1pm!
+- [RSVP Here!](http://click.send.ohsu.edu/?qs=e0e8dbe8e54efafce36083e9299faa45f1844d703638c8f494396770c97704ca7abf401ea7aeb3d8100dc9791f1da794af1f878766163b71)
+  
 
 ## Key Dates
 
-- Homework 2 due on Friday!!
+- Homework 2 due 2/1 at 11pm
+- Lab 2 due 2/8 at 11pm
