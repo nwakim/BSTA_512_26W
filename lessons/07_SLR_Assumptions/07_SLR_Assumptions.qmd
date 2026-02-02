@@ -799,10 +799,21 @@ grid.arrange(norm_h, unif_h, t_h, skewed_h, nrow = 1)
 #| fig-height: 4.5
 #| fig-align: center
 
-norm_qq = ggplot(normal, aes(sample = x)) + stat_qq() + stat_qq_line()
-unif_qq = ggplot(uniform, aes(sample = x)) + stat_qq() + stat_qq_line()
-t_qq = ggplot(t, aes(sample = x)) + stat_qq() + stat_qq_line()
-skewed_qq = ggplot(skewed, aes(sample = x)) + stat_qq() + stat_qq_line()
+norm_qq = ggplot(normal, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line() + 
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
+unif_qq = ggplot(uniform, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line() + 
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
+t_qq = ggplot(t, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line() +
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
+skewed_qq = ggplot(skewed, aes(sample = x)) + 
+  stat_qq() + stat_qq_line() + 
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
 
 grid.arrange(norm_qq, unif_qq, t_qq, skewed_qq, nrow = 1)
 ```
@@ -861,10 +872,21 @@ grid.arrange(norm_h, unif_h, t_h, skewed_h, nrow = 1)
 #| fig-height: 4.5
 #| fig-align: center
 
-norm_qq = ggplot(normal, aes(sample = x)) + stat_qq() + stat_qq_line()
-unif_qq = ggplot(uniform, aes(sample = x)) + stat_qq() + stat_qq_line()
-t_qq = ggplot(t, aes(sample = x)) + stat_qq() + stat_qq_line()
-skewed_qq = ggplot(skewed, aes(sample = x)) + stat_qq() + stat_qq_line()
+norm_qq = ggplot(normal, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line() + 
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
+unif_qq = ggplot(uniform, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line() + 
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
+t_qq = ggplot(t, aes(sample = x)) + 
+  stat_qq() + 
+  stat_qq_line() +
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
+skewed_qq = ggplot(skewed, aes(sample = x)) + 
+  stat_qq() + stat_qq_line() + 
+  theme(labs(x = "Theoretical quantiles", y = "Data"))
 
 grid.arrange(norm_qq, unif_qq, t_qq, skewed_qq, nrow = 1)
 ```

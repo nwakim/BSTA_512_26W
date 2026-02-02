@@ -10,6 +10,9 @@ editor_options:
 ---
 
 ## Announcements
+
+- Quiz 1 looks pretty good overall
+  - Still waiting on a couple issues, but will post scores ASAP
   
 ## Events
 
@@ -31,5 +34,5 @@ The Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is of
 
 ## Key Dates
 
-- Homework 2 due 2/1 at 11pm
 - Lab 2 due 2/8 at 11pm
+- Homework 3 due 2/15 at 11pm
