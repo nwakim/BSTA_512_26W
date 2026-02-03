@@ -141,6 +141,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -164,7 +168,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-winter-2025" id="toc-muddy-points-from-winter-2025" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2025">Muddy Points from Winter 2025</a>
+  <li><a href="#muddy-points-from-winter-2026" id="toc-muddy-points-from-winter-2026" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2026">Muddy Points from Winter 2026</a>
+  <ul class="collapse">
+  <li><a href="#what-do-you-do-when-you-wanted-to-fit-a-linear-regression-and-your-data-look-linear-but-you-find-out-with-the-qq-plot-the-residuals-are-not-normally-distributed-or-there-is-not-equality-of-variance-of-the-residuals-and-in-practice-do-people-usually-check-these-assumptions-before-doing-linear-regression" id="toc-what-do-you-do-when-you-wanted-to-fit-a-linear-regression-and-your-data-look-linear-but-you-find-out-with-the-qq-plot-the-residuals-are-not-normally-distributed-or-there-is-not-equality-of-variance-of-the-residuals-and-in-practice-do-people-usually-check-these-assumptions-before-doing-linear-regression" class="nav-link" data-scroll-target="#what-do-you-do-when-you-wanted-to-fit-a-linear-regression-and-your-data-look-linear-but-you-find-out-with-the-qq-plot-the-residuals-are-not-normally-distributed-or-there-is-not-equality-of-variance-of-the-residuals-and-in-practice-do-people-usually-check-these-assumptions-before-doing-linear-regression">1. what do you do when you wanted to fit a linear regression and your data look linear but you find out with the QQ plot the residuals are not normally distributed? or there is not equality of variance of the residuals? and in practice, do people usually check these assumptions before doing linear regression?</a></li>
+  <li><a href="#if-the-normality-assumption-is-met-would-the-equality-of-variance-assumption-not-be-automatically-met-as-well-if-you-have-wildly-differing-variance-then-my-intuition-tells-me-the-normality-condition-would-also-fail." id="toc-if-the-normality-assumption-is-met-would-the-equality-of-variance-assumption-not-be-automatically-met-as-well-if-you-have-wildly-differing-variance-then-my-intuition-tells-me-the-normality-condition-would-also-fail." class="nav-link" data-scroll-target="#if-the-normality-assumption-is-met-would-the-equality-of-variance-assumption-not-be-automatically-met-as-well-if-you-have-wildly-differing-variance-then-my-intuition-tells-me-the-normality-condition-would-also-fail.">2. If the normality assumption is met, would the equality of variance assumption not be automatically met as well? If you have wildly differing variance, then my intuition tells me the normality condition would also fail.</a></li>
+  <li><a href="#for-any-fixed-value-of-x-y-has-normal-distribution.-note-this-is-not-about-y-alone-but-y-given-x.-equivalently-the-measurement-random-errorss-normally-distributed.-this-is-more-often-what-we-check-why-are-these-equivalent-in-my-mind-these-are-2-different-things" id="toc-for-any-fixed-value-of-x-y-has-normal-distribution.-note-this-is-not-about-y-alone-but-y-given-x.-equivalently-the-measurement-random-errorss-normally-distributed.-this-is-more-often-what-we-check-why-are-these-equivalent-in-my-mind-these-are-2-different-things" class="nav-link" data-scroll-target="#for-any-fixed-value-of-x-y-has-normal-distribution.-note-this-is-not-about-y-alone-but-y-given-x.-equivalently-the-measurement-random-errorss-normally-distributed.-this-is-more-often-what-we-check-why-are-these-equivalent-in-my-mind-these-are-2-different-things">3. “For any fixed value of X, Y has normal distribution. Note: This is not about Y alone, but Y given X. Equivalently, the measurement (random) errors’s normally distributed. This is more often what we check” Why are these equivalent? in my mind these are 2 different things</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-winter-2025" id="toc-muddy-points-from-winter-2025" class="nav-link" data-scroll-target="#muddy-points-from-winter-2025">Muddy Points from Winter 2025</a>
   <ul class="collapse">
   <li><a href="#probably-understanding-the-independence-of-residuals" id="toc-probably-understanding-the-independence-of-residuals" class="nav-link" data-scroll-target="#probably-understanding-the-independence-of-residuals">1. Probably understanding the independence of residuals</a></li>
   <li><a href="#residual-variance-across-x-values-what-conclusions-can-we-draw-from-residual-plot" id="toc-residual-variance-across-x-values-what-conclusions-can-we-draw-from-residual-plot" class="nav-link" data-scroll-target="#residual-variance-across-x-values-what-conclusions-can-we-draw-from-residual-plot">2. Residual variance across X values, what conclusions can we draw from residual plot?</a></li>
@@ -198,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">February 2, 2026</p>
     </div>
   </div>
     
@@ -209,6 +219,111 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="muddy-points-from-winter-2026" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2026">Muddy Points from Winter 2026</h2>
+<section id="what-do-you-do-when-you-wanted-to-fit-a-linear-regression-and-your-data-look-linear-but-you-find-out-with-the-qq-plot-the-residuals-are-not-normally-distributed-or-there-is-not-equality-of-variance-of-the-residuals-and-in-practice-do-people-usually-check-these-assumptions-before-doing-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="what-do-you-do-when-you-wanted-to-fit-a-linear-regression-and-your-data-look-linear-but-you-find-out-with-the-qq-plot-the-residuals-are-not-normally-distributed-or-there-is-not-equality-of-variance-of-the-residuals-and-in-practice-do-people-usually-check-these-assumptions-before-doing-linear-regression">1. what do you do when you wanted to fit a linear regression and your data look linear but you find out with the QQ plot the residuals are not normally distributed? or there is not equality of variance of the residuals? and in practice, do people usually check these assumptions before doing linear regression?</h3>
+<p>If the relationship looks linear, but the QQ plot shows that the residuals are not normal, then we can try transforming the response variable (Y) to see if that helps. Common transformations include log, square root, or Box-Cox transformations. We’ll go over this next class!</p>
+<p>If the equality of variance assumption is violated (heteroscedasticity), we can also try transforming Y.</p>
+</section>
+<section id="if-the-normality-assumption-is-met-would-the-equality-of-variance-assumption-not-be-automatically-met-as-well-if-you-have-wildly-differing-variance-then-my-intuition-tells-me-the-normality-condition-would-also-fail." class="level3">
+<h3 class="anchored" data-anchor-id="if-the-normality-assumption-is-met-would-the-equality-of-variance-assumption-not-be-automatically-met-as-well-if-you-have-wildly-differing-variance-then-my-intuition-tells-me-the-normality-condition-would-also-fail.">2. If the normality assumption is met, would the equality of variance assumption not be automatically met as well? If you have wildly differing variance, then my intuition tells me the normality condition would also fail.</h3>
+<p>Not necessarily! It is possible to have normality but still have heteroscedasticity. For example, if the spread of the residuals increases with increasing values of X, the residuals can still be normally distributed at each level of X, but the variance is not constant across all levels of X.</p>
+<p>Here is a simulation example in R that shows this:</p>
+<p>First, I’ll load the needed packages</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>I’ll set a seed for reproducibility and create a dataset where the variance of Y increases with X.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12302</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">200</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="do">## use tibble to make data frame</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sim_ex <span class="ot">=</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">runif</span>(n, <span class="dv">1</span>, <span class="dv">5</span>), </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Y =</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">2</span><span class="sc">*</span>X, <span class="at">sd =</span> <span class="fl">1.2</span><span class="sc">*</span>X)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, I’ll fit a linear model and create the diagnostic plots to check for normality and homoscedasticity.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> sim_ex <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> Y <span class="sc">~</span> X)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sim_ex <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Heteroscedasticity Example"</span>, <span class="at">x =</span> <span class="st">"X"</span>, <span class="at">y =</span> <span class="st">"Y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>augmented_model <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The following histogram and QQ plot look fairly normal.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot histogram of residuals</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(augmented_model, <span class="fu">aes</span>(<span class="at">x =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Residuals"</span>, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Residuals"</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Density"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a qq plot</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(augmented_model, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"QQ Plot of Residuals"</span>, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Theoretical Quantiles"</span>, </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Sample Quantiles"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>However, the residual plot shows a clear pattern of increasing spread with increasing X, indicating heteroscedasticity.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make residual plot</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(augmented_model, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Residuals vs X"</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"X"</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Residuals"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="in-addition-dont-you-need-to-use-the-shapiro-wilk-test-to-officially-determine-the-normality-of-the-distribution-in-an-official-study-can-you-just-use-a-qqplot-to-determine-the-normality" class="level4">
+<h4 class="anchored" data-anchor-id="in-addition-dont-you-need-to-use-the-shapiro-wilk-test-to-officially-determine-the-normality-of-the-distribution-in-an-official-study-can-you-just-use-a-qqplot-to-determine-the-normality">In addition, don’t you need to use the Shapiro-Wilk test to officially determine the normality of the distribution? In an official study, can you just use a QQplot to determine the normality?</h4>
+<p>The Shapiro-Wilk test is a formal statistical test for normality, but it can be sensitive to sample size. In practice, many researchers use QQ plots as a visual tool to assess normality, especially in larger datasets where minor deviations from normality may not significantly impact the results.</p>
+</section>
+</section>
+<section id="for-any-fixed-value-of-x-y-has-normal-distribution.-note-this-is-not-about-y-alone-but-y-given-x.-equivalently-the-measurement-random-errorss-normally-distributed.-this-is-more-often-what-we-check-why-are-these-equivalent-in-my-mind-these-are-2-different-things" class="level3">
+<h3 class="anchored" data-anchor-id="for-any-fixed-value-of-x-y-has-normal-distribution.-note-this-is-not-about-y-alone-but-y-given-x.-equivalently-the-measurement-random-errorss-normally-distributed.-this-is-more-often-what-we-check-why-are-these-equivalent-in-my-mind-these-are-2-different-things">3. “For any fixed value of X, Y has normal distribution. Note: This is not about Y alone, but Y given X. Equivalently, the measurement (random) errors’s normally distributed. This is more often what we check” Why are these equivalent? in my mind these are 2 different things</h3>
+<p>These two statements are equivalent because they both describe the same underlying assumption about the distribution of the response variable (Y) in relation to the predictor variable (X). When we say “For any fixed value of X, Y has a normal distribution,” we are stating that if we were to look at all the observations where X is held constant, the values of Y would follow a normal distribution. This is the big part of the “given X.” This is the same as saying that the measurement errors (the differences between the observed Y values and the predicted Y values from the regression model) are normally distributed.</p>
+</section>
+</section>
 <section id="muddy-points-from-winter-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-winter-2025">Muddy Points from Winter 2025</h2>
 <section id="probably-understanding-the-independence-of-residuals" class="level3">
@@ -225,48 +340,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is within the <code>geom_smooth()</code> function in our ggplot code.</p>
 <p>Here is the plot without bands:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1"></a><span class="fu">ggplot</span>(gapm, <span class="fu">aes</span>(<span class="at">x =</span> FemaleLiteracyRate,</span>
-<span id="annotated-cell-1-2"><a href="#annotated-cell-1-2"></a>                 <span class="at">y =</span> LifeExpectancyYrs)) <span class="sc">+</span></span>
-<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour=</span><span class="st">"#F14124"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Female literacy rate (%)"</span>, </span>
-<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6"></a>       <span class="at">y =</span> <span class="st">"Life expectancy (years)"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1"></a>gapm <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell_phones_100, </span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2"></a>                 <span class="at">y =</span> life_exp)) <span class="sc">+</span></span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour=</span><span class="st">"#F14124"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cell phones per 100 people"</span>, </span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6"></a>       <span class="at">y =</span> <span class="st">"Life expectancy (years)"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="1"><code>se = FALSE</code> tells R to omit the bands</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="1"><code>se = FALSE</code> tells R to omit the bands</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here is the plot with bands:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1"></a><span class="fu">ggplot</span>(gapm, <span class="fu">aes</span>(<span class="at">x =</span> FemaleLiteracyRate,</span>
-<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2"></a>                 <span class="at">y =</span> LifeExpectancyYrs)) <span class="sc">+</span></span>
-<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">colour=</span><span class="st">"#F14124"</span>) <span class="sc">+</span></span>
-<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Female literacy rate (%)"</span>, </span>
-<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6"></a>       <span class="at">y =</span> <span class="st">"Life expectancy (years)"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1"></a>gapm <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cell_phones_100, </span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2"></a>                 <span class="at">y =</span> life_exp)) <span class="sc">+</span></span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-4" class="code-annotation-target"><a href="#annotated-cell-9-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour=</span><span class="st">"#F14124"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Cell phones per 100 people"</span>, </span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6"></a>       <span class="at">y =</span> <span class="st">"Life expectancy (years)"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="1"><code>se = TRUE</code> tells R to show the bands</span>
+<span data-code-cell="annotated-cell-9" data-code-lines="4" data-code-annotation="1"><code>se = TRUE</code> tells R to show the bands</span>
 </dd>
 </dl>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="07_SLR_Assumptions_muddy_points_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

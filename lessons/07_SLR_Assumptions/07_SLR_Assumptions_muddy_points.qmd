@@ -9,6 +9,93 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Muddy Points from Winter 2026
+
+### 1. what do you do when you wanted to fit a linear regression and your data look linear but you find out with the QQ plot the residuals are not normally distributed? or there is not equality of variance of the residuals? and in practice, do people usually check these assumptions before doing linear regression?
+
+If the relationship looks linear, but the QQ plot shows that the residuals are not normal, then we can try transforming the response variable (Y) to see if that helps. Common transformations include log, square root, or Box-Cox transformations. We'll go over this next class! 
+
+If the equality of variance assumption is violated (heteroscedasticity), we can also try transforming Y.
+
+### 2. If the normality assumption is met, would the equality of variance assumption not be automatically met as well? If you have wildly differing variance, then my intuition tells me the normality condition would also fail. 
+
+Not necessarily! It is possible to have normality but still have heteroscedasticity. For example, if the spread of the residuals increases with increasing values of X, the residuals can still be normally distributed at each level of X, but the variance is not constant across all levels of X.
+
+Here is a simulation example in R that shows this:
+
+First, I'll load the needed packages
+```{r}
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(broom)
+```
+
+I'll set a seed for reproducibility and create a dataset where the variance of Y increases with X. 
+```{r}
+set.seed(12302)
+n = 200
+## use tibble to make data frame
+sim_ex = tibble(
+  X = runif(n, 1, 5), 
+  Y = rnorm(n, mean = 2*X, sd = 1.2*X)
+)
+```
+
+Now, I'll fit a linear model and create the diagnostic plots to check for normality and homoscedasticity.
+```{r}
+model <- sim_ex %>% lm(formula = Y ~ X)
+
+sim_ex %>% ggplot(aes(x = X, y = Y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(title = "Heteroscedasticity Example", x = "X", y = "Y")
+
+augmented_model <- augment(model)
+```
+
+The following histogram and QQ plot look fairly normal.
+```{r}
+#| warning: false
+
+# plot histogram of residuals
+ggplot(augmented_model, aes(x = .resid)) +
+  geom_histogram(aes(y = ..density..), color = "black") +
+  geom_density(color = "red", size = 1) +
+  labs(title = "Histogram of Residuals", 
+       x = "Residuals", 
+       y = "Density")
+
+# make a qq plot
+ggplot(augmented_model, aes(sample = .resid)) +
+  stat_qq() +
+  stat_qq_line(color = "red") +
+  labs(title = "QQ Plot of Residuals", 
+       x = "Theoretical Quantiles", 
+       y = "Sample Quantiles")
+```
+
+However, the residual plot shows a clear pattern of increasing spread with increasing X, indicating heteroscedasticity.
+```{r}
+# make residual plot
+ggplot(augmented_model, aes(x = X, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, color = "red") +
+  labs(title = "Residuals vs X", 
+       x = "X", 
+       y = "Residuals")
+```
+
+#### In addition, don't you need to use the Shapiro-Wilk test to officially determine the normality of the distribution? In an official study, can you just use a QQplot to determine the normality?
+
+The Shapiro-Wilk test is a formal statistical test for normality, but it can be sensitive to sample size. In practice, many researchers use QQ plots as a visual tool to assess normality, especially in larger datasets where minor deviations from normality may not significantly impact the results. 
+
+
+### 3. "For any fixed value of X, Y has normal distribution. Note: This is not about Y alone, but Y given X. Equivalently, the measurement (random) errors’s normally distributed. This is more often what we check" Why are these equivalent? in my mind these are 2 different things
+
+These two statements are equivalent because they both describe the same underlying assumption about the distribution of the response variable (Y) in relation to the predictor variable (X). When we say "For any fixed value of X, Y has a normal distribution," we are stating that if we were to look at all the observations where X is held constant, the values of Y would follow a normal distribution. This is the big part of the "given X." This is the same as saying that the measurement errors (the differences between the observed Y values and the predicted Y values from the regression model) are normally distributed.
+
 ## Muddy Points from Winter 2025
 
 ### 1. Probably understanding the independence of residuals
@@ -34,8 +121,12 @@ library(readxl)
 library(here)
 library(tidyverse)
 
-gapm1 <- read_excel(here("data/Gapminder_vars_2011.xlsx"), na = "NA") 
-gapm <- gapm1 %>% drop_na(LifeExpectancyYrs, FemaleLiteracyRate)
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F"))
 ```
 
 Here is the plot without bands:
@@ -43,11 +134,11 @@ Here is the plot without bands:
 #| warning: false
 #| code-line-numbers: "4"
 
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+gapm %>% ggplot(aes(x = cell_phones_100, 
+                 y = life_exp)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, colour="#F14124") + # <1>
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)")
 
 ```
@@ -58,11 +149,11 @@ Here is the plot with bands:
 #| warning: false
 #| code-line-numbers: "4"
 
-ggplot(gapm, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+gapm %>% ggplot(aes(x = cell_phones_100, 
+                 y = life_exp)) +
   geom_point() +
-  geom_smooth(method = "lm", se = TRUE, colour="#F14124") + # <1>
-  labs(x = "Female literacy rate (%)", 
+  geom_smooth(method = "lm", se = FALSE, colour="#F14124") + # <1>
+  labs(x = "Cell phones per 100 people", 
        y = "Life expectancy (years)")
 
 ```
