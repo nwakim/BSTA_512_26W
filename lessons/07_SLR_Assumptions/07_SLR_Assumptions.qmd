@@ -55,7 +55,6 @@ theme_set(theme_bw(base_size = 22))
 #| message: false
 #| warning: false
 
-
 load(here("data", "gapminder2022.RData"))
 gapm = gapm %>%
   mutate(fs_order = case_when(freedom_status == "F" ~ 3,
