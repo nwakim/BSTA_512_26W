@@ -2,14 +2,12 @@
 title: "Lab 3"
 author: "Your name here!!"
 subtitle: "BSTA 512/612"
-description: "Due: February 21, 2025 at 11pm"
 date-modified: "today"
-categories: [""]
 format: 
   html:
     link-external-newwindow: true
     toc: true
-    self-contained: true
+    embed-resources: true
     number-sections: true
     number-depth: 4
 ---
@@ -27,31 +25,18 @@ library(here)
 
 ## Lab activities
 
-Before starting this lab, you should go back to Lab 2, save a new `.rda` file that contains all the new variables from that Lab. Then you can load it here!
+**If you did not save your dataset in Lab 2:** Before starting this lab, you should go back to Lab 2, save a new `.rda` file that contains all the new variables from that Lab. Then you can load it here!
 
-### Restate your research question
-
-::: callout-important
-##### Task
-
-Please restate your research question below using the provided format. It's repetitive, but it helps me contextualize my feedback as I look through your lab.
+::: callout-note
+I have left it up to you to load the needed packages for this lab.
 :::
 
-### Quality Control
-
-::: callout-important
-#### Tasks
-
-1.  Filter out observations with a value of -999 in the race variable.
-2.  Glimpse at the observations that may indicate a respondent who has not properly completed the survey portion. This will require filtering **for** specific answer choices. [Please see examples of `filter()` on it's documentation page.](https://dplyr.tidyverse.org/reference/filter.html#ref-examples)
-:::
-
-### Working with multi-selection variables
+### Restate research question
 
 ::: callout-important
 #### Task
 
-If you are using `genderIdentity` or `raceombmulti`, create indicator variables for each possible selection.
+Please restate your research question below using the provided format (1 sentence). You can change the wording if you'd like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.
 :::
 
 ### Thinking about potential confounders and effect modifiers
@@ -59,8 +44,25 @@ If you are using `genderIdentity` or `raceombmulti`, create indicator variables 
 ::: callout-important
 ##### Task
 
-For each variable, consider how each could alter the relationship between IAT score and your variable of interest (from your research question). For each covariate, explain how it might or might not change the relationship.
+For each variable, consider how each could alter the relationship between IAT score and your variable of interest (from your research question). For each covariate, explain how it might or might not change the relationship. You can add to the table below, write in bullets, or however you prefer to organize the information. 
+
+Note: you can consider the race/ethnicity variables as a single "variable" since we are trying to capture the same demogrpahic measurement (race/ethnicity).
 :::
+
+
+
+| Variable name | Confounder, Effect modifier, or nothing? | Reasoning (1-2 sentences) |
+|-----------------|-----------------------------|-----------------------------|
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
+|               |                                          |                           |
 
 ### Continuing data exploration
 
@@ -77,19 +79,22 @@ For each variable outside of your research question, create the appropriate plot
 ::: callout-important
 ##### Task
 
-For at least 3 variables outside of your research question, create the appropriate plot to visualize the relationship between IAT score, your main variable (in research question), and the variable outside your research question. Comment whether you can determine anything from the plot or not. If you can, is there any indication that the variable is a confounder or effect modifier?
+Create the appropriate plot to visualize the relationship between IAT score, your main variable (in research question), and the variable identified in your subquestion. Comment whether you can determine anything from the plot or not. If you can, is there any indication that the variable is a confounder or effect modifier?
 :::
 
-### Fit a simple linear regression
+
+### Fit a multiple linear regression model
 
 ::: callout-important
-##### Task
+#### Task
 
-Run a simple linear regression model for the relationship in your primary research question. Print the regression table. Interpret the results and comment on the initial trend you see.
+Fit a model with you variable of interest (the one in the research question), the variable in your research subquestion, and 1 other covariate. This will not necessarily be your final model, but we can construct interpretations and code that will be useful in your final model. 
 :::
 
-::: callout-important
-##### Bonus Task
+### Interpret the coefficient estimate(s) for your main covariate
 
-This is not required in Lab 3. However, if you want to run a multiple linear regression model with one other variable that you plotted in Multivariate Exploration, then you should try it! Do the results align with your ideas in Section 2.4 and/or the visualization you saw in Section 2.5?
+::: callout-important
+#### Task
+
+Interpret the estimated coefficents for the covariate from your research question. Make sure to include the 95% confidence intervals and what other variables you adjusted for. 
 :::

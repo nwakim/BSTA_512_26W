@@ -82,6 +82,9 @@ How is implicit anti-fat bias, as measured by the IAT score, associated with "in
 
 We have done most of this step through visualizations in Lab 2 and 3. Now, we will quickly run a simple linear regression model for each covariate against the IAT score (outcome). Remember, the goal of this is to see if each covariate explains enough variation of the outcome, IAT score. You should have at least 9 simple linear regression models and their results. Results include the F-statistic and p-value from the test if each covariate explains enough variation of the outcome. Please revisit the slides from Lesson 5 (SLR: More inference + Evaluation) for more help with this test. 
 
+Potential to addd this: 
+For multi-level, unordered categorical covariates, you might consider if a specific category has an impact. For example, we might consider creating an indicator for white, non-Hispanic/Lantinx respondents since the history of fatphobia is tied with white-centered colonization and white supremacy (Redpath, 2023). Thus IAT scores might look different for White respondents vs. minority respondents (those who answered American Indian/Alaskan Natives; East Asian; South Asian; Native Hawaiian or other Pacific Islander; Black or African American; or Hispanic or Latino). Alternatively, we may not want to center our analysis on whiteness. The same fatphobic history involving white supremacy was particularly targeting Black people. So perhaps we want make an indicator for Black or African American respondents. Another option is leaving race as is - we may have enough data to handle the inclusion of all groups!
+
 ::: callout-warning
 ##### VERY IMPORTANT FOR VARIABLES WE ORDERED USING FACTOR!!
 
