@@ -9,6 +9,30 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Muddy Points from Winter 2026
+
+### 1. The Q-Q plots are still a bit confusing to me. I understand we want them to fall on the line; however, I have a hard time distinguishing between which ones are too abnormal.
+
+### 2. Why transform in statistical models if it screws up interpretability?
+
+
+
+### 3. still feeling confused about the first poll everywhere question - why would we do log(x) and not log(y) in that situation where the graph is looking sort of exponential?
+
+Oh, I think log(Y) is a good option! I would probably start with that, but I think the only answer choices transformations of X.
+
+### 4. 	For a model where we wanted to include the X^3 variable, do we need to keep the X^2 in the model as well, or just the base X(^1)?
+
+You need to include both $X^2$ and $X^1$ in the model. This is because the higher order terms are conditional on the lower order terms.
+
+### 5. what is the point of trying to fit a linear regression to data that are not linear? or in what situations would we want to do that?
+
+Linear regression is a very flexible tool. Even if the relationship between X and Y is not linear, we can use "linear" regression. "Linear" refers to the coefficients, not the variables. By transforming X and/or Y, we can still use linear regression to model non-linear relationships.
+
+### 6. Would we do the transformation on the points? Would the transformation be on the line of best fit?
+
+Transformations are done on the X or Y variables, leading to transformations in the observations (points). 
+
 ## Muddy Points from Winter 2025
 
 ### 1. using `gladder()`

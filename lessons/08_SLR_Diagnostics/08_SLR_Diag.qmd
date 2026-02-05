@@ -1363,6 +1363,12 @@ ggplot(aug1, aes(x = cell_phones_100, y = life_exp,
 - When we remove outliers, how do our coefficient estimates change?
 - We can compare the model with and without outliers
 
+```{r}
+model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
+# Get regression table:
+tidy_model1 = tidy(model1)
+```
+
 ::: columns
 ::: column
 
