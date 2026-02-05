@@ -13,8 +13,15 @@ editor_options:
 
 ### 1. The Q-Q plots are still a bit confusing to me. I understand we want them to fall on the line; however, I have a hard time distinguishing between which ones are too abnormal.
 
+I would check out [this muddy point](https://nwakim.github.io/BSTA_512_26W/lessons/07_SLR_Assumptions/07_SLR_Assumptions_muddy_points.html#what-are-the-small-nuances-in-interpreting-the-normality-through-a-qq-plot) more.
+
 ### 2. Why transform in statistical models if it screws up interpretability?
 
+It doesn't necessarily screw up interpretability! It depends on the transformation. For example, if we log-transform X, then the interpretation of the coefficient becomes "for a one unit increase in log(X), we expect a beta increase in Y." This is still interpretable, but we need to be careful about how we phrase it.
+
+The more transformations we do, the harder it becomes to interpret. For example, if we log-transform both X and Y, then the interpretation becomes "for a one unit increase in log(X), we expect a beta increase in log(Y)." This is still interpretable, but it becomes more abstract.
+
+I feel that I have misled us slightly during lecture. Transformations are useful when needed!! I have found that newer analysts tend to jump to transformations as a way to fix any slight issue with the LINE assumptions. I wanted to discourage us from doing that. Transformations should be used when there are **clear violations** of the LINE assumptions that cannot be fixed with other methods (like adding variables).
 
 
 ### 3. still feeling confused about the first poll everywhere question - why would we do log(x) and not log(y) in that situation where the graph is looking sort of exponential?
