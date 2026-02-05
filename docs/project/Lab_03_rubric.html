@@ -153,8 +153,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Total: 15 points</strong><br>
-<em>Each row is scored from 0–3 points based on the criteria.</em></p>
+<p>This lab is graded out of <strong>18 points</strong>. Each row is scored from 0–3 points based on the criteria.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -165,48 +164,55 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Lab activity</th>
-<th>3 points</th>
-<th>2 points</th>
-<th>1 point</th>
-<th>0 points</th>
+<th style="text-align: left;">Lab activity</th>
+<th style="text-align: left;">3 points</th>
+<th style="text-align: left;">2 points</th>
+<th style="text-align: left;">1 point</th>
+<th style="text-align: left;">0 points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Restate research question</strong></td>
-<td>Research question is clearly and correctly restated using the specified format</td>
-<td>Research question is mostly clear, but minor issues with clarity or format</td>
-<td>Research question is vague or partially incomplete</td>
-<td>Research question is missing or not understandable</td>
+<td style="text-align: left;"><strong>Restate research question</strong></td>
+<td style="text-align: left;">Research question is clearly and correctly restated using the specified format.</td>
+<td style="text-align: left;">Research question is mostly clear, but minor issues with clarity or format.</td>
+<td style="text-align: left;">Research question is vague or partially incomplete.</td>
+<td style="text-align: left;">Research question is missing or not understandable.</td>
 </tr>
 <tr class="even">
-<td><strong>Fit a multiple logistic regression model</strong></td>
-<td>Correctly fits a main effects model with 5 covariates; code runs without error</td>
-<td>Fits model with minor issues (e.g., &lt;5 covariates, unclear variable selection)</td>
-<td>Attempts model but contains major coding or logic errors</td>
-<td>No model fit attempted</td>
+<td style="text-align: left;"><strong>Thinking about potential confounders and effect modifiers</strong></td>
+<td style="text-align: left;">Table/list is complete for all covariates; reasoning is logical and based on research/theory rather than just data trends.</td>
+<td style="text-align: left;">Most covariates addressed; reasoning is present but slightly vague or lacks a theoretical basis.</td>
+<td style="text-align: left;">Only a few covariates addressed or reasoning is purely anecdotal without logical links.</td>
+<td style="text-align: left;">Section is missing or variables are listed without any reasoning.</td>
 </tr>
 <tr class="odd">
-<td><strong>Present the odds ratio in a table</strong></td>
-<td>Uses <code>tbl_regression()</code> correctly; table is well-formatted and clearly labeled</td>
-<td>Table is mostly correct but has minor issues with formatting or labels</td>
-<td>Table is incomplete or improperly formatted</td>
-<td>No odds ratio table presented</td>
+<td style="text-align: left;"><strong>Bivariate exploration</strong></td>
+<td style="text-align: left;">Appropriate plots created for all covariates with insightful comments on trends, ordering, or linearity for each.</td>
+<td style="text-align: left;">Plots are created for most covariates, but comments are missing or very brief.</td>
+<td style="text-align: left;">Plots are present but many are inappropriate for the variable type (e.g., using scatterplots for categorical data).</td>
+<td style="text-align: left;">No bivariate plots or comments provided.</td>
 </tr>
 <tr class="even">
-<td><strong>Present the odds ratio in a forest plot</strong></td>
-<td>Forest plot is correctly constructed, includes all model terms, and highlights the main covariate clearly</td>
-<td>Plot is mostly correct but has formatting issues or unclear labeling</td>
-<td>Forest plot included but missing key elements or incorrect</td>
-<td>No forest plot included</td>
+<td style="text-align: left;"><strong>Multivariate exploration</strong></td>
+<td style="text-align: left;">High-quality 3-variable plot created; axes are readable (tilted/wrapped) and potential trends/confounding are discussed.</td>
+<td style="text-align: left;">Plot is created but difficult to interpret (e.g., overlapping points, unreadable labels) or discussion is missing.</td>
+<td style="text-align: left;">A multivariate plot is attempted but does not include the required variables (Outcome, IV, Subquestion variable).</td>
+<td style="text-align: left;">No multivariate plot provided.</td>
 </tr>
 <tr class="odd">
-<td><strong>Interpret the odds ratio for your main covariate</strong></td>
-<td>Clear, correct interpretation of the main covariate’s odds ratio with 95% CI and list of adjusted covariates</td>
-<td>Interpretation is mostly correct but lacks clarity or key details</td>
-<td>Attempted interpretation but contains errors in meaning or missing CI/adjustment info</td>
-<td>No interpretation provided</td>
+<td style="text-align: left;"><strong>Fit a multiple linear regression model</strong></td>
+<td style="text-align: left;">Correctly fits a model with 3+ covariates (Main IV, Sub-question vairable, +1 other); code runs without error.</td>
+<td style="text-align: left;">Fits model with minor issues (e.g., missing a required variable) or minor coding warnings.</td>
+<td style="text-align: left;">Attempts model but contains major coding or logic errors.</td>
+<td style="text-align: left;">No model fit attempted.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Interpret coefficient estimates for your main covariate</strong></td>
+<td style="text-align: left;">Clear, correct interpretation of the estimate; includes 95% CI and explicitly names all adjusted covariates.</td>
+<td style="text-align: left;">Interpretation is mostly correct but lacks the “holding constant/adjusting for” phrasing or the CI.</td>
+<td style="text-align: left;">Attempted interpretation but contains significant errors in statistical meaning.</td>
+<td style="text-align: left;">No interpretation provided.</td>
 </tr>
 </tbody>
 </table>

@@ -5,13 +5,13 @@ format:
     page-layout: full
 ---
 
-**Total: 15 points**\
-*Each row is scored from 0–3 points based on the criteria.*
+This lab is graded out of **18 points**. Each row is scored from 0–3 points based on the criteria.
 
 | Lab activity | 3 points | 2 points | 1 point | 0 points |
-|----|----|----|----|----|
-| **Restate research question** | Research question is clearly and correctly restated using the specified format | Research question is mostly clear, but minor issues with clarity or format | Research question is vague or partially incomplete | Research question is missing or not understandable |
-| **Fit a multiple logistic regression model** | Correctly fits a main effects model with 5 covariates; code runs without error | Fits model with minor issues (e.g., \<5 covariates, unclear variable selection) | Attempts model but contains major coding or logic errors | No model fit attempted |
-| **Present the odds ratio in a table** | Uses `tbl_regression()` correctly; table is well-formatted and clearly labeled | Table is mostly correct but has minor issues with formatting or labels | Table is incomplete or improperly formatted | No odds ratio table presented |
-| **Present the odds ratio in a forest plot** | Forest plot is correctly constructed, includes all model terms, and highlights the main covariate clearly | Plot is mostly correct but has formatting issues or unclear labeling | Forest plot included but missing key elements or incorrect | No forest plot included |
-| **Interpret the odds ratio for your main covariate** | Clear, correct interpretation of the main covariate’s odds ratio with 95% CI and list of adjusted covariates | Interpretation is mostly correct but lacks clarity or key details | Attempted interpretation but contains errors in meaning or missing CI/adjustment info | No interpretation provided |
+|:--------------|:--------------|:--------------|:--------------|:--------------|
+| **Restate research question** | Research question is clearly and correctly restated using the specified format. | Research question is mostly clear, but minor issues with clarity or format. | Research question is vague or partially incomplete. | Research question is missing or not understandable. |
+| **Thinking about potential confounders and effect modifiers** | Table/list is complete for all covariates; reasoning is logical and based on research/theory rather than just data trends. | Most covariates addressed; reasoning is present but slightly vague or lacks a theoretical basis. | Only a few covariates addressed or reasoning is purely anecdotal without logical links. | Section is missing or variables are listed without any reasoning. |
+| **Bivariate exploration** | Appropriate plots created for all covariates with insightful comments on trends, ordering, or linearity for each. | Plots are created for most covariates, but comments are missing or very brief. | Plots are present but many are inappropriate for the variable type (e.g., using scatterplots for categorical data). | No bivariate plots or comments provided. |
+| **Multivariate exploration** | High-quality 3-variable plot created; axes are readable (tilted/wrapped) and potential trends/confounding are discussed. | Plot is created but difficult to interpret (e.g., overlapping points, unreadable labels) or discussion is missing. | A multivariate plot is attempted but does not include the required variables (Outcome, IV, Subquestion variable). | No multivariate plot provided. |
+| **Fit a multiple linear regression model** | Correctly fits a model with 3+ covariates (Main IV, Sub-question vairable, +1 other); code runs without error. | Fits model with minor issues (e.g., missing a required variable) or minor coding warnings. | Attempts model but contains major coding or logic errors. | No model fit attempted. |
+| **Interpret coefficient estimates for your main covariate** | Clear, correct interpretation of the estimate; includes 95% CI and explicitly names all adjusted covariates. | Interpretation is mostly correct but lacks the "holding constant/adjusting for" phrasing or the CI. | Attempted interpretation but contains significant errors in statistical meaning. | No interpretation provided. |

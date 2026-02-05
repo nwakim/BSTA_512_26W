@@ -54,7 +54,7 @@ The purpose of this lab is to fit a multiple logistic regression model and **pra
 
 ### Grading
 
-This lab is graded out of 21 points. Each lab will follow the specific rubric on the Project page.
+This lab is graded out of 18 points. Each lab will follow the specific rubric on the Project page.
 
 ## Lab activities
 
