@@ -3,7 +3,7 @@ title: "Lesson 9: Introduction to Multiple Linear Regression (MLR)"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "02/05/2025"
+date: "`r library(here); source(here('class_dates.R')); w6d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -47,6 +47,10 @@ library(plotly) # for plot_ly() command
 library(GGally) # for ggpairs() command 
 library(ggiraphExtra)   # for ggPredict() command
 
+knitr::opts_chunk$set(echo = TRUE, fig.height=6, fig.width=8,
+                      message = FALSE, warning = FALSE)
+theme_set(theme_bw(base_size = 12))
+
 ```
 
 # Learning Objectives
@@ -54,8 +58,6 @@ library(ggiraphExtra)   # for ggPredict() command
 1.  Understand the population multiple linear regression model through equations and visuals.
 2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
 3.  Interpret MLR (population) coefficient estimates with additional variable in model
-4.  Based off of previous SLR work, understand how the population MLR is estimated.
-
 
 ```{css, echo=FALSE}
 .reveal code {
@@ -318,15 +320,110 @@ $$y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}+ \ldots + \beta_k x_{ik} + \ep
 ```{r}
 # Load the data - update code if the file is not in the same location
 # on your computer
-gapm <- read_excel("data/Gapminder_vars_2011.xlsx", 
-                   na = "NA")  # important!!!! 
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F")) %>%
+  mutate(income_level_4 = fct_relevel(income_level_4, 
+                                      "Low income", 
+                                      "Lower middle income",
+                                      "Upper middle income",
+                                      "High income"))
+  
 
-gapm_sub <- gapm %>% 
-  drop_na(LifeExpectancyYrs, FemaleLiteracyRate, FoodSupplykcPPD)
-  # above drops rows with NAs in any of the three variables
-
-glimpse(gapm_sub)
+glimpse(gapm)
 ```
+
+## Visualize relationship between life expectancy, female literacy rate, and food supply
+
+```{r fig.width=6, fig.height=3}
+#| echo: false
+
+ggplot(gapm, aes(x = cell_phones_100,
+                 y = life_exp, 
+                 color = income_level_4)) +
+  geom_point() +
+  geom_smooth(method = "lm", se=F) +
+  labs(title = "Life expectancy vs. cell phones", 
+       x = "Cell phones per 100 people", 
+       y = "Life Expectancy (yrs)", 
+       color = "Income level") +
+  theme(axis.title = element_text(size = 10), 
+        axis.text = element_text(size = 10), 
+        title = element_text(size = 10))
+
+```
+
+
+## Can we improve our model by adding food supply as a covariate?
+
+::: columns
+::: {.column width="10%"}
+:::
+
+::: {.column width="80%"}
+::: definition
+::: def-title
+Simple linear regression population model
+:::
+
+::: def-cont
+$$\begin{aligned}
+\text{LE} & = \beta_0 + \beta_1 \text{CP} + \epsilon
+\end{aligned}$$
+:::
+:::
+
+::: fact
+::: fact-title
+Multiple linear regression population model (with added Food Supply)
+:::
+
+::: fact-cont
+$$\begin{aligned}
+\text{LE}  = & \beta_0 + \beta_1 \text{CP} + \beta_2 I(IL = \text{``Lower middle"}) + \\ & \beta_3 I(IL = \text{``Upper middle"}) + \beta_2 I(IL = \text{``High"}) + \epsilon
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="10%"}
+:::
+:::
+
+## How do we fit a multiple linear regression model in R?
+
+New population model for example:
+
+$$\text{LE}  = \beta_0 + \beta_1 \text{CP} + \beta_2 I(IL = \text{``Lower middle"}) + \beta_3 I(IL = \text{``Upper middle"}) + \beta_2 I(IL = \text{``High"}) + \epsilon $$
+
+```{r}
+# Fit regression model:
+mr1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100 + income_level_4)
+tidy(mr1, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
+```
+
+```{r}
+#| echo: false
+
+mr1_tidy = tidy(mr1, conf.int=T)
+```
+
+Fitted multiple regression model:
+
+$$\begin{aligned}
+\text{LE}  = & \widehat{\beta}_0 + \widehat{\beta}_1 \text{CP} + \widehat{\beta}_2 I(IL = \text{``Lower middle"}) + \widehat{\beta}_3 I(IL = \text{``Upper middle"}) + \widehat{\beta}_2 I(IL = \text{``High"}) \\
+\widehat{\text{LE}} = & `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP}
++ `r round(mr1_tidy$estimate[3], 3)`\ I(IL = \text{``Lower middle"}) + `r round(mr1_tidy$estimate[4], 3)`\ I(IL = \text{``Upper middle"}) + `r round(mr1_tidy$estimate[5], 3)`\ I(IL = \text{``High"})
+\end{aligned}$$
+
+
+
+# Learning Objectives
+
+
 
 ## Can we improve our model by adding food supply as a covariate?
 
@@ -366,25 +463,27 @@ $$\begin{aligned}
 :::
 :::
 
+
+
 ## Visualize relationship between life expectancy, female literacy rate, and food supply
 
 ```{r fig.width=8, fig.height=3}
 #| echo: false
 
-plot_LE_FLR <- ggplot(gapm_sub, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+plot_LE_FLR <- ggplot(gapm, aes(x = cell_phones_100,
+                 y = life_exp)) +
   geom_point() +
   geom_smooth() +
   geom_smooth(method = "lm", color = "#F14124") +
   labs(title = "Life expectancy vs.\n female literacy rate", 
-       x = "Female Litaracy Rate (%)", 
+       x = "Cell phones per 100 people", 
        y = "Life Expectancy (yrs)") +
   theme(axis.title = element_text(size = 10), 
         axis.text = element_text(size = 10), 
         title = element_text(size = 10))
 
-plot_LE_FS <- ggplot(gapm_sub, aes(x = FoodSupplykcPPD,
-                 y = LifeExpectancyYrs)) +
+plot_LE_FS <- ggplot(gapm, aes(x = basic_sani,
+                 y = life_exp)) +
   geom_point() +
   geom_smooth() +
   geom_smooth(method = "lm", color = "#F14124") +
@@ -395,13 +494,13 @@ plot_LE_FS <- ggplot(gapm_sub, aes(x = FoodSupplykcPPD,
         axis.text = element_text(size = 10), 
         title = element_text(size = 10))
 
-plot_FLR_FS <- ggplot(gapm_sub, aes(x = FoodSupplykcPPD,
-                 y = FemaleLiteracyRate)) +
+plot_FLR_FS <- ggplot(gapm, aes(x = basic_sani,
+                 y = cell_phones_100)) +
   geom_point() +
   geom_smooth() +
   geom_smooth(method = "lm", color = "#F14124") +
   labs(title = "Female literacy rate vs. \n food supply", 
-       y = "Female Litaracy Rate (%)", 
+       y = "Cell phones per 100 people", 
        x = "Food supply (kcal PPD)") +
   theme(axis.title = element_text(size = 10), 
         axis.text = element_text(size = 10), 
@@ -425,10 +524,10 @@ grid.arrange(plot_LE_FLR, plot_LE_FS, plot_FLR_FS,
 # z = response variable
 # x & y are predictor variables
 
-dim3_scatter <- plot_ly(gapm_sub, 
-                       x = ~FemaleLiteracyRate, 
-                       y = ~FoodSupplykcPPD, 
-                       z = ~LifeExpectancyYrs) %>%
+dim3_scatter <- plot_ly(gapm, 
+                       x = ~cell_phones_100, 
+                       y = ~basic_sani, 
+                       z = ~life_exp) %>%
   add_markers() %>%
   layout(scene = list(xaxis = list(title = 'Female literacy rate'),
                      yaxis = list(title = 'Food supply (kc PPD)'),
@@ -462,8 +561,8 @@ $$\text{LE} = \beta_0 + \beta_1 \text{FLR} + \beta_2 \text{FS} + \epsilon$$
 
 ```{r}
 # Fit regression model:
-mr1 <- gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD)
+mr1 <- gapm %>% 
+  lm(formula = life_exp ~ cell_phones_100 + basic_sani)
 tidy(mr1, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 ```
 
@@ -503,13 +602,13 @@ summary(mr1)
 ```{r fig.height=10, fig.width=10, echo=F, warning=FALSE}
 #| fig-align: center
 # setup hideous grid required by plotly
-mr1 <- gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD)
-x_grid <- seq(from = min(gapm_sub$FemaleLiteracyRate, na.rm = TRUE), 
-              to = max(gapm_sub$FemaleLiteracyRate, na.rm = TRUE), 
+mr1 <- gapm %>% 
+  lm(formula = life_exp ~ cell_phones_100 + basic_sani)
+x_grid <- seq(from = min(gapm$cell_phones_100, na.rm = TRUE), 
+              to = max(gapm$cell_phones_100, na.rm = TRUE), 
               length = 100)
-y_grid <- seq(from = min(gapm_sub$FoodSupplykcPPD, na.rm = TRUE), 
-              to = max(gapm_sub$FoodSupplykcPPD, na.rm = TRUE), 
+y_grid <- seq(from = min(gapm$basic_sani, na.rm = TRUE), 
+              to = max(gapm$basic_sani, na.rm = TRUE), 
               length = 200)
 z_grid <- expand.grid(x_grid, y_grid) %>%
   as_tibble() %>%
@@ -522,16 +621,16 @@ z_grid <- expand.grid(x_grid, y_grid) %>%
 # Plot points
 plot_ly() %>%
   add_markers(
-    x = gapm_sub$FemaleLiteracyRate,
-    y = gapm_sub$FoodSupplykcPPD,
-    z = gapm_sub$LifeExpectancyYrs,
+    x = gapm$cell_phones_100,
+    y = gapm$basic_sani,
+    z = gapm$life_exp,
     hoverinfo = 'text',
     text = ~paste("x1 - Female literacy rate: ",
-                  gapm_sub$FemaleLiteracyRate,
+                  gapm$cell_phones_100,
                   "</br> x2 - Food supply (kc PPD): ",
-                  gapm_sub$FoodSupplykcPPD,
+                  gapm$basic_sani,
                   "</br> y - Life expectancy: ",
-                  gapm_sub$LifeExpectancyYrs)
+                  gapm$life_exp)
   ) %>%
   # Label axes
   layout(
@@ -695,6 +794,8 @@ $$\begin{aligned}
 
 - Our goal is to get to a statement with $\widehat{\beta}_1$ alone:
 
+::: columns
+::: {.column width="75%"}
 $$\begin{aligned}
 \widehat{Y}|x_{1a} = &\widehat{\beta}_0 + \widehat{\beta}_1 x_{1a} + \widehat{\beta}_2 X_2\\
 \widehat{Y}|x_{1b} = &\widehat{\beta}_0 + \widehat{\beta}_1 x_{1b} + \widehat{\beta}_2 X_2\\
@@ -703,6 +804,18 @@ $$\begin{aligned}
 \widehat{Y}|x_{1b} - \widehat{Y}|x_{1a} = &  \widehat{\beta}_1 (x_{1b} - x_{1a})\\
 \widehat{Y}|x_{1b} - \widehat{Y}|x_{1a} = &  \widehat{\beta}_1\\
 \end{aligned}$$
+:::
+::: {.column width="25%"}
+
+ 
+
+::: definition
+::: def-cont
+As long as $X_2$ is the same value (aka adjusting or controlling for $X_2$), then the two $\widehat{\beta}_2X_2$ terms will cancel out
+:::
+:::
+:::
+:::
 
 **Interpretation:** For every increase of 1 $X_1$-unit in the $X_1$-variable, adjusting/controlling for $X_2$-variable, there is an expected increase/decrease of $|\widehat\beta_1|$ units in the $Y$-variable (95%: LB, UB).
 
@@ -719,6 +832,8 @@ $$\begin{aligned}
 
 - Our goal is to get to a statement with $\widehat{\beta}_1$ alone:
 
+::: columns
+::: {.column width="75%"}
 $$\begin{aligned}
 \widehat{Y}|x_{2a} = &\widehat{\beta}_0 + \widehat{\beta}_1 x_{1a} + \widehat{\beta}_2 X_2\\
 \widehat{Y}|x_{2b} = &\widehat{\beta}_0 + \widehat{\beta}_1 x_{1b} + \widehat{\beta}_2 X_2\\
@@ -727,6 +842,18 @@ $$\begin{aligned}
 \widehat{Y}|x_{2b} - \widehat{Y}|x_{2a} = &  \widehat{\beta}_2 (x_{2b} - x_{2a})\\
 \widehat{Y}|x_{2b} - \widehat{Y}|x_{2a} = &  \widehat{\beta}_2\\
 \end{aligned}$$
+:::
+::: {.column width="25%"}
+
+ 
+
+::: proof1
+::: proof-cont
+As long as $X_1$ is the same value (aka adjusting or controlling for $X_1$), then the two $\widehat{\beta}_1X_1$ terms will cancel out
+:::
+:::
+:::
+:::
 
 **Interpretation:** For every increase of 1 $X_2$-unit in the $X_2$-variable, adjusting/controlling for $X_1$-variable, there is an expected increase/decrease of $|\widehat\beta_2|$ units in the $Y$-variable (95%: LB, UB).
 
@@ -738,8 +865,8 @@ $$\begin{aligned}
 We fit the regression model in R and printed the regression table:
 
 ```{r}
-mr1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD, 
-          data = gapm_sub)
+mr1 <- lm(life_exp ~ cell_phones_100 + basic_sani, 
+          data = gapm)
 ```
 
 ```{r}
@@ -819,30 +946,7 @@ For every 1 kcal PPD increase in the food supply, adjusting for female literacy 
 :::
 :::
 
-# Learning Objectives
-
-1.  Understand the population multiple linear regression model through equations and visuals.
-2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
-3.  Interpret MLR (population) coefficient estimates with additional variable in model
-
-::: lob
-4.  Based off of previous SLR work, understand how the population MLR is estimated.
-:::
-
-## How do we estimate the model parameters?
-
--   We need to estimate the population model coefficients $\widehat{\beta}_0, \widehat{\beta}_1, \widehat{\beta}_2, \ldots, \widehat{\beta}_k$
--   This can be done using the **ordinary least-squares method**
-    -   Find the $\widehat{\beta}$ values that **minimize** the sum of squares due to error ($SSE$)
-
-$$ \begin{aligned}
-SSE & = \displaystyle\sum^n_{i=1} \widehat\epsilon_i^2 \\
-SSE & = \displaystyle\sum^n_{i=1} (Y_i - \widehat{Y}_i)^2 \\
-SSE & = \displaystyle\sum^n_{i=1} (Y_i - (\widehat{\beta}_0 +\widehat{\beta}_1 X_{i1}+ \ldots+\widehat{\beta}_1 X_{ik}))^2 \\
-SSE & = \displaystyle\sum^n_{i=1} (Y_i - \widehat{\beta}_0 -\widehat{\beta}_1 X_{i1}- \ldots-\widehat{\beta}_1 X_{ik})^2
-\end{aligned}$$
-
-## Technical side note (not needed in our class)
+## Technical side note (not *needed* in our class)
 
 -   The equations for calculating the $\boldsymbol{\widehat{\beta}}$ values is best done using matrix notation (not required for our class)
 
@@ -890,310 +994,5 @@ $$
 :::
 :::
 
-## LINE model assumptions
 
-::: columns
-::: column
-::: definition
-::: def-title
-**\[L\] Linearity** of relationship between variables
-:::
 
-::: def-cont
-The mean value of $Y$ given any combination of $X_1, X_2, \ldots, X_k$ values, is a linear function of $\beta_0, \beta_1, \beta_2, \ldots, \beta_k$:
-
-$$\mu_{Y|X_1, \ldots, X_k} = \beta_0 + \beta_1 X_1 + \beta_2 X_2+ \ldots + \beta_k X_k$$
-:::
-:::
-:::
-
-::: column
-::: proof1
-::: proof-title
-**\[I\] Independence** of the $Y$ values
-:::
-
-::: proof-cont
-Observations ($X_1, X_2, \ldots, X_k, Y$) are independent from one another
-:::
-:::
-:::
-
-::: column
-::: theorem
-::: thm-title
-**\[N\] Normality** of the $Y$'s given $X$ (residuals)
-:::
-
-::: thm-cont
-$Y$ has a normal distribution for any any combination of $X_1, X_2, \ldots, X_k$ values
-
--   Thus, the residuals are normally distributed
-:::
-:::
-:::
-
-::: column
-::: fact
-::: fact-title
-**\[E\] Equality** of variance of the residuals (homoscedasticity)
-:::
-
-::: fact-cont
-The variance of $Y$ is the same for any any combination of $X_1, X_2, \ldots, X_k$ values
-
-$$\sigma^2_{Y|X_1, X_2, \ldots, X_k} = Var(Y|X_1, X_2, \ldots, X_k) = \sigma^2$$
-:::
-:::
-:::
-:::
-
-## Summary of the LINE assumptions
-
--   Equivalently, the **residuals** are independently and identically distributed (iid):
-    -   normal
-    -   with mean 0 and
-    -   constant variance $\sigma^2$
-
- 
-    
-- Residuals are still $\widehat{\epsilon}_i=Y_i - \widehat{Y}_i$ for each observation
-  - It's just that $\widehat{Y}_i$ is now calculated with many covariates ($X_1, X_2, \ldots, X_k$)
-
-## Variation: Explained vs. Unexplained
-
-$$\begin{aligned}
-\sum_{i=1}^n (Y_i - \overline{Y})^2 &= \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 + \sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 \\
-SSY &= SSR + SSE
-\end{aligned}$$
-
--   $Y_i - \overline{Y}$ = the deviation of $Y_i$ around the mean $\overline{Y}$
-    -   the **total** amount deviation
--   $\widehat{Y}_i- \overline{Y}$ = the deviation of the fitted value $\widehat{Y}_i$ around the mean $\overline{Y}$
-    -   the amount deviation **explained** by the regression at $X_{i1},\ldots,X_{ik}$
--   $Y_i - \widehat{Y}_i$ = the deviation of the observation $Y$ around the fitted regression line
-    -   the amount deviation **unexplained** by the regression at $X_{i1},\ldots,X_{ik}$
-
-## Poll Everywhere Question 4
-
-## Building the ANOVA table {visibility="hidden"}
-
-ANOVA table ($k$ = \# of predictors, $n$ = \# of observations)
-
-::: columns
-::: {.column width="8%"}
-:::
-
-::: {.column width="84%"}
-| Variation Source | df      | SS    | MS                        | test statistic        | p-value                 |
-|------------|------------|------------|------------|------------|------------|
-| Regression       | $k$     | $SSR$ | $MSR = \frac{SSR}{k}$     | $F = \frac{MSR}{MSE}$ | $P(F_{(k, n-k-1)}>F)$ |
-| Error            | $n-k-1$ | $SSE$ | $MSE = \frac{SSE}{n-k-1}$ |                       |                         |
-| Total            | $n-1$   | $SSY$ |                           |                       |                         |
-:::
-:::
-
- 
-
-```{r}
-#| eval: false
-#| echo: false
-anova(mr1) %>% tidy() %>% gt() %>%
-   tab_options(table.font.size = 40) %>% fmt_number(decimals = 3)
-```
-
-## SLR: Another way to think of SSY, SSR, and SSE
-
--   Let's create a data frame of each component within the SS's
-
-    -   Deviation in SSY: $Y_i - \overline{Y}$
-    -   Deviation in SSR: $\widehat{Y}_i- \overline{Y}$
-    -   Deviation in SSE: $Y_i - \widehat{Y}_i$
-
--   Using our simple linear regression model as an example:
-
-```{r}
-slr1 <- gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
-aug_slr1 = augment(slr1)
-SS_dev_slr = gapm_sub %>% select(LifeExpectancyYrs) %>%
-  mutate(SSY_dev = LifeExpectancyYrs - mean(LifeExpectancyYrs),
-         y_hat = aug_slr1$.fitted, 
-         SSR_dev = y_hat - mean(LifeExpectancyYrs), 
-         SSE_dev = aug_slr1$.resid)
-```
-
-## *SLR*: Plot the components of each sum of squares
-
-```{r}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Code to make the below plots"
-
-SSY_plot = ggplot(SS_dev_slr, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y)))
-SSR_plot = ggplot(SS_dev_slr, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y)))
-SSE_plot = ggplot(SS_dev_slr, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i]))
-grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
-```
-
-::: columns
-::: column
-```{r}
-#| fig-align: right
-#| fig-width: 6
-#| fig-height: 8
-#| echo: false
-
-SSY_plot_slr = ggplot(SS_dev_slr, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
-SSR_plot_slr = ggplot(SS_dev_slr, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
-SSE_plot_slr = ggplot(SS_dev_slr, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i])) + theme(axis.title.x = element_text(size = 22))
-grid.arrange(SSY_plot_slr, SSR_plot_slr, SSE_plot_slr, nrow = 3)
-```
-:::
-
-::: column
-$$SSY = \sum_{i=1}^n (Y_i - \overline{Y})^2 = `r round(var(SS_dev_slr$SSY_dev), 2)`$$ 
-
- 
-
-$$SSR = \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 = `r round(var(SS_dev_slr$SSR_dev), 2)`$$
-
- 
-
-$$SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = `r round(var(SS_dev_slr$SSE_dev), 2)`$$
-:::
-:::
-
-## *MLR:* Another way to think of SSY, SSR, and SSE
-
--   Let's create a data frame of each component within the SS's
-
-    -   Deviation in SSY: $Y_i - \overline{Y}$
-    -   Deviation in SSR: $\widehat{Y}_i- \overline{Y}$
-    -   Deviation in SSE: $Y_i - \widehat{Y}_i$
-
--   Using our simple linear regression model as an example:
-
-```{r}
-mr1 <- gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD)
-aug_mlr1 = augment(mr1)
-SS_df = gapm_sub %>% select(LifeExpectancyYrs) %>%
-  mutate(SSY_dev = LifeExpectancyYrs - mean(LifeExpectancyYrs),
-         y_hat = aug_mlr1$.fitted, 
-         SSR_dev = y_hat - mean(LifeExpectancyYrs), 
-         SSE_dev = aug_mlr1$.resid)
-```
-
-## *MLR:* Plot the components of each sum of squares
-
-```{r}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Code to make the below plots"
-
-SSY_plot = ggplot(SS_df, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y)))
-SSR_plot = ggplot(SS_df, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y)))
-SSE_plot = ggplot(SS_df, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i]))
-grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
-```
-
-::: columns
-::: column
-```{r}
-#| fig-align: right
-#| fig-width: 6
-#| fig-height: 8
-#| echo: false
-
-SSY_plot = ggplot(SS_df, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
-SSR_plot = ggplot(SS_df, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
-SSE_plot = ggplot(SS_df, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i])) + theme(axis.title.x = element_text(size = 22))
-grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
-```
-:::
-
-::: column
-$$SSY = \sum_{i=1}^n (Y_i - \overline{Y})^2 = `r round(var(SS_df$SSY_dev), 2)`$$ 
-
- 
-
-$$SSR = \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 = `r round(var(SS_df$SSR_dev), 2)`$$
-
- 
-
-$$SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = `r round(var(SS_df$SSE_dev), 2)`$$
-:::
-:::
-
-## What did you notice in the plots?
-
-::: columns
-::: {.column width="50%"}
-::: L1
-Simple Linear Regression
-:::
-:::
-::: {.column width="50%"}
-::: E1
-Multiple Linear Regression
-:::
-:::
-:::
-
-::: columns
-::: {.column width="35%"}
-```{r}
-#| fig-align: center
-#| fig-width: 6
-#| fig-height: 8
-#| echo: false
-
-grid.arrange(SSY_plot_slr, SSR_plot_slr, SSE_plot_slr, nrow = 3)
-```
-:::
-
-::: {.column width="15%"}
-$$SSY = `r round(var(SS_dev_slr$SSY_dev), 2)`$$ 
-
- 
-
- 
-
-$$SSR = `r round(var(SS_dev_slr$SSR_dev), 2)`$$
-
- 
-
- 
-
-$$SSE =`r round(var(SS_dev_slr$SSE_dev), 2)`$$
-:::
-
-::: {.column width="35%"}
-```{r}
-#| fig-align: center
-#| fig-width: 6
-#| fig-height: 8
-#| echo: false
-
-grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
-```
-:::
-::: {.column width="15%"}
-$$SSY = `r round(var(SS_df$SSY_dev), 2)`$$ 
-
- 
-
- 
-
-$$SSR = `r round(var(SS_df$SSR_dev), 2)`$$
-
- 
-
- 
-
-$$SSE =`r round(var(SS_df$SSE_dev), 2)`$$
-:::
-:::
-
-- Next class: we can determine if model fit is better by comparing the SSE's of different models

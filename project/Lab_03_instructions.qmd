@@ -201,17 +201,12 @@ This is not required, but will be very helpful later: You can use inline code to
 #| eval: false
 
 model_temp <- iat_2024_comp_factor %>% 
-  lm(formulat = iat_score ~ important_f + pol_id_f)
+  lm(formula = iat_score ~ important_f + pol_id_f)
 model_temp_tidy <- tidy(model_temp, conf.int = T)
 ```
 
 Then you can use inline code to extract the estimate and confidence intervals like such:
-```{txt}
-`r round(model_temp_tidy$estimate[2], 2)` 
-(for the estimate of important_001) and 
-`r round(model_temp_tidy$conf.low[2], 2)` and `r round(model_temp_tidy$conf.high[2], 2)` 
-(for the confidence intervals of important_001).
-```
+`` `r knitr::inline_expr("round(model_temp_tidy$estimate[2], 2)")` `` (for the estimate of important_001) and `` `r knitr::inline_expr("round(model_temp_tidy$conf.low[2], 2)")` `` and `` `r knitr::inline_expr("round(model_temp_tidy$conf.high[2], 2)")` `` (for the confidence intervals of important_001).
 
 ::: callout-important
 #### Task

@@ -3,7 +3,7 @@ title: "Lesson 10: MLR: Using the F-test"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "02/10/2025"
+date: "`r library(here); source(here('class_dates.R')); w6d2`"
 categories: ["Week 5"]
 format: 
   revealjs:
@@ -162,6 +162,386 @@ Model Use (Inference)
 :::
 :::
 :::
+
+# Learning Objectives
+
+1.  Understand the population multiple linear regression model through equations and visuals.
+2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
+3.  Interpret MLR (population) coefficient estimates with additional variable in model
+
+::: lob
+4.  Based off of previous SLR work, understand how the population MLR is estimated.
+:::
+
+## How do we estimate the model parameters?
+
+-   We need to estimate the population model coefficients $\widehat{\beta}_0, \widehat{\beta}_1, \widehat{\beta}_2, \ldots, \widehat{\beta}_k$
+-   This can be done using the **ordinary least-squares method**
+    -   Find the $\widehat{\beta}$ values that **minimize** the sum of squares due to error ($SSE$)
+
+$$ \begin{aligned}
+SSE & = \displaystyle\sum^n_{i=1} \widehat\epsilon_i^2 \\
+SSE & = \displaystyle\sum^n_{i=1} (Y_i - \widehat{Y}_i)^2 \\
+SSE & = \displaystyle\sum^n_{i=1} (Y_i - (\widehat{\beta}_0 +\widehat{\beta}_1 X_{i1}+ \ldots+\widehat{\beta}_1 X_{ik}))^2 \\
+SSE & = \displaystyle\sum^n_{i=1} (Y_i - \widehat{\beta}_0 -\widehat{\beta}_1 X_{i1}- \ldots-\widehat{\beta}_1 X_{ik})^2
+\end{aligned}$$
+
+## Technical side note (not *needed* in our class)
+
+-   The equations for calculating the $\boldsymbol{\widehat{\beta}}$ values is best done using matrix notation (not required for our class)
+
+-   We will be using `R` to get the coefficients instead of the equation (already did this a few slides back!)
+
+-   How we have represented the population regression model: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2+ \ldots + \beta_k X_k + \epsilon$$
+
+::: columns
+::: {.column width="40%"}
+-   How to represent population model with matrix notation:
+
+$$\begin{aligned}
+\boldsymbol{Y} &= \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} \\
+\boldsymbol{Y}_{n \times 1}& = \boldsymbol{X}_{n \times (k+1)}\boldsymbol{\beta}_{(k+1)\times 1} + \boldsymbol{\epsilon}_{n \times 1}
+\end{aligned}$$
+
+- $\boldsymbol{X}$ is often called the design matrix
+  - Each row represents an individual 
+  - Each column represents a covariate
+:::
+
+::: {.column width="20%"}
+$$
+\boldsymbol{Y} = \left[\begin{array}{c} Y_1 \\ Y_2 \\ \vdots \\ Y_n
+\end{array} \right]_{n \times 1} 
+$$ $$
+\boldsymbol{\epsilon} = \left[\begin{array}{c} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n
+\end{array} \right]_{n \times 1}  
+$$
+:::
+
+::: {.column width="40%"}
+$$
+\boldsymbol{X} = \left[ \begin{array}{ccccc} 1 &  X_{11} &  X_{12} & \ldots & X_{1,k} \\
+1 &X_{21} &  X_{22} & \ldots & X_{2,k} \\
+\vdots&\vdots & \vdots &  \ldots & \vdots \\
+1 & X_{n1} &  X_{n2} & \ldots & X_{n,k} \end{array} \right]_{n \times (k+1)}
+$$
+
+$$
+\boldsymbol{\beta}  = \left[\begin{array}{c} \beta_0 \\ \beta_1\\  \vdots \\
+\beta_{k}
+\end{array} \right]_{(k+1)\times 1}
+$$
+:::
+:::
+
+## LINE model assumptions
+
+::: columns
+::: column
+::: definition
+::: def-title
+**\[L\] Linearity** of relationship between variables
+:::
+
+::: def-cont
+The mean value of $Y$ given any combination of $X_1, X_2, \ldots, X_k$ values, is a linear function of $\beta_0, \beta_1, \beta_2, \ldots, \beta_k$:
+
+$$\mu_{Y|X_1, \ldots, X_k} = \beta_0 + \beta_1 X_1 + \beta_2 X_2+ \ldots + \beta_k X_k$$
+:::
+:::
+:::
+
+::: column
+::: proof1
+::: proof-title
+**\[I\] Independence** of the $Y$ values
+:::
+
+::: proof-cont
+Observations ($X_1, X_2, \ldots, X_k, Y$) are independent from one another
+:::
+:::
+:::
+
+::: column
+::: theorem
+::: thm-title
+**\[N\] Normality** of the $Y$'s given $X$ (residuals)
+:::
+
+::: thm-cont
+$Y$ has a normal distribution for any any combination of $X_1, X_2, \ldots, X_k$ values
+
+-   Thus, the residuals are normally distributed
+:::
+:::
+:::
+
+::: column
+::: fact
+::: fact-title
+**\[E\] Equality** of variance of the residuals (homoscedasticity)
+:::
+
+::: fact-cont
+The variance of $Y$ is the same for any any combination of $X_1, X_2, \ldots, X_k$ values
+
+$$\sigma^2_{Y|X_1, X_2, \ldots, X_k} = Var(Y|X_1, X_2, \ldots, X_k) = \sigma^2$$
+:::
+:::
+:::
+:::
+
+## Summary of the LINE assumptions
+
+-   Equivalently, the **residuals** are independently and identically distributed (iid):
+    -   normal
+    -   with mean 0 and
+    -   constant variance $\sigma^2$
+
+ 
+    
+- Residuals are still $\widehat{\epsilon}_i=Y_i - \widehat{Y}_i$ for each observation
+  - It's just that $\widehat{Y}_i$ is now calculated with many covariates ($X_1, X_2, \ldots, X_k$)
+
+## Variation: Explained vs. Unexplained
+
+$$\begin{aligned}
+\sum_{i=1}^n (Y_i - \overline{Y})^2 &= \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 + \sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 \\
+SSY &= SSR + SSE
+\end{aligned}$$
+
+-   $Y_i - \overline{Y}$ = the deviation of $Y_i$ around the mean $\overline{Y}$
+    -   the **total** amount deviation
+-   $\widehat{Y}_i- \overline{Y}$ = the deviation of the fitted value $\widehat{Y}_i$ around the mean $\overline{Y}$
+    -   the amount deviation **explained** by the regression at $X_{i1},\ldots,X_{ik}$
+-   $Y_i - \widehat{Y}_i$ = the deviation of the observation $Y$ around the fitted regression line
+    -   the amount deviation **unexplained** by the regression at $X_{i1},\ldots,X_{ik}$
+
+## Poll Everywhere Question 4
+
+## Building the ANOVA table {visibility="hidden"}
+
+ANOVA table ($k$ = \# of predictors, $n$ = \# of observations)
+
+::: columns
+::: {.column width="8%"}
+:::
+
+::: {.column width="84%"}
+| Variation Source | df      | SS    | MS                        | test statistic        | p-value                 |
+|------------|------------|------------|------------|------------|------------|
+| Regression       | $k$     | $SSR$ | $MSR = \frac{SSR}{k}$     | $F = \frac{MSR}{MSE}$ | $P(F_{(k, n-k-1)}>F)$ |
+| Error            | $n-k-1$ | $SSE$ | $MSE = \frac{SSE}{n-k-1}$ |                       |                         |
+| Total            | $n-1$   | $SSY$ |                           |                       |                         |
+:::
+:::
+
+ 
+
+```{r}
+#| eval: false
+#| echo: false
+anova(mr1) %>% tidy() %>% gt() %>%
+   tab_options(table.font.size = 40) %>% fmt_number(decimals = 3)
+```
+
+## SLR: Another way to think of SSY, SSR, and SSE
+
+-   Let's create a data frame of each component within the SS's
+
+    -   Deviation in SSY: $Y_i - \overline{Y}$
+    -   Deviation in SSR: $\widehat{Y}_i- \overline{Y}$
+    -   Deviation in SSE: $Y_i - \widehat{Y}_i$
+
+-   Using our simple linear regression model as an example:
+
+```{r}
+slr1 <- gapm_sub %>% 
+  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
+aug_slr1 = augment(slr1)
+SS_dev_slr = gapm_sub %>% select(LifeExpectancyYrs) %>%
+  mutate(SSY_dev = LifeExpectancyYrs - mean(LifeExpectancyYrs),
+         y_hat = aug_slr1$.fitted, 
+         SSR_dev = y_hat - mean(LifeExpectancyYrs), 
+         SSE_dev = aug_slr1$.resid)
+```
+
+## *SLR*: Plot the components of each sum of squares
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Code to make the below plots"
+
+SSY_plot = ggplot(SS_dev_slr, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y)))
+SSR_plot = ggplot(SS_dev_slr, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y)))
+SSE_plot = ggplot(SS_dev_slr, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i]))
+grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
+```
+
+::: columns
+::: column
+```{r}
+#| fig-align: right
+#| fig-width: 6
+#| fig-height: 8
+#| echo: false
+
+SSY_plot_slr = ggplot(SS_dev_slr, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
+SSR_plot_slr = ggplot(SS_dev_slr, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
+SSE_plot_slr = ggplot(SS_dev_slr, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i])) + theme(axis.title.x = element_text(size = 22))
+grid.arrange(SSY_plot_slr, SSR_plot_slr, SSE_plot_slr, nrow = 3)
+```
+:::
+
+::: column
+$$SSY = \sum_{i=1}^n (Y_i - \overline{Y})^2 = `r round(var(SS_dev_slr$SSY_dev), 2)`$$ 
+
+ 
+
+$$SSR = \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 = `r round(var(SS_dev_slr$SSR_dev), 2)`$$
+
+ 
+
+$$SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = `r round(var(SS_dev_slr$SSE_dev), 2)`$$
+:::
+:::
+
+## *MLR:* Another way to think of SSY, SSR, and SSE
+
+-   Let's create a data frame of each component within the SS's
+
+    -   Deviation in SSY: $Y_i - \overline{Y}$
+    -   Deviation in SSR: $\widehat{Y}_i- \overline{Y}$
+    -   Deviation in SSE: $Y_i - \widehat{Y}_i$
+
+-   Using our simple linear regression model as an example:
+
+```{r}
+mr1 <- gapm_sub %>% 
+  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD)
+aug_mlr1 = augment(mr1)
+SS_df = gapm_sub %>% select(LifeExpectancyYrs) %>%
+  mutate(SSY_dev = LifeExpectancyYrs - mean(LifeExpectancyYrs),
+         y_hat = aug_mlr1$.fitted, 
+         SSR_dev = y_hat - mean(LifeExpectancyYrs), 
+         SSE_dev = aug_mlr1$.resid)
+```
+
+## *MLR:* Plot the components of each sum of squares
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Code to make the below plots"
+
+SSY_plot = ggplot(SS_df, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y)))
+SSR_plot = ggplot(SS_df, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y)))
+SSE_plot = ggplot(SS_df, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i]))
+grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
+```
+
+::: columns
+::: column
+```{r}
+#| fig-align: right
+#| fig-width: 6
+#| fig-height: 8
+#| echo: false
+
+SSY_plot = ggplot(SS_df, aes(SSY_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
+SSR_plot = ggplot(SS_df, aes(SSR_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) +xlab(expression(hat(Y)[i] - bar(Y))) + theme(axis.title.x = element_text(size = 22))
+SSE_plot = ggplot(SS_df, aes(SSE_dev)) + geom_histogram() + xlim(-30, 30) + ylim(0, 35) + xlab(expression(Y[i] - hat(Y)[i])) + theme(axis.title.x = element_text(size = 22))
+grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
+```
+:::
+
+::: column
+$$SSY = \sum_{i=1}^n (Y_i - \overline{Y})^2 = `r round(var(SS_df$SSY_dev), 2)`$$ 
+
+ 
+
+$$SSR = \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 = `r round(var(SS_df$SSR_dev), 2)`$$
+
+ 
+
+$$SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = `r round(var(SS_df$SSE_dev), 2)`$$
+:::
+:::
+
+## What did you notice in the plots?
+
+::: columns
+::: {.column width="50%"}
+::: L1
+Simple Linear Regression
+:::
+:::
+::: {.column width="50%"}
+::: E1
+Multiple Linear Regression
+:::
+:::
+:::
+
+::: columns
+::: {.column width="35%"}
+```{r}
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 8
+#| echo: false
+
+grid.arrange(SSY_plot_slr, SSR_plot_slr, SSE_plot_slr, nrow = 3)
+```
+:::
+
+::: {.column width="15%"}
+$$SSY = `r round(var(SS_dev_slr$SSY_dev), 2)`$$ 
+
+ 
+
+ 
+
+$$SSR = `r round(var(SS_dev_slr$SSR_dev), 2)`$$
+
+ 
+
+ 
+
+$$SSE =`r round(var(SS_dev_slr$SSE_dev), 2)`$$
+:::
+
+::: {.column width="35%"}
+```{r}
+#| fig-align: center
+#| fig-width: 6
+#| fig-height: 8
+#| echo: false
+
+grid.arrange(SSY_plot, SSR_plot, SSE_plot, nrow = 3)
+```
+:::
+::: {.column width="15%"}
+$$SSY = `r round(var(SS_df$SSY_dev), 2)`$$ 
+
+ 
+
+ 
+
+$$SSR = `r round(var(SS_df$SSR_dev), 2)`$$
+
+ 
+
+ 
+
+$$SSE =`r round(var(SS_df$SSE_dev), 2)`$$
+:::
+:::
+
+- Next class: we can determine if model fit is better by comparing the SSE's of different models
+
 
 # Learning Objectives
 

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Nicky Wakim">
-  <meta name="dcterms.date" content="2025-02-10">
+  <meta name="dcterms.date" content="2026-02-11">
   <title>Linear Models – Lesson 10: MLR: Using the F-test</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -206,7 +206,7 @@ Nicky Wakim
 </div>
 </div>
 
-  <p class="date">2025-02-10</p>
+  <p class="date">2026-02-11</p>
 </section>
 <section>
 <section id="learning-objectives" class="title-slide slide level1 center">
@@ -302,6 +302,328 @@ Nicky Wakim
 </section></section>
 <section>
 <section id="learning-objectives-1" class="title-slide slide level1 center">
+<h1>Learning Objectives</h1>
+<ol type="1">
+<li>Understand the population multiple linear regression model through equations and visuals.</li>
+<li>Fit MLR model (in <code>R</code>) and understand the difference between fitted regression plane and regression lines.</li>
+<li>Interpret MLR (population) coefficient estimates with additional variable in model</li>
+</ol>
+<div class="lob">
+<ol start="4" type="1">
+<li>Based off of previous SLR work, understand how the population MLR is estimated.</li>
+</ol>
+</div>
+</section>
+<section id="how-do-we-estimate-the-model-parameters" class="slide level2">
+<h2>How do we estimate the model parameters?</h2>
+<ul>
+<li>We need to estimate the population model coefficients <span class="math inline">\(\widehat{\beta}_0, \widehat{\beta}_1, \widehat{\beta}_2, \ldots, \widehat{\beta}_k\)</span></li>
+<li>This can be done using the <strong>ordinary least-squares method</strong>
+<ul>
+<li>Find the <span class="math inline">\(\widehat{\beta}\)</span> values that <strong>minimize</strong> the sum of squares due to error (<span class="math inline">\(SSE\)</span>)</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[ \begin{aligned}
+SSE &amp; = \displaystyle\sum^n_{i=1} \widehat\epsilon_i^2 \\
+SSE &amp; = \displaystyle\sum^n_{i=1} (Y_i - \widehat{Y}_i)^2 \\
+SSE &amp; = \displaystyle\sum^n_{i=1} (Y_i - (\widehat{\beta}_0 +\widehat{\beta}_1 X_{i1}+ \ldots+\widehat{\beta}_1 X_{ik}))^2 \\
+SSE &amp; = \displaystyle\sum^n_{i=1} (Y_i - \widehat{\beta}_0 -\widehat{\beta}_1 X_{i1}- \ldots-\widehat{\beta}_1 X_{ik})^2
+\end{aligned}\]</span></p>
+</section>
+<section id="technical-side-note-not-needed-in-our-class" class="slide level2">
+<h2>Technical side note (not <em>needed</em> in our class)</h2>
+<ul>
+<li><p>The equations for calculating the <span class="math inline">\(\boldsymbol{\widehat{\beta}}\)</span> values is best done using matrix notation (not required for our class)</p></li>
+<li><p>We will be using <code>R</code> to get the coefficients instead of the equation (already did this a few slides back!)</p></li>
+<li><p>How we have represented the population regression model: <span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2+ \ldots + \beta_k X_k + \epsilon\]</span></p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>How to represent population model with matrix notation:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+\boldsymbol{Y} &amp;= \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\epsilon} \\
+\boldsymbol{Y}_{n \times 1}&amp; = \boldsymbol{X}_{n \times (k+1)}\boldsymbol{\beta}_{(k+1)\times 1} + \boldsymbol{\epsilon}_{n \times 1}
+\end{aligned}\]</span></p>
+<ul>
+<li><span class="math inline">\(\boldsymbol{X}\)</span> is often called the design matrix
+<ul>
+<li>Each row represents an individual</li>
+<li>Each column represents a covariate</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:20%;">
+<p><span class="math display">\[
+\boldsymbol{Y} = \left[\begin{array}{c} Y_1 \\ Y_2 \\ \vdots \\ Y_n
+\end{array} \right]_{n \times 1}
+\]</span> <span class="math display">\[
+\boldsymbol{\epsilon} = \left[\begin{array}{c} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n
+\end{array} \right]_{n \times 1}  
+\]</span></p>
+</div><div class="column" style="width:40%;">
+<p><span class="math display">\[
+\boldsymbol{X} = \left[ \begin{array}{ccccc} 1 &amp;  X_{11} &amp;  X_{12} &amp; \ldots &amp; X_{1,k} \\
+1 &amp;X_{21} &amp;  X_{22} &amp; \ldots &amp; X_{2,k} \\
+\vdots&amp;\vdots &amp; \vdots &amp;  \ldots &amp; \vdots \\
+1 &amp; X_{n1} &amp;  X_{n2} &amp; \ldots &amp; X_{n,k} \end{array} \right]_{n \times (k+1)}
+\]</span></p>
+<p><span class="math display">\[
+\boldsymbol{\beta}  = \left[\begin{array}{c} \beta_0 \\ \beta_1\\  \vdots \\
+\beta_{k}
+\end{array} \right]_{(k+1)\times 1}
+\]</span></p>
+</div></div>
+</section>
+<section id="line-model-assumptions" class="slide level2">
+<h2>LINE model assumptions</h2>
+<div class="columns">
+<div class="column">
+<div class="definition">
+<div class="def-title">
+<p><strong>[L] Linearity</strong> of relationship between variables</p>
+</div>
+<div class="def-cont">
+<p>The mean value of <span class="math inline">\(Y\)</span> given any combination of <span class="math inline">\(X_1, X_2, \ldots, X_k\)</span> values, is a linear function of <span class="math inline">\(\beta_0, \beta_1, \beta_2, \ldots, \beta_k\)</span>:</p>
+<p><span class="math display">\[\mu_{Y|X_1, \ldots, X_k} = \beta_0 + \beta_1 X_1 + \beta_2 X_2+ \ldots + \beta_k X_k\]</span></p>
+</div>
+</div>
+</div><div class="column">
+<div class="proof1">
+<div class="proof-title">
+<p><strong>[I] Independence</strong> of the <span class="math inline">\(Y\)</span> values</p>
+</div>
+<div class="proof-cont">
+<p>Observations (<span class="math inline">\(X_1, X_2, \ldots, X_k, Y\)</span>) are independent from one another</p>
+</div>
+</div>
+</div><div class="column">
+<div class="theorem">
+<div class="thm-title">
+<p><strong>[N] Normality</strong> of the <span class="math inline">\(Y\)</span>’s given <span class="math inline">\(X\)</span> (residuals)</p>
+</div>
+<div class="thm-cont">
+<p><span class="math inline">\(Y\)</span> has a normal distribution for any any combination of <span class="math inline">\(X_1, X_2, \ldots, X_k\)</span> values</p>
+<ul>
+<li>Thus, the residuals are normally distributed</li>
+</ul>
+</div>
+</div>
+</div><div class="column">
+<div class="fact">
+<div class="fact-title">
+<p><strong>[E] Equality</strong> of variance of the residuals (homoscedasticity)</p>
+</div>
+<div class="fact-cont">
+<p>The variance of <span class="math inline">\(Y\)</span> is the same for any any combination of <span class="math inline">\(X_1, X_2, \ldots, X_k\)</span> values</p>
+<p><span class="math display">\[\sigma^2_{Y|X_1, X_2, \ldots, X_k} = Var(Y|X_1, X_2, \ldots, X_k) = \sigma^2\]</span></p>
+</div>
+</div>
+</div></div>
+</section>
+<section id="summary-of-the-line-assumptions" class="slide level2">
+<h2>Summary of the LINE assumptions</h2>
+<ul>
+<li>Equivalently, the <strong>residuals</strong> are independently and identically distributed (iid):
+<ul>
+<li>normal</li>
+<li>with mean 0 and</li>
+<li>constant variance <span class="math inline">\(\sigma^2\)</span></li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li>Residuals are still <span class="math inline">\(\widehat{\epsilon}_i=Y_i - \widehat{Y}_i\)</span> for each observation
+<ul>
+<li>It’s just that <span class="math inline">\(\widehat{Y}_i\)</span> is now calculated with many covariates (<span class="math inline">\(X_1, X_2, \ldots, X_k\)</span>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="variation-explained-vs.-unexplained" class="slide level2">
+<h2>Variation: Explained vs.&nbsp;Unexplained</h2>
+<p><span class="math display">\[\begin{aligned}
+\sum_{i=1}^n (Y_i - \overline{Y})^2 &amp;= \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 + \sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 \\
+SSY &amp;= SSR + SSE
+\end{aligned}\]</span></p>
+<ul>
+<li><span class="math inline">\(Y_i - \overline{Y}\)</span> = the deviation of <span class="math inline">\(Y_i\)</span> around the mean <span class="math inline">\(\overline{Y}\)</span>
+<ul>
+<li>the <strong>total</strong> amount deviation</li>
+</ul></li>
+<li><span class="math inline">\(\widehat{Y}_i- \overline{Y}\)</span> = the deviation of the fitted value <span class="math inline">\(\widehat{Y}_i\)</span> around the mean <span class="math inline">\(\overline{Y}\)</span>
+<ul>
+<li>the amount deviation <strong>explained</strong> by the regression at <span class="math inline">\(X_{i1},\ldots,X_{ik}\)</span></li>
+</ul></li>
+<li><span class="math inline">\(Y_i - \widehat{Y}_i\)</span> = the deviation of the observation <span class="math inline">\(Y\)</span> around the fitted regression line
+<ul>
+<li>the amount deviation <strong>unexplained</strong> by the regression at <span class="math inline">\(X_{i1},\ldots,X_{ik}\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="poll-everywhere-question-4" class="slide level2">
+<h2>Poll Everywhere Question 4</h2>
+</section>
+
+<section id="slr-another-way-to-think-of-ssy-ssr-and-sse" class="slide level2">
+<h2>SLR: Another way to think of SSY, SSR, and SSE</h2>
+<ul>
+<li><p>Let’s create a data frame of each component within the SS’s</p>
+<ul>
+<li>Deviation in SSY: <span class="math inline">\(Y_i - \overline{Y}\)</span></li>
+<li>Deviation in SSR: <span class="math inline">\(\widehat{Y}_i- \overline{Y}\)</span></li>
+<li>Deviation in SSE: <span class="math inline">\(Y_i - \widehat{Y}_i\)</span></li>
+</ul></li>
+<li><p>Using our simple linear regression model as an example:</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>slr1 <span class="ot">&lt;-</span> gapm_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate)</span>
+<span id="cb1-3"><a></a>aug_slr1 <span class="ot">=</span> <span class="fu">augment</span>(slr1)</span>
+<span id="cb1-4"><a></a>SS_dev_slr <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">select</span>(LifeExpectancyYrs) <span class="sc">%&gt;%</span></span>
+<span id="cb1-5"><a></a>  <span class="fu">mutate</span>(<span class="at">SSY_dev =</span> LifeExpectancyYrs <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs),</span>
+<span id="cb1-6"><a></a>         <span class="at">y_hat =</span> aug_slr1<span class="sc">$</span>.fitted, </span>
+<span id="cb1-7"><a></a>         <span class="at">SSR_dev =</span> y_hat <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs), </span>
+<span id="cb1-8"><a></a>         <span class="at">SSE_dev =</span> aug_slr1<span class="sc">$</span>.resid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="slr-plot-the-components-of-each-sum-of-squares" class="slide level2">
+<h2><em>SLR</em>: Plot the components of each sum of squares</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code to make the below plots</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>SSY_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSY_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb2-2"><a></a>SSR_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSR_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(Y)[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb2-3"><a></a>SSE_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSE_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">hat</span>(Y)[i]))</span>
+<span id="cb2-4"><a></a><span class="fu">grid.arrange</span>(SSY_plot, SSR_plot, SSE_plot, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="right">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-right" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><span class="math display">\[SSY = \sum_{i=1}^n (Y_i - \overline{Y})^2 = 64.64\]</span></p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSR = \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 = 27.24\]</span></p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = 37.39\]</span></p>
+</div></div>
+</section>
+<section id="mlr-another-way-to-think-of-ssy-ssr-and-sse" class="slide level2">
+<h2><em>MLR:</em> Another way to think of SSY, SSR, and SSE</h2>
+<ul>
+<li><p>Let’s create a data frame of each component within the SS’s</p>
+<ul>
+<li>Deviation in SSY: <span class="math inline">\(Y_i - \overline{Y}\)</span></li>
+<li>Deviation in SSR: <span class="math inline">\(\widehat{Y}_i- \overline{Y}\)</span></li>
+<li>Deviation in SSE: <span class="math inline">\(Y_i - \widehat{Y}_i\)</span></li>
+</ul></li>
+<li><p>Using our simple linear regression model as an example:</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>mr1 <span class="ot">&lt;-</span> gapm_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD)</span>
+<span id="cb3-3"><a></a>aug_mlr1 <span class="ot">=</span> <span class="fu">augment</span>(mr1)</span>
+<span id="cb3-4"><a></a>SS_df <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">select</span>(LifeExpectancyYrs) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a></a>  <span class="fu">mutate</span>(<span class="at">SSY_dev =</span> LifeExpectancyYrs <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs),</span>
+<span id="cb3-6"><a></a>         <span class="at">y_hat =</span> aug_mlr1<span class="sc">$</span>.fitted, </span>
+<span id="cb3-7"><a></a>         <span class="at">SSR_dev =</span> y_hat <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs), </span>
+<span id="cb3-8"><a></a>         <span class="at">SSE_dev =</span> aug_mlr1<span class="sc">$</span>.resid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="mlr-plot-the-components-of-each-sum-of-squares" class="slide level2">
+<h2><em>MLR:</em> Plot the components of each sum of squares</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code to make the below plots</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>SSY_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSY_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb4-2"><a></a>SSR_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSR_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(Y)[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb4-3"><a></a>SSE_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSE_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">hat</span>(Y)[i]))</span>
+<span id="cb4-4"><a></a><span class="fu">grid.arrange</span>(SSY_plot, SSR_plot, SSE_plot, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="columns">
+<div class="column">
+<div class="cell" data-layout-align="right">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-right">
+<figure>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-right" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><span class="math display">\[SSY = \sum_{i=1}^n (Y_i - \overline{Y})^2 = 64.64\]</span></p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSR = \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 = 36.39\]</span></p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = 28.25\]</span></p>
+</div></div>
+</section>
+<section id="what-did-you-notice-in-the-plots" class="slide level2">
+<h2>What did you notice in the plots?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="L1">
+<p>Simple Linear Regression</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="E1">
+<p>Multiple Linear Regression</p>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:15%;">
+<p><span class="math display">\[SSY = 64.64\]</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSR = 27.24\]</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSE =37.39\]</span></p>
+</div><div class="column" style="width:35%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:15%;">
+<p><span class="math display">\[SSY = 64.64\]</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSR = 36.39\]</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span class="math display">\[SSE =28.25\]</span></p>
+</div></div>
+<ul>
+<li>Next class: we can determine if model fit is better by comparing the SSE’s of different models</li>
+</ul>
+</section></section>
+<section>
+<section id="learning-objectives-2" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <div class="lob">
 <ol type="1">
@@ -481,7 +803,7 @@ H_0 &amp;: \beta_1 = 0\\
 </div>
 </div>
 </section>
-<section id="variation-explained-vs.-unexplained" class="slide level2">
+<section id="variation-explained-vs.-unexplained-1" class="slide level2">
 <h2>Variation: Explained vs.&nbsp;Unexplained</h2>
 <p><span class="math display">\[\begin{aligned}
 \sum_{i=1}^n (Y_i - \overline{Y})^2 &amp;= \sum_{i=1}^n (\widehat{Y}_i- \overline{Y})^2 + \sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 \\
@@ -508,10 +830,10 @@ SSY &amp;= SSR + SSE
 <div class="cell">
 <details class="code-fold">
 <summary>Code to make the below plots</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>SSY_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSY_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
-<span id="cb2-2"><a></a>SSR_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSR_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(Y)[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
-<span id="cb2-3"><a></a>SSE_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSE_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">hat</span>(Y)[i]))</span>
-<span id="cb2-4"><a></a><span class="fu">grid.arrange</span>(SSY_plot, SSR_plot, SSE_plot, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>SSY_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSY_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb6-2"><a></a>SSR_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSR_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(Y)[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb6-3"><a></a>SSE_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_dev_slr, <span class="fu">aes</span>(SSE_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">hat</span>(Y)[i]))</span>
+<span id="cb6-4"><a></a><span class="fu">grid.arrange</span>(SSY_plot, SSR_plot, SSE_plot, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="columns">
@@ -520,7 +842,7 @@ SSY &amp;= SSR + SSE
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-right" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-right" width="576"></p>
 </figure>
 </div>
 </div>
@@ -539,10 +861,10 @@ SSY &amp;= SSR + SSE
 <div class="cell">
 <details class="code-fold">
 <summary>Code to make the below plots</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>SSY_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSY_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
-<span id="cb4-2"><a></a>SSR_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSR_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(Y)[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
-<span id="cb4-3"><a></a>SSE_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSE_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">hat</span>(Y)[i]))</span>
-<span id="cb4-4"><a></a><span class="fu">grid.arrange</span>(SSY_plot, SSR_plot, SSE_plot, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>SSY_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSY_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb8-2"><a></a>SSR_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSR_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span><span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="fu">hat</span>(Y)[i] <span class="sc">-</span> <span class="fu">bar</span>(Y)))</span>
+<span id="cb8-3"><a></a>SSE_plot <span class="ot">=</span> <span class="fu">ggplot</span>(SS_df, <span class="fu">aes</span>(SSE_dev)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">30</span>, <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">35</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(Y[i] <span class="sc">-</span> <span class="fu">hat</span>(Y)[i]))</span>
+<span id="cb8-4"><a></a><span class="fu">grid.arrange</span>(SSY_plot, SSR_plot, SSE_plot, <span class="at">nrow =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="columns">
@@ -551,7 +873,7 @@ SSY &amp;= SSR + SSE
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-right">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-right" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-right" width="576"></p>
 </figure>
 </div>
 </div>
@@ -564,7 +886,7 @@ SSY &amp;= SSR + SSE
 <p><span class="math display">\[SSE =\sum_{i=1}^n (Y_i - \widehat{Y}_i)^2 = 28.25\]</span></p>
 </div></div>
 </section>
-<section id="what-did-you-notice-in-the-plots" class="slide level2">
+<section id="what-did-you-notice-in-the-plots-1" class="slide level2">
 <h2>What did you notice in the plots?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -582,7 +904,7 @@ SSY &amp;= SSR + SSE
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -600,7 +922,7 @@ SSY &amp;= SSR + SSE
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -651,28 +973,28 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
 <p>New population model for example:</p>
 <p><span class="math display">\[\text{LE} = \beta_0 + \beta_1 \text{FLR} + \beta_2 \text{FS} + \epsilon\]</span></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Fit regression model:</span></span>
-<span id="cb5-2"><a></a>mr1 <span class="ot">&lt;-</span> gapm_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD)</span>
-<span id="cb5-4"><a></a><span class="fu">tidy</span>(mr1, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Fit regression model:</span></span>
+<span id="cb9-2"><a></a>mr1 <span class="ot">&lt;-</span> gapm_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD)</span>
+<span id="cb9-4"><a></a><span class="fu">tidy</span>(mr1, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="oqwyvczxdh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#oqwyvczxdh table {
+<div id="adxbpseztt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#adxbpseztt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oqwyvczxdh thead, #oqwyvczxdh tbody, #oqwyvczxdh tfoot, #oqwyvczxdh tr, #oqwyvczxdh td, #oqwyvczxdh th {
+#adxbpseztt thead, #adxbpseztt tbody, #adxbpseztt tfoot, #adxbpseztt tr, #adxbpseztt td, #adxbpseztt th {
   border-style: none;
 }
 
-#oqwyvczxdh p {
+#adxbpseztt p {
   margin: 0;
   padding: 0;
 }
 
-#oqwyvczxdh .gt_table {
+#adxbpseztt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -698,12 +1020,12 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-left-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_caption {
+#adxbpseztt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oqwyvczxdh .gt_title {
+#adxbpseztt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -715,7 +1037,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-bottom-width: 0;
 }
 
-#oqwyvczxdh .gt_subtitle {
+#adxbpseztt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -727,7 +1049,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-top-width: 0;
 }
 
-#oqwyvczxdh .gt_heading {
+#adxbpseztt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -739,13 +1061,13 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-right-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_bottom_border {
+#adxbpseztt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_col_headings {
+#adxbpseztt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -760,7 +1082,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-right-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_col_heading {
+#adxbpseztt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -780,7 +1102,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   overflow-x: hidden;
 }
 
-#oqwyvczxdh .gt_column_spanner_outer {
+#adxbpseztt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -792,15 +1114,15 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   padding-right: 4px;
 }
 
-#oqwyvczxdh .gt_column_spanner_outer:first-child {
+#adxbpseztt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oqwyvczxdh .gt_column_spanner_outer:last-child {
+#adxbpseztt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oqwyvczxdh .gt_column_spanner {
+#adxbpseztt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -812,11 +1134,11 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   width: 100%;
 }
 
-#oqwyvczxdh .gt_spanner_row {
+#adxbpseztt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oqwyvczxdh .gt_group_heading {
+#adxbpseztt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -842,7 +1164,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   text-align: left;
 }
 
-#oqwyvczxdh .gt_empty_group_heading {
+#adxbpseztt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -857,15 +1179,15 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   vertical-align: middle;
 }
 
-#oqwyvczxdh .gt_from_md > :first-child {
+#adxbpseztt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oqwyvczxdh .gt_from_md > :last-child {
+#adxbpseztt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oqwyvczxdh .gt_row {
+#adxbpseztt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -884,7 +1206,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   overflow-x: hidden;
 }
 
-#oqwyvczxdh .gt_stub {
+#adxbpseztt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -897,7 +1219,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   padding-right: 5px;
 }
 
-#oqwyvczxdh .gt_stub_row_group {
+#adxbpseztt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -911,15 +1233,15 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   vertical-align: top;
 }
 
-#oqwyvczxdh .gt_row_group_first td {
+#adxbpseztt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oqwyvczxdh .gt_row_group_first th {
+#adxbpseztt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oqwyvczxdh .gt_summary_row {
+#adxbpseztt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -929,16 +1251,16 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   padding-right: 5px;
 }
 
-#oqwyvczxdh .gt_first_summary_row {
+#adxbpseztt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_first_summary_row.thick {
+#adxbpseztt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oqwyvczxdh .gt_last_summary_row {
+#adxbpseztt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +1270,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-bottom-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_grand_summary_row {
+#adxbpseztt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -958,7 +1280,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   padding-right: 5px;
 }
 
-#oqwyvczxdh .gt_first_grand_summary_row {
+#adxbpseztt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -968,7 +1290,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-top-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_last_grand_summary_row_top {
+#adxbpseztt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -978,11 +1300,11 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-bottom-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_striped {
+#adxbpseztt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oqwyvczxdh .gt_table_body {
+#adxbpseztt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -991,7 +1313,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-bottom-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_footnotes {
+#adxbpseztt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1005,7 +1327,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-right-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_footnote {
+#adxbpseztt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1014,7 +1336,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   padding-right: 5px;
 }
 
-#oqwyvczxdh .gt_sourcenotes {
+#adxbpseztt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1028,7 +1350,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   border-right-color: #D3D3D3;
 }
 
-#oqwyvczxdh .gt_sourcenote {
+#adxbpseztt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1036,72 +1358,72 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
   padding-right: 5px;
 }
 
-#oqwyvczxdh .gt_left {
+#adxbpseztt .gt_left {
   text-align: left;
 }
 
-#oqwyvczxdh .gt_center {
+#adxbpseztt .gt_center {
   text-align: center;
 }
 
-#oqwyvczxdh .gt_right {
+#adxbpseztt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oqwyvczxdh .gt_font_normal {
+#adxbpseztt .gt_font_normal {
   font-weight: normal;
 }
 
-#oqwyvczxdh .gt_font_bold {
+#adxbpseztt .gt_font_bold {
   font-weight: bold;
 }
 
-#oqwyvczxdh .gt_font_italic {
+#adxbpseztt .gt_font_italic {
   font-style: italic;
 }
 
-#oqwyvczxdh .gt_super {
+#adxbpseztt .gt_super {
   font-size: 65%;
 }
 
-#oqwyvczxdh .gt_footnote_marks {
+#adxbpseztt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oqwyvczxdh .gt_asterisk {
+#adxbpseztt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oqwyvczxdh .gt_indent_1 {
+#adxbpseztt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oqwyvczxdh .gt_indent_2 {
+#adxbpseztt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oqwyvczxdh .gt_indent_3 {
+#adxbpseztt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oqwyvczxdh .gt_indent_4 {
+#adxbpseztt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oqwyvczxdh .gt_indent_5 {
+#adxbpseztt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#oqwyvczxdh .katex-display {
+#adxbpseztt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#oqwyvczxdh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#adxbpseztt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1160,7 +1482,7 @@ F = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}
 \end{aligned}\]</span></p>
 </section></section>
 <section>
-<section id="learning-objectives-2" class="title-slide slide level1 center">
+<section id="learning-objectives-3" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li>Understand the use of the general F-test and interpret what it measures.</li>
@@ -1354,29 +1676,29 @@ H_0 &amp;: \beta_1=\beta_2= \ldots=\beta_k=0\\
 <li>Fit and get augmented values for reduced model:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>mod_red1 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb6-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> <span class="dv">1</span>)</span>
-<span id="cb6-3"><a></a>aug_red1  <span class="ot">=</span> <span class="fu">augment</span>(mod_red1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>mod_red1 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> <span class="dv">1</span>)</span>
+<span id="cb10-3"><a></a>aug_red1  <span class="ot">=</span> <span class="fu">augment</span>(mod_red1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Fit and get augmented values for full model:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>mod_full1 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD)</span>
-<span id="cb7-3"><a></a>aug_full1  <span class="ot">=</span> <span class="fu">augment</span>(mod_full1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>mod_full1 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> LifeExpectancyYrs <span class="sc">~</span> FemaleLiteracyRate <span class="sc">+</span> FoodSupplykcPPD)</span>
+<span id="cb11-3"><a></a>aug_full1  <span class="ot">=</span> <span class="fu">augment</span>(mod_full1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Calculate the deviances for each model:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>SS_df2 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">select</span>(LifeExpectancyYrs) <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a></a>  <span class="fu">mutate</span>(<span class="at">SSY_diff_r1 =</span> LifeExpectancyYrs <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs),</span>
-<span id="cb8-3"><a></a>         <span class="at">SSR_diff_r1 =</span> aug_red1<span class="sc">$</span>.fitted <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs), </span>
-<span id="cb8-4"><a></a>         <span class="at">SSE_diff_r1 =</span> aug_red1<span class="sc">$</span>.resid, </span>
-<span id="cb8-5"><a></a>         <span class="at">SSY_diff_f1 =</span> LifeExpectancyYrs <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs),</span>
-<span id="cb8-6"><a></a>         <span class="at">SSR_diff_f1 =</span> aug_full1<span class="sc">$</span>.fitted <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs), </span>
-<span id="cb8-7"><a></a>         <span class="at">SSE_diff_f1 =</span> aug_full1<span class="sc">$</span>.resid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>SS_df2 <span class="ot">=</span> gapm_sub <span class="sc">%&gt;%</span> <span class="fu">select</span>(LifeExpectancyYrs) <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">mutate</span>(<span class="at">SSY_diff_r1 =</span> LifeExpectancyYrs <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs),</span>
+<span id="cb12-3"><a></a>         <span class="at">SSR_diff_r1 =</span> aug_red1<span class="sc">$</span>.fitted <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs), </span>
+<span id="cb12-4"><a></a>         <span class="at">SSE_diff_r1 =</span> aug_red1<span class="sc">$</span>.resid, </span>
+<span id="cb12-5"><a></a>         <span class="at">SSY_diff_f1 =</span> LifeExpectancyYrs <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs),</span>
+<span id="cb12-6"><a></a>         <span class="at">SSR_diff_f1 =</span> aug_full1<span class="sc">$</span>.fitted <span class="sc">-</span> <span class="fu">mean</span>(LifeExpectancyYrs), </span>
+<span id="cb12-7"><a></a>         <span class="at">SSE_diff_f1 =</span> aug_full1<span class="sc">$</span>.resid)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="comparing-the-ssy-ssr-and-sse-for-reduced-and-full-model-1" class="slide level2">
@@ -1393,7 +1715,7 @@ H_0 &amp;: \beta_1=\beta_2= \ldots=\beta_k=0\\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1416,7 +1738,7 @@ H_0 &amp;: \beta_1=\beta_2= \ldots=\beta_k=0\\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-25-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1483,25 +1805,25 @@ H_0 &amp;: \beta_1=\beta_2=0\\
 <p>The calculated <strong>test statistic</strong> is</p>
 <p><span class="math display">\[F^ = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}=44.443\]</span> OR use ANOVA table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">anova</span>(mod_red1, mod_full1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">anova</span>(mod_red1, mod_full1) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="bdeopestmo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bdeopestmo table {
+<div id="aldblawopo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#aldblawopo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bdeopestmo thead, #bdeopestmo tbody, #bdeopestmo tfoot, #bdeopestmo tr, #bdeopestmo td, #bdeopestmo th {
+#aldblawopo thead, #aldblawopo tbody, #aldblawopo tfoot, #aldblawopo tr, #aldblawopo td, #aldblawopo th {
   border-style: none;
 }
 
-#bdeopestmo p {
+#aldblawopo p {
   margin: 0;
   padding: 0;
 }
 
-#bdeopestmo .gt_table {
+#aldblawopo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1527,12 +1849,12 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-left-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_caption {
+#aldblawopo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bdeopestmo .gt_title {
+#aldblawopo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1544,7 +1866,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-bottom-width: 0;
 }
 
-#bdeopestmo .gt_subtitle {
+#aldblawopo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1556,7 +1878,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-top-width: 0;
 }
 
-#bdeopestmo .gt_heading {
+#aldblawopo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1568,13 +1890,13 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_bottom_border {
+#aldblawopo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_col_headings {
+#aldblawopo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1589,7 +1911,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_col_heading {
+#aldblawopo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1609,7 +1931,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   overflow-x: hidden;
 }
 
-#bdeopestmo .gt_column_spanner_outer {
+#aldblawopo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1621,15 +1943,15 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   padding-right: 4px;
 }
 
-#bdeopestmo .gt_column_spanner_outer:first-child {
+#aldblawopo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bdeopestmo .gt_column_spanner_outer:last-child {
+#aldblawopo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bdeopestmo .gt_column_spanner {
+#aldblawopo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1641,11 +1963,11 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   width: 100%;
 }
 
-#bdeopestmo .gt_spanner_row {
+#aldblawopo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bdeopestmo .gt_group_heading {
+#aldblawopo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1671,7 +1993,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   text-align: left;
 }
 
-#bdeopestmo .gt_empty_group_heading {
+#aldblawopo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1686,15 +2008,15 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   vertical-align: middle;
 }
 
-#bdeopestmo .gt_from_md > :first-child {
+#aldblawopo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bdeopestmo .gt_from_md > :last-child {
+#aldblawopo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bdeopestmo .gt_row {
+#aldblawopo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1713,7 +2035,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   overflow-x: hidden;
 }
 
-#bdeopestmo .gt_stub {
+#aldblawopo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1726,7 +2048,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   padding-right: 5px;
 }
 
-#bdeopestmo .gt_stub_row_group {
+#aldblawopo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1740,15 +2062,15 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   vertical-align: top;
 }
 
-#bdeopestmo .gt_row_group_first td {
+#aldblawopo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bdeopestmo .gt_row_group_first th {
+#aldblawopo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bdeopestmo .gt_summary_row {
+#aldblawopo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1758,16 +2080,16 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   padding-right: 5px;
 }
 
-#bdeopestmo .gt_first_summary_row {
+#aldblawopo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_first_summary_row.thick {
+#aldblawopo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bdeopestmo .gt_last_summary_row {
+#aldblawopo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1777,7 +2099,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_grand_summary_row {
+#aldblawopo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1787,7 +2109,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   padding-right: 5px;
 }
 
-#bdeopestmo .gt_first_grand_summary_row {
+#aldblawopo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1797,7 +2119,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-top-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_last_grand_summary_row_top {
+#aldblawopo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1807,11 +2129,11 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_striped {
+#aldblawopo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bdeopestmo .gt_table_body {
+#aldblawopo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1820,7 +2142,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_footnotes {
+#aldblawopo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1834,7 +2156,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_footnote {
+#aldblawopo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1843,7 +2165,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   padding-right: 5px;
 }
 
-#bdeopestmo .gt_sourcenotes {
+#aldblawopo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1857,7 +2179,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#bdeopestmo .gt_sourcenote {
+#aldblawopo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1865,72 +2187,72 @@ H_0 &amp;: \beta_1=\beta_2=0\\
   padding-right: 5px;
 }
 
-#bdeopestmo .gt_left {
+#aldblawopo .gt_left {
   text-align: left;
 }
 
-#bdeopestmo .gt_center {
+#aldblawopo .gt_center {
   text-align: center;
 }
 
-#bdeopestmo .gt_right {
+#aldblawopo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bdeopestmo .gt_font_normal {
+#aldblawopo .gt_font_normal {
   font-weight: normal;
 }
 
-#bdeopestmo .gt_font_bold {
+#aldblawopo .gt_font_bold {
   font-weight: bold;
 }
 
-#bdeopestmo .gt_font_italic {
+#aldblawopo .gt_font_italic {
   font-style: italic;
 }
 
-#bdeopestmo .gt_super {
+#aldblawopo .gt_super {
   font-size: 65%;
 }
 
-#bdeopestmo .gt_footnote_marks {
+#aldblawopo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bdeopestmo .gt_asterisk {
+#aldblawopo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bdeopestmo .gt_indent_1 {
+#aldblawopo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bdeopestmo .gt_indent_2 {
+#aldblawopo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bdeopestmo .gt_indent_3 {
+#aldblawopo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bdeopestmo .gt_indent_4 {
+#aldblawopo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bdeopestmo .gt_indent_5 {
+#aldblawopo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bdeopestmo .katex-display {
+#aldblawopo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bdeopestmo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#aldblawopo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1986,7 +2308,7 @@ H_0 &amp;: \beta_1=\beta_2=0\\
 <p>We reject the null hypothesis at the 5% significance level. There is sufficient evidence that either countries’ female literacy rate or the food supply (or both) contributes significantly to the prediction of life expectancy (p-value &lt; 0.001).</p>
 </section></section>
 <section>
-<section id="learning-objectives-3" class="title-slide slide level1 center">
+<section id="learning-objectives-4" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li>Understand the use of the general F-test and interpret what it measures.</li>
@@ -2170,7 +2492,7 @@ H_0 &amp;: \beta_j=0\\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-19-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-28-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -2190,7 +2512,7 @@ H_0 &amp;: \beta_j=0\\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-20-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-29-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -2204,7 +2526,7 @@ H_0 &amp;: \beta_j=0\\
 </div></div>
 </div></div>
 </section>
-<section id="poll-everywhere-question-4" class="slide level2">
+<section id="poll-everywhere-question-4-1" class="slide level2">
 <h2>Poll Everywhere Question 4</h2>
 </section>
 <section id="so-lets-step-through-our-hypothesis-test-13-1" class="slide level2">
@@ -2257,25 +2579,25 @@ H_0 &amp;: \beta_2=0\\
 <p>The calculated <strong>test statistic</strong> is</p>
 <p><span class="math display">\[F^ = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}\]</span> ANOVA table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">anova</span>(mod_red2, mod_full2) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">anova</span>(mod_red2, mod_full2) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="cpshdvsbgv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cpshdvsbgv table {
+<div id="qvznotbwfs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qvznotbwfs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cpshdvsbgv thead, #cpshdvsbgv tbody, #cpshdvsbgv tfoot, #cpshdvsbgv tr, #cpshdvsbgv td, #cpshdvsbgv th {
+#qvznotbwfs thead, #qvznotbwfs tbody, #qvznotbwfs tfoot, #qvznotbwfs tr, #qvznotbwfs td, #qvznotbwfs th {
   border-style: none;
 }
 
-#cpshdvsbgv p {
+#qvznotbwfs p {
   margin: 0;
   padding: 0;
 }
 
-#cpshdvsbgv .gt_table {
+#qvznotbwfs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2301,12 +2623,12 @@ H_0 &amp;: \beta_2=0\\
   border-left-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_caption {
+#qvznotbwfs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cpshdvsbgv .gt_title {
+#qvznotbwfs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2318,7 +2640,7 @@ H_0 &amp;: \beta_2=0\\
   border-bottom-width: 0;
 }
 
-#cpshdvsbgv .gt_subtitle {
+#qvznotbwfs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2330,7 +2652,7 @@ H_0 &amp;: \beta_2=0\\
   border-top-width: 0;
 }
 
-#cpshdvsbgv .gt_heading {
+#qvznotbwfs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2342,13 +2664,13 @@ H_0 &amp;: \beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_bottom_border {
+#qvznotbwfs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_col_headings {
+#qvznotbwfs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2363,7 +2685,7 @@ H_0 &amp;: \beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_col_heading {
+#qvznotbwfs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2383,7 +2705,7 @@ H_0 &amp;: \beta_2=0\\
   overflow-x: hidden;
 }
 
-#cpshdvsbgv .gt_column_spanner_outer {
+#qvznotbwfs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2395,15 +2717,15 @@ H_0 &amp;: \beta_2=0\\
   padding-right: 4px;
 }
 
-#cpshdvsbgv .gt_column_spanner_outer:first-child {
+#qvznotbwfs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cpshdvsbgv .gt_column_spanner_outer:last-child {
+#qvznotbwfs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cpshdvsbgv .gt_column_spanner {
+#qvznotbwfs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2415,11 +2737,11 @@ H_0 &amp;: \beta_2=0\\
   width: 100%;
 }
 
-#cpshdvsbgv .gt_spanner_row {
+#qvznotbwfs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cpshdvsbgv .gt_group_heading {
+#qvznotbwfs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2445,7 +2767,7 @@ H_0 &amp;: \beta_2=0\\
   text-align: left;
 }
 
-#cpshdvsbgv .gt_empty_group_heading {
+#qvznotbwfs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2460,15 +2782,15 @@ H_0 &amp;: \beta_2=0\\
   vertical-align: middle;
 }
 
-#cpshdvsbgv .gt_from_md > :first-child {
+#qvznotbwfs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cpshdvsbgv .gt_from_md > :last-child {
+#qvznotbwfs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cpshdvsbgv .gt_row {
+#qvznotbwfs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2487,7 +2809,7 @@ H_0 &amp;: \beta_2=0\\
   overflow-x: hidden;
 }
 
-#cpshdvsbgv .gt_stub {
+#qvznotbwfs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2500,7 +2822,7 @@ H_0 &amp;: \beta_2=0\\
   padding-right: 5px;
 }
 
-#cpshdvsbgv .gt_stub_row_group {
+#qvznotbwfs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2514,15 +2836,15 @@ H_0 &amp;: \beta_2=0\\
   vertical-align: top;
 }
 
-#cpshdvsbgv .gt_row_group_first td {
+#qvznotbwfs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cpshdvsbgv .gt_row_group_first th {
+#qvznotbwfs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cpshdvsbgv .gt_summary_row {
+#qvznotbwfs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2532,16 +2854,16 @@ H_0 &amp;: \beta_2=0\\
   padding-right: 5px;
 }
 
-#cpshdvsbgv .gt_first_summary_row {
+#qvznotbwfs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_first_summary_row.thick {
+#qvznotbwfs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cpshdvsbgv .gt_last_summary_row {
+#qvznotbwfs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2551,7 +2873,7 @@ H_0 &amp;: \beta_2=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_grand_summary_row {
+#qvznotbwfs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2561,7 +2883,7 @@ H_0 &amp;: \beta_2=0\\
   padding-right: 5px;
 }
 
-#cpshdvsbgv .gt_first_grand_summary_row {
+#qvznotbwfs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2571,7 +2893,7 @@ H_0 &amp;: \beta_2=0\\
   border-top-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_last_grand_summary_row_top {
+#qvznotbwfs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2581,11 +2903,11 @@ H_0 &amp;: \beta_2=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_striped {
+#qvznotbwfs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cpshdvsbgv .gt_table_body {
+#qvznotbwfs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2594,7 +2916,7 @@ H_0 &amp;: \beta_2=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_footnotes {
+#qvznotbwfs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2608,7 +2930,7 @@ H_0 &amp;: \beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_footnote {
+#qvznotbwfs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2617,7 +2939,7 @@ H_0 &amp;: \beta_2=0\\
   padding-right: 5px;
 }
 
-#cpshdvsbgv .gt_sourcenotes {
+#qvznotbwfs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2631,7 +2953,7 @@ H_0 &amp;: \beta_2=0\\
   border-right-color: #D3D3D3;
 }
 
-#cpshdvsbgv .gt_sourcenote {
+#qvznotbwfs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2639,72 +2961,72 @@ H_0 &amp;: \beta_2=0\\
   padding-right: 5px;
 }
 
-#cpshdvsbgv .gt_left {
+#qvznotbwfs .gt_left {
   text-align: left;
 }
 
-#cpshdvsbgv .gt_center {
+#qvznotbwfs .gt_center {
   text-align: center;
 }
 
-#cpshdvsbgv .gt_right {
+#qvznotbwfs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cpshdvsbgv .gt_font_normal {
+#qvznotbwfs .gt_font_normal {
   font-weight: normal;
 }
 
-#cpshdvsbgv .gt_font_bold {
+#qvznotbwfs .gt_font_bold {
   font-weight: bold;
 }
 
-#cpshdvsbgv .gt_font_italic {
+#qvznotbwfs .gt_font_italic {
   font-style: italic;
 }
 
-#cpshdvsbgv .gt_super {
+#qvznotbwfs .gt_super {
   font-size: 65%;
 }
 
-#cpshdvsbgv .gt_footnote_marks {
+#qvznotbwfs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cpshdvsbgv .gt_asterisk {
+#qvznotbwfs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cpshdvsbgv .gt_indent_1 {
+#qvznotbwfs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cpshdvsbgv .gt_indent_2 {
+#qvznotbwfs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cpshdvsbgv .gt_indent_3 {
+#qvznotbwfs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cpshdvsbgv .gt_indent_4 {
+#qvznotbwfs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cpshdvsbgv .gt_indent_5 {
+#qvznotbwfs .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cpshdvsbgv .katex-display {
+#qvznotbwfs .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cpshdvsbgv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qvznotbwfs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2760,7 +3082,7 @@ H_0 &amp;: \beta_2=0\\
 <p>We reject the null hypothesis at the 5% significance level. There is sufficient evidence that countries’ food supply contributes significantly to the prediction of life expectancy, given that female literacy rate is already in the model (p-value &lt; 0.001).</p>
 </section></section>
 <section>
-<section id="learning-objectives-4" class="title-slide slide level1 center">
+<section id="learning-objectives-5" class="title-slide slide level1 center">
 <h1>Learning Objectives</h1>
 <ol type="1">
 <li>Understand the use of the general F-test and interpret what it measures.</li>
@@ -2940,7 +3262,7 @@ H_0 &amp;: \beta_1 = \beta_3 = 0\\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-32-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -2960,7 +3282,7 @@ H_0 &amp;: \beta_1 = \beta_3 = 0\\
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-24-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+<p><img data-src="10_MLR_F-test_files/figure-revealjs/unnamed-chunk-33-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
 </figure>
 </div>
 </div>
@@ -3024,25 +3346,25 @@ H_0 &amp;: \beta_2=\beta_3=0\\
 <p>The calculated <strong>test statistic</strong> is</p>
 <p><span class="math display">\[F^ = \dfrac{\frac{SSE(R) - SSE(F)}{df_R - df_F}}{\frac{SSE(F)}{df_F}}\]</span> ANOVA table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">anova</span>(mod_red3, mod_full3) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">anova</span>(mod_red3, mod_full3) <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="jtruwmaegh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jtruwmaegh table {
+<div id="ipzmbmobkv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ipzmbmobkv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jtruwmaegh thead, #jtruwmaegh tbody, #jtruwmaegh tfoot, #jtruwmaegh tr, #jtruwmaegh td, #jtruwmaegh th {
+#ipzmbmobkv thead, #ipzmbmobkv tbody, #ipzmbmobkv tfoot, #ipzmbmobkv tr, #ipzmbmobkv td, #ipzmbmobkv th {
   border-style: none;
 }
 
-#jtruwmaegh p {
+#ipzmbmobkv p {
   margin: 0;
   padding: 0;
 }
 
-#jtruwmaegh .gt_table {
+#ipzmbmobkv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3068,12 +3390,12 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-left-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_caption {
+#ipzmbmobkv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jtruwmaegh .gt_title {
+#ipzmbmobkv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3085,7 +3407,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-bottom-width: 0;
 }
 
-#jtruwmaegh .gt_subtitle {
+#ipzmbmobkv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3097,7 +3419,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-top-width: 0;
 }
 
-#jtruwmaegh .gt_heading {
+#ipzmbmobkv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3109,13 +3431,13 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-right-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_bottom_border {
+#ipzmbmobkv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_col_headings {
+#ipzmbmobkv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3130,7 +3452,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-right-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_col_heading {
+#ipzmbmobkv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3150,7 +3472,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   overflow-x: hidden;
 }
 
-#jtruwmaegh .gt_column_spanner_outer {
+#ipzmbmobkv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3162,15 +3484,15 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   padding-right: 4px;
 }
 
-#jtruwmaegh .gt_column_spanner_outer:first-child {
+#ipzmbmobkv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jtruwmaegh .gt_column_spanner_outer:last-child {
+#ipzmbmobkv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jtruwmaegh .gt_column_spanner {
+#ipzmbmobkv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3182,11 +3504,11 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   width: 100%;
 }
 
-#jtruwmaegh .gt_spanner_row {
+#ipzmbmobkv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jtruwmaegh .gt_group_heading {
+#ipzmbmobkv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3212,7 +3534,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   text-align: left;
 }
 
-#jtruwmaegh .gt_empty_group_heading {
+#ipzmbmobkv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3227,15 +3549,15 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   vertical-align: middle;
 }
 
-#jtruwmaegh .gt_from_md > :first-child {
+#ipzmbmobkv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jtruwmaegh .gt_from_md > :last-child {
+#ipzmbmobkv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jtruwmaegh .gt_row {
+#ipzmbmobkv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3254,7 +3576,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   overflow-x: hidden;
 }
 
-#jtruwmaegh .gt_stub {
+#ipzmbmobkv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3267,7 +3589,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   padding-right: 5px;
 }
 
-#jtruwmaegh .gt_stub_row_group {
+#ipzmbmobkv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3281,15 +3603,15 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   vertical-align: top;
 }
 
-#jtruwmaegh .gt_row_group_first td {
+#ipzmbmobkv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jtruwmaegh .gt_row_group_first th {
+#ipzmbmobkv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jtruwmaegh .gt_summary_row {
+#ipzmbmobkv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3299,16 +3621,16 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   padding-right: 5px;
 }
 
-#jtruwmaegh .gt_first_summary_row {
+#ipzmbmobkv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_first_summary_row.thick {
+#ipzmbmobkv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jtruwmaegh .gt_last_summary_row {
+#ipzmbmobkv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3318,7 +3640,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_grand_summary_row {
+#ipzmbmobkv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3328,7 +3650,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   padding-right: 5px;
 }
 
-#jtruwmaegh .gt_first_grand_summary_row {
+#ipzmbmobkv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3338,7 +3660,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-top-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_last_grand_summary_row_top {
+#ipzmbmobkv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3348,11 +3670,11 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_striped {
+#ipzmbmobkv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jtruwmaegh .gt_table_body {
+#ipzmbmobkv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3361,7 +3683,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-bottom-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_footnotes {
+#ipzmbmobkv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3375,7 +3697,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-right-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_footnote {
+#ipzmbmobkv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3384,7 +3706,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   padding-right: 5px;
 }
 
-#jtruwmaegh .gt_sourcenotes {
+#ipzmbmobkv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3398,7 +3720,7 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   border-right-color: #D3D3D3;
 }
 
-#jtruwmaegh .gt_sourcenote {
+#ipzmbmobkv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3406,72 +3728,72 @@ H_0 &amp;: \beta_2=\beta_3=0\\
   padding-right: 5px;
 }
 
-#jtruwmaegh .gt_left {
+#ipzmbmobkv .gt_left {
   text-align: left;
 }
 
-#jtruwmaegh .gt_center {
+#ipzmbmobkv .gt_center {
   text-align: center;
 }
 
-#jtruwmaegh .gt_right {
+#ipzmbmobkv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jtruwmaegh .gt_font_normal {
+#ipzmbmobkv .gt_font_normal {
   font-weight: normal;
 }
 
-#jtruwmaegh .gt_font_bold {
+#ipzmbmobkv .gt_font_bold {
   font-weight: bold;
 }
 
-#jtruwmaegh .gt_font_italic {
+#ipzmbmobkv .gt_font_italic {
   font-style: italic;
 }
 
-#jtruwmaegh .gt_super {
+#ipzmbmobkv .gt_super {
   font-size: 65%;
 }
 
-#jtruwmaegh .gt_footnote_marks {
+#ipzmbmobkv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jtruwmaegh .gt_asterisk {
+#ipzmbmobkv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jtruwmaegh .gt_indent_1 {
+#ipzmbmobkv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jtruwmaegh .gt_indent_2 {
+#ipzmbmobkv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jtruwmaegh .gt_indent_3 {
+#ipzmbmobkv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jtruwmaegh .gt_indent_4 {
+#ipzmbmobkv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jtruwmaegh .gt_indent_5 {
+#ipzmbmobkv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jtruwmaegh .katex-display {
+#ipzmbmobkv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jtruwmaegh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ipzmbmobkv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

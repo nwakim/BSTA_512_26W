@@ -5,16 +5,15 @@ format:
     page-layout: full
 ---
 
-**Total: 24 points**  
+**Total: 24 points**\
 *Each row is scored from 0–3 points based on the criteria.*
 
 | Lab activity | 3 points | 2 points | 1 point | 0 points |
-|:---|:---|:---|:---|:---|
+|:--------------|:--------------|:--------------|:--------------|:--------------|
 | **Restate your research question** | Clearly restates the research question using the provided format, identifying the specific independent variable. | Restates the question but deviates from the format or omits the specific variable name. | Question is vague, incomplete, or does not match the Lab 1 selection. | Task not attempted. |
 | **Load in your saved data from Lab 1** | Successfully loads the cleaned `.rda` file from Lab 1 using the `here` package. | Loads the data correctly but does not use the `here` package for reproducible paths. | Attempts to load data but encounters errors or reverts to the raw `.sav` file. | Data not loaded. |
 | **Peek at your outcome** | Provides a clean histogram of IAT scores with a thoughtful observation about its distribution/shape. | Provides a histogram but lacks interpretation or the plot labels/formatting are poor. | Histogram is incorrect, poorly scaled, or visualization is missing. | Task not attempted. |
-| **Univariate exploratory data analysis** | Visualizes all variables (10 total) using appropriate plots/tables to show their distributions. | Visualizes most variables but misses one or two, or uses inappropriate plot types for the data. | Visualizations are missing for many variables or plots are unreadable. | No univariate EDA provided. |
+| **Univariate exploratory data analysis** | Visualizes all variables (8 variables + 8 race/ethnicity indicators) using appropriate plots/tables to show their distributions. | Visualizes most variables but misses one or two, or uses inappropriate plot types for the data. | Visualizations are missing for many variables or plots are unreadable. | No univariate EDA provided. |
 | **Bivariate exploratory data analysis** | Provides a clear plot of IAT score vs. main predictor; correctly uses `fct_relevel` or `fct_reorder` for ordered factors. | Provides a bivariate plot but fails to reorder factor levels, making the relationship hard to discern. | Plot is incorrect for the variable types (e.g., scatterplot for two categorical variables). | No bivariate EDA provided. |
 | **Quality Control** | Uses `filter()` correctly to identify and "glimpse" potentially untruthful observations without deleting them. | Identifies flagged observations but the filtering logic is partially incomplete or flawed. | Mentions quality control but provides no code output or glimpse of the flagged data. | Did not perform the quality control check. |
 | **Fit a simple linear regression & Interpret results** | Fits the SLR, prints a clean table, correctly interprets the slope in context, and comments on the initial trend. | Fits the model and prints the table, but the interpretation contains minor technical or contextual errors. | Fits the model but fails to print a table or provide an interpretation of the results. | Modeling task not attempted. |
-
