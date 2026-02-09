@@ -55,7 +55,7 @@ theme_set(theme_bw(base_size = 12))
 
 # Learning Objectives
 
-1.  Understand the population multiple linear regression model through equations and visuals.
+1.  Understand the population multiple linear regression model through equations.
 2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
 3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
 2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
@@ -217,9 +217,9 @@ Model Use (Inference)
     -   Predictor: Cell phones per 100 people, the number of cell phones per 100 people in a country
     
 -   Let's say many other variables were measured for each country ([see codebook](../gapminder_codebook.qmd))
-  - Income levels: Low income, Lower middle income, Upper middle income, High income
-  - Basic sanitation: the percentage of people in urban areas with access to basic sanitation services
-
+    - **Income levels:** Low income, Lower middle income, Upper middle income, High income
+    - **Vaccination rate:** The percentage of one-year-olds who have received at least one of the following vaccinations: BCG, DTP3, HepB3, HIB3, Measles 1st,Measles 2nd, PCV3, Pol3 or RotaC.
+  
 ## Loading the data {visibility="hidden"}
 
 ```{r}
@@ -239,6 +239,51 @@ gapm = gapm %>%
   
 
 glimpse(gapm)
+```
+  
+## We have seen some work with all these variables
+
+- We have looked at some of the "simple" linear regression relationships between life expectancy and these variables (e.g. cell phones, income level, basic sanitation)
+
+```{r}
+#| echo: false
+#| fig-width: 14
+#| fig-height: 5
+#| code-fold: true
+#| code-summary: "Code: Create three SLR plots for life expectancy vs. cell phones, income level, and basic sanitation"
+
+gapm_slr_plot = gapm %>%
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, size = 2, colour="#F14124") +
+  geom_smooth(method = "loess", se = FALSE, size = 2, colour="#34AC8B") +
+  labs(x = "Cell phones per 100 people",
+       y = "Life expectancy (years)") +
+  theme(axis.title = element_text(size = 15), 
+        axis.text = element_text(size = 15))
+
+slr_income_plot = ggplot(gapm, aes(x = income_level_4, y = life_exp)) +
+  geom_jitter(size = 1, alpha = .6, width = 0.2) +
+  stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
+  scale_x_discrete(limits = levels(gapm$income_level_4), labels = function(x) str_wrap(x, width=9)) +
+  labs(x = "Income levels", 
+       y = "Life expectancy (years)") +
+  theme(axis.title = element_text(size = 15), 
+        axis.text = element_text(size = 15))
+
+gapm_bs_plot = gapm %>%
+  ggplot(aes(x = vax_rate,
+             y = life_exp)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, size = 2, colour="#F14124") +
+  geom_smooth(method = "loess", se = FALSE, size = 2, colour="#34AC8B") +
+  labs(x = "Vaccination rate (%)",
+       y = "Life expectancy (years)") +
+  theme(axis.title = element_text(size = 15), 
+        axis.text = element_text(size = 15))
+
+grid.arrange(gapm_slr_plot, slr_income_plot, gapm_bs_plot, nrow = 1)
 ```
 
 ## 
@@ -334,7 +379,9 @@ $$y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}+ \ldots + \beta_k x_{ik} + \ep
 :::
 :::
 
-## Visualize relationship between life expectancy, cell phones, and income level
+# Learning Objectives
+
+## Visualize relationship: life expectancy, cell phones, and income level
 
 ```{r fig.width=7, fig.height=4}
 #| echo: false
@@ -552,13 +599,13 @@ $$\begin{aligned}
 
 ::: proof1
 ::: proof-cont
-Adjusting/controlling for $X_1$-variable, the difference in mean $Y$-variable comparing $X_2$-variable in category 2 to the reference group (cat 1) is $|\widehat\beta_2|$ units (95%: LB, UB).
+As long as $X_1$ is the same value (aka adjusting or controlling for $X_1$), then the two $\widehat{\beta}_1X_1$ terms will cancel out
 :::
 :::
 :::
 :::
 
-**Interpretation:** For every increase of 1 $X_2$-unit in the $X_2$-variable, adjusting/controlling for $X_1$-variable, there is an expected increase/decrease of $|\widehat\beta_2|$ units in the $Y$-variable (95%: LB, UB).
+**Interpretation:** Adjusting/controlling for $X_1$-variable, the difference in mean $Y$-variable comparing $X_2$-variable in category 2 to the reference group (cat 1) is $|\widehat\beta_2|$ units (95%: LB, UB).
 
 
 ## What do the fitted regression lines look like?
@@ -590,19 +637,13 @@ ggplot(aug_mod1) +
 
 ## Getting these interpretations from our regression table
 
-We fit the regression model in R and printed the regression table:
+[**Fitted** multiple regression model:]{style="color: #34AC8B;"}
 
-```{r}
-mr1 <- lm(life_exp ~ cell_phones_100 + basic_sani, 
-          data = gapm)
-```
-
-```{r}
-#| echo: false
-tidy(mr1, conf.int=T) %>% gt() %>% tab_options(table.font.size = 30) %>% fmt_number(decimals = 3)
-```
-
-Fitted multiple regression model: $\widehat{\text{LE}} = 33.595 + 0.157 \text{ FLR} + 0.008 \text{ FS}$
+$$\begin{aligned}
+\widehat{\text{LE}}  = & \widehat{\beta}_0 + \widehat{\beta}_1 \text{CP} + \widehat{\beta}_2 I(IL = \text{``Lower middle"}) + \widehat{\beta}_3 I(IL = \text{``Upper middle"}) + \widehat{\beta}_2 I(IL = \text{``High"}) \\
+\widehat{\text{LE}} = & `r round(mr1_tidy$estimate[1], 2)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP}
++ `r round(mr1_tidy$estimate[3], 2)`\ I(IL = \text{``Lower middle"}) + `r round(mr1_tidy$estimate[4], 2)`\ I(IL = \text{``Upper middle"}) + \\ & `r round(mr1_tidy$estimate[5], 2)`\ I(IL = \text{``High"})
+\end{aligned}$$
 
 ::: columns
 ::: {.column width="33%"}
@@ -612,7 +653,7 @@ Interpretation for $\widehat{\beta}_0$
 :::
 
 ::: fact-cont
-The average life expectancy is 33.595 years when the female literacy rate is 0% and food supply is 0 kcal PPD (95% CI: 24.674, 41.517).
+The average life expectancy is `r round(mr1_tidy$estimate[1], 2)` years for a country with 0 cell phones per 100 people and low income status (95% CI: `r round(mr1_tidy$conf.low[1], 2)`, `r round(mr1_tidy$conf.high[1], 2)`).
 :::
 :::
 :::
@@ -624,7 +665,7 @@ Interpretation for $\widehat{\beta}_1$
 :::
 
 ::: def-cont
-For every 1% increase in the female literacy rate, adjusting for food supply, there is an expected increase of 0.157 years in the life expectancy (95%: 0.093, 0.221).
+For every increase of 1 cell phone per 100 people, there is an expected increase of `r round(mr1_tidy$estimate[2], 3)` years in life expectancy (95% CI: `r round(mr1_tidy$conf.low[2], 3)`, `r round(mr1_tidy$conf.high[2], 3)`), adjusting for income level.
 :::
 :::
 :::
@@ -636,7 +677,7 @@ Interpretation for $\widehat{\beta}_2$
 :::
 
 ::: proof-cont
-For every 1 kcal PPD increase in the food supply, adjusting for female literacy rate, there is an expected increase of 0.008 years in life expectancy (95%: 0.005, 0.012).
+The difference in average life expectancy comparing lower middle income countries to low income countries is `r round(mr1_tidy$estimate[3], 2)` years (95% CI: `r round(mr1_tidy$conf.low[3], 2)`, `r round(mr1_tidy$conf.high[3], 2)`), adjusting for cell phones per 100 people.
 :::
 :::
 :::
@@ -660,21 +701,19 @@ Simple linear regression population model
 
 ::: def-cont
 $$\begin{aligned}
-\text{Life expectancy} & = \beta_0 + \beta_1 \text{Female literacy rate} + \epsilon \\
-\text{LE} & = \beta_0 + \beta_1 \text{FLR} + \epsilon
+\text{LE}  = \beta_0 + \beta_1 \text{CP} + \epsilon
 \end{aligned}$$
 :::
 :::
 
 ::: fact
 ::: fact-title
-Multiple linear regression population model (with added Food Supply)
+Multiple linear regression population model (with added vaccination rate)
 :::
 
 ::: fact-cont
 $$\begin{aligned}
-\text{Life expectancy} & = \beta_0 + \beta_1 \text{Female literacy rate} + \beta_2 \text{Food supply} + \epsilon \\
-\text{LE} & = \beta_0 + \beta_1 \text{FLR} + \beta_2 \text{FS} + \epsilon
+\text{LE}  =  \beta_0 + \beta_1 \text{CP} + \beta_2 \text{VR} + \epsilon
 \end{aligned}$$
 :::
 :::
@@ -685,44 +724,43 @@ $$\begin{aligned}
 :::
 
 
+## Visualize relationship: life expectancy, cell phones, and vaccination rate
 
-## Visualize relationship between life expectancy, female literacy rate, and food supply
-
-```{r fig.width=8, fig.height=3}
+```{r fig.width=10, fig.height=3}
 #| echo: false
 
 plot_LE_FLR <- ggplot(gapm, aes(x = cell_phones_100,
                  y = life_exp)) +
   geom_point() +
-  geom_smooth() +
-  geom_smooth(method = "lm", color = "#F14124") +
-  labs(title = "Life expectancy vs.\n female literacy rate", 
+  geom_smooth(method = "lm", se = FALSE, size = 1, colour="#F14124") +
+  geom_smooth(method = "loess", se = FALSE, size = 1, colour="#34AC8B") +
+  labs(title = "Life expectancy vs.cell phones", 
        x = "Cell phones per 100 people", 
        y = "Life Expectancy (yrs)") +
   theme(axis.title = element_text(size = 10), 
         axis.text = element_text(size = 10), 
         title = element_text(size = 10))
 
-plot_LE_FS <- ggplot(gapm, aes(x = basic_sani,
+plot_LE_FS <- ggplot(gapm, aes(x = vax_rate,
                  y = life_exp)) +
   geom_point() +
-  geom_smooth() +
-  geom_smooth(method = "lm", color = "#F14124") +
-  labs(title = "Life expectancy vs. \n food supply", 
-       x = "Food supply (kcal PPD)", 
+  geom_smooth(method = "lm", se = FALSE, size = 1, colour="#F14124") +
+  geom_smooth(method = "loess", se = FALSE, size = 1, colour="#34AC8B") +
+  labs(title = "Life expectancy vs. vax rate", 
+       x = "Vaccination rate (%)", 
        y = "Life Expectancy (yrs)") +
   theme(axis.title = element_text(size = 10), 
         axis.text = element_text(size = 10), 
         title = element_text(size = 10))
 
-plot_FLR_FS <- ggplot(gapm, aes(x = basic_sani,
+plot_FLR_FS <- ggplot(gapm, aes(x = vax_rate,
                  y = cell_phones_100)) +
   geom_point() +
-  geom_smooth() +
-  geom_smooth(method = "lm", color = "#F14124") +
-  labs(title = "Female literacy rate vs. \n food supply", 
+  geom_smooth(method = "lm", se = FALSE, size = 1, colour="#F14124") +
+  geom_smooth(method = "loess", se = FALSE, size = 1, colour="#34AC8B") +
+  labs(title = "Cell phones vs. vax rate", 
        y = "Cell phones per 100 people", 
-       x = "Food supply (kcal PPD)") +
+       x = "Vaccination rate (%)") +
   theme(axis.title = element_text(size = 10), 
         axis.text = element_text(size = 10), 
         title = element_text(size = 10))
@@ -738,7 +776,7 @@ grid.arrange(plot_LE_FLR, plot_LE_FS, plot_FLR_FS,
 :::
 
 ::: {.column width="50%"}
-```{r fig.height=8, fig.width=8, warning=F}
+```{r fig.height=10, fig.width=10, warning=F}
 #| echo: false
 #| fig-align: center
 # plotly package is require for plot_ly function, which is loaded at beginning of Rmd 
@@ -747,11 +785,11 @@ grid.arrange(plot_LE_FLR, plot_LE_FS, plot_FLR_FS,
 
 dim3_scatter <- plot_ly(gapm, 
                        x = ~cell_phones_100, 
-                       y = ~basic_sani, 
+                       y = ~vax_rate, 
                        z = ~life_exp) %>%
   add_markers() %>%
-  layout(scene = list(xaxis = list(title = 'Female literacy rate'),
-                     yaxis = list(title = 'Food supply (kc PPD)'),
+  layout(scene = list(xaxis = list(title = 'Cell phones per 100 people'),
+                     yaxis = list(title = 'Vaccination rate (%)'),
                      zaxis = list(title = 'Life expectancy')))
 dim3_scatter
 ```
@@ -760,6 +798,31 @@ dim3_scatter
 ::: {.column width="25%"}
 :::
 :::
+
+## Relationship with 2D plot with color
+
+```{r fig.width=7, fig.height=4}
+#| echo: false
+
+# make quartiles for vax rate
+gapm2 = gapm %>%
+  mutate(vax_rate_q = ntile(vax_rate, 4)) %>%
+  mutate(vax_rate_q = factor(vax_rate_q, 
+                             labels = c("Q1", "Q2", "Q3", "Q4")))
+
+ggplot(gapm2, aes(x = cell_phones_100,
+                 y = life_exp, 
+                 color = vax_rate_q)) +
+  geom_point() +
+  geom_smooth(method = "lm", se=F) +
+  labs(title = "Life expectancy vs. cell phones", 
+       x = "Cell phones per 100 people", 
+       y = "Life Expectancy (yrs)", 
+       color = "Vaccination rate quartiles") +
+  theme(axis.title = element_text(size = 10), 
+        axis.text = element_text(size = 10), 
+        title = element_text(size = 10))
+```
 
 ## Poll Everywhere Question 1
 
@@ -778,12 +841,12 @@ dim3_scatter
 
 New population model for example:
 
-$$\text{LE} = \beta_0 + \beta_1 \text{FLR} + \beta_2 \text{FS} + \epsilon$$
+$$\text{LE} = \beta_0 + \beta_1 \text{CP} + \beta_2 \text{VR} + \epsilon$$
 
 ```{r}
 # Fit regression model:
 mr1 <- gapm %>% 
-  lm(formula = life_exp ~ cell_phones_100 + basic_sani)
+  lm(formula = life_exp ~ cell_phones_100 + vax_rate)
 tidy(mr1, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 ```
 
@@ -796,16 +859,10 @@ mr1_tidy = tidy(mr1, conf.int=T)
 Fitted multiple regression model:
 
 $$\begin{aligned}
-\widehat{\text{LE}} &= \widehat{\beta}_0 + \widehat{\beta}_1 \text{FLR} + \widehat{\beta}_2 \text{FS} \\
-\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{FLR} 
-+ `r round(mr1_tidy$estimate[3], 3)`\ \text{FS}
+\widehat{\text{LE}} &= \widehat{\beta}_0 + \widehat{\beta}_1 \text{CP} + \widehat{\beta}_2 \text{VR} \\
+\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP} 
++ `r round(mr1_tidy$estimate[3], 3)`\ \text{VR}
 \end{aligned}$$
-
-## Don't forget `summary()` to extract information!
-
-```{r}
-summary(mr1)
-```
 
 ## Visualize the fitted multiple regression model
 
@@ -824,12 +881,12 @@ summary(mr1)
 #| fig-align: center
 # setup hideous grid required by plotly
 mr1 <- gapm %>% 
-  lm(formula = life_exp ~ cell_phones_100 + basic_sani)
+  lm(formula = life_exp ~ cell_phones_100 + vax_rate)
 x_grid <- seq(from = min(gapm$cell_phones_100, na.rm = TRUE), 
               to = max(gapm$cell_phones_100, na.rm = TRUE), 
               length = 100)
-y_grid <- seq(from = min(gapm$basic_sani, na.rm = TRUE), 
-              to = max(gapm$basic_sani, na.rm = TRUE), 
+y_grid <- seq(from = min(gapm$vax_rate, na.rm = TRUE), 
+              to = max(gapm$vax_rate, na.rm = TRUE), 
               length = 200)
 z_grid <- expand.grid(x_grid, y_grid) %>%
   as_tibble() %>%
@@ -843,12 +900,12 @@ z_grid <- expand.grid(x_grid, y_grid) %>%
 plot_ly() %>%
   add_markers(
     x = gapm$cell_phones_100,
-    y = gapm$basic_sani,
+    y = gapm$vax_rate,
     z = gapm$life_exp,
     hoverinfo = 'text',
-    text = ~paste("x1 - Female literacy rate: ",
+    text = ~paste("x1 - Cell phones per 100 people: ",
                   gapm$cell_phones_100,
-                  "</br> x2 - Food supply (kc PPD): ",
+                  "</br> x2 - Vaccination rate (%): ",
                   gapm$basic_sani,
                   "</br> y - Life expectancy: ",
                   gapm$life_exp)
@@ -856,8 +913,8 @@ plot_ly() %>%
   # Label axes
   layout(
     scene = list(
-      xaxis = list(title = "x1 - Female literacy rate"),
-      yaxis = list(title = "x2 - Food supply (kc PPD)"),
+      xaxis = list(title = "x1 - Cell phones per 100 people"),
+      yaxis = list(title = "x2 - Vaccination rate (%)"),
       zaxis = list(title = "y - Life expectancy")
     )
   ) %>%
@@ -875,16 +932,16 @@ plot_ly() %>%
 ## Regression lines for varying values of food supply
 
 $$\begin{aligned}
-\widehat{\text{LE}} &= \widehat{\beta}_0 + \widehat{\beta}_1 \text{FLR} + \widehat{\beta}_2 \text{FS} \\
-\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{FLR} 
-+ `r round(mr1_tidy$estimate[3], 3)`\ \text{FS}
+\widehat{\text{LE}} &= \widehat{\beta}_0 + \widehat{\beta}_1 \text{CP} + \widehat{\beta}_2 \text{VR} \\
+\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP} 
++ `r round(mr1_tidy$estimate[3], 3)`\ \text{VR}
 \end{aligned}$$
 
 ::: columns
 ::: {.column width="35%"}
--   Note: when the food supply is held constant but the female literacy rate varies...
+-   Note: when the vaccination rate is held constant but cell phones varies...
     -   then the outcome values change along a **line**
--   Different values of food supply give different lines
+-   Different values of vaccination rate give different lines
     -   The intercepts change, but
     -   the slopes stay the same (parallel lines)
 :::
@@ -900,20 +957,20 @@ $$\begin{aligned}
 :::
 :::
 
-## How do we calculate the regression line for 3000 kc PPD food supply?
+## How do we calculate the regression line for 80% vaccination rate?
 
 ::: columns
 ::: {.column width="40%"}
  
 
 $$\begin{aligned}
-\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{FLR} 
-+ `r round(mr1_tidy$estimate[3], 3)`\ \text{FS}\\
-\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{FLR} 
-+ `r round(mr1_tidy$estimate[3], 3)`\cdot 3000\\
-\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{FLR}
-+ `r round(mr1_tidy$estimate[3]*3000, 3)` \\
-\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1] + mr1_tidy$estimate[3]*3000, 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{FLR}
+\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP} 
++ `r round(mr1_tidy$estimate[3], 3)`\ \text{VR}\\
+\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP} 
++ `r round(mr1_tidy$estimate[3], 3)`\cdot 80\\
+\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP}
++ `r round(mr1_tidy$estimate[3]*80, 3)` \\
+\widehat{\text{LE}} &= `r round(mr1_tidy$estimate[1] + mr1_tidy$estimate[3]*80, 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP}
 \end{aligned}$$
 :::
 
@@ -986,10 +1043,10 @@ For every increase of 1 $X_2$-unit in the $X_2$-variable, adjusting/controlling 
 :::
 
 
-## Interpreting the estimated population coefficient: $\widehat{\beta}_0$ {#color-slide1}
+## Interpreting the estimated population coefficient: $\widehat{\beta}_0$ {#color-slide9}
 
 ```{css, echo=FALSE}
-#color-slide1 h2 {
+#color-slide9 h2 {
  color: #34AC8B;
 }
 ```
@@ -1003,10 +1060,10 @@ $$\begin{aligned}
 
 **Interpretation:** The expected $Y$-variable is ($\widehat\beta_0$ units) when the $X_1$-variable is 0 $X_1$-units and $X_2$-variable is 0 $X_1$-units (95% CI: LB, UB).
 
-## Interpreting the estimated population coefficient: $\widehat{\beta}_1$ {#color-slide2}
+## Interpreting the estimated population coefficient: $\widehat{\beta}_1$ {#color-slide10}
 
 ```{css, echo=FALSE}
-#color-slide2 h2 {
+#color-slide10 h2 {
  color: #4FADF3;
 }
 ```
@@ -1041,23 +1098,23 @@ As long as $X_2$ is the same value (aka adjusting or controlling for $X_2$), the
 **Interpretation:** For every increase of 1 $X_1$-unit in the $X_1$-variable, adjusting/controlling for $X_2$-variable, there is an expected increase/decrease of $|\widehat\beta_1|$ units in the $Y$-variable (95%: LB, UB).
 
 
-## Interpreting the estimated population coefficient: $\widehat{\beta}_2$ {#color-slide3}
+## Interpreting the estimated population coefficient: $\widehat{\beta}_2$ {#color-slide11}
 
 ```{css, echo=FALSE}
-#color-slide3 h2 {
+#color-slide11 h2 {
  color: #FF8021;
 }
 ```
 
 - We can so the same for $X_2$: $x_{2a}$ and $x_{2b} = x_{2a} + 1$, with the implication that $\Delta{x_2} = x_{2b} - x_{2a} = 1$
 
-- Our goal is to get to a statement with $\widehat{\beta}_1$ alone:
+- Our goal is to get to a statement with $\widehat{\beta}_2$ alone:
 
 ::: columns
 ::: {.column width="75%"}
 $$\begin{aligned}
-\widehat{Y}|x_{2a} = &\widehat{\beta}_0 + \widehat{\beta}_1 x_{1a} + \widehat{\beta}_2 X_2\\
-\widehat{Y}|x_{2b} = &\widehat{\beta}_0 + \widehat{\beta}_1 x_{1b} + \widehat{\beta}_2 X_2\\
+\widehat{Y}|x_{2a} = &\widehat{\beta}_0 + \widehat{\beta}_1 X_1 + \widehat{\beta}_2 x_{2a}\\
+\widehat{Y}|x_{2b} = &\widehat{\beta}_0 + \widehat{\beta}_1 X_1 + \widehat{\beta}_2 x_{2b}\\
 \widehat{Y}|x_{2b} - \widehat{Y}|x_{2a} = & \bigg[\widehat{\beta}_0 + \widehat{\beta}_1 X_1 + \widehat{\beta}_2 x_{2b} \bigg] - \bigg[\widehat{\beta}_0 + \widehat{\beta}_1 X_1 + \widehat{\beta}_2 x_{2a}\bigg] \\
 \widehat{Y}|x_{2b} - \widehat{Y}|x_{2a} = &  \widehat{\beta}_2 x_{2b} - \widehat{\beta}_2 x_{2a}\\
 \widehat{Y}|x_{2b} - \widehat{Y}|x_{2a} = &  \widehat{\beta}_2 (x_{2b} - x_{2a})\\
@@ -1078,7 +1135,6 @@ As long as $X_1$ is the same value (aka adjusting or controlling for $X_1$), the
 
 **Interpretation:** For every increase of 1 $X_2$-unit in the $X_2$-variable, adjusting/controlling for $X_1$-variable, there is an expected increase/decrease of $|\widehat\beta_2|$ units in the $Y$-variable (95%: LB, UB).
 
-
 ## Poll Everywhere Question 3
 
 ## Getting these interpretations from our regression table
@@ -1086,7 +1142,7 @@ As long as $X_1$ is the same value (aka adjusting or controlling for $X_1$), the
 We fit the regression model in R and printed the regression table:
 
 ```{r}
-mr1 <- lm(life_exp ~ cell_phones_100 + basic_sani, 
+mr1 <- lm(life_exp ~ cell_phones_100 + vax_rate, 
           data = gapm)
 ```
 
@@ -1095,7 +1151,7 @@ mr1 <- lm(life_exp ~ cell_phones_100 + basic_sani,
 tidy(mr1, conf.int=T) %>% gt() %>% tab_options(table.font.size = 30) %>% fmt_number(decimals = 3)
 ```
 
-Fitted multiple regression model: $\widehat{\text{LE}} = 33.595 + 0.157 \text{ FLR} + 0.008 \text{ FS}$
+Fitted multiple regression model: $\widehat{\text{LE}} = `r round(mr1_tidy$estimate[1], 3)` + `r round(mr1_tidy$estimate[2], 3)` \ \text{CP} + `r round(mr1_tidy$estimate[3], 3)`\ \text{VR}$
 
 ::: columns
 ::: {.column width="33%"}
@@ -1105,7 +1161,7 @@ Interpretation for $\widehat{\beta}_0$
 :::
 
 ::: fact-cont
-The average life expectancy is 33.595 years when the female literacy rate is 0% and food supply is 0 kcal PPD (95% CI: 24.674, 41.517).
+The average life expectancy is `r round(mr1_tidy$estimate[1], 2)` years for a country with 0 cell phones per 100 people and 0% vaccination rate (95% CI: `r round(mr1_tidy$conf.low[1], 2)`, `r round(mr1_tidy$conf.high[1], 2)`).
 :::
 :::
 :::
@@ -1117,7 +1173,7 @@ Interpretation for $\widehat{\beta}_1$
 :::
 
 ::: def-cont
-For every 1% increase in the female literacy rate, adjusting for food supply, there is an expected increase of 0.157 years in the life expectancy (95%: 0.093, 0.221).
+For every increase of 1 cell phone per 100 people, there is an expected increase of `r round(mr1_tidy$estimate[2], 2)` years in a country's life expectancy (95% CI: `r round(mr1_tidy$conf.low[2], 2)`, `r round(mr1_tidy$conf.high[2], 2)`), adjusting for vaccination rate.
 :::
 :::
 :::
@@ -1129,7 +1185,7 @@ Interpretation for $\widehat{\beta}_2$
 :::
 
 ::: proof-cont
-For every 1 kcal PPD increase in the food supply, adjusting for female literacy rate, there is an expected increase of 0.008 years in life expectancy (95%: 0.005, 0.012).
+For every 1% increase in vaccination rate, there is an expected increase of `r round(mr1_tidy$estimate[3], 2)` years in a country's life expectancy (95% CI: `r round(mr1_tidy$conf.low[3], 2)`, `r round(mr1_tidy$conf.high[3], 2)`), adjusting for cell phones per 100 people.
 :::
 :::
 :::
