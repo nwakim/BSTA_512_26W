@@ -58,8 +58,8 @@ theme_set(theme_bw(base_size = 12))
 1.  Understand the population multiple linear regression model through equations.
 2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
 3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
-2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
-3.  Interpret MLR (population) coefficient estimates with additional variable in model
+4.  Fit MLR model (in `R`) with two continuous predictors.
+5.  Interpret MLR coefficient estimates from model with two continuous predictors.
 
 ```{css, echo=FALSE}
 .reveal code {
@@ -214,7 +214,7 @@ Model Use (Inference)
 
     -   Outcome: [**Life expectancy**](https://www.gapminder.org/data/documentation/gd004/) = the average number of years a newborn child would live if current mortality patterns were to stay the same.
 
-    -   Predictor: Cell phones per 100 people, the number of cell phones per 100 people in a country
+    -   Predictor: **Cell phones per 100 people**, the number of cell phones per 100 people in a country
     
 -   Let's say many other variables were measured for each country ([see codebook](../gapminder_codebook.qmd))
     - **Income levels:** Low income, Lower middle income, Upper middle income, High income
@@ -241,16 +241,16 @@ gapm = gapm %>%
 glimpse(gapm)
 ```
   
-## We have seen some work with all these variables
+## We have seen some work with these variables
 
-- We have looked at some of the "simple" linear regression relationships between life expectancy and these variables (e.g. cell phones, income level, basic sanitation)
+- We have looked at some of the "simple" linear regression relationships between life expectancy and these variables (e.g. cell phones, income level, vaccination rate)
 
 ```{r}
 #| echo: false
 #| fig-width: 14
 #| fig-height: 5
 #| code-fold: true
-#| code-summary: "Code: Create three SLR plots for life expectancy vs. cell phones, income level, and basic sanitation"
+#| code-summary: "Code: Create three SLR plots for life expectancy vs. cell phones, income level, and vaccination rate"
 
 gapm_slr_plot = gapm %>%
   ggplot(aes(x = cell_phones_100,
@@ -286,19 +286,16 @@ gapm_bs_plot = gapm %>%
 grid.arrange(gapm_slr_plot, slr_income_plot, gapm_bs_plot, nrow = 1)
 ```
 
-## 
-
-![](../img_slides/all_mod_wrong.jpg){fig-align="center"}
-
 # Learning Objectives
 
 ::: lob
-1.  Understand the population multiple linear regression model through equations and visuals.
+1.  Understand the population multiple linear regression model through equations.
 :::
 
-2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
-3.  Interpret MLR (population) coefficient estimates with additional variable in model
-4.  Based off of previous SLR work, understand how the population MLR is estimated.
+2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
+3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
+4.  Fit MLR model (in `R`) with two continuous predictors.
+5.  Interpret MLR coefficient estimates from model with two continuous predictors.
 
 ## Simple Linear Regression vs. Multiple Linear Regression
 
@@ -381,6 +378,16 @@ $$y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}+ \ldots + \beta_k x_{ik} + \ep
 
 # Learning Objectives
 
+1.  Understand the population multiple linear regression model through equations.
+
+::: lob
+2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
+:::
+
+3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
+4.  Fit MLR model (in `R`) with two continuous predictors.
+5.  Interpret MLR coefficient estimates from model with two continuous predictors.
+
 ## Visualize relationship: life expectancy, cell phones, and income level
 
 ```{r fig.width=7, fig.height=4}
@@ -402,8 +409,10 @@ ggplot(gapm, aes(x = cell_phones_100,
 
 ```
 
+## Poll Everywhere Question 1 
 
-## Can we improve our model by adding food supply as a covariate?
+
+## How can we model life expectancy with cell phones and income level?
 
 ::: columns
 ::: {.column width="10%"}
@@ -469,6 +478,16 @@ $$\begin{aligned}
 
 
 # Learning Objectives
+
+1.  Understand the population multiple linear regression model through equations.
+2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
+
+::: lob
+3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
+:::
+
+4.  Fit MLR model (in `R`) with two continuous predictors.
+5.  Interpret MLR coefficient estimates from model with two continuous predictors.
 
 ## Interpreting the estimated population coefficients
 
@@ -635,6 +654,9 @@ ggplot(aug_mod1) +
         title = element_text(size = 10))
 ```
 
+## Poll Everywhere Question 2
+
+
 ## Getting these interpretations from our regression table
 
 [**Fitted** multiple regression model:]{style="color: #34AC8B;"}
@@ -685,7 +707,15 @@ The difference in average life expectancy comparing lower middle income countrie
 
 # Learning Objectives
 
+1.  Understand the population multiple linear regression model through equations.
+2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
+3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
 
+::: lob
+4.  Fit MLR model (in `R`) with two continuous predictors.
+:::
+
+5.  Interpret MLR coefficient estimates from model with two continuous predictors.
 
 ## Can we improve our model by adding food supply as a covariate?
 
@@ -823,19 +853,6 @@ ggplot(gapm2, aes(x = cell_phones_100,
         axis.text = element_text(size = 10), 
         title = element_text(size = 10))
 ```
-
-## Poll Everywhere Question 1
-
-# Learning Objectives
-
-1.  Understand the population multiple linear regression model through equations and visuals.
-
-::: lob
-2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
-:::
-
-3.  Interpret MLR (population) coefficient estimates with additional variable in model
-4.  Based off of previous SLR work, understand how the population MLR is estimated.
 
 ## How do we fit a multiple linear regression model in R?
 
@@ -985,18 +1002,18 @@ $$\begin{aligned}
 :::
 :::
 
-## Poll Everwhere Question 2
+## Poll Everwhere Question 3
 
 # Learning Objectives
 
-1.  Understand the population multiple linear regression model through equations and visuals.
-2.  Fit MLR model (in `R`) and understand the difference between fitted regression plane and regression lines.
+1.  Understand the population multiple linear regression model through equations.
+2.  Fit MLR model (in `R`) with one continuous and one categorical predictor.
+3.  Interpret MLR coefficient estimates from model with one continuous and one categorical predictor.
+4.  Fit MLR model (in `R`) with two continuous predictors.
 
 ::: lob
-3.  Interpret MLR (population) coefficient estimates with additional variable in model
+5.  Interpret MLR coefficient estimates from model with two continuous predictors.
 :::
-
-4.  Based off of previous SLR work, understand how the population MLR is estimated.
 
 ## Interpreting the estimated population coefficients
 
@@ -1135,7 +1152,7 @@ As long as $X_1$ is the same value (aka adjusting or controlling for $X_1$), the
 
 **Interpretation:** For every increase of 1 $X_2$-unit in the $X_2$-variable, adjusting/controlling for $X_1$-variable, there is an expected increase/decrease of $|\widehat\beta_2|$ units in the $Y$-variable (95%: LB, UB).
 
-## Poll Everywhere Question 3
+## Poll Everywhere Question 4
 
 ## Getting these interpretations from our regression table
 
@@ -1190,6 +1207,8 @@ For every 1% increase in vaccination rate, there is an expected increase of `r r
 :::
 :::
 :::
+
+# Extra resources
 
 ## What we need in our interpretations of coefficients (reference)
 
