@@ -2874,7 +2874,7 @@
     "href": "lessons/08_SLR_Diagnostics/08_SLR_Diag.html#what-does-the-model-look-like-without-outliers",
     "title": "Lesson 8: SLR: Model Diagnostics",
     "section": "What does the model look like without outliers?",
-    "text": "What does the model look like without outliers?\n\nWhen we remove outliers, how do our coefficient estimates change?\nWe can compare the model with and without outliers\n\n\nmodel1 &lt;- gapm %&gt;% lm(formula = life_exp ~ cell_phones_100)\n# Get regression table:\ntidy_model1 = tidy(model1)\n\n\n\n\n\nModel with outliers\n\n\n\n\nCode\ntidy(model1) %&gt;% gt() %&gt;% # With outliers\n tab_options(table.font.size = 40) %&gt;% \n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n60.041\n2.056\n29.207\n0.000\n\n\ncell_phones_100\n0.094\n0.017\n5.546\n0.000\n\n\n\n\n\n\n\n\\[\n\\widehat{Y} = 60.04 + 0.094\\cdot X\n\\]\n\n\n\n\n\nModel without outliers\n\n\n\n\nCode\naug1_no_out &lt;- aug1 %&gt;% filter(abs(.std.resid) &lt;= 2) \n\nmodel1_no_out &lt;- aug1_no_out %&gt;% \n  lm(formula = life_exp ~ cell_phones_100)\ntidy(model1_no_out) %&gt;% gt() %&gt;% # Without outliers\n tab_options(table.font.size = 40) %&gt;% \n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n59.479\n1.760\n33.791\n0.000\n\n\ncell_phones_100\n0.102\n0.015\n7.001\n0.000\n\n\n\n\n\n\n\n\\[\n\\widehat{Y} = 59.48 + 0.102\\cdot X\n\\]\n\n\n\n\nModels have similar coefficient estimates, but standard errors are smaller for model without outliers\n\nThis is not a reason to exclude outliers!!"
+    "text": "What does the model look like without outliers?\n\nWhen we remove outliers, how do our coefficient estimates change?\nWe can compare the model with and without outliers\n\n\nmodel1 &lt;- gapm %&gt;% lm(formula = life_exp ~ cell_phones_100)\ntidy_model1 = tidy(model1)\n\n\n\n\n\nModel with outliers\n\n\n\n\nCode\ntidy(model1) %&gt;% gt() %&gt;% # With outliers\n tab_options(table.font.size = 40) %&gt;% \n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n60.041\n2.056\n29.207\n0.000\n\n\ncell_phones_100\n0.094\n0.017\n5.546\n0.000\n\n\n\n\n\n\n\n\\[\n\\widehat{Y} = 60.04 + 0.094\\cdot X\n\\]\n\n\n\n\n\nModel without outliers\n\n\n\n\nCode\naug1_no_out &lt;- aug1 %&gt;% filter(abs(.std.resid) &lt;= 2) \n\nmodel1_no_out &lt;- aug1_no_out %&gt;% \n  lm(formula = life_exp ~ cell_phones_100)\ntidy(model1_no_out) %&gt;% gt() %&gt;% # Without outliers\n tab_options(table.font.size = 40) %&gt;% \n  fmt_number(decimals = 3)\n\n\n\n\n\n\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n59.479\n1.760\n33.791\n0.000\n\n\ncell_phones_100\n0.102\n0.015\n7.001\n0.000\n\n\n\n\n\n\n\n\\[\n\\widehat{Y} = 59.48 + 0.102\\cdot X\n\\]\n\n\n\n\nModels have similar coefficient estimates, but standard errors are smaller for model without outliers\n\nThis is not a reason to exclude outliers!!"
   },
   {
     "objectID": "lessons/08_SLR_Diagnostics/08_SLR_Diag.html#high-leverage-observations",
@@ -4687,7 +4687,7 @@
     "href": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html#key-dates",
     "title": "Key Info and Announcements",
     "section": "Key Dates",
-    "text": "Key Dates"
+    "text": "Key Dates\n\nHomework 3 due 2/15 at 11pm"
   },
   {
     "objectID": "lessons/09_MLR_Intro/09_MLR_Intro.html",
@@ -6858,5 +6858,26 @@
     "title": "Lesson 9: Introduction to Multiple Linear Regression (MLR)",
     "section": "Poll Everwhere Question 3",
     "text": "Poll Everwhere Question 3"
+  },
+  {
+    "objectID": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html",
+    "href": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Homework 2 feedback\n\nYou did well! Solutions are now up\nA note on interpreting coefficient estimates:\n\nThe coefficient estimate for a predictor variable represents the expected change or average change in the outcome variable for a one-unit increase in that predictor.\nWe need to make sure that it stated in our interpretations!"
+  },
+  {
+    "objectID": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html#announcements",
+    "href": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html#announcements",
+    "title": "Key Info and Announcements",
+    "section": "",
+    "text": "Homework 2 feedback\n\nYou did well! Solutions are now up\nA note on interpreting coefficient estimates:\n\nThe coefficient estimate for a predictor variable represents the expected change or average change in the outcome variable for a one-unit increase in that predictor.\nWe need to make sure that it stated in our interpretations!"
+  },
+  {
+    "objectID": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html#events",
+    "href": "lessons/09_MLR_Intro/09_MLR_Intro_key_info.html#events",
+    "title": "Key Info and Announcements",
+    "section": "Events",
+    "text": "Events\n\nAlgorithmic Bias: A Practical Introduction\nThe Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is offering a brand-new seminar in our Responsible Practice in Data and Analysis series. Alicia Johnson is leading this seminar on Friday, February 13. Flier attached; session in Compass; here’s the event page."
   }
 ]

@@ -10,4 +10,17 @@ editor_options:
 
 ## Announcements
 
+- Homework 2 feedback
+  - You did well! Solutions are now up
+  - A note on interpreting coefficient estimates: 
+    - The coefficient estimate for a predictor variable represents the **expected** change or **average** change in the outcome variable for a one-unit increase in that predictor.
+    - We need to make sure that it stated in our interpretations!
+
+## Events
+
+### Algorithmic Bias: A Practical Introduction
+The Biostatistics, Epidemiology, and Research Design (BERD) group in OCTRI is offering a brand-new seminar in our Responsible Practice in Data and Analysis series. Alicia Johnson is leading this seminar on Friday, February 13. Flier attached; session [in Compass](https://urldefense.com/v3/__https://ohsu.csod.com/ui/lms-learning-details/app/event/1a40dce3-f716-4f50-9b8d-b0ffbb79efc6__;!!Mi0JBg!J_FZKpWO-hsmRDFAgAyx6mq9WtXTsyPm04HVO4TcxVsleaonXnpYFh6bbimKktbZipfJx7Z1FWr2leoAARDWXEmVh4c$); here’s the [event page](https://www.ohsu.edu/octri/octri-berd-algorithmic-bias-practical-introduction).
+
 ## Key Dates
+
+- Homework 3 due 2/15 at 11pm

@@ -11,8 +11,6 @@ editor_options:
 ## Announcements
 
 - Quiz 1 grades posted
-- 
-
 
 ## Events
 

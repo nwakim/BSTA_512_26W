@@ -1365,7 +1365,6 @@ ggplot(aug1, aes(x = cell_phones_100, y = life_exp,
 
 ```{r}
 model1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100)
-# Get regression table:
 tidy_model1 = tidy(model1)
 ```
 
