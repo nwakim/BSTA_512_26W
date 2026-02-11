@@ -2,8 +2,8 @@
 title: "Lab 2: Feedback and Discussion"
 author: "Nicky Wakim"
 title-slide-attributes:
-    data-background-color: "#C2352F"
-date: "04/30/2025"
+    data-background-color: "#213c96"
+date: "`r library(here); source(here('class_dates.R')); w6d2`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
