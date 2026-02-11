@@ -6893,5 +6893,61 @@
     "title": "Muddy Points",
     "section": "",
     "text": "The lowercase x’s refer to the observed values of the covariates. So if we have a dataset with 100 observations, then we have 100 \\(x_{1}\\) and 100 \\(x_{2}\\). \\(x_{1a}\\) and \\(x_{1b}\\) are meant to represent two different observed values (a and b). The uppercase \\(X\\)’s refer to the population covariates. So we can think of \\(X_1\\) as being the population covariate that corresponds to the observed \\(x_{1a}\\) and \\(x_{1b}\\). Similarly, \\(X_2\\) is the population covariate that corresponds to the observed \\(x_{2a}\\) and \\(x_{2b}\\).\n\n\n\nThis is a great question! The coefficients for the covariates beyond the first one (B2, B3, etc.) are not changing the slope of the first covariate (B1). They are comparing one category from our second variable, income level, to the reference category. So they are changing the intercept of the line, but not the slope of the first covariate. The slope of the first covariate (B1) is still telling us how much we expect Y to change for a one unit increase in X1, holding all other covariates constant."
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#notes-from-me-and-the-tas",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#notes-from-me-and-the-tas",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Notes from me and the TAs",
+    "text": "Notes from me and the TAs\n\nMake sure your .Rproj is open!\nPlease use the template .qmd that I give you!\nUnivariate exploration should include all the race variables (indicators for each race)\nYou should not have any NA’s\n\nPlease make sure you coded EACH variable correctly…\nSaw people missing a gender identity\n\nPlease interpret all the coefficient estimates!!\n\nEveryone should have more than one coefficient\nGood reference for self-perception: “Neither ….”\n\nThe whole point of plotting each variable is to start understanding trends in the data…\n\nLooking at some plots, I don’t think you can do that…"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#lets-review-projects-in-r",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#lets-review-projects-in-r",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Let’s review projects in R",
+    "text": "Let’s review projects in R\n\nMake sure your .Rproj is open!\nUnivariate exploration should include all the race variables (indicators for each race)"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#get-into-groups-of-2-4",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#get-into-groups-of-2-4",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Get into groups of 2-4",
+    "text": "Get into groups of 2-4\n\nNo more than 4!\nTry to group with people with whom you do not already work on labs\nIntroduce yourself if you do not know each other\nShare you html documents with each other (email, airdrop, etc.)"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#introduce-research-question",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#introduce-research-question",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Introduce Research Question",
+    "text": "Introduce Research Question\n\nShare your research question with each other!\n\nShould be using the same outcome + your main variable\n\nShare your other variables"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#double-check-code-for-variables",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#double-check-code-for-variables",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Double check code for variables",
+    "text": "Double check code for variables\n\nDid everyone code their variables correctly?\nIf you changed something to a factor, does it have the correct levels?"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#simple-logistic-regression",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#simple-logistic-regression",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Simple logistic regression",
+    "text": "Simple logistic regression\n\nDoes everyone have the correct interpretations of the coefficient estimates?\nWhat’s your reference group? Does this make sense?\nWhat trends are you seeing?"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#notes-on-plots",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#notes-on-plots",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Notes on plots",
+    "text": "Notes on plots\n\nMake sure your categorical variable is presented in order\nMake sure your plots are clear and easy to read (e.g., axis labels, title, etc.)\n\nIf the category names are too long, tilt the names or make new line\n\nHistograms are for CONTINUOUS variables, bar plots are for CATEGORICAL variables\nDo NOT use the continuous variables for your categorical predictor!!\n\nI’m seeing a lot of people use important_001 instead of their categorical/factor version of this variable\n\nUnivariate vs bivariate\nColors in histograms are fun, but not necessary!!\n\nDo not use a different color for each plot - color is meant to convey information!\nThe main thing it does it alert me that you might be using AI bc AI does this a lot!"
+  },
+  {
+    "objectID": "lessons/L02_Discussion/L02_Discussion.html#share-your-bivariate-plots",
+    "href": "lessons/L02_Discussion/L02_Discussion.html#share-your-bivariate-plots",
+    "title": "Lab 2: Feedback and Discussion",
+    "section": "Share your bivariate plots",
+    "text": "Share your bivariate plots\n\nCan you get an idea of the relationship between your main variable and the outcome from the plot?\nIs your predictor categorical?\nDo you see any trends?"
   }
 ]
