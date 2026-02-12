@@ -19,7 +19,9 @@ The lowercase x's refer to the observed values of the covariates. So if we have 
 
 This is a great question! The coefficients for the covariates beyond the first one (B2, B3, etc.) are not changing the slope of the first covariate (B1). They are comparing one category from our second variable, income level, to the reference category. So they are changing the intercept of the line, but not the slope of the first covariate. The slope of the first covariate (B1) is still telling us how much we expect Y to change for a one unit increase in X1, holding all other covariates constant.
 
+### 3. Interpreting the regression plane - what was that 3D plot representing?
 
+When we have two independent variables (predictors) in our model, we are trying to fit an equation to the outcome. Since we have two predictors, we are trying to fit a plane to the data. The 3D plot was representing this plane. The x and y axes represent the two predictors, and the z axis represents the outcome. The plane is the best fit plane that minimizes the distance from all the observed points to the plane.
 
 ## Muddy Points from Winter 2024
 

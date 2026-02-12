@@ -1,0 +1,15 @@
+{
+  "hash": "340deb0c4d9809697f9d985b8146fb37",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Muddy Points\"\nsubtitle: \"Lab 2 Discussion\"\ndate-modified: \"today\"\nformat: \n  html:\n    link-external-newwindow: true\neditor_options: \n  chunk_output_type: console\n---\n\n### 1. For the lab, can you show us what you would do for the Quality Control piece? everyone in my group did something different.\n\nI would do something like the following. It won't be exactly what you did, but I can stack different filtering options to get a subset of the data that may not be truthful responders.\n\n\n::: {.cell}\n\n```{.r .cell-code}\niat_filtered = iat_data %>%\n  filter(edu > 13) %>%\n  filter(age < 15) %>%\n  filter(re_asian == 1 & re_black == 1 & re_hispanic == 1 & re_white == 1)\n```\n:::\n\n\n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

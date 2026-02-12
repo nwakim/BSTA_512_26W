@@ -201,6 +201,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#i-am-confused-by-the-lowercase-x1a-x1b-x2a-x2b-notation-what-does-that-mean-as-opposed-to-the-uppercase-x1-x2" id="toc-i-am-confused-by-the-lowercase-x1a-x1b-x2a-x2b-notation-what-does-that-mean-as-opposed-to-the-uppercase-x1-x2" class="nav-link" data-scroll-target="#i-am-confused-by-the-lowercase-x1a-x1b-x2a-x2b-notation-what-does-that-mean-as-opposed-to-the-uppercase-x1-x2">1. I am confused by the lowercase x1a x1b x2a x2b notation, what does that mean as opposed to the uppercase X1 X2?</a></li>
   <li><a href="#i-thought-the-coefficients-told-us-something-about-the-slope-difference-in-mean-y-variable-e.g.-the-interpretation-on-slide-19-but-you-are-saying-the-coefficients-beyond-b1-are-just-changing-the-intercept-basically-im-confused-about-how-that-b2-interpretation-tells-us-the-slope-is-the-same-but-the-intercept-is-changing." id="toc-i-thought-the-coefficients-told-us-something-about-the-slope-difference-in-mean-y-variable-e.g.-the-interpretation-on-slide-19-but-you-are-saying-the-coefficients-beyond-b1-are-just-changing-the-intercept-basically-im-confused-about-how-that-b2-interpretation-tells-us-the-slope-is-the-same-but-the-intercept-is-changing." class="nav-link" data-scroll-target="#i-thought-the-coefficients-told-us-something-about-the-slope-difference-in-mean-y-variable-e.g.-the-interpretation-on-slide-19-but-you-are-saying-the-coefficients-beyond-b1-are-just-changing-the-intercept-basically-im-confused-about-how-that-b2-interpretation-tells-us-the-slope-is-the-same-but-the-intercept-is-changing.">2. I thought the coefficients told us something about the slope (difference in mean Y variable, e.g.&nbsp;the interpretation on slide 19)? but you are saying the coefficients beyond B1 are just changing the intercept? Basically I’m confused about how that B2 interpretation tells us the slope is the same but the intercept is changing.</a></li>
+  <li><a href="#interpreting-the-regression-plane---what-was-that-3d-plot-representing" id="toc-interpreting-the-regression-plane---what-was-that-3d-plot-representing" class="nav-link" data-scroll-target="#interpreting-the-regression-plane---what-was-that-3d-plot-representing">3. Interpreting the regression plane - what was that 3D plot representing?</a></li>
   </ul></li>
   <li><a href="#muddy-points-from-winter-2024" id="toc-muddy-points-from-winter-2024" class="nav-link" data-scroll-target="#muddy-points-from-winter-2024">Muddy Points from Winter 2024</a>
   <ul class="collapse">
@@ -231,7 +232,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 9, 2026</p>
+      <p class="date-modified">February 11, 2026</p>
     </div>
   </div>
     
@@ -251,6 +252,10 @@ window.Quarto = {
 <section id="i-thought-the-coefficients-told-us-something-about-the-slope-difference-in-mean-y-variable-e.g.-the-interpretation-on-slide-19-but-you-are-saying-the-coefficients-beyond-b1-are-just-changing-the-intercept-basically-im-confused-about-how-that-b2-interpretation-tells-us-the-slope-is-the-same-but-the-intercept-is-changing." class="level3">
 <h3 class="anchored" data-anchor-id="i-thought-the-coefficients-told-us-something-about-the-slope-difference-in-mean-y-variable-e.g.-the-interpretation-on-slide-19-but-you-are-saying-the-coefficients-beyond-b1-are-just-changing-the-intercept-basically-im-confused-about-how-that-b2-interpretation-tells-us-the-slope-is-the-same-but-the-intercept-is-changing.">2. I thought the coefficients told us something about the slope (difference in mean Y variable, e.g.&nbsp;the interpretation on slide 19)? but you are saying the coefficients beyond B1 are just changing the intercept? Basically I’m confused about how that B2 interpretation tells us the slope is the same but the intercept is changing.</h3>
 <p>This is a great question! The coefficients for the covariates beyond the first one (B2, B3, etc.) are not changing the slope of the first covariate (B1). They are comparing one category from our second variable, income level, to the reference category. So they are changing the intercept of the line, but not the slope of the first covariate. The slope of the first covariate (B1) is still telling us how much we expect Y to change for a one unit increase in X1, holding all other covariates constant.</p>
+</section>
+<section id="interpreting-the-regression-plane---what-was-that-3d-plot-representing" class="level3">
+<h3 class="anchored" data-anchor-id="interpreting-the-regression-plane---what-was-that-3d-plot-representing">3. Interpreting the regression plane - what was that 3D plot representing?</h3>
+<p>When we have two independent variables (predictors) in our model, we are trying to fit an equation to the outcome. Since we have two predictors, we are trying to fit a plane to the data. The 3D plot was representing this plane. The x and y axes represent the two predictors, and the z axis represents the outcome. The plane is the best fit plane that minimizes the distance from all the observed points to the plane.</p>
 </section>
 </section>
 <section id="muddy-points-from-winter-2024" class="level2">

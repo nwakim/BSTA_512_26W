@@ -1,6 +1,6 @@
 ---
 title: "Muddy Points"
-subtitle: "Lab 1 Discussion"
+subtitle: "Lab 2 Discussion"
 date-modified: "today"
 format: 
   html:
@@ -9,11 +9,20 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Muddy Points from Spring 2025
+### 1. For the lab, can you show us what you would do for the Quality Control piece? everyone in my group did something different.
 
-### 1. Why should we be cautious of using survey question variables?
+I would do something like the following. It won't be exactly what you did, but I can stack different filtering options to get a subset of the data that may not be truthful responders.
 
-These variables may be integrated into other variables already. They have not been processed by the survey designers, so we need to be cautious and think extra critically if we use them!
+```{r}
+#| eval: false
+
+iat_filtered = iat_data %>%
+  filter(edu > 13) %>%
+  filter(age < 15) %>%
+  filter(re_asian == 1 & re_black == 1 & re_hispanic == 1 & re_white == 1)
+```
+
+
 
 
 
