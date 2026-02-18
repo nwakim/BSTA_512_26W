@@ -12,9 +12,16 @@ editor_options:
 
 - Lab 2
   - If you got points off for not doing a section, you can email me and the TAs with the completed and get points back
+- Quiz 2 opens today!
+  - HW 3 solns are up
+- Lab 3
+  - Haven't talked about effect modifiers/interactions
+  - Want you to do the best you can to define the relationship
 
 
 ## Key Dates
 
-- 
+- Lab 3 due 2/22
+- Quiz 2 opens today, closes 2/22
+- Mandatory Lab 3 discussion 2/25
 

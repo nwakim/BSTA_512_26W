@@ -17,8 +17,8 @@ Below is the general timing and lessons for each quiz:
 | Quiz | Lessons | Open Date \@ 3pm | Close Date \@ 11pm |
 |------------------|------------------|------------------|------------------|
 | 1 | 1-4 | `r q1_open %>% format("%m/%d")` | `r q1_close %>% format("%m/%d")` |
-| 2 | 5-9 | `r q2_open %>% format("%m/%d")` | `r q2_close %>% format("%m/%d")` |
-| 3 | 10-14 | `r q3_open %>% format("%m/%d")` | `r q3_close %>% format("%m/%d")` |
+| 2 | 5-8 | `r q2_open %>% format("%m/%d")` | `r q2_close %>% format("%m/%d")` |
+| 3 | 9-14 | `r q3_open %>% format("%m/%d")` | `r q3_close %>% format("%m/%d")` |
 
 Quizzes will be mostly conceptual questions with 10-15 multiple choice questions. Some calculations will need to be done for certain questions, but the focus will be on understanding concepts.
 
@@ -64,5 +64,31 @@ More information specific to each quiz will be posted below.
         -   interpreting mean response
 
 ### Quiz 2
+
+-   Some info
+
+    -   diagnostic plots
+
+    -   knowing what models you are testing
+
+    -   interpreting coefficient estimates
+
+    -   lots of plots and picking the best one
+
+    -   one question with calculations
+
+-   Covers Lessons 5-8
+
+    -   SLR
+
+    -   Categorical covariates
+
+    -   F-test in SLR
+
+    -   LINE assumptions
+
+    -   Diagnostics
+
+    -   Transformations
 
 ### Quiz 3
