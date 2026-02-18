@@ -189,7 +189,7 @@ You can also see an [example in my `qmd` file on the Github page](https://github
 ::: callout-important
 ##### Task
 
-Run a simple linear regression model for the relationship in your primary research question. Print the regression table. Interpret the results and comment on the initial trend you see.
+Run a simple linear regression model for the relationship in your primary research question. Print the regression table. Interpret the coefficient estimates (with confidence intervals) and comment on the initial trend you see.
 :::
 
 ## Bibliography

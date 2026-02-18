@@ -3,7 +3,7 @@ title: "Lesson 11: Interactions, Part 1"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "02/12/2025"
+date: "`r library(here); source(here('class_dates.R')); w7d2`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -48,33 +48,25 @@ library(ggiraphExtra)   # for ggPredict() command
 
 # Load the data - update code if the csv file is not in the same location on your computer
 # If you need to download the file, please go to ur shared folder under Data > Slides
-gapm <- read_excel("data/Gapminder_vars_2011.xlsx", 
-                   na = "NA")  # important!!!! 
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F")) %>%
+  mutate(income_level_4 = fct_relevel(income_level_4, 
+                                      "Low income", 
+                                      "Lower middle income",
+                                      "Upper middle income",
+                                      "High income")) %>%
+  mutate(income_level_2 = case_when(income_level_4 %in% c("Low income", "Lower middle income") ~ "Lower income",
+                                      income_level_4 %in% c("Upper middle income", "High income") ~ "Higher income")) %>%
+  mutate(income_level_2 = fct_relevel(income_level_2, "Lower income", "Higher income")) %>%
+  mutate(CP_c = cell_phones_100 - mean(cell_phones_100, na.rm=T))
 
+mlr1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100 + vax_rate)
 
-gapm_sub <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
-  drop_na(LifeExpectancyYrs, FemaleLiteracyRate, four_regions, FoodSupplykcPPD) %>%
-  mutate(four_regions = factor(four_regions, 
-                               levels = c("africa", "americas", 
-                                          "asia", "europe"), 
-                               labels = c("Africa", "Americas", 
-                                          "Asia", "Europe"))) %>%
-  rename(income_levels = `World bank, 4 income groups 2017`) %>%
-  mutate(income_levels1 = factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income")), 
-         income_levels2 = relevel(factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income"), 
-                                labels = c("Lower income", "Lower income", 
-                                            "Higher income", "Higher income")), 
-                                ref = "Lower income"))
-
-gapm2 = gapm %>% select(-Longitude, -Latitude, -eight_regions, -six_regions, -geo, -`World bank, 4 income groups 2017`, -country, -population, -`World bank region`, -ElectricityUsePP)
+gapm2 = gapm %>% select(cell_phones_100, life_exp, vax_rate, freedom_status, income_level_4, basic_sani)
 ```
 
 # Learning Objectives
@@ -195,16 +187,19 @@ Model Use (Inference)
 #| echo: false
 #| fig-align: center 
 
-ggplot(gapm_sub, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+gapm_slr_plot = gapm %>%
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Life expectancy vs. female literacy rate") +
-    theme(axis.title = element_text(size = 22), 
-        axis.text = element_text(size = 22), 
-        title = element_text(size = 22))
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25))
+
+gapm_slr_plot
 
 ```
 
@@ -301,7 +296,7 @@ $$Y= \beta_0 + \beta_1X_{1}+ \beta_2X_{2} + \epsilon$$
 
 -   If food supply is a confounder in the relationship between life expectancy and female literacy rate, then we only use main effects in the model:
 
-$$\text{LE} = \beta_0 + \beta_1 \text{FLR} + \beta_2 \text{FS} + \epsilon$$
+$$\text{LE} = \beta_0 + \beta_1 \text{CP} + \beta_2 \text{VR} + \epsilon$$
 :::
 
 ::: column
@@ -310,8 +305,8 @@ $$\text{LE} = \beta_0 + \beta_1 \text{FLR} + \beta_2 \text{FS} + \epsilon$$
 #| fig-height: 4
 #| fig-align: center
 
-mr1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD, 
-          data = gapm_sub)
+mr1 <- lm(life_exp ~ cell_phones_100 + vax_rate, 
+          data = gapm)
 (mr1_2d = ggPredict(mr1, interactive = T))
 ```
 :::
@@ -416,7 +411,7 @@ mr1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD,
 -   Questions of interest: Is the effect of female literacy rate on life expectancy differ depending on income level?
 
     -   This is the same as: Is income level is an effect modifier for female literacy rate?
-    -   "effect of female literacy rate" differing = different slopes between FLR and LE depending on the income group
+    -   "effect of female literacy rate" differing = different slopes between CP and LE depending on the income group
 
 -   Let's run an interaction model to see!
 :::
@@ -424,8 +419,8 @@ mr1 <- lm(LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD,
 ::: {.column width="55%"}
 ```{r fig.height=7, fig.width=10, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs, 
-                  color = income_levels2)) +
+ggplot(gapm, aes(x = cell_phones_100, y = life_exp, 
+                  color = income_level_2)) +
   geom_point(size = 3) +
   geom_smooth(method = lm, se = FALSE, size=2) + 
   labs(x = "Female Literacy Rate (%)", 
@@ -445,18 +440,18 @@ ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs,
 
 Model we are fitting:
 
-$$ LE = \beta_0 + \beta_1 FLR + \beta_2 I(\text{high income}) + \beta_3 FLR \cdot I(\text{high income}) + \epsilon$$
+$$ LE = \beta_0 + \beta_1 CP + \beta_2 I(\text{high income}) + \beta_3 CP \cdot I(\text{high income}) + \epsilon$$
 
 -   $LE$ as outcome
--   $FLR$ as continuous variable that is our main variable of interest
+-   $CP$ as continuous variable that is our main variable of interest
 -   $I(\text{high income})$ as the indicator that income level is "high income" (binary categorical variable)
 
 ```{r}
 #| echo: true
 
-m_int_inc2 = gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + income_levels2 +
-       FemaleLiteracyRate*income_levels2)
+m_int_inc2 = gapm %>% 
+  lm(formula = life_exp ~ cell_phones_100 + income_level_2 +
+       cell_phones_100*income_level_2)
 ```
 
 OR
@@ -464,8 +459,8 @@ OR
 ```{r}
 #| echo: true
 
-m_int_inc2 = gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate*income_levels2)
+m_int_inc2 = gapm %>% 
+  lm(formula = life_exp ~ cell_phones_100*income_level_2)
 ```
 
 ## Displaying the regression table and writing fitted regression equation
@@ -477,8 +472,8 @@ tidy(m_int_inc2, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>% 
 ```
 
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 FLR \cdot I(\text{high income}) \\
-\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot I(\text{high income}) + 0.228 \cdot FLR \cdot I(\text{high income})
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP \cdot I(\text{high income}) \\
+\widehat{LE} = & 54.85 + 0.156 \cdot CP - 16.65 \cdot I(\text{high income}) + 0.228 \cdot CP \cdot I(\text{high income})
 \end{aligned}$$
 
 ## Poll Everywhere Question 2
@@ -486,8 +481,8 @@ $$ \begin{aligned}
 ## Comparing fitted regression lines for each income level
 
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 FLR \cdot I(\text{high income}) \\
-\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot I(\text{high income}) + 0.228 \cdot FLR \cdot I(\text{high income})
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP \cdot I(\text{high income}) \\
+\widehat{LE} = & 54.85 + 0.156 \cdot CP - 16.65 \cdot I(\text{high income}) + 0.228 \cdot CP \cdot I(\text{high income})
 \end{aligned}$$
 
 ::::::::::: columns
@@ -499,10 +494,10 @@ For lower income countries: $I(\text{high income}) =0$
 
 ::: proof-cont
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 \cdot 0 + \widehat\beta_3 FLR \cdot 0 \\
-\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot 0 + \\
-& 0.228 \cdot FLR \cdot 0 \\ 
-\widehat{LE} = & 54.85 + 0.156 \cdot FLR\\ 
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 \cdot 0 + \widehat\beta_3 CP \cdot 0 \\
+\widehat{LE} = & 54.85 + 0.156 \cdot CP - 16.65 \cdot 0 + \\
+& 0.228 \cdot CP \cdot 0 \\ 
+\widehat{LE} = & 54.85 + 0.156 \cdot CP\\ 
 \end{aligned}$$
 :::
 :::::
@@ -516,11 +511,11 @@ For higher income countries: $I(\text{high income}) =1$
 
 ::: fact-cont
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 \cdot 1 + \widehat\beta_3 FLR \cdot 1 \\
-\widehat{LE} = & 54.85 + 0.156 \cdot FLR - 16.65 \cdot 1 + \\ & 0.228 \cdot FLR \cdot 1 \\ 
-\widehat{LE} = & (54.85 - 16.65 \cdot 1) + \\ & (0.156 \cdot FLR + 0.228 \cdot FLR \cdot 1) \\ 
-\widehat{LE} = & (54.85 - 16.65) + (0.156 + 0.228) \cdot FLR\\ 
-\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot FLR\\ 
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 \cdot 1 + \widehat\beta_3 CP \cdot 1 \\
+\widehat{LE} = & 54.85 + 0.156 \cdot CP - 16.65 \cdot 1 + \\ & 0.228 \cdot CP \cdot 1 \\ 
+\widehat{LE} = & (54.85 - 16.65 \cdot 1) + \\ & (0.156 \cdot CP + 0.228 \cdot CP \cdot 1) \\ 
+\widehat{LE} = & (54.85 - 16.65) + (0.156 + 0.228) \cdot CP\\ 
+\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot CP\\ 
 \end{aligned}$$
 :::
 :::::
@@ -538,8 +533,8 @@ For lower income countries: $I(\text{high income}) =0$
 
 ::: proof-cont
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR  \\
-\widehat{LE} = & 54.85 + 0.156 \cdot FLR\\ 
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP  \\
+\widehat{LE} = & 54.85 + 0.156 \cdot CP\\ 
 \end{aligned}$$
 :::
 :::::
@@ -551,9 +546,9 @@ For higher income countries: $I(\text{high income}) =1$
 
 ::: fact-cont
 $$ \begin{aligned}
-\widehat{LE} = & (\widehat\beta_0 +\widehat\beta_2) + (\widehat\beta_1 +\widehat\beta_3) FLR \\
-\widehat{LE} = & (54.85 - 16.65) + (0.156 + 0.228) \cdot FLR\\ 
-\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot FLR\\ 
+\widehat{LE} = & (\widehat\beta_0 +\widehat\beta_2) + (\widehat\beta_1 +\widehat\beta_3) CP \\
+\widehat{LE} = & (54.85 - 16.65) + (0.156 + 0.228) \cdot CP\\ 
+\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot CP\\ 
 \end{aligned}$$
 :::
 :::::
@@ -562,8 +557,8 @@ $$ \begin{aligned}
 ::: {.column width="50%"}
 ```{r fig.height=8.5, fig.width=8.5, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs, 
-                  color = income_levels2)) +
+ggplot(gapm, aes(x = cell_phones_100, y = life_exp, 
+                  color = income_level_2)) +
   geom_point(size = 3) +
   geom_smooth(method = lm, se = FALSE, size=2) + ylim(30, 84) +
   labs(x = "Female Literacy Rate (%)", 
@@ -588,15 +583,15 @@ ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs,
 -   For the high income group, the mean life expectancy had a regression line with a small intercept
 
 $$ \begin{aligned}
-\widehat{LE} = & (\widehat\beta_0 +\widehat\beta_2) + (\widehat\beta_1 +\widehat\beta_3) FLR \\
-\widehat{LE} = & (54.85 - 16.65) + (0.156 + 0.228) \cdot FLR\\ 
-\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot FLR\\ 
+\widehat{LE} = & (\widehat\beta_0 +\widehat\beta_2) + (\widehat\beta_1 +\widehat\beta_3) CP \\
+\widehat{LE} = & (54.85 - 16.65) + (0.156 + 0.228) \cdot CP\\ 
+\widehat{LE} = & `r 54.85 - 16.65` + `r 0.156 + 0.228` \cdot CP\\ 
 \end{aligned}$$
 
 -   Intercept of `r 54.85 - 16.65` is misleading because
 
-    -   Makes you think some of the life expectancies for high income countries are lower than that of low income countries (depending on the FLR)
-    -   There are no high income countries with FLR less than \~70%
+    -   Makes you think some of the life expectancies for high income countries are lower than that of low income countries (depending on the CP)
+    -   There are no high income countries with CP less than \~70%
 
 -   Other online sources about when and when not to center:
 
@@ -625,33 +620,33 @@ $$ \begin{aligned}
 
 ![](../img_slides/pause.png){.absolute top="83%" right="0%" width="120" height="120"}
 
--   Centering female literacy rate: $$ FLR^c = FLR - \overline{FLR}$$
+-   Centering female literacy rate: $$ CP^c = CP - \overline{CP}$$
 -   Centering in R:
 
 ```{r}
 #| echo: true 
-gapm_sub = gapm_sub %>% 
-  mutate(FLR_c = FemaleLiteracyRate - median(FemaleLiteracyRate))
+gapm = gapm %>% 
+  mutate(CP_c = cell_phones_100 - median(cell_phones_100))
 ```
 
 -   I'm going to print the mean so I can use it for my interpretations
 
 ```{r}
 #| echo: true
-(mean_FLR = mean(gapm_sub$FemaleLiteracyRate))
+(mean_CP = mean(gapm$cell_phones_100))
 ```
 
--   Now all intercept values (in each respective world region) will be the mean life expectancy when female literacy rate is `r round(mean_FLR, 2)`%
+-   Now all intercept values (in each respective world region) will be the mean life expectancy when female literacy rate is `r round(mean_CP, 2)`%
 
--   We will used center FLR for the rest of the lecture
+-   We will used center CP for the rest of the lecture
 
 ## Displaying the regression table and writing fitted regression equation AGAIN
 
 ```{r}
 #| echo: true
 
-m_int_inc2 = gapm_sub %>% 
-  lm(formula = LifeExpectancyYrs ~ FLR_c*income_levels2)
+m_int_inc2 = gapm %>% 
+  lm(formula = life_exp ~ CP_c*income_level_2)
 ```
 
 ```{r}
@@ -667,22 +662,22 @@ tidy(m_int_inc2, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>% 
 ```
 
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 FLR^c \cdot I(\text{high income}) \\
-\widehat{LE} = & `r round(coef_centered$estimate[1], 3)` + `r round(coef_centered$estimate[2], 3)` \cdot FLR^c + `r round(coef_centered$estimate[3], 3)` \cdot I(\text{high income}) + `r round(coef_centered$estimate[4], 3)` \cdot FLR^c \cdot I(\text{high income})
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP^c \cdot I(\text{high income}) \\
+\widehat{LE} = & `r round(coef_centered$estimate[1], 3)` + `r round(coef_centered$estimate[2], 3)` \cdot CP^c + `r round(coef_centered$estimate[3], 3)` \cdot I(\text{high income}) + `r round(coef_centered$estimate[4], 3)` \cdot CP^c \cdot I(\text{high income})
 \end{aligned}$$
 
 ## Interpretation for interaction between binary categorical and continuous variables
 
 $$ \begin{aligned}
-\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 FLR^c + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 FLR^c \cdot I(\text{high income}) \\
-\widehat{LE} = & \bigg[\widehat\beta_0 + \widehat\beta_2 \cdot I(\text{high income})\bigg] + \underbrace{\bigg[\widehat\beta_1 + \widehat\beta_3 \cdot I(\text{high income}) \bigg]}_\text{FLR's effect} FLR^c \\
+\widehat{LE} = & \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP^c \cdot I(\text{high income}) \\
+\widehat{LE} = & \bigg[\widehat\beta_0 + \widehat\beta_2 \cdot I(\text{high income})\bigg] + \underbrace{\bigg[\widehat\beta_1 + \widehat\beta_3 \cdot I(\text{high income}) \bigg]}_\text{CP's effect} CP^c \\
 \end{aligned}$$
 
 -   Interpretation:
 
     -   $\beta_3$ = mean change in female literacy rate's effect, comparing higher income to lower income levels
 
-        -   AKA: the change in slopes (for line between FLR and LE) comparing high income to low income
+        -   AKA: the change in slopes (for line between CP and LE) comparing high income to low income
 
     -   where the "female literacy rate effect" = change in mean life expectancy per percent increase in female literacy (slope) with income level held constant, i.e. "adjusted female literacy rate effect"
 
@@ -694,7 +689,7 @@ $$ \begin{aligned}
 
 -   We run an F-test for a single coefficient ($\beta_3$) in the below model (see Lesson 10, MLR: Using the F-test)
 
-$$ LE = \beta_0 + \beta_1 FLR^c + \beta_2 I(\text{high income}) + \beta_3 FLR^c \cdot I(\text{high income}) + \epsilon$$
+$$ LE = \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \beta_3 CP^c \cdot I(\text{high income}) + \epsilon$$
 
 ::::::::::::: columns
 ::: {.column width="5%"}
@@ -740,7 +735,7 @@ Null / Smaller / Reduced model
 
 ::: proof-cont
 $$\begin{aligned}
-LE = & \beta_0 + \beta_1 FLR^c + \beta_2 I(\text{high income}) + \\ &\epsilon
+LE = & \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &\epsilon
 \end{aligned}$$
 :::
 :::::
@@ -754,7 +749,7 @@ Alternative / Larger / Full model
 
 ::: def-cont
 $$\begin{aligned}
-LE = & \beta_0 + \beta_1 FLR^c + \beta_2 I(\text{high income}) + \\ &\beta_3 FLR^c \cdot I(\text{high income}) + \epsilon
+LE = & \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &\beta_3 CP^c \cdot I(\text{high income}) + \epsilon
 \end{aligned}$$
 :::
 :::::
@@ -772,10 +767,10 @@ LE = & \beta_0 + \beta_1 FLR^c + \beta_2 I(\text{high income}) + \\ &\beta_3 FLR
 
 ```{r}
 #| echo: true
-m_int_inc_red = lm(LifeExpectancyYrs ~ FLR_c + income_levels2, 
-                   data = gapm_sub)
-m_int_inc_full = lm(LifeExpectancyYrs ~ FLR_c + income_levels2 +
-                  FLR_c*income_levels2, data = gapm_sub)
+m_int_inc_red = lm(life_exp ~ CP_c + income_level_2, 
+                   data = gapm)
+m_int_inc_full = lm(life_exp ~ CP_c + income_level_2 +
+                  CP_c*income_level_2, data = gapm)
 ```
 
 -   Display the ANOVA table with F-statistic and p-value
@@ -820,8 +815,8 @@ anova(m_int_inc_red, m_int_inc_full) %>% tidy() %>% gt() %>% tab_options(table.f
 ::: {.column width="60%"}
 ```{r fig.height=7, fig.width=10, warning=F, fig.align='center'}
 #| echo: false
-ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs, 
-                  color = four_regions)) +
+ggplot(gapm, aes(x = cell_phones_100, y = life_exp, 
+                  color = freedom_status)) +
   geom_point(size = 3) +
   geom_smooth(method = lm, se = FALSE, size=2) + 
   labs(x = "Female Literacy Rate (%)", 
@@ -832,7 +827,7 @@ ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs,
         axis.text = element_text(size = 20), 
         title = element_text(size = 20), 
         legend.text=element_text(size= 18)) +
-  scale_color_manual(values=c("#FF8021", "#34AC8B", "#F14124", "#4FADF3"))
+  scale_color_manual(values=c("#FF8021", "#34AC8B", "#4FADF3"))
 ```
 :::
 :::::
@@ -841,10 +836,10 @@ ggplot(gapm_sub, aes(x = FemaleLiteracyRate, y = LifeExpectancyYrs,
 
 Model we are fitting:
 
-$$\begin{aligned}LE = &\beta_0 + \beta_1 FLR^c + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ & \beta_5 FLR^c \cdot I(\text{Americas}) + \beta_6 FLR^c \cdot I(\text{Asia})+ \beta_7 FLR^c \cdot I(\text{Europe})+ \epsilon \end{aligned}$$
+$$\begin{aligned}LE = &\beta_0 + \beta_1 CP^c + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ & \beta_5 CP^c \cdot I(\text{Americas}) + \beta_6 CP^c \cdot I(\text{Asia})+ \beta_7 CP^c \cdot I(\text{Europe})+ \epsilon \end{aligned}$$
 
 -   $LE$ as life expectancy
--   $FLR^c$ as centered female literacy rate (continuous variable)
+-   $CP^c$ as centered female literacy rate (continuous variable)
 -   $I(\text{Americas})$, $I(\text{Asia})$, $I(\text{Europe})$ as the indicator for each world region
 
 In R:
@@ -852,8 +847,8 @@ In R:
 ```{r}
 #| echo: true
 
-m_int_wr = gapm_sub %>% lm(formula = LifeExpectancyYrs ~ FLR_c + four_regions +
-                  FLR_c*four_regions)
+m_int_wr = gapm %>% lm(formula = life_exp ~ CP_c + freedom_status +
+                  CP_c*freedom_status)
 ```
 
 OR
@@ -861,7 +856,7 @@ OR
 ```{r}
 #| echo: true
 
-m_int_wr = gapm_sub %>% lm(formula = LifeExpectancyYrs ~ FLR_c * four_regions)
+m_int_wr = gapm %>% lm(formula = life_exp ~ CP_c * freedom_status)
 ```
 
 ## Displaying the regression table and writing fitted regression equation
@@ -879,15 +874,15 @@ tidy(m_int_wr, conf.int=T) %>% gt() %>% tab_options(table.font.size = 35) %>% fm
 ```
 
 $$\begin{aligned} 
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 FLR \cdot I(\text{Americas}) + \widehat\beta_6 FLR \cdot I(\text{Asia})+ \widehat\beta_7 FLR \cdot I(\text{Europe}) \\
-\widehat{LE} = & `r round(m_int_wr_fit$estimate[1], 3)` + `r round(m_int_wr_fit$estimate[2], 3)` \cdot FLR + `r round(m_int_wr_fit$estimate[3], 3)` \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[4], 3)` \cdot I(\text{Asia}) + `r round(m_int_wr_fit$estimate[5], 3)` \cdot I(\text{Europe}) + \\ & `r round(m_int_wr_fit$estimate[6], 3)`  \cdot FLR \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[7], 3)` \cdot FLR \cdot I(\text{Asia}) `r round(m_int_wr_fit$estimate[8], 3)`    \cdot FLR \cdot I(\text{Europe})
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 CP \cdot I(\text{Americas}) + \widehat\beta_6 CP \cdot I(\text{Asia})+ \widehat\beta_7 CP \cdot I(\text{Europe}) \\
+\widehat{LE} = & `r round(m_int_wr_fit$estimate[1], 3)` + `r round(m_int_wr_fit$estimate[2], 3)` \cdot CP + `r round(m_int_wr_fit$estimate[3], 3)` \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[4], 3)` \cdot I(\text{Asia}) + `r round(m_int_wr_fit$estimate[5], 3)` \cdot I(\text{Europe}) + \\ & `r round(m_int_wr_fit$estimate[6], 3)`  \cdot CP \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[7], 3)` \cdot CP \cdot I(\text{Asia}) `r round(m_int_wr_fit$estimate[8], 3)`    \cdot CP \cdot I(\text{Europe})
 \end{aligned}$$
 
 ## Comparing fitted regression lines for each world region {.smaller}
 
 $$\begin{aligned} 
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 FLR \cdot I(\text{Americas}) + \widehat\beta_6 FLR \cdot I(\text{Asia})+ \widehat\beta_7 FLR \cdot I(\text{Europe}) \\
-\widehat{LE} = & `r round(m_int_wr_fit$estimate[1], 3)` + `r round(m_int_wr_fit$estimate[2], 3)` \cdot FLR + `r round(m_int_wr_fit$estimate[3], 3)` \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[4], 3)` \cdot I(\text{Asia}) + `r round(m_int_wr_fit$estimate[5], 3)` \cdot I(\text{Europe}) + \\ & `r round(m_int_wr_fit$estimate[6], 3)`  \cdot FLR \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[7], 3)` \cdot FLR \cdot I(\text{Asia}) `r round(m_int_wr_fit$estimate[8], 3)`    \cdot FLR \cdot I(\text{Europe})
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 CP \cdot I(\text{Americas}) + \widehat\beta_6 CP \cdot I(\text{Asia})+ \widehat\beta_7 CP \cdot I(\text{Europe}) \\
+\widehat{LE} = & `r round(m_int_wr_fit$estimate[1], 3)` + `r round(m_int_wr_fit$estimate[2], 3)` \cdot CP + `r round(m_int_wr_fit$estimate[3], 3)` \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[4], 3)` \cdot I(\text{Asia}) + `r round(m_int_wr_fit$estimate[5], 3)` \cdot I(\text{Europe}) + \\ & `r round(m_int_wr_fit$estimate[6], 3)`  \cdot CP \cdot I(\text{Americas}) + `r round(m_int_wr_fit$estimate[7], 3)` \cdot CP \cdot I(\text{Asia}) `r round(m_int_wr_fit$estimate[8], 3)`    \cdot CP \cdot I(\text{Europe})
 \end{aligned}$$
 
 ::::::::::::::::::: columns
@@ -899,8 +894,8 @@ Africa
 
 ::: proof-cont
 $$\begin{aligned} 
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \\ & \widehat\beta_4 \cdot 0 + \widehat\beta_5 FLR \cdot 0 + \\ & \widehat\beta_6 FLR \cdot 0+ \widehat\beta_7 FLR \cdot 0 \\
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR\\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \\ & \widehat\beta_4 \cdot 0 + \widehat\beta_5 CP \cdot 0 + \\ & \widehat\beta_6 CP \cdot 0+ \widehat\beta_7 CP \cdot 0 \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP\\
 \end{aligned}$$
 :::
 :::::
@@ -914,8 +909,8 @@ The Americas
 
 ::: fact-cont
 $$\begin{aligned} 
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \\ & \widehat\beta_2 \cdot 1 + \widehat\beta_3 \cdot 0 + \\ & \widehat\beta_4 \cdot 0 + \widehat\beta_5 FLR \cdot 1 + \\ & \widehat\beta_6 FLR \cdot 0+ \widehat\beta_7 FLR \cdot 0 \\
-\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_2\big) + \\ &\big(\widehat\beta_1 + \widehat\beta_5\big)FLR \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \\ & \widehat\beta_2 \cdot 1 + \widehat\beta_3 \cdot 0 + \\ & \widehat\beta_4 \cdot 0 + \widehat\beta_5 CP \cdot 1 + \\ & \widehat\beta_6 CP \cdot 0+ \widehat\beta_7 CP \cdot 0 \\
+\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_2\big) + \\ &\big(\widehat\beta_1 + \widehat\beta_5\big)CP \\
 \end{aligned}$$
 :::
 :::::
@@ -929,8 +924,8 @@ Asia
 
 ::: prop-cont
 $$\begin{aligned} 
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 1 + \\ & \widehat\beta_4 \cdot 0 + \widehat\beta_5 FLR \cdot 0 + \\ & \widehat\beta_6 FLR \cdot 1+ \widehat\beta_7 FLR \cdot 0 \\
-\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_3\big) + \\ &\big(\widehat\beta_1 + \widehat\beta_6\big)FLR \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 1 + \\ & \widehat\beta_4 \cdot 0 + \widehat\beta_5 CP \cdot 0 + \\ & \widehat\beta_6 CP \cdot 1+ \widehat\beta_7 CP \cdot 0 \\
+\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_3\big) + \\ &\big(\widehat\beta_1 + \widehat\beta_6\big)CP \\
 \end{aligned}$$
 :::
 :::::
@@ -944,8 +939,8 @@ Europe
 
 ::: def-cont
 $$\begin{aligned} 
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \\ & \widehat\beta_4 \cdot 1 + \widehat\beta_5 FLR \cdot 0 + \\ & \widehat\beta_6 FLR \cdot 0+ \widehat\beta_7 FLR \cdot 1 \\
-\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_4\big) + \\ & \big(\widehat\beta_1 + \widehat\beta_7\big)FLR \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \\ & \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \\ & \widehat\beta_4 \cdot 1 + \widehat\beta_5 CP \cdot 0 + \\ & \widehat\beta_6 CP \cdot 0+ \widehat\beta_7 CP \cdot 1 \\
+\widehat{LE} = &\big(\widehat\beta_0+\widehat\beta_4\big) + \\ & \big(\widehat\beta_1 + \widehat\beta_7\big)CP \\
 \end{aligned}$$
 :::
 :::::
@@ -955,8 +950,8 @@ $$\begin{aligned}
 ## Interpretation for interaction between multi-level categorical and continuous variables
 
 $$ \begin{aligned}
-\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 FLR + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 FLR \cdot I(\text{Americas}) + \widehat\beta_6 FLR \cdot I(\text{Asia})+ \widehat\beta_7 FLR \cdot I(\text{Europe}) \\
-\widehat{LE} = & \bigg[\widehat\beta_0 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe})\bigg] + \\ &\underbrace{\bigg[\widehat\beta_1 +  \widehat\beta_5 \cdot I(\text{Americas}) + \widehat\beta_6 \cdot I(\text{Asia})+ \widehat\beta_7 \cdot I(\text{Europe}) \bigg]}_\text{FLR's effect} FLR \\
+\widehat{LE} = &\widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ & \widehat\beta_5 CP \cdot I(\text{Americas}) + \widehat\beta_6 CP \cdot I(\text{Asia})+ \widehat\beta_7 CP \cdot I(\text{Europe}) \\
+\widehat{LE} = & \bigg[\widehat\beta_0 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe})\bigg] + \\ &\underbrace{\bigg[\widehat\beta_1 +  \widehat\beta_5 \cdot I(\text{Americas}) + \widehat\beta_6 \cdot I(\text{Asia})+ \widehat\beta_7 \cdot I(\text{Europe}) \bigg]}_\text{CP's effect} CP \\
 \end{aligned}$$
 
 -   Interpretation:
@@ -971,7 +966,7 @@ $$ \begin{aligned}
 
 -   We run an F-test for a group of coefficients ($\beta_5$, $\beta_6$, $\beta_7$) in the below model (see lesson 10)
 
-$$\begin{aligned}LE = &\beta_0 + \beta_1 FLR + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ & \beta_5 FLR \cdot I(\text{Americas}) + \beta_6 FLR \cdot I(\text{Asia})+ \beta_7 FLR \cdot I(\text{Europe})+ \epsilon \end{aligned}$$
+$$\begin{aligned}LE = &\beta_0 + \beta_1 CP + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ & \beta_5 CP \cdot I(\text{Americas}) + \beta_6 CP \cdot I(\text{Asia})+ \beta_7 CP \cdot I(\text{Europe})+ \epsilon \end{aligned}$$
 
 ::::::::::: columns
 :::::: {.column width="45%"}
@@ -1007,7 +1002,7 @@ Null / Smaller / Reduced model
 :::
 
 ::: proof-cont
-$$\begin{aligned}LE = &\beta_0 + \beta_1 FLR + \beta_2 I(\text{Americas}) + \\ & \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \epsilon \end{aligned}$$
+$$\begin{aligned}LE = &\beta_0 + \beta_1 CP + \beta_2 I(\text{Americas}) + \\ & \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \epsilon \end{aligned}$$
 :::
 :::::
 ::::::
@@ -1019,7 +1014,7 @@ Alternative / Larger / Full model
 :::
 
 ::: def-cont
-$$\begin{aligned}LE = &\beta_0 + \beta_1 FLR + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \\ & \beta_4 I(\text{Europe}) + \beta_5 FLR \cdot I(\text{Americas}) + \\ & \beta_6 FLR \cdot I(\text{Asia})+ \beta_7 FLR \cdot I(\text{Europe})+ \epsilon \end{aligned}$$
+$$\begin{aligned}LE = &\beta_0 + \beta_1 CP + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \\ & \beta_4 I(\text{Europe}) + \beta_5 CP \cdot I(\text{Americas}) + \\ & \beta_6 CP \cdot I(\text{Asia})+ \beta_7 CP \cdot I(\text{Europe})+ \epsilon \end{aligned}$$
 :::
 :::::
 ::::::
@@ -1031,10 +1026,10 @@ $$\begin{aligned}LE = &\beta_0 + \beta_1 FLR + \beta_2 I(\text{Americas}) + \bet
 
 ```{r}
 #| echo: true
-m_int_wr_red = lm(LifeExpectancyYrs ~ FLR_c + four_regions, 
-                   data = gapm_sub)
-m_int_wr_full = lm(LifeExpectancyYrs ~ FLR_c + four_regions+
-                  FLR_c*four_regions, data = gapm_sub)
+m_int_wr_red = lm(life_exp ~ CP_c + freedom_status, 
+                   data = gapm)
+m_int_wr_full = lm(life_exp ~ CP_c + freedom_status+
+                  CP_c*freedom_status, data = gapm)
 ```
 
 -   Display the ANOVA table with F-statistic and p-value
@@ -1042,8 +1037,8 @@ m_int_wr_full = lm(LifeExpectancyYrs ~ FLR_c + four_regions+
 ```{r}
 anova(m_int_wr_red, m_int_wr_full) %>% tidy() %>% gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 
-# newdata <- data.frame(four_regions = c("Africa", "Americas", "Asia", "Europe"), 
-#                       FLR_c = c()) 
+# newdata <- data.frame(freedom_status = c("Africa", "Americas", "Asia", "Europe"), 
+#                       CP_c = c()) 
 # (pred = predict(m_int_wr_full, 
 #                 newdata=newdata, 
 #                 interval="confidence"))
@@ -1051,4 +1046,4 @@ anova(m_int_wr_red, m_int_wr_full) %>% tidy() %>% gt() %>% tab_options(table.fon
 
 -   Conclusion: There is not a significant interaction between female literacy rate and world region (p = 0.478).
 
--   World region is NOT an effect measure modifier of FLR on LE
+-   World region is NOT an effect measure modifier of CP on LE
