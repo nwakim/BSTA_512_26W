@@ -170,6 +170,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -193,7 +197,14 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-winter-2025" id="toc-muddy-points-from-winter-2025" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2025">Muddy Points from Winter 2025</a>
+  <li><a href="#muddy-points-from-winter-2026" id="toc-muddy-points-from-winter-2026" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2026">Muddy Points from Winter 2026</a>
+  <ul class="collapse">
+  <li><a href="#i-was-taught-that-the-f-test-is-a-test-of-variance-but-it-seems-more-like-a-test-of-sse" id="toc-i-was-taught-that-the-f-test-is-a-test-of-variance-but-it-seems-more-like-a-test-of-sse" class="nav-link" data-scroll-target="#i-was-taught-that-the-f-test-is-a-test-of-variance-but-it-seems-more-like-a-test-of-sse">1. I was taught that the F test is a test of variance, but it seems more like a test of SSE?</a></li>
+  <li><a href="#a-group-of-covariates-is-when-there-is-2-covariates-right" id="toc-a-group-of-covariates-is-when-there-is-2-covariates-right" class="nav-link" data-scroll-target="#a-group-of-covariates-is-when-there-is-2-covariates-right">2. A group of covariates is when there is 2+ covariates right?</a></li>
+  <li><a href="#i-was-a-little-confused-about-how-linearity-is-different-in-mlr-vs.-slr." id="toc-i-was-a-little-confused-about-how-linearity-is-different-in-mlr-vs.-slr." class="nav-link" data-scroll-target="#i-was-a-little-confused-about-how-linearity-is-different-in-mlr-vs.-slr.">3. I was a little confused about how Linearity is different in MLR vs.&nbsp;SLR.</a></li>
+  <li><a href="#im-not-sure-i-understand-whywhen-youd-choose-to-do-each-f-test-version-overall-single-variable-groups-of-variables" id="toc-im-not-sure-i-understand-whywhen-youd-choose-to-do-each-f-test-version-overall-single-variable-groups-of-variables" class="nav-link" data-scroll-target="#im-not-sure-i-understand-whywhen-youd-choose-to-do-each-f-test-version-overall-single-variable-groups-of-variables">4. I’m not sure I understand why/when you’d choose to do each F-test version (overall, single variable, groups of variables)</a></li>
+  </ul></li>
+  <li><a href="#muddy-points-from-winter-2025" id="toc-muddy-points-from-winter-2025" class="nav-link" data-scroll-target="#muddy-points-from-winter-2025">Muddy Points from Winter 2025</a>
   <ul class="collapse">
   <li><a href="#the-muddiest-point-i-had-was-what-is-the-point-or-purpose-of-trying-to-the-explain-the-unexplained.-what-does-it-mean-to-greatly-reduce-the-unexplained-variation-or-increase-the-explained-variation" id="toc-the-muddiest-point-i-had-was-what-is-the-point-or-purpose-of-trying-to-the-explain-the-unexplained.-what-does-it-mean-to-greatly-reduce-the-unexplained-variation-or-increase-the-explained-variation" class="nav-link" data-scroll-target="#the-muddiest-point-i-had-was-what-is-the-point-or-purpose-of-trying-to-the-explain-the-unexplained.-what-does-it-mean-to-greatly-reduce-the-unexplained-variation-or-increase-the-explained-variation">1. The muddiest point I had was what is the point or purpose of trying to the “explain the unexplained.” What does it mean to greatly reduce the unexplained variation or increase the explained variation?</a></li>
   <li><a href="#i-was-wondering-why-the-ssr-is-always-smaller-than-the-ssy." id="toc-i-was-wondering-why-the-ssr-is-always-smaller-than-the-ssy." class="nav-link" data-scroll-target="#i-was-wondering-why-the-ssr-is-always-smaller-than-the-ssy.">2. I was wondering why the SSR is always smaller than the SSY.</a></li>
@@ -231,7 +242,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">February 18, 2026</p>
     </div>
   </div>
     
@@ -242,6 +253,30 @@ window.Quarto = {
 </header>
 
 
+<section id="muddy-points-from-winter-2026" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2026">Muddy Points from Winter 2026</h2>
+<section id="i-was-taught-that-the-f-test-is-a-test-of-variance-but-it-seems-more-like-a-test-of-sse" class="level3">
+<h3 class="anchored" data-anchor-id="i-was-taught-that-the-f-test-is-a-test-of-variance-but-it-seems-more-like-a-test-of-sse">1. I was taught that the F test is a test of variance, but it seems more like a test of SSE?</h3>
+<p>Yes, the F-test is a test of variance, but it is a test of the variance of the error (SSE).</p>
+<p>Remember, variance is loosely defined as the squared deviation from the mean. And if you took Intro to Probability with me, you know that the variance of a random variable is the expected value of the squared deviation from its mean (<span class="math inline">\(E[(X - \mu)^2]\)</span>).</p>
+<p>Our errors (residuals) are deviations from the fitted values. So the variance of the error is a measure of the squared deviation from the fitted values. And that is what we are testing with the F-test!</p>
+<p>The F-test is testing whether the variance of the error in the reduced model is significantly greater than the variance of the error in the full model.</p>
+</section>
+<section id="a-group-of-covariates-is-when-there-is-2-covariates-right" class="level3">
+<h3 class="anchored" data-anchor-id="a-group-of-covariates-is-when-there-is-2-covariates-right">2. A group of covariates is when there is 2+ covariates right?</h3>
+<p>Yep!</p>
+<p>Those covariates can have multiple coefficients (in the case of multi-level categorical variables).</p>
+</section>
+<section id="i-was-a-little-confused-about-how-linearity-is-different-in-mlr-vs.-slr." class="level3">
+<h3 class="anchored" data-anchor-id="i-was-a-little-confused-about-how-linearity-is-different-in-mlr-vs.-slr.">3. I was a little confused about how Linearity is different in MLR vs.&nbsp;SLR.</h3>
+<p>In SLR, we are only looking at the relationship between one predictor and the outcome. So linearity is just about whether that relationship is linear.</p>
+<p>In MLR, we are looking at the relationship between multiple predictors and the outcome. So linearity is about whether the relationship between each predictor and the outcome is linear, while holding the other predictors constant.</p>
+</section>
+<section id="im-not-sure-i-understand-whywhen-youd-choose-to-do-each-f-test-version-overall-single-variable-groups-of-variables" class="level3">
+<h3 class="anchored" data-anchor-id="im-not-sure-i-understand-whywhen-youd-choose-to-do-each-f-test-version-overall-single-variable-groups-of-variables">4. I’m not sure I understand why/when you’d choose to do each F-test version (overall, single variable, groups of variables)</h3>
+<p>Yep, we’re going to get to that! We just use it so much that I wanted to make sure we understood the tool before we got into the different contexts in which we use it.</p>
+</section>
+</section>
 <section id="muddy-points-from-winter-2025" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-winter-2025">Muddy Points from Winter 2025</h2>
 <section id="the-muddiest-point-i-had-was-what-is-the-point-or-purpose-of-trying-to-the-explain-the-unexplained.-what-does-it-mean-to-greatly-reduce-the-unexplained-variation-or-increase-the-explained-variation" class="level3">

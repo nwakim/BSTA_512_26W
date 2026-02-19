@@ -9,6 +9,34 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Muddy Points from Winter 2026
+
+### 1. I was taught that the F test is a test of variance, but it seems more like a test of SSE?
+
+Yes, the F-test is a test of variance, but it is a test of the variance of the error (SSE). 
+
+Remember, variance is loosely defined as the squared deviation from the mean. And if you took Intro to Probability with me, you know that the variance of a random variable is the expected value of the squared deviation from its mean ($E[(X - \mu)^2]$).
+
+Our errors (residuals) are deviations from the fitted values. So the variance of the error is a measure of the squared deviation from the fitted values. And that is what we are testing with the F-test!
+
+The F-test is testing whether the variance of the error in the reduced model is significantly greater than the variance of the error in the full model.
+
+### 2. A group of covariates is when there is 2+ covariates right?
+
+Yep! 
+
+Those covariates can have multiple coefficients (in the case of multi-level categorical variables). 
+
+### 3. I was a little confused about how Linearity is different in MLR vs. SLR.
+
+In SLR, we are only looking at the relationship between one predictor and the outcome. So linearity is just about whether that relationship is linear.
+
+In MLR, we are looking at the relationship between multiple predictors and the outcome. So linearity is about whether the relationship between each predictor and the outcome is linear, while holding the other predictors constant.
+
+### 4. I'm not sure I understand why/when you'd choose to do each F-test version (overall, single variable, groups of variables)
+
+Yep, we're going to get to that! We just use it so much that I wanted to make sure we understood the tool before we got into the different contexts in which we use it.
+
 ## Muddy Points from Winter 2025
 
 ### 1. The muddiest point I had was what is the point or purpose of trying to the "explain the unexplained." What does it mean to greatly reduce the unexplained variation or increase the explained variation?
