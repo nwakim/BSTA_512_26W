@@ -15,7 +15,7 @@ source(here("class_dates.R"))
 Below is the general timing and lessons for each quiz:
 
 | Quiz | Lessons | Open Date \@ 3pm | Close Date \@ 11pm |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | 1 | 1-4 | `r q1_open %>% format("%m/%d")` | `r q1_close %>% format("%m/%d")` |
 | 2 | 5-8 | `r q2_open %>% format("%m/%d")` | `r q2_close %>% format("%m/%d")` |
 | 3 | 9-14 | `r q3_open %>% format("%m/%d")` | `r q3_close %>% format("%m/%d")` |

@@ -42,7 +42,7 @@ load(here("../Project/data/iat_2024_comp_clean_factor_2026-02-05.rda"))
 
 ## Directions
 
-Please turn in your `.html` file on Sakai.Please let me know if you greatly prefer to submit a physical copy.
+Please turn in your `.html` file on Sakai. Please let me know if you greatly prefer to submit a physical copy.
 
 [You can download the `.qmd` file for this lab here.](https://github.com/nwakim/BSTA_512_26W/blob/main/project/Lab_03.qmd) Please use the linked qmd file and not this one! (This is specifically the instructions.)
 
@@ -69,7 +69,7 @@ I have left it up to you to load the needed packages for this lab.
 ::: callout-important
 #### Task
 
-Please restate your research question below using the provided format (1 sentence). You can change the wording if you'd like, but please make sure it is still clear. It’s repetitive, but it helps me contextualize my feedback as I look through your lab.
+Please restate your research question from Lab 1. 
 :::
 
 ### Thinking about potential confounders and effect modifiers

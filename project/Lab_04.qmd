@@ -2,7 +2,6 @@
 title: "Lab 4"
 author: "Your name here!!"
 subtitle: "BSTA 512/612"
-description: "Due: March 7, 2024 at 11pm"
 date-modified: "today"
 categories: [""]
 format: 
@@ -33,9 +32,9 @@ Before starting this lab, you should go back to Lab 2, save a new `.rda` file th
 ### Restate your research question
 
 ::: callout-important
-##### Task
+#### Task
 
-Please restate your research question below using the provided format. It's repetitive, but it helps me contextualize my feedback as I look through your lab.
+Please restate your research question from Lab 1. 
 :::
 
 ### Step 1: Simple linear regressions / analysis
@@ -44,9 +43,9 @@ Please restate your research question below using the provided format. It's repe
 #### Tasks
 
 1.  Run a simple linear regression model for each covariate against the IAT score (outcome).
-2.  Display results from the test if each covariate explains enough variation of the outcome. This may be from three options in the instructions: `summary()/anova()` only, `lapply()`, or `sapply()`
+2.  Display results from the test if each covariate explains enough variation of the outcome. This may be from three options in the instructions: `summary()/anova()` only or the output from `add1()`.
 
-Interpretation of the results will be in the next step.
+Interpretation of the results **will be in the next step**.
 :::
 
 ### Step 2: Preliminary variable selection
@@ -86,9 +85,7 @@ No tasks here! If you want to try out what I did above, you can!
 ::: callout-important
 #### Tasks
 
-Using your discussion in Lab 3 and the results from the F-test on interactions:
-
-1.    Create a list of the interactions that you will include in your model.
+1.    Using `add1()`, determine what interactions you will include in your preliminary final model.
 2.    Run the preliminary final model that includes the main effects and interactions.
 :::
 
