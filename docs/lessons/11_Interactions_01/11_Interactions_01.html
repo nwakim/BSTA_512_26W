@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Nicky Wakim">
-  <meta name="dcterms.date" content="2026-02-18">
+  <meta name="dcterms.date" content="2026-02-23">
   <title>Linear Models – Lesson 11: Interactions, Part 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -211,7 +211,7 @@ Nicky Wakim
 </div>
 </div>
 
-  <p class="date">2026-02-18</p>
+  <p class="date">2026-02-23</p>
 </section>
 <section>
 <section id="learning-objectives" class="title-slide slide level1 center">
@@ -228,12 +228,7 @@ Nicky Wakim
 <li>Interpret the interaction component of a model with <strong>two continuous covariates</strong>, and how the main variable’s effect changes.</li>
 </ol>
 </section>
-<section id="a-fun-example-of-an-interaction-model" class="slide level2">
-<h2>A fun example of an interaction model</h2>
-<p><a href="https://academic.oup.com/jrssig/article/22/6/30/8275180?searchresult=1" class="uri">https://academic.oup.com/jrssig/article/22/6/30/8275180?searchresult=1</a></p>
-<p><a href="lessons/11_Interactions_01/kiss_interactions_model.pdf">pdf in folder</a></p>
-<p><a href="https://academic.oup.com/ije/article/46/1/348/2622842">And a nice tutorial on interrupted time series regression</a></p>
-</section>
+
 <section id="regression-analysis-process" class="slide level2">
 <h2>Regression analysis process</h2>
 <div class="box">
@@ -419,16 +414,16 @@ Nicky Wakim
 <div class="columns">
 <div class="column">
 <ul>
-<li><p>We have seen a plot of Life expectancy vs.&nbsp;female literacy rate with different levels of food supply colored (Lesson 8)</p></li>
+<li><p>We have seen a plot of life expectancy vs.&nbsp;cell phones with different levels of food supply colored (Lesson 8)</p></li>
 <li><p>In our plot and the model, we treat food supply as a <strong>confounder</strong></p></li>
-<li><p>If food supply is a confounder in the relationship between life expectancy and female literacy rate, then we only use main effects in the model:</p></li>
+<li><p>If food supply is a confounder in the relationship between life expectancy and cell phones, then we only use main effects in the model:</p></li>
 </ul>
 <p><span class="math display">\[\text{LE} = \beta_0 + \beta_1 \text{CP} + \beta_2 \text{VR} + \epsilon\]</span></p>
 </div><div class="column">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div class="girafe html-widget html-fill-item" id="htmlwidget-695237c5dba8bbc41add" style="width:576px;height:384px;"></div>
-<script type="application/json" data-for="htmlwidget-695237c5dba8bbc41add">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_5824278cb9e9c7d9' viewBox='0 0 432 288'>\n <defs id='svg_5824278cb9e9c7d9_defs'>\n  <clipPath id='svg_5824278cb9e9c7d9_c1'>\n   <rect x='0' y='0' width='432' height='288'/>\n  <\/clipPath>\n  <clipPath id='svg_5824278cb9e9c7d9_c2'>\n   <rect x='33.27' y='5.48' width='329.14' height='250.79'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_5824278cb9e9c7d9_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_5824278cb9e9c7d9_c1)'>\n   <rect x='0' y='0' width='432' height='288' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='432' height='288' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n  <\/g>\n  <g clip-path='url(#svg_5824278cb9e9c7d9_c2)'>\n   <rect x='33.27' y='5.48' width='329.14' height='250.79' fill='#EBEBEB' fill-opacity='1' stroke='none'/>\n   <polyline points='33.27,216.42 362.40,216.42' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,150.41 362.40,150.41' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,84.40 362.40,84.40' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,18.40 362.40,18.40' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='39.92,256.27 39.92,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='123.03,256.27 123.03,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='206.15,256.27 206.15,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='289.26,256.27 289.26,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,249.42 362.40,249.42' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,183.41 362.40,183.41' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,117.41 362.40,117.41' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,51.40 362.40,51.40' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='81.47,256.27 81.47,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='164.59,256.27 164.59,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='247.70,256.27 247.70,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='330.82,256.27 330.82,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <circle id='svg_5824278cb9e9c7d9_e1' cx='91.89' cy='165.99' r='1.47pt' fill='#214668' fill-opacity='1' stroke='#214668' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='1' title='1&amp;lt;br/&amp;gt;cell_phones_100=56.2655&amp;lt;br/&amp;gt;life_exp=62.64'/>\n   <circle id='svg_5824278cb9e9c7d9_e2' cx='161.92' cy='77.34' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='2' title='2&amp;lt;br/&amp;gt;cell_phones_100=98.395&amp;lt;br/&amp;gt;life_exp=76.07'/>\n   <circle id='svg_5824278cb9e9c7d9_e3' cx='323.55' cy='94.9' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='3' title='3&amp;lt;br/&amp;gt;cell_phones_100=195.625&amp;lt;br/&amp;gt;life_exp=73.41'/>\n   <circle id='svg_5824278cb9e9c7d9_e4' cx='216.93' cy='81.96' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='4' title='4&amp;lt;br/&amp;gt;cell_phones_100=131.484&amp;lt;br/&amp;gt;life_exp=75.37'/>\n   <circle id='svg_5824278cb9e9c7d9_e5' cx='215.36' cy='93.25' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='5' title='5&amp;lt;br/&amp;gt;cell_phones_100=130.54&amp;lt;br/&amp;gt;life_exp=73.66'/>\n   <circle id='svg_5824278cb9e9c7d9_e6' cx='177.07' cy='108.36' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='6' title='6&amp;lt;br/&amp;gt;cell_phones_100=107.506&amp;lt;br/&amp;gt;life_exp=71.37'/>\n   <circle id='svg_5824278cb9e9c7d9_e7' cx='174.14' cy='157.28' r='1.47pt' fill='#4289C2' fill-opacity='1' stroke='#4289C2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='7' title='7&amp;lt;br/&amp;gt;cell_phones_100=105.745&amp;lt;br/&amp;gt;life_exp=63.96'/>\n   <circle id='svg_5824278cb9e9c7d9_e8' cx='180.99' cy='81.3' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='8' title='8&amp;lt;br/&amp;gt;cell_phones_100=109.867&amp;lt;br/&amp;gt;life_exp=75.47'/>\n   <circle id='svg_5824278cb9e9c7d9_e9' cx='192.32' cy='118.07' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='9' title='9&amp;lt;br/&amp;gt;cell_phones_100=116.679&amp;lt;br/&amp;gt;life_exp=69.9'/>\n   <circle id='svg_5824278cb9e9c7d9_e10' cx='196.08' cy='84.27' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='10' title='10&amp;lt;br/&amp;gt;cell_phones_100=118.944&amp;lt;br/&amp;gt;life_exp=75.02'/>\n   <circle id='svg_5824278cb9e9c7d9_e11' cx='167.2' cy='124.54' r='1.47pt' fill='#2C5D86' fill-opacity='1' stroke='#2C5D86' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='11' title='11&amp;lt;br/&amp;gt;cell_phones_100=101.572&amp;lt;br/&amp;gt;life_exp=68.92'/>\n   <circle id='svg_5824278cb9e9c7d9_e12' cx='166.66' cy='91.53' r='1.47pt' fill='#4186BD' fill-opacity='1' stroke='#4186BD' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='12' title='12&amp;lt;br/&amp;gt;cell_phones_100=101.245&amp;lt;br/&amp;gt;life_exp=73.92'/>\n   <circle id='svg_5824278cb9e9c7d9_e13' cx='294.59' cy='165.79' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='13' title='13&amp;lt;br/&amp;gt;cell_phones_100=178.205&amp;lt;br/&amp;gt;life_exp=62.67'/>\n   <circle id='svg_5824278cb9e9c7d9_e14' cx='222.96' cy='55.69' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='14' title='14&amp;lt;br/&amp;gt;cell_phones_100=135.114&amp;lt;br/&amp;gt;life_exp=79.35'/>\n   <circle id='svg_5824278cb9e9c7d9_e15' cx='266.38' cy='158.2' r='1.47pt' fill='#3B7BAF' fill-opacity='1' stroke='#3B7BAF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='15' title='15&amp;lt;br/&amp;gt;cell_phones_100=161.232&amp;lt;br/&amp;gt;life_exp=63.82'/>\n   <circle id='svg_5824278cb9e9c7d9_e16' cx='147.68' cy='165.53' r='1.47pt' fill='#244D70' fill-opacity='1' stroke='#244D70' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='16' title='16&amp;lt;br/&amp;gt;cell_phones_100=89.8274&amp;lt;br/&amp;gt;life_exp=62.71'/>\n   <circle id='svg_5824278cb9e9c7d9_e17' cx='79.28' cy='153.91' r='1.47pt' fill='#2E608A' fill-opacity='1' stroke='#2E608A' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='17' title='17&amp;lt;br/&amp;gt;cell_phones_100=48.6774&amp;lt;br/&amp;gt;life_exp=64.47'/>\n   <circle id='svg_5824278cb9e9c7d9_e18' cx='258' cy='71.47' r='1.47pt' fill='#4186BD' fill-opacity='1' stroke='#4186BD' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='18' title='18&amp;lt;br/&amp;gt;cell_phones_100=156.195&amp;lt;br/&amp;gt;life_exp=76.96'/>\n   <circle id='svg_5824278cb9e9c7d9_e19' cx='256' cy='64.93' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='19' title='19&amp;lt;br/&amp;gt;cell_phones_100=154.989&amp;lt;br/&amp;gt;life_exp=77.95'/>\n   <circle id='svg_5824278cb9e9c7d9_e20' cx='211.31' cy='62.36' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='20' title='20&amp;lt;br/&amp;gt;cell_phones_100=128.105&amp;lt;br/&amp;gt;life_exp=78.34'/>\n   <circle id='svg_5824278cb9e9c7d9_e21' cx='148.59' cy='92.46' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='21' title='21&amp;lt;br/&amp;gt;cell_phones_100=90.376&amp;lt;br/&amp;gt;life_exp=73.78'/>\n   <circle id='svg_5824278cb9e9c7d9_e22' cx='177.53' cy='72.19' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='22' title='22&amp;lt;br/&amp;gt;cell_phones_100=107.787&amp;lt;br/&amp;gt;life_exp=76.85'/>\n   <circle id='svg_5824278cb9e9c7d9_e23' cx='161.48' cy='71.4' r='1.47pt' fill='#2C5D86' fill-opacity='1' stroke='#2C5D86' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='23' title='23&amp;lt;br/&amp;gt;cell_phones_100=98.1309&amp;lt;br/&amp;gt;life_exp=76.97'/>\n   <circle id='svg_5824278cb9e9c7d9_e24' cx='149.1' cy='118.86' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='24' title='24&amp;lt;br/&amp;gt;cell_phones_100=90.6795&amp;lt;br/&amp;gt;life_exp=69.78'/>\n   <circle id='svg_5824278cb9e9c7d9_e25' cx='251.48' cy='61.1' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='25' title='25&amp;lt;br/&amp;gt;cell_phones_100=152.271&amp;lt;br/&amp;gt;life_exp=78.53'/>\n   <circle id='svg_5824278cb9e9c7d9_e26' cx='93.05' cy='126.38' r='1.47pt' fill='#1F4364' fill-opacity='1' stroke='#1F4364' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='26' title='26&amp;lt;br/&amp;gt;cell_phones_100=56.9643&amp;lt;br/&amp;gt;life_exp=68.64'/>\n   <circle id='svg_5824278cb9e9c7d9_e27' cx='211.17' cy='35.89' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='27' title='27&amp;lt;br/&amp;gt;cell_phones_100=128.023&amp;lt;br/&amp;gt;life_exp=82.35'/>\n   <circle id='svg_5824278cb9e9c7d9_e28' cx='191.1' cy='29.16' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='28' title='28&amp;lt;br/&amp;gt;cell_phones_100=115.951&amp;lt;br/&amp;gt;life_exp=83.37'/>\n   <circle id='svg_5824278cb9e9c7d9_e29' cx='203.21' cy='137.94' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='29' title='29&amp;lt;br/&amp;gt;cell_phones_100=123.233&amp;lt;br/&amp;gt;life_exp=66.89'/>\n   <circle id='svg_5824278cb9e9c7d9_e30' cx='254.38' cy='107.37' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='30' title='30&amp;lt;br/&amp;gt;cell_phones_100=154.014&amp;lt;br/&amp;gt;life_exp=71.52'/>\n   <circle id='svg_5824278cb9e9c7d9_e31' cx='199.17' cy='147.11' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='31' title='31&amp;lt;br/&amp;gt;cell_phones_100=120.803&amp;lt;br/&amp;gt;life_exp=65.5'/>\n   <circle id='svg_5824278cb9e9c7d9_e32' cx='179.36' cy='180.18' r='1.47pt' fill='#275379' fill-opacity='1' stroke='#275379' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='32' title='32&amp;lt;br/&amp;gt;cell_phones_100=108.885&amp;lt;br/&amp;gt;life_exp=60.49'/>\n   <circle id='svg_5824278cb9e9c7d9_e33' cx='175.86' cy='144.8' r='1.47pt' fill='#3874A6' fill-opacity='1' stroke='#3874A6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='33' title='33&amp;lt;br/&amp;gt;cell_phones_100=106.782&amp;lt;br/&amp;gt;life_exp=65.85'/>\n   <circle id='svg_5824278cb9e9c7d9_e34' cx='189.78' cy='129.55' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='34' title='34&amp;lt;br/&amp;gt;cell_phones_100=115.156&amp;lt;br/&amp;gt;life_exp=68.16'/>\n   <circle id='svg_5824278cb9e9c7d9_e35' cx='124.45' cy='117.8' r='1.47pt' fill='#336A98' fill-opacity='1' stroke='#336A98' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='35' title='35&amp;lt;br/&amp;gt;cell_phones_100=75.8551&amp;lt;br/&amp;gt;life_exp=69.94'/>\n   <circle id='svg_5824278cb9e9c7d9_e36' cx='174.22' cy='83.68' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='36' title='36&amp;lt;br/&amp;gt;cell_phones_100=105.794&amp;lt;br/&amp;gt;life_exp=75.11'/>\n   <circle id='svg_5824278cb9e9c7d9_e37' cx='202.61' cy='123.41' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='37' title='37&amp;lt;br/&amp;gt;cell_phones_100=122.873&amp;lt;br/&amp;gt;life_exp=69.09'/>\n   <circle id='svg_5824278cb9e9c7d9_e38' cx='131.65' cy='133.18' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='38' title='38&amp;lt;br/&amp;gt;cell_phones_100=80.1818&amp;lt;br/&amp;gt;life_exp=67.61'/>\n   <circle id='svg_5824278cb9e9c7d9_e39' cx='182.22' cy='35.03' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='39' title='39&amp;lt;br/&amp;gt;cell_phones_100=110.609&amp;lt;br/&amp;gt;life_exp=82.48'/>\n   <circle id='svg_5824278cb9e9c7d9_e40' cx='268.84' cy='76.62' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='40' title='40&amp;lt;br/&amp;gt;cell_phones_100=162.713&amp;lt;br/&amp;gt;life_exp=76.18'/>\n   <circle id='svg_5824278cb9e9c7d9_e41' cx='163.15' cy='97.47' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='41' title='41&amp;lt;br/&amp;gt;cell_phones_100=99.1324&amp;lt;br/&amp;gt;life_exp=73.02'/>\n   <circle id='svg_5824278cb9e9c7d9_e42' cx='174.17' cy='84.14' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='42' title='42&amp;lt;br/&amp;gt;cell_phones_100=105.762&amp;lt;br/&amp;gt;life_exp=75.04'/>\n   <circle id='svg_5824278cb9e9c7d9_e43' cx='110.97' cy='75.49' r='1.47pt' fill='#4894D0' fill-opacity='1' stroke='#4894D0' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='43' title='43&amp;lt;br/&amp;gt;cell_phones_100=67.7457&amp;lt;br/&amp;gt;life_exp=76.35'/>\n   <circle id='svg_5824278cb9e9c7d9_e44' cx='207.21' cy='118.4' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='44' title='44&amp;lt;br/&amp;gt;cell_phones_100=125.642&amp;lt;br/&amp;gt;life_exp=69.85'/>\n   <circle id='svg_5824278cb9e9c7d9_e45' cx='199.78' cy='146.65' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='45' title='45&amp;lt;br/&amp;gt;cell_phones_100=121.169&amp;lt;br/&amp;gt;life_exp=65.57'/>\n   <circle id='svg_5824278cb9e9c7d9_e46' cx='176.1' cy='99.92' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='46' title='46&amp;lt;br/&amp;gt;cell_phones_100=106.926&amp;lt;br/&amp;gt;life_exp=72.65'/>\n   <circle id='svg_5824278cb9e9c7d9_e47' cx='186.85' cy='123.22' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='47' title='47&amp;lt;br/&amp;gt;cell_phones_100=113.392&amp;lt;br/&amp;gt;life_exp=69.12'/>\n   <circle id='svg_5824278cb9e9c7d9_e48' cx='278.21' cy='37.8' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='48' title='48&amp;lt;br/&amp;gt;cell_phones_100=168.35&amp;lt;br/&amp;gt;life_exp=82.06'/>\n   <circle id='svg_5824278cb9e9c7d9_e49' cx='103.67' cy='118.46' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='49' title='49&amp;lt;br/&amp;gt;cell_phones_100=63.3546&amp;lt;br/&amp;gt;life_exp=69.84'/>\n   <circle id='svg_5824278cb9e9c7d9_e50' cx='51.66' cy='143.08' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='50' title='50&amp;lt;br/&amp;gt;cell_phones_100=32.0639&amp;lt;br/&amp;gt;life_exp=66.11'/>\n   <circle id='svg_5824278cb9e9c7d9_e51' cx='250.58' cy='65.2' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='51' title='51&amp;lt;br/&amp;gt;cell_phones_100=151.727&amp;lt;br/&amp;gt;life_exp=77.91'/>\n   <circle id='svg_5824278cb9e9c7d9_e52' cx='111.56' cy='244.87' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='52' title='52&amp;lt;br/&amp;gt;cell_phones_100=68.1001&amp;lt;br/&amp;gt;life_exp=50.69'/>\n   <circle id='svg_5824278cb9e9c7d9_e53' cx='224.16' cy='88.89' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='53' title='53&amp;lt;br/&amp;gt;cell_phones_100=135.834&amp;lt;br/&amp;gt;life_exp=74.32'/>\n   <circle id='svg_5824278cb9e9c7d9_e54' cx='234.19' cy='90.74' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='54' title='54&amp;lt;br/&amp;gt;cell_phones_100=141.87&amp;lt;br/&amp;gt;life_exp=74.04'/>\n   <circle id='svg_5824278cb9e9c7d9_e55' cx='226.4' cy='104.87' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='55' title='55&amp;lt;br/&amp;gt;cell_phones_100=137.183&amp;lt;br/&amp;gt;life_exp=71.9'/>\n   <circle id='svg_5824278cb9e9c7d9_e56' cx='105.99' cy='151.47' r='1.47pt' fill='#18344F' fill-opacity='1' stroke='#18344F' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='56' title='56&amp;lt;br/&amp;gt;cell_phones_100=64.7495&amp;lt;br/&amp;gt;life_exp=64.84'/>\n   <circle id='svg_5824278cb9e9c7d9_e57' cx='174.09' cy='76.02' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='57' title='57&amp;lt;br/&amp;gt;cell_phones_100=105.713&amp;lt;br/&amp;gt;life_exp=76.27'/>\n   <circle id='svg_5824278cb9e9c7d9_e58' cx='183.38' cy='110.15' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='58' title='58&amp;lt;br/&amp;gt;cell_phones_100=111.303&amp;lt;br/&amp;gt;life_exp=71.1'/>\n   <circle id='svg_5824278cb9e9c7d9_e59' cx='184.74' cy='173.05' r='1.47pt' fill='#336A98' fill-opacity='1' stroke='#336A98' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='59' title='59&amp;lt;br/&amp;gt;cell_phones_100=112.12&amp;lt;br/&amp;gt;life_exp=61.57'/>\n   <circle id='svg_5824278cb9e9c7d9_e60' cx='177.11' cy='116.48' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='60' title='60&amp;lt;br/&amp;gt;cell_phones_100=107.535&amp;lt;br/&amp;gt;life_exp=70.14'/>\n   <circle id='svg_5824278cb9e9c7d9_e61' cx='342.92' cy='79.98' r='1.47pt' fill='#3D7FB4' fill-opacity='1' stroke='#3D7FB4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='61' title='61&amp;lt;br/&amp;gt;cell_phones_100=207.278&amp;lt;br/&amp;gt;life_exp=75.67'/>\n   <circle id='svg_5824278cb9e9c7d9_e62' cx='235.75' cy='124.8' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='62' title='62&amp;lt;br/&amp;gt;cell_phones_100=142.809&amp;lt;br/&amp;gt;life_exp=68.88'/>\n   <circle id='svg_5824278cb9e9c7d9_e63' cx='74.52' cy='203.81' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='63' title='63&amp;lt;br/&amp;gt;cell_phones_100=45.8178&amp;lt;br/&amp;gt;life_exp=56.91'/>\n   <circle id='svg_5824278cb9e9c7d9_e64' cx='181.02' cy='119.32' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='64' title='64&amp;lt;br/&amp;gt;cell_phones_100=109.884&amp;lt;br/&amp;gt;life_exp=69.71'/>\n   <circle id='svg_5824278cb9e9c7d9_e65' cx='271.49' cy='88.83' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='65' title='65&amp;lt;br/&amp;gt;cell_phones_100=164.309&amp;lt;br/&amp;gt;life_exp=74.33'/>\n   <circle id='svg_5824278cb9e9c7d9_e66' cx='97.51' cy='160.44' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='66' title='66&amp;lt;br/&amp;gt;cell_phones_100=59.6496&amp;lt;br/&amp;gt;life_exp=63.48'/>\n   <circle id='svg_5824278cb9e9c7d9_e67' cx='228.1' cy='80.84' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='67' title='67&amp;lt;br/&amp;gt;cell_phones_100=138.208&amp;lt;br/&amp;gt;life_exp=75.54'/>\n   <circle id='svg_5824278cb9e9c7d9_e68' cx='165.52' cy='183.15' r='1.47pt' fill='#4894D0' fill-opacity='1' stroke='#4894D0' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='68' title='68&amp;lt;br/&amp;gt;cell_phones_100=100.558&amp;lt;br/&amp;gt;life_exp=60.04'/>\n   <circle id='svg_5824278cb9e9c7d9_e69' cx='103.71' cy='172.19' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='69' title='69&amp;lt;br/&amp;gt;cell_phones_100=63.3771&amp;lt;br/&amp;gt;life_exp=61.7'/>\n   <circle id='svg_5824278cb9e9c7d9_e70' cx='163.9' cy='149.02' r='1.47pt' fill='#29567D' fill-opacity='1' stroke='#29567D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='70' title='70&amp;lt;br/&amp;gt;cell_phones_100=99.5852&amp;lt;br/&amp;gt;life_exp=65.21'/>\n   <circle id='svg_5824278cb9e9c7d9_e71' cx='219.9' cy='104.07' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='71' title='71&amp;lt;br/&amp;gt;cell_phones_100=133.273&amp;lt;br/&amp;gt;life_exp=72.02'/>\n   <circle id='svg_5824278cb9e9c7d9_e72' cx='129.86' cy='146.85' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='72' title='72&amp;lt;br/&amp;gt;cell_phones_100=79.1051&amp;lt;br/&amp;gt;life_exp=65.54'/>\n   <circle id='svg_5824278cb9e9c7d9_e73' cx='251.13' cy='57.87' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='73' title='73&amp;lt;br/&amp;gt;cell_phones_100=152.062&amp;lt;br/&amp;gt;life_exp=79.02'/>\n   <circle id='svg_5824278cb9e9c7d9_e74' cx='204.68' cy='69.02' r='1.47pt' fill='#4289C2' fill-opacity='1' stroke='#4289C2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='74' title='74&amp;lt;br/&amp;gt;cell_phones_100=124.119&amp;lt;br/&amp;gt;life_exp=77.33'/>\n   <circle id='svg_5824278cb9e9c7d9_e75' cx='243.43' cy='103.15' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='75' title='75&amp;lt;br/&amp;gt;cell_phones_100=147.429&amp;lt;br/&amp;gt;life_exp=72.16'/>\n   <circle id='svg_5824278cb9e9c7d9_e76' cx='226.1' cy='70.08' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='76' title='76&amp;lt;br/&amp;gt;cell_phones_100=137.002&amp;lt;br/&amp;gt;life_exp=77.17'/>\n   <circle id='svg_5824278cb9e9c7d9_e77' cx='202.49' cy='36.48' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='77' title='77&amp;lt;br/&amp;gt;cell_phones_100=122.801&amp;lt;br/&amp;gt;life_exp=82.26'/>\n   <circle id='svg_5824278cb9e9c7d9_e78' cx='211.28' cy='95.36' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='78' title='78&amp;lt;br/&amp;gt;cell_phones_100=128.088&amp;lt;br/&amp;gt;life_exp=73.34'/>\n   <circle id='svg_5824278cb9e9c7d9_e79' cx='199.73' cy='96.55' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='79' title='79&amp;lt;br/&amp;gt;cell_phones_100=121.142&amp;lt;br/&amp;gt;life_exp=73.16'/>\n   <circle id='svg_5824278cb9e9c7d9_e80' cx='278.42' cy='122.69' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='80' title='80&amp;lt;br/&amp;gt;cell_phones_100=168.476&amp;lt;br/&amp;gt;life_exp=69.2'/>\n   <circle id='svg_5824278cb9e9c7d9_e81' cx='247.37' cy='83.74' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='81' title='81&amp;lt;br/&amp;gt;cell_phones_100=149.798&amp;lt;br/&amp;gt;life_exp=75.1'/>\n   <circle id='svg_5824278cb9e9c7d9_e82' cx='194.76' cy='131.53' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='82' title='82&amp;lt;br/&amp;gt;cell_phones_100=118.15&amp;lt;br/&amp;gt;life_exp=67.86'/>\n   <circle id='svg_5824278cb9e9c7d9_e83' cx='285.95' cy='16.88' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='83' title='83&amp;lt;br/&amp;gt;cell_phones_100=173.005&amp;lt;br/&amp;gt;life_exp=85.23'/>\n   <circle id='svg_5824278cb9e9c7d9_e84' cx='177.69' cy='170.61' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='84' title='84&amp;lt;br/&amp;gt;cell_phones_100=107.882&amp;lt;br/&amp;gt;life_exp=61.94'/>\n   <circle id='svg_5824278cb9e9c7d9_e85' cx='302.97' cy='87.18' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='85' title='85&amp;lt;br/&amp;gt;cell_phones_100=183.249&amp;lt;br/&amp;gt;life_exp=74.58'/>\n   <circle id='svg_5824278cb9e9c7d9_e86' cx='214.15' cy='96.68' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='86' title='86&amp;lt;br/&amp;gt;cell_phones_100=129.813&amp;lt;br/&amp;gt;life_exp=73.14'/>\n   <circle id='svg_5824278cb9e9c7d9_e87' cx='224.48' cy='82.95' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='87' title='87&amp;lt;br/&amp;gt;cell_phones_100=136.029&amp;lt;br/&amp;gt;life_exp=75.22'/>\n   <circle id='svg_5824278cb9e9c7d9_e88' cx='232.38' cy='29.75' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='88' title='88&amp;lt;br/&amp;gt;cell_phones_100=140.782&amp;lt;br/&amp;gt;life_exp=83.28'/>\n   <circle id='svg_5824278cb9e9c7d9_e89' cx='200.32' cy='221.5' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='89' title='89&amp;lt;br/&amp;gt;cell_phones_100=121.492&amp;lt;br/&amp;gt;life_exp=54.23'/>\n   <circle id='svg_5824278cb9e9c7d9_e90' cx='107.14' cy='182.82' r='1.47pt' fill='#4894D0' fill-opacity='1' stroke='#4894D0' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='90' title='90&amp;lt;br/&amp;gt;cell_phones_100=65.4378&amp;lt;br/&amp;gt;life_exp=60.09'/>\n   <circle id='svg_5824278cb9e9c7d9_e91' cx='118.4' cy='145.39' r='1.47pt' fill='#4690CB' fill-opacity='1' stroke='#4690CB' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='91' title='91&amp;lt;br/&amp;gt;cell_phones_100=72.2148&amp;lt;br/&amp;gt;life_exp=65.76'/>\n   <circle id='svg_5824278cb9e9c7d9_e92' cx='291.3' cy='57.21' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='92' title='92&amp;lt;br/&amp;gt;cell_phones_100=176.223&amp;lt;br/&amp;gt;life_exp=79.12'/>\n   <circle id='svg_5824278cb9e9c7d9_e93' cx='208.08' cy='117.54' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='93' title='93&amp;lt;br/&amp;gt;cell_phones_100=126.161&amp;lt;br/&amp;gt;life_exp=69.98'/>\n   <circle id='svg_5824278cb9e9c7d9_e94' cx='217.58' cy='78.2' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='94' title='94&amp;lt;br/&amp;gt;cell_phones_100=131.875&amp;lt;br/&amp;gt;life_exp=75.94'/>\n   <circle id='svg_5824278cb9e9c7d9_e95' cx='170.77' cy='57.74' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='95' title='95&amp;lt;br/&amp;gt;cell_phones_100=103.721&amp;lt;br/&amp;gt;life_exp=79.04'/>\n   <circle id='svg_5824278cb9e9c7d9_e96' cx='152.98' cy='137.28' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='96' title='96&amp;lt;br/&amp;gt;cell_phones_100=93.016&amp;lt;br/&amp;gt;life_exp=66.99'/>\n   <circle id='svg_5824278cb9e9c7d9_e97' cx='114.95' cy='137.8' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='97' title='97&amp;lt;br/&amp;gt;cell_phones_100=70.1401&amp;lt;br/&amp;gt;life_exp=66.91'/>\n   <circle id='svg_5824278cb9e9c7d9_e98' cx='198.27' cy='131.14' r='1.47pt' fill='#29567D' fill-opacity='1' stroke='#29567D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='98' title='98&amp;lt;br/&amp;gt;cell_phones_100=120.261&amp;lt;br/&amp;gt;life_exp=67.92'/>\n   <circle id='svg_5824278cb9e9c7d9_e99' cx='230.8' cy='64.47' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='99' title='99&amp;lt;br/&amp;gt;cell_phones_100=139.829&amp;lt;br/&amp;gt;life_exp=78.02'/>\n   <circle id='svg_5824278cb9e9c7d9_e100' cx='173.69' cy='125.59' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='100' title='100&amp;lt;br/&amp;gt;cell_phones_100=105.472&amp;lt;br/&amp;gt;life_exp=68.76'/>\n   <circle id='svg_5824278cb9e9c7d9_e101' cx='227.51' cy='84.73' r='1.47pt' fill='#4690CB' fill-opacity='1' stroke='#4690CB' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='101' title='101&amp;lt;br/&amp;gt;cell_phones_100=137.852&amp;lt;br/&amp;gt;life_exp=74.95'/>\n   <circle id='svg_5824278cb9e9c7d9_e102' cx='75.58' cy='141.7' r='1.47pt' fill='#18344F' fill-opacity='1' stroke='#18344F' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='102' title='102&amp;lt;br/&amp;gt;cell_phones_100=46.4534&amp;lt;br/&amp;gt;life_exp=66.32'/>\n   <circle id='svg_5824278cb9e9c7d9_e103' cx='265.54' cy='179.98' r='1.47pt' fill='#4289C2' fill-opacity='1' stroke='#4289C2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='103' title='103&amp;lt;br/&amp;gt;cell_phones_100=160.729&amp;lt;br/&amp;gt;life_exp=60.52'/>\n   <circle id='svg_5824278cb9e9c7d9_e104' cx='161.99' cy='168.96' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='104' title='104&amp;lt;br/&amp;gt;cell_phones_100=98.4373&amp;lt;br/&amp;gt;life_exp=62.19'/>\n   <circle id='svg_5824278cb9e9c7d9_e105' cx='146.3' cy='189.09' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='105' title='105&amp;lt;br/&amp;gt;cell_phones_100=88.9958&amp;lt;br/&amp;gt;life_exp=59.14'/>\n   <polyline id='svg_5824278cb9e9c7d9_e106' points='48.23,188.80 64.85,183.84 81.47,178.89 98.10,173.93 114.72,168.97 131.34,164.01 147.97,159.05 164.59,154.10 181.21,149.14 197.84,144.18 214.46,139.22 231.08,134.27 247.70,129.31 264.33,124.35 280.95,119.39 297.57,114.44 314.20,109.48 330.82,104.52 347.44,99.56' fill='none' stroke='#132B43' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=60&amp;lt;br/&amp;gt;y = 0.08*x +56.93' data-id='1'/>\n   <polyline id='svg_5824278cb9e9c7d9_e107' points='48.23,177.69 64.85,172.73 81.47,167.78 98.10,162.82 114.72,157.86 131.34,152.90 147.97,147.95 164.59,142.99 181.21,138.03 197.84,133.07 214.46,128.12 231.08,123.16 247.70,118.20 264.33,113.24 280.95,108.29 297.57,103.33 314.20,98.37 330.82,93.41 347.44,88.46' fill='none' stroke='#22496C' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=70&amp;lt;br/&amp;gt;y = 0.08*x +58.61' data-id='20'/>\n   <polyline id='svg_5824278cb9e9c7d9_e108' points='48.23,166.58 64.85,161.63 81.47,156.67 98.10,151.71 114.72,146.75 131.34,141.80 147.97,136.84 164.59,131.88 181.21,126.92 197.84,121.97 214.46,117.01 231.08,112.05 247.70,107.09 264.33,102.13 280.95,97.18 297.57,92.22 314.20,87.26 330.82,82.30 347.44,77.35' fill='none' stroke='#336A98' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=80&amp;lt;br/&amp;gt;y = 0.08*x +60.3' data-id='39'/>\n   <polyline id='svg_5824278cb9e9c7d9_e109' points='48.23,155.48 64.85,150.52 81.47,145.56 98.10,140.60 114.72,135.65 131.34,130.69 147.97,125.73 164.59,120.77 181.21,115.81 197.84,110.86 214.46,105.90 231.08,100.94 247.70,95.98 264.33,91.03 280.95,86.07 297.57,81.11 314.20,76.15 330.82,71.20 347.44,66.24' fill='none' stroke='#448DC6' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=90&amp;lt;br/&amp;gt;y = 0.08*x +61.98' data-id='58'/>\n   <polyline id='svg_5824278cb9e9c7d9_e110' points='48.23,144.37 64.85,139.41 81.47,134.45 98.10,129.49 114.72,124.54 131.34,119.58 147.97,114.62 164.59,109.66 181.21,104.71 197.84,99.75 214.46,94.79 231.08,89.83 247.70,84.88 264.33,79.92 280.95,74.96 297.57,70.00 314.20,65.05 330.82,60.09 347.44,55.13' fill='none' stroke='#56B1F7' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=100&amp;lt;br/&amp;gt;y = 0.08*x +63.66' data-id='77'/>\n  <\/g>\n  <g clip-path='url(#svg_5824278cb9e9c7d9_c1)'>\n   <text x='18.54' y='252.57' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>50<\/text>\n   <text x='18.54' y='186.57' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>60<\/text>\n   <text x='18.54' y='120.56' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>70<\/text>\n   <text x='18.54' y='54.55' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>80<\/text>\n   <polyline points='30.53,249.42 33.27,249.42' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='30.53,183.41 33.27,183.41' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='30.53,117.41 33.27,117.41' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='30.53,51.40 33.27,51.40' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='81.47,259.01 81.47,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='164.59,259.01 164.59,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='247.70,259.01 247.70,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='330.82,259.01 330.82,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='76.58' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>50<\/text>\n   <text x='157.25' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>100<\/text>\n   <text x='240.36' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>150<\/text>\n   <text x='323.48' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>200<\/text>\n   <text x='156.23' y='280.09' font-size='8.25pt' font-family='Helvetica'>cell_phones_100<\/text>\n   <text transform='translate(13.37,149.83) rotate(-90.00)' font-size='8.25pt' font-family='Helvetica'>life_exp<\/text>\n   <rect x='373.36' y='74.29' width='53.16' height='113.16' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <text x='378.84' y='88.88' font-size='8.25pt' font-family='Helvetica'>vax_rate<\/text>\n   <image x='378.84' y='95.57' width='17.28' height='86.4' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAAmElEQVQ4ja2UQRLDMAgDd3hk/tnX5agcknFaCoa0vnkMCEnGsL12GQhDYDpPwoDrpBFlRDWi/9Wu6AHC9FkLYLrzlhD3oJ3mDvRHRYy7IC8A7bCK8gpWKYDzeQVArDcDyD2YAnSofZvzaOA6Q7Oahp/dmRuVTQ0xU5TGP2o8Waool1obVuv1q8qP9xPvg633XlGLDtfIhNUBcBeA5ss0BXMAAAAASUVORK5CYII=' xmlns:xlink='http://www.w3.org/1999/xlink'/>\n   <polyline points='392.67,181.83 396.12,181.83' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,160.30 396.12,160.30' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,138.77 396.12,138.77' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,117.25 396.12,117.25' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,95.72 396.12,95.72' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,181.83 378.84,181.83' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,160.30 378.84,160.30' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,138.77 378.84,138.77' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,117.25 378.84,117.25' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,95.72 378.84,95.72' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='401.6' y='184.98' font-size='6.6pt' font-family='Helvetica'>60<\/text>\n   <text x='401.6' y='163.46' font-size='6.6pt' font-family='Helvetica'>70<\/text>\n   <text x='401.6' y='141.93' font-size='6.6pt' font-family='Helvetica'>80<\/text>\n   <text x='401.6' y='120.4' font-size='6.6pt' font-family='Helvetica'>90<\/text>\n   <text x='401.6' y='98.87' font-size='6.6pt' font-family='Helvetica'>100<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_5824278cb9e9c7d9","ratio":1.5,"settings":{"tooltip":{"css":".tooltip_SVGID_ { background-color:white;font-style:italic;padding:10px;border-radius:10px 20px 10px 20px; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.75,"offx":10,"offy":0,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { r:4px;cursor:pointer;stroke:red;stroke-width:2px; }","reactive":false,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:#FF3333;stroke:black; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":10,"duration":300,"default_on":false},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+<div class="girafe html-widget html-fill-item" id="htmlwidget-6410763517cf9662d5b7" style="width:576px;height:384px;"></div>
+<script type="application/json" data-for="htmlwidget-6410763517cf9662d5b7">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_f9b2b687f5286d84' viewBox='0 0 432 288'>\n <defs id='svg_f9b2b687f5286d84_defs'>\n  <clipPath id='svg_f9b2b687f5286d84_c1'>\n   <rect x='0' y='0' width='432' height='288'/>\n  <\/clipPath>\n  <clipPath id='svg_f9b2b687f5286d84_c2'>\n   <rect x='33.27' y='5.48' width='329.14' height='250.79'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_f9b2b687f5286d84_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_f9b2b687f5286d84_c1)'>\n   <rect x='0' y='0' width='432' height='288' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='432' height='288' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n  <\/g>\n  <g clip-path='url(#svg_f9b2b687f5286d84_c2)'>\n   <rect x='33.27' y='5.48' width='329.14' height='250.79' fill='#EBEBEB' fill-opacity='1' stroke='none'/>\n   <polyline points='33.27,216.42 362.40,216.42' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,150.41 362.40,150.41' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,84.40 362.40,84.40' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,18.40 362.40,18.40' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='39.92,256.27 39.92,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='123.03,256.27 123.03,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='206.15,256.27 206.15,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='289.26,256.27 289.26,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,249.42 362.40,249.42' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,183.41 362.40,183.41' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,117.41 362.40,117.41' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='33.27,51.40 362.40,51.40' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='81.47,256.27 81.47,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='164.59,256.27 164.59,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='247.70,256.27 247.70,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='330.82,256.27 330.82,5.48' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <circle id='svg_f9b2b687f5286d84_e1' cx='91.89' cy='165.99' r='1.47pt' fill='#214668' fill-opacity='1' stroke='#214668' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='1' title='1&amp;lt;br/&amp;gt;cell_phones_100=56.2655&amp;lt;br/&amp;gt;life_exp=62.64'/>\n   <circle id='svg_f9b2b687f5286d84_e2' cx='161.92' cy='77.34' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='2' title='2&amp;lt;br/&amp;gt;cell_phones_100=98.395&amp;lt;br/&amp;gt;life_exp=76.07'/>\n   <circle id='svg_f9b2b687f5286d84_e3' cx='323.55' cy='94.9' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='3' title='3&amp;lt;br/&amp;gt;cell_phones_100=195.625&amp;lt;br/&amp;gt;life_exp=73.41'/>\n   <circle id='svg_f9b2b687f5286d84_e4' cx='216.93' cy='81.96' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='4' title='4&amp;lt;br/&amp;gt;cell_phones_100=131.484&amp;lt;br/&amp;gt;life_exp=75.37'/>\n   <circle id='svg_f9b2b687f5286d84_e5' cx='215.36' cy='93.25' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='5' title='5&amp;lt;br/&amp;gt;cell_phones_100=130.54&amp;lt;br/&amp;gt;life_exp=73.66'/>\n   <circle id='svg_f9b2b687f5286d84_e6' cx='177.07' cy='108.36' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='6' title='6&amp;lt;br/&amp;gt;cell_phones_100=107.506&amp;lt;br/&amp;gt;life_exp=71.37'/>\n   <circle id='svg_f9b2b687f5286d84_e7' cx='174.14' cy='157.28' r='1.47pt' fill='#4289C2' fill-opacity='1' stroke='#4289C2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='7' title='7&amp;lt;br/&amp;gt;cell_phones_100=105.745&amp;lt;br/&amp;gt;life_exp=63.96'/>\n   <circle id='svg_f9b2b687f5286d84_e8' cx='180.99' cy='81.3' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='8' title='8&amp;lt;br/&amp;gt;cell_phones_100=109.867&amp;lt;br/&amp;gt;life_exp=75.47'/>\n   <circle id='svg_f9b2b687f5286d84_e9' cx='192.32' cy='118.07' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='9' title='9&amp;lt;br/&amp;gt;cell_phones_100=116.679&amp;lt;br/&amp;gt;life_exp=69.9'/>\n   <circle id='svg_f9b2b687f5286d84_e10' cx='196.08' cy='84.27' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='10' title='10&amp;lt;br/&amp;gt;cell_phones_100=118.944&amp;lt;br/&amp;gt;life_exp=75.02'/>\n   <circle id='svg_f9b2b687f5286d84_e11' cx='167.2' cy='124.54' r='1.47pt' fill='#2C5D86' fill-opacity='1' stroke='#2C5D86' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='11' title='11&amp;lt;br/&amp;gt;cell_phones_100=101.572&amp;lt;br/&amp;gt;life_exp=68.92'/>\n   <circle id='svg_f9b2b687f5286d84_e12' cx='166.66' cy='91.53' r='1.47pt' fill='#4186BD' fill-opacity='1' stroke='#4186BD' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='12' title='12&amp;lt;br/&amp;gt;cell_phones_100=101.245&amp;lt;br/&amp;gt;life_exp=73.92'/>\n   <circle id='svg_f9b2b687f5286d84_e13' cx='294.59' cy='165.79' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='13' title='13&amp;lt;br/&amp;gt;cell_phones_100=178.205&amp;lt;br/&amp;gt;life_exp=62.67'/>\n   <circle id='svg_f9b2b687f5286d84_e14' cx='222.96' cy='55.69' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='14' title='14&amp;lt;br/&amp;gt;cell_phones_100=135.114&amp;lt;br/&amp;gt;life_exp=79.35'/>\n   <circle id='svg_f9b2b687f5286d84_e15' cx='266.38' cy='158.2' r='1.47pt' fill='#3B7BAF' fill-opacity='1' stroke='#3B7BAF' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='15' title='15&amp;lt;br/&amp;gt;cell_phones_100=161.232&amp;lt;br/&amp;gt;life_exp=63.82'/>\n   <circle id='svg_f9b2b687f5286d84_e16' cx='147.68' cy='165.53' r='1.47pt' fill='#244D70' fill-opacity='1' stroke='#244D70' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='16' title='16&amp;lt;br/&amp;gt;cell_phones_100=89.8274&amp;lt;br/&amp;gt;life_exp=62.71'/>\n   <circle id='svg_f9b2b687f5286d84_e17' cx='79.28' cy='153.91' r='1.47pt' fill='#2E608A' fill-opacity='1' stroke='#2E608A' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='17' title='17&amp;lt;br/&amp;gt;cell_phones_100=48.6774&amp;lt;br/&amp;gt;life_exp=64.47'/>\n   <circle id='svg_f9b2b687f5286d84_e18' cx='258' cy='71.47' r='1.47pt' fill='#4186BD' fill-opacity='1' stroke='#4186BD' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='18' title='18&amp;lt;br/&amp;gt;cell_phones_100=156.195&amp;lt;br/&amp;gt;life_exp=76.96'/>\n   <circle id='svg_f9b2b687f5286d84_e19' cx='256' cy='64.93' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='19' title='19&amp;lt;br/&amp;gt;cell_phones_100=154.989&amp;lt;br/&amp;gt;life_exp=77.95'/>\n   <circle id='svg_f9b2b687f5286d84_e20' cx='211.31' cy='62.36' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='20' title='20&amp;lt;br/&amp;gt;cell_phones_100=128.105&amp;lt;br/&amp;gt;life_exp=78.34'/>\n   <circle id='svg_f9b2b687f5286d84_e21' cx='148.59' cy='92.46' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='21' title='21&amp;lt;br/&amp;gt;cell_phones_100=90.376&amp;lt;br/&amp;gt;life_exp=73.78'/>\n   <circle id='svg_f9b2b687f5286d84_e22' cx='177.53' cy='72.19' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='22' title='22&amp;lt;br/&amp;gt;cell_phones_100=107.787&amp;lt;br/&amp;gt;life_exp=76.85'/>\n   <circle id='svg_f9b2b687f5286d84_e23' cx='161.48' cy='71.4' r='1.47pt' fill='#2C5D86' fill-opacity='1' stroke='#2C5D86' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='23' title='23&amp;lt;br/&amp;gt;cell_phones_100=98.1309&amp;lt;br/&amp;gt;life_exp=76.97'/>\n   <circle id='svg_f9b2b687f5286d84_e24' cx='149.1' cy='118.86' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='24' title='24&amp;lt;br/&amp;gt;cell_phones_100=90.6795&amp;lt;br/&amp;gt;life_exp=69.78'/>\n   <circle id='svg_f9b2b687f5286d84_e25' cx='251.48' cy='61.1' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='25' title='25&amp;lt;br/&amp;gt;cell_phones_100=152.271&amp;lt;br/&amp;gt;life_exp=78.53'/>\n   <circle id='svg_f9b2b687f5286d84_e26' cx='93.05' cy='126.38' r='1.47pt' fill='#1F4364' fill-opacity='1' stroke='#1F4364' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='26' title='26&amp;lt;br/&amp;gt;cell_phones_100=56.9643&amp;lt;br/&amp;gt;life_exp=68.64'/>\n   <circle id='svg_f9b2b687f5286d84_e27' cx='211.17' cy='35.89' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='27' title='27&amp;lt;br/&amp;gt;cell_phones_100=128.023&amp;lt;br/&amp;gt;life_exp=82.35'/>\n   <circle id='svg_f9b2b687f5286d84_e28' cx='191.1' cy='29.16' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='28' title='28&amp;lt;br/&amp;gt;cell_phones_100=115.951&amp;lt;br/&amp;gt;life_exp=83.37'/>\n   <circle id='svg_f9b2b687f5286d84_e29' cx='203.21' cy='137.94' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='29' title='29&amp;lt;br/&amp;gt;cell_phones_100=123.233&amp;lt;br/&amp;gt;life_exp=66.89'/>\n   <circle id='svg_f9b2b687f5286d84_e30' cx='254.38' cy='107.37' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='30' title='30&amp;lt;br/&amp;gt;cell_phones_100=154.014&amp;lt;br/&amp;gt;life_exp=71.52'/>\n   <circle id='svg_f9b2b687f5286d84_e31' cx='199.17' cy='147.11' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='31' title='31&amp;lt;br/&amp;gt;cell_phones_100=120.803&amp;lt;br/&amp;gt;life_exp=65.5'/>\n   <circle id='svg_f9b2b687f5286d84_e32' cx='179.36' cy='180.18' r='1.47pt' fill='#275379' fill-opacity='1' stroke='#275379' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='32' title='32&amp;lt;br/&amp;gt;cell_phones_100=108.885&amp;lt;br/&amp;gt;life_exp=60.49'/>\n   <circle id='svg_f9b2b687f5286d84_e33' cx='175.86' cy='144.8' r='1.47pt' fill='#3874A6' fill-opacity='1' stroke='#3874A6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='33' title='33&amp;lt;br/&amp;gt;cell_phones_100=106.782&amp;lt;br/&amp;gt;life_exp=65.85'/>\n   <circle id='svg_f9b2b687f5286d84_e34' cx='189.78' cy='129.55' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='34' title='34&amp;lt;br/&amp;gt;cell_phones_100=115.156&amp;lt;br/&amp;gt;life_exp=68.16'/>\n   <circle id='svg_f9b2b687f5286d84_e35' cx='124.45' cy='117.8' r='1.47pt' fill='#336A98' fill-opacity='1' stroke='#336A98' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='35' title='35&amp;lt;br/&amp;gt;cell_phones_100=75.8551&amp;lt;br/&amp;gt;life_exp=69.94'/>\n   <circle id='svg_f9b2b687f5286d84_e36' cx='174.22' cy='83.68' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='36' title='36&amp;lt;br/&amp;gt;cell_phones_100=105.794&amp;lt;br/&amp;gt;life_exp=75.11'/>\n   <circle id='svg_f9b2b687f5286d84_e37' cx='202.61' cy='123.41' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='37' title='37&amp;lt;br/&amp;gt;cell_phones_100=122.873&amp;lt;br/&amp;gt;life_exp=69.09'/>\n   <circle id='svg_f9b2b687f5286d84_e38' cx='131.65' cy='133.18' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='38' title='38&amp;lt;br/&amp;gt;cell_phones_100=80.1818&amp;lt;br/&amp;gt;life_exp=67.61'/>\n   <circle id='svg_f9b2b687f5286d84_e39' cx='182.22' cy='35.03' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='39' title='39&amp;lt;br/&amp;gt;cell_phones_100=110.609&amp;lt;br/&amp;gt;life_exp=82.48'/>\n   <circle id='svg_f9b2b687f5286d84_e40' cx='268.84' cy='76.62' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='40' title='40&amp;lt;br/&amp;gt;cell_phones_100=162.713&amp;lt;br/&amp;gt;life_exp=76.18'/>\n   <circle id='svg_f9b2b687f5286d84_e41' cx='163.15' cy='97.47' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='41' title='41&amp;lt;br/&amp;gt;cell_phones_100=99.1324&amp;lt;br/&amp;gt;life_exp=73.02'/>\n   <circle id='svg_f9b2b687f5286d84_e42' cx='174.17' cy='84.14' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='42' title='42&amp;lt;br/&amp;gt;cell_phones_100=105.762&amp;lt;br/&amp;gt;life_exp=75.04'/>\n   <circle id='svg_f9b2b687f5286d84_e43' cx='110.97' cy='75.49' r='1.47pt' fill='#4894D0' fill-opacity='1' stroke='#4894D0' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='43' title='43&amp;lt;br/&amp;gt;cell_phones_100=67.7457&amp;lt;br/&amp;gt;life_exp=76.35'/>\n   <circle id='svg_f9b2b687f5286d84_e44' cx='207.21' cy='118.4' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='44' title='44&amp;lt;br/&amp;gt;cell_phones_100=125.642&amp;lt;br/&amp;gt;life_exp=69.85'/>\n   <circle id='svg_f9b2b687f5286d84_e45' cx='199.78' cy='146.65' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='45' title='45&amp;lt;br/&amp;gt;cell_phones_100=121.169&amp;lt;br/&amp;gt;life_exp=65.57'/>\n   <circle id='svg_f9b2b687f5286d84_e46' cx='176.1' cy='99.92' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='46' title='46&amp;lt;br/&amp;gt;cell_phones_100=106.926&amp;lt;br/&amp;gt;life_exp=72.65'/>\n   <circle id='svg_f9b2b687f5286d84_e47' cx='186.85' cy='123.22' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='47' title='47&amp;lt;br/&amp;gt;cell_phones_100=113.392&amp;lt;br/&amp;gt;life_exp=69.12'/>\n   <circle id='svg_f9b2b687f5286d84_e48' cx='278.21' cy='37.8' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='48' title='48&amp;lt;br/&amp;gt;cell_phones_100=168.35&amp;lt;br/&amp;gt;life_exp=82.06'/>\n   <circle id='svg_f9b2b687f5286d84_e49' cx='103.67' cy='118.46' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='49' title='49&amp;lt;br/&amp;gt;cell_phones_100=63.3546&amp;lt;br/&amp;gt;life_exp=69.84'/>\n   <circle id='svg_f9b2b687f5286d84_e50' cx='51.66' cy='143.08' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='50' title='50&amp;lt;br/&amp;gt;cell_phones_100=32.0639&amp;lt;br/&amp;gt;life_exp=66.11'/>\n   <circle id='svg_f9b2b687f5286d84_e51' cx='250.58' cy='65.2' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='51' title='51&amp;lt;br/&amp;gt;cell_phones_100=151.727&amp;lt;br/&amp;gt;life_exp=77.91'/>\n   <circle id='svg_f9b2b687f5286d84_e52' cx='111.56' cy='244.87' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='52' title='52&amp;lt;br/&amp;gt;cell_phones_100=68.1001&amp;lt;br/&amp;gt;life_exp=50.69'/>\n   <circle id='svg_f9b2b687f5286d84_e53' cx='224.16' cy='88.89' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='53' title='53&amp;lt;br/&amp;gt;cell_phones_100=135.834&amp;lt;br/&amp;gt;life_exp=74.32'/>\n   <circle id='svg_f9b2b687f5286d84_e54' cx='234.19' cy='90.74' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='54' title='54&amp;lt;br/&amp;gt;cell_phones_100=141.87&amp;lt;br/&amp;gt;life_exp=74.04'/>\n   <circle id='svg_f9b2b687f5286d84_e55' cx='226.4' cy='104.87' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='55' title='55&amp;lt;br/&amp;gt;cell_phones_100=137.183&amp;lt;br/&amp;gt;life_exp=71.9'/>\n   <circle id='svg_f9b2b687f5286d84_e56' cx='105.99' cy='151.47' r='1.47pt' fill='#18344F' fill-opacity='1' stroke='#18344F' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='56' title='56&amp;lt;br/&amp;gt;cell_phones_100=64.7495&amp;lt;br/&amp;gt;life_exp=64.84'/>\n   <circle id='svg_f9b2b687f5286d84_e57' cx='174.09' cy='76.02' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='57' title='57&amp;lt;br/&amp;gt;cell_phones_100=105.713&amp;lt;br/&amp;gt;life_exp=76.27'/>\n   <circle id='svg_f9b2b687f5286d84_e58' cx='183.38' cy='110.15' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='58' title='58&amp;lt;br/&amp;gt;cell_phones_100=111.303&amp;lt;br/&amp;gt;life_exp=71.1'/>\n   <circle id='svg_f9b2b687f5286d84_e59' cx='184.74' cy='173.05' r='1.47pt' fill='#336A98' fill-opacity='1' stroke='#336A98' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='59' title='59&amp;lt;br/&amp;gt;cell_phones_100=112.12&amp;lt;br/&amp;gt;life_exp=61.57'/>\n   <circle id='svg_f9b2b687f5286d84_e60' cx='177.11' cy='116.48' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='60' title='60&amp;lt;br/&amp;gt;cell_phones_100=107.535&amp;lt;br/&amp;gt;life_exp=70.14'/>\n   <circle id='svg_f9b2b687f5286d84_e61' cx='342.92' cy='79.98' r='1.47pt' fill='#3D7FB4' fill-opacity='1' stroke='#3D7FB4' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='61' title='61&amp;lt;br/&amp;gt;cell_phones_100=207.278&amp;lt;br/&amp;gt;life_exp=75.67'/>\n   <circle id='svg_f9b2b687f5286d84_e62' cx='235.75' cy='124.8' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='62' title='62&amp;lt;br/&amp;gt;cell_phones_100=142.809&amp;lt;br/&amp;gt;life_exp=68.88'/>\n   <circle id='svg_f9b2b687f5286d84_e63' cx='74.52' cy='203.81' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='63' title='63&amp;lt;br/&amp;gt;cell_phones_100=45.8178&amp;lt;br/&amp;gt;life_exp=56.91'/>\n   <circle id='svg_f9b2b687f5286d84_e64' cx='181.02' cy='119.32' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='64' title='64&amp;lt;br/&amp;gt;cell_phones_100=109.884&amp;lt;br/&amp;gt;life_exp=69.71'/>\n   <circle id='svg_f9b2b687f5286d84_e65' cx='271.49' cy='88.83' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='65' title='65&amp;lt;br/&amp;gt;cell_phones_100=164.309&amp;lt;br/&amp;gt;life_exp=74.33'/>\n   <circle id='svg_f9b2b687f5286d84_e66' cx='97.51' cy='160.44' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='66' title='66&amp;lt;br/&amp;gt;cell_phones_100=59.6496&amp;lt;br/&amp;gt;life_exp=63.48'/>\n   <circle id='svg_f9b2b687f5286d84_e67' cx='228.1' cy='80.84' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='67' title='67&amp;lt;br/&amp;gt;cell_phones_100=138.208&amp;lt;br/&amp;gt;life_exp=75.54'/>\n   <circle id='svg_f9b2b687f5286d84_e68' cx='165.52' cy='183.15' r='1.47pt' fill='#4894D0' fill-opacity='1' stroke='#4894D0' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='68' title='68&amp;lt;br/&amp;gt;cell_phones_100=100.558&amp;lt;br/&amp;gt;life_exp=60.04'/>\n   <circle id='svg_f9b2b687f5286d84_e69' cx='103.71' cy='172.19' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='69' title='69&amp;lt;br/&amp;gt;cell_phones_100=63.3771&amp;lt;br/&amp;gt;life_exp=61.7'/>\n   <circle id='svg_f9b2b687f5286d84_e70' cx='163.9' cy='149.02' r='1.47pt' fill='#29567D' fill-opacity='1' stroke='#29567D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='70' title='70&amp;lt;br/&amp;gt;cell_phones_100=99.5852&amp;lt;br/&amp;gt;life_exp=65.21'/>\n   <circle id='svg_f9b2b687f5286d84_e71' cx='219.9' cy='104.07' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='71' title='71&amp;lt;br/&amp;gt;cell_phones_100=133.273&amp;lt;br/&amp;gt;life_exp=72.02'/>\n   <circle id='svg_f9b2b687f5286d84_e72' cx='129.86' cy='146.85' r='1.47pt' fill='#4D9FDE' fill-opacity='1' stroke='#4D9FDE' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='72' title='72&amp;lt;br/&amp;gt;cell_phones_100=79.1051&amp;lt;br/&amp;gt;life_exp=65.54'/>\n   <circle id='svg_f9b2b687f5286d84_e73' cx='251.13' cy='57.87' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='73' title='73&amp;lt;br/&amp;gt;cell_phones_100=152.062&amp;lt;br/&amp;gt;life_exp=79.02'/>\n   <circle id='svg_f9b2b687f5286d84_e74' cx='204.68' cy='69.02' r='1.47pt' fill='#4289C2' fill-opacity='1' stroke='#4289C2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='74' title='74&amp;lt;br/&amp;gt;cell_phones_100=124.119&amp;lt;br/&amp;gt;life_exp=77.33'/>\n   <circle id='svg_f9b2b687f5286d84_e75' cx='243.43' cy='103.15' r='1.47pt' fill='#3F82B8' fill-opacity='1' stroke='#3F82B8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='75' title='75&amp;lt;br/&amp;gt;cell_phones_100=147.429&amp;lt;br/&amp;gt;life_exp=72.16'/>\n   <circle id='svg_f9b2b687f5286d84_e76' cx='226.1' cy='70.08' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='76' title='76&amp;lt;br/&amp;gt;cell_phones_100=137.002&amp;lt;br/&amp;gt;life_exp=77.17'/>\n   <circle id='svg_f9b2b687f5286d84_e77' cx='202.49' cy='36.48' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='77' title='77&amp;lt;br/&amp;gt;cell_phones_100=122.801&amp;lt;br/&amp;gt;life_exp=82.26'/>\n   <circle id='svg_f9b2b687f5286d84_e78' cx='211.28' cy='95.36' r='1.47pt' fill='#316793' fill-opacity='1' stroke='#316793' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='78' title='78&amp;lt;br/&amp;gt;cell_phones_100=128.088&amp;lt;br/&amp;gt;life_exp=73.34'/>\n   <circle id='svg_f9b2b687f5286d84_e79' cx='199.73' cy='96.55' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='79' title='79&amp;lt;br/&amp;gt;cell_phones_100=121.142&amp;lt;br/&amp;gt;life_exp=73.16'/>\n   <circle id='svg_f9b2b687f5286d84_e80' cx='278.42' cy='122.69' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='80' title='80&amp;lt;br/&amp;gt;cell_phones_100=168.476&amp;lt;br/&amp;gt;life_exp=69.2'/>\n   <circle id='svg_f9b2b687f5286d84_e81' cx='247.37' cy='83.74' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='81' title='81&amp;lt;br/&amp;gt;cell_phones_100=149.798&amp;lt;br/&amp;gt;life_exp=75.1'/>\n   <circle id='svg_f9b2b687f5286d84_e82' cx='194.76' cy='131.53' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='82' title='82&amp;lt;br/&amp;gt;cell_phones_100=118.15&amp;lt;br/&amp;gt;life_exp=67.86'/>\n   <circle id='svg_f9b2b687f5286d84_e83' cx='285.95' cy='16.88' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='83' title='83&amp;lt;br/&amp;gt;cell_phones_100=173.005&amp;lt;br/&amp;gt;life_exp=85.23'/>\n   <circle id='svg_f9b2b687f5286d84_e84' cx='177.69' cy='170.61' r='1.47pt' fill='#4997D5' fill-opacity='1' stroke='#4997D5' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='84' title='84&amp;lt;br/&amp;gt;cell_phones_100=107.882&amp;lt;br/&amp;gt;life_exp=61.94'/>\n   <circle id='svg_f9b2b687f5286d84_e85' cx='302.97' cy='87.18' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='85' title='85&amp;lt;br/&amp;gt;cell_phones_100=183.249&amp;lt;br/&amp;gt;life_exp=74.58'/>\n   <circle id='svg_f9b2b687f5286d84_e86' cx='214.15' cy='96.68' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='86' title='86&amp;lt;br/&amp;gt;cell_phones_100=129.813&amp;lt;br/&amp;gt;life_exp=73.14'/>\n   <circle id='svg_f9b2b687f5286d84_e87' cx='224.48' cy='82.95' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='87' title='87&amp;lt;br/&amp;gt;cell_phones_100=136.029&amp;lt;br/&amp;gt;life_exp=75.22'/>\n   <circle id='svg_f9b2b687f5286d84_e88' cx='232.38' cy='29.75' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='88' title='88&amp;lt;br/&amp;gt;cell_phones_100=140.782&amp;lt;br/&amp;gt;life_exp=83.28'/>\n   <circle id='svg_f9b2b687f5286d84_e89' cx='200.32' cy='221.5' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='89' title='89&amp;lt;br/&amp;gt;cell_phones_100=121.492&amp;lt;br/&amp;gt;life_exp=54.23'/>\n   <circle id='svg_f9b2b687f5286d84_e90' cx='107.14' cy='182.82' r='1.47pt' fill='#4894D0' fill-opacity='1' stroke='#4894D0' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='90' title='90&amp;lt;br/&amp;gt;cell_phones_100=65.4378&amp;lt;br/&amp;gt;life_exp=60.09'/>\n   <circle id='svg_f9b2b687f5286d84_e91' cx='118.4' cy='145.39' r='1.47pt' fill='#4690CB' fill-opacity='1' stroke='#4690CB' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='91' title='91&amp;lt;br/&amp;gt;cell_phones_100=72.2148&amp;lt;br/&amp;gt;life_exp=65.76'/>\n   <circle id='svg_f9b2b687f5286d84_e92' cx='291.3' cy='57.21' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='92' title='92&amp;lt;br/&amp;gt;cell_phones_100=176.223&amp;lt;br/&amp;gt;life_exp=79.12'/>\n   <circle id='svg_f9b2b687f5286d84_e93' cx='208.08' cy='117.54' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='93' title='93&amp;lt;br/&amp;gt;cell_phones_100=126.161&amp;lt;br/&amp;gt;life_exp=69.98'/>\n   <circle id='svg_f9b2b687f5286d84_e94' cx='217.58' cy='78.2' r='1.47pt' fill='#52AAED' fill-opacity='1' stroke='#52AAED' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='94' title='94&amp;lt;br/&amp;gt;cell_phones_100=131.875&amp;lt;br/&amp;gt;life_exp=75.94'/>\n   <circle id='svg_f9b2b687f5286d84_e95' cx='170.77' cy='57.74' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='95' title='95&amp;lt;br/&amp;gt;cell_phones_100=103.721&amp;lt;br/&amp;gt;life_exp=79.04'/>\n   <circle id='svg_f9b2b687f5286d84_e96' cx='152.98' cy='137.28' r='1.47pt' fill='#4B9BDA' fill-opacity='1' stroke='#4B9BDA' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='96' title='96&amp;lt;br/&amp;gt;cell_phones_100=93.016&amp;lt;br/&amp;gt;life_exp=66.99'/>\n   <circle id='svg_f9b2b687f5286d84_e97' cx='114.95' cy='137.8' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='97' title='97&amp;lt;br/&amp;gt;cell_phones_100=70.1401&amp;lt;br/&amp;gt;life_exp=66.91'/>\n   <circle id='svg_f9b2b687f5286d84_e98' cx='198.27' cy='131.14' r='1.47pt' fill='#29567D' fill-opacity='1' stroke='#29567D' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='98' title='98&amp;lt;br/&amp;gt;cell_phones_100=120.261&amp;lt;br/&amp;gt;life_exp=67.92'/>\n   <circle id='svg_f9b2b687f5286d84_e99' cx='230.8' cy='64.47' r='1.47pt' fill='#51A6E8' fill-opacity='1' stroke='#51A6E8' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='99' title='99&amp;lt;br/&amp;gt;cell_phones_100=139.829&amp;lt;br/&amp;gt;life_exp=78.02'/>\n   <circle id='svg_f9b2b687f5286d84_e100' cx='173.69' cy='125.59' r='1.47pt' fill='#54ADF2' fill-opacity='1' stroke='#54ADF2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='100' title='100&amp;lt;br/&amp;gt;cell_phones_100=105.472&amp;lt;br/&amp;gt;life_exp=68.76'/>\n   <circle id='svg_f9b2b687f5286d84_e101' cx='227.51' cy='84.73' r='1.47pt' fill='#4690CB' fill-opacity='1' stroke='#4690CB' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='101' title='101&amp;lt;br/&amp;gt;cell_phones_100=137.852&amp;lt;br/&amp;gt;life_exp=74.95'/>\n   <circle id='svg_f9b2b687f5286d84_e102' cx='75.58' cy='141.7' r='1.47pt' fill='#18344F' fill-opacity='1' stroke='#18344F' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='102' title='102&amp;lt;br/&amp;gt;cell_phones_100=46.4534&amp;lt;br/&amp;gt;life_exp=66.32'/>\n   <circle id='svg_f9b2b687f5286d84_e103' cx='265.54' cy='179.98' r='1.47pt' fill='#4289C2' fill-opacity='1' stroke='#4289C2' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='103' title='103&amp;lt;br/&amp;gt;cell_phones_100=160.729&amp;lt;br/&amp;gt;life_exp=60.52'/>\n   <circle id='svg_f9b2b687f5286d84_e104' cx='161.99' cy='168.96' r='1.47pt' fill='#448DC6' fill-opacity='1' stroke='#448DC6' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='104' title='104&amp;lt;br/&amp;gt;cell_phones_100=98.4373&amp;lt;br/&amp;gt;life_exp=62.19'/>\n   <circle id='svg_f9b2b687f5286d84_e105' cx='146.3' cy='189.09' r='1.47pt' fill='#4FA2E3' fill-opacity='1' stroke='#4FA2E3' stroke-opacity='1' stroke-width='0.71' stroke-linejoin='round' stroke-linecap='round' data-id='105' title='105&amp;lt;br/&amp;gt;cell_phones_100=88.9958&amp;lt;br/&amp;gt;life_exp=59.14'/>\n   <polyline id='svg_f9b2b687f5286d84_e106' points='48.23,188.80 64.85,183.84 81.47,178.89 98.10,173.93 114.72,168.97 131.34,164.01 147.97,159.05 164.59,154.10 181.21,149.14 197.84,144.18 214.46,139.22 231.08,134.27 247.70,129.31 264.33,124.35 280.95,119.39 297.57,114.44 314.20,109.48 330.82,104.52 347.44,99.56' fill='none' stroke='#132B43' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=60&amp;lt;br/&amp;gt;y = 0.08*x +56.93' data-id='1'/>\n   <polyline id='svg_f9b2b687f5286d84_e107' points='48.23,177.69 64.85,172.73 81.47,167.78 98.10,162.82 114.72,157.86 131.34,152.90 147.97,147.95 164.59,142.99 181.21,138.03 197.84,133.07 214.46,128.12 231.08,123.16 247.70,118.20 264.33,113.24 280.95,108.29 297.57,103.33 314.20,98.37 330.82,93.41 347.44,88.46' fill='none' stroke='#22496C' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=70&amp;lt;br/&amp;gt;y = 0.08*x +58.61' data-id='20'/>\n   <polyline id='svg_f9b2b687f5286d84_e108' points='48.23,166.58 64.85,161.63 81.47,156.67 98.10,151.71 114.72,146.75 131.34,141.80 147.97,136.84 164.59,131.88 181.21,126.92 197.84,121.97 214.46,117.01 231.08,112.05 247.70,107.09 264.33,102.13 280.95,97.18 297.57,92.22 314.20,87.26 330.82,82.30 347.44,77.35' fill='none' stroke='#336A98' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=80&amp;lt;br/&amp;gt;y = 0.08*x +60.3' data-id='39'/>\n   <polyline id='svg_f9b2b687f5286d84_e109' points='48.23,155.48 64.85,150.52 81.47,145.56 98.10,140.60 114.72,135.65 131.34,130.69 147.97,125.73 164.59,120.77 181.21,115.81 197.84,110.86 214.46,105.90 231.08,100.94 247.70,95.98 264.33,91.03 280.95,86.07 297.57,81.11 314.20,76.15 330.82,71.20 347.44,66.24' fill='none' stroke='#448DC6' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=90&amp;lt;br/&amp;gt;y = 0.08*x +61.98' data-id='58'/>\n   <polyline id='svg_f9b2b687f5286d84_e110' points='48.23,144.37 64.85,139.41 81.47,134.45 98.10,129.49 114.72,124.54 131.34,119.58 147.97,114.62 164.59,109.66 181.21,104.71 197.84,99.75 214.46,94.79 231.08,89.83 247.70,84.88 264.33,79.92 280.95,74.96 297.57,70.00 314.20,65.05 330.82,60.09 347.44,55.13' fill='none' stroke='#56B1F7' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' title='for vax_rate=100&amp;lt;br/&amp;gt;y = 0.08*x +63.66' data-id='77'/>\n  <\/g>\n  <g clip-path='url(#svg_f9b2b687f5286d84_c1)'>\n   <text x='18.54' y='252.57' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>50<\/text>\n   <text x='18.54' y='186.57' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>60<\/text>\n   <text x='18.54' y='120.56' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>70<\/text>\n   <text x='18.54' y='54.55' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>80<\/text>\n   <polyline points='30.53,249.42 33.27,249.42' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='30.53,183.41 33.27,183.41' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='30.53,117.41 33.27,117.41' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='30.53,51.40 33.27,51.40' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='81.47,259.01 81.47,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='164.59,259.01 164.59,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='247.70,259.01 247.70,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='330.82,259.01 330.82,256.27' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='76.58' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>50<\/text>\n   <text x='157.25' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>100<\/text>\n   <text x='240.36' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>150<\/text>\n   <text x='323.48' y='267.5' font-size='6.6pt' font-family='Helvetica' fill='#4D4D4D' fill-opacity='1'>200<\/text>\n   <text x='156.23' y='280.09' font-size='8.25pt' font-family='Helvetica'>cell_phones_100<\/text>\n   <text transform='translate(13.37,149.83) rotate(-90.00)' font-size='8.25pt' font-family='Helvetica'>life_exp<\/text>\n   <rect x='373.36' y='74.29' width='53.16' height='113.16' fill='#FFFFFF' fill-opacity='1' stroke='none'/>\n   <text x='378.84' y='88.88' font-size='8.25pt' font-family='Helvetica'>vax_rate<\/text>\n   <image x='378.84' y='95.57' width='17.28' height='86.4' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAAmElEQVQ4ja2UQRLDMAgDd3hk/tnX5agcknFaCoa0vnkMCEnGsL12GQhDYDpPwoDrpBFlRDWi/9Wu6AHC9FkLYLrzlhD3oJ3mDvRHRYy7IC8A7bCK8gpWKYDzeQVArDcDyD2YAnSofZvzaOA6Q7Oahp/dmRuVTQ0xU5TGP2o8Waool1obVuv1q8qP9xPvg633XlGLDtfIhNUBcBeA5ss0BXMAAAAASUVORK5CYII=' xmlns:xlink='http://www.w3.org/1999/xlink'/>\n   <polyline points='392.67,181.83 396.12,181.83' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,160.30 396.12,160.30' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,138.77 396.12,138.77' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,117.25 396.12,117.25' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='392.67,95.72 396.12,95.72' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,181.83 378.84,181.83' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,160.30 378.84,160.30' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,138.77 378.84,138.77' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,117.25 378.84,117.25' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='382.30,95.72 378.84,95.72' fill='none' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.37' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='401.6' y='184.98' font-size='6.6pt' font-family='Helvetica'>60<\/text>\n   <text x='401.6' y='163.46' font-size='6.6pt' font-family='Helvetica'>70<\/text>\n   <text x='401.6' y='141.93' font-size='6.6pt' font-family='Helvetica'>80<\/text>\n   <text x='401.6' y='120.4' font-size='6.6pt' font-family='Helvetica'>90<\/text>\n   <text x='401.6' y='98.87' font-size='6.6pt' font-family='Helvetica'>100<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_f9b2b687f5286d84","ratio":1.5,"settings":{"tooltip":{"css":".tooltip_SVGID_ { background-color:white;font-style:italic;padding:10px;border-radius:10px 20px 10px 20px; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.75,"offx":10,"offy":0,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { r:4px;cursor:pointer;stroke:red;stroke-width:2px; }","reactive":false,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:#FF3333;stroke:black; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":10,"duration":300,"default_on":false},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div></div>
@@ -538,17 +533,17 @@ Nicky Wakim
 <li>Interpret the interaction component of a model with <strong>two continuous covariates</strong>, and how the main variable’s effect changes.</li>
 </ol>
 </section>
-<section id="do-we-think-income-level-is-an-effect-modifier-for-female-literacy-rate" class="slide level2">
-<h2>Do we think income level is an effect modifier for female literacy rate?</h2>
+<section id="do-we-think-income-level-is-an-effect-modifier-for-cell-phones" class="slide level2">
+<h2>Do we think income level is an effect modifier for cell phones?</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
 <ul>
 <li><p>Let’s say we only have two income groups: low income and high income</p></li>
-<li><p>We can start by visualizing the relationship between life expectancy and female literacy rate <em>by income level</em></p></li>
-<li><p>Questions of interest: Is the effect of female literacy rate on life expectancy differ depending on income level?</p>
+<li><p>We can start by visualizing the relationship between life expectancy and cell phones <em>by income level</em></p></li>
+<li><p>Questions of interest: Is the effect of number of cell phones on life expectancy differ depending on income level?</p>
 <ul>
-<li>This is the same as: Is income level is an effect modifier for female literacy rate?</li>
-<li>“effect of female literacy rate” differing = different slopes between CP and LE depending on the income group</li>
+<li>This is the same as: Is income level is an effect modifier for cell phones?</li>
+<li>“effect of cell phones” differing = different slopes between CP and LE depending on the income group</li>
 </ul></li>
 <li><p>Let’s run an interaction model to see!</p></li>
 </ul>
@@ -587,25 +582,31 @@ Nicky Wakim
 <section id="displaying-the-regression-table-and-writing-fitted-regression-equation" class="slide level2">
 <h2>Displaying the regression table and writing fitted regression equation</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">tidy</span>(m_int_inc2, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code to display regression table with interaction</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>tidy_m_int_inc2 <span class="ot">=</span> <span class="fu">tidy</span>(m_int_inc2, <span class="at">conf.int=</span>T)</span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a>tidy_m_int_inc2 <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="jsxfiezdbq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jsxfiezdbq table {
+<div id="eqwvxpwcvx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eqwvxpwcvx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jsxfiezdbq thead, #jsxfiezdbq tbody, #jsxfiezdbq tfoot, #jsxfiezdbq tr, #jsxfiezdbq td, #jsxfiezdbq th {
+#eqwvxpwcvx thead, #eqwvxpwcvx tbody, #eqwvxpwcvx tfoot, #eqwvxpwcvx tr, #eqwvxpwcvx td, #eqwvxpwcvx th {
   border-style: none;
 }
 
-#jsxfiezdbq p {
+#eqwvxpwcvx p {
   margin: 0;
   padding: 0;
 }
 
-#jsxfiezdbq .gt_table {
+#eqwvxpwcvx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -631,12 +632,12 @@ Nicky Wakim
   border-left-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_caption {
+#eqwvxpwcvx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jsxfiezdbq .gt_title {
+#eqwvxpwcvx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -648,7 +649,7 @@ Nicky Wakim
   border-bottom-width: 0;
 }
 
-#jsxfiezdbq .gt_subtitle {
+#eqwvxpwcvx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -660,7 +661,7 @@ Nicky Wakim
   border-top-width: 0;
 }
 
-#jsxfiezdbq .gt_heading {
+#eqwvxpwcvx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -672,13 +673,13 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_bottom_border {
+#eqwvxpwcvx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_col_headings {
+#eqwvxpwcvx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -693,7 +694,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_col_heading {
+#eqwvxpwcvx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -713,7 +714,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#jsxfiezdbq .gt_column_spanner_outer {
+#eqwvxpwcvx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -725,15 +726,15 @@ Nicky Wakim
   padding-right: 4px;
 }
 
-#jsxfiezdbq .gt_column_spanner_outer:first-child {
+#eqwvxpwcvx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jsxfiezdbq .gt_column_spanner_outer:last-child {
+#eqwvxpwcvx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jsxfiezdbq .gt_column_spanner {
+#eqwvxpwcvx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -745,11 +746,11 @@ Nicky Wakim
   width: 100%;
 }
 
-#jsxfiezdbq .gt_spanner_row {
+#eqwvxpwcvx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jsxfiezdbq .gt_group_heading {
+#eqwvxpwcvx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -775,7 +776,7 @@ Nicky Wakim
   text-align: left;
 }
 
-#jsxfiezdbq .gt_empty_group_heading {
+#eqwvxpwcvx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -790,15 +791,15 @@ Nicky Wakim
   vertical-align: middle;
 }
 
-#jsxfiezdbq .gt_from_md > :first-child {
+#eqwvxpwcvx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jsxfiezdbq .gt_from_md > :last-child {
+#eqwvxpwcvx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jsxfiezdbq .gt_row {
+#eqwvxpwcvx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -817,7 +818,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#jsxfiezdbq .gt_stub {
+#eqwvxpwcvx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -830,7 +831,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#jsxfiezdbq .gt_stub_row_group {
+#eqwvxpwcvx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -844,15 +845,15 @@ Nicky Wakim
   vertical-align: top;
 }
 
-#jsxfiezdbq .gt_row_group_first td {
+#eqwvxpwcvx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jsxfiezdbq .gt_row_group_first th {
+#eqwvxpwcvx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jsxfiezdbq .gt_summary_row {
+#eqwvxpwcvx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -862,16 +863,16 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#jsxfiezdbq .gt_first_summary_row {
+#eqwvxpwcvx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_first_summary_row.thick {
+#eqwvxpwcvx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jsxfiezdbq .gt_last_summary_row {
+#eqwvxpwcvx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -881,7 +882,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_grand_summary_row {
+#eqwvxpwcvx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -891,7 +892,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#jsxfiezdbq .gt_first_grand_summary_row {
+#eqwvxpwcvx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -901,7 +902,7 @@ Nicky Wakim
   border-top-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_last_grand_summary_row_top {
+#eqwvxpwcvx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -911,11 +912,11 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_striped {
+#eqwvxpwcvx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jsxfiezdbq .gt_table_body {
+#eqwvxpwcvx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -924,7 +925,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_footnotes {
+#eqwvxpwcvx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -938,7 +939,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_footnote {
+#eqwvxpwcvx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -947,7 +948,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#jsxfiezdbq .gt_sourcenotes {
+#eqwvxpwcvx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -961,7 +962,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#jsxfiezdbq .gt_sourcenote {
+#eqwvxpwcvx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -969,72 +970,72 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#jsxfiezdbq .gt_left {
+#eqwvxpwcvx .gt_left {
   text-align: left;
 }
 
-#jsxfiezdbq .gt_center {
+#eqwvxpwcvx .gt_center {
   text-align: center;
 }
 
-#jsxfiezdbq .gt_right {
+#eqwvxpwcvx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jsxfiezdbq .gt_font_normal {
+#eqwvxpwcvx .gt_font_normal {
   font-weight: normal;
 }
 
-#jsxfiezdbq .gt_font_bold {
+#eqwvxpwcvx .gt_font_bold {
   font-weight: bold;
 }
 
-#jsxfiezdbq .gt_font_italic {
+#eqwvxpwcvx .gt_font_italic {
   font-style: italic;
 }
 
-#jsxfiezdbq .gt_super {
+#eqwvxpwcvx .gt_super {
   font-size: 65%;
 }
 
-#jsxfiezdbq .gt_footnote_marks {
+#eqwvxpwcvx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jsxfiezdbq .gt_asterisk {
+#eqwvxpwcvx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jsxfiezdbq .gt_indent_1 {
+#eqwvxpwcvx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jsxfiezdbq .gt_indent_2 {
+#eqwvxpwcvx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jsxfiezdbq .gt_indent_3 {
+#eqwvxpwcvx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jsxfiezdbq .gt_indent_4 {
+#eqwvxpwcvx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jsxfiezdbq .gt_indent_5 {
+#eqwvxpwcvx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jsxfiezdbq .katex-display {
+#eqwvxpwcvx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jsxfiezdbq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eqwvxpwcvx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1096,7 +1097,7 @@ Nicky Wakim
 </div>
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP \cdot I(\text{high income}) \\
-\widehat{LE} = &amp; 54.85 + 0.156 \cdot CP - 16.65 \cdot I(\text{high income}) + 0.228 \cdot CP \cdot I(\text{high income})
+\widehat{LE} = &amp; 59.61 + 0.076 \cdot CP + 13.879 \cdot I(\text{high income}) -0.066 \cdot CP \cdot I(\text{high income})
 \end{aligned}\]</span></p>
 </section>
 <section id="poll-everywhere-question-2" class="slide level2">
@@ -1106,7 +1107,7 @@ Nicky Wakim
 <h2>Comparing fitted regression lines for each income level</h2>
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP \cdot I(\text{high income}) \\
-\widehat{LE} = &amp; 54.85 + 0.156 \cdot CP - 16.65 \cdot I(\text{high income}) + 0.228 \cdot CP \cdot I(\text{high income})
+\widehat{LE} = &amp; 59.61 + 0.076 \cdot CP + 13.879 \cdot I(\text{high income}) -0.066 \cdot CP \cdot I(\text{high income})
 \end{aligned}\]</span></p>
 <div class="columns">
 <div class="column">
@@ -1117,9 +1118,9 @@ Nicky Wakim
 <div class="proof-cont">
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 \cdot 0 + \widehat\beta_3 CP \cdot 0 \\
-\widehat{LE} = &amp; 54.85 + 0.156 \cdot CP - 16.65 \cdot 0 + \\
-&amp; 0.228 \cdot CP \cdot 0 \\
-\widehat{LE} = &amp; 54.85 + 0.156 \cdot CP\\
+\widehat{LE} = &amp; 59.61 + 0.076 \cdot CP + 13.879 \cdot 0 \\
+&amp; -0.066 \cdot CP \cdot 0 \\
+\widehat{LE} = &amp; 59.61 + 0.076 \cdot CP
 \end{aligned}\]</span></p>
 </div>
 </div>
@@ -1131,10 +1132,10 @@ Nicky Wakim
 <div class="fact-cont">
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 \cdot 1 + \widehat\beta_3 CP \cdot 1 \\
-\widehat{LE} = &amp; 54.85 + 0.156 \cdot CP - 16.65 \cdot 1 + \\ &amp; 0.228 \cdot CP \cdot 1 \\
-\widehat{LE} = &amp; (54.85 - 16.65 \cdot 1) + \\ &amp; (0.156 \cdot CP + 0.228 \cdot CP \cdot 1) \\
-\widehat{LE} = &amp; (54.85 - 16.65) + (0.156 + 0.228) \cdot CP\\
-\widehat{LE} = &amp; 38.2 + 0.384 \cdot CP\\
+\widehat{LE} = &amp; 59.61 + 0.076 \cdot CP + 13.879 \cdot 1 \\
+&amp; -0.066 CP \cdot 1 \\
+\widehat{LE} = &amp; (59.61 + 13.879) + (0.076 -0.066) \cdot CP \\
+\widehat{LE} = &amp; 73.49 + 0.01 \cdot CP
 \end{aligned}\]</span></p>
 </div>
 </div>
@@ -1150,8 +1151,8 @@ Nicky Wakim
 </div>
 <div class="proof-cont">
 <p><span class="math display">\[ \begin{aligned}
-\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP  \\
-\widehat{LE} = &amp; 54.85 + 0.156 \cdot CP\\
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP\\
+\widehat{LE} = &amp; 59.61 + 0.076 \cdot CP
 \end{aligned}\]</span></p>
 </div>
 </div>
@@ -1162,8 +1163,8 @@ Nicky Wakim
 <div class="fact-cont">
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; (\widehat\beta_0 +\widehat\beta_2) + (\widehat\beta_1 +\widehat\beta_3) CP \\
-\widehat{LE} = &amp; (54.85 - 16.65) + (0.156 + 0.228) \cdot CP\\
-\widehat{LE} = &amp; 38.2 + 0.384 \cdot CP\\
+\widehat{LE} = &amp; (59.61 + 13.879) + (0.076 -0.066) \cdot CP \\
+\widehat{LE} = &amp; 73.49 + 0.01 \cdot CP
 \end{aligned}\]</span></p>
 </div>
 </div>
@@ -1190,14 +1191,14 @@ Nicky Wakim
 </ul>
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; (\widehat\beta_0 +\widehat\beta_2) + (\widehat\beta_1 +\widehat\beta_3) CP \\
-\widehat{LE} = &amp; (54.85 - 16.65) + (0.156 + 0.228) \cdot CP\\
-\widehat{LE} = &amp; 38.2 + 0.384 \cdot CP\\
+\widehat{LE} = &amp; (59.61 + 13.879) + (0.076 -0.066) \cdot CP \\
+\widehat{LE} = &amp; 73.49 + 0.01 \cdot CP
 \end{aligned}\]</span></p>
 <ul>
-<li><p>Intercept of 38.2 is misleading because</p>
+<li><p>Intercept of 73.49 is misleading because</p>
 <ul>
 <li>Makes you think some of the life expectancies for high income countries are lower than that of low income countries (depending on the CP)</li>
-<li>There are no high income countries with CP less than ~70%</li>
+<li>There are no high income countries with CP less than ~80</li>
 </ul></li>
 <li><p>Other online sources about when and when not to center:</p>
 <ul>
@@ -1223,11 +1224,11 @@ Nicky Wakim
 </ul></li>
 </ul>
 </section>
-<section id="itll-be-helpful-to-center-female-literacy-rate" class="slide level2">
-<h2>It’ll be helpful to center female literacy rate</h2>
+<section id="itll-be-helpful-to-center-number-of-cell-phones" class="slide level2">
+<h2>It’ll be helpful to center number of cell phones</h2>
 <p><img data-src="../img_slides/pause.png" class="absolute" style="top: 83%; right: 0%; width: 120px; height: 120px; "></p>
 <ul>
-<li>Centering female literacy rate: <span class="math display">\[ CP^c = CP - \overline{CP}\]</span></li>
+<li>Centering number of cell phones: <span class="math display">\[ CP^c = CP - \overline{CP}\]</span></li>
 <li>Centering in R:</li>
 </ul>
 <div class="cell">
@@ -1244,7 +1245,7 @@ Nicky Wakim
 </div>
 </div>
 <ul>
-<li><p>Now all intercept values (in each respective world region) will be the mean life expectancy when female literacy rate is 116.52%</p></li>
+<li><p>Now all intercept values (in each respective freedom status) will be the mean life expectancy when number of cell phones per 100 people is 116.52</p></li>
 <li><p>We will used center CP for the rest of the lecture</p></li>
 </ul>
 </section>
@@ -1255,25 +1256,28 @@ Nicky Wakim
 <span id="cb8-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c<span class="sc">*</span>income_level_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code to display regression table with interaction</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">tidy</span>(m_int_inc2, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="buekfpxwdw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#buekfpxwdw table {
+<div id="ktciwocrwq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ktciwocrwq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#buekfpxwdw thead, #buekfpxwdw tbody, #buekfpxwdw tfoot, #buekfpxwdw tr, #buekfpxwdw td, #buekfpxwdw th {
+#ktciwocrwq thead, #ktciwocrwq tbody, #ktciwocrwq tfoot, #ktciwocrwq tr, #ktciwocrwq td, #ktciwocrwq th {
   border-style: none;
 }
 
-#buekfpxwdw p {
+#ktciwocrwq p {
   margin: 0;
   padding: 0;
 }
 
-#buekfpxwdw .gt_table {
+#ktciwocrwq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1299,12 +1303,12 @@ Nicky Wakim
   border-left-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_caption {
+#ktciwocrwq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#buekfpxwdw .gt_title {
+#ktciwocrwq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1316,7 +1320,7 @@ Nicky Wakim
   border-bottom-width: 0;
 }
 
-#buekfpxwdw .gt_subtitle {
+#ktciwocrwq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1328,7 +1332,7 @@ Nicky Wakim
   border-top-width: 0;
 }
 
-#buekfpxwdw .gt_heading {
+#ktciwocrwq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1340,13 +1344,13 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_bottom_border {
+#ktciwocrwq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_col_headings {
+#ktciwocrwq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1361,7 +1365,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_col_heading {
+#ktciwocrwq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1381,7 +1385,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#buekfpxwdw .gt_column_spanner_outer {
+#ktciwocrwq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1393,15 +1397,15 @@ Nicky Wakim
   padding-right: 4px;
 }
 
-#buekfpxwdw .gt_column_spanner_outer:first-child {
+#ktciwocrwq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#buekfpxwdw .gt_column_spanner_outer:last-child {
+#ktciwocrwq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#buekfpxwdw .gt_column_spanner {
+#ktciwocrwq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1413,11 +1417,11 @@ Nicky Wakim
   width: 100%;
 }
 
-#buekfpxwdw .gt_spanner_row {
+#ktciwocrwq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#buekfpxwdw .gt_group_heading {
+#ktciwocrwq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1443,7 +1447,7 @@ Nicky Wakim
   text-align: left;
 }
 
-#buekfpxwdw .gt_empty_group_heading {
+#ktciwocrwq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1458,15 +1462,15 @@ Nicky Wakim
   vertical-align: middle;
 }
 
-#buekfpxwdw .gt_from_md > :first-child {
+#ktciwocrwq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#buekfpxwdw .gt_from_md > :last-child {
+#ktciwocrwq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#buekfpxwdw .gt_row {
+#ktciwocrwq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1485,7 +1489,7 @@ Nicky Wakim
   overflow-x: hidden;
 }
 
-#buekfpxwdw .gt_stub {
+#ktciwocrwq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1498,7 +1502,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#buekfpxwdw .gt_stub_row_group {
+#ktciwocrwq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1512,15 +1516,15 @@ Nicky Wakim
   vertical-align: top;
 }
 
-#buekfpxwdw .gt_row_group_first td {
+#ktciwocrwq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#buekfpxwdw .gt_row_group_first th {
+#ktciwocrwq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#buekfpxwdw .gt_summary_row {
+#ktciwocrwq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1530,16 +1534,16 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#buekfpxwdw .gt_first_summary_row {
+#ktciwocrwq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_first_summary_row.thick {
+#ktciwocrwq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#buekfpxwdw .gt_last_summary_row {
+#ktciwocrwq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1549,7 +1553,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_grand_summary_row {
+#ktciwocrwq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1559,7 +1563,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#buekfpxwdw .gt_first_grand_summary_row {
+#ktciwocrwq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1569,7 +1573,7 @@ Nicky Wakim
   border-top-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_last_grand_summary_row_top {
+#ktciwocrwq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1579,11 +1583,11 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_striped {
+#ktciwocrwq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#buekfpxwdw .gt_table_body {
+#ktciwocrwq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1592,7 +1596,7 @@ Nicky Wakim
   border-bottom-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_footnotes {
+#ktciwocrwq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1606,7 +1610,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_footnote {
+#ktciwocrwq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1615,7 +1619,7 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#buekfpxwdw .gt_sourcenotes {
+#ktciwocrwq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1629,7 +1633,7 @@ Nicky Wakim
   border-right-color: #D3D3D3;
 }
 
-#buekfpxwdw .gt_sourcenote {
+#ktciwocrwq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1637,72 +1641,72 @@ Nicky Wakim
   padding-right: 5px;
 }
 
-#buekfpxwdw .gt_left {
+#ktciwocrwq .gt_left {
   text-align: left;
 }
 
-#buekfpxwdw .gt_center {
+#ktciwocrwq .gt_center {
   text-align: center;
 }
 
-#buekfpxwdw .gt_right {
+#ktciwocrwq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#buekfpxwdw .gt_font_normal {
+#ktciwocrwq .gt_font_normal {
   font-weight: normal;
 }
 
-#buekfpxwdw .gt_font_bold {
+#ktciwocrwq .gt_font_bold {
   font-weight: bold;
 }
 
-#buekfpxwdw .gt_font_italic {
+#ktciwocrwq .gt_font_italic {
   font-style: italic;
 }
 
-#buekfpxwdw .gt_super {
+#ktciwocrwq .gt_super {
   font-size: 65%;
 }
 
-#buekfpxwdw .gt_footnote_marks {
+#ktciwocrwq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#buekfpxwdw .gt_asterisk {
+#ktciwocrwq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#buekfpxwdw .gt_indent_1 {
+#ktciwocrwq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#buekfpxwdw .gt_indent_2 {
+#ktciwocrwq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#buekfpxwdw .gt_indent_3 {
+#ktciwocrwq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#buekfpxwdw .gt_indent_4 {
+#ktciwocrwq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#buekfpxwdw .gt_indent_5 {
+#ktciwocrwq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#buekfpxwdw .katex-display {
+#ktciwocrwq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#buekfpxwdw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ktciwocrwq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1764,7 +1768,7 @@ Nicky Wakim
 </div>
 <p><span class="math display">\[ \begin{aligned}
 \widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 I(\text{high income}) + \widehat\beta_3 CP^c \cdot I(\text{high income}) \\
-\widehat{LE} = &amp; 68.42 + 0.076 \cdot CP^c + 6.236 \cdot I(\text{high income}) + -0.066 \cdot CP^c \cdot I(\text{high income})
+\widehat{LE} = &amp; 68.42 + 0.076 \cdot CP^c + 6.236 \cdot I(\text{high income}) -0.066 \cdot CP^c \cdot I(\text{high income})
 \end{aligned}\]</span></p>
 </section>
 <section id="interpretation-for-interaction-between-binary-categorical-and-continuous-variables" class="slide level2">
@@ -1776,13 +1780,13 @@ Nicky Wakim
 <ul>
 <li><p>Interpretation:</p>
 <ul>
-<li><p><span class="math inline">\(\beta_3\)</span> = mean change in female literacy rate’s effect, comparing higher income to lower income levels</p>
+<li><p><span class="math inline">\(\beta_3\)</span> = mean change in number of cell phones’s effect, comparing higher income to lower income levels</p>
 <ul>
 <li>AKA: the change in slopes (for line between CP and LE) comparing high income to low income</li>
 </ul></li>
-<li><p>where the “female literacy rate effect” = change in mean life expectancy per percent increase in female literacy (slope) with income level held constant, i.e.&nbsp;“adjusted female literacy rate effect”</p></li>
+<li><p>where the “number of cell phones effect” = change in mean life expectancy per one additional cell phone (slope) with income level held constant, i.e.&nbsp;“adjusted number of cell phones effect”</p></li>
 </ul></li>
-<li><p>In summary, the interaction term can be interpreted as “difference in adjusted female literacy rate effect comparing higher income to lower income levels”</p></li>
+<li><p>In summary, the interaction term can be interpreted as “difference in adjusted cell phones’ effect comparing higher income to lower income levels”</p></li>
 <li><p>It will be helpful to test the interaction to round out this interpretation!!</p></li>
 </ul>
 </section>
@@ -1854,33 +1858,34 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <li>Fit the reduced and full model</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>m_int_inc_red <span class="ot">=</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> income_level_2, </span>
-<span id="cb10-2"><a></a>                   <span class="at">data =</span> gapm)</span>
-<span id="cb10-3"><a></a>m_int_inc_full <span class="ot">=</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> income_level_2 <span class="sc">+</span></span>
-<span id="cb10-4"><a></a>                  CP_c<span class="sc">*</span>income_level_2, <span class="at">data =</span> gapm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>m_int_inc_red <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> income_level_2)</span>
+<span id="cb10-2"><a></a>m_int_inc_full <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> income_level_2 <span class="sc">+</span> CP_c<span class="sc">*</span>income_level_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<ul>
-<li>Display the ANOVA table with F-statistic and p-value</li>
-</ul>
 <div class="cell">
+<details class="code-fold">
+<summary>Code to display ANOVA table for testing interaction</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>anova_int <span class="ot">=</span> <span class="fu">anova</span>(m_int_inc_red, m_int_inc_full)</span>
+<span id="cb11-2"><a></a>anova_int <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="juqeoodtxf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#juqeoodtxf table {
+<div id="leyfdpiico" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#leyfdpiico table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#juqeoodtxf thead, #juqeoodtxf tbody, #juqeoodtxf tfoot, #juqeoodtxf tr, #juqeoodtxf td, #juqeoodtxf th {
+#leyfdpiico thead, #leyfdpiico tbody, #leyfdpiico tfoot, #leyfdpiico tr, #leyfdpiico td, #leyfdpiico th {
   border-style: none;
 }
 
-#juqeoodtxf p {
+#leyfdpiico p {
   margin: 0;
   padding: 0;
 }
 
-#juqeoodtxf .gt_table {
+#leyfdpiico .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1906,12 +1911,12 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-left-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_caption {
+#leyfdpiico .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#juqeoodtxf .gt_title {
+#leyfdpiico .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1923,7 +1928,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-width: 0;
 }
 
-#juqeoodtxf .gt_subtitle {
+#leyfdpiico .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1935,7 +1940,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-top-width: 0;
 }
 
-#juqeoodtxf .gt_heading {
+#leyfdpiico .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1947,13 +1952,13 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_bottom_border {
+#leyfdpiico .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_col_headings {
+#leyfdpiico .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1968,7 +1973,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_col_heading {
+#leyfdpiico .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1988,7 +1993,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   overflow-x: hidden;
 }
 
-#juqeoodtxf .gt_column_spanner_outer {
+#leyfdpiico .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2000,15 +2005,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 4px;
 }
 
-#juqeoodtxf .gt_column_spanner_outer:first-child {
+#leyfdpiico .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#juqeoodtxf .gt_column_spanner_outer:last-child {
+#leyfdpiico .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#juqeoodtxf .gt_column_spanner {
+#leyfdpiico .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2020,11 +2025,11 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   width: 100%;
 }
 
-#juqeoodtxf .gt_spanner_row {
+#leyfdpiico .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#juqeoodtxf .gt_group_heading {
+#leyfdpiico .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2050,7 +2055,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   text-align: left;
 }
 
-#juqeoodtxf .gt_empty_group_heading {
+#leyfdpiico .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2065,15 +2070,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   vertical-align: middle;
 }
 
-#juqeoodtxf .gt_from_md > :first-child {
+#leyfdpiico .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#juqeoodtxf .gt_from_md > :last-child {
+#leyfdpiico .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#juqeoodtxf .gt_row {
+#leyfdpiico .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2092,7 +2097,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   overflow-x: hidden;
 }
 
-#juqeoodtxf .gt_stub {
+#leyfdpiico .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2105,7 +2110,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#juqeoodtxf .gt_stub_row_group {
+#leyfdpiico .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2119,15 +2124,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   vertical-align: top;
 }
 
-#juqeoodtxf .gt_row_group_first td {
+#leyfdpiico .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#juqeoodtxf .gt_row_group_first th {
+#leyfdpiico .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#juqeoodtxf .gt_summary_row {
+#leyfdpiico .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2137,16 +2142,16 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#juqeoodtxf .gt_first_summary_row {
+#leyfdpiico .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_first_summary_row.thick {
+#leyfdpiico .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#juqeoodtxf .gt_last_summary_row {
+#leyfdpiico .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2156,7 +2161,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_grand_summary_row {
+#leyfdpiico .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2166,7 +2171,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#juqeoodtxf .gt_first_grand_summary_row {
+#leyfdpiico .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2176,7 +2181,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-top-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_last_grand_summary_row_top {
+#leyfdpiico .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2186,11 +2191,11 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_striped {
+#leyfdpiico .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#juqeoodtxf .gt_table_body {
+#leyfdpiico .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2199,7 +2204,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_footnotes {
+#leyfdpiico .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2213,7 +2218,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_footnote {
+#leyfdpiico .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2222,7 +2227,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#juqeoodtxf .gt_sourcenotes {
+#leyfdpiico .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2236,7 +2241,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#juqeoodtxf .gt_sourcenote {
+#leyfdpiico .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2244,72 +2249,72 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#juqeoodtxf .gt_left {
+#leyfdpiico .gt_left {
   text-align: left;
 }
 
-#juqeoodtxf .gt_center {
+#leyfdpiico .gt_center {
   text-align: center;
 }
 
-#juqeoodtxf .gt_right {
+#leyfdpiico .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#juqeoodtxf .gt_font_normal {
+#leyfdpiico .gt_font_normal {
   font-weight: normal;
 }
 
-#juqeoodtxf .gt_font_bold {
+#leyfdpiico .gt_font_bold {
   font-weight: bold;
 }
 
-#juqeoodtxf .gt_font_italic {
+#leyfdpiico .gt_font_italic {
   font-style: italic;
 }
 
-#juqeoodtxf .gt_super {
+#leyfdpiico .gt_super {
   font-size: 65%;
 }
 
-#juqeoodtxf .gt_footnote_marks {
+#leyfdpiico .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#juqeoodtxf .gt_asterisk {
+#leyfdpiico .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#juqeoodtxf .gt_indent_1 {
+#leyfdpiico .gt_indent_1 {
   text-indent: 5px;
 }
 
-#juqeoodtxf .gt_indent_2 {
+#leyfdpiico .gt_indent_2 {
   text-indent: 10px;
 }
 
-#juqeoodtxf .gt_indent_3 {
+#leyfdpiico .gt_indent_3 {
   text-indent: 15px;
 }
 
-#juqeoodtxf .gt_indent_4 {
+#leyfdpiico .gt_indent_4 {
   text-indent: 20px;
 }
 
-#juqeoodtxf .gt_indent_5 {
+#leyfdpiico .gt_indent_5 {
   text-indent: 25px;
 }
 
-#juqeoodtxf .katex-display {
+#leyfdpiico .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#juqeoodtxf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#leyfdpiico div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2352,9 +2357,9 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 </div>
 </div>
 <ul>
-<li><p>Conclusion: There is not a significant interaction between female literacy rate and income level (p = 0.168).</p>
+<li><p><strong>Conclusion:</strong> There is not a significant interaction between cell phones and income level (p = 0.07)</p>
 <ul>
-<li>If significant, we say more: For higher income levels, for every one percent increase in female literacy rate, the mean life expectancy increases 0.384 years. For lower income levels, for every one percent increase in female literacy rate, the mean life expectancy increases 0.156 years. Thus, the female literacy rate almost doubles comparing high income to low income levels.</li>
+<li><strong>If significant, we say more:</strong> For higher income levels, for every one additional cell phone per 100 people, the mean life expectancy increases 0.01 years. For lower income levels, for every one additional cell phone per 100 people, the mean life expectancy increases 0.076 years. Thus, the effect of cell phones is seven times more for high income than low income levels.</li>
 </ul></li>
 </ul>
 </section></section>
@@ -2377,15 +2382,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <li>Interpret the interaction component of a model with <strong>two continuous covariates</strong>, and how the main variable’s effect changes.</li>
 </ol>
 </section>
-<section id="do-we-think-world-region-is-an-effect-modifier-for-female-literacy-rate" class="slide level2">
-<h2>Do we think world region is an effect modifier for female literacy rate?</h2>
+<section id="do-we-think-freedom-status-is-an-effect-modifier-for-cell-phones" class="slide level2">
+<h2>Do we think freedom status is an effect modifier for cell phones?</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
-<li><p>We can start by visualizing the relationship between life expectancy and female literacy rate <em>by world region</em></p></li>
-<li><p>Questions of interest: Does the effect of female literacy rate on life expectancy differ depending on world region?</p>
+<li><p>We can start by visualizing the relationship between life expectancy and cell phones <em>by freedom status</em></p></li>
+<li><p>Questions of interest: Does the effect of number of cell phones on life expectancy differ depending on freedom status?</p>
 <ul>
-<li>This is the same as: Is world region is an effect modifier for female literacy rate?</li>
+<li>This is the same as: Is freedom status is an effect modifier for number of cell phones?</li>
 </ul></li>
 <li><p>Let’s run an interaction model to see!</p></li>
 </ul>
@@ -2394,7 +2399,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="11_Interactions_01_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<p><img data-src="11_Interactions_01_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2404,44 +2409,48 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <section id="model-with-interaction-between-a-multi-level-categorical-and-continuous-variables" class="slide level2">
 <h2>Model with interaction between a <em>multi-level categorical and continuous variables</em></h2>
 <p>Model we are fitting:</p>
-<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP^c + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ &amp; \beta_5 CP^c \cdot I(\text{Americas}) + \beta_6 CP^c \cdot I(\text{Asia})+ \beta_7 CP^c \cdot I(\text{Europe})+ \epsilon \end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP^c + \beta_2 I(\text{FS} = \text{PF}) + \beta_3 I(\text{FS} = \text{F}) + \\ &amp; \beta_4 CP^c \cdot I(\text{FS} = \text{PF}) + \beta_5 CP^c \cdot I(\text{FS} = \text{F}) + \epsilon\end{aligned}\]</span></p>
 <ul>
 <li><span class="math inline">\(LE\)</span> as life expectancy</li>
-<li><span class="math inline">\(CP^c\)</span> as centered female literacy rate (continuous variable)</li>
-<li><span class="math inline">\(I(\text{Americas})\)</span>, <span class="math inline">\(I(\text{Asia})\)</span>, <span class="math inline">\(I(\text{Europe})\)</span> as the indicator for each world region</li>
+<li><span class="math inline">\(CP^c\)</span> as centered number of cell phones (continuous variable)</li>
+<li><span class="math inline">\(I(\text{FS} = \text{PF})\)</span> and <span class="math inline">\(I(\text{FS} = \text{F})\)</span> as the indicator for freedom status (with NF as reference group)</li>
 </ul>
 <p>In R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>m_int_wr <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> freedom_status <span class="sc">+</span></span>
-<span id="cb11-2"><a></a>                  CP_c<span class="sc">*</span>freedom_status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>m_int_wr <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> freedom_status <span class="sc">+</span> CP_c<span class="sc">*</span>freedom_status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>OR</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>m_int_wr <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">*</span> freedom_status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>m_int_wr <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">*</span> freedom_status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="displaying-the-regression-table-and-writing-fitted-regression-equation-1" class="slide level2">
 <h2>Displaying the regression table and writing fitted regression equation</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">tidy</span>(m_int_wr, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code to display regression table with interaction</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">tidy</span>(m_int_wr, <span class="at">conf.int=</span>T) <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="kusqhpunhp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kusqhpunhp table {
+<div id="cpobjkjkpc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cpobjkjkpc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kusqhpunhp thead, #kusqhpunhp tbody, #kusqhpunhp tfoot, #kusqhpunhp tr, #kusqhpunhp td, #kusqhpunhp th {
+#cpobjkjkpc thead, #cpobjkjkpc tbody, #cpobjkjkpc tfoot, #cpobjkjkpc tr, #cpobjkjkpc td, #cpobjkjkpc th {
   border-style: none;
 }
 
-#kusqhpunhp p {
+#cpobjkjkpc p {
   margin: 0;
   padding: 0;
 }
 
-#kusqhpunhp .gt_table {
+#cpobjkjkpc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2467,12 +2476,12 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-left-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_caption {
+#cpobjkjkpc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kusqhpunhp .gt_title {
+#cpobjkjkpc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2484,7 +2493,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-width: 0;
 }
 
-#kusqhpunhp .gt_subtitle {
+#cpobjkjkpc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2496,7 +2505,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-top-width: 0;
 }
 
-#kusqhpunhp .gt_heading {
+#cpobjkjkpc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2508,13 +2517,13 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_bottom_border {
+#cpobjkjkpc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_col_headings {
+#cpobjkjkpc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2529,7 +2538,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_col_heading {
+#cpobjkjkpc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2549,7 +2558,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   overflow-x: hidden;
 }
 
-#kusqhpunhp .gt_column_spanner_outer {
+#cpobjkjkpc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2561,15 +2570,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 4px;
 }
 
-#kusqhpunhp .gt_column_spanner_outer:first-child {
+#cpobjkjkpc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kusqhpunhp .gt_column_spanner_outer:last-child {
+#cpobjkjkpc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kusqhpunhp .gt_column_spanner {
+#cpobjkjkpc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2581,11 +2590,11 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   width: 100%;
 }
 
-#kusqhpunhp .gt_spanner_row {
+#cpobjkjkpc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kusqhpunhp .gt_group_heading {
+#cpobjkjkpc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2611,7 +2620,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   text-align: left;
 }
 
-#kusqhpunhp .gt_empty_group_heading {
+#cpobjkjkpc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2626,15 +2635,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   vertical-align: middle;
 }
 
-#kusqhpunhp .gt_from_md > :first-child {
+#cpobjkjkpc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kusqhpunhp .gt_from_md > :last-child {
+#cpobjkjkpc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kusqhpunhp .gt_row {
+#cpobjkjkpc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2653,7 +2662,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   overflow-x: hidden;
 }
 
-#kusqhpunhp .gt_stub {
+#cpobjkjkpc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2666,7 +2675,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#kusqhpunhp .gt_stub_row_group {
+#cpobjkjkpc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2680,15 +2689,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   vertical-align: top;
 }
 
-#kusqhpunhp .gt_row_group_first td {
+#cpobjkjkpc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kusqhpunhp .gt_row_group_first th {
+#cpobjkjkpc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kusqhpunhp .gt_summary_row {
+#cpobjkjkpc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2698,16 +2707,16 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#kusqhpunhp .gt_first_summary_row {
+#cpobjkjkpc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_first_summary_row.thick {
+#cpobjkjkpc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kusqhpunhp .gt_last_summary_row {
+#cpobjkjkpc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2717,7 +2726,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_grand_summary_row {
+#cpobjkjkpc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2727,7 +2736,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#kusqhpunhp .gt_first_grand_summary_row {
+#cpobjkjkpc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2737,7 +2746,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-top-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_last_grand_summary_row_top {
+#cpobjkjkpc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2747,11 +2756,11 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_striped {
+#cpobjkjkpc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kusqhpunhp .gt_table_body {
+#cpobjkjkpc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2760,7 +2769,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_footnotes {
+#cpobjkjkpc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2774,7 +2783,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_footnote {
+#cpobjkjkpc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2783,7 +2792,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#kusqhpunhp .gt_sourcenotes {
+#cpobjkjkpc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2797,7 +2806,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#kusqhpunhp .gt_sourcenote {
+#cpobjkjkpc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2805,72 +2814,72 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#kusqhpunhp .gt_left {
+#cpobjkjkpc .gt_left {
   text-align: left;
 }
 
-#kusqhpunhp .gt_center {
+#cpobjkjkpc .gt_center {
   text-align: center;
 }
 
-#kusqhpunhp .gt_right {
+#cpobjkjkpc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kusqhpunhp .gt_font_normal {
+#cpobjkjkpc .gt_font_normal {
   font-weight: normal;
 }
 
-#kusqhpunhp .gt_font_bold {
+#cpobjkjkpc .gt_font_bold {
   font-weight: bold;
 }
 
-#kusqhpunhp .gt_font_italic {
+#cpobjkjkpc .gt_font_italic {
   font-style: italic;
 }
 
-#kusqhpunhp .gt_super {
+#cpobjkjkpc .gt_super {
   font-size: 65%;
 }
 
-#kusqhpunhp .gt_footnote_marks {
+#cpobjkjkpc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kusqhpunhp .gt_asterisk {
+#cpobjkjkpc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kusqhpunhp .gt_indent_1 {
+#cpobjkjkpc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kusqhpunhp .gt_indent_2 {
+#cpobjkjkpc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kusqhpunhp .gt_indent_3 {
+#cpobjkjkpc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kusqhpunhp .gt_indent_4 {
+#cpobjkjkpc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kusqhpunhp .gt_indent_5 {
+#cpobjkjkpc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kusqhpunhp .katex-display {
+#cpobjkjkpc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kusqhpunhp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cpobjkjkpc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2949,62 +2958,50 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 </div>
 </div>
 <p><span class="math display">\[\begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ &amp; \widehat\beta_5 CP \cdot I(\text{Americas}) + \widehat\beta_6 CP \cdot I(\text{Asia})+ \widehat\beta_7 CP \cdot I(\text{Europe}) \\
-\widehat{LE} = &amp; 69.645 + 0.065 \cdot CP + 0.953 \cdot I(\text{Americas}) + 3.519 \cdot I(\text{Asia}) + 0.039 \cdot I(\text{Europe}) + \\ &amp; 0.005  \cdot CP \cdot I(\text{Americas}) + NA \cdot CP \cdot I(\text{Asia}) NA    \cdot CP \cdot I(\text{Europe})
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 I(\text{FS} = \text{PF}) + \widehat\beta_3 I(\text{FS} = \text{F}) + \\ &amp; \widehat\beta_4 CP^c \cdot I(\text{FS} = \text{PF}) + \widehat\beta_5 CP^c \cdot I(\text{FS} = \text{F}) \\
+\widehat{LE} = &amp; 69.645 + 0.065 \cdot CP^c + 0.953 \cdot I(\text{FS} = \text{PF}) + 3.519 \cdot I(\text{FS} = \text{F}) + \\ &amp; 0.039  \cdot CP^c \cdot I(\text{FS} = \text{PF}) + 0.005 \cdot CP^c \cdot I(\text{FS} = \text{PF})
 \end{aligned}\]</span></p>
 </section>
-<section id="comparing-fitted-regression-lines-for-each-world-region" class="slide level2 smaller">
-<h2>Comparing fitted regression lines for each world region</h2>
+<section id="comparing-fitted-regression-lines-for-each-freedom-status" class="slide level2">
+<h2>Comparing fitted regression lines for each freedom status</h2>
 <p><span class="math display">\[\begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ &amp; \widehat\beta_5 CP \cdot I(\text{Americas}) + \widehat\beta_6 CP \cdot I(\text{Asia})+ \widehat\beta_7 CP \cdot I(\text{Europe}) \\
-\widehat{LE} = &amp; 69.645 + 0.065 \cdot CP + 0.953 \cdot I(\text{Americas}) + 3.519 \cdot I(\text{Asia}) + 0.039 \cdot I(\text{Europe}) + \\ &amp; 0.005  \cdot CP \cdot I(\text{Americas}) + NA \cdot CP \cdot I(\text{Asia}) NA    \cdot CP \cdot I(\text{Europe})
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 I(\text{FS} = \text{PF}) + \widehat\beta_3 I(\text{FS} = \text{F}) + \\ &amp; \widehat\beta_4 CP^c \cdot I(\text{FS} = \text{PF}) + \widehat\beta_5 CP^c \cdot I(\text{FS} = \text{F}) \\
+\widehat{LE} = &amp; 69.645 + 0.065 \cdot CP^c + 0.953 \cdot I(\text{FS} = \text{PF}) + 3.519 \cdot I(\text{FS} = \text{F}) + \\ &amp; 0.039  \cdot CP^c \cdot I(\text{FS} = \text{PF}) + 0.005 \cdot CP^c \cdot I(\text{FS} = \text{PF})
 \end{aligned}\]</span></p>
 <div class="columns">
-<div class="column" style="width:25%;">
+<div class="column" style="width:30%;">
 <div class="proof1">
 <div class="proof-title">
-<p>Africa</p>
+<p>Not free</p>
 </div>
 <div class="proof-cont">
 <p><span class="math display">\[\begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \\ &amp; \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \\ &amp; \widehat\beta_4 \cdot 0 + \widehat\beta_5 CP \cdot 0 + \\ &amp; \widehat\beta_6 CP \cdot 0+ \widehat\beta_7 CP \cdot 0 \\
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP\\
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 \cdot 0 + \\ &amp; \widehat\beta_3 \cdot 0 +  \widehat\beta_4 CP^c \cdot 0 + \\&amp; \widehat\beta_5 CP^c \cdot 0 \\
+\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP^c\\
 \end{aligned}\]</span></p>
 </div>
 </div>
-</div><div class="column" style="width:25%;">
+</div><div class="column" style="width:35%;">
 <div class="fact">
 <div class="fact-title">
-<p>The Americas</p>
+<p>Partly free</p>
 </div>
 <div class="fact-cont">
 <p><span class="math display">\[\begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \\ &amp; \widehat\beta_2 \cdot 1 + \widehat\beta_3 \cdot 0 + \\ &amp; \widehat\beta_4 \cdot 0 + \widehat\beta_5 CP \cdot 1 + \\ &amp; \widehat\beta_6 CP \cdot 0+ \widehat\beta_7 CP \cdot 0 \\
-\widehat{LE} = &amp;\big(\widehat\beta_0+\widehat\beta_2\big) + \\ &amp;\big(\widehat\beta_1 + \widehat\beta_5\big)CP \\
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 \cdot 1 + \\ &amp; \widehat\beta_3 \cdot 0 + \widehat\beta_4 CP^c \cdot 1 + \\&amp;  \widehat\beta_5 CP^c \cdot 0 \\
+\widehat{LE} = &amp; \big(\widehat\beta_0 + \widehat\beta_2\big) + \big(\widehat\beta_1 + \widehat\beta_4\big) CP^c\\
 \end{aligned}\]</span></p>
 </div>
 </div>
-</div><div class="column" style="width:25%;">
-<div class="proposition">
-<div class="prop-title">
-<p>Asia</p>
-</div>
-<div class="prop-cont">
-<p><span class="math display">\[\begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \\ &amp; \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 1 + \\ &amp; \widehat\beta_4 \cdot 0 + \widehat\beta_5 CP \cdot 0 + \\ &amp; \widehat\beta_6 CP \cdot 1+ \widehat\beta_7 CP \cdot 0 \\
-\widehat{LE} = &amp;\big(\widehat\beta_0+\widehat\beta_3\big) + \\ &amp;\big(\widehat\beta_1 + \widehat\beta_6\big)CP \\
-\end{aligned}\]</span></p>
-</div>
-</div>
-</div><div class="column" style="width:25%;">
+</div><div class="column" style="width:35%;">
 <div class="definition">
 <div class="def-title">
-<p>Europe</p>
+<p>Free</p>
 </div>
 <div class="def-cont">
 <p><span class="math display">\[\begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \\ &amp; \widehat\beta_2 \cdot 0 + \widehat\beta_3 \cdot 0 + \\ &amp; \widehat\beta_4 \cdot 1 + \widehat\beta_5 CP \cdot 0 + \\ &amp; \widehat\beta_6 CP \cdot 0+ \widehat\beta_7 CP \cdot 1 \\
-\widehat{LE} = &amp;\big(\widehat\beta_0+\widehat\beta_4\big) + \\ &amp; \big(\widehat\beta_1 + \widehat\beta_7\big)CP \\
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 \cdot 0 + \\ &amp; \widehat\beta_3 \cdot 1 + \widehat\beta_4 CP^c \cdot 0 + \\&amp; \widehat\beta_5 CP^c \cdot 1 \\
+\widehat{LE} = &amp; \big(\widehat\beta_0 + \widehat\beta_3\big) + \big(\widehat\beta_1 + \widehat\beta_5\big) CP^c\\
 \end{aligned}\]</span></p>
 </div>
 </div>
@@ -3012,16 +3009,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 </section>
 <section id="interpretation-for-interaction-between-multi-level-categorical-and-continuous-variables" class="slide level2">
 <h2>Interpretation for interaction between multi-level categorical and continuous variables</h2>
-<p><span class="math display">\[ \begin{aligned}
-\widehat{LE} = &amp;\widehat\beta_0 + \widehat\beta_1 CP + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe}) + \\ &amp; \widehat\beta_5 CP \cdot I(\text{Americas}) + \widehat\beta_6 CP \cdot I(\text{Asia})+ \widehat\beta_7 CP \cdot I(\text{Europe}) \\
-\widehat{LE} = &amp; \bigg[\widehat\beta_0 + \widehat\beta_2 I(\text{Americas}) + \widehat\beta_3 I(\text{Asia}) + \widehat\beta_4 I(\text{Europe})\bigg] + \\ &amp;\underbrace{\bigg[\widehat\beta_1 +  \widehat\beta_5 \cdot I(\text{Americas}) + \widehat\beta_6 \cdot I(\text{Asia})+ \widehat\beta_7 \cdot I(\text{Europe}) \bigg]}_\text{CP's effect} CP \\
+<p><span class="math display">\[\begin{aligned}
+\widehat{LE} = &amp; \widehat\beta_0 + \widehat\beta_1 CP^c + \widehat\beta_2 I(\text{FS} = \text{PF}) + \widehat\beta_3 I(\text{FS} = \text{F}) + \\ &amp; \widehat\beta_4 CP^c \cdot I(\text{FS} = \text{PF}) + \widehat\beta_5 CP^c \cdot I(\text{FS} = \text{F}) \\
+\widehat{LE} = &amp; \bigg[\widehat\beta_0 + \widehat\beta_2 I(\text{FS} = \text{PF}) + \widehat\beta_3 I(\text{FS} = \text{F})\bigg] + \\ &amp;\underbrace{\bigg[\widehat\beta_1 +  \widehat\beta_4 \cdot I(\text{FS} = \text{F}) + \widehat\beta_5 \cdot I(\text{FS} = \text{F}) \bigg]}_\text{CP's effect} CP^c \\
 \end{aligned}\]</span></p>
 <ul>
 <li><p>Interpretation:</p>
 <ul>
-<li><span class="math inline">\(\beta_5\)</span> = mean change in female literacy rate’s effect, comparing countries in the Americas to countries in Africa</li>
-<li><span class="math inline">\(\beta_6\)</span> = mean change in female literacy rate’s effect, comparing countries in Asia to countries in Africa</li>
-<li><span class="math inline">\(\beta_7\)</span> = mean change in female literacy rate’s effect, comparing countries in Europe to countries in Africa</li>
+<li><span class="math inline">\(\beta_4\)</span> = mean change in cell phones’s effect, comparing countries that are partly free to countries that are not free</li>
+<li><span class="math inline">\(\beta_5\)</span> = mean change in cell phones’s effect, comparing countries that are free to countries that are not free</li>
 </ul></li>
 <li><p>It will be helpful to test the interaction to round out this interpretation!!</p></li>
 </ul>
@@ -3029,9 +3025,9 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <section id="test-interaction-between-multi-level-categorical-continuous-variables" class="slide level2">
 <h2>Test interaction between multi-level categorical &amp; continuous variables</h2>
 <ul>
-<li>We run an F-test for a group of coefficients (<span class="math inline">\(\beta_5\)</span>, <span class="math inline">\(\beta_6\)</span>, <span class="math inline">\(\beta_7\)</span>) in the below model (see lesson 10)</li>
+<li>We run an F-test for a group of coefficients (<span class="math inline">\(\beta_4\)</span> and <span class="math inline">\(\beta_5\)</span>) in the below model</li>
 </ul>
-<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \\ &amp; \beta_5 CP \cdot I(\text{Americas}) + \beta_6 CP \cdot I(\text{Asia})+ \beta_7 CP \cdot I(\text{Europe})+ \epsilon \end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP^c + \beta_2 I(\text{FS} = \text{PF}) + \beta_3 I(\text{FS} = \text{F}) + \\ &amp; \beta_4 CP^c \cdot I(\text{FS} = \text{PF}) + \beta_5 CP^c \cdot I(\text{FS} = \text{F}) + \epsilon\end{aligned}\]</span></p>
 <div class="columns">
 <div class="column" style="width:45%;">
 <div class="proof1">
@@ -3039,7 +3035,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <p>Null <span class="math inline">\(H_0\)</span></p>
 </div>
 <div class="proof-cont">
-<p><span class="math inline">\(\beta_5= \beta_6 = \beta_7 =0\)</span></p>
+<p><span class="math inline">\(\beta_4= \beta_5 =0\)</span></p>
 </div>
 </div>
 </div><div class="column" style="width:55%;">
@@ -3048,7 +3044,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <p>Alternative <span class="math inline">\(H_1\)</span></p>
 </div>
 <div class="def-cont">
-<p><span class="math inline">\(\beta_5\neq0\)</span> and/or <span class="math inline">\(\beta_6\neq0\)</span> and/or <span class="math inline">\(\beta_7\neq0\)</span></p>
+<p><span class="math inline">\(\beta_4\neq0\)</span> and/or <span class="math inline">\(\beta_5\neq0\)</span>$</p>
 </div>
 </div>
 </div></div>
@@ -3059,7 +3055,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <p>Null / Smaller / Reduced model</p>
 </div>
 <div class="proof-cont">
-<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP + \beta_2 I(\text{Americas}) + \\ &amp; \beta_3 I(\text{Asia}) + \beta_4 I(\text{Europe}) + \epsilon \end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP^c + \beta_2 I(\text{FS} = \text{PF}) + \\ &amp;\beta_3 I(\text{FS} = \text{F}) +  \epsilon\end{aligned}\]</span></p>
 </div>
 </div>
 </div><div class="column" style="width:55%;">
@@ -3068,7 +3064,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <p>Alternative / Larger / Full model</p>
 </div>
 <div class="def-cont">
-<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP + \beta_2 I(\text{Americas}) + \beta_3 I(\text{Asia}) + \\ &amp; \beta_4 I(\text{Europe}) + \beta_5 CP \cdot I(\text{Americas}) + \\ &amp; \beta_6 CP \cdot I(\text{Asia})+ \beta_7 CP \cdot I(\text{Europe})+ \epsilon \end{aligned}\]</span></p>
+<p><span class="math display">\[\begin{aligned}LE = &amp;\beta_0 + \beta_1 CP^c + \beta_2 I(\text{FS} = \text{PF}) + \beta_3 I(\text{FS} = \text{F}) + \\ &amp; \beta_4 CP^c \cdot I(\text{FS} = \text{PF}) + \beta_5 CP^c \cdot I(\text{FS} = \text{F}) + \epsilon\end{aligned}\]</span></p>
 </div>
 </div>
 </div></div>
@@ -3079,33 +3075,35 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 <li>Fit the reduced and full model</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>m_int_wr_red <span class="ot">=</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> freedom_status, </span>
-<span id="cb14-2"><a></a>                   <span class="at">data =</span> gapm)</span>
-<span id="cb14-3"><a></a>m_int_wr_full <span class="ot">=</span> <span class="fu">lm</span>(life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> freedom_status<span class="sc">+</span></span>
-<span id="cb14-4"><a></a>                  CP_c<span class="sc">*</span>freedom_status, <span class="at">data =</span> gapm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>m_int_fs_red <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> freedom_status)</span>
+<span id="cb15-2"><a></a>m_int_fs_full <span class="ot">=</span> gapm <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a></a>  <span class="fu">lm</span>(<span class="at">formula =</span> life_exp <span class="sc">~</span> CP_c <span class="sc">+</span> freedom_status <span class="sc">+</span> CP_c<span class="sc">*</span>freedom_status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<ul>
-<li>Display the ANOVA table with F-statistic and p-value</li>
-</ul>
 <div class="cell">
+<details class="code-fold">
+<summary>Code to display ANOVA table for testing interaction</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>anova_int_fs <span class="ot">=</span> <span class="fu">anova</span>(m_int_fs_red, m_int_fs_full)</span>
+<span id="cb16-2"><a></a>anova_int_fs <span class="sc">%&gt;%</span> <span class="fu">tidy</span>() <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">35</span>) <span class="sc">%&gt;%</span> <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
-<div id="tzfhtoeofq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tzfhtoeofq table {
+<div id="tlmglkurak" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tlmglkurak table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tzfhtoeofq thead, #tzfhtoeofq tbody, #tzfhtoeofq tfoot, #tzfhtoeofq tr, #tzfhtoeofq td, #tzfhtoeofq th {
+#tlmglkurak thead, #tlmglkurak tbody, #tlmglkurak tfoot, #tlmglkurak tr, #tlmglkurak td, #tlmglkurak th {
   border-style: none;
 }
 
-#tzfhtoeofq p {
+#tlmglkurak p {
   margin: 0;
   padding: 0;
 }
 
-#tzfhtoeofq .gt_table {
+#tlmglkurak .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3131,12 +3129,12 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-left-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_caption {
+#tlmglkurak .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tzfhtoeofq .gt_title {
+#tlmglkurak .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3148,7 +3146,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-width: 0;
 }
 
-#tzfhtoeofq .gt_subtitle {
+#tlmglkurak .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3160,7 +3158,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-top-width: 0;
 }
 
-#tzfhtoeofq .gt_heading {
+#tlmglkurak .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3172,13 +3170,13 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_bottom_border {
+#tlmglkurak .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_col_headings {
+#tlmglkurak .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3193,7 +3191,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_col_heading {
+#tlmglkurak .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3213,7 +3211,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   overflow-x: hidden;
 }
 
-#tzfhtoeofq .gt_column_spanner_outer {
+#tlmglkurak .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3225,15 +3223,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 4px;
 }
 
-#tzfhtoeofq .gt_column_spanner_outer:first-child {
+#tlmglkurak .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tzfhtoeofq .gt_column_spanner_outer:last-child {
+#tlmglkurak .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tzfhtoeofq .gt_column_spanner {
+#tlmglkurak .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3245,11 +3243,11 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   width: 100%;
 }
 
-#tzfhtoeofq .gt_spanner_row {
+#tlmglkurak .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tzfhtoeofq .gt_group_heading {
+#tlmglkurak .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3275,7 +3273,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   text-align: left;
 }
 
-#tzfhtoeofq .gt_empty_group_heading {
+#tlmglkurak .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3290,15 +3288,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   vertical-align: middle;
 }
 
-#tzfhtoeofq .gt_from_md > :first-child {
+#tlmglkurak .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tzfhtoeofq .gt_from_md > :last-child {
+#tlmglkurak .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tzfhtoeofq .gt_row {
+#tlmglkurak .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3317,7 +3315,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   overflow-x: hidden;
 }
 
-#tzfhtoeofq .gt_stub {
+#tlmglkurak .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3330,7 +3328,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#tzfhtoeofq .gt_stub_row_group {
+#tlmglkurak .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3344,15 +3342,15 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   vertical-align: top;
 }
 
-#tzfhtoeofq .gt_row_group_first td {
+#tlmglkurak .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tzfhtoeofq .gt_row_group_first th {
+#tlmglkurak .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tzfhtoeofq .gt_summary_row {
+#tlmglkurak .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3362,16 +3360,16 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#tzfhtoeofq .gt_first_summary_row {
+#tlmglkurak .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_first_summary_row.thick {
+#tlmglkurak .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tzfhtoeofq .gt_last_summary_row {
+#tlmglkurak .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3381,7 +3379,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_grand_summary_row {
+#tlmglkurak .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3391,7 +3389,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#tzfhtoeofq .gt_first_grand_summary_row {
+#tlmglkurak .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3401,7 +3399,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-top-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_last_grand_summary_row_top {
+#tlmglkurak .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3411,11 +3409,11 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_striped {
+#tlmglkurak .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tzfhtoeofq .gt_table_body {
+#tlmglkurak .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3424,7 +3422,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-bottom-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_footnotes {
+#tlmglkurak .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3438,7 +3436,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_footnote {
+#tlmglkurak .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3447,7 +3445,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#tzfhtoeofq .gt_sourcenotes {
+#tlmglkurak .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3461,7 +3459,7 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   border-right-color: #D3D3D3;
 }
 
-#tzfhtoeofq .gt_sourcenote {
+#tlmglkurak .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3469,72 +3467,72 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
   padding-right: 5px;
 }
 
-#tzfhtoeofq .gt_left {
+#tlmglkurak .gt_left {
   text-align: left;
 }
 
-#tzfhtoeofq .gt_center {
+#tlmglkurak .gt_center {
   text-align: center;
 }
 
-#tzfhtoeofq .gt_right {
+#tlmglkurak .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tzfhtoeofq .gt_font_normal {
+#tlmglkurak .gt_font_normal {
   font-weight: normal;
 }
 
-#tzfhtoeofq .gt_font_bold {
+#tlmglkurak .gt_font_bold {
   font-weight: bold;
 }
 
-#tzfhtoeofq .gt_font_italic {
+#tlmglkurak .gt_font_italic {
   font-style: italic;
 }
 
-#tzfhtoeofq .gt_super {
+#tlmglkurak .gt_super {
   font-size: 65%;
 }
 
-#tzfhtoeofq .gt_footnote_marks {
+#tlmglkurak .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tzfhtoeofq .gt_asterisk {
+#tlmglkurak .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tzfhtoeofq .gt_indent_1 {
+#tlmglkurak .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tzfhtoeofq .gt_indent_2 {
+#tlmglkurak .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tzfhtoeofq .gt_indent_3 {
+#tlmglkurak .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tzfhtoeofq .gt_indent_4 {
+#tlmglkurak .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tzfhtoeofq .gt_indent_5 {
+#tlmglkurak .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tzfhtoeofq .katex-display {
+#tlmglkurak .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tzfhtoeofq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tlmglkurak div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3577,8 +3575,8 @@ LE = &amp; \beta_0 + \beta_1 CP^c + \beta_2 I(\text{high income}) + \\ &amp;\bet
 </div>
 </div>
 <ul>
-<li><p>Conclusion: There is not a significant interaction between female literacy rate and world region (p = 0.478).</p></li>
-<li><p>World region is NOT an effect measure modifier of CP on LE</p></li>
+<li><p>Conclusion: There is not a significant interaction between number of cell phones and freedom status (p = 0.554)</p></li>
+<li><p>Freedom status is NOT an effect measure modifier of CP on LE</p></li>
 </ul>
 
 
