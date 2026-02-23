@@ -693,6 +693,8 @@ $$ \begin{aligned}
 
 -   It will be helpful to test the interaction to round out this interpretation!!
 
+## Poll Everywhere Question 4
+
 ## Test interaction between binary categorical and continuous variables
 
 -   We run an F-test for a single coefficient ($\beta_3$) in the below model (see Lesson 10, MLR: Using the F-test)

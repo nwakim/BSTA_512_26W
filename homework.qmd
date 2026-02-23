@@ -12,16 +12,18 @@ library(here)
 source(here("class_dates.R"))
 ```
 
-| Homework | Assignment | Assignment due (\@11pm) | Answers | Solutions folder |
-|---------------|---------------|---------------|---------------|---------------|
+| Homework | Assignment | Assignment due (\@11pm) | Answers | Solutions folder\* |
+|----|----|----|----|----|
 | 0 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_00.qmd)]{style="color:#f8f5f0;"} | `r hw0 %>% format("%m/%d")` | [{{< iconify ph key-fill size=29px >}}]{style="color:#f8f5f0;"} | [{{< iconify icon-park-twotone file-code size=29px >}}]{style="color:#f8f5f0;"} |
 | 1 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_01.qmd)]{style="color:#f8f5f0;"} | `r hw1 %>% format("%m/%d")` | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_01_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/HW_solns/HW1?csf=1&web=1&e=OkULxF)]{style="color:#f8f5f0;"} |
 | 2 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_02.qmd)]{style="color:#f8f5f0;"} | `r hw2 %>% format("%m/%d")` | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_02_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/HW_solns/HW2?csf=1&web=1&e=9WnsS3)]{style="color:#f8f5f0;"} |
 | 3 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_03.qmd)]{style="color:#f8f5f0;"} | `r hw3 %>% format("%m/%d")` | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_03_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/HW_solns/HW3?csf=1&web=1&e=AtDCHG)]{style="color:#f8f5f0;"} |
 | 4 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_04.qmd)]{style="color:#f8f5f0;"} | `r hw4 %>% format("%m/%d")` | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_04_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/HW_solns/HW4?csf=1&web=1&e=9biyZC)]{style="color:#f8f5f0;"} |
-| 5 | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_05.qmd)]{style="color:#f8f5f0;"} | `r hw5 %>% format("%m/%d")` | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_05_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/HW_solns/HW5?csf=1&web=1&e=vj2ang)]{style="color:#f8f5f0;"} |
+| 5 (optional) | [[{{< iconify material-symbols assignment size=29px >}}](/homework/HW_05.qmd)]{style="color:#f8f5f0;"} | `r hw5 %>% format("%m/%d")` | [[{{< iconify ph key-fill size=29px >}}](/hw_answers/HW_05_ans.qmd)]{style="color:#f8f5f0;"} | [[{{< iconify icon-park-twotone file-code size=29px >}}](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/HW_solns/HW5?csf=1&web=1&e=vj2ang)]{style="color:#f8f5f0;"} |
 
 \*Please note that you need to download the `.html` file to see the LaTeX math properly.
+
+-   **Optional HW 5:** This homework is optional. Not completing it will not impact your grade. It is not an extra credit assignment. If you have a 0 for any homework assignment, then you can complete HW 5 to replace that 0.
 
 ## File Naming
 
@@ -30,5 +32,5 @@ source(here("class_dates.R"))
 ## Rubrics
 
 |   | 1 point | 0 points |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Completeness | 75% of the question parts are thoroughly worked out and have an answer. “Question parts” means the sub-questions labeled “Part \_." Answers can be incorrect or correct. For parts with longer processes and calculations, solution set up and calculations are required. | Less than 75% of question parts are thoroughly worked out. Attempts do not count as thoroughly worked out. |
