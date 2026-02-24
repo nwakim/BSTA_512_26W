@@ -135,6 +135,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -158,7 +162,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-winter-2025" id="toc-muddy-points-from-winter-2025" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2025">Muddy Points from Winter 2025</a></li>
+  <li><a href="#muddy-points-from-winter-2026" id="toc-muddy-points-from-winter-2026" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2026">Muddy Points from Winter 2026</a>
+  <ul class="collapse">
+  <li><a href="#im-still-a-little-unclear-on-the-difference-between-confounders-and-effect-modifiers.-right-now-i-am-imagining-confounders-as-variables-that-modify-the-y-axis-intercept-while-effect-modifiers-alter-slopes-but-i-dont-think-this-is-correct." id="toc-im-still-a-little-unclear-on-the-difference-between-confounders-and-effect-modifiers.-right-now-i-am-imagining-confounders-as-variables-that-modify-the-y-axis-intercept-while-effect-modifiers-alter-slopes-but-i-dont-think-this-is-correct." class="nav-link" data-scroll-target="#im-still-a-little-unclear-on-the-difference-between-confounders-and-effect-modifiers.-right-now-i-am-imagining-confounders-as-variables-that-modify-the-y-axis-intercept-while-effect-modifiers-alter-slopes-but-i-dont-think-this-is-correct.">1. I’m still a little unclear on the difference between confounders and effect modifiers. Right now, I am imagining confounders as variables that modify the Y-axis intercept while effect modifiers alter slopes, but I don’t think this is correct.</a></li>
+  <li><a href="#how-to-make-the-models---which-variables-do-we-pick-and-why" id="toc-how-to-make-the-models---which-variables-do-we-pick-and-why" class="nav-link" data-scroll-target="#how-to-make-the-models---which-variables-do-we-pick-and-why">2. how to make the models - which variables do we pick and why???</a></li>
+  <li><a href="#i-had-a-hard-time-wrapping-my-head-around-the-existence-of-both-the-confounder-variable-term-in-conjunction-with-the-interaction-term.-i-understand-the-interpretation-of-those-coefficients-but-in-terms-of-significance-does-that-mean-only-the-confounder-term-or-the-interaction-term-can-be-significant-if-you-have-widehaty-widehatbeta_0-widehatbeta_1-cdot-x_1-widehatbeta_2-cdot-x_2-widehatbeta_3-cdot-x_1-cdot-x_2-is-it-either-widehatbeta_2-is-significant-or-widehatbeta_3-is-significant-because-a-covariate-can-never-be-both-a-confounder-and-an-effect-modifier-right-it-has-to-only-be-one" id="toc-i-had-a-hard-time-wrapping-my-head-around-the-existence-of-both-the-confounder-variable-term-in-conjunction-with-the-interaction-term.-i-understand-the-interpretation-of-those-coefficients-but-in-terms-of-significance-does-that-mean-only-the-confounder-term-or-the-interaction-term-can-be-significant-if-you-have-widehaty-widehatbeta_0-widehatbeta_1-cdot-x_1-widehatbeta_2-cdot-x_2-widehatbeta_3-cdot-x_1-cdot-x_2-is-it-either-widehatbeta_2-is-significant-or-widehatbeta_3-is-significant-because-a-covariate-can-never-be-both-a-confounder-and-an-effect-modifier-right-it-has-to-only-be-one" class="nav-link" data-scroll-target="#i-had-a-hard-time-wrapping-my-head-around-the-existence-of-both-the-confounder-variable-term-in-conjunction-with-the-interaction-term.-i-understand-the-interpretation-of-those-coefficients-but-in-terms-of-significance-does-that-mean-only-the-confounder-term-or-the-interaction-term-can-be-significant-if-you-have-widehaty-widehatbeta_0-widehatbeta_1-cdot-x_1-widehatbeta_2-cdot-x_2-widehatbeta_3-cdot-x_1-cdot-x_2-is-it-either-widehatbeta_2-is-significant-or-widehatbeta_3-is-significant-because-a-covariate-can-never-be-both-a-confounder-and-an-effect-modifier-right-it-has-to-only-be-one">3. I had a hard time wrapping my head around the existence of both the “confounder” variable term in conjunction with the interaction term. I understand the interpretation of those coefficients, but in terms of significance, does that mean only the confounder term or the interaction term can be significant? If you have <span class="math inline">\(\widehat{Y} = \widehat\beta_0 + \widehat\beta_1 \cdot X_1 + \widehat\beta_2 \cdot X_2 + \widehat\beta_3 \cdot X_1 \cdot X_2\)</span>, is it either <span class="math inline">\(\widehat\beta_2\)</span> is significant or <span class="math inline">\(\widehat\beta_3\)</span> is significant? Because a covariate can never be both a confounder AND an effect modifier, right? It has to only be one?</a></li>
+  <li><a href="#im-a-little-muddy-on-the-stepsapproach-you-should-take-when-identifying-effect-modifiers-vs-confounders.-do-you-just-try-running-the-linear-model-with-the-interaction-and-see-if-its-significant" id="toc-im-a-little-muddy-on-the-stepsapproach-you-should-take-when-identifying-effect-modifiers-vs-confounders.-do-you-just-try-running-the-linear-model-with-the-interaction-and-see-if-its-significant" class="nav-link" data-scroll-target="#im-a-little-muddy-on-the-stepsapproach-you-should-take-when-identifying-effect-modifiers-vs-confounders.-do-you-just-try-running-the-linear-model-with-the-interaction-and-see-if-its-significant">4. I’m a little muddy on the steps/approach you should take when identifying effect modifiers vs confounders. Do you just try running the linear model with the interaction and see if it’s significant?</a></li>
+  </ul></li>
   <li><a href="#muddy-points-from-winter-2024" id="toc-muddy-points-from-winter-2024" class="nav-link" data-scroll-target="#muddy-points-from-winter-2024">Muddy Points from Winter 2024</a>
   <ul class="collapse">
   <li><a href="#can-we-use-continuous-covariates-in-an-interaction-model" id="toc-can-we-use-continuous-covariates-in-an-interaction-model" class="nav-link" data-scroll-target="#can-we-use-continuous-covariates-in-an-interaction-model">1. Can we use continuous covariates in an interaction model?</a></li>
@@ -186,7 +196,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">February 23, 2026</p>
     </div>
   </div>
     
@@ -197,8 +207,29 @@ window.Quarto = {
 </header>
 
 
-<section id="muddy-points-from-winter-2025" class="level2">
-<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2025">Muddy Points from Winter 2025</h2>
+<section id="muddy-points-from-winter-2026" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2026">Muddy Points from Winter 2026</h2>
+<section id="im-still-a-little-unclear-on-the-difference-between-confounders-and-effect-modifiers.-right-now-i-am-imagining-confounders-as-variables-that-modify-the-y-axis-intercept-while-effect-modifiers-alter-slopes-but-i-dont-think-this-is-correct." class="level3">
+<h3 class="anchored" data-anchor-id="im-still-a-little-unclear-on-the-difference-between-confounders-and-effect-modifiers.-right-now-i-am-imagining-confounders-as-variables-that-modify-the-y-axis-intercept-while-effect-modifiers-alter-slopes-but-i-dont-think-this-is-correct.">1. I’m still a little unclear on the difference between confounders and effect modifiers. Right now, I am imagining confounders as variables that modify the Y-axis intercept while effect modifiers alter slopes, but I don’t think this is correct.</h3>
+<p>This is pretty close!</p>
+<p>The main difference is that confounders are associated with both the exposure and the outcome, but they do not modify the effect of the exposure on the outcome. So like you said, they can shift the Y-axis intercept, but they do not change the slope of the line.</p>
+<p>Effect modifiers, on the other hand, do modify the effect of the exposure on the outcome. This means that they can change the slope of the line, and <strong>they can also change the Y-axis intercept</strong>.</p>
+</section>
+<section id="how-to-make-the-models---which-variables-do-we-pick-and-why" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-make-the-models---which-variables-do-we-pick-and-why">2. how to make the models - which variables do we pick and why???</h3>
+<p>This is a great question! The variables we include in our models depend on our research question, our hypothesis on how they are related, and some statistical tests! We will cover this more in depth when we get to the lesson on Model Selection!</p>
+</section>
+<section id="i-had-a-hard-time-wrapping-my-head-around-the-existence-of-both-the-confounder-variable-term-in-conjunction-with-the-interaction-term.-i-understand-the-interpretation-of-those-coefficients-but-in-terms-of-significance-does-that-mean-only-the-confounder-term-or-the-interaction-term-can-be-significant-if-you-have-widehaty-widehatbeta_0-widehatbeta_1-cdot-x_1-widehatbeta_2-cdot-x_2-widehatbeta_3-cdot-x_1-cdot-x_2-is-it-either-widehatbeta_2-is-significant-or-widehatbeta_3-is-significant-because-a-covariate-can-never-be-both-a-confounder-and-an-effect-modifier-right-it-has-to-only-be-one" class="level3">
+<h3 class="anchored" data-anchor-id="i-had-a-hard-time-wrapping-my-head-around-the-existence-of-both-the-confounder-variable-term-in-conjunction-with-the-interaction-term.-i-understand-the-interpretation-of-those-coefficients-but-in-terms-of-significance-does-that-mean-only-the-confounder-term-or-the-interaction-term-can-be-significant-if-you-have-widehaty-widehatbeta_0-widehatbeta_1-cdot-x_1-widehatbeta_2-cdot-x_2-widehatbeta_3-cdot-x_1-cdot-x_2-is-it-either-widehatbeta_2-is-significant-or-widehatbeta_3-is-significant-because-a-covariate-can-never-be-both-a-confounder-and-an-effect-modifier-right-it-has-to-only-be-one">3. I had a hard time wrapping my head around the existence of both the “confounder” variable term in conjunction with the interaction term. I understand the interpretation of those coefficients, but in terms of significance, does that mean only the confounder term or the interaction term can be significant? If you have <span class="math inline">\(\widehat{Y} = \widehat\beta_0 + \widehat\beta_1 \cdot X_1 + \widehat\beta_2 \cdot X_2 + \widehat\beta_3 \cdot X_1 \cdot X_2\)</span>, is it either <span class="math inline">\(\widehat\beta_2\)</span> is significant or <span class="math inline">\(\widehat\beta_3\)</span> is significant? Because a covariate can never be both a confounder AND an effect modifier, right? It has to only be one?</h3>
+<p>Nope, we don’t really distinguish between confounders and effect modifiers in the above model. So we’re not really saying that <span class="math inline">\(\widehat\beta_2\)</span> or <span class="math inline">\(\widehat\beta_3\)</span> are significant.</p>
+<p>If <span class="math inline">\(X_2\)</span> is a <strong>confounder</strong> then we use the following model (calling it Model C) to represent it: <span class="math display">\[\widehat{Y} = \widehat\beta_0 + \widehat\beta_1 \cdot X_1 + \widehat\beta_2 \cdot X_2\]</span></p>
+<p>If <span class="math inline">\(X_2\)</span> is an <strong>effect modifier</strong> then we use the following model (calling it Model EM) to represent it: <span class="math display">\[\widehat{Y} = \widehat\beta_0 + \widehat\beta_1 \cdot X_1 + \widehat\beta_2 \cdot X_2 + \widehat\beta_3 \cdot X_1 \cdot X_2\]</span></p>
+<p>We cannot go right to testing both coefficients in the interaction model (Model EM) above. We would first test the interaction term (<span class="math inline">\(\widehat\beta_3\)</span>) to see if there is evidence of effect modification. If there is no evidence of effect modification, then we would need to run the model (Model C) without the interaction term. In that model, we would then test the confounder term (<span class="math inline">\(\widehat\beta_2\)</span>) to see if there is evidence of confounding.</p>
+</section>
+<section id="im-a-little-muddy-on-the-stepsapproach-you-should-take-when-identifying-effect-modifiers-vs-confounders.-do-you-just-try-running-the-linear-model-with-the-interaction-and-see-if-its-significant" class="level3">
+<h3 class="anchored" data-anchor-id="im-a-little-muddy-on-the-stepsapproach-you-should-take-when-identifying-effect-modifiers-vs-confounders.-do-you-just-try-running-the-linear-model-with-the-interaction-and-see-if-its-significant">4. I’m a little muddy on the steps/approach you should take when identifying effect modifiers vs confounders. Do you just try running the linear model with the interaction and see if it’s significant?</h3>
+<p>See above answer. We’ll also talk about this more in depth when we get to the lesson on Model Selection!</p>
+</section>
 </section>
 <section id="muddy-points-from-winter-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-winter-2024">Muddy Points from Winter 2024</h2>
