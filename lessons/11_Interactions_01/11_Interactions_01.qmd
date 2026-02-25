@@ -632,7 +632,7 @@ $$ \begin{aligned}
 ```{r}
 #| echo: true 
 gapm = gapm %>% 
-  mutate(CP_c = cell_phones_100 - median(cell_phones_100))
+  mutate(CP_c = cell_phones_100 - mean(cell_phones_100))
 ```
 
 -   I'm going to print the mean so I can use it for my interpretations
