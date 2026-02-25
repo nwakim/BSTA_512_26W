@@ -10,26 +10,20 @@ editor_options:
 
 ## Announcements
 
-- Please make sure you are looking at the lab instructions! 
-  - The instructions are on the site
-  - The `qmd` you download does NOT have the instructions on them
+- Still waiting on quiz 2
 - Today + 3 more lessons!!
-  - If we stay on track, 3/3 will be our last day of new material
+  - If we stay on track, 3/4 will be our last day of new material
   - Then the rest of classes will be dedicated to Project or HW help!
 - I will be posting the poster instructions by the end of this week!
+- HW 5 will be optional (see homework page)
 - Anything else?
 
-### Careers in Public Health: Insights from Industry Employers
-Thursday, Feb. 20th Noon-1pm via Zoom. Please register for Zoom Link: <https://portlandstate.joinhandshake.com/events/1668028/share_preview>
- 
-Join us for a virtual panel featuring professionals from public service, healthcare, nonprofit organizations, and education!
-What You’ll Experience:
-
-- Career Journeys: Hear firsthand how each panelist entered and advanced in their field, and learn what inspired their paths in public health.
-- Insider Tips: Discover the strategies panelists recommend for job searching and landing roles in their organizations and industries.
-- Job Search Guidance: Get expert advice on how to stand out in applications, interviews, and networking to secure the job you want.
 
 ## Key Dates
 
-- Lab 3 due this Friday (2/21)
-- HW 4 due next Friday (2/28)
+- HW 4 due this Sunday (3/1)
+- Lab 4 due next week (3/8)
+- Quiz 3 will open 3/11
+- Optional HW 5 due 3/15
+- Poster presentation (mandatory in-person attendance) on 3/16
+- Poster due 3/17 at 11pm

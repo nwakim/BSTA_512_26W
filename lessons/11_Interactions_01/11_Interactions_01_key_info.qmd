@@ -9,6 +9,7 @@ editor_options:
 ---
 
 ## Announcements
+
 - Lab 3 discussion next class
 - Quiz 2 due last night
   - Waiting on some extensions
