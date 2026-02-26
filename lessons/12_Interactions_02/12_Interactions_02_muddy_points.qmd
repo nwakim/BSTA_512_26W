@@ -9,7 +9,23 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Muddy Points from Winter 2025
+## Muddy Points from Winter 2026
+
+### 1. I'm confused about the difference between confounders and effect modifiers and how to identify them
+
+Confounders are variables that are associated with both the exposure and the outcome and can create a spurious association between them. Confounders are something we need to adjust for in the model with a main effect. For example, if we are interested in the association between $Y$ and $X_1$, and we want to model $X_2$ as a confounder, we would include $X_2$ in the model as a main effect. The model would look like: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon$$
+
+Effect modifiers, on the other hand, are variables that modify the effect of the exposure on the outcome. We need to model how the effect modifier will **change** the exposure's effect. Thus, we need an interaction term between the exposure and the effect modifier. For example, if we are interested in the association between $Y$ and $X_1$, and we want to model $X_2$ as an effect modifier, we would include an interaction term between $X_1$ and $X_2$ in the model. The model would look like: $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon$$
+
+### 2. The end part of interactions with getting the confidence intervals for the slope and intercept and interpreting them was confusing to me. I don't understand why the intercept wouldn't be $\widehat\beta_0 + 5 \cdot \widehat\beta_2$ based on the formula provided, but when Nicky wrote it out, it was $\widehat\beta_0 + 5 \cdot \widehat\beta_1$
+
+Oops! That's because I wrote it wrong. Will correct on the slides.
+
+### 3. I got a little confused by the visual representation on slide 10
+
+Let's go through some visualization for an interaction between two binary variables $X_1$ and $X_2$:
+
+![](muddy_point_01.png)
 
 ## Muddy Points from Winter 2024
 

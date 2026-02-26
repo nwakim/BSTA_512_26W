@@ -135,6 +135,10 @@ window.Quarto = {
 <span class="menu-text">Instructors</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../../quiz.html"> 
+<span class="menu-text">Quizzes</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
@@ -158,7 +162,12 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#muddy-points-from-winter-2025" id="toc-muddy-points-from-winter-2025" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2025">Muddy Points from Winter 2025</a></li>
+  <li><a href="#muddy-points-from-winter-2026" id="toc-muddy-points-from-winter-2026" class="nav-link active" data-scroll-target="#muddy-points-from-winter-2026">Muddy Points from Winter 2026</a>
+  <ul class="collapse">
+  <li><a href="#im-confused-about-the-difference-between-confounders-and-effect-modifiers-and-how-to-identify-them" id="toc-im-confused-about-the-difference-between-confounders-and-effect-modifiers-and-how-to-identify-them" class="nav-link" data-scroll-target="#im-confused-about-the-difference-between-confounders-and-effect-modifiers-and-how-to-identify-them">1. I’m confused about the difference between confounders and effect modifiers and how to identify them</a></li>
+  <li><a href="#the-end-part-of-interactions-with-getting-the-confidence-intervals-for-the-slope-and-intercept-and-interpreting-them-was-confusing-to-me.-i-dont-understand-why-the-intercept-wouldnt-be-widehatbeta_0-5-cdot-widehatbeta_2-based-on-the-formula-provided-but-when-nicky-wrote-it-out-it-was-widehatbeta_0-5-cdot-widehatbeta_1" id="toc-the-end-part-of-interactions-with-getting-the-confidence-intervals-for-the-slope-and-intercept-and-interpreting-them-was-confusing-to-me.-i-dont-understand-why-the-intercept-wouldnt-be-widehatbeta_0-5-cdot-widehatbeta_2-based-on-the-formula-provided-but-when-nicky-wrote-it-out-it-was-widehatbeta_0-5-cdot-widehatbeta_1" class="nav-link" data-scroll-target="#the-end-part-of-interactions-with-getting-the-confidence-intervals-for-the-slope-and-intercept-and-interpreting-them-was-confusing-to-me.-i-dont-understand-why-the-intercept-wouldnt-be-widehatbeta_0-5-cdot-widehatbeta_2-based-on-the-formula-provided-but-when-nicky-wrote-it-out-it-was-widehatbeta_0-5-cdot-widehatbeta_1">2. The end part of interactions with getting the confidence intervals for the slope and intercept and interpreting them was confusing to me. I don’t understand why the intercept wouldn’t be <span class="math inline">\(\widehat\beta_0 + 5 \cdot \widehat\beta_2\)</span> based on the formula provided, but when Nicky wrote it out, it was <span class="math inline">\(\widehat\beta_0 + 5 \cdot \widehat\beta_1\)</span></a></li>
+  <li><a href="#i-got-a-little-confused-by-the-visual-representation-on-slide-10" id="toc-i-got-a-little-confused-by-the-visual-representation-on-slide-10" class="nav-link" data-scroll-target="#i-got-a-little-confused-by-the-visual-representation-on-slide-10">3. I got a little confused by the visual representation on slide 10</a></li>
+  </ul></li>
   <li><a href="#muddy-points-from-winter-2024" id="toc-muddy-points-from-winter-2024" class="nav-link" data-scroll-target="#muddy-points-from-winter-2024">Muddy Points from Winter 2024</a>
   <ul class="collapse">
   <li><a href="#interactions-in-general" id="toc-interactions-in-general" class="nav-link" data-scroll-target="#interactions-in-general">1. Interactions in general</a></li>
@@ -185,7 +194,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 12, 2025</p>
+      <p class="date-modified">February 25, 2026</p>
     </div>
   </div>
     
@@ -196,8 +205,22 @@ window.Quarto = {
 </header>
 
 
-<section id="muddy-points-from-winter-2025" class="level2">
-<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2025">Muddy Points from Winter 2025</h2>
+<section id="muddy-points-from-winter-2026" class="level2">
+<h2 class="anchored" data-anchor-id="muddy-points-from-winter-2026">Muddy Points from Winter 2026</h2>
+<section id="im-confused-about-the-difference-between-confounders-and-effect-modifiers-and-how-to-identify-them" class="level3">
+<h3 class="anchored" data-anchor-id="im-confused-about-the-difference-between-confounders-and-effect-modifiers-and-how-to-identify-them">1. I’m confused about the difference between confounders and effect modifiers and how to identify them</h3>
+<p>Confounders are variables that are associated with both the exposure and the outcome and can create a spurious association between them. Confounders are something we need to adjust for in the model with a main effect. For example, if we are interested in the association between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>, and we want to model <span class="math inline">\(X_2\)</span> as a confounder, we would include <span class="math inline">\(X_2\)</span> in the model as a main effect. The model would look like: <span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon\]</span></p>
+<p>Effect modifiers, on the other hand, are variables that modify the effect of the exposure on the outcome. We need to model how the effect modifier will <strong>change</strong> the exposure’s effect. Thus, we need an interaction term between the exposure and the effect modifier. For example, if we are interested in the association between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>, and we want to model <span class="math inline">\(X_2\)</span> as an effect modifier, we would include an interaction term between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> in the model. The model would look like: <span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon\]</span></p>
+</section>
+<section id="the-end-part-of-interactions-with-getting-the-confidence-intervals-for-the-slope-and-intercept-and-interpreting-them-was-confusing-to-me.-i-dont-understand-why-the-intercept-wouldnt-be-widehatbeta_0-5-cdot-widehatbeta_2-based-on-the-formula-provided-but-when-nicky-wrote-it-out-it-was-widehatbeta_0-5-cdot-widehatbeta_1" class="level3">
+<h3 class="anchored" data-anchor-id="the-end-part-of-interactions-with-getting-the-confidence-intervals-for-the-slope-and-intercept-and-interpreting-them-was-confusing-to-me.-i-dont-understand-why-the-intercept-wouldnt-be-widehatbeta_0-5-cdot-widehatbeta_2-based-on-the-formula-provided-but-when-nicky-wrote-it-out-it-was-widehatbeta_0-5-cdot-widehatbeta_1">2. The end part of interactions with getting the confidence intervals for the slope and intercept and interpreting them was confusing to me. I don’t understand why the intercept wouldn’t be <span class="math inline">\(\widehat\beta_0 + 5 \cdot \widehat\beta_2\)</span> based on the formula provided, but when Nicky wrote it out, it was <span class="math inline">\(\widehat\beta_0 + 5 \cdot \widehat\beta_1\)</span></h3>
+<p>Oops! That’s because I wrote it wrong. Will correct on the slides.</p>
+</section>
+<section id="i-got-a-little-confused-by-the-visual-representation-on-slide-10" class="level3">
+<h3 class="anchored" data-anchor-id="i-got-a-little-confused-by-the-visual-representation-on-slide-10">3. I got a little confused by the visual representation on slide 10</h3>
+<p>Let’s go through some visualization for an interaction between two binary variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>:</p>
+<p><img src="muddy_point_01.png" class="img-fluid"></p>
+</section>
 </section>
 <section id="muddy-points-from-winter-2024" class="level2">
 <h2 class="anchored" data-anchor-id="muddy-points-from-winter-2024">Muddy Points from Winter 2024</h2>

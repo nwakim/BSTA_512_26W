@@ -7166,5 +7166,19 @@
     "title": "Lab 3: Feedback and Discussion",
     "section": "Multiple Linear Regression",
     "text": "Multiple Linear Regression\n\nDoes everyone have an interpretation for each coefficient for the main variable?\nHow would you synthesize the results in a sentence or two?\n\nIn the poster, it will be good to discuss the trend, then give an example of how you would interpret each coefficient"
+  },
+  {
+    "objectID": "lessons/12_Interactions_02/12_Interactions_02_muddy_points.html",
+    "href": "lessons/12_Interactions_02/12_Interactions_02_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Confounders are variables that are associated with both the exposure and the outcome and can create a spurious association between them. Confounders are something we need to adjust for in the model with a main effect. For example, if we are interested in the association between \\(Y\\) and \\(X_1\\), and we want to model \\(X_2\\) as a confounder, we would include \\(X_2\\) in the model as a main effect. The model would look like: \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\epsilon\\]\nEffect modifiers, on the other hand, are variables that modify the effect of the exposure on the outcome. We need to model how the effect modifier will change the exposure’s effect. Thus, we need an interaction term between the exposure and the effect modifier. For example, if we are interested in the association between \\(Y\\) and \\(X_1\\), and we want to model \\(X_2\\) as an effect modifier, we would include an interaction term between \\(X_1\\) and \\(X_2\\) in the model. The model would look like: \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_1 X_2 + \\epsilon\\]\n\n\n\nOops! That’s because I wrote it wrong. Will correct on the slides.\n\n\n\nLet’s go through some visualization for an interaction between two binary variables \\(X_1\\) and \\(X_2\\):"
+  },
+  {
+    "objectID": "lessons/12_Interactions_02/12_Interactions_02_muddy_points.html#muddy-points-from-winter-2026",
+    "href": "lessons/12_Interactions_02/12_Interactions_02_muddy_points.html#muddy-points-from-winter-2026",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Confounders are variables that are associated with both the exposure and the outcome and can create a spurious association between them. Confounders are something we need to adjust for in the model with a main effect. For example, if we are interested in the association between \\(Y\\) and \\(X_1\\), and we want to model \\(X_2\\) as a confounder, we would include \\(X_2\\) in the model as a main effect. The model would look like: \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\epsilon\\]\nEffect modifiers, on the other hand, are variables that modify the effect of the exposure on the outcome. We need to model how the effect modifier will change the exposure’s effect. Thus, we need an interaction term between the exposure and the effect modifier. For example, if we are interested in the association between \\(Y\\) and \\(X_1\\), and we want to model \\(X_2\\) as an effect modifier, we would include an interaction term between \\(X_1\\) and \\(X_2\\) in the model. The model would look like: \\[Y = \\beta_0 + \\beta_1 X_1 + \\beta_2 X_2 + \\beta_3 X_1 X_2 + \\epsilon\\]\n\n\n\nOops! That’s because I wrote it wrong. Will correct on the slides.\n\n\n\nLet’s go through some visualization for an interaction between two binary variables \\(X_1\\) and \\(X_2\\):"
   }
 ]
