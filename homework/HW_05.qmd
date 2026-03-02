@@ -31,9 +31,9 @@ library(here)
 
 ## Directions
 
--   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_W25/blob/main/homework/HW_05.qmd)
+-   [Download the `.qmd` file here.](https://github.com/nwakim/BSTA_512_26W/blob/main/homework/HW_05.qmd)
 
--   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/g/personal/wakim_ohsu_edu/EtimsrgruwZOvhVqgx31g0MBwLSTj2L53ilK_ZIw9-vucA?e=sBvCNu) the HW3 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW3 `.qmd` file.
+-   You will need to download the datasets. Use [this link to download](https://ohsuitg-my.sharepoint.com/:f:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Data/Homework?csf=1&web=1&e=es5Kgh) the HW4 datasets needed in this assignment. If you do not want to make changes to the paths set in this document, then make sure the files are stored in a folder named "data" that is housed in the same location as your HW4 `.qmd` file.
 
 -   Please upload your homework to Sakai. **Upload both your `.qmd` code file and the rendered `.html` file**
 
@@ -56,7 +56,7 @@ The purpose of the below problem is to integrate what we have learned so far int
 -   F-test procedures and conclusions
 -   Testing if a covariate is an effect modifier, confounder, or nothing
 
-## Question 1
+## Question 1 {#sec-L11-L12-Interactions-02}
 
 We are going to revisit the Palmer Penguins dataset from Homework 4. Choosing what to test, interpretations of coefficients, F-test conclusions, and interactions
 

@@ -3,7 +3,7 @@ title: "Lesson 14: Purposeful model selection"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "02/26/2025"
+date: "`r library(here); source(here('class_dates.R')); w9d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -33,75 +33,35 @@ library(broom)
 library(rstatix)
 library(gt)
 library(readxl)
-#----------
-# new packages
-# install.packages("describedata")
 library(describedata) # gladder()
 library(gridExtra)   # grid.arrange()
 library(ggfortify)  # autoplot(model)
 # New Day 6
 library(gtsummary)
-
-# New Day 7
 library(plotly) # for plot_ly() command
 library(GGally) # for ggpairs() command 
 library(ggiraphExtra)   # for ggPredict() command
 
-# Load the data - update code if the csv file is not in the same location on your computer
-# If you need to download the file, please go to ur shared folder under Data > Slides
-gapm <- read_excel("data/Gapminder_vars_2011.xlsx", 
-                   na = "NA")  # important!!!! 
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F")) %>%
+  mutate(income_level_4 = fct_relevel(income_level_4, 
+                                      "Low income", 
+                                      "Lower middle income",
+                                      "Upper middle income",
+                                      "High income")) %>%
+  mutate(income_level_2 = case_when(income_level_4 %in% c("Low income", "Lower middle income") ~ "Lower income",
+                                      income_level_4 %in% c("Upper middle income", "High income") ~ "Higher income")) %>%
+  mutate(income_level_2 = fct_relevel(income_level_2, "Lower income", "Higher income")) %>%
+  mutate(CP_c = cell_phones_100 - mean(cell_phones_100, na.rm=T)) %>%
+  mutate(co2_emissions = co2_emissions/1000/1000)
 
+mlr1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100 + vax_rate)
 
-gapm_sub1 <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
-  mutate(four_regions = factor(four_regions, 
-                               levels = c("africa", "americas", 
-                                          "asia", "europe"), 
-                               labels = c("Africa", "Americas", 
-                                          "Asia", "Europe"))) %>%
-  rename(income_levels = `World bank, 4 income groups 2017`) %>%
-  mutate(income_levels1 = factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income")) %>%
-                            relevel(ref = "Low income"), 
-         income_levels2 = relevel(factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income"), 
-                                labels = c("Lower income", "Lower income", 
-                                            "Higher income", "Higher income")), 
-                                ref = "Lower income")) %>%
-  mutate(population_mill = population/1000000) %>%
-  select(-population)
-
-gapm_sub <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
-  drop_na(LifeExpectancyYrs, FemaleLiteracyRate, four_regions, FoodSupplykcPPD) %>%
-  mutate(four_regions = factor(four_regions, 
-                               levels = c("africa", "americas", 
-                                          "asia", "europe"), 
-                               labels = c("Africa", "Americas", 
-                                          "Asia", "Europe"))) %>%
-  rename(income_levels = `World bank, 4 income groups 2017`) %>%
-  mutate(income_levels1 = factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income")), 
-         income_levels2 = relevel(factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income"), 
-                                labels = c("Lower income", "Lower income", 
-                                            "Higher income", "Higher income")), 
-                                ref = "Lower income"))
-
-gapm_ind = gapm_sub %>% select(LifeExpectancyYrs, country)
-
-gapm2 = gapm %>% select(-Longitude, -Latitude, -eight_regions, -six_regions, -geo, -`World bank, 4 income groups 2017`, -country, -population, -`World bank region`, -ElectricityUsePP)
+gapm2 = gapm %>% select(cell_phones_100, life_exp, vax_rate, freedom_status, income_level_4, basic_sani,  co2_emissions, happiness_score)
 ```
 
 # Learning Objectives
@@ -110,7 +70,7 @@ gapm2 = gapm %>% select(-Longitude, -Latitude, -eight_regions, -six_regions, -ge
 
 2.  Apply purposeful selection to a dataset using R
 
-3.  Use different approaches to assess the linear scale of continuous variables in logistic regression
+3.  Use different approaches to assess the linear scale of continuous variables in linear regression
 
 
 ## Regression analysis process
@@ -216,7 +176,7 @@ Model Use (Inference)
 
 2.  Apply purposeful selection to a dataset using R
 
-3.  Use different approaches to assess the linear scale of continuous variables in logistic regression
+3.  Use different approaches to assess the linear scale of continuous variables in linear regression
 
 ## 
 
@@ -333,7 +293,7 @@ Assess model fit
 2.  Apply purposeful selection to a dataset using R
 :::
 
-3.  Use different approaches to assess the linear scale of continuous variables in logistic regression
+3.  Use different approaches to assess the linear scale of continuous variables in linear regression
 
 ## Pre-step: Exploratory data analysis
 
@@ -366,6 +326,8 @@ A few things we can do:
     -   Categories
 
     -   Units
+
+-   Make yourself a [codebook](https://nwakim.github.io/BSTA_512_26W/lessons/gapminder_codebook.html) for reference
 
 -   Then make sure the summary of values makes sense
 
@@ -415,7 +377,7 @@ skim(gapm)
 #| echo: true
 #| output: false
 library(skimr)
-skim(gapm)
+skim(gapm2)
 ```
 
 -   [Some `skim()` help](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html)
@@ -432,17 +394,19 @@ skim(gapm)
 ```{r}
 #| echo: true
 #| size: small 
-skim(gapm_sub1) %>% yank("factor")
+skim(gapm2) %>% yank("factor")
 ```
 :::
 :::
 
 ## Pre-step: Exploratory data analysis: Check the data {.smaller}
 
-```{r, skimr_digits = 2}
+```{r}
 #| echo: true
 #| size: small 
-skim(gapm_sub1) %>% yank("numeric")
+#| skimr_digits: 2
+
+skim(gapm2) %>% yank("numeric")
 ```
 
 ## Poll Everywhere Question 1
@@ -471,12 +435,10 @@ skim(gapm_sub1) %>% yank("numeric")
 #| echo: true
 
 library(Hmisc)
-hist.data.frame(gapm %>% select(-Longitude, -Latitude, -eight_regions, -six_regions, -geo, -`World bank, 4 income groups 2017`, -country, -population, -`World bank region`, -ElectricityUsePP))
+hist.data.frame(gapm2)
 ```
 
 ## Poll Everywhere Question 2
-
-Question: What function might you use to visualize or summarize the frequencies of categorical variables?
 
 ## Pre-step: Exploratory data analysis: Missing data
 
@@ -502,10 +464,6 @@ Question: What function might you use to visualize or summarize the frequencies 
 gapm2 %>% ggpairs() # gapm2 is a new dataset with some variables selected
 ```
 
-## Poll Everywhere Question 3
-
-![](../img_slides/14_poll_ev_03.png)
-
 ## Step 1: Simple linear regressions / analysis
 
 -   For each covariate, we want to see how it relates to the outcome (without adjusting for other covariates)
@@ -530,7 +488,7 @@ gapm2 %>% ggpairs() # gapm2 is a new dataset with some variables selected
 
 -   Let's think back to our Gapminder dataset
 
--   Always good to start with our main relationship: life expectancy vs. female literacy rate
+-   Always good to start with our main relationship: life expectancy vs. cell phones
 
     -   *Throwback to Lesson 3 SLR when we first visualized and ran `lm()` for this relationship*
 
@@ -538,7 +496,7 @@ gapm2 %>% ggpairs() # gapm2 is a new dataset with some variables selected
 #| echo: true
 #| eval: false
 
-model_FLR = lm(LifeExpectancyYrs ~ FemaleLiteracyRate, data = gapm_sub)
+model_CP = gapm2 %>% lm(formula = life_exp ~ cell_phones_100)
 ```
 
  
@@ -550,30 +508,32 @@ model_FLR = lm(LifeExpectancyYrs ~ FemaleLiteracyRate, data = gapm_sub)
 #| fig-width: 11
 #| echo: false
 
-ggplot(gapm_sub, aes(x = FemaleLiteracyRate,
-                 y = LifeExpectancyYrs)) +
+gapm_slr_plot = gapm %>%
+  ggplot(aes(x = cell_phones_100,
+             y = life_exp)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE, size = 3, colour="#F14124") +
-  labs(x = "Female literacy rate (%)", 
+  labs(x = "Cell phones per 100 people",
        y = "Life expectancy (years)",
-       title = "Relationship between life expectancy and \n the female literacy rate in 2011") +
-    theme(axis.title = element_text(size = 30), 
+       title = "Relationship between life expectancy and cell phones") +
+    theme(axis.title = element_text(size = 27), 
         axis.text = element_text(size = 25), 
-        title = element_text(size = 30))
+        title = element_text(size = 25))
 
+gapm_slr_plot
 ```
 :::
 
 ::: {.column width="55%"}
 ```{r}
-model_FLR = lm(LifeExpectancyYrs ~ FemaleLiteracyRate, data = gapm_sub)
-tidy(model_FLR) %>% gt() %>% tab_options(table.font.size = 40) %>% 
-  fmt_number(decimals = 3)
+model_CP = gapm2 %>% lm(formula = life_exp ~ cell_phones_100)
+tidy(model_CP) %>% gt() %>% tab_options(table.font.size = 40) %>%
+  fmt_number(decimals = 2)
 ```
 :::
 :::
 
-## Poll Everywhere Question 4
+## Poll Everywhere Question 3
 
 ## Step 1: Simple linear regressions / analysis
 
@@ -582,23 +542,21 @@ tidy(model_FLR) %>% gt() %>% tab_options(table.font.size = 40) %>%
 ```{r}
 #| echo: true
 
-model_WR = lm(LifeExpectancyYrs ~ four_regions, data = gapm_sub)
+model_FS = gapm2 %>% lm(formula = life_exp ~ freedom_status)
 ```
-
- 
 
 ::: columns
 ::: {.column width="45%"}
 ```{r fig.height=7, fig.width=7, warning=F, fig.align='center'}
 #| echo: true
 #| code-fold: true
-ggplot(gapm_sub, aes(x = four_regions, y = LifeExpectancyYrs)) +
+ggplot(gapm, aes(x = freedom_status, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  labs(x = "World region", 
+  labs(x = "Freedom status", 
        y = "Country life expectancy (years)",
-       title = "Life expectancy vs. world region",
-       caption = "Diamonds = region averages") +
+       title = "Life expectancy vs. Freedom status",
+       caption = "Diamonds = FS averages") +
   theme(axis.title = element_text(size = 20), 
         axis.text = element_text(size = 20), 
         title = element_text(size = 20))
@@ -609,40 +567,40 @@ ggplot(gapm_sub, aes(x = four_regions, y = LifeExpectancyYrs)) +
 ```{r}
 #| echo: true
 
-anova(model_WR) %>% tidy() %>% gt() %>%
+anova(model_FS) %>% tidy() %>% gt() %>%
    tab_options(table.font.size = 40) %>%
-   fmt_number(decimals = 3)
+   fmt_number(decimals = 2)
 
 ```
 
  
 
--   Recall from Lesson 5 (SLR: More inference + Evaluation):
+-   Recall from Lesson 5 (and Lesson 10):
 
-    -   `anova()` with one model name will compare the model (`model_WR`) to the intercept model
+    -   `anova()` with one model name will compare the model (`model_FS`) to the intercept model
 :::
 :::
-
-```{r}
-
-gapm2 = gapm_sub %>% select(LifeExpectancyYrs, CO2emissions, FoodSupplykcPPD, 
-                            IncomePP, FemaleLiteracyRate, WaterSourcePrct, 
-                            four_regions, members_oecd_g77)
-```
-
 
 ## Step 1: Simple linear regressions / analysis
 
 -   If we do a good job visualizing the relationship between our outcome and each covariate, then we can proceed to a streamlined version of the F-test for each relationship
 -   Run `add1()` to add each variable one at a time and separately
 - Output will include hypothesis test (using F-test) if coefficient(s) is 0 or not
+  - Null: intercept model
+  - Alternative: model with single variable
+  
+## Step 1: Simple linear regressions / analysis
+
+- Output from `add1()`
 
 ```{r}
 #| echo: true
 
-intercept_model = gapm2 %>% lm(formula = LifeExpectancyYrs ~ 1)
-add1(intercept_model, scope = ~ FemaleLiteracyRate + CO2emissions + IncomePP + four_regions +
-       WaterSourcePrct + FoodSupplykcPPD + members_oecd_g77, test = "F")
+intercept_model = gapm2 %>% lm(formula = life_exp ~ 1)
+add1(intercept_model, 
+     scope = ~ cell_phones_100 + freedom_status + income_level_4 + basic_sani + 
+       vax_rate + co2_emissions + happiness_score, 
+     test = "F")
 ```
 
 ## Step 2: Preliminary variable selection
@@ -672,8 +630,9 @@ add1(intercept_model, scope = ~ FemaleLiteracyRate + CO2emissions + IncomePP + f
 ```{r}
 #| echo: true
 
-add1(intercept_model, scope = ~ FemaleLiteracyRate + CO2emissions + IncomePP + four_regions +
-       WaterSourcePrct + FoodSupplykcPPD + members_oecd_g77, test = "F")
+add1(intercept_model, 
+     scope = ~ cell_phones_100 + freedom_status + income_level_4 + basic_sani + vax_rate + co2_emissions + happiness_score, 
+     test = "F")
 ```
 
 ## Step 2: Preliminary variable selection
@@ -685,82 +644,41 @@ add1(intercept_model, scope = ~ FemaleLiteracyRate + CO2emissions + IncomePP + f
 #| echo: true
 #| output-location: column
 
-init_model = lm(LifeExpectancyYrs ~
-                  FemaleLiteracyRate + 
-                  CO2emissions + 
-                  IncomePP +
-                  four_regions + 
-                  WaterSourcePrct + 
-                  FoodSupplykcPPD + 
-                  members_oecd_g77, 
-                data = gapm2)
-
+init_model = gapm2 %>% 
+  lm(formula = 
+       life_exp ~ cell_phones_100 + 
+       freedom_status + 
+       income_level_4 + 
+       basic_sani + 
+       vax_rate + 
+       co2_emissions + 
+       happiness_score)
 tbl_regression(
   init_model, 
   label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2emissions ~ "CO2 emissions", 
-    IncomePP ~ "Income  (GDP per capita)", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to omproved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
+    cell_phones_100 ~ "Cell phones per 100 people",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    basic_sani ~ "Basic sanitation (%)",
+    vax_rate ~ "Vaccination rate (%)",
+    co2_emissions ~ "CO2 emissions",
+    happiness_score ~ "Happiness score"
     )) %>% 
-  as_gt() %>% 
-  tab_options(table.font.size = 26) 
+  as_gt() %>% tab_options(table.font.size = 26) 
 ```
 
 
 ## Step 3: Assess change in coefficient
 
-::: columns
-::: {.column width="48%"}
--   This is where we start identifying covariates that we might remove
-
- 
-
--   I would start by using the p-value to guide me towards specific variables
-
-    -   Female literacy rate, but that's our main covariate
-    -   Intergovernmental group?
-    -   Maybe water source percent?
-
- 
-
--   Some people will say you can use the p-value alone
-
-    -   I like to double check that those variables do not have a large effect on the other coefficients
-:::
-
-::: {.column width="52%"}
-```{r}
-tbl_regression(
-  init_model, 
-  label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2emissions ~ "CO2 emissions", 
-    IncomePP ~ "Income  (GDP per capita)", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to omproved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
-    )) %>% 
-  as_gt() %>% 
-  tab_options(table.font.size = 26) 
-```
-:::
-:::
-
-## Step 3: Assess change in coefficient
-
--   Very similar to the process we used when looking at confounders
+-  We have our initial model with all the covariates that we want to consider
+    -  We want to see if we can remove any of the covariates without changing the coefficient of our main explanatory variable (cell phones) by more than 10%
 
  
 
 -   One variable at a time, we run the multivariable model with and without a variable
 
     -   We look at the p-value of the F-test for the coefficients of said variable
-    -   We look at the percent change for the coefficient ($\Delta\%$) of our **explanatory variable** (FLR in our example)
+    -   We look at the percent change for the coefficient ($\Delta\%$) of our **explanatory variable** (CP in our example)
 
  
 
@@ -769,7 +687,7 @@ tbl_regression(
     -   p-value \> 0.05 for the F-test of its own coefficients
     -   AND change in coefficient ($\Delta\%$) of our explanatory variable is \< 10%
 
-## F-test on dropping each covariate
+## Step 3: F-test on dropping each covariate
 
 - Function `drop1()`: If we put in our initial model, the function will remove each covariate and perform the respective F-test to test if the coefficients are 0 (null) or not (alternative).
 ```{r}
@@ -778,11 +696,79 @@ tbl_regression(
 drop1(init_model, test="F")
 ```
 
-## Testing for percent change ( $\Delta\%$) in a coefficient
+## Step 3: F-test on dropping each covariate
 
--   Let's say we have $X_1$ and $X_2$, and we specifically want to see if $X_2$ is a confounder for $X_1$ (the explanatory variable or variable of interest)
+Let's consider an example of a hypothesis test from `drop1()` for `income_level_4`
 
--   If we are only considering $X_1$ and $X_2$, then we need to run the following two models:
+::: columns
+::: {.column width="40%"}
+::: proof1
+::: proof-title
+Null $H_0$
+:::
+
+::: proof-cont
+$\beta_8= \beta_9 = \beta_{10}=0$
+:::
+:::
+:::
+
+::: {.column width="60%"}
+::: definition
+::: def-title
+Alternative $H_1$
+:::
+
+::: def-cont
+$\beta_8\neq0$ and/or $\beta_9\neq0$ and/or $\beta_{10}\neq0$
+:::
+:::
+:::
+:::
+
+::: columns
+
+::: {.column width="40%"}
+::: proof1
+::: proof-title
+Null / Smaller / Reduced model
+:::
+
+::: proof-cont
+$$\begin{aligned}
+LE = & \beta_0 + \beta_1 \text{CP} + \beta_2 I(\text{FS} = \text{PF}) + \\
+& \beta_3 I(\text{FS} = \text{F}) + \beta_4 \text{BS} + \beta_5 \text{VR} + \\
+& \beta_6 \text{CO2} + \beta_7 \text{HS} + \epsilon \end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="60%"}
+::: definition
+::: def-title
+Alternative / Larger / Full model
+:::
+
+::: def-cont
+$$\begin{aligned}
+LE = & \beta_0 + \beta_1 \text{CP} + \beta_2 I(\text{FS} = \text{PF}) + \\
+& \beta_3 I(\text{FS} = \text{F}) + \beta_4 \text{BS} + \beta_5 \text{VR} + \\
+& \beta_6 \text{CO2} + \beta_7 \text{HS} + \beta_8 I(\text{IL} = \text{lower middle}) + \\
+& \beta_9 I(\text{IL} = \text{upper middle}) + \beta_{10} I(\text{IL} = \text{upper}) + \epsilon \end{aligned}$$
+:::
+:::
+:::
+
+:::
+
+-   From the output of `drop1()`, we can see that the p-value for dropping `income_level_4` is 0.006, which is < 0.05, so there is sufficient evidence that the coefficients are not 0
+
+## Step 3: Testing for percent change ( $\Delta\%$) in a coefficient
+
+-   Our F-test in `drop1()` concluded that we should drop a variable (e.g. freedom status)
+    - We then need to check if the change in coefficient for the main variable is less than 10% or not
+
+-   Generic form: If we are only considering $X_1$ and $X_2$, then we need to run the following two models:
 
     -   Fitted model 1 / reduced model (`mod1`): $\widehat{Y} = \widehat\beta_0 + \widehat\beta_1X_1$
 
@@ -804,7 +790,7 @@ Calculation for % change in coefficient
 
 ::: fact-cont
 $$
-\Delta\% = 100\% \cdot\frac{\widehat\beta_{1, \text{mod1}} - \widehat\beta_{1, \text{mod2}}}{\widehat\beta_{1, \text{mod2}}} = 100\% \cdot \frac{\widehat\beta_{1, \text{red}} - \widehat\beta_{1, \text{full}}}{\widehat\beta_{1, \text{full}}}
+\Delta\% = 100\% \cdot\frac{\lvert \widehat\beta_{1, \text{mod1}} - \widehat\beta_{1, \text{mod2}} \rvert }{\widehat\beta_{1, \text{mod2}}} = 100\% \cdot \frac{\lvert \widehat\beta_{1, \text{red}} - \widehat\beta_{1, \text{full}} \rvert }{\widehat\beta_{1, \text{full}}}
 $$
 :::
 :::
@@ -817,7 +803,7 @@ $$
 
 ## Step 3: Assess change in coefficient
 
--   Let's try this out on `members_oecd_g77`
+-   Let's try this out on freedom status
 
 ```{r}
 #| echo: true
@@ -825,9 +811,7 @@ $$
 #| code-summary: "Display the ANOVA table with F-statistic and p-value"
 
 model_full = init_model
-model_red = lm(LifeExpectancyYrs ~ FemaleLiteracyRate + CO2emissions + IncomePP +
-               four_regions + WaterSourcePrct + FoodSupplykcPPD, 
-                 data = gapm2)
+model_red = gapm2 %>% lm(formula = life_exp ~ cell_phones_100 + basic_sani + vax_rate + co2_emissions + happiness_score + income_level_4)
 anova(model_full, model_red) %>% tidy() %>% 
   gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 ```
@@ -835,7 +819,7 @@ anova(model_full, model_red) %>% tidy() %>%
 ```{r}
 #| echo: true
 #| code-fold: true
-#| code-summary: "Display the FLR coefficient for both models"
+#| code-summary: "Display the CP coefficient for both models"
 #| include: false
 
 tidy(model_full) %>% 
@@ -844,17 +828,17 @@ tidy(model_red) %>%
   gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 ```
 
--   $\widehat\beta_{FLR, full} = `r round(tidy(model_full)[2,2], 4)`$, $\widehat\beta_{FLR, red} = `r round(tidy(model_red)[2,2], 4)`$
+-   $\widehat\beta_{CP, full} = `r round(tidy(model_full)[2,2], 4)`$, $\widehat\beta_{CP, red} = `r round(tidy(model_red)[2,2], 4)`$
 
 $$
-\Delta\% = 100\% \cdot \frac{\widehat\beta_{FLR, full} - \widehat\beta_{FLR, red}}{\widehat\beta_{FLR, full}} = 100\% \cdot \frac{`r round(tidy(model_full)[2,2], 4)` - `r round(tidy(model_red)[2,2], 4)`}{`r round(tidy(model_full)[2,2], 4)`} = `r round(100*(tidy(model_full)[2,2] - tidy(model_red)[2,2])/tidy(model_full)[2,2], 2)`\%
+\Delta\% = 100\% \cdot \frac{\lvert \widehat\beta_{CP, full} - \widehat\beta_{CP, red} \rvert}{\widehat\beta_{CP, full}} = 100\% \cdot \frac{\lvert `r round(tidy(model_full)[2,2], 4)` - `r round(tidy(model_red)[2,2], 4)`\rvert}{`r round(tidy(model_full)[2,2], 4)`} = `r abs(round(100*(tidy(model_full)[2,2] - tidy(model_red)[2,2])/tidy(model_full)[2,2], 2))`\%
 $$
 
 -   Based off the percent change, I would keep this in the model
 
 ## Step 3: Assess change in coefficient (Reference only)
 
--   Let's try this out on water source percent (even though the p-value was \< 0.05)
+-   Let's try this out on vaccination rate
 
 ```{r}
 #| echo: true
@@ -862,9 +846,8 @@ $$
 #| code-summary: "Display the ANOVA table with F-statistic and p-value"
 
 model_full = init_model
-model_red = lm(LifeExpectancyYrs ~ FemaleLiteracyRate + CO2emissions + IncomePP +
-               four_regions + members_oecd_g77 + FoodSupplykcPPD, 
-                 data = gapm2)
+model_red = gapm2 %>% lm(formula = life_exp ~ cell_phones_100 + freedom_status + income_level_4 +
+                 basic_sani + co2_emissions + happiness_score)
 anova(model_full, model_red) %>% tidy() %>% 
   gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 ```
@@ -872,7 +855,7 @@ anova(model_full, model_red) %>% tidy() %>%
 ```{r}
 #| echo: true
 #| code-fold: true
-#| code-summary: "Display the FLR coefficient for both models"
+#| code-summary: "Display the CP coefficient for both models"
 #| include: false
 
 tidy(model_full) %>% 
@@ -881,15 +864,51 @@ tidy(model_red) %>%
   gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
 ```
 
--   $\widehat\beta_{FLR, full} = `r round(tidy(model_full)[2,2], 4)`$, $\widehat\beta_{FLR, red} = `r round(tidy(model_red)[2,2], 4)`$
+-   $\widehat\beta_{CP, full} = `r round(tidy(model_full)[2,2], 4)`$, $\widehat\beta_{CP, red} = `r round(tidy(model_red)[2,2], 4)`$
 
 $$
-\Delta\% = 100\% \cdot \frac{\widehat\beta_{FLR, full} - \widehat\beta_{FLR, red}}{\widehat\beta_{FLR, full}} = 100\% \cdot \frac{`r round(tidy(model_full)[2,2], 4)` - `r round(tidy(model_red)[2,2], 4)`}{`r round(tidy(model_full)[2,2], 4)`} = `r round(100*(tidy(model_full)[2,2] - tidy(model_red)[2,2])/tidy(model_full)[2,2], 2)`\%
+\Delta\% = 100\% \cdot \frac{\lvert \widehat\beta_{CP, full} - \widehat\beta_{CP, red} \rvert}{\widehat\beta_{CP, full}} = 100\% \cdot \frac{\lvert `r round(tidy(model_full)[2,2], 4)` - `r round(tidy(model_red)[2,2], 4)`\rvert}{`r round(tidy(model_full)[2,2], 4)`} = `r abs(round(100*(tidy(model_full)[2,2] - tidy(model_red)[2,2])/tidy(model_full)[2,2], 2))`\%
 $$
 
--   Based off the percent change (and p-value), I would keep this in the model
+-   Based off the percent change, I would keep this in the model
 
-## Poll Everywhere Question 5
+## Step 3: Assess change in coefficient (Reference only)
+
+-   Let's try this out on CO2 emissions
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Display the ANOVA table with F-statistic and p-value"
+
+model_full = init_model
+model_red = gapm2 %>% lm(formula = life_exp ~ cell_phones_100 + freedom_status + income_level_4 +
+                 basic_sani + vax_rate + happiness_score)
+anova(model_full, model_red) %>% tidy() %>% 
+  gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
+```
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Display the CP coefficient for both models"
+#| include: false
+
+tidy(model_full) %>% 
+  gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
+tidy(model_red) %>% 
+  gt() %>% tab_options(table.font.size = 35) %>% fmt_number(decimals = 3)
+```
+
+-   $\widehat\beta_{CP, full} = `r round(tidy(model_full)[2,2], 4)`$, $\widehat\beta_{CP, red} = `r round(tidy(model_red)[2,2], 4)`$
+
+$$
+\Delta\% = 100\% \cdot \frac{\lvert \widehat\beta_{CP, full} - \widehat\beta_{CP, red} \rvert}{\widehat\beta_{CP, full}} = 100\% \cdot \frac{\lvert `r round(tidy(model_full)[2,2], 4)` - `r round(tidy(model_red)[2,2], 4)`\rvert}{`r round(tidy(model_full)[2,2], 4)`} = `r abs(round(100*(tidy(model_full)[2,2] - tidy(model_red)[2,2])/tidy(model_full)[2,2], 2))`\%
+$$
+
+-   Based off the percent change, I would remove CO2 emissions from the model
+
+## Poll Everywhere Question 4
 
 ## Step 3: Assess change in coefficient: Summary
 
@@ -900,17 +919,16 @@ $$
     -   P-value \> 0.05 for the F-test of its own coefficients
     -   Change in coefficient ($\Delta\%$) of our explanatory variable is \< 10%
 
--   In our example, the **preliminary main effects model** (end of Step 3) was the same as the **initial model** (end of Step 2)
+-   In our example, the **preliminary main effects model** (end of Step 3) has one less variable than the **initial model** (end of Step 2)
 
 -   Preliminary main effects model includes:
 
-    -   `FemaleLiteracyRate`
-    -   `CO2emissions`
-    -   `IncomePP`
-    -   `four_regions`
-    -   `members_oecd_g77`
-    -   `FoodSupplykcPPD`
-    -   `WaterSupplePct`
+    -   `cell_phones_100`
+    -   `freedom_status`
+    -   `income_level_4`
+    -   `basic_sani`
+    -   `vax_rate`
+    -   `happiness_score`
     
     
 ## Recap of Steps 1-3
@@ -948,7 +966,7 @@ $$
 2.  Apply purposeful selection to a dataset using R
 
 ::: lob
-3.  Use different approaches to assess the linear scale of continuous variables in logistic regression
+3.  Use different approaches to assess the linear scale of continuous variables in linear regression
 :::
 
 ## Step 4: Assess scale for continuous variables
@@ -964,7 +982,7 @@ $$
 -   Three methods/approaches to address the violation of linearity assumption:
 
     -   **Approach 1:** Categorize continuous variable
-    -   **Approach 2:** Fractional Polynomials
+    -   **Approach 2:** Transformation of variable
     -   **Approach 3:** Spline functions
     
 -   Approach will depend on the covariate!!
@@ -1009,11 +1027,11 @@ autoplot(model_full) + theme(text=element_text(size=14))
 
 -   In Gapminder dataset, we have 5 continuous variables:
 
-    -   CO2 Emissions
-    -   Food Supply
-    -   Income
-    -   Female Literacy Rate
-    -   Water source percent
+    -   Cell phones
+    -   Basic sanitation
+    -   Vaccination rate
+    -   CO2 emissions
+    -   Happiness score
 
 -   Plot each of these agains the outcome, life expectancy
 
@@ -1025,14 +1043,7 @@ autoplot(model_full) + theme(text=element_text(size=14))
 #| code-summary: "We can quickly look at ggpairs() to identify variables"
 
 gapm2 %>% select(where(is.numeric)) %>% 
-  relocate(LifeExpectancyYrs, .after = last_col()) %>% ggpairs()
-
-```
-
-```{r}
-#| echo: false
-
-gapm2 = gapm_sub 
+  relocate(life_exp, .after = last_col()) %>% ggpairs()
 ```
 
 ## Step 4: Assess scale for continuous variables: Smoothed scatterplots
@@ -1040,56 +1051,28 @@ gapm2 = gapm_sub
 ```{r}
 #| echo: true
 #| code-fold: true
-#| code-summary: "Take a look at C02, Food Supply, and Income"
+#| code-summary: "Take a look at happiness score, vaccination rate, and basic sanitation"
 #| fig-width: 10
 #| fig-height: 3.5
 #| fig-align: center
 
-CO2 = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = CO2emissions)) + 
+HS = ggplot(data = gapm2, aes(y = life_exp, x = happiness_score)) + 
   geom_point() +
-  geom_smooth(se=F) + labs(x = "CO2 Emissions (kt)", y = "Life Expectancy (yrs)")
+  geom_smooth(se=F) + labs(x = "Happiness Score", y = "Life Expectancy (yrs)")
 
-FS = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = FoodSupplykcPPD)) + 
+VR = ggplot(data = gapm2, aes(y = life_exp, x = vax_rate)) + 
   geom_point() +
-  geom_smooth(se=F) + labs(x = "Food Supply (kcal PPD)", y = "Life Expectancy (yrs)")
+  geom_smooth(se=F) + labs(x = "Vaccination rate (%)", y = "Life Expectancy (yrs)")
 
-Income = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = IncomePP)) + 
+BS = ggplot(data = gapm2, aes(y = life_exp, x = basic_sani)) + 
   geom_point() +
-  geom_smooth(se=F) + labs(x = "Income (GDP per capita)", y = "Life Expectancy (yrs)")
+  geom_smooth(se=F) + labs(x = "Basic sanitation (%)", y = "Life Expectancy (yrs)")
 
-grid.arrange(CO2, FS, Income, nrow=1)
+grid.arrange(HS, VR, BS, nrow=1)
 ```
 
--   Food Supply looks admissible
--   CO2 Emissions and Income do not look very linear, but I want to zoom into the area of the plots that have most of the data
-
-## Step 4: Assess scale for continuous variables: Smoothed scatterplots
-
-```{r}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Zoom into areas on plots with more data"
-#| fig-width: 10
-#| fig-height: 3.5
-#| fig-align: center
-
-CO2 = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = CO2emissions)) + 
-  geom_point() + xlim(0,10) +
-  geom_smooth(se=F) + labs(x = "CO2 Emissions (kt)", y = "Life Expectancy (yrs)")
-
-FS = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = FoodSupplykcPPD)) + 
-  geom_point() +
-  geom_smooth(se=F) + labs(x = "Food Supply (kcal PPD)", y = "Life Expectancy (yrs)")
-
-Income = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = IncomePP)) + 
-  geom_point() + xlim(0,40000) +
-  geom_smooth(se=F) + labs(x = "Income (GDP per capita)", y = "Life Expectancy (yrs)")
-
-grid.arrange(CO2, FS, Income, nrow=1)
-```
-
--   Food Supply still looks admissible
--   CO2 Emissions and Income not linear: will address this!!
+-   Happiness score looks pretty linear, vaccination rate looks admissible
+- Basic sanitation looks non-linear
 
 ## Step 4: Assess scale for continuous variables
 
@@ -1101,7 +1084,7 @@ grid.arrange(CO2, FS, Income, nrow=1)
 
      
 
-    -   **Approach 2:** Fractional Polynomials
+    -   **Approach 2:** Transformation of variable
     
      
 
@@ -1151,11 +1134,11 @@ grid.arrange(CO2, FS, Income, nrow=1)
 #| echo: false
 level_order <- c("Low income", "Lower middle income", 
                  "Upper middle income", "High income") 
-ggplot(gapm2, aes(x = factor(income_levels1, level = level_order), y = LifeExpectancyYrs)) +
+ggplot(gapm2, aes(x = income_level_4, y = life_exp)) +
   geom_jitter(size = 1, alpha = .6, width = 0.2) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
   labs(x = "Income levels", 
-       y = "Country life expectancy (years)",
+       y = "Life expectancy (years)",
        title = "Life expectancy vs. income levels",
        caption = "Diamonds = Income level averages") +
   theme(axis.title = element_text(size = 20), 
@@ -1170,9 +1153,9 @@ ggplot(gapm2, aes(x = factor(income_levels1, level = level_order), y = LifeExpec
 
 ::: columns
 ::: {.column width="40%"} 
--   Let's still try it out with CO2 Emissions (kt)
+-   Let's still try it out with basic sanitation
 
--   I have plotted the quartile lines of food supply with red lines
+-   I have plotted the quartile lines of basic sanitation with red lines
 :::
 
 ::: {.column width="60%"} 
@@ -1184,13 +1167,13 @@ ggplot(gapm2, aes(x = factor(income_levels1, level = level_order), y = LifeExpec
 #| fig-height: 8
 #| fig-align: center
 
-vline_coordinates= data.frame(Quantile_Name=names(quantile(gapm2$CO2emissions)),
-                          quantile_values=as.numeric(quantile(gapm2$CO2emissions)))
+vline_coordinates= data.frame(Quantile_Name=names(quantile(gapm2$basic_sani)),
+                          quantile_values=as.numeric(quantile(gapm2$basic_sani)))
 
-ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = CO2emissions)) + 
+ggplot(data = gapm2, aes(y = life_exp, x = basic_sani)) + 
   geom_point(size = 3) +
   #geom_smooth(se=F) + 
-  labs(x = "CO2 Emissions (kt)", y = "Life Expectancy (yrs)") +
+  labs(x = "Basic sanitation (%)", y = "Life Expectancy (yrs)") +
   geom_vline(data = vline_coordinates, aes(xintercept = quantile_values), 
              color = "red", linetype = "dashed", size = 2) +
     theme(axis.title = element_text(size = 25), 
@@ -1203,17 +1186,17 @@ ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = CO2emissions)) +
 #| echo: false
 #| eval: false
 #| 
-vline_coordinates= data.frame(Quantile_Name=names(quantile(gapm2$IncomePP)),
-                          quantile_values=as.numeric(quantile(gapm2$IncomePP)))
+vline_coordinates= data.frame(Quantile_Name=names(quantile(gapm2$basic_sani)),
+                          quantile_values=as.numeric(quantile(gapm2$basic_sani)))
 
-Income = ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = IncomePP)) +
+basic_sani = ggplot(data = gapm2, aes(y = life_exp, x = basic_sani)) +
   geom_point(size = 1) +
   #geom_smooth(se=F) +
   labs(x = "Income (GDP per capita)", y = "Life Expectancy (yrs)")  +
   geom_vline(data = vline_coordinates, aes(xintercept = quantile_values),
              color = "red", linetype = "dashed", size = .9)
 
-grid.arrange(CO2, Income, nrow=1)
+grid.arrange(CO2, basic_sani, nrow=1)
 ```
 :::
 
@@ -1221,13 +1204,13 @@ grid.arrange(CO2, Income, nrow=1)
 
 ## Step 4: Approach 1: Categorize continuous variable
 
--   Let's make the quartiles for CO2 emissions:
+-   Let's make the quartiles for basic sanitation:
 
 ```{r}
 #| echo: true
 library(dvmisc)
 gapm2 = gapm2 %>% 
-  mutate(CO2_q = quant_groups(CO2emissions, groups = 4) %>% factor())
+  mutate(BS_q = quant_groups(basic_sani, groups = 4) %>% factor())
 ```
 
 ```{r}
@@ -1239,11 +1222,10 @@ gapm2 = gapm2 %>%
 #| fig-align: center
 
 
-ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = CO2_q)) + 
-  # geom_point(size = 3, aes(y = LifeExpectancyYrs, x = CO2emissions)) +
+ggplot(data = gapm2, aes(y = life_exp, x = BS_q)) + 
+  # geom_point(size = 3, aes(y = life_exp, x = co2_emissions)) +
   stat_summary(fun = mean, geom = "point", size = 8, shape = 18) +
-  #geom_smooth(se=F) + 
-  labs(x = "CO2 Emissions (kt)", y = "Life Expectancy (yrs)") +
+  labs(x = "Basic sanitation (%)", y = "Life Expectancy (yrs)") +
     theme(axis.title = element_text(size = 25), 
         axis.text = element_text(size = 25), 
         title = element_text(size = 25))
@@ -1256,16 +1238,14 @@ ggplot(data = gapm2, aes(y = LifeExpectancyYrs, x = CO2_q)) +
 
  
 
--   Let's fit a new model with the two new representations for income and CO2 emissions
+-   Let's fit a new model with new representation for basic sanitation
 
  
 
--   Remember, this is the **main effects model** if we decide to make CO2 into quartiles
+-   Remember, this is the **main effects model** if we decide to make basic sanitation into quartiles
 
 ```{r}
-main_eff_model = lm(LifeExpectancyYrs ~ FemaleLiteracyRate + CO2_q + income_levels1 +
-               four_regions + WaterSourcePrct + FoodSupplykcPPD + members_oecd_g77, 
-                 data = gapm2)
+main_eff_model = gapm2 %>% lm(formula = life_exp ~ cell_phones_100 + BS_q + freedom_status + income_level_4 + vax_rate + happiness_score)
 ```
 :::
 
@@ -1274,13 +1254,12 @@ main_eff_model = lm(LifeExpectancyYrs ~ FemaleLiteracyRate + CO2_q + income_leve
 tbl_regression(
   main_eff_model, 
   label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2_q ~ "CO2 emissions quartiles", 
-    income_levels1 ~ "Income levels", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to omproved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    BS_q ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
     )) %>% 
   as_gt() %>% 
   tab_options(table.font.size = 22) 
@@ -1288,7 +1267,7 @@ tbl_regression(
 :::
 :::
 
-## Step 4: Approach 2: Fractional Polynomials
+## Step 4: Approach 2: Transformation of variable
 
 -   Main concepts and transformations presented in Lesson 7 SLR: Model Evaluation and Diagnostics (slide 33 on)
 
@@ -1314,46 +1293,39 @@ tbl_regression(
 
     -   [mfp package in R](https://cran.r-project.org/web/packages/mfp/mfp.pdf) contains the fp() function
 
-## Step 4: Approach 2: Fractional Polynomials
+## Step 4: Approach 2: Transformation of variable
 
 ```{r}
 #| echo: true
 
 library(mfp)
 
-fp_model_CO2 = mfp(LifeExpectancyYrs ~ FemaleLiteracyRate + 
-                     fp(CO2emissions, df = 4) + income_levels1 + four_regions +
-                     WaterSourcePrct + FoodSupplykcPPD + members_oecd_g77,
+model_fp_BS = mfp(life_exp ~ cell_phones_100 + freedom_status + income_level_4 + 
+                     vax_rate + happiness_score + fp(basic_sani, df = 4),
                data = gapm2, family = "gaussian")
 
-fp_model_CO2$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.size = 24)
+model_fp_BS$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.size = 24)
 ```
 
-## Step 4: Approach 2: Fractional Polynomials
+## Step 4: Approach 2: Transformation of variable
 
 ::: columns
 ::: column
 ```{r}
 #| echo: false
 
-library(mfp)
-
-fp_model_CO2 = mfp(LifeExpectancyYrs ~ FemaleLiteracyRate + 
-                     fp(CO2emissions, df = 4) + income_levels1 + four_regions +
-                     WaterSourcePrct + FoodSupplykcPPD + members_oecd_g77,
-               data = gapm2, family = "gaussian")
-
-fp_model_CO2$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.size = 24)
+model_fp_BS$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.size = 24)
 ```
 :::
 
 ::: column 
 
--   Conclusion from fractional polynomial is that CO2 does not need to be transformed
+-   Conclusion from fractional polynomial is that basic sanitation needs to be transformed
+    - Use square root transformation for basic sanitation
 
--   A little counter-intuitive to what we saw in quartiles
-
--   Thus, I think leaving CO2 emissions as quartiles is best!
+- `fp()` does NOT test for linearity assumption, just tells you best fit
+    - Sometimes, it will conclude that something does NOT need to be transformed
+    - A little counter-intuitive from what we saw in plots
 :::
 
 :::
@@ -1368,7 +1340,14 @@ fp_model_CO2$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.siz
 :::
 
 ::: column 
-![](../img_slides/spline2.png){fig-align="center"}
+```{r}
+#| fig-width: 7
+#| fig-height: 6
+BS + theme(axis.title = element_text(size = 25), 
+        axis.text = element_text(size = 25), 
+        title = element_text(size = 25)) + 
+  geom_vline(xintercept = c(50), color = "red", linetype = "dashed", size = 2)
+```
 :::
 :::
 
@@ -1381,7 +1360,7 @@ fp_model_CO2$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.siz
 
  
 
--   Within our class, fractional polynomials will be sufficient
+-   Within our class, fractional polynomials will be sufficient (more in Longitudinal Data Analysis)
 
  
 
@@ -1404,7 +1383,7 @@ fp_model_CO2$fptable %>% gt(rownames_to_stub = T) %>% tab_options(table.font.siz
 -   We concluded that we will use:
 
     -   Income levels (categorical) that Gapminder created
-    -   Quartiles for CO2 Emissions
+    -   Quartiles for basic sanitation
 
 ::: definition
 ::: def-title
@@ -1414,25 +1393,24 @@ Note
 This is also a good step to decide if you would like to score a categorical variable (Lesson 5)
 :::
 :::
-:::
 
 - Question: Do you see any visual issues with my regression table?
+:::
 
 ::: {.column width="50%"}
 ```{r}
 tbl_regression(
   main_eff_model, 
   label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2_q ~ "CO2 emissions quartiles", 
-    income_levels1 ~ "Income levels", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to omproved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    BS_q ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
     )) %>% 
   as_gt() %>% 
-  tab_options(table.font.size = 22) 
+  tab_options(table.font.size = 24) 
 ```
 :::
 :::
@@ -1446,7 +1424,7 @@ tbl_regression(
 2.  Apply purposeful selection to a dataset using R
 :::
 
-3.  Use different approaches to assess the linear scale of continuous variables in logistic regression
+3.  Use different approaches to assess the linear scale of continuous variables in linear regression
 
 ## Step 5: Check for interactions
 
@@ -1464,7 +1442,7 @@ tbl_regression(
 
  
 
--   Use methods from Step 2 (comparing model with all interactions to a smaller model with interactions) to determine which interactions to keep
+-   Use methods from Step 2 (comparing model with no interactions to a larger model with 1 interaction) to determine which interactions to keep
 
  
 
@@ -1532,23 +1510,96 @@ Testing a single coefficient for the interaction term using F-test comparing ful
 :::
 :::
 
-## Poll Everywhere Questions 6-8
+## Poll Everywhere Questions 5-7
+
+## Poll Everywhere Questions 5-7
+
+## Poll Everywhere Questions 5-7
 
 ## Step 5: Check for interactions
 
-- Use `add1()` function to compare a full model (interactions with FLR) and reduced model (main effects model)
+- Use `add1()` function to compare a full model (interactions with CP) and reduced model (main effects model)
 
 ```{r}
 #| echo: true
 
-add1(main_eff_model, scope = ~ FemaleLiteracyRate * . ,  test = "F")
+add1(main_eff_model, scope = ~ cell_phones_100 * . ,  test = "F")
 ```
 
--   I went through all the ANOVA tables, and found the following significant interactions:
-
-    -   None!
+-   No significant interactions with cell phones per 100 people (p-value > 0.1), so we would not include any interactions with that variable
     
 -   **Think about it:** does that track with what we saw in our interactions lecture?
+
+## Step 5: Example test in `add1()` for `income_level_4` {.smaller}
+
+::: columns
+::: {.column width="40%"}
+::: proof1
+::: proof-title
+Null $H_0$
+:::
+
+::: proof-cont
+$\beta_8= \beta_9 = \beta_{10}=0$
+:::
+:::
+:::
+
+::: {.column width="60%"}
+::: definition
+::: def-title
+Alternative $H_1$
+:::
+
+::: def-cont
+$\beta_{10}\neq0$ and/or $\beta_{11}\neq0$ and/or $\beta_{12}\neq0$
+:::
+:::
+:::
+:::
+
+::: columns
+
+::: {.column width="40%"}
+::: proof1
+::: proof-title
+Null / Smaller / Reduced model
+:::
+
+::: proof-cont
+$$\begin{aligned}
+LE = & \beta_0 + \beta_1 \text{CP} + \beta_2 I(\text{FS} = \text{PF}) + \\
+& \beta_3 I(\text{FS} = \text{F}) + \beta_4 \text{BS} + \beta_5 \text{VR} + \\
+& \beta_6 \text{HS} + \beta_7 I(\text{IL} = \text{lower middle}) + \\
+& \beta_8 I(\text{IL} = \text{upper middle}) + \\
+& \beta_{9} I(\text{IL} = \text{upper}) + \epsilon
+\end{aligned}$$
+:::
+:::
+:::
+
+::: {.column width="60%"}
+::: definition
+::: def-title
+Alternative / Larger / Full model
+:::
+
+::: def-cont
+$$\begin{aligned}
+LE = & \beta_0 + \beta_1 \text{CP} + \beta_2 I(\text{FS} = \text{PF}) + \beta_3 I(\text{FS} = \text{F}) + \\
+& \beta_4 \text{BS} + \beta_5 \text{VR} + \beta_6 \text{HS} + \beta_7 I(\text{IL} = \text{lower middle}) + \\
+& \beta_8 I(\text{IL} = \text{upper middle}) + \beta_{9} I(\text{IL} = \text{upper}) + \\
+& \beta_{10} \text{CP} \cdot I(\text{IL} = \text{lower middle}) + \\
+& \beta_{11} \text{CP} \cdot I(\text{IL} = \text{upper middle}) + \\
+& \beta_{12} \text{CP} \cdot I(\text{IL} = \text{upper}) + \epsilon
+\end{aligned}$$
+:::
+:::
+:::
+
+:::
+
+-   From the output of `add1()`, we can see that the p-value for dropping `income_level_4` is 0.165, which is > 0.1, so we do not reject the null, aka no interaction
 
 ## Step 6: Assess model fit
 
@@ -1579,18 +1630,12 @@ save(final_model, prelim_me_model, gapm2,
 
 -   Our **final model** contains
 
-    -   Female Literacy Rate `FLR`
-    -   CO2 Emissions in quartiles `CO2_q`
-    -   Income levels in groups assigned by Gapminder `income_levels`
-    -   World regions `four_regions`
-    -   Membership of global and economic groups `members_oecd_g77`
-    
-        -   OECD: Organization for Economic Co-operation and Development
-        -   G77: Group of 77
-        -   Other
-        
-    -   Food Supply `FoodSupplykcPPD`
-    -   Clean Water Supply `WaterSupplePct`
+    -   Cell phones per 100 people
+    -  Basic sanitation (quartiles)
+    -   Freedom status
+    -   Income level
+    -   Vaccination rate
+    -   Happiness score
     
 ## Step 6: Assess model fit: Model fit statistics
 
@@ -1619,7 +1664,7 @@ glance(final_model) %>% mutate(Model = "Final model") %>%
 
 ## Step 6: Assess model fit: Comparing model fits
 
--   Remember the preliminary main effects model (at end of Step 3): same as final model but the continuous varaibles, income and CO2 emissions, were not categorized
+-   Remember the preliminary main effects model (at end of Step 3): same as final model but basic sanitation was not categorized
 
 -   We can compare model fit statistics of the preliminary main effects model and the final model
 
@@ -1636,5 +1681,5 @@ rbind(fm_glance, pmem_glance) %>% gt() %>%
 
 -   Remember, adjusted $R^2$, AIC, and BIC penalize models for more coefficients
 
--   Preliminary main effects model: better fit statistics, but violates linearity assumption
+-   Final model has better model fit statistics (higher adjusted $R^2$, lower AIC and BIC)
 

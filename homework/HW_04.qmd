@@ -144,17 +144,31 @@ Fit the regression model with all the covariates (Fatalism, Optimism, Spirituali
 
 #### Part b
 
-Does at least one of the covariates contribute significantly to the prediction of Depression? (Note: this is an overall test. Please follow the hypothesis test steps. To complete step 4-6, simply output your ANOVA table.)
+Does at least one of the covariates contribute significantly to the prediction of Depression? (Note: this is an overall test. Please follow the hypothesis test steps. To complete step 5-6, simply output your ANOVA table.)
+
+::: callout-note
+We have not covered how to check the model assumptions in a multiple linear regression, so you can skip that step.
+:::
 
 
 #### Part c
 
 Does the addition of Spirituality add significantly to the prediction of Depression achieved by Fatalism and Optimism?
 
+::: callout-note
+We have not covered how to check the model assumptions in a multiple linear regression, so you can skip that step.
+:::
+
+
 
 #### Part d
 
 Does the addition of Spirituality and Optimism add significantly to the prediction of Depression achieved by Fatalism?
+
+::: callout-note
+We have not covered how to check the model assumptions in a multiple linear regression, so you can skip that step.
+:::
+
 
 
 ### Question 3 {#sec-L11-L12-Interactions-01}
@@ -201,6 +215,7 @@ HDL_factors <- read_excel(here("./data/CH09Q05.xls")) # change this to the appro
 
 Use $\alpha= 0.05$, test whether if there is a crude association between HDL measurement and total cholesterol. Note: testing for a crude association means we fit a simple linear regression model and see if the association is significant. 
 
+
 #### Part b
 
 Sometimes simple linear regression leads us to believe that there is no association between two variables, but missing interaction might be obscuring the association. Use $\alpha= 0.1$ to test whether total triglyceride is an effect modifier of the association between HDL and total cholesterol. Make sure to include a concluding statement.
@@ -210,5 +225,9 @@ Note: Since the data frame has the variables named as $Y$, $X1$, and $X2$, you m
 #### Part c
 
 Test whether total triglyceride is a confounder by comparing the model in Part a to a model that includes total triglyceride. Make sure to include a concluding statement and interpret your coefficients. 
+
+::: callout-note
+We have not covered how to check the model assumptions in a multiple linear regression, so you can skip that step.
+:::
 
 

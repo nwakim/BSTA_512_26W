@@ -3,7 +3,7 @@ title: "Lesson 13: Model/Variable Selection"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "02/24/2025"
+date: "`r library(here); source(here('class_dates.R')); w9d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -40,40 +40,32 @@ library(gridExtra)   # grid.arrange()
 library(ggfortify)  # autoplot(model)
 # New Day 6
 library(gtsummary)
+library(here)
 
 # New Day 7
 library(plotly) # for plot_ly() command
 library(GGally) # for ggpairs() command 
 library(ggiraphExtra)   # for ggPredict() command
 
-# Load the data - update code if the csv file is not in the same location on your computer
-# If you need to download the file, please go to ur shared folder under Data > Slides
-gapm <- read_excel("data/Gapminder_vars_2011.xlsx", 
-                   na = "NA")  # important!!!! 
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F")) %>%
+  mutate(income_level_4 = fct_relevel(income_level_4, 
+                                      "Low income", 
+                                      "Lower middle income",
+                                      "Upper middle income",
+                                      "High income")) %>%
+  mutate(income_level_2 = case_when(income_level_4 %in% c("Low income", "Lower middle income") ~ "Lower income",
+                                      income_level_4 %in% c("Upper middle income", "High income") ~ "Higher income")) %>%
+  mutate(income_level_2 = fct_relevel(income_level_2, "Lower income", "Higher income")) %>%
+  mutate(CP_c = cell_phones_100 - mean(cell_phones_100, na.rm=T))
 
+mlr1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100 + vax_rate)
 
-gapm_sub <- gapm %>% # called it gapm2_sub3 to be consistent with Day 7 notes
-  drop_na(LifeExpectancyYrs, FemaleLiteracyRate, four_regions, FoodSupplykcPPD) %>%
-  mutate(four_regions = factor(four_regions, 
-                               levels = c("africa", "americas", 
-                                          "asia", "europe"), 
-                               labels = c("Africa", "Americas", 
-                                          "Asia", "Europe"))) %>%
-  rename(income_levels = `World bank, 4 income groups 2017`) %>%
-  mutate(income_levels1 = factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income")), 
-         income_levels2 = relevel(factor(income_levels, 
-                                levels = c("Low income", 
-                                           "Lower middle income", 
-                                           "Upper middle income", 
-                                           "High income"), 
-                                labels = c("Lower income", "Lower income", 
-                                            "Higher income", "Higher income")), 
-                                ref = "Lower income"))
-gapm_ind = gapm_sub %>% select(LifeExpectancyYrs, country)
+gapm2 = gapm %>% select(cell_phones_100, life_exp, vax_rate, freedom_status, income_level_4, basic_sani)
 ```
 
 # Learning Objectives
@@ -219,10 +211,10 @@ Model Use (Inference)
 
 -   First, let's think about the number of observations in our dataset
 
-    - In our Gapminder dataset, we have ~80 countries 
+    - In our Gapminder dataset, we have ~100 countries 
     - The closer the number of variables is to the number of observations: the model overfit the data and lose precision on coefficient estimates
 
--   Extreme example: In the Gapminder dataset, I can use an indicator for each country
+-   **Extreme example:** In the Gapminder dataset, I can use an indicator for each country
 
     -   Remember that each country is an observation
 
@@ -628,18 +620,18 @@ Prediction
 
 ![https://www.researchgate.net/figure/Model-Fit-Statistics_tbl1_308844501](../img_slides/Model-Fit-Statistics.png)
 
-## Example of a table for model fit statistics
+## Example of a table for model fit statistics {.smaller}
 
 ```{r}
 #| echo: true
 
 library(olsrr)
-model1 = gapm_sub %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate)
-model2 = gapm_sub %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD)
-model3 = gapm_sub %>% lm(formula = LifeExpectancyYrs ~ FemaleLiteracyRate + FoodSupplykcPPD + 
-                           income_levels + four_regions)
+model1 = gapm %>% lm(formula = life_exp ~ cell_phones_100)
+model2 = gapm %>% lm(formula = life_exp ~ cell_phones_100 + vax_rate)
+model3 = gapm %>% 
+  lm(formula = life_exp ~ cell_phones_100 + vax_rate + freedom_status + income_level_4)
 
-fit_stats = data.frame(Model = c("Model 1: FLR only", "Model 2: FLR + FS", "Model 3: FLR + FS + Income + WR"), 
+fit_stats = data.frame(Model = c("Model 1: CP only", "Model 2: CP + VR", "Model 3: CP + VR + FS + IL"), 
                        adj_R_2 = c(summary(model1)$adj.r.squared, summary(model2)$adj.r.squared, 
                                    summary(model3)$adj.r.squared), 
                        Cp = c(ols_mallows_cp(model1, model3), ols_mallows_cp(model2, model3), 

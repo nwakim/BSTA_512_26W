@@ -62,7 +62,7 @@ The most important learning objectives in this project are:
 
 ## Final Poster
 
-[Poster Instructions](/labs/Project_poster_instructions.qmd)
+[Poster Instructions](/project/Project_poster_instructions.qmd)
 
 Poster due 3/17
 
