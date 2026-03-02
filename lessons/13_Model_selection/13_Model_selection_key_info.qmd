@@ -10,6 +10,13 @@ editor_options:
 
 ## Announcements
 
+- Lab 3
+  - "1 - unit increase" for categorical variables is WRONG
+    - We are comparing the mean IAT score for different categories
+  - Still a couple students with factor issues in main variable
+    - Make sure to use `fct_relevel` to change the order of the categories
+    - Example: `fatal_dep = fatal_dep %>% mutate(Fatalism = fct_relevel(Fatalism, "Low", "Medium", "High"))`
+    - Ordering with `as.order` or `ordered` will mess up your regression ([example](https://stats.stackexchange.com/questions/387735/interpreting-the-estimate-of-an-ordered-factor-in-regression))
 - Quiz 2 scores up
 - I will be posting the poster instructions TONIGHT!
 - HW 5 will be optional (see homework page)

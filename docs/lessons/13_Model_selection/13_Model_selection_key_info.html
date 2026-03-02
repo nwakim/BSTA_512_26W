@@ -169,6 +169,19 @@ ul.task-list li input[type="checkbox"] {
 <section id="announcements" class="level2">
 <h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
 <ul>
+<li>Lab 3
+<ul>
+<li>“1 - unit increase” for categorical variables is WRONG
+<ul>
+<li>We are comparing the mean IAT score for different categories</li>
+</ul></li>
+<li>Still a couple students with factor issues in main variable
+<ul>
+<li>Make sure to use <code>fct_relevel</code> to change the order of the categories</li>
+<li>Example: <code>fatal_dep = fatal_dep %&gt;% mutate(Fatalism = fct_relevel(Fatalism, "Low", "Medium", "High"))</code></li>
+<li>Ordering with <code>as.order</code> or <code>ordered</code> will mess up your regression (<a href="https://stats.stackexchange.com/questions/387735/interpreting-the-estimate-of-an-ordered-factor-in-regression">example</a>)</li>
+</ul></li>
+</ul></li>
 <li>Quiz 2 scores up</li>
 <li>I will be posting the poster instructions TONIGHT!</li>
 <li>HW 5 will be optional (see homework page)</li>

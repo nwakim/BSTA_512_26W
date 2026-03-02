@@ -1159,14 +1159,14 @@
     "href": "lessons/13_Model_selection/13_Model_selection_key_info.html",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Quiz 2 scores up\nI will be posting the poster instructions TONIGHT!\nHW 5 will be optional (see homework page)\nAnything else?"
+    "text": "Lab 3\n\n“1 - unit increase” for categorical variables is WRONG\n\nWe are comparing the mean IAT score for different categories\n\nStill a couple students with factor issues in main variable\n\nMake sure to use fct_relevel to change the order of the categories\nExample: fatal_dep = fatal_dep %&gt;% mutate(Fatalism = fct_relevel(Fatalism, \"Low\", \"Medium\", \"High\"))\nOrdering with as.order or ordered will mess up your regression (example)\n\n\nQuiz 2 scores up\nI will be posting the poster instructions TONIGHT!\nHW 5 will be optional (see homework page)\nAnything else?"
   },
   {
     "objectID": "lessons/13_Model_selection/13_Model_selection_key_info.html#announcements",
     "href": "lessons/13_Model_selection/13_Model_selection_key_info.html#announcements",
     "title": "Key Info and Announcements",
     "section": "",
-    "text": "Quiz 2 scores up\nI will be posting the poster instructions TONIGHT!\nHW 5 will be optional (see homework page)\nAnything else?"
+    "text": "Lab 3\n\n“1 - unit increase” for categorical variables is WRONG\n\nWe are comparing the mean IAT score for different categories\n\nStill a couple students with factor issues in main variable\n\nMake sure to use fct_relevel to change the order of the categories\nExample: fatal_dep = fatal_dep %&gt;% mutate(Fatalism = fct_relevel(Fatalism, \"Low\", \"Medium\", \"High\"))\nOrdering with as.order or ordered will mess up your regression (example)\n\n\nQuiz 2 scores up\nI will be posting the poster instructions TONIGHT!\nHW 5 will be optional (see homework page)\nAnything else?"
   },
   {
     "objectID": "lessons/13_Model_selection/13_Model_selection_key_info.html#key-dates",
