@@ -17,10 +17,6 @@ editor_options:
 bibliography: references.bib
 ---
 
-::: callout-important
-Needs editing
-:::
-
 ------------------------------------------------------------------------
 
 The purpose section was partially developed using ChatGPT by feeding in my previous project report instructions and asking ChatGPT to edit for a poster.
@@ -115,14 +111,16 @@ You can save tables and figures from labs or separate files, then load them in t
     -   Done by Nicky (a long time ago) so please excuse a lot of the poor language around race/ethnicity
         -   I have learned a lot since then! My statistics education did not do a great job of incorporating responsible practice around participant's identities
     -   Showing this poster because it is a good example of the level of detail expected in our poster's background, methods, and conclusions
-    
-::: callout-note
-More examples to come! I am asking a few students from last year if I can share their posters.
-:::
+- [Poster 4](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Sample_poster/Poster_04.pdf?csf=1&web=1&e=SjdDdG), [Poster 5](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Sample_poster/Poster_05.pdf?csf=1&web=1&e=Km7hEq), [Poster 6](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Sample_poster/Poster_06.pdf?csf=1&web=1&e=3hDUNi), [Poster 7](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Sample_poster/Poster_07.pdf?csf=1&web=1&e=8f7WDr), [Poster 8](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Sample_poster/Poster_08.pdf?csf=1&web=1&e=3lcbqk)
+  - Examples of students' work from Winter 2025
+  - These are some very good posters, but they are not perfect!
+  
 
 ### Grading
 
-The project report is out of 36 points. Note that the Statistical Methods and Results sections are graded on an 8-point scale, while all other components are graded on a 4-point scale.
+The project report is out of 36 points. Note that the Statistical Methods and Results sections are graded on an 8-point scale, while all other components are graded on a 4-point scale. 
+
+[Please see the project rubric for detailed grading.](https://ohsuitg-my.sharepoint.com/:x:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Resources/Project_Rubric_512_612.xlsx?d=w418c78b7197146b59b3c461c95f4f6c0&csf=1&web=1&e=Dr6yJY) I will go through this rubric as I grade your poster. 
 
 -   In formatting, an example of a report with little editing needed is one that has zero to some grammar or spelling mistakes, no code chunks showing, and no output warnings nor messages showing.
 

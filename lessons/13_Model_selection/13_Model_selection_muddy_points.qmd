@@ -9,7 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Muddy Points from n2025
+## Muddy Points from 2025
 
 ### 1. I am a little stuck model selection strategies. I just want clarification on which one is the "best one", and why? 
 

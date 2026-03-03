@@ -28,7 +28,7 @@ source(here("class_dates.R"))
 ## Labs
 
 | Lab Instructions | Rubric | Due Date | Topics |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | [Lab 1](/project/Lab_01_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_01_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab1 %>% format("%m/%d")` | Familiarize yourself with project, explore your research question, and explore the data |
 | [Lab 2](/project/Lab_02_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_02_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab2 %>% format("%m/%d")` | Explore the data, fit a simple linear regression model |
 | [Lab 3](/project/Lab_03_instructions.qmd) | [[{{< iconify material-symbols rubric-rounded size=30px >}}](/project/Lab_03_rubric.qmd)]{style="color:#f8f5f0;"} | `r lab3 %>% format("%m/%d")` | Fit a temporary MLR and practice interpreting coefficient estimates |
@@ -64,7 +64,11 @@ The most important learning objectives in this project are:
 
 [Poster Instructions](/project/Project_poster_instructions.qmd)
 
-Poster due 3/17
+[Poster rubric](https://ohsuitg-my.sharepoint.com/:x:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Resources/Project_Rubric_512_612.xlsx?d=w418c78b7197146b59b3c461c95f4f6c0&csf=1&web=1&e=Dr6yJY)
+
+-   Poster presentation day on 3/16 at 1pm in class
+
+-   Poster due 3/17 at 11pm
 
 ```{r}
 #| echo: false
