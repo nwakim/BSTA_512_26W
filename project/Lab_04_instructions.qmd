@@ -251,11 +251,15 @@ No tasks here! If you want to try out what I did above, you can!
 
 Now we're going to check if there are any interactions. We will use `add1()` as described in Lesson 14 (in Step 5). From the F-statistic and p-value, we can determine if the interaction should be included in the model.
 
+::: callout-note
+I've made a change to the Task below!!! I originally said to check for interactions between the main variable and each covariate, but that is overwhelming. If the interaction from your subquestion is significant, then you should include that one, but don't include all the significant interactions.
+:::
+
 ::: callout-important
 #### Tasks
 
-1.    Using `add1()`, determine what interactions you will include in your preliminary final model.
-2.    Run the preliminary final model that includes the main effects and interactions.
+1.    Using `add1()`, determine what interactions are significant. If your variable from your subquestion is significant, then add it to your preliminary model.  
+2.    Run the preliminary final model that includes the main effects and potential interaction.
 :::
 
 ### Step 6: Assess model fit

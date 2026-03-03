@@ -4109,7 +4109,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 22, 2026</p>
+      <p class="date-modified">March 3, 2026</p>
     </div>
   </div>
     
@@ -4383,6 +4383,19 @@ iam_fNeither underweight nor overweight               iam_fSlightly underweight
 <section id="step-5-check-for-interactions" class="level3" data-number="2.6">
 <h3 data-number="2.6" class="anchored" data-anchor-id="step-5-check-for-interactions"><span class="header-section-number">2.6</span> Step 5: Check for interactions</h3>
 <p>Now we’re going to check if there are any interactions. We will use <code>add1()</code> as described in Lesson 14 (in Step 5). From the F-statistic and p-value, we can determine if the interaction should be included in the model.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’ve made a change to the Task below!!! I originally said to check for interactions between the main variable and each covariate, but that is overwhelming. If the interaction from your subquestion is significant, then you should include that one, but don’t include all the significant interactions.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4394,8 +4407,9 @@ iam_fNeither underweight nor overweight               iam_fSlightly underweight
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Using <code>add1()</code>, determine what interactions you will include in your preliminary final model.</li>
-<li>Run the preliminary final model that includes the main effects and interactions.</li>
+<li>Using <code>add1()</code>, determine what interactions are significant. If your variable from your subquestion is significant, then add it to your preliminary model.<br>
+</li>
+<li>Run the preliminary final model that includes the main effects and potential interaction.</li>
 </ol>
 </div>
 </div>
