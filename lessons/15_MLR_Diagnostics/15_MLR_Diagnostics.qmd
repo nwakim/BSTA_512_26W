@@ -3,7 +3,7 @@ title: "Lesson 15: MLR Model Diagnostics"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "03/05/2025"
+date: "`r library(here); source(here('class_dates.R')); w9d2`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -26,29 +26,46 @@ execute:
 #| message: false
 #| warning: false
 
-library(tidyverse)    
-library(openintro)
+library(tidyverse)
+library(here)
 library(janitor)
-library(rstatix)
 library(knitr)
-library(gtsummary)
-library(moderndive)
+library(broom)
+library(rstatix)
 library(gt)
-library(broom) 
-library(here) 
-library(pwr) 
-library(gridExtra)   # grid.arrange()
 library(readxl)
 library(describedata) # gladder()
 library(gridExtra)   # grid.arrange()
 library(ggfortify)  # autoplot(model)
+# New Day 6
 library(gtsummary)
+library(plotly) # for plot_ly() command
+library(GGally) # for ggpairs() command 
+library(ggiraphExtra)   # for ggPredict() command
 
-knitr::opts_chunk$set(echo = TRUE,
-                      message = FALSE, warning = FALSE)
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = fct_relevel(freedom_status, "NF", "PF", "F")) %>%
+  mutate(income_level_4 = fct_relevel(income_level_4, 
+                                      "Low income", 
+                                      "Lower middle income",
+                                      "Upper middle income",
+                                      "High income")) %>%
+  mutate(income_level_2 = case_when(income_level_4 %in% c("Low income", "Lower middle income") ~ "Lower income",
+                                      income_level_4 %in% c("Upper middle income", "High income") ~ "Higher income")) %>%
+  mutate(income_level_2 = fct_relevel(income_level_2, "Lower income", "Higher income")) %>%
+  mutate(CP_c = cell_phones_100 - mean(cell_phones_100, na.rm=T)) %>%
+  mutate(co2_emissions = co2_emissions/1000/1000)
+
+mlr1 <- gapm %>% lm(formula = life_exp ~ cell_phones_100 + vax_rate)
+
+gapm2 = gapm %>% select(cell_phones_100, life_exp, vax_rate, freedom_status, income_level_4, basic_sani,  co2_emissions, happiness_score)
 load(here("./lessons/15_MLR_Diagnostics/final_mod.rda"))
-gapm <- read_csv(here("./data/lifeexp_femlit_2011.csv"))
 
+theme_set(theme_bw(base_size = 22))
 ```
 
 # Learning Objectives
@@ -151,36 +168,34 @@ Model Use (Inference)
 ## Let's remind ourselves of the final model
 
 ::::: columns
-::: {.column width="40%"}
+::: {.column width="45%"}
 -   Our **final model** contains
 
-    -   Female Literacy Rate `FLR`
-    -   CO2 Emissions in quartiles `CO2_q`
-    -   Income levels in groups assigned by Gapminder `income_levels1`
-    -   World regions `four_regions`
-    -   Membership of global and economic groups `members_oecd_g77`
-    -   Food Supply `FoodSupplykcPPD`
-    -   Clean Water Supply `WaterSupplePct`
-    -   No interactions
+    -   Cell phones per 100 people
+    -  Basic sanitation (quartiles)
+    -   Freedom status
+    -   Income level
+    -   Vaccination rate
+    -   Happiness score
+    - No interactions
 :::
 
-::: {.column width="60%"}
+::: {.column width="55%"}
 ```{r}
 #| code-fold: true
 #| code-summary: "Display regression table for final model"
 tbl_regression(
   final_model, 
   label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2_q ~ "CO2 emissions quartiles", 
-    income_levels1 ~ "Income levels", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to omproved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    BS_q ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
     )) %>% 
   as_gt() %>% 
-  tab_options(table.font.size = 18) 
+  tab_options(table.font.size = 24) 
 ```
 :::
 :::::
@@ -191,7 +206,7 @@ tbl_regression(
 
  
 
--   With 7 variables in our final model, it is hard to visualize outliers and influential points
+-   With `r ncol(final_model$model)-1` variables in our final model, it is hard to scatterplots to visualize linearity, outliers, and influential points
 
  
 
@@ -209,7 +224,7 @@ tbl_regression(
 
 ```{r}
 aug = augment(final_model)
-head(aug) %>% relocate(.fitted, .resid, .std.resid, .hat, .cooksd, .after = LifeExpectancyYrs)
+head(aug) %>% relocate(.fitted, .resid, .std.resid, .hat, .cooksd, .after = life_exp)
 ```
 
 [RDocumentation on the `augment()` function.](https://www.rdocumentation.org/packages/broom/versions/1.0.4/topics/augment.lm)
@@ -274,11 +289,11 @@ autoplot(final_model) + theme(text=element_text(size=20))
 :::
 
 ::: {.column width="40%"}
-Looks like 3 obs are flagged:
+Looks like 2 obs are flagged:
 
--   17: Cote d'Ivoire
--   59: South Africa
--   61: Kingdom of Eswatini (formerly Swaziland in 2011)
+-   8: Bangladesh
+-   52: Lesotho
+-   66: Malawi
 
 Without them, QQ-plot and residual plot look good
 
@@ -370,28 +385,12 @@ ggplot(data = aug) +
 #| echo: false
 
 aug = aug %>%
-  mutate(country = gapm2$country) %>% relocate(country)
+  mutate(territory = gapm$territory) %>% relocate(territory)
 ```
 
 ```{r}
-aug %>% relocate(.std.resid, .after = country) %>%
+aug %>% relocate(.std.resid, .after = territory) %>%
   filter(abs(.std.resid) > 3) %>% arrange(desc(abs(.std.resid)))
-```
-
-## Countries that are outliers ($|r_i| > 2$)
-
--   We can identify the countries that are outliers
-
-```{r}
-#| echo: false
-
-aug = aug %>%
-  mutate(country = gapm2$country) %>% relocate(country)
-```
-
-```{r}
-aug %>% relocate(.std.resid, .after = country) %>%
-  filter(abs(.std.resid) > 2) %>% arrange(desc(abs(.std.resid)))
 ```
 
 ## Leverage $h_i$
@@ -407,7 +406,7 @@ aug %>% relocate(.std.resid, .after = country) %>%
     -   **Works for MLR:** $h_i > 3p/n$ where $p$ = number of regression coefficients
 
 ```{r}
-aug = aug %>% relocate(.hat, .after = FemaleLiteracyRate)
+aug = aug %>% relocate(.hat, .after = cell_phones_100)
 aug %>% arrange(desc(.hat)) %>% head(5)
 ```
 
@@ -430,26 +429,45 @@ aug %>%
   arrange(desc(.hat))
 ```
 
-## Identifying points with high Cook's distance
+## Cook's distance
 
-::::: columns
+-   Measures the overall influence of an observation
+
+-   Attempts to measure how much **influence a single observation has** over the fitted model
+
+    -   Measures **how coefficient estimates change** when the $ith$ observation is removed from the model
+
+    -   Combines leverage and outlier information
+    
+::: columns
 ::: column
-The Cook's distance for the $i^{th}$ observation is
-
-$$d_i = \frac{h_i}{2(1-h_i)} \cdot r_i^2$$ where $h_i$ is the leverage and $r_i$ is the studentized residual
+::: definition
+::: def-title
+The Cook's distance for the $i^{th}$ observation
+:::
+::: def-cont
+$$d_i = \frac{h_i}{2(1-h_i)} \cdot r_i^2$$ where $h_i$ is the leverage
+and $r_i$ is the studentized residual
+:::
+:::
 :::
 
 ::: column
+
+ 
+
 -   Another rule for Cook's distance that is not strict:
     -   Investigate observations that have $d_i > 1$
 -   Cook's distance values are already in the augment tibble: `.cooksd`
 :::
-:::::
+:::
+
+## Identifying points with high Cook's distance
 
 -   No countries with high Cook's distance
 
 ```{r}
-aug = aug %>% relocate(.cooksd, .after = country)
+aug = aug %>% relocate(.cooksd, .after = territory)
 aug %>% arrange(desc(.cooksd)) %>% filter(.cooksd > 1)
 ```
 
@@ -463,7 +481,7 @@ aug %>% arrange(desc(.cooksd)) %>% filter(.cooksd > 1)
 plot(final_model, which = 4)
 ```
 
-- Identify 3 highest Cook's distance: 59, 61, 62 (South Africa, Kingdom of Eswatini, Tajikistan)
+- Identify 3 highest Cook's distance: 8, 52, 66 (Bangladesh, Lesotho, Malawi)
 
 ## How do we deal with influential points?
 
@@ -727,7 +745,7 @@ car::vif(final_model)
 
     -   By centering age, we no longer have a one-to-one connection between age and age-squared
 
-    -   If centered at 40yo: a 35 yo and a 45 yo will both have centered age of 5, and age-squared of 25
+    -   If centered at 40yo: a 35yo has centered age of -5 and a 45yo centered age of 5, but both have age-squared of 25
 
  
 
