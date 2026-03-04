@@ -127,6 +127,8 @@ psst... There might be some code in Step 4 that might help you get started in th
 
 Remove variables from the initial model based on your common sense, change in coefficient, and/or p-values of the F-tests.
 
+If more than 50% of the coefficients for your main variable change by more than 10% when you remove a variable, then you should keep that variable in the model.
+
 **You do NOT need to show all your work here.** You just need to include: 
 
 1.    A brief explanation of what variables were dropped and why (a sentence per variable), and
