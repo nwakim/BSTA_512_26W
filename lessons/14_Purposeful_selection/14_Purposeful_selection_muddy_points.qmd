@@ -9,6 +9,20 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Muddy Points 2026
+
+### 1. Using the different approaches to assess the linear scale of continuous variables.
+
+Oops! I should have clarified more - the approaches are not to assess linear scale, but if we know a variable does not meet the linearity assumptions. The approaches are three different ways we can model the variable to meet the linearity assumption. 
+
+### 2. LINE assumptions for MLR. Do we need to transform every variable that doesn't have a linear relationship with the output?
+
+Yeah, if the variable is blatantly breaking the linearity assumption then we need transform or categorize the variable.
+
+### 3. Is there a chance you could add the drop code slide to the lecture slides uploaded
+
+I think it's already up! Email me if you don't see it still. 
+
 ## Muddy Points 2025
 
 ### 1. For the three methods/approaches to address the violation of linearity assumption: Approach 1: Categorize continuous variable Approach 2: Fractional Polynomials Approach 3: Spline functions Which one is the most used approach? I am a bit confused on what we should be looking for in each. What should be the values that we should analyze first?
