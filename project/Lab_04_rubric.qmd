@@ -5,12 +5,14 @@ format:
     page-layout: full
 ---
 
-**Total: 15 points**\
+**Total: 18 points**\
 *Each row is scored from 0–3 points based on the criteria.*
 
 | Lab activity | 3 points | 2 points | 1 point | 0 points |
-|---------------|---------------|---------------|---------------|---------------|
-| **Restate research question** | Research question is clearly and correctly restated using the provided format | Research question is mostly clear but contains minor wording or format issues | Research question is vague or partially incomplete | Research question is missing or unclear |
-| **Build your model (6 points)** | 6 points: Clearly builds model using either LASSO or purposeful selection with appropriate justification and code | 4 points: Model is mostly correct but lacks clarity, explanation, or includes minor coding issues | 2 points: Model is attempted but has major conceptual or coding errors | 0 points: No model built or model is not interpretable |
-| **Assess your model fit** | Includes both Hosmer-Lemeshow test and ROC-AUC, interprets results correctly | Includes tests but interpretation is shallow or contains minor errors | Includes only one test or results without interpretation | No model fit assessment performed |
-| **Perform model diagnostics** | Conducts all required diagnostics (residuals, coefficients, leverage), investigates influential points clearly | Conducts most diagnostics, but with minimal interpretation or analysis | Performs incomplete or incorrect diagnostics | No diagnostics performed |
+|:--------------|:--------------|:--------------|:--------------|:--------------|
+| **Restate research question** | Research question is clearly and correctly restated. | Research question is mostly clear, but minor issues with clarity. | Research question is vague or partially incomplete. | Research question is missing. |
+| **Step 1: SLR Screening** | All 16 variables are tested against the outcome; results (F-stats/p-values) are clearly displayed using `add1()` or individual models. | Most variables are tested, but some are missing or results are difficult to find. | Only a few variables are tested or code contains significant errors. | No SLR screening performed. |
+| **Step 2: Preliminary Selection** | Correct logic applied (p \< 0.25); initial MLR model is fit with the correct subset and table is displayed. | Model fit with minor errors in variable selection logic or table formatting. | Model fit attempted but ignores the p \< 0.25 selection rule. | No preliminary MLR model provided. |
+| **Step 3: Purposeful Selection Logic** | Provides clear explanation for every dropped variable (common sense + p-value + $\Delta\%$) and includes code for at least one $\Delta\%$ calculation. | Explains dropped variables but lacks the code example for $\Delta\%$ or reasoning is inconsistent. | Variables are dropped without explanation or logical justification. | No evidence of the variable reduction process. |
+| **Step 5: Interaction Testing** | Uses `add1()` correctly to test interactions; adds one subquestion interaction (if applicable) and runs the updated model. | Tests interactions but misinterprets significance or fails to run the final updated model. | Attempted interaction testing but code is broken or logic is fundamentally flawed. | Interaction testing is missing. |
+| **Final Visualization (Forest/Table)** | Produces a clean, readable Forest Plot or `tbl_regression()`; labels are formatted (not raw code names) and axes are clear. | Visualization is produced but is messy (e.g., raw variable names like `att7`) or difficult to read. | Visualization is attempted but missing key components like Confidence Intervals. | No forest plot or regression table provided. |

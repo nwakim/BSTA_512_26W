@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -153,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Total: 15 points</strong><br>
+<p><strong>Total: 18 points</strong><br>
 <em>Each row is scored from 0–3 points based on the criteria.</em></p>
 <table class="caption-top table">
 <colgroup>
@@ -165,41 +194,55 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Lab activity</th>
-<th>3 points</th>
-<th>2 points</th>
-<th>1 point</th>
-<th>0 points</th>
+<th style="text-align: left;">Lab activity</th>
+<th style="text-align: left;">3 points</th>
+<th style="text-align: left;">2 points</th>
+<th style="text-align: left;">1 point</th>
+<th style="text-align: left;">0 points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Restate research question</strong></td>
-<td>Research question is clearly and correctly restated using the provided format</td>
-<td>Research question is mostly clear but contains minor wording or format issues</td>
-<td>Research question is vague or partially incomplete</td>
-<td>Research question is missing or unclear</td>
+<td style="text-align: left;"><strong>Restate research question</strong></td>
+<td style="text-align: left;">Research question is clearly and correctly restated.</td>
+<td style="text-align: left;">Research question is mostly clear, but minor issues with clarity.</td>
+<td style="text-align: left;">Research question is vague or partially incomplete.</td>
+<td style="text-align: left;">Research question is missing.</td>
 </tr>
 <tr class="even">
-<td><strong>Build your model (6 points)</strong></td>
-<td>6 points: Clearly builds model using either LASSO or purposeful selection with appropriate justification and code</td>
-<td>4 points: Model is mostly correct but lacks clarity, explanation, or includes minor coding issues</td>
-<td>2 points: Model is attempted but has major conceptual or coding errors</td>
-<td>0 points: No model built or model is not interpretable</td>
+<td style="text-align: left;"><strong>Step 1: SLR Screening</strong></td>
+<td style="text-align: left;">All 16 variables are tested against the outcome; results (F-stats/p-values) are clearly displayed using <code>add1()</code> or individual models.</td>
+<td style="text-align: left;">Most variables are tested, but some are missing or results are difficult to find.</td>
+<td style="text-align: left;">Only a few variables are tested or code contains significant errors.</td>
+<td style="text-align: left;">No SLR screening performed.</td>
 </tr>
 <tr class="odd">
-<td><strong>Assess your model fit</strong></td>
-<td>Includes both Hosmer-Lemeshow test and ROC-AUC, interprets results correctly</td>
-<td>Includes tests but interpretation is shallow or contains minor errors</td>
-<td>Includes only one test or results without interpretation</td>
-<td>No model fit assessment performed</td>
+<td style="text-align: left;"><strong>Step 2: Preliminary Selection</strong></td>
+<td style="text-align: left;">Correct logic applied (p &lt; 0.25); initial MLR model is fit with the correct subset and table is displayed.</td>
+<td style="text-align: left;">Model fit with minor errors in variable selection logic or table formatting.</td>
+<td style="text-align: left;">Model fit attempted but ignores the p &lt; 0.25 selection rule.</td>
+<td style="text-align: left;">No preliminary MLR model provided.</td>
 </tr>
 <tr class="even">
-<td><strong>Perform model diagnostics</strong></td>
-<td>Conducts all required diagnostics (residuals, coefficients, leverage), investigates influential points clearly</td>
-<td>Conducts most diagnostics, but with minimal interpretation or analysis</td>
-<td>Performs incomplete or incorrect diagnostics</td>
-<td>No diagnostics performed</td>
+<td style="text-align: left;"><strong>Step 3: Purposeful Selection Logic</strong></td>
+<td style="text-align: left;">Provides clear explanation for every dropped variable (common sense + p-value + <span class="math inline">\(\Delta\%\)</span>) and includes code for at least one <span class="math inline">\(\Delta\%\)</span> calculation.</td>
+<td style="text-align: left;">Explains dropped variables but lacks the code example for <span class="math inline">\(\Delta\%\)</span> or reasoning is inconsistent.</td>
+<td style="text-align: left;">Variables are dropped without explanation or logical justification.</td>
+<td style="text-align: left;">No evidence of the variable reduction process.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Step 5: Interaction Testing</strong></td>
+<td style="text-align: left;">Uses <code>add1()</code> correctly to test interactions; adds one subquestion interaction (if applicable) and runs the updated model.</td>
+<td style="text-align: left;">Tests interactions but misinterprets significance or fails to run the final updated model.</td>
+<td style="text-align: left;">Attempted interaction testing but code is broken or logic is fundamentally flawed.</td>
+<td style="text-align: left;">Interaction testing is missing.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Final Visualization (Forest/Table)</strong></td>
+<td style="text-align: left;">Produces a clean, readable Forest Plot or <code>tbl_regression()</code>; labels are formatted (not raw code names) and axes are clear.</td>
+<td style="text-align: left;">Visualization is produced but is messy (e.g., raw variable names like <code>att7</code>) or difficult to read.</td>
+<td style="text-align: left;">Visualization is attempted but missing key components like Confidence Intervals.</td>
+<td style="text-align: left;">No forest plot or regression table provided.</td>
 </tr>
 </tbody>
 </table>
