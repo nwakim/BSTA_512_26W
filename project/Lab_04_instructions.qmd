@@ -86,7 +86,7 @@ Here are 2 options to running and outputting the results of
 1.  Run a simple linear regression model for each covariate against the IAT score (outcome).
 2.  Display results from the test if each covariate explains enough variation of the outcome. This may be from three options in the instructions: `summary()/anova()` only or the output from `add1()`.
 
-Interpretation of the results **will be in the next step**.
+Decisions based on this output **will be in the next step**.
 :::
 
 ### Step 2: Preliminary variable selection
