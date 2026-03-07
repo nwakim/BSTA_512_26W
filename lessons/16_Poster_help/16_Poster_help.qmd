@@ -3,7 +3,7 @@ title: "Poster Results Help Session"
 author: "Nicky Wakim"
 title-slide-attributes:
     data-background-color: "#213c96"
-date: "03/05/2025"
+date: "`r library(here); source(here('class_dates.R')); w10d1`"
 format: 
   revealjs:
     theme: "../simple_NW.scss"
@@ -40,33 +40,36 @@ library(ggiraphExtra)   # for ggPredict() command
 library(dvmisc)
 library(expss)
 
-# Load the data - update code if the csv file is not in the same location on your computer
-# If you need to download the file, please go to ur shared folder under Data > Slides
-load(here("./lessons/15_MLR_Diagnostics/final_mod.rda"))
-gapm2 = gapm2 %>%
-  mutate(members_oecd_g77 = factor(members_oecd_g77, levels = c("g77", "oecd", "others"), 
-                                   labels = c("Group of 77", "OECD", "Others")), 
-         CO2_q = factor(
-           CO2_q,
-           levels = c("[0.0439,0.806]","(0.806,2.54]", "(2.54,4.66]", "(4.66,35.2]"),
-           labels = c("Quartile 1", "Quartile 2", "Quartile 3", "Quartile 4"))) %>%
-  apply_labels(FemaleLiteracyRate = "Female literacy rate (%)", 
-    CO2emissions = "CO2 emissions quartiles", 
-    income_levels1 = "Income levels", 
-    four_regions = "World region",
-    WaterSourcePrct = "Access to improved water (%)",
-    FoodSupplykcPPD = "Food supply (kcal PPD)",
-    members_oecd_g77 = "Intergovernmental group", 
-    CO2_q = "CO2 emissions quartiles")
-```
+load(here("data", "gapminder2022.RData"))
+gapm = gapm %>%
+  mutate(fs_order = case_when(freedom_status == "F" ~ 3,
+                                freedom_status == "PF" ~ 2,
+                                freedom_status == "NF" ~ 1), 
+         freedom_status = case_match(freedom_status, 
+                                     "NF" ~ "Not free", 
+                                     "PF" ~ "Partly free", 
+                                     "F"  ~ "Free"),
+         freedom_status = fct_relevel(freedom_status, "Not free", "Partly free", "Free")) %>%
+  mutate(income_level_4 = fct_relevel(income_level_4, 
+                                      "Low income", 
+                                      "Lower middle income",
+                                      "Upper middle income",
+                                      "High income")) %>%
+  mutate(income_level_2 = case_when(income_level_4 %in% c("Low income", "Lower middle income") ~ "Lower income",
+                                      income_level_4 %in% c("Upper middle income", "High income") ~ "Higher income")) %>%
+  mutate(income_level_2 = fct_relevel(income_level_2, "Lower income", "Higher income")) %>%
+  mutate(CP_c = cell_phones_100 - mean(cell_phones_100, na.rm=T)) %>%
+  mutate(co2_emissions = co2_emissions/1000/1000)
 
-```{r}
-final_model = gapm2 %>%
-  lm(
-    formula = LifeExpectancyYrs ~ FemaleLiteracyRate + CO2_q + 
-      income_levels1 + four_regions + WaterSourcePrct + 
-      FoodSupplykcPPD + members_oecd_g77
-    )
+gapm2 = gapm %>% select(cell_phones_100, life_exp, vax_rate, freedom_status, income_level_4, basic_sani,  co2_emissions, happiness_score)
+gapm2 = gapm2 %>% 
+  mutate(BS_q = quant_groups(basic_sani, groups = 4) %>% factor(labels = c("Quartile 1", "Quartile 2", "Quartile 3", "Quartile 4")),  
+         BS_q = fct_relevel(BS_q, "Quartile 1", "Quartile 2", "Quartile 3", "Quartile 4"))
+
+#load(here("./lessons/15_MLR_Diagnostics/final_mod.rda"))
+final_model = gapm2 %>% lm(formula = life_exp ~ cell_phones_100 + BS_q + freedom_status + income_level_4 + vax_rate + happiness_score)
+
+theme_set(theme_bw(base_size = 22))
 ```
 
 ## Some lab 3 notes
@@ -122,15 +125,15 @@ final_model = gapm2 %>%
 ## Methods for life expectancy {.smaller}
 
 - Data were collected from Gapminder and World Bank with 197 countries in 2011
-- We performed a complete case analysis on 72 countries
-- We generated categorized variables for CO2 emissions and income levels
-  - CO2 emissions used quartiles
+- We performed a complete case analysis on 105 countries
+- We generated a categorized variable for basic sanitation and income level
+  - Basic sanitation used quartiles
   - Income levels used the specified groupings by Gapminder
 - We used purposeful model selection, a combination of field expertise and statistical methods, to determine the final model
-- We performed linear regression on our outcome, life expectancy, with a main effect for female literacy rate while adjusting for confounders $$\widehat{\text{LE}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{FLR} + \text{other confounders}$$
-  - We adjusted for: CO2 emissions, income levels, world region, access to improved water, food supply, and intergovernmental groups
+- We performed linear regression on our outcome, life expectancy, with a main effect for cell phones per 100 people while adjusting for confounders $$\widehat{\text{LE}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{FLR} + \text{other confounders}$$
+  - We adjusted for: income levels, basic sanitation, vaccination rate, freedom status, and happiness score
 - We investigated model assumptions and diagnostics using standardized residuals, leverage, Cook's distance, and variance inflation factors (VIFs)
-- We used R version 4.4.1 to analyze data
+- We used R version 4.5.1 to analyze data
   
 
 ## Results: What should be in your results?
@@ -141,7 +144,7 @@ final_model = gapm2 %>%
 
 3.  One additional figure or table to help understand your question
 
-4.  Interpretations of important coefficient estimates
+4.  Interpretation(s) of important coefficient estimates 
 
 ## 1. Table 1 (table summary in Lesson 2)
 
@@ -154,27 +157,23 @@ final_model = gapm2 %>%
 library(gtsummary)
 
 gapm2_vars = gapm2 %>% 
-  select(
-    CO2emissions, 
-    FoodSupplykcPPD, 
-    FemaleLiteracyRate, 
-    WaterSourcePrct, 
-    four_regions, 
-    members_oecd_g77, 
-    income_levels1
-  )
+  select(cell_phones_100, 
+         vax_rate, 
+         freedom_status, 
+         income_level_4, 
+         basic_sani,
+         happiness_score)
 
 tbl_summary(
   gapm2_vars, 
   label = list(
-    FemaleLiteracyRate = "Female literacy rate (%)", 
-    CO2emissions = "CO2 emissions quartiles", 
-    income_levels1 = "Income levels", 
-    four_regions = "World region",
-    WaterSourcePrct = "Access to improved water (%)",
-    FoodSupplykcPPD = "Food supply (kcal PPD)",
-    members_oecd_g77 = "Intergovernmental group"
-    ),
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    basic_sani ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
+    ), 
   statistic = list(all_continuous() ~ "{mean} ({sd})")
   )
 ```
@@ -185,28 +184,24 @@ tbl_summary(
 library(gtsummary)
 
 gapm2_vars = gapm2 %>% 
-  select(
-    CO2emissions, 
-    FoodSupplykcPPD, 
-    FemaleLiteracyRate, 
-    WaterSourcePrct, 
-    four_regions, 
-    members_oecd_g77, 
-    income_levels1
-  )
+  select(cell_phones_100, 
+         vax_rate, 
+         freedom_status, 
+         income_level_4, 
+         basic_sani,
+         happiness_score)
 
 tbl_summary(
   gapm2_vars, 
   label = list(
-    FemaleLiteracyRate = "Female literacy rate (%)", 
-    CO2emissions = "CO2 emissions quartiles", 
-    income_levels1 = "Income levels", 
-    four_regions = "World region",
-    WaterSourcePrct = "Access to improved water (%)",
-    FoodSupplykcPPD = "Food supply (kcal PPD)",
-    members_oecd_g77 = "Intergovernmental group"
-    ),
-  statistic = list(all_continuous() ~ "{mean} ({sd})") 
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    basic_sani ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
+    ), 
+  statistic = list(all_continuous() ~ "{mean} ({sd})")
   ) %>% 
   as_gt() %>% 
   tab_options(table.font.size = 26)
@@ -225,16 +220,15 @@ tbl_summary(
 tbl_regression(
   final_model, 
   label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2_q ~ "CO2 emissions quartiles", 
-    income_levels1 ~ "Income levels", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to improved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
-    )) %>%   
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    BS_q ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
+    )) %>% 
   as_gt() %>% 
-  tab_options(table.font.size = 20) %>%
+  tab_options(table.font.size = 25) %>%
   cols_width(label ~ px(250))
 ```
 :::
@@ -244,22 +238,21 @@ tbl_regression(
 tbl_regression(
   final_model, 
   label = list(
-    FemaleLiteracyRate ~ "Female literacy rate (%)", 
-    CO2_q ~ "CO2 emissions quartiles", 
-    income_levels1 ~ "Income levels", 
-    four_regions ~ "World region",
-    WaterSourcePrct ~ "Access to improved water (%)",
-    FoodSupplykcPPD ~ "Food supply (kcal PPD)",
-    members_oecd_g77 ~ "Intergovernmental group"
-    )) %>%   
+    cell_phones_100 ~ "Cell phones per 100 people", 
+    BS_q ~ "Basic sanitation (%)",
+    freedom_status ~ "Freedom status",
+    income_level_4 ~ "Income level",
+    vax_rate ~ "Vaccination rate (%)",
+    happiness_score ~ "Happiness score"
+    )) %>% 
   as_gt() %>% 
-  tab_options(table.font.size = 20) %>%
+  tab_options(table.font.size = 25) %>%
   cols_width(label ~ px(250))
 ```
 :::
 :::::
 
-## 2. Regression table or Forest plot (needs work!)
+## 2. Regression table or Forest plot
 
 ::::: columns
 ::: {.column width="50%"}
@@ -269,13 +262,31 @@ tbl_regression(
 ```{r}
 #| echo: true
 #| eval: false
+#| code-fold: true
+#| code-summary: "Code for forest plot"
 
 library(broom.helpers)
 
 model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_remove_intercept() %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
-  tidy_add_term_labels()
+  tidy_add_term_labels() %>%
+  mutate(label = fct_rev(fct_inorder(label))) %>%
+  mutate(var_label = case_match(var_label, 
+                               "BS_q" ~ "Basic sanitation",
+                               "freedom_status" ~ "Freedom status",
+                               "income_level_4" ~ "Income level",
+                               "vax_rate" ~ " ",
+                               "happiness_score" ~ "  ",
+                               "cell_phones_100" ~ "    ",
+                               .default = var_label
+                         )) %>%
+  mutate(label = case_match(label, 
+                               "vax_rate" ~ "Vaccination rate (%)",
+                               "happiness_score" ~ "Happiness score",
+                               "cell_phones_100" ~ "Cell phones per 100 people",
+                               .default = label
+                         ))
 
 ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",
@@ -284,9 +295,10 @@ ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high))
   geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +
   theme_classic() +
   labs(x = "Beta", y = "Variables") +
-  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
-        title = element_text(size = 20), strip.placement = "outside", 
-        strip.text = element_text(size = 20), strip.background = element_blank())
+  theme(axis.title = element_text(size = 16), axis.text = element_text(size = 16), 
+        title = element_text(size = 16), strip.placement = "outside", 
+        strip.text.y.left = element_text(size = 16, angle = 0), 
+        strip.background = element_blank())
 ```
 :::
 
@@ -301,7 +313,24 @@ library(broom.helpers)
 model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_remove_intercept() %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
-  tidy_add_term_labels()
+  tidy_add_term_labels() %>%
+  mutate(label = fct_rev(fct_inorder(label))) %>%
+  mutate(var_label = case_match(var_label, 
+                               "BS_q" ~ "Basic \n sanitation",
+                               "freedom_status" ~ "Freedom \n status",
+                               "income_level_4" ~ "Income \n level",
+                               "vax_rate" ~ " ",
+                               "happiness_score" ~ "  ",
+                               "cell_phones_100" ~ "    ",
+                               .default = var_label
+                         )) %>%
+  mutate(label = case_match(label, 
+                               "vax_rate" ~ "Vaccination rate (%)",
+                               "happiness_score" ~ "Happiness score",
+                               "cell_phones_100" ~ "Cell phones per \n 100 people ",
+                               .default = label
+                         ))
+
 
 ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",
@@ -310,16 +339,51 @@ ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high))
   geom_vline(xintercept=0, color='#C2352F', linetype='dashed', alpha=1) +
   theme_classic() +
   labs(x = "Beta", y = "Variables") +
-  theme(axis.title = element_text(size = 20), axis.text = element_text(size = 20), 
-        title = element_text(size = 20), strip.placement = "outside", 
-        strip.text = element_text(size = 20), strip.background = element_blank())
+  theme(axis.title = element_text(size = 16), axis.text = element_text(size = 16), 
+        title = element_text(size = 16), strip.placement = "outside", 
+        strip.text.y.left = element_text(size = 16, angle = 0), 
+        strip.background = element_blank())
 ```
 :::
 :::::
+
+## Reporting results
+
+-   **Length: 5-8 bullets**
+-   **Purpose:** Interpret the results of your analyses and explain what they mean in the context
+
+ 
+
+-   Let's just say basic sanitation was my main variable
+-   In my results, I would say something like:
+    - In general, countries in higher quartiles of basic sanitation have higher life expectancy adjusting for all other variables in the final model
+    - For example, based on the estimated coefficients in the forest plot:
+      - Countries in the 4th quartile of basic sanitation have an expected life expectancy that is `r round(model_tidy$estimate[5], 2)` years higher than countries in the 1st quartile of basic sanitation (95% CI: `r round(model_tidy$conf.low[5], 2)`, `r round(model_tidy$conf.high[5], 2)`).
+      - Similar interpretations can be made for coefficients of the 2nd and 3rd quartiles of basic sanitation
+    
+
+
 
 ## Important note if you have interactions
 
 -   There is extra care to reporting results from interactions
 
--   Please make sure you use `estimable()` to get the correct effects!
-    - If you have an interaction with a categorical variable, then your main variable's "effect" should be reported for each category
+-   Please make sure you are interpreting your coefficients correctly!!
+
+-  If you have an interaction, you cannot interpret the main effects without considering the interaction term
+  - You can exclude the interaction coefficients from your forest plot
+
+## Example of main effects interpretation with an interaction
+- For example, if we have an interaction between importance of weight and political ID, our model might look like: $$\begin{aligned}
+\widehat{\text{IAT}} = &\widehat{\beta}_0 + \widehat{\beta}_1 I(\text{imp} = \text{Slightly}) + \widehat{\beta}_2 I(\text{imp} = \text{Moderately}) + \widehat{\beta}_3 I(\text{imp} = \text{Very}) + \\
+&\widehat{\beta}_4 I(\text{imp} = \text{Extremely}) + \widehat{\beta}_5 I(\text{pol} = \text{Strongly liberal}) + \widehat{\beta}_6 I(\text{pol} = \text{Moderately liberal}) + \\
+& \widehat{\beta}_7 I(\text{pol} = \text{Slightly liberal}) + \widehat{\beta}_8 I(\text{pol} = \text{Slightly conservative}) + \\
+& \widehat{\beta}_9 I(\text{pol} = \text{Moderately conservative}) + \widehat{\beta}_{10} I(\text{pol} = \text{Strongly conservative}) + \\
+& ... \text{confounders} ... + \\
+& \widehat{\beta}_{11} I(\text{imp} = \text{Slightly}) \cdot I(\text{pol} = \text{Strongly liberal}) + \\ 
+&\widehat{\beta}_{12} I(\text{imp} = \text{Slightly}) \cdot I(\text{pol} = \text{Moderately liberal}) + \\
+& \widehat{\beta}_{13} I(\text{imp} = \text{Slightly}) \cdot I(\text{pol} = \text{Slightly liberal}) + \\
+&\widehat{\beta}_{14} I(\text{imp} = \text{Slightly}) \cdot I(\text{pol} = \text{Slightly conservative}) + \\
+& \widehat{\beta}_{15} I(\text{imp} = \text{Slightly}) \cdot I(\text{pol} = \text{Moderately conservative}) + \\
+& \widehat{\beta}_{16} I(\text{imp} = \text{Slightly}) \cdot I(\text{pol} = \text{Strongly conservative}) \\
+\end{aligned}$$

@@ -10,22 +10,9 @@ editor_options:
 
 ## Announcements
 
-- I mostly caught up on muddy points!
-
-- Today is last day of new material
-
-- Next class, I will cover some good ways to communicate and visualize results 
-  - Will be helpful in final project!
-  
-- Class on Wednesday is INFORMAL
-  - I will be here in person
-  
-- Classes on Monday (3/10) and Wednesday (3/12) will be virtual!
-  - Basically like office hours for your project and final homework
-
-- Lab 4 up!
-
-- Homework 5 is up!
+- Homework 4
+  - Using hats in population models
+- 
 
 ## Key Dates
 

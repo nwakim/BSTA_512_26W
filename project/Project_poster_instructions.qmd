@@ -39,7 +39,7 @@ A scientific poster serves as a visual and concise way to communicate research f
 -   Poster dimensions: 36" by 24"
     -   Mostly important to keep the ratio as 6:4
     -   Use a landscape layout
--   Font size should be no less than 36pt
+-   Font size should be no less than **20pt**
 -   Sectioning of the report
     -   Main sections that were required: Introduction, Methods, Results, Conclusion, and References
     -   Other sections that might help group specific methods or results
