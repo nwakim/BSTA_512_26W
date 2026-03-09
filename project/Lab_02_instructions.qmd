@@ -127,11 +127,11 @@ iat_data2 = iat_data %>%
   mutate(
     important_001_f = fct_relevel(
       important_001_f,
-      "Not at all important to my sense of self",
-      "A little important to my sense of self",
-      "Somewhat important to my sense of self",
-      "Very important to my sense of self",
-      "Extremely important to my sense of self"
+      "Not at all important",
+      "Slightly important",
+      "Moderately important",
+      "Very important",
+      "Extremely important"
     )
   )
 ```

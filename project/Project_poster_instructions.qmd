@@ -96,7 +96,8 @@ You can save tables and figures from labs or separate files, then load them in t
 
 ### Poster template
 
--   [Powerpoint Template](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Resources/poster_template.pdf?csf=1&web=1&e=wNAwmU)
+-   [Powerpoint Template PDF](https://ohsuitg-my.sharepoint.com/:b:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Resources/poster_template.pdf?csf=1&web=1&e=wNAwmU)
+- [Powerpoint Template PPTX](https://ohsuitg-my.sharepoint.com/:p:/r/personal/wakim_ohsu_edu/Documents/Teaching/Classes/BSTA_512_26W/Student_BSTA_512/Project/Resources/poster_template.pptx?d=w206ceba9b7cd45b7baf28554c1fd916c&csf=1&web=1&e=NWAX2m)
     -   Feel free to adjust this poster visually
 
 ### Poster examples
