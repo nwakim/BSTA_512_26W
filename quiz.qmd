@@ -92,3 +92,21 @@ More information specific to each quiz will be posted below.
     -   Transformations
 
 ### Quiz 3
+
+-   Some info
+
+    -   F-tests: know what models are tested based on a description AND describe what we are testing based on models
+
+    -   Know what confounders and effect modifiers are
+
+        -   And how to test each in model
+
+    -   Interpretations of effect modifiers and main effects
+
+-   Covers Lessons 9-12
+
+    -   MLR
+
+    -   F-tests
+
+    -   Interactions
