@@ -217,21 +217,18 @@ Methods typically describe your approach and process, not the results of that pr
 
 -   **Length: mostly tables and figures with 3-5 bullet points**
 -   **Purpose:** Relay the results from our sample's analysis typically focusing on the numbers and interpretations
--   Required tables & figures
-    -   Table 1 summarizing participant characteristics (from Lab 1)
-    -   Figure of plot showing the relationship between the explanatory variable and IAT score with interaction as color
-        - This should be a scatter plot with mean IAT on the y-axis, explanatory variable on the x-axis, and color by interaction
-    - Table or figure with coefficient estimates from regression
-        - You will need to organize and present this for the three models you ran: unadjusted, adjusted, and interaction
-        -   Can be a forest plot
-            -   If you have A LOT of coefficient estimates, the forest plot may not work well!
-    - Table comparing model fit statistics
-        -   This should include the unadjusted, adjusted, and interaction models
-        -   Include AIC, BIC, and R-squared
--   Optional figure: Up to 1 figure that you think is helpful in understanding the results, for example
-    -   DAG explaining connection between variables (if you did this)
-    -   Table or figure to compare model fit statistics (if you did this)
-    -   Table or figure for unadjusted relationship between outcome and explanatory variables
+
+- Tables & figures (2-3 tables or figures)
+  - The following are required tables or figures
+      - Table 1 summarizing participant characteristics both overall
+      - Table or figure with regression results
+        - Can be a forest plot
+        - If you have A LOT of coefficient estimates, the forest plot may not work well!
+  - 1-2 figures that you think are helpful in understanding the results, for example
+    - DAG explaining connection between variables (if you did this)
+    - Table or figure to compare model fit statistics (if you did this)
+    - Table or figure for unadjusted relationship between outcome and explanatory variables
+      - Can be with variable from your subquestion if you include interactions in your model
 -   Interpret the **important** model coefficients in the context of the research question
     -   3-5 bullets
     -   Interpreting the explanatory variable's relationship with IAT score is the most important thing to report!!
