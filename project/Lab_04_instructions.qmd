@@ -305,7 +305,6 @@ model_tidy = tidy_and_attach(prelim_model, conf.int=T) %>%
   tidy_add_reference_rows() %>% 
   tidy_add_estimate_to_reference_rows() %>%
   tidy_add_term_labels() %>%
-  mutate(label = fct_rev(fct_inorder(label))) %>% # This line will order your labels in the order of your data that went into the lm function
   mutate(var_label = case_match(var_label, 
                                "age" ~ " ", 
                                "How much control do people have over their weight?" ~ "How much control do people \n have over their weight?",  
@@ -331,7 +330,8 @@ model_tidy = tidy_and_attach(prelim_model, conf.int=T) %>%
                             "What is your race or ethnicity? (Participant selected White)" ~ "White",
                             "age" ~ "Age (years)",
                             .default = label
-  ))
+  )) %>%
+    mutate(label = fct_rev(fct_inorder(label))) # This line will order your labels in the order of your data that went into the lm function
 
 forest_plot = ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
   facet_grid(rows = vars(var_label), scales = "free",

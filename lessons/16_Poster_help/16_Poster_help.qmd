@@ -332,7 +332,6 @@ model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
   tidy_remove_intercept() %>%
   tidy_add_reference_rows() %>% tidy_add_estimate_to_reference_rows() %>%
   tidy_add_term_labels() %>%
-  mutate(label = fct_rev(fct_inorder(label))) %>%
   mutate(var_label = case_match(var_label, 
                                "BS_q" ~ "Basic \n sanitation",
                                "freedom_status" ~ "Freedom \n status",
@@ -347,7 +346,8 @@ model_tidy = tidy_and_attach(final_model, conf.int=T) %>%
                                "happiness_score" ~ "Happiness score",
                                "cell_phones_100" ~ "Cell phones per \n 100 people ",
                                .default = label
-                         ))
+                         )) %>%
+    mutate(label = fct_rev(fct_inorder(label)))
 
 
 ggplot(data=model_tidy, aes(y=label, x=estimate, xmin=conf.low, xmax=conf.high)) + 
