@@ -180,7 +180,7 @@ The project report is out of 36 points. Note that the Statistical Methods and Re
         -   This includes a description of analyses for Table 1 and what statistics were used to summarize the variables
             -   More on creation of Table 1, not discussing the results of Table 1
         -   Includes (only include if you did one of the following)
-            -   Indicators for gender identity or race
+            -   Combined the different variables for race/ethnicity into one variable
             -   Creating BMI
             -   Categorizing a continuous variable (even if performed in model selection)
             -   Using scoring for an ordered categorical variable (that is not your explanatory variable)
@@ -194,10 +194,10 @@ The project report is out of 36 points. Note that the Statistical Methods and Re
         -   Example: We considered the following potential confounders: list fo them. Based on our research question, existing literature, and clinical significance, we used purposeful selection to identify confounders and effect modifiers.
     -   Final model
         -   1 bullet
-        -   Write out your final model equation
-        -   I would include the main exploratory variable then a placeholder for all the other covariates
+        -   Write out your final model: this is best through list format!
+        _ Should include outcome, explanatory variable, confounders/adjusted variables, and any interaction included
     -   Model diagnostics
-        -   1-3 sentences
+        -   1-2 bullets
         -   Includes
             -   Process of investigating model diagnostics
             -   By the time you build the model, LINE assumptions should be met
